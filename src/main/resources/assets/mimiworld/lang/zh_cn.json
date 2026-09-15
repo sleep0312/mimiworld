@@ -1,0 +1,19 @@
+{
+  "dimension.mimiworld.mimi_dimension": "米米维度",
+  "itemGroup.mimiworld.mimi": "米米世界",
+  "item.mimiworld.rice": "米",
+  "item.mimiworld.cooked_rice": "熟米",
+  "item.mimiworld.rice_ball": "米团",
+  "item.mimiworld.cooked_rice_ball": "熟米团",
+  "item.mimiworld.rice_stick": "米木棍",
+  "item.mimiworld.rice_bucket": "米桶",
+  "item.mimiworld.rice_fruit": "米果",
+  "block.mimiworld.rice_log": "米原木",
+  "block.mimiworld.rice_planks": "米木板",
+  "block.mimiworld.rice_leaves": "米树叶",
+  "block.mimiworld.rice_sapling": "米树苗",
+  "block.mimiworld.rice_grass": "米草",
+  "block.mimiworld.hardened_rice": "硬化米",
+  "block.mimiworld.deepslate_hardened_rice": "深层硬化米",
+  "block.mimiworld.rice_bedrock": "基米"
+}

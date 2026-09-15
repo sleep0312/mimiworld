@@ -1,0 +1,19 @@
+{
+  "dimension.mimiworld.mimi_dimension": "Mimi Dimension",
+  "itemGroup.mimiworld.mimi": "Mimi World",
+  "item.mimiworld.rice": "Rice",
+  "item.mimiworld.cooked_rice": "Cooked Rice",
+  "item.mimiworld.rice_ball": "Rice Ball",
+  "item.mimiworld.cooked_rice_ball": "Cooked Rice Ball",
+  "item.mimiworld.rice_stick": "Rice Stick",
+  "item.mimiworld.rice_bucket": "Rice Bucket",
+  "item.mimiworld.rice_fruit": "Rice Fruit",
+  "block.mimiworld.rice_log": "Rice Log",
+  "block.mimiworld.rice_planks": "Rice Planks",
+  "block.mimiworld.rice_leaves": "Rice Leaves",
+  "block.mimiworld.rice_sapling": "Rice Sapling",
+  "block.mimiworld.rice_grass": "Rice Grass",
+  "block.mimiworld.hardened_rice": "Hardened Rice",
+  "block.mimiworld.deepslate_hardened_rice": "Deepslate Hardened Rice",
+  "block.mimiworld.rice_bedrock": "Rice Bedrock"
+}
