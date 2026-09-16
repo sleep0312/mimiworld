@@ -58,6 +58,34 @@ import java.util.function.Supplier;
  *   27 = rice_maker（造米机，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
  *   28 = rice_block（米块，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
  *   29 = rice_pounding_table（锤米台，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
+ *   30 = rice_pail（饭桶，自定义桶物品 RicePailItem extends BucketItem，最大堆叠 1；绑定饭汤 rice_broth 流体，行为同原版水桶；英文名 Rice Pail，避开 9 号 rice_bucket）
+ *   31 = rice_press（压饭机，方块物品 BlockItem；石头类方块，镐挖掘等级2=铁镐，方块本体见 block.ModBlocks；英文名 Rice Press）
+ *   32 = compressed_rice_pail（压缩饭桶，普通物品，最大堆叠 64；英文名 Compressed Rice Pail）
+ *   33 = coarse_crystallized_rice_meal（粗制结晶饭，普通物品，最大堆叠 64；英文名 Coarse Crystallized Rice Meal）
+ *   34 = crystallized_rice_meal（结晶饭，普通物品，最大堆叠 64；英文名 Crystallized Rice Meal，区别于 16 号结晶米 crystallized_rice）
+ *   35 = rice_crystal_alloy_ingot（饭晶合金锭，普通物品，最大堆叠 64；英文名 Rice Crystal Alloy Ingot）
+ *   36 = rice_crystal_hammer（饭晶锤，自定义工具类物品 RiceCrystalHammerItem，最大堆叠 1；镐类挖掘、钻石级 tier，英文名 Rice Crystal Hammer）
+ *   37 = wet_grass_fiber（湿草麻，普通物品，最大堆叠 64；英文名 Wet Grass Fiber）
+ *   38 = coarse_rice_fiber（粗制米麻，普通物品，最大堆叠 64；英文名 Coarse Rice Fiber）
+ *   39 = reinforced_wet_grass_fiber（强化湿草麻，普通物品，最大堆叠 64；英文名 Reinforced Wet Grass Fiber）
+ *   40 = refined_rice_fiber（精制米麻，普通物品，最大堆叠 64；英文名 Refined Rice Fiber）
+ *   41 = wet_grass_net（湿草网，普通物品，最大堆叠 64；英文名 Wet Grass Net）
+ *   42 = coarse_wet_grass_net（粗制湿草网，普通物品，最大堆叠 64；英文名 Coarse Wet Grass Net）
+ *   43 = coarse_rice_net（粗制米网，普通物品，最大堆叠 64；英文名 Coarse Rice Net）
+ *   44 = reinforced_wet_grass_net（强化湿草网，普通物品，最大堆叠 64；英文名 Reinforced Wet Grass Net）
+ *   45 = refined_reinforced_wet_grass_net（精制强化湿草网，普通物品，最大堆叠 64；英文名 Refined Reinforced Wet Grass Net）
+ *   46 = refined_reinforced_rice_net（精制强化米网，普通物品，最大堆叠 64；英文名 Refined Reinforced Rice Net）
+ *   47 = rice_crystal_alloy_hammer（饭晶合金锤，自定义工具类物品 RiceCrystalAlloyHammerItem，最大堆叠 1；镐类挖掘、下界合金级 tier，36号饭晶锤强化版，英文名 Rice Crystal Alloy Hammer）
+ *   48 = placeholder_48（占位物品，无实际用途，仅按手稿锁定编码48；普通物品、不显示在创造标签页；英文名 Placeholder (48)）
+ *   49 = advanced_rice_pounding_table（高级锤米台，方块物品 BlockItem；石头类方块，镐挖掘等级2=铁镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Advanced Rice Pounding Table）
+ *   50 = coarse_super_crystal（粗超结晶，普通物品，最大堆叠 64；英文名 Coarse Super Crystal）
+ *   51 = super_crystal（超结晶，普通物品，最大堆叠 64；英文名 Super Crystal）
+ *   52 = rice_ore（米矿石，方块物品 BlockItem；铁矿石类方块，镐挖掘等级3=钻石镐，破坏掉本身并掉3~7经验，方块本体见 block.ModBlocks；英文名 Rice Ore）
+ *   53 = rice_stone（米石，普通物品，最大堆叠 64；嵌有米纹的小石块，英文名 Rice Stone）
+ *   54 = super_crystal_block（超结晶块，方块物品 BlockItem；晶块类方块，镐挖掘等级2=铁镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Block of Super Crystal）
+ *   55 = super_heavy_crystal（超重结晶，普通物品，最大堆叠 64；英文名 Super Heavy Crystal）
+ *   56 = ionization_table（电离台，方块物品 BlockItem；金属机器方块，镐挖掘等级3=钻石镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Ionization Table）
+ *   57 = precipitation_table（沉淀台，方块物品 BlockItem；金属机器方块，镐挖掘等级3=钻石镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Precipitation Table）
  * ================================================================================
  */
 public class ModItems {
@@ -280,6 +308,129 @@ public class ModItems {
     // 编码 29 = rice_pounding_table（锤米台，Rice Pounding Table）：石头类方块物品，放置后对应 ModBlocks.RICE_POUNDING_TABLE；钻石镐（挖掘等级3）采集
     public static final RegistryObject<Item> RICE_POUNDING_TABLE = registerItem("rice_pounding_table",
             () -> new BlockItem(ModBlocks.RICE_POUNDING_TABLE.get(), new Item.Properties()));
+
+    // 编码 30 = rice_pail（饭桶，Rice Pail）：饭汤桶，最大堆叠 1；RicePailItem 继承 BucketItem，
+    // 构造器内部绑定 fluid.ModFluids.RICE_BROTH（饭汤源流体），行为同原版水桶
+    public static final RegistryObject<Item> RICE_PAIL = registerItem("rice_pail",
+            () -> new RicePailItem(new Item.Properties().stacksTo(1)));
+
+    // 编码 31 = rice_press（压饭机，Rice Press）：石头类方块物品，放置后对应 ModBlocks.RICE_PRESS；铁镐（挖掘等级2）采集
+    public static final RegistryObject<Item> RICE_PRESS = registerItem("rice_press",
+            () -> new BlockItem(ModBlocks.RICE_PRESS.get(), new Item.Properties()));
+
+    // 编码 32 = compressed_rice_pail（压缩饭桶，Compressed Rice Pail）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> COMPRESSED_RICE_PAIL = registerItem("compressed_rice_pail",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 33 = coarse_crystallized_rice_meal（粗制结晶饭，Coarse Crystallized Rice Meal）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> COARSE_CRYSTALLIZED_RICE_MEAL = registerItem("coarse_crystallized_rice_meal",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 34 = crystallized_rice_meal（结晶饭，Crystallized Rice Meal）：普通物品，最大堆叠 64；注意区别于 16 号结晶米 CRYSTALLIZED_RICE
+    public static final RegistryObject<Item> CRYSTALLIZED_RICE_MEAL = registerItem("crystallized_rice_meal",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 35 = rice_crystal_alloy_ingot（饭晶合金锭，Rice Crystal Alloy Ingot）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_INGOT = registerItem("rice_crystal_alloy_ingot",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 36 = rice_crystal_hammer（饭晶锤，Rice Crystal Hammer）：自定义工具类，镐类挖掘（钻石级 tier），近战 +7 伤害/-3.2 攻速；
+    // 直接继承 Item（非 DiggerItem），stacksTo(1) 与普通工具一致，逻辑见 RiceCrystalHammerItem
+    public static final RegistryObject<Item> RICE_CRYSTAL_HAMMER = registerItem("rice_crystal_hammer",
+            RiceCrystalHammerItem::new);
+
+    // 编码 37 = wet_grass_fiber（湿草麻，Wet Grass Fiber）：纤维束材料
+    public static final RegistryObject<Item> WET_GRASS_FIBER = registerItem("wet_grass_fiber",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 38 = coarse_rice_fiber（粗制米麻，Coarse Rice Fiber）：纤维束材料
+    public static final RegistryObject<Item> COARSE_RICE_FIBER = registerItem("coarse_rice_fiber",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 39 = reinforced_wet_grass_fiber（强化湿草麻，Reinforced Wet Grass Fiber）：纤维束材料
+    public static final RegistryObject<Item> REINFORCED_WET_GRASS_FIBER = registerItem("reinforced_wet_grass_fiber",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 40 = refined_rice_fiber（精制米麻，Refined Rice Fiber）：纤维束材料
+    public static final RegistryObject<Item> REFINED_RICE_FIBER = registerItem("refined_rice_fiber",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 41 = wet_grass_net（湿草网，Wet Grass Net）：编织网材料
+    public static final RegistryObject<Item> WET_GRASS_NET = registerItem("wet_grass_net",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 42 = coarse_wet_grass_net（粗制湿草网，Coarse Wet Grass Net）：编织网材料
+    public static final RegistryObject<Item> COARSE_WET_GRASS_NET = registerItem("coarse_wet_grass_net",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 43 = coarse_rice_net（粗制米网，Coarse Rice Net）：编织网材料
+    public static final RegistryObject<Item> COARSE_RICE_NET = registerItem("coarse_rice_net",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 44 = reinforced_wet_grass_net（强化湿草网，Reinforced Wet Grass Net）：编织网材料
+    public static final RegistryObject<Item> REINFORCED_WET_GRASS_NET = registerItem("reinforced_wet_grass_net",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 45 = refined_reinforced_wet_grass_net（精制强化湿草网，Refined Reinforced Wet Grass Net）：编织网材料
+    public static final RegistryObject<Item> REFINED_REINFORCED_WET_GRASS_NET = registerItem("refined_reinforced_wet_grass_net",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 46 = refined_reinforced_rice_net（精制强化米网，Refined Reinforced Rice Net）：编织网材料
+    public static final RegistryObject<Item> REFINED_REINFORCED_RICE_NET = registerItem("refined_reinforced_rice_net",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 47 = rice_crystal_alloy_hammer（饭晶合金锤，Rice Crystal Alloy Hammer）：自定义工具类，
+    // 36号饭晶锤的合金强化版；镐类挖掘（下界合金级 tier，speed 9.0），近战 +9 伤害/-3.1 攻速；
+    // 直接继承 Item（非 DiggerItem），stacksTo(1) 与普通工具一致，逻辑见 RiceCrystalAlloyHammerItem
+    public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_HAMMER = registerItem("rice_crystal_alloy_hammer",
+            RiceCrystalAlloyHammerItem::new);
+
+    // 编码 48 = placeholder_48（占位物品，Placeholder (48)）：无实际用途，仅按手稿锁定编码48；
+    // 普通物品（默认堆叠64），在 ModCreativeTabs 中被过滤、不显示在创造标签页；
+    // 未来手稿确定48号真实物品后，直接替换本注册项（含模型/贴图/语言键）即可。
+    public static final RegistryObject<Item> PLACEHOLDER_48 = registerItem("placeholder_48",
+            () -> new Item(new Item.Properties()));
+
+    // 编码 49 = advanced_rice_pounding_table（高级锤米台，Advanced Rice Pounding Table）：石头类方块物品，
+    // 放置后对应 ModBlocks.ADVANCED_RICE_POUNDING_TABLE；铁镐（挖掘等级2）采集，破坏掉落本身
+    public static final RegistryObject<Item> ADVANCED_RICE_POUNDING_TABLE = registerItem("advanced_rice_pounding_table",
+            () -> new BlockItem(ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get(), new Item.Properties()));
+
+    // 编码 50 = coarse_super_crystal（粗超结晶，Coarse Super Crystal）：结晶材料，粗糙灰蓝晶簇含金色杂质
+    public static final RegistryObject<Item> COARSE_SUPER_CRYSTAL = registerItem("coarse_super_crystal",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 51 = super_crystal（超结晶，Super Crystal）：结晶材料，高纯度亮蓝晶簇含金核
+    public static final RegistryObject<Item> SUPER_CRYSTAL = registerItem("super_crystal",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 52 = rice_ore（米矿石，Rice Ore）：铁矿石类方块物品，放置后对应 ModBlocks.RICE_ORE；
+    // 钻石镐（挖掘等级3）采集，破坏掉落本身并额外掉 3~7 经验球（非精准采集）
+    public static final RegistryObject<Item> RICE_ORE = registerItem("rice_ore",
+            () -> new BlockItem(ModBlocks.RICE_ORE.get(), new Item.Properties()));
+
+    // 编码 53 = rice_stone（米石，Rice Stone）：嵌有奶白米纹的小石块，普通材料物品，最大堆叠 64
+    public static final RegistryObject<Item> RICE_STONE = registerItem("rice_stone",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 54 = super_crystal_block（超结晶块，Block of Super Crystal）：51号超结晶的压缩块，
+    // 放置后对应 ModBlocks.SUPER_CRYSTAL_BLOCK；铁镐（挖掘等级2）采集，破坏掉落本身
+    public static final RegistryObject<Item> SUPER_CRYSTAL_BLOCK = registerItem("super_crystal_block",
+            () -> new BlockItem(ModBlocks.SUPER_CRYSTAL_BLOCK.get(), new Item.Properties()));
+
+    // 编码 55 = super_heavy_crystal（超重结晶，Super Heavy Crystal）：高密度重晶材料，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL = registerItem("super_heavy_crystal",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 56 = ionization_table（电离台，Ionization Table）：工艺机器方块（装饰性全立方块），
+    // 放置后对应 ModBlocks.IONIZATION_TABLE；钻石镐（挖掘等级3）采集，破坏掉落本身
+    public static final RegistryObject<Item> IONIZATION_TABLE = registerItem("ionization_table",
+            () -> new BlockItem(ModBlocks.IONIZATION_TABLE.get(), new Item.Properties()));
+
+    // 编码 57 = precipitation_table（沉淀台，Precipitation Table）：工艺机器方块（装饰性全立方块），
+    // 放置后对应 ModBlocks.PRECIPITATION_TABLE；钻石镐（挖掘等级3）采集，破坏掉落本身
+    public static final RegistryObject<Item> PRECIPITATION_TABLE = registerItem("precipitation_table",
+            () -> new BlockItem(ModBlocks.PRECIPITATION_TABLE.get(), new Item.Properties()));
 
     // ============================ 新物品写在这行以上（末尾追加） ============================
 

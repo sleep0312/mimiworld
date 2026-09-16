@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /**
- * 米米世界流体注册：米汤（rice_soup）。
+ * 米米世界流体注册：米汤（rice_soup，9 号米桶）与饭汤（rice_broth，30 号饭桶）。
  *
  * 1.20.1 Forge 47.x 的流体三件套（旧版 FluidAttributes 已改名 FluidType）：
  * <ol>
@@ -46,7 +46,7 @@ import java.util.function.Consumer;
  *     <li>源流体 + 流动流体（ForgeFlowingFluid.Source/Flowing），注册到 ForgeRegistries.FLUIDS；</li>
  *     <li>世界中的流体方块（LiquidBlock，无 BlockItem、不占物品编码）。</li>
  * </ol>
- * 桶复用 9 号物品 rice_bucket（RiceBucketItem extends BucketItem 绑定源流体）。
+ * 米汤与饭汤各注册一个专属炼药锅；两种桶行为均同原版水桶。
  */
 public class ModFluids {
     // 流体类型注册表（Forge 注册表，必须用 ForgeRegistries.Keys.FLUID_TYPES）
@@ -64,8 +64,16 @@ public class ModFluids {
     public static final ResourceLocation FLOWING_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(MimiWorld.MODID, "block/rice_soup_flow");
 
+    // 饭汤贴图引用：assets/mimiworld/textures/block/rice_broth_still.png / rice_broth_flow.png
+    public static final ResourceLocation BROTH_STILL_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(MimiWorld.MODID, "block/rice_broth_still");
+    public static final ResourceLocation BROTH_FLOWING_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(MimiWorld.MODID, "block/rice_broth_flow");
+
     // 米汤染色：ARGB = 0x80F5F5F5（半透明奶白）
     public static final int TINT_COLOR = 0x80F5F5F5;
+    // 饭汤染色：ARGB = 0x80F5F5F5（半透明；贴图本身为暖奶油色，故观感呈暖汤）
+    public static final int BROTH_TINT_COLOR = 0x80F5F5F5;
 
     // ===== 1. 流体类型（属性） =====
     // density=2000 kg/m³（比水重，实体会下沉）；静态 viscosity=6000（非米米世界默认值）；
@@ -150,11 +158,104 @@ public class ModFluids {
                     LayeredCauldronBlock.RAIN,
                     RICE_SOUP_CAULDRON_INTERACTIONS));
 
+    // ============================================================================
+    // 饭汤（rice_broth，Rice Broth）——参数按用户给定：
+    //   染色 ARGB 0x80F5F5F5；density=2000 kg/m³；静态 viscosity=7000（非米米世界），
+    //   米米世界内 2000（由 RiceBrothFluid#getTickDelay 按维度实现，35t / 10t）；
+    //   luminosity=0；非气态（1.20.1 无 gaseous()，默认即非气态）；装桶/倒出音效与水桶一致。
+    // ============================================================================
+
+    // ===== 1. 流体类型（属性） =====
+    public static final RegistryObject<FluidType> RICE_BROTH_TYPE =
+            FLUID_TYPES.register("rice_broth", () -> new FluidType(
+                    FluidType.Properties.create()
+                            .density(2000)
+                            .viscosity(7000)
+                            .lightLevel(0)
+                            .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                            .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)) {
+                @Override
+                public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+                    consumer.accept(new IClientFluidTypeExtensions() {
+                        @Override
+                        public ResourceLocation getStillTexture() {
+                            return BROTH_STILL_TEXTURE;
+                        }
+
+                        @Override
+                        public ResourceLocation getFlowingTexture() {
+                            return BROTH_FLOWING_TEXTURE;
+                        }
+
+                        @Override
+                        public int getTintColor() {
+                            return BROTH_TINT_COLOR;
+                        }
+                    });
+                }
+            });
+
+    // ===== 2. 源流体 / 流动流体 =====
+    public static final RegistryObject<FlowingFluid> RICE_BROTH =
+            FLUIDS.register("rice_broth", () -> new RiceBrothFluid.Source(makeBrothProperties()));
+    public static final RegistryObject<FlowingFluid> FLOWING_RICE_BROTH =
+            FLUIDS.register("flowing_rice_broth", () -> new RiceBrothFluid.Flowing(makeBrothProperties()));
+
+    // ===== 3. 流体方块（属性同米汤方块：不可替换时才放置、无碰撞、100 硬度、不可推动、不掉落；颜色暖沙） =====
+    public static final RegistryObject<LiquidBlock> RICE_BROTH_BLOCK =
+            BLOCKS.register("rice_broth", () -> new LiquidBlock(RICE_BROTH,
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.SAND)
+                            .replaceable()
+                            .noCollission()
+                            .strength(100.0F)
+                            .pushReaction(PushReaction.DESTROY)
+                            .noLootTable()
+                            .liquid()
+                            .sound(SoundType.EMPTY)));
+
+    // ===== 4. 饭汤炼药锅（无 BlockItem、不占物品编码：只能由饭桶倒入/空桶舀出，破坏后掉原版空锅） =====
+    // 交互表规则与米汤锅完全一致，仅产物换成 30 号饭桶。
+    public static final Map<Item, CauldronInteraction> RICE_BROTH_CAULDRON_INTERACTIONS =
+            Util.make(new Object2ObjectOpenHashMap<>(), map -> {
+                map.defaultReturnValue((state, level, pos, player, hand, stack) -> InteractionResult.PASS);
+                // 空桶只能从「装满（level=3）」的饭汤锅舀走一整桶饭汤，锅变回空锅
+                map.put(Items.BUCKET, (state, level, pos, player, hand, stack) -> {
+                    if (state.getValue(LayeredCauldronBlock.LEVEL) != 3) {
+                        return InteractionResult.PASS;
+                    }
+                    if (!level.isClientSide) {
+                        player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player,
+                                new ItemStack(ModItems.RICE_PAIL.get())));
+                        player.awardStat(Stats.USE_CAULDRON);
+                        player.awardStat(Stats.ITEM_USED.get(Items.BUCKET));
+                        level.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+                        level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                        level.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
+                    }
+                    return InteractionResult.sidedSuccess(level.isClientSide);
+                });
+            });
+
+    // 方块属性同米汤锅（铁、需镐、2 硬度），液位行为同水锅（RAIN：雨天可接雨续满）
+    public static final RegistryObject<LayeredCauldronBlock> RICE_BROTH_CAULDRON =
+            BLOCKS.register("rice_broth_cauldron", () -> new LayeredCauldronBlock(
+                    BlockBehaviour.Properties.copy(Blocks.CAULDRON),
+                    LayeredCauldronBlock.RAIN,
+                    RICE_BROTH_CAULDRON_INTERACTIONS));
+
     // ForgeFlowingFluid 属性：类型 + 源/流动互引 + 流体方块 + 桶（9 号米桶）
     private static ForgeFlowingFluid.Properties makeProperties() {
         return new ForgeFlowingFluid.Properties(RICE_SOUP_TYPE, RICE_SOUP, FLOWING_RICE_SOUP)
                 .block(RICE_SOUP_BLOCK)
                 .bucket(() -> ModItems.RICE_BUCKET.get());
+    }
+
+    // 饭汤 ForgeFlowingFluid 属性：桶绑定 30 号饭桶（RicePailItem）
+    private static ForgeFlowingFluid.Properties makeBrothProperties() {
+        return new ForgeFlowingFluid.Properties(RICE_BROTH_TYPE, RICE_BROTH, FLOWING_RICE_BROTH)
+                .block(RICE_BROTH_BLOCK)
+                .bucket(() -> ModItems.RICE_PAIL.get());
     }
 
     public static void register(IEventBus modEventBus) {
@@ -164,9 +265,9 @@ public class ModFluids {
     }
 
     /**
-     * 把米桶注册进原版「空炼药锅」交互表（FMLCommonSetup 主线程阶段调用，此时物品注册表已就绪）。
-     * 逻辑逐行对应原版 CauldronInteraction#emptyBucket(FILL_WATER)：米桶对空锅使用后
-     * 空锅变成装满的米汤锅、米桶变空铁桶、播放水桶倒出音效。
+     * 把米桶/饭桶注册进原版「空炼药锅」交互表（FMLCommonSetup 主线程阶段调用，此时物品注册表已就绪）。
+     * 逻辑逐行对应原版 CauldronInteraction#emptyBucket(FILL_WATER)：桶对空锅使用后
+     * 空锅变成装满的对应汤锅、桶变空铁桶、播放水桶倒出音效。
      */
     public static void registerCauldronInteractions() {
         CauldronInteraction.EMPTY.put(ModItems.RICE_BUCKET.get(),
@@ -177,6 +278,21 @@ public class ModFluids {
                         player.awardStat(Stats.FILL_CAULDRON);
                         player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
                         level.setBlockAndUpdate(pos, RICE_SOUP_CAULDRON.get().defaultBlockState()
+                                .setValue(LayeredCauldronBlock.LEVEL, 3));
+                        level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                        level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+                    }
+                    return InteractionResult.sidedSuccess(level.isClientSide);
+                });
+        // 饭桶对空锅使用：空锅变成装满的饭汤锅、饭桶变空铁桶
+        CauldronInteraction.EMPTY.put(ModItems.RICE_PAIL.get(),
+                (state, level, pos, player, hand, stack) -> {
+                    if (!level.isClientSide) {
+                        player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player,
+                                new ItemStack(Items.BUCKET)));
+                        player.awardStat(Stats.FILL_CAULDRON);
+                        player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+                        level.setBlockAndUpdate(pos, RICE_BROTH_CAULDRON.get().defaultBlockState()
                                 .setValue(LayeredCauldronBlock.LEVEL, 3));
                         level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
                         level.gameEvent(null, GameEvent.FLUID_PLACE, pos);

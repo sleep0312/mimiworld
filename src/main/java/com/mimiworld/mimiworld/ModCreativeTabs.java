@@ -24,9 +24,11 @@ public class ModCreativeTabs {
                     .icon(() -> Items.GRASS_BLOCK.getDefaultInstance())
                     .title(Component.translatable("itemGroup.mimiworld.mimi"))
                     .displayItems((parameters, output) ->
-                            // 自动添加本模组所有已注册物品/方块物品
+                            // 自动添加本模组所有已注册物品/方块物品；
+                            // 占位物品（如 placeholder_48，仅用于锁定编码）不显示
                             ForgeRegistries.ITEMS.getEntries().stream()
                                     .filter(entry -> entry.getKey().location().getNamespace().equals(MimiWorld.MODID))
+                                    .filter(entry -> !entry.getKey().location().getPath().startsWith("placeholder_"))
                                     .forEach(entry -> output.accept(entry.getValue())))
                     .build());
 

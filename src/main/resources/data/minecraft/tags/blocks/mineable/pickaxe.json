@@ -7,9 +7,16 @@
     "mimiworld:recrystallized_rice_ore",
     "mimiworld:combustible_rice_ore",
     "mimiworld:rice_soup_cauldron",
+    "mimiworld:rice_broth_cauldron",
     "mimiworld:coarse_rice_block",
     "mimiworld:rice_maker",
     "mimiworld:rice_block",
-    "mimiworld:rice_pounding_table"
+    "mimiworld:rice_pounding_table",
+    "mimiworld:rice_press",
+    "mimiworld:advanced_rice_pounding_table",
+    "mimiworld:rice_ore",
+    "mimiworld:super_crystal_block",
+    "mimiworld:ionization_table",
+    "mimiworld:precipitation_table"
   ]
 }

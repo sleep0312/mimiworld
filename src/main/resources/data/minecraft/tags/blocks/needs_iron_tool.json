@@ -3,6 +3,9 @@
   "values": [
     "mimiworld:hardened_rice",
     "mimiworld:deepslate_hardened_rice",
-    "mimiworld:mud_rice"
+    "mimiworld:mud_rice",
+    "mimiworld:rice_press",
+    "mimiworld:advanced_rice_pounding_table",
+    "mimiworld:super_crystal_block"
   ]
 }

@@ -38,6 +38,8 @@ public class ClientSetup {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_GRASS.get(), RenderType.cutout());
             // 米汤流体方块：半透明奶白，需要 translucent 层（同原版水）
             ItemBlockRenderTypes.setRenderLayer(ModFluids.RICE_SOUP_BLOCK.get(), RenderType.translucent());
+            // 饭汤流体方块：半透明暖汤，同样需要 translucent 层
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.RICE_BROTH_BLOCK.get(), RenderType.translucent());
         });
     }
 }

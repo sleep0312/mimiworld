@@ -193,6 +193,68 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
+    // 压饭机（31 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    public static final RegistryObject<Block> RICE_PRESS =
+            BLOCKS.register("rice_press", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.5F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
+    // 高级锤米台（49 号）：29 号锤米台的合金强化版，石头类普通全立方块，属性参照原版石头
+    // （硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/advanced_rice_pounding_table.json）。
+    public static final RegistryObject<Block> ADVANCED_RICE_POUNDING_TABLE =
+            BLOCKS.register("advanced_rice_pounding_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.5F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
+    // 米矿石（52 号）：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 继承原版 DropExperienceBlock + UniformInt(3,7)：用正确工具且非精准采集破坏时掉 3~7 经验球（精准采集不掉经验）；
+    // 方块本身由 loot_tables/blocks/rice_ore.json 掉落。
+    public static final RegistryObject<Block> RICE_ORE =
+            BLOCKS.register("rice_ore", () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 3.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE),
+                    UniformInt.of(3, 7)));
+
+    // 超结晶块（54 号）：51 号超结晶的压缩存储块，金属块类全立方块（硬度照铁块 5.0、抗爆 6.0、紫晶声）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/super_crystal_block.json）。
+    public static final RegistryObject<Block> SUPER_CRYSTAL_BLOCK =
+            BLOCKS.register("super_crystal_block", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(5.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.AMETHYST)));
+
+    // 电离台（56 号）：工艺机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/ionization_table.json）。
+    public static final RegistryObject<Block> IONIZATION_TABLE =
+            BLOCKS.register("ionization_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 沉淀台（57 号）：工艺机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/precipitation_table.json）。
+    public static final RegistryObject<Block> PRECIPITATION_TABLE =
+            BLOCKS.register("precipitation_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }

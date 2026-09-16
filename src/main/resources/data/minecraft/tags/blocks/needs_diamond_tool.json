@@ -4,6 +4,9 @@
     "mimiworld:coarse_rice_block",
     "mimiworld:rice_maker",
     "mimiworld:rice_block",
-    "mimiworld:rice_pounding_table"
+    "mimiworld:rice_pounding_table",
+    "mimiworld:rice_ore",
+    "mimiworld:ionization_table",
+    "mimiworld:precipitation_table"
   ]
 }

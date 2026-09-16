@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mimiworld:block/advanced_rice_pounding_table"
+  }
+}
