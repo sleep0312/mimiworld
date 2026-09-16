@@ -1,12 +1,17 @@
 package com.mimiworld.mimiworld.client;
 
 import com.mimiworld.mimiworld.MimiWorld;
+import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
+import com.mimiworld.mimiworld.fluid.ModFluids;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 /**
  * 仅客户端的注册：投掷物渲染器。ThrownItemRenderer 直接渲染物品自身贴图，
@@ -19,5 +24,20 @@ public class ClientSetup {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.RICE_BALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.COOKED_RICE_BALL.get(), ThrownItemRenderer::new);
+    }
+
+    /**
+     * 十字型植物方块（米树苗、米草）的纹理带透明像素，必须挂到 cutout 渲染层，
+     * 否则默认 solid 层不丢弃 Alpha=0 像素，透明区域在世界中会显示成黑色（与原版树苗/草一致的处理）。
+     */
+    @SuppressWarnings({"deprecation", "removal"}) // 1.20.1 中 setRenderLayer 被标记待删除但仍是官方可用 API（替代方案 1.21 才有）
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_GRASS.get(), RenderType.cutout());
+            // 米汤流体方块：半透明奶白，需要 translucent 层（同原版水）
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.RICE_SOUP_BLOCK.get(), RenderType.translucent());
+        });
     }
 }

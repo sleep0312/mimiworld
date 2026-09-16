@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "mimiworld:crystallized_rice_ore",
+    "mimiworld:recrystallized_rice_ore",
+    "mimiworld:combustible_rice_ore"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.mimiworld.mimiworld.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "mimiworld.refmap.json",
+  "mixins": [
+    "CauldronBlockMixin",
+    "LayeredCauldronBlockMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -31,6 +31,40 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice", has(ModItems.byCode(1)))
                 .save(consumer, MimiWorld.MODID + ":rice_smelting");
 
+        // 烧炼/高炉：17 号 结晶米矿石 → 16 号 结晶米（锭），经验 0.7（照抄原版铁矿石），
+        // 熔炉 200t（10s），高炉 100t（5s）。矿石本身还会在被正确工具破坏时另掉 3~7 经验球。
+        SimpleCookingRecipeBuilder
+                .smelting(Ingredient.of(ModItems.byCode(17)), RecipeCategory.MISC, ModItems.byCode(16), 0.7F, 200)
+                .unlockedBy("has_crystallized_rice_ore", has(ModItems.byCode(17)))
+                .save(consumer, MimiWorld.MODID + ":crystallized_rice_smelting");
+
+        SimpleCookingRecipeBuilder
+                .blasting(Ingredient.of(ModItems.byCode(17)), RecipeCategory.MISC, ModItems.byCode(16), 0.7F, 100)
+                .unlockedBy("has_crystallized_rice_ore", has(ModItems.byCode(17)))
+                .save(consumer, MimiWorld.MODID + ":crystallized_rice_blasting");
+
+        // 18 号 重结晶米矿石烧炼成 19 号重结晶米（精炼锭），经验 0.7，熔炉 200t / 高炉 100t
+        SimpleCookingRecipeBuilder
+                .smelting(Ingredient.of(ModItems.byCode(18)), RecipeCategory.MISC, ModItems.byCode(19), 0.7F, 200)
+                .unlockedBy("has_recrystallized_rice_ore", has(ModItems.byCode(18)))
+                .save(consumer, MimiWorld.MODID + ":recrystallized_rice_smelting");
+
+        SimpleCookingRecipeBuilder
+                .blasting(Ingredient.of(ModItems.byCode(18)), RecipeCategory.MISC, ModItems.byCode(19), 0.7F, 100)
+                .unlockedBy("has_recrystallized_rice_ore", has(ModItems.byCode(18)))
+                .save(consumer, MimiWorld.MODID + ":recrystallized_rice_blasting");
+
+        // 21 号 可燃米矿石烧炼成 20 号可燃米（强燃料材料），经验 0.7，熔炉 200t / 高炉 100t
+        SimpleCookingRecipeBuilder
+                .smelting(Ingredient.of(ModItems.byCode(21)), RecipeCategory.MISC, ModItems.byCode(20), 0.7F, 200)
+                .unlockedBy("has_combustible_rice_ore", has(ModItems.byCode(21)))
+                .save(consumer, MimiWorld.MODID + ":combustible_rice_smelting");
+
+        SimpleCookingRecipeBuilder
+                .blasting(Ingredient.of(ModItems.byCode(21)), RecipeCategory.MISC, ModItems.byCode(20), 0.7F, 100)
+                .unlockedBy("has_combustible_rice_ore", has(ModItems.byCode(21)))
+                .save(consumer, MimiWorld.MODID + ":combustible_rice_blasting");
+
         // 有序合成米团（ShapedRecipeBuilder 天然不支持无序合成）：
         // 需求形状 ["BBA", "BBA", "AAA"]，B = 1 号米；A = 无（空槽）。
         // ShapedRecipeBuilder 校验要求：除空格外的每个图案字符都必须 define，

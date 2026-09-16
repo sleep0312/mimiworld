@@ -35,5 +35,9 @@ public class ModFuelEvents {
         else if (stack.is(ModItems.RICE_LEAVES.get())) {
             event.setBurnTime(TICKS_PER_ITEM / 2);
         }
+        // 可燃米：强燃料，可烧 32 个物品 = 6400 tick（介于烈焰棒 2400t 与煤炭块 16000t 之间）
+        else if (stack.is(ModItems.COMBUSTIBLE_RICE.get())) {
+            event.setBurnTime(32 * TICKS_PER_ITEM);
+        }
     }
 }

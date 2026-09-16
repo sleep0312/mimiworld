@@ -2,10 +2,12 @@ package com.mimiworld.mimiworld;
 
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
+import com.mimiworld.mimiworld.fluid.ModFluids;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -23,13 +25,21 @@ public class MimiWorld
         // 挂载各注册器到 mod 事件总线
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
+        ModFluids.register(modEventBus); // 米汤流体类型/源流体/流动流体/流体方块
         ModCreativeTabs.register(modEventBus);
         ModEntities.register(modEventBus);
         // 米树 configured_feature 是动态注册表内容，1.20.1 只能用数据包 JSON 注册（data/mimiworld/worldgen/configured_feature/rice_tree.json），无 DeferredRegister
+
+        // commonSetup 主线程阶段注册米桶↔空炼药锅交互（需等物品/方块注册表填充完成）
+        modEventBus.addListener(this::commonSetup);
 
         // 注册到 Forge 事件总线，供后续服务端/游戏事件监听使用
         MinecraftForge.EVENT_BUS.register(this);
 
         LOGGER.info("MimiWorld mod loaded");
+    }
+
+    private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(ModFluids::registerCauldronInteractions);
     }
 }

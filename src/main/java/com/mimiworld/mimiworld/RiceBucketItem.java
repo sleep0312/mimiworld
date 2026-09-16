@@ -1,26 +1,27 @@
 package com.mimiworld.mimiworld;
 
+import com.mimiworld.mimiworld.fluid.ModFluids;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
+
+import java.util.function.Supplier;
 
 /**
- * 米桶（9 号物品）：定位为类似原版水桶的「流体容器」，最大堆叠 1。
- *
- * 当前状态：对应的自定义流体待定，因此本类先继承普通 {@link Item}，不实现右键放置/盛装逻辑。
- * 待流体确定后，推荐按以下两种方式之一接入（均只需小改本类与 ModFluids）：
- *
- * 方式一（推荐，与水桶完全同款，流体可放在世界中形成流体方块）：
- *   1. 新建 fluid/ModFluids（DeferredRegister&lt;ForgeFlowingFluid&gt;），注册源流体/流动流体/流体方块/桶用物品引用；
- *   2. 把本类改为 extends net.minecraft.world.item.BucketItem，
- *      构造器 super(fluidSupplier, properties)，ModItems 工厂传入该流体 Supplier；
- *   3. 流体注册时把其 defaultBucket 设为本物品（Fluids.buildAttributes 或 FluidType 的 bucket 属性）。
- *
- * 方式二（不需要世界流体，只是右键在方块上产生效果）：
- *   直接 override use(...) / useOn(...) 编写自定义交互，空桶/满桶可用两个物品或 NBT 区分。
+ * 米桶（9 号物品）：绑定米汤流体，行为与原版水桶完全一致——右键把米汤倒入世界/空炼药锅，
+ * 对米汤源方块右键可重新装回（倒出/装填音效来自米汤 FluidType 的 BUCKET_EMPTY/BUCKET_FILL 配置）。
+ * 原版空铁桶也能舀起米汤源（Forge 流体经 ForgeFlowingFluid.Properties#bucket 关联本物品，
+ * LiquidBlock.pickupBlock 会返回本物品）；装满的米汤炼药锅同样可用空桶舀回本物品。
+ * 最大堆叠 1，倒空后返还原版空桶。
  */
-public class RiceBucketItem extends Item {
+public class RiceBucketItem extends BucketItem {
     public RiceBucketItem(Properties properties) {
-        super(properties);
+        super(ModFluids.RICE_SOUP, properties);
     }
 
-    // TODO: 流体确定后在此接入放置/盛装逻辑（见类注释方式一/二）。
+    // 保留可显式传流体的构造器，便于后续派生其他米桶（当前使用默认绑定米汤的构造器）
+    @SuppressWarnings("unused")
+    public RiceBucketItem(Supplier<? extends Fluid> fluid, Properties properties) {
+        super(fluid, properties);
+    }
 }

@@ -37,13 +37,27 @@ import java.util.function.Supplier;
  *   6 = rice_planks（米木板，方块物品 BlockItem；方块本体见 block.ModBlocks，不另编号）
  *   7 = rice_stick（米木棍，可燃烧 300t = 1.5 个物品）
  *   8 = rice_leaves（米树叶，方块物品 BlockItem；方块本体见 block.ModBlocks，不另编号）
- *   9 = rice_bucket（米桶，堆叠 1，流体容器定位；流体待定，见 RiceBucketItem）
+ *   9 = rice_bucket（米桶，堆叠 1，BucketItem 绑定米汤流体 mimiworld:rice_soup，见 fluid.ModFluids/RiceBucketItem）
  *   10 = rice_sapling（米树苗，方块物品 BlockItem；骨粉催熟长成米树，方块本体见 block.ModBlocks）
  *   11 = hardened_rice（硬化米，方块物品 BlockItem；石头类方块，铁镐挖掘等级2，方块本体见 block.ModBlocks）
  *   12 = deepslate_hardened_rice（深层硬化米，方块物品 BlockItem；石头类方块，铁镐挖掘等级2，方块本体见 block.ModBlocks）
  *   13 = rice_bedrock（基米，方块物品 BlockItem；基岩类方块，生存不可破坏，方块本体见 block.ModBlocks）
  *   14 = rice_grass（米草，方块物品 BlockItem，自定义 RiceGrassItem；可放置的草类植物，剪刀采集；可食用，方块本体见 block.ModBlocks）
  *   15 = rice_fruit（米果，类似原版苹果的食物；漂浮I/反胃I/虚弱I，食用2s）
+ *   16 = crystallized_rice（结晶米，类似原版锭的矿石材料）
+ *   17 = crystallized_rice_ore（结晶米矿石，方块物品 BlockItem；下界合金镐挖掘等级4，掉经验3-7，方块本体见 block.ModBlocks）
+ *   18 = recrystallized_rice_ore（重结晶米矿石，方块物品 BlockItem；深板岩质地，下界合金镐，掉经验3-7，烧炼得19号；原名 deepslate_crystallized_rice_ore 已按中文名整体改名，方块本体见 block.ModBlocks）
+ *   19 = recrystallized_rice（重结晶米，精炼锭类材料；由18号重结晶米矿石烧炼得到）
+ *   20 = combustible_rice（可燃米，普通材料；熔炉燃料 6400t = 可烧 32 个物品，见 event.ModFuelEvents）
+ *   21 = combustible_rice_ore（可燃米矿石，方块物品 BlockItem；石头类矿石，下界合金镐，掉经验3-7，烧炼得20号，方块本体见 block.ModBlocks）
+ *   22 = mud_rice（泥米，方块物品 BlockItem；泥巴质地，铲挖掘等级2=铁铲，方块本体见 block.ModBlocks）
+ *   23 = reinforced_rice_stick（强化米棍，普通材料物品，最大堆叠 64）
+ *   24 = rice_baton（米棍，普通材料物品，最大堆叠 64；英文名 Rice Baton，避开 7 号米木棍已占用的 Rice Stick）
+ *   25 = rice_flour（米粉，普通材料物品，最大堆叠 64；英文名 Rice Flour）
+ *   26 = coarse_rice_block（粗米块，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
+ *   27 = rice_maker（造米机，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
+ *   28 = rice_block（米块，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
+ *   29 = rice_pounding_table（锤米台，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
  * ================================================================================
  */
 public class ModItems {
@@ -152,7 +166,8 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_LEAVES = registerItem("rice_leaves",
             () -> new BlockItem(ModBlocks.RICE_LEAVES.get(), new Item.Properties()));
 
-    // 编码 9 = rice_bucket（米桶）：流体容器定位，最大堆叠 1；对应流体待定，确定后改为 BucketItem（见 RiceBucketItem 类注释）
+    // 编码 9 = rice_bucket（米桶）：米汤桶，最大堆叠 1；RiceBucketItem 继承 BucketItem，
+    // 构造器内部绑定 fluid.ModFluids.RICE_SOUP（米汤源流体），行为同原版水桶
     public static final RegistryObject<Item> RICE_BUCKET = registerItem("rice_bucket",
             () -> new RiceBucketItem(new Item.Properties().stacksTo(1)));
 
@@ -205,6 +220,66 @@ public class ModItems {
                     return 40; // 食用时间 2 秒
                 }
             });
+
+    // 编码 16 = crystallized_rice（结晶米）：类似原版锭的普通矿石材料，最大堆叠 64
+    public static final RegistryObject<Item> CRYSTALLIZED_RICE = registerItem("crystallized_rice",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 17 = crystallized_rice_ore（结晶米矿石）：石头类矿石方块物品，放置后对应 ModBlocks.CRYSTALLIZED_RICE_ORE；
+    // 下界合金镐才能采集，破坏掉 3~7 经验，可烧炼成 16 号结晶米锭
+    public static final RegistryObject<Item> CRYSTALLIZED_RICE_ORE = registerItem("crystallized_rice_ore",
+            () -> new BlockItem(ModBlocks.CRYSTALLIZED_RICE_ORE.get(), new Item.Properties()));
+
+    // 编码 18 = recrystallized_rice_ore（重结晶米矿石）：深板岩质地矿石，
+    // 放置后对应 ModBlocks.RECRYSTALLIZED_RICE_ORE；下界合金镐采集，破坏掉 3~7 经验，烧炼得 19 号重结晶米
+    public static final RegistryObject<Item> RECRYSTALLIZED_RICE_ORE = registerItem("recrystallized_rice_ore",
+            () -> new BlockItem(ModBlocks.RECRYSTALLIZED_RICE_ORE.get(), new Item.Properties()));
+
+    // 编码 19 = recrystallized_rice（重结晶米）：精炼锭类普通材料，最大堆叠 64；由 18 号重结晶米矿石熔炉/高炉烧炼得到
+    public static final RegistryObject<Item> RECRYSTALLIZED_RICE = registerItem("recrystallized_rice",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 20 = combustible_rice（可燃米）：普通材料，最大堆叠 64；
+    // 作为熔炉燃料可烧 32 个物品（6400 tick），燃料值在 event.ModFuelEvents 中赋予
+    public static final RegistryObject<Item> COMBUSTIBLE_RICE = registerItem("combustible_rice",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 21 = combustible_rice_ore（可燃米矿石）：石头类矿石方块物品，放置后对应 ModBlocks.COMBUSTIBLE_RICE_ORE；
+    // 下界合金镐采集，破坏掉 3~7 经验，熔炉/高炉烧炼得 20 号可燃米
+    public static final RegistryObject<Item> COMBUSTIBLE_RICE_ORE = registerItem("combustible_rice_ore",
+            () -> new BlockItem(ModBlocks.COMBUSTIBLE_RICE_ORE.get(), new Item.Properties()));
+
+    // 编码 22 = mud_rice（泥米）：泥巴质地方块物品，放置后对应 ModBlocks.MUD_RICE；铁铲（挖掘等级2）采集
+    public static final RegistryObject<Item> MUD_RICE = registerItem("mud_rice",
+            () -> new BlockItem(ModBlocks.MUD_RICE.get(), new Item.Properties()));
+
+    // 编码 23 = reinforced_rice_stick（强化米棍，Reinforced Rice Stick）：普通材料物品，最大堆叠 64
+    public static final RegistryObject<Item> REINFORCED_RICE_STICK = registerItem("reinforced_rice_stick",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 24 = rice_baton（米棍，Rice Baton）：普通材料物品，最大堆叠 64
+    public static final RegistryObject<Item> RICE_BATON = registerItem("rice_baton",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 25 = rice_flour（米粉，Rice Flour）：普通材料物品，最大堆叠 64
+    public static final RegistryObject<Item> RICE_FLOUR = registerItem("rice_flour",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 26 = coarse_rice_block（粗米块，Coarse Rice Block）：石头类方块物品，放置后对应 ModBlocks.COARSE_RICE_BLOCK；钻石镐（挖掘等级3）采集
+    public static final RegistryObject<Item> COARSE_RICE_BLOCK = registerItem("coarse_rice_block",
+            () -> new BlockItem(ModBlocks.COARSE_RICE_BLOCK.get(), new Item.Properties()));
+
+    // 编码 27 = rice_maker（造米机，Rice Maker）：石头类方块物品，放置后对应 ModBlocks.RICE_MAKER；钻石镐（挖掘等级3）采集
+    public static final RegistryObject<Item> RICE_MAKER = registerItem("rice_maker",
+            () -> new BlockItem(ModBlocks.RICE_MAKER.get(), new Item.Properties()));
+
+    // 编码 28 = rice_block（米块，Rice Block）：石头类方块物品，放置后对应 ModBlocks.RICE_BLOCK；钻石镐（挖掘等级3）采集
+    public static final RegistryObject<Item> RICE_BLOCK = registerItem("rice_block",
+            () -> new BlockItem(ModBlocks.RICE_BLOCK.get(), new Item.Properties()));
+
+    // 编码 29 = rice_pounding_table（锤米台，Rice Pounding Table）：石头类方块物品，放置后对应 ModBlocks.RICE_POUNDING_TABLE；钻石镐（挖掘等级3）采集
+    public static final RegistryObject<Item> RICE_POUNDING_TABLE = registerItem("rice_pounding_table",
+            () -> new BlockItem(ModBlocks.RICE_POUNDING_TABLE.get(), new Item.Properties()));
 
     // ============================ 新物品写在这行以上（末尾追加） ============================
 

@@ -2,10 +2,10 @@
   "type": "mimiworld:mimi_dimension",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "mimiworld:mimi_overworld",
     "biome_source": {
-      "type": "minecraft:multi_noise",
-      "preset": "minecraft:overworld"
+      "type": "minecraft:fixed",
+      "biome": "mimiworld:mimi_plains"
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "mimiworld:recrystallized_rice_ore"
+  },
+  "result": "mimiworld:recrystallized_rice"
+}

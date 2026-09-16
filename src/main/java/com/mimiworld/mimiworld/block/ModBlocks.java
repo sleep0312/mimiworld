@@ -3,8 +3,10 @@ package com.mimiworld.mimiworld.block;
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.world.tree.RiceTreeGrower;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -111,6 +113,85 @@ public class ModBlocks {
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .ignitedByLava()
                             .pushReaction(PushReaction.DESTROY)));
+
+    // 结晶米矿石：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 4 = 下界合金镐（needs_netherite_tool 标签）。
+    // 继承原版 DropExperienceBlock + UniformInt(3,7)：用正确工具且非精准采集破坏时掉落 3~7 经验球，
+    // 精准采集不掉经验（与原版煤矿/钻石矿等掉经验矿石行为一致）。
+    public static final RegistryObject<Block> CRYSTALLIZED_RICE_ORE =
+            BLOCKS.register("crystallized_rice_ore", () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 3.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE),
+                    UniformInt.of(3, 7)));
+
+    // 重结晶米矿石（18 号，原 deepslate_crystallized_rice_ore 已按中文名整体改名）：
+    // 深板岩质地矿石，硬度/抗爆照抄深层铁矿 4.5/3.0，深板岩声；挖掘等级 4 = 下界合金镐；破坏掉 3~7 经验，精准采集不掉；
+    // 烧炼得 19 号重结晶米。
+    public static final RegistryObject<Block> RECRYSTALLIZED_RICE_ORE =
+            BLOCKS.register("recrystallized_rice_ore", () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(4.5F, 3.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.DEEPSLATE),
+                    UniformInt.of(3, 7)));
+
+    // 可燃米矿石：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 4 = 下界合金镐（needs_netherite_tool 标签）。
+    // DropExperienceBlock + UniformInt(3,7)：用正确工具且非精准采集破坏时掉 3~7 经验；烧炼得 20 号可燃米。
+    public static final RegistryObject<Block> COMBUSTIBLE_RICE_ORE =
+            BLOCKS.register("combustible_rice_ore", () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 3.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE),
+                    UniformInt.of(3, 7)));
+
+    // 泥米（22 号）：泥巴质地方块，属性照抄原版泥巴（硬度 0.5、泥声）；
+    // 铲可快速挖掘（mineable/shovel 标签）；挖掘等级 2 = 铁铲（needs_iron_tool 标签），低级铲慢挖不掉落。
+    public static final RegistryObject<Block> MUD_RICE =
+            BLOCKS.register("mud_rice", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(0.5F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.MUD)));
+
+    // 粗米块（26 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下只能慢挖且不掉落。
+    public static final RegistryObject<Block> COARSE_RICE_BLOCK =
+            BLOCKS.register("coarse_rice_block", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.5F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
+    // 造米机（27 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    public static final RegistryObject<Block> RICE_MAKER =
+            BLOCKS.register("rice_maker", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.5F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
+    // 米块（28 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    public static final RegistryObject<Block> RICE_BLOCK =
+            BLOCKS.register("rice_block", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.5F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
+    // 锤米台（29 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    public static final RegistryObject<Block> RICE_POUNDING_TABLE =
+            BLOCKS.register("rice_pounding_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.5F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
 
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
