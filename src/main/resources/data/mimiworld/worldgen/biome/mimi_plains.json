@@ -22,8 +22,8 @@
   "features": [
     [],
     [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
+      "mimiworld:lake_rice_broth_underground",
+      "mimiworld:lake_rice_broth_surface"
     ],
     [],
     [],
@@ -42,7 +42,7 @@
     [],
     [
       "mimiworld:spring_rice_soup",
-      "minecraft:spring_lava"
+      "mimiworld:spring_rice_broth"
     ],
     [
       "mimiworld:trees_rice_plains",

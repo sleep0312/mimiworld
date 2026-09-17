@@ -7,6 +7,9 @@
     "mimiworld:rice_pounding_table",
     "mimiworld:rice_ore",
     "mimiworld:ionization_table",
-    "mimiworld:precipitation_table"
+    "mimiworld:precipitation_table",
+    "mimiworld:sword_forging_table",
+    "mimiworld:armor_forging_table",
+    "mimiworld:bow_forging_table"
   ]
 }

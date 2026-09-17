@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mimiworld:item/cleansing_compound_sword"
+  }
+}

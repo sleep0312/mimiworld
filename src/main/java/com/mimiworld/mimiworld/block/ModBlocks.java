@@ -255,6 +255,56 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
+    // 离解台（64 号）：工艺机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/dissociation_table.json）。
+    public static final RegistryObject<Block> DISSOCIATION_TABLE =
+            BLOCKS.register("dissociation_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 米石块（81 号）：53 号米石的压缩存储块，石头类全立方块（硬度 3.0、抗爆 6.0、石声）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/rice_stone_block.json）。
+    public static final RegistryObject<Block> RICE_STONE_BLOCK =
+            BLOCKS.register("rice_stone_block", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
+    // 铸剑台（130 号）：装备锻造机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/sword_forging_table.json）。
+    public static final RegistryObject<Block> SWORD_FORGING_TABLE =
+            BLOCKS.register("sword_forging_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 铸甲台（131 号）：装备锻造机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/armor_forging_table.json）。
+    public static final RegistryObject<Block> ARMOR_FORGING_TABLE =
+            BLOCKS.register("armor_forging_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 铸弓台（132 号）：装备锻造机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/bow_forging_table.json）。
+    public static final RegistryObject<Block> BOW_FORGING_TABLE =
+            BLOCKS.register("bow_forging_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }

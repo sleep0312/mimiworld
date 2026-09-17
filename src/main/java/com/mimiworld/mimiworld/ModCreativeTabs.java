@@ -25,7 +25,7 @@ public class ModCreativeTabs {
                     .title(Component.translatable("itemGroup.mimiworld.mimi"))
                     .displayItems((parameters, output) ->
                             // 自动添加本模组所有已注册物品/方块物品；
-                            // 占位物品（如 placeholder_48，仅用于锁定编码）不显示
+                            // placeholder_ 前缀为锁定编码用的占位物品（当前已无占位物），不显示
                             ForgeRegistries.ITEMS.getEntries().stream()
                                     .filter(entry -> entry.getKey().location().getNamespace().equals(MimiWorld.MODID))
                                     .filter(entry -> !entry.getKey().location().getPath().startsWith("placeholder_"))

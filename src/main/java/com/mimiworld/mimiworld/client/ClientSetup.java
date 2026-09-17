@@ -2,6 +2,7 @@ package com.mimiworld.mimiworld.client;
 
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
+import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.fluid.ModFluids;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -24,6 +25,15 @@ public class ClientSetup {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.RICE_BALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.COOKED_RICE_BALL.get(), ThrownItemRenderer::new);
+
+        // 七个待定 Boss 统一使用 Steve 人形模型占位，真实 GeckoLib 模型实现后在此替换
+        event.registerEntityRenderer(ModEntities.MIMI_MONKEY_KING.get(), PendingBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), PendingBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.SUPER_CRYSTAL_COW_KING.get(), PendingBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
+        event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossRenderer::new);
     }
 
     /**

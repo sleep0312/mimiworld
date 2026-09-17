@@ -17,6 +17,11 @@
     "mimiworld:rice_ore",
     "mimiworld:super_crystal_block",
     "mimiworld:ionization_table",
-    "mimiworld:precipitation_table"
+    "mimiworld:precipitation_table",
+    "mimiworld:dissociation_table",
+    "mimiworld:rice_stone_block",
+    "mimiworld:sword_forging_table",
+    "mimiworld:armor_forging_table",
+    "mimiworld:bow_forging_table"
   ]
 }

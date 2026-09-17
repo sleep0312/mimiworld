@@ -66,6 +66,14 @@ description='''${mod_description}'''
     ordering="NONE"
     side="BOTH"
 
+# GeckoLib：自定义生物/立体盔甲等 3D 动画的硬性前置（1.20.1 对应 4.7+）
+[[dependencies.${mod_id}]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="[4.7,)"
+    ordering="AFTER"
+    side="BOTH"
+
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
 # that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
 # stop your mod loading on the server for example.

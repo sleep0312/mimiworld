@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:spring_feature",
+  "config": {
+    "hole_count": 1,
+    "requires_block_below": true,
+    "rock_count": 4,
+    "state": {
+      "Name": "mimiworld:rice_broth",
+      "Properties": {
+        "falling": "true"
+      }
+    },
+    "valid_blocks": [
+      "mimiworld:hardened_rice",
+      "mimiworld:deepslate_hardened_rice",
+      "mimiworld:mud_rice"
+    ]
+  }
+}

@@ -4,6 +4,7 @@ import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.fluid.ModFluids;
 import com.mojang.logging.LogUtils;
+import software.bernie.geckolib.GeckoLib;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +22,10 @@ public class MimiWorld
     public MimiWorld(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
+
+        // GeckoLib 初始化：内部完成网络注册与客户端渲染/重载监听等事件总线订阅，
+        // 是后续自定义 Geo 生物、立体 Geo 盔甲、动画方块/物品的必要前置（有 hasInitialized 防重入）
+        GeckoLib.initialize();
 
         // 挂载各注册器到 mod 事件总线
         ModBlocks.register(modEventBus);

@@ -220,6 +220,17 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
 
+    // GeckoLib 官方 maven（Cloudsmith）：自定义生物/方块/物品/立体盔甲动画库前置
+    // 官方安装文档要求同时放行 geckolib 与 mclib 两个 group（1.20.1 属 1.19.3~1.20.4 模板）
+    maven {
+        name = "GeckoLib"
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
+
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
     // flatDir {
@@ -249,6 +260,11 @@ dependencies {
     // Curios API - 饰品/装备槽 API：编译期只依赖 api，运行期用完整 jar
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+
+    // GeckoLib - 自定义生物/立体盔甲等 3D 动画库，硬性前置（编译期+运行期都需要完整 jar）
+    // 1.20.1 官方依赖模板（1.19.3~1.20.4）：forge 构件走 fg.deobf，另需 mclib:20 数学库
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${mc_version}:${geckolib_version}")
+    implementation "com.eliotlash.mclib:mclib:20"
 
     // Jade 11.13.2 - HUD 信息显示（无前置）
     runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")

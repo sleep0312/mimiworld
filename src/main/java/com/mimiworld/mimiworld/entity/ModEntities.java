@@ -33,6 +33,40 @@ public class ModEntities {
                             .updateInterval(10)
                             .build("cooked_rice_ball"));
 
+    // ===== 151-157 生物蛋绑定的七大 Boss（实体待定，当前统一用 PendingBossEntity 占位） =====
+    // 真实 Boss 实现后仅需替换工厂引用 PendingBossEntity::new，生物蛋（ModItems）无需改动。
+
+    // 151 米米猴王：灵巧中型
+    public static final RegistryObject<EntityType<PendingBossEntity>> MIMI_MONKEY_KING =
+            registerBoss("mimi_monkey_king", 0.7F, 1.9F);
+    // 152 饭晶虎王：四足猛兽
+    public static final RegistryObject<EntityType<PendingBossEntity>> RICE_CRYSTAL_TIGER_KING =
+            registerBoss("rice_crystal_tiger_king", 1.2F, 1.3F);
+    // 153 超晶牛王：壮硕大体型
+    public static final RegistryObject<EntityType<PendingBossEntity>> SUPER_CRYSTAL_COW_KING =
+            registerBoss("super_crystal_cow_king", 1.4F, 1.7F);
+    // 154 重晶兔王：小型
+    public static final RegistryObject<EntityType<PendingBossEntity>> HEAVY_CRYSTAL_RABBIT_KING =
+            registerBoss("heavy_crystal_rabbit_king", 0.7F, 0.9F);
+    // 155 复晶天青蟒：长形低伏
+    public static final RegistryObject<EntityType<PendingBossEntity>> COMPOUND_AZURE_PYTHON =
+            registerBoss("compound_azure_python", 1.0F, 0.8F);
+    // 156 清洁长命夔：巨型走兽
+    public static final RegistryObject<EntityType<PendingBossEntity>> CLEANSING_LONGEVITY_KUI =
+            registerBoss("cleansing_longevity_kui", 1.6F, 2.2F);
+    // 157 最懒终末龙：超巨型
+    public static final RegistryObject<EntityType<PendingBossEntity>> LAZIEST_FINAL_DRAGON =
+            registerBoss("laziest_final_dragon", 2.5F, 3.5F);
+
+    private static RegistryObject<EntityType<PendingBossEntity>> registerBoss(String id, float width, float height) {
+        return ENTITY_TYPES.register(id, () ->
+                EntityType.Builder.<PendingBossEntity>of(PendingBossEntity::new, MobCategory.MONSTER)
+                        .sized(width, height)
+                        .clientTrackingRange(12)
+                        .fireImmune()
+                        .build(id));
+    }
+
     public static void register(IEventBus modEventBus) {
         ENTITY_TYPES.register(modEventBus);
     }
