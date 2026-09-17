@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mimiworld:item/laziest_heavenfall_pickaxe"
+  }
+}

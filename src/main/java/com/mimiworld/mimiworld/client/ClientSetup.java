@@ -34,6 +34,9 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossRenderer::new);
+        // 257 盗米者：同样是 PendingBossEntity 占位实体，必须注册渲染器，
+        // 否则生物蛋右键生成实体后客户端找不到 renderer 直接崩溃
+        event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), PendingBossRenderer::new);
     }
 
     /**

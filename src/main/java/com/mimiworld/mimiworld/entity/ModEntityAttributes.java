@@ -20,5 +20,6 @@ public class ModEntityAttributes {
         event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossEntity.createAttributes().build());
+        event.put(ModEntities.RICE_STEALER.get(), PendingBossEntity.createAttributes().build());
     }
 }

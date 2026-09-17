@@ -325,6 +325,17 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
+    // 堕落台（271 号）：堕落力量相关的仪式台方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 暗下界合金质地、硬度 3.0、抗爆 6.0，需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/fallen_altar.json）。
+    public static final RegistryObject<Block> FALLEN_ALTAR =
+            BLOCKS.register("fallen_altar", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.NETHERITE_BLOCK)));
+
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }

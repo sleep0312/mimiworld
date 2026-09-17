@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mimiworld:item/compound_rice_meal_pickaxe"
+  }
+}

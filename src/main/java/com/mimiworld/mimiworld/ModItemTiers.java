@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
  * 米米世界自定义工具/武器材料等级（编码 48、85-129 的剑与弓引用本类）。
  *
  * <p>等级链（从低到高）：米木（原版木制级别）&lt; 饭晶 &lt; 超结晶 &lt; 饭晶合金锭
- * &lt; 超重结晶锭 &lt; 复合米饭锭 &lt; 清洁复合锭 &lt; 超懒合金锭。</p>
+ * &lt; 超重结晶锭 &lt; 复合米饭锭 &lt; 清洁复合锭 &lt; 超懒合金锭 &lt; 最懒天堕（184 号堕落之心修复）。</p>
  *
  * <p>数值逐档递增（耐久/挖掘速度/攻击加成/挖掘等级/附魔能力），修复材料全部用本模组已有物品：</p>
  * <ul>
@@ -34,7 +34,9 @@ public enum ModItemTiers implements Tier {
     /** 清洁复合：更高一档（修复材料 75 号清洁复合锭） */
     CLEANSING_COMPOUND(2600, 9.5F, 4.5F, 4, 20, () -> Ingredient.of(ModItems.CLEANSING_COMPOUND_INGOT.get())),
     /** 超懒合金：终极材料（修复材料 80 号超懒合金锭） */
-    SUPER_LAZY_ALLOY(3200, 10.0F, 5.0F, 4, 22, () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get()));
+    SUPER_LAZY_ALLOY(3200, 10.0F, 5.0F, 4, 22, () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get())),
+    /** 最懒天堕：超懒合金之上的传说级（编码 255 最懒天堕镐；修复材料 184 号堕落之心，与 HEAVENFALL 盔甲同源） */
+    LAZIEST_HEAVENFALL(3800, 11.0F, 5.5F, 4, 24, () -> Ingredient.of(ModItems.FALLEN_HEART.get()));
 
     private final int uses;
     private final float speed;
