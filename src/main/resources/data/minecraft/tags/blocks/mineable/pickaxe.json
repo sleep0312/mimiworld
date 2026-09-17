@@ -22,6 +22,8 @@
     "mimiworld:rice_stone_block",
     "mimiworld:sword_forging_table",
     "mimiworld:armor_forging_table",
-    "mimiworld:bow_forging_table"
+    "mimiworld:bow_forging_table",
+    "mimiworld:sword_quenching_table",
+    "mimiworld:bloodletting_table"
   ]
 }

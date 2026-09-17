@@ -43,7 +43,11 @@ public enum ModArmorMaterials implements ArmorMaterial {
     /** 超懒神翼（仅 161 号胸甲）：终极翼甲，10 点胸甲防御、韧性 5、击退抗性 0.15（修复 80 号超懒合金锭） */
     SUPER_LAZY_WINGS("super_lazy_wings", 50, new int[]{0, 0, 10, 0}, 22,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 5.0F, 0.15F,
-            () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get()));
+            () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get())),
+    /** 最懒天堕套（188 胸甲/189 头盔/190 护腿/191 靴子）：堕落系终极甲，韧性 4、击退抗性 0.12（修复 184 号堕落之心） */
+    HEAVENFALL("heavenfall", 46, new int[]{4, 7, 9, 4}, 20,
+            SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.12F,
+            () -> Ingredient.of(ModItems.FALLEN_HEART.get()));
 
     /** 各槽位耐久基准，顺序与 EquipmentSlot.values() 一致（脚/腿/胸/头） */
     private static final int[] BASE_DURABILITY = {13, 15, 16, 11};

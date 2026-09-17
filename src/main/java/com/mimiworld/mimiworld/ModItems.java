@@ -197,7 +197,35 @@ import java.util.function.Supplier;
  *   160 = mimi_phantom_membrane（米米幻翼膜，普通物品，最大堆叠 64；英文名 Mimi Phantom Membrane）
  *   161 = super_lazy_wings_chestplate（超懒神翼胸甲，ArmorItem 胸甲，最大堆叠 1，SUPER_LAZY_WINGS；英文名 Super Lazy Divine Wings Chestplate）
  *   162 = ancient_sword_intent（上古剑意，普通物品，最大堆叠 64；英文名 Ancient Sword Intent）
- *   163 = super_lazy_divine_sword_broken_1（超懒神剑·残缺·壹，普通物品【非装备】，最大堆叠 64，RainbowNameItem 动态彩虹渐变名称；英文名 Super Lazy Divine Sword - Broken I）
+ *   163 = super_lazy_divine_sword_broken_1（超懒神剑·残缺·壹，普通物品【非装备】，最大堆叠 1，RainbowNameItem 动态彩虹渐变名称；英文名 Super Lazy Divine Sword - Broken I）
+ *   164 = sword_quenching_table（淬剑台，方块物品 BlockItem；金属机器方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Sword Quenching Table）
+ *   165 = super_lazy_divine_sword_broken_2（超懒神剑·残缺·贰，普通物品【非装备】，最大堆叠 1，RainbowNameItem 动态彩虹渐变名称；英文名 Super Lazy Divine Sword - Broken II）
+ *   166 = bloodletting_table（汲血台，方块物品 BlockItem；金属机器方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Bloodletting Table）
+ *   167 = blood_vial（血瓶，普通物品，最大堆叠 64；英文名 Blood Vial）
+ *   168 = sword_quenching_liquid（淬剑液，普通物品，最大堆叠 64；英文名 Sword Quenching Liquid）
+ *   169 = ancient_sword_soul（远古剑魄，普通物品，最大堆叠 64；英文名 Ancient Sword Soul）
+ *   170 = super_lazy_divine_sword_defective（超懒神剑·残次，普通物品【非装备】，最大堆叠 1，RainbowNameItem 动态彩虹渐变名称；英文名 Super Lazy Divine Sword - Defective）
+ *   171 = primordial_sword_soul（太古剑魄，普通物品，最大堆叠 64；英文名 Primordial Sword Soul）
+ *   172 = super_lazy_divine_sword_counterfeit（超懒神剑·赝品，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Divine Sword - Counterfeit）
+ *   173 = divine_jade（神玉，普通物品，最大堆叠 64；英文名 Divine Jade）
+ *   174 = golden_rice_jade（金米玉，普通物品，最大堆叠 64；英文名 Golden Rice Jade）
+ *   175 = divine_sword_appraisal_jade（神剑鉴玉，普通物品，最大堆叠 64；英文名 Divine Sword Appraisal Jade）
+ *   176 = super_lazy_divine_sword_flawed（超懒神剑·瑕疵，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Divine Sword - Flawed）
+ *   177 = forbidden_sword_manual（剑法禁卷，普通物品，最大堆叠 64；英文名 Forbidden Sword Manual）
+ *   178 = super_lazy_sword_art（超懒剑法，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Sword Art）
+ *   179 = super_lazy_divine_sword_complete（超懒神剑·完整，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Divine Sword - Complete）
+ *   180 = crystallized_rice_jade（结晶米玉，普通物品，最大堆叠 64；英文名 Crystallized Rice Jade）
+ *   181 = final_sword_codex（终末剑诀，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Final Sword Codex）
+ *   182 = laziest_heavenfall_sword_counterfeit（最懒天堕剑·赝品，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Laziest Heavenfall Sword - Counterfeit）
+ *   183 = ruined_heart（破败之心，普通物品，最大堆叠 64；英文名 Ruined Heart）
+ *   184 = fallen_heart（堕落之心，普通物品，最大堆叠 64；英文名 Fallen Heart；同时是 HEAVENFALL 盔甲修复材料）
+ *   185 = fallen_crown（堕落王冠，普通物品，最大堆叠 64；英文名 Fallen Crown）
+ *   186 = seven_deadly_falls（七宗堕落，普通物品，最大堆叠 64；英文名 Seven Deadly Falls）
+ *   187 = laziest_heavenfall_sword_original_sin（最懒天堕剑·原罪，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Laziest Heavenfall Sword - Original Sin）
+ *   188 = heavenfall_wings_chestplate（天堕翼胸甲，ArmorItem 胸甲，最大堆叠 1，HEAVENFALL；英文名 Heavenfall Wing Chestplate）
+ *   189 = laziest_heavenfall_helmet（最懒天堕头盔，ArmorItem 头盔，最大堆叠 1，HEAVENFALL；英文名 Laziest Heavenfall Helmet）
+ *   190 = laziest_heavenfall_leggings（最懒天堕护腿，ArmorItem 护腿，最大堆叠 1，HEAVENFALL；英文名 Laziest Heavenfall Leggings）
+ *   191 = laziest_heavenfall_boots（最懒天堕靴子，ArmorItem 靴子，最大堆叠 1，HEAVENFALL；英文名 Laziest Heavenfall Boots）
  * ================================================================================
  */
 public class ModItems {
@@ -987,10 +1015,151 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 163 = 超懒神剑·残缺·壹（Super Lazy Divine Sword - Broken I）：普通物品【非装备】，
-    // RainbowNameItem 覆盖显示名，逐字动态彩虹渐变
+    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_1 =
             registerItem("super_lazy_divine_sword_broken_1",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(64)));
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // 编码 164 = 淬剑台（Sword Quenching Table）：放置后对应 ModBlocks.SWORD_QUENCHING_TABLE
+    public static final RegistryObject<Item> SWORD_QUENCHING_TABLE = registerItem("sword_quenching_table",
+            () -> new BlockItem(ModBlocks.SWORD_QUENCHING_TABLE.get(), new Item.Properties()));
+
+    // 编码 165 = 超懒神剑·残缺·贰（Super Lazy Divine Sword - Broken II）：普通物品【非装备】，
+    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变（与163残缺·壹同款）
+    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_2 =
+            registerItem("super_lazy_divine_sword_broken_2",
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // 编码 166 = 汲血台（Bloodletting Table）：放置后对应 ModBlocks.BLOODLETTING_TABLE
+    public static final RegistryObject<Item> BLOODLETTING_TABLE = registerItem("bloodletting_table",
+            () -> new BlockItem(ModBlocks.BLOODLETTING_TABLE.get(), new Item.Properties()));
+
+    // ===== 167-168：血瓶 / 淬剑液（普通物品，最大堆叠 64） =====
+
+    // 编码 167 = 血瓶（Blood Vial）
+    public static final RegistryObject<Item> BLOOD_VIAL = registerItem("blood_vial",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 168 = 淬剑液（Sword Quenching Liquid）
+    public static final RegistryObject<Item> SWORD_QUENCHING_LIQUID = registerItem("sword_quenching_liquid",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // ===== 169-172：剑魄与超懒神剑·残次/赝品 =====
+
+    // 编码 169 = 远古剑魄（Ancient Sword Soul）
+    public static final RegistryObject<Item> ANCIENT_SWORD_SOUL = registerItem("ancient_sword_soul",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 170 = 超懒神剑·残次：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_DEFECTIVE =
+            registerItem("super_lazy_divine_sword_defective",
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // 编码 171 = 太古剑魄（Primordial Sword Soul）
+    public static final RegistryObject<Item> PRIMORDIAL_SWORD_SOUL = registerItem("primordial_sword_soul",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 172 = 超懒神剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT =
+            registerItem("super_lazy_divine_sword_counterfeit",
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // ===== 173-176：神玉系列与超懒神剑·瑕疵 =====
+
+    // 编码 173 = 神玉（Divine Jade）
+    public static final RegistryObject<Item> DIVINE_JADE = registerItem("divine_jade",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 174 = 金米玉（Golden Rice Jade）
+    public static final RegistryObject<Item> GOLDEN_RICE_JADE = registerItem("golden_rice_jade",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 175 = 神剑鉴玉（Divine Sword Appraisal Jade）
+    public static final RegistryObject<Item> DIVINE_SWORD_APPRAISAL_JADE =
+            registerItem("divine_sword_appraisal_jade",
+                    () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 176 = 超懒神剑·瑕疵：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_FLAWED =
+            registerItem("super_lazy_divine_sword_flawed",
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // ===== 177-181：剑谱系列（178/179/181 为彩虹名堆叠1） =====
+
+    // 编码 177 = 剑法禁卷（Forbidden Sword Manual）
+    public static final RegistryObject<Item> FORBIDDEN_SWORD_MANUAL = registerItem("forbidden_sword_manual",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 178 = 超懒剑法：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> SUPER_LAZY_SWORD_ART = registerItem("super_lazy_sword_art",
+            () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // 编码 179 = 超懒神剑·完整：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COMPLETE =
+            registerItem("super_lazy_divine_sword_complete",
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // 编码 180 = 结晶米玉（Crystallized Rice Jade）
+    public static final RegistryObject<Item> CRYSTALLIZED_RICE_JADE = registerItem("crystallized_rice_jade",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 181 = 终末剑诀：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> FINAL_SWORD_CODEX = registerItem("final_sword_codex",
+            () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // ===== 182-187：天堕/堕落系列 =====
+
+    // 编码 182 = 最懒天堕剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_COUNTERFEIT =
+            registerItem("laziest_heavenfall_sword_counterfeit",
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // 编码 183 = 破败之心（Ruined Heart）
+    public static final RegistryObject<Item> RUINED_HEART = registerItem("ruined_heart",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 184 = 堕落之心（Fallen Heart）：HEAVENFALL 盔甲的修复材料
+    public static final RegistryObject<Item> FALLEN_HEART = registerItem("fallen_heart",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 185 = 堕落王冠（Fallen Crown）
+    public static final RegistryObject<Item> FALLEN_CROWN = registerItem("fallen_crown",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 186 = 七宗堕落（Seven Deadly Falls）
+    public static final RegistryObject<Item> SEVEN_DEADLY_FALLS = registerItem("seven_deadly_falls",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 187 = 最懒天堕剑·原罪：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_ORIGINAL_SIN =
+            registerItem("laziest_heavenfall_sword_original_sin",
+                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+
+    // ===== 188-191：最懒天堕盔甲四件套（HEAVENFALL 材质，全部 stacksTo 1） =====
+
+    // 编码 188 = 天堕翼胸甲：CHESTPLATE
+    public static final RegistryObject<Item> HEAVENFALL_WINGS_CHESTPLATE =
+            registerItem("heavenfall_wings_chestplate",
+                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.CHESTPLATE,
+                            new Item.Properties().stacksTo(1)));
+
+    // 编码 189 = 最懒天堕头盔：HELMET
+    public static final RegistryObject<Item> LAZIEST_HEAVENFALL_HELMET =
+            registerItem("laziest_heavenfall_helmet",
+                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.HELMET,
+                            new Item.Properties().stacksTo(1)));
+
+    // 编码 190 = 最懒天堕护腿：LEGGINGS
+    public static final RegistryObject<Item> LAZIEST_HEAVENFALL_LEGGINGS =
+            registerItem("laziest_heavenfall_leggings",
+                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.LEGGINGS,
+                            new Item.Properties().stacksTo(1)));
+
+    // 编码 191 = 最懒天堕靴子：BOOTS
+    public static final RegistryObject<Item> LAZIEST_HEAVENFALL_BOOTS =
+            registerItem("laziest_heavenfall_boots",
+                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.BOOTS,
+                            new Item.Properties().stacksTo(1)));
 
     // ============================ 新物品写在这行以上（末尾追加） ============================
 
