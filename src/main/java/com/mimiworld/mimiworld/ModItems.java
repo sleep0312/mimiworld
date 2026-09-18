@@ -325,6 +325,8 @@ import java.util.function.Supplier;
  *   286 = coarse_remnant_fallen_world_essence（粗制残堕世界精华，普通物品，最大堆叠 64；英文名 Coarse Remnant Fallen World Essence）
  * ================================================================================
  */
+
+
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, MimiWorld.MODID);
