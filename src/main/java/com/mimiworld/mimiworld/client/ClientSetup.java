@@ -2,6 +2,7 @@ package com.mimiworld.mimiworld.client;
 
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
+import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.fluid.ModFluids;
@@ -34,9 +35,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossRenderer::new);
-        // 257 盗米者：同样是 PendingBossEntity 占位实体，必须注册渲染器，
-        // 否则生物蛋右键生成实体后客户端找不到 renderer 直接崩溃
-        event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), PendingBossRenderer::new);
+        // 257 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染
+        event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), MicroDuckRenderer::new);
     }
 
     /**

@@ -20,6 +20,7 @@ public class ModEntityAttributes {
         event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossEntity.createAttributes().build());
-        event.put(ModEntities.RICE_STEALER.get(), PendingBossEntity.createAttributes().build());
+        // 257 盗米者：已替换为真实的 GeckoLib 微型鸭实体，使用其自身属性
+        event.put(ModEntities.RICE_STEALER.get(), MicroDuckEntity.createAttributes().build());
     }
 }

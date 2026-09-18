@@ -58,9 +58,14 @@ public class ModEntities {
     public static final RegistryObject<EntityType<PendingBossEntity>> LAZIEST_FINAL_DRAGON =
             registerBoss("laziest_final_dragon", 2.5F, 3.5F);
 
-    // ===== 257 盗米者生物蛋绑定的实体（待定，当前用 PendingBossEntity 占位；人形 0.6×1.8） =====
-    public static final RegistryObject<EntityType<PendingBossEntity>> RICE_STEALER =
-            registerBoss("rice_stealer", 0.6F, 1.8F);
+    // ===== 257 盗米者生物蛋绑定的实体：MicroDuckEntity（GeckoLib microduck 模型，小型 0.5×1.0） =====
+    // 注册名仍为 rice_stealer，因此 257 号生物蛋（ForgeSpawnEggItem 绑定 RICE_STEALER）无需任何改动
+    public static final RegistryObject<EntityType<MicroDuckEntity>> RICE_STEALER =
+            ENTITY_TYPES.register("rice_stealer", () ->
+                    EntityType.Builder.<MicroDuckEntity>of(MicroDuckEntity::new, MobCategory.MONSTER)
+                            .sized(0.5F, 1.0F)
+                            .clientTrackingRange(8)
+                            .build("rice_stealer"));
 
     private static RegistryObject<EntityType<PendingBossEntity>> registerBoss(String id, float width, float height) {
         return ENTITY_TYPES.register(id, () ->
