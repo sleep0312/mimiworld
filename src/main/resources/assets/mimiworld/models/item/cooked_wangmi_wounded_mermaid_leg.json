@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mimiworld:item/cooked_wangmi_wounded_mermaid_leg"
+  }
+}

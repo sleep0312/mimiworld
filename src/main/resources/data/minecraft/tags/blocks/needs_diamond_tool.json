@@ -10,6 +10,9 @@
     "mimiworld:precipitation_table",
     "mimiworld:sword_forging_table",
     "mimiworld:armor_forging_table",
-    "mimiworld:bow_forging_table"
+    "mimiworld:bow_forging_table",
+    "mimiworld:grinding_table",
+    "mimiworld:polished_remnant_fallen_abyss_rock",
+    "mimiworld:pestle_realm_table"
   ]
 }

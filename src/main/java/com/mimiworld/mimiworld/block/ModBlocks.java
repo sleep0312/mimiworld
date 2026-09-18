@@ -336,6 +336,49 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.NETHERITE_BLOCK)));
 
+    // 碾磨台（287 号）：石质碾磨工作台（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 硬度照原版砂轮 2.0、抗爆 6.0、石声、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/grinding_table.json）。
+    public static final RegistryObject<Block> GRINDING_TABLE =
+            BLOCKS.register("grinding_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(2.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
+    // 磨制残堕深渊岩（288 号）：残堕深渊岩石的磨制变体，深板岩质地全立方块（硬度 3.0、抗爆 6.0、深板岩声）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/polished_remnant_fallen_abyss_rock.json）。
+    public static final RegistryObject<Block> POLISHED_REMNANT_FALLEN_ABYSS_ROCK =
+            BLOCKS.register("polished_remnant_fallen_abyss_rock", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.DEEPSLATE)));
+
+    // 杵界台（289 号）：杵界仪式工作台方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/pestle_realm_table.json）。
+    public static final RegistryObject<Block> PESTLE_REALM_TABLE =
+            BLOCKS.register("pestle_realm_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 凝锭台（292 号）：熔融金属冷凝成锭的工艺机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/ingot_condensation_table.json）。
+    public static final RegistryObject<Block> INGOT_CONDENSATION_TABLE =
+            BLOCKS.register("ingot_condensation_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }

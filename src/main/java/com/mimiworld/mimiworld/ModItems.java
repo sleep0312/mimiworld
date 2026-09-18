@@ -323,6 +323,35 @@ import java.util.function.Supplier;
  *   284 = deep_dyed_elf_hat（深染精灵帽，普通物品【非装备】，最大堆叠 64；英文名 Deep-Dyed Elf Hat）
  *   285 = deep_dyed_moon_devourer_wolf_claw（深染噬月狼爪，普通物品，最大堆叠 64；英文名 Deep-Dyed Moon Devourer Wolf Claw）
  *   286 = coarse_remnant_fallen_world_essence（粗制残堕世界精华，普通物品，最大堆叠 64；英文名 Coarse Remnant Fallen World Essence）
+ *   287 = grinding_table（碾磨台，方块物品 BlockItem；石质工作台方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Grinding Table）
+ *   288 = polished_remnant_fallen_abyss_rock（磨制残堕深渊岩，方块物品 BlockItem；深板岩质地方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Polished Remnant Fallen Abyss Rock）
+ *   289 = pestle_realm_table（杵界台，方块物品 BlockItem；金属仪式工作台方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Pestle Realm Table）
+ *   290 = placeholder_290（待定占位，不进创造标签页；英文名 Reserved Slot 290）
+ *   291 = polished_remnant_fallen_essence_solution（磨制残堕精华液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Polished Remnant Fallen Essence Solution）
+ *   292 = ingot_condensation_table（凝锭台，方块物品 BlockItem；金属工艺机器方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Ingot Condensation Table）
+ *   293 = remnant_fallen_world_essence_ingot（残堕世界精华锭，普通物品，最大堆叠 64；英文名 Remnant Fallen World Essence Ingot）
+ *   294 = world_tear（世界之泪，普通物品，最大堆叠 64；英文名 Tear of the World）
+ *   295 = realm_lord_token（界主令牌，普通物品，最大堆叠 64；英文名 Realm Lord Token）
+ *   296 = placeholder_296（待定占位，不进创造标签页；英文名 Reserved Slot 296）
+ *   297 = cooked_realm_heaven_embryo_flower（熟界天胎花，食物，最大堆叠 64，2饱食度；英文名 Cooked Realm-Heaven Embryo Flower）
+ *   298 = void_touch_tentacle（虚无触足，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Void Touch Tentacle）
+ *   299 = cooked_void_touch_tentacle（熟虚无触足，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Void Touch Tentacle）
+ *   300 = thorn_petal（棘花瓣，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Thorn Petal）
+ *   301 = cooked_thorn_petal（熟棘花瓣，食物，最大堆叠 64，2饱食度；英文名 Cooked Thorn Petal）
+ *   302 = rice_phoenix_meat_chunk（米凤肉块，食物，最大堆叠 64，1.5饱食度，30%饥饿30s；英文名 Rice Phoenix Meat Chunk）
+ *   303 = cooked_rice_phoenix_meat_chunk（熟米凤肉块，食物，最大堆叠 64，3.5饱食度；英文名 Cooked Rice Phoenix Meat Chunk）
+ *   304 = specialty_fallen_rice（特色堕落米，食物，最大堆叠 64，3饱食度；与305同名不同物；英文名 Specialty Fallen Rice）
+ *   305 = special_fallen_rice（特色堕落米，食物，最大堆叠 64，2.5饱食度；与304同名不同物；英文名 Special Fallen Rice）
+ *   306 = pale_mermaid_tail（浅鲛尾，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Pale Mermaid Tail）
+ *   307 = cooked_pale_mermaid_tail（熟浅鲛尾，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Pale Mermaid Tail）
+ *   308 = wangmi_wounded_mermaid_leg（望米伤鲛足，食物，最大堆叠 64，1饱食度，40%饥饿30s；英文名 Wangmi Wounded Mermaid Leg）
+ *   309 = cooked_wangmi_wounded_mermaid_leg（熟望米伤鲛足，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Wangmi Wounded Mermaid Leg）
+ *   310 = half_mirage_meat_slice（半蜃肉片，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Half Mirage Meat Slice）
+ *   311 = cooked_half_mirage_meat_slice（熟半蜃肉片，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Half Mirage Meat Slice）
+ *   312 = fragrant_pouch（香袋，普通物品，最大堆叠 64；英文名 Fragrant Pouch）
+ *   313 = fragrant_powder（香粉，普通物品，最大堆叠 64；英文名 Fragrant Powder）
+ *   314 = devourer_vulture_wing（噬鹫翅，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Devourer Vulture Wing）
+ *   315 = cooked_devourer_vulture_wing（熟噬鹫翅，食物，最大堆叠 64，3饱食度；英文名 Cooked Devourer Vulture Wing）
  * ================================================================================
  */
 
@@ -346,6 +375,34 @@ public class ModItems {
         ITEM_BY_CODE.put(code, item);
         CODE_BY_ITEM.put(item.getId(), code);
         return item;
+    }
+
+    /**
+     * 熟食食物属性：仅饱食度/饱和度，无负面效果（293-315 批次的各「熟」食材使用）。
+     *
+     * @param nutrition  饱食度（鸡腿数，1=半个鸡腿）
+     * @param saturation 饱和度系数
+     */
+    private static FoodProperties cookedFood(int nutrition, float saturation) {
+        return new FoodProperties.Builder()
+                .nutrition(nutrition)
+                .saturationMod(saturation)
+                .build();
+    }
+
+    /**
+     * 生食食物属性：模仿原版生肉，除饱食度/饱和度外按概率附加「饥饿 I 30 秒」（600 tick）。
+     *
+     * @param hungerChance 附加饥饿效果的概率（0.0~1.0），0 表示无负面效果
+     */
+    private static FoodProperties rawFood(int nutrition, float saturation, float hungerChance) {
+        FoodProperties.Builder builder = new FoodProperties.Builder()
+                .nutrition(nutrition)
+                .saturationMod(saturation);
+        if (hungerChance > 0.0F) {
+            builder.effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), hungerChance);
+        }
+        return builder.build();
     }
 
     /** 按编码获取物品实例（配方代码里用编码表达需求时使用），编码不存在则抛异常 */
@@ -1834,6 +1891,140 @@ public class ModItems {
     public static final RegistryObject<Item> COARSE_REMNANT_FALLEN_WORLD_ESSENCE =
             registerItem("coarse_remnant_fallen_world_essence",
                     () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // ===== 287-289：方块物品 BlockItem（破坏掉落本身，方块本体见 block.ModBlocks） =====
+
+    // 编码 287 = 碾磨台（Grinding Table）：石质工作台方块，镐挖掘等级 3 = 钻石镐
+    public static final RegistryObject<Item> GRINDING_TABLE = registerItem("grinding_table",
+            () -> new BlockItem(ModBlocks.GRINDING_TABLE.get(), new Item.Properties()));
+
+    // 编码 288 = 磨制残堕深渊岩（Polished Remnant Fallen Abyss Rock）：深板岩质地方块，镐挖掘等级 3 = 钻石镐
+    public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_ABYSS_ROCK =
+            registerItem("polished_remnant_fallen_abyss_rock",
+                    () -> new BlockItem(ModBlocks.POLISHED_REMNANT_FALLEN_ABYSS_ROCK.get(), new Item.Properties()));
+
+    // 编码 289 = 杵界台（Pestle Realm Table）：金属仪式工作台方块，镐挖掘等级 3 = 钻石镐
+    public static final RegistryObject<Item> PESTLE_REALM_TABLE = registerItem("pestle_realm_table",
+            () -> new BlockItem(ModBlocks.PESTLE_REALM_TABLE.get(), new Item.Properties()));
+
+    // 编码 290 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
+    public static final RegistryObject<Item> PLACEHOLDER_290 = registerItem("placeholder_290",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 291 = 磨制残堕精华液（Polished Remnant Fallen Essence Solution）：
+    // 普通物品非流体、药水瓶造型（贴图/模型见资源文件），最大堆叠 64
+    public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_ESSENCE_SOLUTION =
+            registerItem("polished_remnant_fallen_essence_solution",
+                    () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 292 = 凝锭台（Ingot Condensation Table）：金属工艺机器方块，镐挖掘等级 2 = 铁镐
+    public static final RegistryObject<Item> INGOT_CONDENSATION_TABLE = registerItem("ingot_condensation_table",
+            () -> new BlockItem(ModBlocks.INGOT_CONDENSATION_TABLE.get(), new Item.Properties()));
+
+    // ===== 293-315：残堕世界材料 / 令牌 / 生熟食材 / 香料（食材均为食物，最大堆叠 64） =====
+
+    // 编码 293 = 残堕世界精华锭（Remnant Fallen World Essence Ingot）：普通材料物品
+    public static final RegistryObject<Item> REMNANT_FALLEN_WORLD_ESSENCE_INGOT =
+            registerItem("remnant_fallen_world_essence_ingot",
+                    () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 294 = 世界之泪（Tear of the World）：普通材料物品
+    public static final RegistryObject<Item> WORLD_TEAR = registerItem("world_tear",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 295 = 界主令牌（Realm Lord Token）：普通材料物品
+    public static final RegistryObject<Item> REALM_LORD_TOKEN = registerItem("realm_lord_token",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 296 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
+    public static final RegistryObject<Item> PLACEHOLDER_296 = registerItem("placeholder_296",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 297 = 熟界天胎花（Cooked Realm-Heaven Embryo Flower）：熟食，2 饱食度
+    public static final RegistryObject<Item> COOKED_REALM_HEAVEN_EMBRYO_FLOWER =
+            registerItem("cooked_realm_heaven_embryo_flower",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.4F))));
+
+    // 编码 298 = 虚无触足（Void Touch Tentacle）：生食，1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> VOID_TOUCH_TENTACLE = registerItem("void_touch_tentacle",
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
+
+    // 编码 299 = 熟虚无触足（Cooked Void Touch Tentacle）：熟食，2.5 饱食度
+    public static final RegistryObject<Item> COOKED_VOID_TOUCH_TENTACLE =
+            registerItem("cooked_void_touch_tentacle",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
+
+    // 编码 300 = 棘花瓣（Thorn Petal）：生食，1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> THORN_PETAL = registerItem("thorn_petal",
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.2F, 0.3F))));
+
+    // 编码 301 = 熟棘花瓣（Cooked Thorn Petal）：熟食，2 饱食度
+    public static final RegistryObject<Item> COOKED_THORN_PETAL = registerItem("cooked_thorn_petal",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.4F))));
+
+    // 编码 302 = 米凤肉块（Rice Phoenix Meat Chunk）：生食，1.5 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> RICE_PHOENIX_MEAT_CHUNK =
+            registerItem("rice_phoenix_meat_chunk",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.3F))));
+
+    // 编码 303 = 熟米凤肉块（Cooked Rice Phoenix Meat Chunk）：熟食，3.5 饱食度
+    public static final RegistryObject<Item> COOKED_RICE_PHOENIX_MEAT_CHUNK =
+            registerItem("cooked_rice_phoenix_meat_chunk",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.8F))));
+
+    // 编码 304 = 特色堕落米（Specialty Fallen Rice）：熟食（特色款，紫米黑碗外观），3 饱食度
+    public static final RegistryObject<Item> SPECIALTY_FALLEN_RICE = registerItem("specialty_fallen_rice",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 305 = 特色堕落米（Special Fallen Rice）：熟食（与 304 同名但为不同物品，红米灰碗外观），2.5 饱食度
+    public static final RegistryObject<Item> SPECIAL_FALLEN_RICE = registerItem("special_fallen_rice",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.5F))));
+
+    // 编码 306 = 浅鲛尾（Pale Mermaid Tail）：生食，1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> PALE_MERMAID_TAIL = registerItem("pale_mermaid_tail",
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.2F, 0.3F))));
+
+    // 编码 307 = 熟浅鲛尾（Cooked Pale Mermaid Tail）：熟食，2.5 饱食度
+    public static final RegistryObject<Item> COOKED_PALE_MERMAID_TAIL =
+            registerItem("cooked_pale_mermaid_tail",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
+
+    // 编码 308 = 望米伤鲛足（Wangmi Wounded Mermaid Leg）：生食，1 饱食度，40% 饥饿 I 30s
+    public static final RegistryObject<Item> WANGMI_WOUNDED_MERMAID_LEG =
+            registerItem("wangmi_wounded_mermaid_leg",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.4F))));
+
+    // 编码 309 = 熟望米伤鲛足（Cooked Wangmi Wounded Mermaid Leg）：熟食，2.5 饱食度
+    public static final RegistryObject<Item> COOKED_WANGMI_WOUNDED_MERMAID_LEG =
+            registerItem("cooked_wangmi_wounded_mermaid_leg",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
+
+    // 编码 310 = 半蜃肉片（Half Mirage Meat Slice）：生食，1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> HALF_MIRAGE_MEAT_SLICE =
+            registerItem("half_mirage_meat_slice",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
+
+    // 编码 311 = 熟半蜃肉片（Cooked Half Mirage Meat Slice）：熟食，2.5 饱食度
+    public static final RegistryObject<Item> COOKED_HALF_MIRAGE_MEAT_SLICE =
+            registerItem("cooked_half_mirage_meat_slice",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
+
+    // 编码 312 = 香袋（Fragrant Pouch）：普通物品（香料袋），最大堆叠 64
+    public static final RegistryObject<Item> FRAGRANT_POUCH = registerItem("fragrant_pouch",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 313 = 香粉（Fragrant Powder）：普通物品（粉末材料），最大堆叠 64
+    public static final RegistryObject<Item> FRAGRANT_POWDER = registerItem("fragrant_powder",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 314 = 噬鹫翅（Devourer Vulture Wing）：生食，1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> DEVOURER_VULTURE_WING = registerItem("devourer_vulture_wing",
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
+
+    // 编码 315 = 熟噬鹫翅（Cooked Devourer Vulture Wing）：熟食，3 饱食度
+    public static final RegistryObject<Item> COOKED_DEVOURER_VULTURE_WING =
+            registerItem("cooked_devourer_vulture_wing",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
 
     // ============================ 新物品写在这行以上（末尾追加） ============================
 
