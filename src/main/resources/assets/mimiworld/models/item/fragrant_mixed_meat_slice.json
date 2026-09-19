@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mimiworld:item/fragrant_mixed_meat_slice"
+  }
+}

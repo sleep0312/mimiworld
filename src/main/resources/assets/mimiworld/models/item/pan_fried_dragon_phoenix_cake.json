@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mimiworld:item/pan_fried_dragon_phoenix_cake"
+  }
+}

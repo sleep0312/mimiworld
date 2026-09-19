@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mimiworld:item/special_fallen_rice"
+    "layer0": "mimiworld:item/kelp_slice"
   }
 }

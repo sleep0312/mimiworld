@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mimiworld:item/pale_mermaid_rice_ball"
+  }
+}

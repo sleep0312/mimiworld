@@ -340,8 +340,8 @@ import java.util.function.Supplier;
  *   301 = cooked_thorn_petal（熟棘花瓣，食物，最大堆叠 64，2饱食度；英文名 Cooked Thorn Petal）
  *   302 = rice_phoenix_meat_chunk（米凤肉块，食物，最大堆叠 64，1.5饱食度，30%饥饿30s；英文名 Rice Phoenix Meat Chunk）
  *   303 = cooked_rice_phoenix_meat_chunk（熟米凤肉块，食物，最大堆叠 64，3.5饱食度；英文名 Cooked Rice Phoenix Meat Chunk）
- *   304 = specialty_fallen_rice（特色堕落米，食物，最大堆叠 64，3饱食度；与305同名不同物；英文名 Specialty Fallen Rice）
- *   305 = special_fallen_rice（特色堕落米，食物，最大堆叠 64，2.5饱食度；与304同名不同物；英文名 Special Fallen Rice）
+ *   304 = specialty_fallen_rice（特色堕落米，食物（生），最大堆叠 64，1.5饱食度，30%饥饿30s；英文名 Specialty Fallen Rice）
+ *   305 = cooked_specialty_fallen_rice（熟特色堕落米，食物（熟），最大堆叠 64，3.5饱食度；英文名 Cooked Specialty Fallen Rice）
  *   306 = pale_mermaid_tail（浅鲛尾，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Pale Mermaid Tail）
  *   307 = cooked_pale_mermaid_tail（熟浅鲛尾，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Pale Mermaid Tail）
  *   308 = wangmi_wounded_mermaid_leg（望米伤鲛足，食物，最大堆叠 64，1饱食度，40%饥饿30s；英文名 Wangmi Wounded Mermaid Leg）
@@ -352,6 +352,54 @@ import java.util.function.Supplier;
  *   313 = fragrant_powder（香粉，普通物品，最大堆叠 64；英文名 Fragrant Powder）
  *   314 = devourer_vulture_wing（噬鹫翅，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Devourer Vulture Wing）
  *   315 = cooked_devourer_vulture_wing（熟噬鹫翅，食物，最大堆叠 64，3饱食度；英文名 Cooked Devourer Vulture Wing）
+ *   316 = placeholder_316（待定占位，不进创造标签页；英文名 Reserved Slot 316）
+ *   317 = placeholder_317（待定占位，不进创造标签页；英文名 Reserved Slot 317）
+ *   318 = placeholder_318（待定占位，不进创造标签页；英文名 Reserved Slot 318）
+ *   319 = celestial_void_thorn_brain_soup（天虚棘脑汤，食物（熟），最大堆叠 64，3饱食度；英文名 Celestial Void Thorn Brain Soup）
+ *   320 = fragrant_mixed_meat_slice（香混肉片，食物（熟），最大堆叠 64，3饱食度；英文名 Fragrant Mixed Meat Slices）
+ *   321 = sauce_glazed_twin_mermaid_tail（酱香双鲛尾，食物（熟），最大堆叠 64，4饱食度；英文名 Sauce-Glazed Twin Mermaid Tails）
+ *   322 = celestial_brain_juice（天脑汁，食物（熟/饮品），最大堆叠 64，2饱食度；英文名 Celestial Brain Juice）
+ *   323 = sauced_brain（酱脑，食物（熟），最大堆叠 64，2.5饱食度；英文名 Sauced Brain）
+ *   324 = fallen_rice_juice（米堕汁，食物（熟/饮品），最大堆叠 64，2饱食度；英文名 Fallen Rice Juice）
+ *   325 = placeholder_325（待定占位，不进创造标签页；英文名 Reserved Slot 325）
+ *   326 = phoenix_meat_paste（凤肉泥，食物（生/肉泥原料），最大堆叠 64，1饱食度，30%饥饿30s；英文名 Phoenix Meat Paste）
+ *   327 = phoenix_ball（凤球，食物（熟/肉丸），最大堆叠 64，2.5饱食度；英文名 Phoenix Ball）
+ *   328 = plate（盘子，普通物品（餐具），最大堆叠 64；英文名 Plate）
+ *   329 = sauce_roasted_vulture_wing（酱烤鹫翅，食物（熟），最大堆叠 64，3.5饱食度；英文名 Sauce-Roasted Vulture Wing）
+ *   330 = placeholder_330（待定占位，不进创造标签页；英文名 Reserved Slot 330）
+ *   331 = placeholder_331（待定占位，不进创造标签页；英文名 Reserved Slot 331）
+ *   332 = oil_bottle（油瓶，普通物品（油料），最大堆叠 64；英文名 Oil Bottle）
+ *   333 = placeholder_333（待定占位，不进创造标签页；英文名 Reserved Slot 333）
+ *   334 = marinade（腌料，普通物品（调料），最大堆叠 64；英文名 Marinade）
+ *   335 = marinated_vulture_wing（腌鹫翅，食物（腌制），最大堆叠 64，1.5饱食度，20%饥饿30s；英文名 Marinated Vulture Wing）
+ *   336 = fallen_rice_meatball_soup（堕米肉丸汤，食物（熟），最大堆叠 64，3饱食度；英文名 Fallen Rice Meatball Soup）
+ *   337 = jiao_mermaid_meat_paste（蛟鲛肉泥，食物（生/肉泥原料），最大堆叠 64，1饱食度，30%饥饿30s；英文名 Jiao Mermaid Meat Paste）
+ *   338 = phoenix_mirage_meat_paste（凤蜃肉泥，食物（生/肉泥原料），最大堆叠 64，1饱食度，30%饥饿30s；英文名 Phoenix Mirage Meat Paste）
+ *   339 = precious_seasoning（珍贵调料，普通物品（调料），最大堆叠 64；英文名 Precious Seasoning）
+ *   340 = oil_seared_void_tentacle（油爆虚无触，食物（熟），最大堆叠 64，3.5饱食度；英文名 Oil-Seared Void Tentacle）
+ *   341 = bbq_powder（烧烤粉，普通物品（调料），最大堆叠 64；英文名 BBQ Powder）
+ *   342 = floral_fragrance_oil（花香油，普通物品（油料），最大堆叠 64；英文名 Floral Fragrance Oil）
+ *   343 = compound_oil（复合油，普通物品（油料），最大堆叠 64；英文名 Compound Oil）
+ *   344 = mermaid_leg_fried_rice（蛟足炒饭，食物（熟），最大堆叠 64，4饱食度；英文名 Mermaid Leg Fried Rice）
+ *   345 = dragon_phoenix_flower_soup（龙凤花汤，食物（熟），最大堆叠 64，3饱食度；英文名 Dragon-Phoenix Flower Soup）
+ *   346 = placeholder_346（待定占位，不进创造标签页；英文名 Reserved Slot 346）
+ *   347 = floral_mermaid_tail（花香蛟尾，食物（熟），最大堆叠 64，3饱食度；英文名 Floral Mermaid Tail）
+ *   348 = sea_beast_jiao_rice（海兽相交饭，食物（熟），最大堆叠 64，4饱食度；英文名 Sea Beast Jiao Rice）
+ *   349 = buddha_illusion（佛幻想，食物（熟/豪华料理），最大堆叠 64，5饱食度；英文名 Buddha Illusion）
+ *   350 = rice_snow_tea（米雪茶，食物（熟/饮品），最大堆叠 64，1饱食度；英文名 Rice Snow Tea）
+ *   351 = pan_fried_dragon_phoenix_cake（煎龙凤饼，食物（熟），最大堆叠 64，3.5饱食度；英文名 Pan-Fried Dragon-Phoenix Cake）
+ *   352 = celestial_fallen_tea（天堕茶，食物（熟/饮品），最大堆叠 64，1饱食度；英文名 Celestial Fallen Tea）
+ *   353 = phoenix_wrapped_wing（凤包翅，食物（熟），最大堆叠 64，3.5饱食度；英文名 Phoenix-Wrapped Wing）
+ *   354 = marinated_wing_wrap（腌翅包，食物（腌制），最大堆叠 64，1.5饱食度，20%饥饿30s；英文名 Marinated Wing Wrap）
+ *   355 = marinated_meat_slice（腌肉片，食物（腌制），最大堆叠 64，1饱食度，20%饥饿30s；英文名 Marinated Meat Slices）
+ *   356 = meat_slice_congee（肉片粥，食物（熟），最大堆叠 64，2.5饱食度；英文名 Meat Slice Congee）
+ *   357 = limb_skewer（肢体烤串，食物（熟），最大堆叠 64，3饱食度；英文名 Limb Skewer）
+ *   358 = onigiri（饭团，食物（熟），最大堆叠 64，2饱食度；注册名避开编码3的 rice_ball=米团（可投掷）；英文名 Onigiri）
+ *   359 = kelp_slice（海带片，普通物品（食材），最大堆叠 64；英文名 Kelp Slices）
+ *   360 = celestial_brain_rice_ball（天脑饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Celestial Brain Rice Ball）
+ *   361 = pale_mermaid_rice_ball（浅鲛饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Pale Mermaid Rice Ball）
+ *   362 = mermaid_leg_rice_ball（蛟足饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Mermaid Leg Rice Ball）
+ *   363 = vulture_wing_rice_ball（鹫翅饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Vulture Wing Rice Ball）
  * ================================================================================
  */
 
@@ -1972,13 +2020,14 @@ public class ModItems {
             registerItem("cooked_rice_phoenix_meat_chunk",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.8F))));
 
-    // 编码 304 = 特色堕落米（Specialty Fallen Rice）：熟食（特色款，紫米黑碗外观），3 饱食度
+    // 编码 304 = 特色堕落米（Specialty Fallen Rice）：生食（紫米黑碗外观），1.5 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> SPECIALTY_FALLEN_RICE = registerItem("specialty_fallen_rice",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.3F))));
 
-    // 编码 305 = 特色堕落米（Special Fallen Rice）：熟食（与 304 同名但为不同物品，红米灰碗外观），2.5 饱食度
-    public static final RegistryObject<Item> SPECIAL_FALLEN_RICE = registerItem("special_fallen_rice",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.5F))));
+    // 编码 305 = 熟特色堕落米（Cooked Specialty Fallen Rice）：304 的熟食版（红米灰碗外观），3.5 饱食度
+    public static final RegistryObject<Item> COOKED_SPECIALTY_FALLEN_RICE =
+            registerItem("cooked_specialty_fallen_rice",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
 
     // 编码 306 = 浅鲛尾（Pale Mermaid Tail）：生食，1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> PALE_MERMAID_TAIL = registerItem("pale_mermaid_tail",
@@ -2025,6 +2074,216 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_DEVOURER_VULTURE_WING =
             registerItem("cooked_devourer_vulture_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
+
+    // 编码 316 = 占位（Reserved Slot 316）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_316 = registerItem("placeholder_316",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 317 = 占位（Reserved Slot 317）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_317 = registerItem("placeholder_317",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 318 = 占位（Reserved Slot 318）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_318 = registerItem("placeholder_318",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 319 = 天虚棘脑汤（Celestial Void Thorn Brain Soup）：熟食，3 饱食度
+    public static final RegistryObject<Item> CELESTIAL_VOID_THORN_BRAIN_SOUP =
+            registerItem("celestial_void_thorn_brain_soup",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 320 = 香混肉片（Fragrant Mixed Meat Slices）：熟食，3 饱食度
+    public static final RegistryObject<Item> FRAGRANT_MIXED_MEAT_SLICE =
+            registerItem("fragrant_mixed_meat_slice",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 321 = 酱香双鲛尾（Sauce-Glazed Twin Mermaid Tails）：熟食，4 饱食度
+    public static final RegistryObject<Item> SAUCE_GLAZED_TWIN_MERMAID_TAIL =
+            registerItem("sauce_glazed_twin_mermaid_tail",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.8F))));
+
+    // 编码 322 = 天脑汁（Celestial Brain Juice）：熟食（饮品），2 饱食度
+    public static final RegistryObject<Item> CELESTIAL_BRAIN_JUICE =
+            registerItem("celestial_brain_juice",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.4F))));
+
+    // 编码 323 = 酱脑（Sauced Brain）：熟食，2.5 饱食度
+    public static final RegistryObject<Item> SAUCED_BRAIN = registerItem("sauced_brain",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
+
+    // 编码 324 = 米堕汁（Fallen Rice Juice）：熟食（饮品），2 饱食度
+    public static final RegistryObject<Item> FALLEN_RICE_JUICE = registerItem("fallen_rice_juice",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.3F))));
+
+    // 编码 325 = 占位（Reserved Slot 325）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_325 = registerItem("placeholder_325",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 326 = 凤肉泥（Phoenix Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> PHOENIX_MEAT_PASTE = registerItem("phoenix_meat_paste",
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
+
+    // 编码 327 = 凤球（Phoenix Ball）：熟食（肉丸），2.5 饱食度
+    public static final RegistryObject<Item> PHOENIX_BALL = registerItem("phoenix_ball",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
+
+    // 编码 328 = 盘子（Plate）：普通物品（餐具），最大堆叠 64
+    public static final RegistryObject<Item> PLATE = registerItem("plate",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 329 = 酱烤鹫翅（Sauce-Roasted Vulture Wing）：熟食，3.5 饱食度
+    public static final RegistryObject<Item> SAUCE_ROASTED_VULTURE_WING =
+            registerItem("sauce_roasted_vulture_wing",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
+
+    // 编码 330 = 占位（Reserved Slot 330）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_330 = registerItem("placeholder_330",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 331 = 占位（Reserved Slot 331）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_331 = registerItem("placeholder_331",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 332 = 油瓶（Oil Bottle）：普通物品（油料），最大堆叠 64
+    public static final RegistryObject<Item> OIL_BOTTLE = registerItem("oil_bottle",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 333 = 占位（Reserved Slot 333）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_333 = registerItem("placeholder_333",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 334 = 腌料（Marinade）：普通物品（调料），最大堆叠 64
+    public static final RegistryObject<Item> MARINADE = registerItem("marinade",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 335 = 腌鹫翅（Marinated Vulture Wing）：生食（腌制），1.5 饱食度，20% 饥饿 I 30s
+    public static final RegistryObject<Item> MARINATED_VULTURE_WING =
+            registerItem("marinated_vulture_wing",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.2F))));
+
+    // 编码 336 = 堕米肉丸汤（Fallen Rice Meatball Soup）：熟食，3 饱食度
+    public static final RegistryObject<Item> FALLEN_RICE_MEATBALL_SOUP =
+            registerItem("fallen_rice_meatball_soup",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
+
+    // 编码 337 = 蛟鲛肉泥（Jiao Mermaid Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> JIAO_MERMAID_MEAT_PASTE =
+            registerItem("jiao_mermaid_meat_paste",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
+
+    // 编码 338 = 凤蜃肉泥（Phoenix Mirage Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
+    public static final RegistryObject<Item> PHOENIX_MIRAGE_MEAT_PASTE =
+            registerItem("phoenix_mirage_meat_paste",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
+
+    // 编码 339 = 珍贵调料（Precious Seasoning）：普通物品（调料），最大堆叠 64
+    public static final RegistryObject<Item> PRECIOUS_SEASONING = registerItem("precious_seasoning",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 340 = 油爆虚无触（Oil-Seared Void Tentacle）：熟食，3.5 饱食度
+    public static final RegistryObject<Item> OIL_SEARED_VOID_TENTACLE =
+            registerItem("oil_seared_void_tentacle",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.8F))));
+
+    // 编码 341 = 烧烤粉（BBQ Powder）：普通物品（调料），最大堆叠 64
+    public static final RegistryObject<Item> BBQ_POWDER = registerItem("bbq_powder",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 342 = 花香油（Floral Fragrance Oil）：普通物品（油料），最大堆叠 64
+    public static final RegistryObject<Item> FLORAL_FRAGRANCE_OIL = registerItem("floral_fragrance_oil",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 343 = 复合油（Compound Oil）：普通物品（油料），最大堆叠 64
+    public static final RegistryObject<Item> COMPOUND_OIL = registerItem("compound_oil",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 344 = 蛟足炒饭（Mermaid Leg Fried Rice）：熟食，4 饱食度
+    public static final RegistryObject<Item> MERMAID_LEG_FRIED_RICE =
+            registerItem("mermaid_leg_fried_rice",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.7F))));
+
+    // 编码 345 = 龙凤花汤（Dragon-Phoenix Flower Soup）：熟食，3 饱食度
+    public static final RegistryObject<Item> DRAGON_PHOENIX_FLOWER_SOUP =
+            registerItem("dragon_phoenix_flower_soup",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 346 = 占位（Reserved Slot 346）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_346 = registerItem("placeholder_346",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 347 = 花香蛟尾（Floral Mermaid Tail）：熟食，3 饱食度
+    public static final RegistryObject<Item> FLORAL_MERMAID_TAIL = registerItem("floral_mermaid_tail",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
+
+    // 编码 348 = 海兽相交饭（Sea Beast Jiao Rice）：熟食，4 饱食度
+    public static final RegistryObject<Item> SEA_BEAST_JIAO_RICE = registerItem("sea_beast_jiao_rice",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.7F))));
+
+    // 编码 349 = 佛幻想（Buddha Illusion）：熟食（豪华料理），5 饱食度
+    public static final RegistryObject<Item> BUDDHA_ILLUSION = registerItem("buddha_illusion",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(10, 0.9F))));
+
+    // 编码 350 = 米雪茶（Rice Snow Tea）：熟食（饮品），1 饱食度
+    public static final RegistryObject<Item> RICE_SNOW_TEA = registerItem("rice_snow_tea",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(2, 0.3F))));
+
+    // 编码 351 = 煎龙凤饼（Pan-Fried Dragon-Phoenix Cake）：熟食，3.5 饱食度
+    public static final RegistryObject<Item> PAN_FRIED_DRAGON_PHOENIX_CAKE =
+            registerItem("pan_fried_dragon_phoenix_cake",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
+
+    // 编码 352 = 天堕茶（Celestial Fallen Tea）：熟食（饮品），1 饱食度
+    public static final RegistryObject<Item> CELESTIAL_FALLEN_TEA = registerItem("celestial_fallen_tea",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(2, 0.3F))));
+
+    // 编码 353 = 凤包翅（Phoenix-Wrapped Wing）：熟食，3.5 饱食度
+    public static final RegistryObject<Item> PHOENIX_WRAPPED_WING =
+            registerItem("phoenix_wrapped_wing",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
+
+    // 编码 354 = 腌翅包（Marinated Wing Wrap）：生食（腌制），1.5 饱食度，20% 饥饿 I 30s
+    public static final RegistryObject<Item> MARINATED_WING_WRAP = registerItem("marinated_wing_wrap",
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.2F))));
+
+    // 编码 355 = 腌肉片（Marinated Meat Slices）：生食（腌制），1 饱食度，20% 饥饿 I 30s
+    public static final RegistryObject<Item> MARINATED_MEAT_SLICE = registerItem("marinated_meat_slice",
+            () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.2F))));
+
+    // 编码 356 = 肉片粥（Meat Slice Congee）：熟食，2.5 饱食度
+    public static final RegistryObject<Item> MEAT_SLICE_CONGEE = registerItem("meat_slice_congee",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.5F))));
+
+    // 编码 357 = 肢体烤串（Limb Skewer）：熟食，3 饱食度
+    public static final RegistryObject<Item> LIMB_SKEWER = registerItem("limb_skewer",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
+
+    // 编码 358 = 饭团（Onigiri）：熟食，2 饱食度（注意：编码 3 的 rice_ball 是另一个可投掷物品「米团」，故本物品注册名为 onigiri）
+    public static final RegistryObject<Item> ONIGIRI = registerItem("onigiri",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.5F))));
+
+    // 编码 359 = 海带片（Kelp Slices）：普通物品（食材），最大堆叠 64
+    public static final RegistryObject<Item> KELP_SLICE = registerItem("kelp_slice",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 360 = 天脑饭团（Celestial Brain Rice Ball）：熟食，3 饱食度
+    public static final RegistryObject<Item> CELESTIAL_BRAIN_RICE_BALL =
+            registerItem("celestial_brain_rice_ball",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 361 = 浅鲛饭团（Pale Mermaid Rice Ball）：熟食，3 饱食度
+    public static final RegistryObject<Item> PALE_MERMAID_RICE_BALL =
+            registerItem("pale_mermaid_rice_ball",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 362 = 蛟足饭团（Mermaid Leg Rice Ball）：熟食，3 饱食度
+    public static final RegistryObject<Item> MERMAID_LEG_RICE_BALL =
+            registerItem("mermaid_leg_rice_ball",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 363 = 鹫翅饭团（Vulture Wing Rice Ball）：熟食，3 饱食度
+    public static final RegistryObject<Item> VULTURE_WING_RICE_BALL =
+            registerItem("vulture_wing_rice_ball",
+                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
     // ============================ 新物品写在这行以上（末尾追加） ============================
 

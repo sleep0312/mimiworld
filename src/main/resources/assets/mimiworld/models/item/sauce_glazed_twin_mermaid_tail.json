@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mimiworld:item/sauce_glazed_twin_mermaid_tail"
+  }
+}

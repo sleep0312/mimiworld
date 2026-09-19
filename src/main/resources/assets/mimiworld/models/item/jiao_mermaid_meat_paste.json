@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mimiworld:item/jiao_mermaid_meat_paste"
+  }
+}
