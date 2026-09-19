@@ -4,8 +4,11 @@ import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
+import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
 import com.mimiworld.mimiworld.entity.ModEntities;
+import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -39,6 +42,9 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), MicroDuckRenderer::new);
     }
 
+    // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）
+    // 随 FMLClientSetupEvent 的 enqueueWork 一起在主线程注册，见 onClientSetup
+
     /**
      * 十字型植物方块（米树苗、米草）的纹理带透明像素，必须挂到 cutout 渲染层，
      * 否则默认 solid 层不丢弃 Alpha=0 像素，透明区域在世界中会显示成黑色（与原版树苗/草一致的处理）。
@@ -53,6 +59,9 @@ public class ClientSetup {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.RICE_SOUP_BLOCK.get(), RenderType.translucent());
             // 饭汤流体方块：半透明暖汤，同样需要 translucent 层
             ItemBlockRenderTypes.setRenderLayer(ModFluids.RICE_BROTH_BLOCK.get(), RenderType.translucent());
+
+            // 绑定造米台菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.RICE_MAKER_MENU.get(), RiceMakerScreen::new);
         });
     }
 }

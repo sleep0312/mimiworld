@@ -166,10 +166,11 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 造米机（27 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 造米机/造米台（27 号 = rice_maker）：石头类机器方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 绑定方块实体 RiceMakerBlockEntity：右键打开 2 输入槽 + 1 输出槽的加工 GUI（见 menu.RiceMakerMenu）。
     public static final RegistryObject<Block> RICE_MAKER =
-            BLOCKS.register("rice_maker", () -> new Block(
+            BLOCKS.register("rice_maker", () -> new RiceMakerBlock(
                     BlockBehaviour.Properties.of()
                             .strength(1.5F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -374,6 +375,72 @@ public class ModBlocks {
     // 破坏掉落本身（loot_tables/blocks/ingot_condensation_table.json）。
     public static final RegistryObject<Block> INGOT_CONDENSATION_TABLE =
             BLOCKS.register("ingot_condensation_table", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 搅碎器（365 号 BlockItem）：食材加工机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/crusher.json）。
+    public static final RegistryObject<Block> CRUSHER =
+            BLOCKS.register("crusher", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 搅拌器（366 号 BlockItem）：食材加工机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/mixer.json）。
+    public static final RegistryObject<Block> MIXER =
+            BLOCKS.register("mixer", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 大煮锅（369 号 BlockItem）：烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/large_cooking_pot.json）。
+    public static final RegistryObject<Block> LARGE_COOKING_POT =
+            BLOCKS.register("large_cooking_pot", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 超大煮锅（370 号 BlockItem）：369 大煮锅的强化版烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/extra_large_cooking_pot.json）。
+    public static final RegistryObject<Block> EXTRA_LARGE_COOKING_POT =
+            BLOCKS.register("extra_large_cooking_pot", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 铁锅（372 号 BlockItem）：烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/iron_wok.json）。
+    public static final RegistryObject<Block> IRON_WOK =
+            BLOCKS.register("iron_wok", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 烤箱（373 号 BlockItem）：烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/oven.json）。
+    public static final RegistryObject<Block> OVEN =
+            BLOCKS.register("oven", () -> new Block(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()

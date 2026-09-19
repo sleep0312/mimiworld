@@ -377,5 +377,15 @@
   "item.mimiworld.celestial_brain_rice_ball": "天脑饭团",
   "item.mimiworld.pale_mermaid_rice_ball": "浅鲛饭团",
   "item.mimiworld.mermaid_leg_rice_ball": "蛟足饭团",
-  "item.mimiworld.vulture_wing_rice_ball": "鹫翅饭团"
+  "item.mimiworld.vulture_wing_rice_ball": "鹫翅饭团",
+  "item.mimiworld.placeholder_364": "待定占位",
+  "block.mimiworld.crusher": "搅碎器",
+  "block.mimiworld.mixer": "搅拌器",
+  "item.mimiworld.placeholder_367": "待定占位",
+  "item.mimiworld.placeholder_368": "待定占位",
+  "block.mimiworld.large_cooking_pot": "大煮锅",
+  "block.mimiworld.extra_large_cooking_pot": "超大煮锅",
+  "item.mimiworld.placeholder_371": "待定占位",
+  "block.mimiworld.iron_wok": "铁锅",
+  "block.mimiworld.oven": "烤箱"
 }

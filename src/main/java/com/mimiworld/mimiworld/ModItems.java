@@ -400,6 +400,16 @@ import java.util.function.Supplier;
  *   361 = pale_mermaid_rice_ball（浅鲛饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Pale Mermaid Rice Ball）
  *   362 = mermaid_leg_rice_ball（蛟足饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Mermaid Leg Rice Ball）
  *   363 = vulture_wing_rice_ball（鹫翅饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Vulture Wing Rice Ball）
+ *   364 = placeholder_364（待定占位，不进创造标签页；英文名 Reserved Slot 364）
+ *   365 = crusher（搅碎器，方块物品 BlockItem；食材加工机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Crusher）
+ *   366 = mixer（搅拌器，方块物品 BlockItem；食材加工机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Mixer）
+ *   367 = placeholder_367（待定占位，不进创造标签页；英文名 Reserved Slot 367）
+ *   368 = placeholder_368（待定占位，不进创造标签页；英文名 Reserved Slot 368）
+ *   369 = large_cooking_pot（大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Large Cooking Pot）
+ *   370 = extra_large_cooking_pot（超大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Extra-Large Cooking Pot）
+ *   371 = placeholder_371（待定占位，不进创造标签页；英文名 Reserved Slot 371）
+ *   372 = iron_wok（铁锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Iron Wok）
+ *   373 = oven（烤箱，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Oven）
  * ================================================================================
  */
 
@@ -2284,6 +2294,46 @@ public class ModItems {
     public static final RegistryObject<Item> VULTURE_WING_RICE_BALL =
             registerItem("vulture_wing_rice_ball",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+
+    // 编码 364 = 占位（Reserved Slot 364）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_364 = registerItem("placeholder_364",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 365 = 搅碎器（Crusher）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> CRUSHER = registerItem("crusher",
+            () -> new BlockItem(ModBlocks.CRUSHER.get(), new Item.Properties()));
+
+    // 编码 366 = 搅拌器（Mixer）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> MIXER = registerItem("mixer",
+            () -> new BlockItem(ModBlocks.MIXER.get(), new Item.Properties()));
+
+    // 编码 367 = 占位（Reserved Slot 367）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_367 = registerItem("placeholder_367",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 368 = 占位（Reserved Slot 368）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_368 = registerItem("placeholder_368",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 369 = 大煮锅（Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> LARGE_COOKING_POT = registerItem("large_cooking_pot",
+            () -> new BlockItem(ModBlocks.LARGE_COOKING_POT.get(), new Item.Properties()));
+
+    // 编码 370 = 超大煮锅（Extra-Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> EXTRA_LARGE_COOKING_POT = registerItem("extra_large_cooking_pot",
+            () -> new BlockItem(ModBlocks.EXTRA_LARGE_COOKING_POT.get(), new Item.Properties()));
+
+    // 编码 371 = 占位（Reserved Slot 371）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_371 = registerItem("placeholder_371",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 372 = 铁锅（Iron Wok）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> IRON_WOK = registerItem("iron_wok",
+            () -> new BlockItem(ModBlocks.IRON_WOK.get(), new Item.Properties()));
+
+    // 编码 373 = 烤箱（Oven）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> OVEN = registerItem("oven",
+            () -> new BlockItem(ModBlocks.OVEN.get(), new Item.Properties()));
 
     // ============================ 新物品写在这行以上（末尾追加） ============================
 

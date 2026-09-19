@@ -362,5 +362,15 @@
   "item.mimiworld.celestial_brain_rice_ball": "Celestial Brain Rice Ball",
   "item.mimiworld.pale_mermaid_rice_ball": "Pale Mermaid Rice Ball",
   "item.mimiworld.mermaid_leg_rice_ball": "Mermaid Leg Rice Ball",
-  "item.mimiworld.vulture_wing_rice_ball": "Vulture Wing Rice Ball"
+  "item.mimiworld.vulture_wing_rice_ball": "Vulture Wing Rice Ball",
+  "item.mimiworld.placeholder_364": "Reserved Slot 364",
+  "block.mimiworld.crusher": "Crusher",
+  "block.mimiworld.mixer": "Mixer",
+  "item.mimiworld.placeholder_367": "Reserved Slot 367",
+  "item.mimiworld.placeholder_368": "Reserved Slot 368",
+  "block.mimiworld.large_cooking_pot": "Large Cooking Pot",
+  "block.mimiworld.extra_large_cooking_pot": "Extra-Large Cooking Pot",
+  "item.mimiworld.placeholder_371": "Reserved Slot 371",
+  "block.mimiworld.iron_wok": "Iron Wok",
+  "block.mimiworld.oven": "Oven"
 }
