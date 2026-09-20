@@ -412,8 +412,6 @@ import java.util.function.Supplier;
  *   373 = oven（烤箱，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Oven）
  * ================================================================================
  */
-
-
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, MimiWorld.MODID);

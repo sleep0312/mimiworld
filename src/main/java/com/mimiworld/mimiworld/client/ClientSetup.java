@@ -4,7 +4,13 @@ import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
+import com.mimiworld.mimiworld.client.renderer.StickyRiceSpiderRenderer;
 import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
+import com.mimiworld.mimiworld.client.screen.RicePoundingTableScreen;
+import com.mimiworld.mimiworld.client.screen.RicePressScreen;
+import com.mimiworld.mimiworld.client.screen.AdvancedRicePoundingTableScreen;
+import com.mimiworld.mimiworld.client.screen.IonizationTableScreen;
+import com.mimiworld.mimiworld.client.screen.PrecipitationTableScreen;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
@@ -40,6 +46,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossRenderer::new);
         // 257 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染
         event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), MicroDuckRenderer::new);
+        // 黏米之蛛：GeckoLib spider 模型（idle/walk/attack 动画）
+        event.registerEntityRenderer(ModEntities.STICKY_RICE_SPIDER.get(), StickyRiceSpiderRenderer::new);
     }
 
     // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）
@@ -62,6 +70,16 @@ public class ClientSetup {
 
             // 绑定造米台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.RICE_MAKER_MENU.get(), RiceMakerScreen::new);
+            // 绑定锤米台菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.RICE_POUNDING_TABLE_MENU.get(), RicePoundingTableScreen::new);
+            // 绑定压饭机菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.RICE_PRESS_MENU.get(), RicePressScreen::new);
+            // 绑定高级锤米台菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.ADVANCED_RICE_POUNDING_TABLE_MENU.get(), AdvancedRicePoundingTableScreen::new);
+            // 绑定电离台菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.IONIZATION_TABLE_MENU.get(), IonizationTableScreen::new);
+            // 绑定沉淀台菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.PRECIPITATION_TABLE_MENU.get(), PrecipitationTableScreen::new);
         });
     }
 }

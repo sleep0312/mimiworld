@@ -185,30 +185,36 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 锤米台（29 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 锤米台（29 号）：石头类机器方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 绑定方块实体 RicePoundingTableBlockEntity：右键打开 2 输入槽 + 1 输出槽的工作台式合成 GUI
+    // （见 menu.RicePoundingTableMenu，当前暂无配方）。
     public static final RegistryObject<Block> RICE_POUNDING_TABLE =
-            BLOCKS.register("rice_pounding_table", () -> new Block(
+            BLOCKS.register("rice_pounding_table", () -> new RicePoundingTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(1.5F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 压饭机（31 号）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 压饭机（31 号）：石头类机器方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 绑定方块实体 RicePressBlockEntity：右键打开 9 输入槽 + 1 输出槽的工作台式合成 GUI
+    // （见 menu.RicePressMenu，当前暂无配方）。
     public static final RegistryObject<Block> RICE_PRESS =
-            BLOCKS.register("rice_press", () -> new Block(
+            BLOCKS.register("rice_press", () -> new RicePressBlock(
                     BlockBehaviour.Properties.of()
                             .strength(1.5F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 高级锤米台（49 号）：29 号锤米台的合金强化版，石头类普通全立方块，属性参照原版石头
+    // 高级锤米台（49 号）：29 号锤米台的合金强化版，石头类机器方块，属性参照原版石头
     // （硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/advanced_rice_pounding_table.json）。
+    // 绑定方块实体 AdvancedRicePoundingTableBlockEntity：功能与锤米台完全一致（2 输入 + 1 输出，
+    // 工作台式即时合成，当前无配方），仅 GUI 贴图外观不同（右上角金锤装饰）。
     public static final RegistryObject<Block> ADVANCED_RICE_POUNDING_TABLE =
-            BLOCKS.register("advanced_rice_pounding_table", () -> new Block(
+            BLOCKS.register("advanced_rice_pounding_table", () -> new AdvancedRicePoundingTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(1.5F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -236,21 +242,21 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.AMETHYST)));
 
-    // 电离台（56 号）：工艺机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 电离台（56 号）：双输入定时加工机器方块（右键开 GUI，无燃料，倒三角加工进度），金属质地、硬度 3.0、抗爆 6.0。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落本身（loot_tables/blocks/ionization_table.json）。
+    // 破坏掉落本身（loot_tables/blocks/ionization_table.json）及槽内物品。
     public static final RegistryObject<Block> IONIZATION_TABLE =
-            BLOCKS.register("ionization_table", () -> new Block(
+            BLOCKS.register("ionization_table", () -> new IonizationTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 沉淀台（57 号）：工艺机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），金属质地、硬度 3.0、抗爆 6.0。
+    // 沉淀台（57 号）：双输入定时加工机器方块（右键开 GUI，无燃料，正三角加工进度），金属质地、硬度 3.0、抗爆 6.0。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落本身（loot_tables/blocks/precipitation_table.json）。
+    // 破坏掉落本身（loot_tables/blocks/precipitation_table.json）及槽内物品。
     public static final RegistryObject<Block> PRECIPITATION_TABLE =
-            BLOCKS.register("precipitation_table", () -> new Block(
+            BLOCKS.register("precipitation_table", () -> new PrecipitationTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()

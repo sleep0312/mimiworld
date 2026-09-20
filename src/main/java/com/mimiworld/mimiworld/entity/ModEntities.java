@@ -67,6 +67,15 @@ public class ModEntities {
                             .clientTrackingRange(8)
                             .build("rice_stealer"));
 
+    // ===== 黏米之蛛：GeckoLib spider 模型，行为同原版蜘蛛但全天敌对（1.4×0.9 中型怪物） =====
+    // 暂不注册刷怪蛋，可用 /summon mimiworld:sticky_rice_spider 召唤测试；自然生成规则后续再加
+    public static final RegistryObject<EntityType<StickyRiceSpiderEntity>> STICKY_RICE_SPIDER =
+            ENTITY_TYPES.register("sticky_rice_spider", () ->
+                    EntityType.Builder.<StickyRiceSpiderEntity>of(StickyRiceSpiderEntity::new, MobCategory.MONSTER)
+                            .sized(1.4F, 0.9F)
+                            .clientTrackingRange(8)
+                            .build("sticky_rice_spider"));
+
     private static RegistryObject<EntityType<PendingBossEntity>> registerBoss(String id, float width, float height) {
         return ENTITY_TYPES.register(id, () ->
                 EntityType.Builder.<PendingBossEntity>of(PendingBossEntity::new, MobCategory.MONSTER)

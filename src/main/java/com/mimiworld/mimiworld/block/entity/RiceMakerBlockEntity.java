@@ -1,8 +1,10 @@
 package com.mimiworld.mimiworld.block.entity;
 
+import com.mimiworld.mimiworld.ModItems;
 import com.mimiworld.mimiworld.menu.RiceMakerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
@@ -15,6 +17,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +26,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import net.minecraft.core.NonNullList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -32,60 +34,92 @@ import java.util.Map;
 /**
  * 造米台方块实体（方块编码 27 = rice_maker）。
  * <p>
- * 3 个物品槽：0/1 为输入槽，2 为输出槽。两个输入满足已注册的 2→1 配方时开始加工，
- * 进度走完 {@link #MAX_PROGRESS} 后各消耗 1 个输入并产出结果；输出槽禁止玩家手动放入。
- * 配方默认是空表，使用 {@link #registerRecipe} 注册（后续也可以换成数据驱动配方）。
+ * 3 个物品槽：
+ * <ul>
+ *   <li>槽 0：原料槽（仅可放入已注册配方的原料，目前仅小麦种子），可批量放入整组；</li>
+ *   <li>槽 1：注水槽（仅可放入水桶），放入 1 桶水立即消耗水桶、在原槽返还空桶，
+ *       并向内部水存储注入 {@value #WATER_PER_BUCKET} mB 水；</li>
+ *   <li>槽 2：输出槽，禁止手动放入。</li>
+ * </ul>
+ * 内部液体存储：普通水，1 桶 = 1000 mB，最大 {@value #MAX_WATER} mB（= 10 桶）。
+ * 配方消耗水与原料，加工循环每条配方独立计时（米配方 40 tick = 2 秒，每次只产出 1 个，
+ * 即便槽内有一组原料也必须每 2 秒加工一次）。
  */
 public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, net.minecraft.world.Container {
 
-    public static final int SLOT_INPUT_1 = 0;
-    public static final int SLOT_INPUT_2 = 1;
+    public static final int SLOT_INPUT = 0;
+    public static final int SLOT_WATER_BUCKET = 1;
     public static final int SLOT_OUTPUT = 2;
     public static final int TOTAL_SLOTS = 3;
 
-    /** 加工总时长（tick），120 = 6 秒 */
-    public static final int MAX_PROGRESS = 120;
+    /** 每桶水注入的水量：1 桶 = 1000 mB */
+    public static final int WATER_PER_BUCKET = 1000;
+    /** 水存储上限：10000 mB = 10 桶水 */
+    public static final int MAX_WATER = 10000;
+    /** 默认/米配方加工时长（tick），2 秒 */
+    public static final int RICE_PROCESS_TICKS = 40;
+    /** 米配方耗水量（mB） */
+    public static final int RICE_WATER_COST = 500;
 
-    /** 2→1 配方表：键为「无序」的两个输入物品，值为输出（含数量）。两个输入不分左右 */
-    private static final Map<Long, ItemStack> RECIPES = new HashMap<>();
+    // -------------------- 配方表 --------------------
+
+    /** 一条「原料 + 水 → 产物」配方 */
+    public record RiceRecipe(Item input, ItemStack result, int waterCost, int processTicks) {
+    }
+
+    /** 键：原料物品；可放原料槽的物品必须在此表中 */
+    private static final Map<Item, RiceRecipe> RECIPES = new HashMap<>();
+
+    static {
+        // 1 小麦种子 + 500 mB 水 → 1 米，加工 2 秒（40 tick）
+        registerRecipe(new RiceRecipe(
+                Items.WHEAT_SEEDS,
+                new ItemStack(ModItems.RICE.get()),
+                RICE_WATER_COST,
+                RICE_PROCESS_TICKS));
+    }
+
+    /** 注册一条「原料 + 水 → 产物」配方。应在模组加载阶段调用。 */
+    public static void registerRecipe(RiceRecipe recipe) {
+        RECIPES.put(recipe.input(), recipe);
+    }
+
+    @Nullable
+    public static RiceRecipe findRecipe(ItemStack input) {
+        return input.isEmpty() ? null : RECIPES.get(input.getItem());
+    }
+
+    // -------------------- 状态 --------------------
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(TOTAL_SLOTS, ItemStack.EMPTY);
     private int progress = 0;
+    private int water = 0;
 
-    // DataSlot 0 = 当前进度（由 Menu 同步写回），DataSlot 1 = 总进度常量
-    private final ContainerData data = new SimpleContainerData(2);
+    /*
+     * DataSlot 布局（水量上限 10000 < 单 slot 上限 65535，无需拆分）：
+     * 0 = 当前进度
+     * 1 = 当前配方加工总时长
+     * 2 = 当前水量（mB）
+     * 3 = 储水上限（mB）
+     */
+    public static final int DATA_PROGRESS = 0;
+    public static final int DATA_MAX_PROGRESS = 1;
+    public static final int DATA_WATER = 2;
+    public static final int DATA_MAX_WATER = 3;
+    public static final int DATA_COUNT = 4;
+
+    private final ContainerData data = new SimpleContainerData(DATA_COUNT);
 
     private LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> new InvWrapper(this));
 
     public RiceMakerBlockEntity(BlockPos pos, BlockState state) {
-        super(com.mimiworld.mimiworld.block.entity.ModBlockEntities.RICE_MAKER.get(), pos, state);
-        this.data.set(1, MAX_PROGRESS);
+        super(ModBlockEntities.RICE_MAKER.get(), pos, state);
+        this.data.set(DATA_MAX_PROGRESS, RICE_PROCESS_TICKS);
+        this.data.set(DATA_MAX_WATER, MAX_WATER);
+        syncWaterToData();
     }
 
-    /** 注册一条无序 2→1 配方（输出数量由 result 自带）。应在模组加载阶段调用。 */
-    public static void registerRecipe(Item inputA, Item inputB, ItemStack result) {
-        RECIPES.put(recipeKey(inputA, inputB), result.copy());
-    }
-
-    /** 查询两个输入的配方结果，找不到返回空栈；输入不分左右 */
-    public static ItemStack findResult(ItemStack a, ItemStack b) {
-        if (a.isEmpty() || b.isEmpty()) {
-            return ItemStack.EMPTY;
-        }
-        ItemStack result = RECIPES.get(recipeKey(a.getItem(), b.getItem()));
-        return result == null ? ItemStack.EMPTY : result.copy();
-    }
-
-    private static long recipeKey(Item a, Item b) {
-        int ia = Item.getId(a);
-        int ib = Item.getId(b);
-        if (ia > ib) {
-            int t = ia;
-            ia = ib;
-            ib = t;
-        }
-        return ((long) ia << 32) | (ib & 0xFFFFFFFFL);
-    }
+    // -------------------- 服务端 tick --------------------
 
     /** 服务端每 tick 加工逻辑（BlockEntityTicker 回调） */
     public static void serverTick(Level level, BlockPos pos, BlockState state, RiceMakerBlockEntity be) {
@@ -93,29 +127,62 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
     }
 
     private void tick() {
-        ItemStack result = findResult(items.get(SLOT_INPUT_1), items.get(SLOT_INPUT_2));
-        boolean canProcess = !result.isEmpty() && canOutputAccept(result);
-
-        if (canProcess) {
-            progress++;
-            if (progress >= MAX_PROGRESS) {
-                items.get(SLOT_INPUT_1).shrink(1);
-                items.get(SLOT_INPUT_2).shrink(1);
-                ItemStack output = items.get(SLOT_OUTPUT);
-                if (output.isEmpty()) {
-                    items.set(SLOT_OUTPUT, result.copy());
-                } else {
-                    output.grow(result.getCount());
-                }
-                progress = 0;
-            }
-            data.set(0, progress);
-            setChanged();
-        } else if (progress != 0) {
-            progress = 0;
-            data.set(0, progress);
+        boolean changed = consumeWaterBucket();
+        changed |= processRecipe();
+        if (changed) {
             setChanged();
         }
+    }
+
+    /**
+     * 注水槽投入水桶时立即处理：消耗 1 个水桶 → 原槽返还 1 个空桶 + 注入 1B 水。
+     * 水已满时不处理（水桶留在槽内）。水桶原版最大堆叠为 1，无需处理成组情况。
+     */
+    private boolean consumeWaterBucket() {
+        ItemStack bucketSlot = items.get(SLOT_WATER_BUCKET);
+        if (bucketSlot.is(Items.WATER_BUCKET) && water + WATER_PER_BUCKET <= MAX_WATER) {
+            water += WATER_PER_BUCKET;
+            items.set(SLOT_WATER_BUCKET, new ItemStack(Items.BUCKET));
+            syncWaterToData();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 配方加工循环：原料与水持续满足时进度推进，到达配方时长后消耗 1 原料 + 定量水、
+     * 产出 1 个结果，进度归零重新计时（每 2 秒只产出一次，原料整组放入也一样）。
+     */
+    private boolean processRecipe() {
+        RiceRecipe recipe = findRecipe(items.get(SLOT_INPUT));
+        boolean canProcess = recipe != null
+                && water >= recipe.waterCost()
+                && canOutputAccept(recipe.result());
+
+        if (!canProcess) {
+            if (progress != 0) {
+                progress = 0;
+                data.set(DATA_PROGRESS, progress);
+                return true;
+            }
+            return false;
+        }
+
+        progress++;
+        if (progress >= recipe.processTicks()) {
+            items.get(SLOT_INPUT).shrink(1);
+            water -= recipe.waterCost();
+            ItemStack output = items.get(SLOT_OUTPUT);
+            if (output.isEmpty()) {
+                items.set(SLOT_OUTPUT, recipe.result().copy());
+            } else {
+                output.grow(recipe.result().getCount());
+            }
+            progress = 0;
+            syncWaterToData();
+        }
+        data.set(DATA_PROGRESS, progress);
+        return true;
     }
 
     /** 输出槽能否再放入这份结果：空槽可放；同种物品堆叠不爆上限可放 */
@@ -130,8 +197,8 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
         return output.getCount() + result.getCount() <= getMaxStackSize();
     }
 
-    public int getProgress() {
-        return progress;
+    private void syncWaterToData() {
+        this.data.set(DATA_WATER, water);
     }
 
     // -------------------- 存档 --------------------
@@ -141,6 +208,7 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
         super.saveAdditional(tag);
         ContainerHelper.saveAllItems(tag, items);
         tag.putInt("Progress", progress);
+        tag.putInt("Water", water);
     }
 
     @Override
@@ -149,7 +217,9 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
         items.clear();
         ContainerHelper.loadAllItems(tag, items);
         progress = tag.getInt("Progress");
-        data.set(0, progress);
+        water = tag.getInt("Water");
+        data.set(DATA_PROGRESS, progress);
+        syncWaterToData();
     }
 
     // -------------------- 能力（漏斗/管道交互） --------------------
@@ -229,9 +299,16 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
                 worldPosition.getZ() + 0.5) <= 64.0;
     }
 
+    /** 槽位准入：原料槽仅接受已注册配方的原料；注水槽仅接受水桶；输出槽不可放入 */
     @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
-        return slot != SLOT_OUTPUT;
+        if (slot == SLOT_INPUT) {
+            return findRecipe(stack) != null;
+        }
+        if (slot == SLOT_WATER_BUCKET) {
+            return stack.is(Items.WATER_BUCKET);
+        }
+        return false;
     }
 
     @Override

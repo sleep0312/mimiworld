@@ -57,7 +57,18 @@ import net.minecraft.world.entity.player.Inventory;
  *      灰与面板灰融合不可见），放到本贴图留白区 (0,200)；
  *      renderBg 中按进度横向裁切宽度 = ceil(progress*24/maxProgress)。
  *
- * 6. 验收：生成后逐像素对比新贴图目标矩形与 furnace 源矩形，必须 0 mismatch
+ * 6. 液体刻度表（水位表，在原版 furnace.png 中无对应物，按同一斜面语言手画）：
+ *    - 位置选面板内空白区 (143,9)，外框 18x64，内膛 16x62（= 槽位斜面竖向
+ *      拉长版）：顶/左 1px #373737、井面 #8B8B8B、右/下 1px #FFFFFF，左下角
+ *      像素保持 #8B8B8B（与槽精灵一致）；
+ *    - 10000 mB（10 桶，1 桶 = 1000 mB）容量 → 9 道 #373737 暗刻线（每 1 桶
+ *      一道，上下边界由框体表达），刻线画在内膛右侧 5px；空表显示刻度，充水
+ *      后被蓝色填充盖住，与真实量杯一致；
+ *    - 贴图只画框+刻度，水体由 renderBg 用 GuiGraphics.fill 从内膛底部向上
+ *      动态填充，高度 = floor(water*62/maxWater)，水色 #3F76E4、水面 1px
+ *      高光 #5B94F5；悬停 tooltip 只显示一行剩余 mB（renderComponentTooltip）。
+ *
+ * 7. 验收：生成后逐像素对比新贴图目标矩形与 furnace 源矩形，必须 0 mismatch
  *    （GetPixel 双重 for 循环逐 ARGB 比较）。256x256 尺寸也要断言。
  *    改完贴图进游戏按 F3+T 重载资源即可，无需重启。
  * ============================================================================
@@ -79,6 +90,19 @@ public class RiceMakerScreen extends AbstractContainerScreen<RiceMakerMenu> {
     // 完整亮色箭头精灵在 256x256 贴图中的 UV（位于 GUI 画面之外的留白区）
     private static final int ARROW_FILL_U = 0;
     private static final int ARROW_FILL_V = 200;
+
+    // 水位刻度表：贴图 (143,9) 为 18x64 外框，内膛 16x62 从 (144,10) 起
+    private static final int GAUGE_FRAME_X = 143;
+    private static final int GAUGE_FRAME_Y = 9;
+    private static final int GAUGE_FRAME_W = 18;
+    private static final int GAUGE_FRAME_H = 64;
+    private static final int GAUGE_INNER_X = 144;
+    private static final int GAUGE_INNER_Y = 10;
+    private static final int GAUGE_INNER_W = 16;
+    private static final int GAUGE_INNER_H = 62;
+    // 原版水体蓝 + 水面 1px 浅蓝高光
+    private static final int WATER_COLOR = 0xFF3F76E4;
+    private static final int WATER_SURFACE_COLOR = 0xFF5B94F5;
 
     // 标题位置（贴图上无任何文字，全部代码渲染）
     private static final int TITLE_X = 8;
@@ -123,6 +147,32 @@ public class RiceMakerScreen extends AbstractContainerScreen<RiceMakerMenu> {
                     ARROW_FILL_U, ARROW_FILL_V,
                     fillWidth, ARROW_HEIGHT,
                     256, 256);
+        }
+
+        // 水位：从刻度表内膛底部向上填充（高度向下取整，避免水量不足时溢出一格）
+        int water = this.menu.getWater();
+        int maxWater = this.menu.getMaxWater();
+        int fillHeight = Math.max(0, Math.min(GAUGE_INNER_H,
+                (int) ((long) water * GAUGE_INNER_H / maxWater)));
+        if (fillHeight > 0) {
+            int fillTop = y + GAUGE_INNER_Y + GAUGE_INNER_H - fillHeight;
+            int fillBottom = y + GAUGE_INNER_Y + GAUGE_INNER_H;
+            graphics.fill(x + GAUGE_INNER_X, fillTop,
+                    x + GAUGE_INNER_X + GAUGE_INNER_W, fillBottom, WATER_COLOR);
+            // 水面 1px 高光
+            graphics.fill(x + GAUGE_INNER_X, fillTop,
+                    x + GAUGE_INNER_X + GAUGE_INNER_W, fillTop + 1, WATER_SURFACE_COLOR);
+        }
+    }
+
+    /** 悬停水位表时只显示剩余水量一行（mB，1 桶 = 1000 mB） */
+    @Override
+    protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+        super.renderTooltip(graphics, mouseX, mouseY);
+        if (isHovering(GAUGE_FRAME_X, GAUGE_FRAME_Y, GAUGE_FRAME_W, GAUGE_FRAME_H, mouseX, mouseY)) {
+            graphics.renderComponentTooltip(this.font,
+                    java.util.List.of(Component.literal("水: " + this.menu.getWater() + " mB")),
+                    mouseX, mouseY);
         }
     }
 

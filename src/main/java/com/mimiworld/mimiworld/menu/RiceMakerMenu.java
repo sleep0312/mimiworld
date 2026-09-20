@@ -15,17 +15,17 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * 造米台菜单：左 2 个输入槽（上下排列），右 1 个输出槽；下方为玩家背包。
+ * 造米台菜单：左上原料槽、左下注水槽（仅水桶）、右侧输出槽；下方为玩家背包。
  * 槽位坐标与 rice_maker.png 中槽框左上角严格一致。
  */
 public class RiceMakerMenu extends AbstractContainerMenu {
 
     // 机器槽（这里是 16x16 凹槽左上角的像素坐标；贴图上 18x18 槽框精灵位于
     // (x-1,y-1)，完整贴图绘制/拼贴规范见 RiceMakerScreen 类头注释）
-    public static final int SLOT_INPUT_1_X = 30;
-    public static final int SLOT_INPUT_1_Y = 26;
-    public static final int SLOT_INPUT_2_X = 30;
-    public static final int SLOT_INPUT_2_Y = 62;
+    public static final int SLOT_INPUT_X = 30;
+    public static final int SLOT_INPUT_Y = 26;
+    public static final int SLOT_WATER_BUCKET_X = 30;
+    public static final int SLOT_WATER_BUCKET_Y = 62;
     public static final int SLOT_OUTPUT_X = 112;
     public static final int SLOT_OUTPUT_Y = 43;
 
@@ -45,23 +45,34 @@ public class RiceMakerMenu extends AbstractContainerMenu {
 
     /** 客户端构造：菜单类型工厂通过网络打开时调用，容器/数据使用本地空实现（槽位同步照常工作） */
     public RiceMakerMenu(int containerId, Inventory playerInventory, FriendlyByteBuf buf) {
-        // 客户端容器：槽位内容由网络同步；本地进度数据会被 DataSlot 同步覆盖
+        // 客户端容器：槽位内容由网络同步；本地进度/水量数据会被 DataSlot 同步覆盖
         this(containerId, playerInventory, new SimpleContainer(MACHINE_SLOTS),
-                new SimpleContainerData(2), ContainerLevelAccess.NULL);
+                new SimpleContainerData(RiceMakerBlockEntity.DATA_COUNT), ContainerLevelAccess.NULL);
     }
 
     /** 服务端构造：由 RiceMakerBlockEntity#createMenu 调用 */
     public RiceMakerMenu(int containerId, Inventory playerInventory, Container container, ContainerData data, ContainerLevelAccess access) {
         super(ModMenuTypes.RICE_MAKER_MENU.get(), containerId);
         checkContainerSize(container, MACHINE_SLOTS);
-        checkContainerDataCount(data, 2);
+        checkContainerDataCount(data, RiceMakerBlockEntity.DATA_COUNT);
         this.container = container;
         this.access = access;
         this.data = data;
 
-        // 2 个输入槽
-        addSlot(new Slot(container, RiceMakerBlockEntity.SLOT_INPUT_1, SLOT_INPUT_1_X, SLOT_INPUT_1_Y));
-        addSlot(new Slot(container, RiceMakerBlockEntity.SLOT_INPUT_2, SLOT_INPUT_2_X, SLOT_INPUT_2_Y));
+        // 原料槽（仅配方原料，客户端容器不是 BE，故显式重写 mayPlace 与服务端保持一致）
+        addSlot(new Slot(container, RiceMakerBlockEntity.SLOT_INPUT, SLOT_INPUT_X, SLOT_INPUT_Y) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return RiceMakerBlockEntity.findRecipe(stack) != null;
+            }
+        });
+        // 注水槽：仅水桶；投入后由 BlockEntity 立即换成空桶并注水
+        addSlot(new Slot(container, RiceMakerBlockEntity.SLOT_WATER_BUCKET, SLOT_WATER_BUCKET_X, SLOT_WATER_BUCKET_Y) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(net.minecraft.world.item.Items.WATER_BUCKET);
+            }
+        });
         // 输出槽：只能取，不能放
         addSlot(new Slot(container, RiceMakerBlockEntity.SLOT_OUTPUT, SLOT_OUTPUT_X, SLOT_OUTPUT_Y) {
             @Override
@@ -86,14 +97,24 @@ public class RiceMakerMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
-    /** 当前加工进度（0~MAX_PROGRESS），供 Screen 绘制箭头填充 */
+    /** 当前加工进度（0~加工总时长），供 Screen 绘制箭头填充 */
     public int getProgress() {
-        return data.get(0);
+        return data.get(RiceMakerBlockEntity.DATA_PROGRESS);
     }
 
     /** 加工总进度（tick） */
     public int getMaxProgress() {
-        return Math.max(1, data.get(1));
+        return Math.max(1, data.get(RiceMakerBlockEntity.DATA_MAX_PROGRESS));
+    }
+
+    /** 当前储水量（mB，0~10000） */
+    public int getWater() {
+        return data.get(RiceMakerBlockEntity.DATA_WATER);
+    }
+
+    /** 储水上限（mB） */
+    public int getMaxWater() {
+        return Math.max(1, data.get(RiceMakerBlockEntity.DATA_MAX_WATER));
     }
 
     @Override
@@ -103,7 +124,8 @@ public class RiceMakerMenu extends AbstractContainerMenu {
 
     /**
      * Shift+点击移动物品：
-     * 机器槽 → 玩家背包；玩家背包 → 两个输入槽（输出槽不接收）；背包↔快捷栏互转。
+     * 机器槽 → 玩家背包；玩家背包 → 原料槽/注水槽（各自 mayPlace 过滤，输出槽不接收）；
+     * 背包↔快捷栏互转。
      */
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
@@ -114,13 +136,13 @@ public class RiceMakerMenu extends AbstractContainerMenu {
             result = clicked.copy();
 
             if (index < MACHINE_SLOTS) {
-                // 机器槽（含输出槽）→ 玩家背包/快捷栏
+                // 机器槽（含输出槽/注水槽内的空桶）→ 玩家背包/快捷栏
                 if (!moveItemStackTo(clicked, INV_SLOT_START, HOTBAR_SLOT_END, true)) {
                     return ItemStack.EMPTY;
                 }
                 slot.onQuickCraft(clicked, result);
             } else {
-                // 玩家背包 → 仅尝试两个输入槽
+                // 玩家背包 → 尝试原料槽 + 注水槽（种子进原料槽，水桶进注水槽）
                 if (!moveItemStackTo(clicked, 0, MACHINE_SLOTS - 1, false)) {
                     // 背包↔快捷栏
                     if (index < INV_SLOT_END) {
