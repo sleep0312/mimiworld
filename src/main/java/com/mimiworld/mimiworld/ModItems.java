@@ -410,6 +410,42 @@ import java.util.function.Supplier;
  *   371 = placeholder_371（待定占位，不进创造标签页；英文名 Reserved Slot 371）
  *   372 = iron_wok（铁锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Iron Wok）
  *   373 = oven（烤箱，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Oven）
+ *   374 = placeholder_374（待定占位，不进创造标签页；英文名 Reserved Slot 374）
+ *   375 = spoon（勺子，普通物品，最大堆叠 64；英文名 Spoon）
+ *   376 = li_pearl（骊珠，普通物品，最大堆叠 64；英文名 Li Pearl）
+ *   377 = dragon_blood（龙血，普通物品，最大堆叠 64；英文名 Dragon Blood）
+ *   378 = dragon_scale（龙鳞，普通物品，最大堆叠 64；英文名 Dragon Scale）
+ *   379 = yu_sin_dragon_reverse_scale（宇罪龙逆鳞，普通物品，最大堆叠 64；同时是 396/397 残堕工具的修复材料；英文名 Yu Sin Dragon Reverse Scale）
+ *   380 = dragon_bone（龙骨，普通物品，最大堆叠 64；英文名 Dragon Bone）
+ *   381 = realm_lord_dragon_heart（界主龙心，普通物品，最大堆叠 64；英文名 Realm Lord Dragon Heart）
+ *   382 = yu_sin_dragon_head（宇罪龙头，普通物品，最大堆叠 64；英文名 Yu Sin Dragon Head）
+ *   383 = cardinal_sin_dragon_crown（宗罪龙头冠，普通物品，最大堆叠 64；同时是 391-394 残堕宗罪套装的修复材料；英文名 Cardinal Sin Dragon Crown）
+ *   384 = dragon_bone_framework（龙骨架构，普通物品，最大堆叠 64；英文名 Dragon Bone Framework）
+ *   385 = dragon_blood_essence（龙血精华，普通物品，最大堆叠 64；英文名 Dragon Blood Essence）
+ *   386 = dragon_scale_block（龙鳞块，方块物品 BlockItem；龙鳞压缩块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Block of Dragon Scale）
+ *   387 = placeholder_387（待定占位，不进创造标签页；英文名 Reserved Slot 387）
+ *   388 = placeholder_388_mmjm（待定占位 mmjm，不进创造标签页；英文名 Reserved Slot 388 MMJM）
+ *   389 = final_sin_dragon_heart（终罪龙心，普通物品，最大堆叠 64；英文名 Final Sin Dragon Heart）
+ *   390 = final_sin_dragon_head（终罪龙头，普通物品，最大堆叠 64；英文名 Final Sin Dragon Head）
+ *   391 = remnant_fallen_cardinal_sin_helmet（残堕宗罪头盔，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Helmet）
+ *   392 = remnant_fallen_cardinal_sin_chestplate（残堕宗罪胸甲，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Chestplate）
+ *   393 = remnant_fallen_cardinal_sin_leggings（残堕宗罪护腿，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Leggings）
+ *   394 = remnant_fallen_cardinal_sin_boots（残堕宗罪靴子，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Boots）
+ *   395 = remnant_fallen_cardinal_sin_bow（残堕宗罪之弓，BowItem，最大堆叠 1，耐久 2304；英文名 Remnant Fallen Cardinal Sin Bow）
+ *   396 = remnant_fallen_disintegration_pickaxe（残堕崩解之镐，工具类 PickaxeItem，最大堆叠 1，REMNANT_FALLEN（修复材料 379 宇罪龙逆鳞）；英文名 Remnant Fallen Disintegration Pickaxe）
+ *   397 = remnant_fallen_reverse_scale_sword（残堕逆鳞之剑，工具类 SwordItem，最大堆叠 1，REMNANT_FALLEN（修复材料 379 宇罪龙逆鳞）；英文名 Remnant Fallen Reverse Scale Sword）
+ *   398 = dragon_scale_might（龙鳞之威，普通物品，最大堆叠 64；英文名 Dragon Scale Might）
+ *   399 = dragon_yuan（龙元，普通物品，最大堆叠 64；英文名 Dragon Yuan）
+ *   400 = dragon_head_wrath（龙首之怒，普通物品，最大堆叠 64；英文名 Dragon Head Wrath）
+ *   401 = final_sin_realm_heart（终罪界心，普通物品，最大堆叠 64；英文名 Final Sin Realm Heart）
+ *   402 = purification_framework（净化架构，普通物品，最大堆叠 64；英文名 Purification Framework）
+ *   403 = world_purifier（世界净化器，普通物品，最大堆叠 64；英文名 World Purifier）
+ *   404 = rice_crystal_arrow（饭晶箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Rice Crystal Arrow）
+ *   405 = super_crystal_arrow（超结晶箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Super Crystal Arrow）
+ *   406 = rice_crystal_alloy_arrow（饭晶合金箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Rice Crystal Alloy Arrow）
+ *   407 = super_heavy_crystal_arrow（超重结晶箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Super Heavy Crystal Arrow）
+ *   408 = compound_rice_meal_arrow（复合米饭箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Compound Rice Meal Arrow）
+ *   409 = cleansing_compound_arrow（清洁复合箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Cleansing Compound Arrow）
  * ================================================================================
  */
 public class ModItems {
@@ -2332,6 +2368,160 @@ public class ModItems {
     // 编码 373 = 烤箱（Oven）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> OVEN = registerItem("oven",
             () -> new BlockItem(ModBlocks.OVEN.get(), new Item.Properties()));
+
+    // ===== 374-409：龙系素材/残堕宗罪装备/箭支批次（严格按编号顺序追加，禁止插入） =====
+
+    // 编码 374 = 占位（Reserved Slot 374）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_374 = registerItem("placeholder_374",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 375 = 勺子（Spoon）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> SPOON = registerItem("spoon",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 376 = 骊珠（Li Pearl）：黑龙颔下之珠，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> LI_PEARL = registerItem("li_pearl",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 377 = 龙血（Dragon Blood）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DRAGON_BLOOD = registerItem("dragon_blood",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 378 = 龙鳞（Dragon Scale）：普通物品，最大堆叠 64；9 个可在工作台压缩成 386 号龙鳞块（配方待定）
+    public static final RegistryObject<Item> DRAGON_SCALE = registerItem("dragon_scale",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 379 = 宇罪龙逆鳞（Yu Sin Dragon Reverse Scale）：普通物品，最大堆叠 64；残堕工具（396/397）修复材料
+    public static final RegistryObject<Item> YU_SIN_DRAGON_REVERSE_SCALE = registerItem("yu_sin_dragon_reverse_scale",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 380 = 龙骨（Dragon Bone）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DRAGON_BONE = registerItem("dragon_bone",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 381 = 界主龙心（Realm Lord Dragon Heart）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> REALM_LORD_DRAGON_HEART = registerItem("realm_lord_dragon_heart",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 382 = 宇罪龙头（Yu Sin Dragon Head）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> YU_SIN_DRAGON_HEAD = registerItem("yu_sin_dragon_head",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 383 = 宗罪龙头冠（Cardinal Sin Dragon Crown）：普通物品，最大堆叠 64；残堕宗罪套装（391-394）修复材料
+    public static final RegistryObject<Item> CARDINAL_SIN_DRAGON_CROWN = registerItem("cardinal_sin_dragon_crown",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 384 = 龙骨架构（Dragon Bone Framework）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DRAGON_BONE_FRAMEWORK = registerItem("dragon_bone_framework",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 385 = 龙血精华（Dragon Blood Essence）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DRAGON_BLOOD_ESSENCE = registerItem("dragon_blood_essence",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 386 = 龙鳞块（Block of Dragon Scale）：378 号龙鳞的压缩存储块，
+    // 放置后对应 ModBlocks.DRAGON_SCALE_BLOCK；钻石镐（挖掘等级3）采集，破坏掉落本身
+    public static final RegistryObject<Item> DRAGON_SCALE_BLOCK = registerItem("dragon_scale_block",
+            () -> new BlockItem(ModBlocks.DRAGON_SCALE_BLOCK.get(), new Item.Properties()));
+
+    // 编码 387 = 占位（Reserved Slot 387）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_387 = registerItem("placeholder_387",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 388 = 占位 mmjm（Reserved Slot 388 MMJM）：无模型/贴图，不进创造标签页
+    public static final RegistryObject<Item> PLACEHOLDER_388_MMJM = registerItem("placeholder_388_mmjm",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 389 = 终罪龙心（Final Sin Dragon Heart）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEART = registerItem("final_sin_dragon_heart",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 390 = 终罪龙头（Final Sin Dragon Head）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEAD = registerItem("final_sin_dragon_head",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // ---- 391-394 残堕宗罪套装（ArmorItem，最大堆叠 1；修复材料 383 号宗罪龙头冠，材质 REMNANT_FALLEN_CARDINAL_SIN） ----
+    public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_HELMET =
+            registerItem("remnant_fallen_cardinal_sin_helmet",
+                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_CHESTPLATE =
+            registerItem("remnant_fallen_cardinal_sin_chestplate",
+                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_LEGGINGS =
+            registerItem("remnant_fallen_cardinal_sin_leggings",
+                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_BOOTS =
+            registerItem("remnant_fallen_cardinal_sin_boots",
+                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+
+    // 编码 395 = 残堕宗罪之弓（Remnant Fallen Cardinal Sin Bow）：BowItem，耐久 2304（设耐久后自动堆叠 1）
+    public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_BOW =
+            registerItem("remnant_fallen_cardinal_sin_bow",
+                    () -> new BowItem(new Item.Properties().durability(2304)));
+
+    // 编码 396 = 残堕崩解之镐（Remnant Fallen Disintegration Pickaxe）：PickaxeItem，最大堆叠 1，
+    // ModItemTiers.REMNANT_FALLEN（修复材料 379 号宇罪龙逆鳞），攻击伤害/攻速与已有各档镐一致
+    public static final RegistryObject<Item> REMNANT_FALLEN_DISINTEGRATION_PICKAXE =
+            registerItem("remnant_fallen_disintegration_pickaxe",
+                    () -> new PickaxeItem(ModItemTiers.REMNANT_FALLEN, 1, -2.8F, new Item.Properties().stacksTo(1)));
+
+    // 编码 397 = 残堕逆鳞之剑（Remnant Fallen Reverse Scale Sword）：SwordItem，最大堆叠 1，
+    // ModItemTiers.REMNANT_FALLEN（修复材料 379 号宇罪龙逆鳞），慢速重剑（+5 伤害/-2.8 攻速）
+    public static final RegistryObject<Item> REMNANT_FALLEN_REVERSE_SCALE_SWORD =
+            registerItem("remnant_fallen_reverse_scale_sword",
+                    () -> new SwordItem(ModItemTiers.REMNANT_FALLEN, 5, -2.8F, new Item.Properties().stacksTo(1)));
+
+    // 编码 398 = 龙鳞之威（Dragon Scale Might）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DRAGON_SCALE_MIGHT = registerItem("dragon_scale_might",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 399 = 龙元（Dragon Yuan）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DRAGON_YUAN = registerItem("dragon_yuan",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 400 = 龙首之怒（Dragon Head Wrath）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DRAGON_HEAD_WRATH = registerItem("dragon_head_wrath",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 401 = 终罪界心（Final Sin Realm Heart）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> FINAL_SIN_REALM_HEART = registerItem("final_sin_realm_heart",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 402 = 净化架构（Purification Framework）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> PURIFICATION_FRAMEWORK = registerItem("purification_framework",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 403 = 世界净化器（World Purifier）：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> WORLD_PURIFIER = registerItem("world_purifier",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // ---- 404-409 箭支：当前全部为普通物品（最大堆叠 64，不设投掷/伤害效果），后续再替换为自定义箭 ----
+    // 编码 404 = 饭晶箭（Rice Crystal Arrow）
+    public static final RegistryObject<Item> RICE_CRYSTAL_ARROW = registerItem("rice_crystal_arrow",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 405 = 超结晶箭（Super Crystal Arrow）
+    public static final RegistryObject<Item> SUPER_CRYSTAL_ARROW = registerItem("super_crystal_arrow",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 406 = 饭晶合金箭（Rice Crystal Alloy Arrow）
+    public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_ARROW = registerItem("rice_crystal_alloy_arrow",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 407 = 超重结晶箭（Super Heavy Crystal Arrow）
+    public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_ARROW = registerItem("super_heavy_crystal_arrow",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 408 = 复合米饭箭（Compound Rice Meal Arrow）
+    public static final RegistryObject<Item> COMPOUND_RICE_MEAL_ARROW = registerItem("compound_rice_meal_arrow",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 编码 409 = 清洁复合箭（Cleansing Compound Arrow）
+    public static final RegistryObject<Item> CLEANSING_COMPOUND_ARROW = registerItem("cleansing_compound_arrow",
+            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // ============================ 新物品写在这行以上（末尾追加） ============================
 

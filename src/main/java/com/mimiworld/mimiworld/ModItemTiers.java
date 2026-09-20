@@ -36,7 +36,9 @@ public enum ModItemTiers implements Tier {
     /** 超懒合金：终极材料（修复材料 80 号超懒合金锭） */
     SUPER_LAZY_ALLOY(3200, 10.0F, 5.0F, 4, 22, () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get())),
     /** 最懒天堕：超懒合金之上的传说级（编码 255 最懒天堕镐；修复材料 184 号堕落之心，与 HEAVENFALL 盔甲同源） */
-    LAZIEST_HEAVENFALL(3800, 11.0F, 5.5F, 4, 24, () -> Ingredient.of(ModItems.FALLEN_HEART.get()));
+    LAZIEST_HEAVENFALL(3800, 11.0F, 5.5F, 4, 24, () -> Ingredient.of(ModItems.FALLEN_HEART.get())),
+    /** 残堕：龙系之上的终末级（编码 396 残堕崩解之镐/397 残堕逆鳞之剑；修复材料 379 号宇罪龙逆鳞） */
+    REMNANT_FALLEN(4200, 12.0F, 6.0F, 4, 26, () -> Ingredient.of(ModItems.YU_SIN_DRAGON_REVERSE_SCALE.get()));
 
     private final int uses;
     private final float speed;

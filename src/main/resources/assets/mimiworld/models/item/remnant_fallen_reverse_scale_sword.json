@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mimiworld:item/remnant_fallen_reverse_scale_sword"
+  }
+}

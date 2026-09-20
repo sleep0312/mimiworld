@@ -47,7 +47,11 @@ public enum ModArmorMaterials implements ArmorMaterial {
     /** 最懒天堕套（188 胸甲/189 头盔/190 护腿/191 靴子）：堕落系终极甲，韧性 4、击退抗性 0.12（修复 184 号堕落之心） */
     HEAVENFALL("heavenfall", 46, new int[]{4, 7, 9, 4}, 20,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.12F,
-            () -> Ingredient.of(ModItems.FALLEN_HEART.get()));
+            () -> Ingredient.of(ModItems.FALLEN_HEART.get())),
+    /** 残堕宗罪套（391 头盔/392 胸甲/393 护腿/394 靴子）：龙系终末甲，韧性 5.5、击退抗性 0.18（修复 383 号宗罪龙头冠） */
+    REMNANT_FALLEN_CARDINAL_SIN("remnant_fallen_cardinal_sin", 54, new int[]{5, 8, 11, 5}, 24,
+            SoundEvents.ARMOR_EQUIP_NETHERITE, 5.5F, 0.18F,
+            () -> Ingredient.of(ModItems.CARDINAL_SIN_DRAGON_CROWN.get()));
 
     /** 各槽位耐久基准，顺序与 EquipmentSlot.values() 一致（脚/腿/胸/头） */
     private static final int[] BASE_DURABILITY = {13, 15, 16, 11};

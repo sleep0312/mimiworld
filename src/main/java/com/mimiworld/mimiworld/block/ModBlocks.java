@@ -452,6 +452,17 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
+    // 龙鳞块（386 号 BlockItem）：378 号龙鳞的压缩存储块，致密龙鳞质地全立方块
+    // （硬度照铁块 5.0、抗爆 6.0、下界合金块声、需正确工具才掉落）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/dragon_scale_block.json）。
+    public static final RegistryObject<Block> DRAGON_SCALE_BLOCK =
+            BLOCKS.register("dragon_scale_block", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(5.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.NETHERITE_BLOCK)));
+
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }
