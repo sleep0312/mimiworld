@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "mimiworld:rice"
+    },
+    "S": {
+      "tag": "minecraft:saplings"
+    }
+  },
+  "pattern": [
+    "   ",
+    " RS",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:rice_sapling"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "mimiworld:rice_grass"
+    }
+  },
+  "pattern": [
+    "   ",
+    " GG",
+    " G "
+  ],
+  "result": {
+    "item": "mimiworld:wet_grass_fiber"
+  },
+  "show_notification": true
+}

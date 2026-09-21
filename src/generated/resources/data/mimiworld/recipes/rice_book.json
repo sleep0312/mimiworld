@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "P": {
+      "item": "mimiworld:rice_paper"
+    }
+  },
+  "pattern": [
+    "   ",
+    " N ",
+    "PPP"
+  ],
+  "result": {
+    "item": "mimiworld:rice_book"
+  },
+  "show_notification": true
+}

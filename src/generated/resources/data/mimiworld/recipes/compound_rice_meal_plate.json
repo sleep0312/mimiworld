@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 40,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "mimiworld:coarse_compound_rice_meal_ingot"
+  },
+  "result": "mimiworld:compound_rice_meal_plate"
+}

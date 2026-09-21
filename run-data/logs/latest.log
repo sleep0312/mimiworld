@@ -1,39 +1,71 @@
-[169月2026 13:49:00.862] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\m3198\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, mimiworld, --all, --output, C:\mimiworld\src\generated\resources, --existing, C:\mimiworld\src\main\resources]
-[169月2026 13:49:00.881] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
-[169月2026 13:49:01.025] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[169月2026 13:49:01.088] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/m3198/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23132!/ Service=ModLauncher Env=CLIENT
-[169月2026 13:49:01.517] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.4.10\ccc533c7dd67e0983217197d7549c8b49e7ab453\javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
-[169月2026 13:49:01.521] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.4.10\e9a2879fe3612ea34b9728ec2633304a1e67d480\lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
-[169月2026 13:49:01.523] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.4.10\ec5cefbbc65c67302b8fac317010faab85fa14b9\mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
-[169月2026 13:49:01.528] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.4.10\94dae566be650566ea9115a1414ab76bfcf5a804\fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
-[169月2026 13:49:01.773] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 4 dependencies adding them to mods collection
-[169月2026 13:49:03.534] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
-[169月2026 13:49:03.558] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\m3198\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, mimiworld, --all, --output, C:\mimiworld\src\generated\resources, --existing, C:\mimiworld\src\main\resources]
-[169月2026 13:49:04.000] [main/INFO] [mixin/]: Remapping refMap attributeslib.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
-[169月2026 13:49:04.139] [main/INFO] [mixin/]: Remapping refMap moonlight-common-refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
-[169月2026 13:49:04.140] [main/INFO] [mixin/]: Remapping refMap moonlight-forge-refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
-[169月2026 13:49:04.177] [main/INFO] [mixin/]: Remapping refMap jade.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
-[169月2026 13:49:04.178] [main/INFO] [mixin/]: Remapping refMap dummmmmmy-common-refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
-[169月2026 13:49:04.179] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
-[169月2026 13:49:04.179] [main/INFO] [mixin/]: Remapping refMap placebo.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
-[169月2026 13:49:04.350] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
-[169月2026 13:49:04.439] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
-[169月2026 13:49:05.246] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [mimiworld]
-[169月2026 13:49:05.464] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.6).
-[169月2026 13:49:07.546] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
-[169月2026 13:49:07.547] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
-[169月2026 13:49:07.575] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
-[169月2026 13:49:07.575] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
-[169月2026 13:49:10.662] [modloading-worker-0/INFO] [com.mimiworld.mimiworld.MimiWorld/]: MimiWorld mod loaded
-[169月2026 13:49:10.669] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
-[169月2026 13:49:10.686] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
-[169月2026 13:49:10.778] [modloading-worker-0/INFO] [net.minecraftforge.coremod.CoreMod.attributeslib/COREMODLOG]: Patching EffectRenderingInventoryScreen#renderEffects
-[169月2026 13:49:11.090] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
-[169月2026 13:49:11.101] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 6.150 ms
-[169月2026 13:49:11.324] [main/INFO] [Moonlight/]: Initialized block sets in 15ms
-[169月2026 13:49:11.778] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/m3198/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
-[169月2026 13:49:11.779] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/m3198/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
-[169月2026 13:49:12.005] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
-[169月2026 13:49:12.094] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 86 ms
-[169月2026 13:49:12.094] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 89 ms
-[169月2026 13:49:12.106] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 16, old count: 12, new count: 17, removed stale: 0, written: 8
+[219月2026 22:11:19.582] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\m3198\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, mimiworld, --all, --output, C:\mimiworld\src\generated\resources, --existing, C:\mimiworld\src\main\resources]
+[219月2026 22:11:19.600] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
+[219月2026 22:11:19.747] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[219月2026 22:11:19.807] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/m3198/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23132!/ Service=ModLauncher Env=CLIENT
+[219月2026 22:11:20.172] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.4.10\ccc533c7dd67e0983217197d7549c8b49e7ab453\javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[219月2026 22:11:20.176] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.4.10\e9a2879fe3612ea34b9728ec2633304a1e67d480\lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[219月2026 22:11:20.179] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.4.10\ec5cefbbc65c67302b8fac317010faab85fa14b9\mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[219月2026 22:11:20.183] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\m3198\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.4.10\94dae566be650566ea9115a1414ab76bfcf5a804\fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[219月2026 22:11:20.568] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 6 dependencies adding them to mods collection
+[219月2026 22:11:23.443] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[219月2026 22:11:23.481] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\m3198\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, mimiworld, --all, --output, C:\mimiworld\src\generated\resources, --existing, C:\mimiworld\src\main\resources]
+[219月2026 22:11:23.938] [main/INFO] [mixin/]: Remapping refMap attributeslib.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.041] [main/INFO] [mixin/]: Remapping refMap moonlight-common-refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.042] [main/INFO] [mixin/]: Remapping refMap moonlight-forge-refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.083] [main/INFO] [mixin/]: Remapping refMap jade.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.084] [main/INFO] [mixin/]: Remapping refMap geckolib.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.088] [main/INFO] [mixin/]: Remapping refMap xaerolib.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.089] [main/INFO] [mixin/]: Remapping refMap xaerolib.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.090] [main/INFO] [mixin/]: Remapping refMap dummmmmmy-common-refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.092] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.094] [main/INFO] [mixin/]: Remapping refMap xaerominimap.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.095] [main/INFO] [mixin/]: Remapping refMap xaerominimap.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.096] [main/INFO] [mixin/]: Remapping refMap xaerominimap.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.096] [main/INFO] [mixin/]: Remapping refMap xaerominimap.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.097] [main/INFO] [mixin/]: Remapping refMap xaeroworldmap.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.097] [main/INFO] [mixin/]: Remapping refMap xaeroworldmap.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.099] [main/INFO] [mixin/]: Remapping refMap placebo.refmap.json using C:\mimiworld/build/createSrgToMcp/output.srg
+[219月2026 22:11:24.306] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
+[219月2026 22:11:24.411] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
+[219月2026 22:11:25.379] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [mimiworld]
+[219月2026 22:11:25.619] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.6).
+[219月2026 22:11:28.256] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
+[219月2026 22:11:28.257] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
+[219月2026 22:11:28.290] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
+[219月2026 22:11:28.290] [main/INFO] [net.minecraftforge.coremod.CoreMod.placebo/COREMODLOG]: Patching IForgeItemStack#getEnchantmentLevel
+[219月2026 22:11:32.642] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[219月2026 22:11:32.647] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[219月2026 22:11:32.890] [modloading-worker-0/INFO] [xaero.hud.minimap.MinimapLogs/]: Xaero's Minimap: World Map found!
+[219月2026 22:11:32.891] [modloading-worker-0/INFO] [xaero.hud.minimap.MinimapLogs/]: No Optifine!
+[219月2026 22:11:32.891] [modloading-worker-0/INFO] [xaero.hud.minimap.MinimapLogs/]: Xaero's Minimap: No Vivecraft!
+[219月2026 22:11:32.948] [modloading-worker-0/INFO] [net.minecraftforge.coremod.CoreMod.attributeslib/COREMODLOG]: Patching EffectRenderingInventoryScreen#renderEffects
+[219月2026 22:11:33.031] [modloading-worker-0/INFO] [xaero.lib.XaeroLib/]: Registering common data for channel xaerolib:main!
+[219月2026 22:11:33.040] [modloading-worker-0/WARN] [software.bernie.geckolib.GeckoLib/]: Minecraft.getInstance() was null, could not register reload listeners
+[219月2026 22:11:33.091] [modloading-worker-0/INFO] [xaero.lib.XaeroLib/]: Registering client data for channel xaerolib:main!
+[219月2026 22:11:33.138] [modloading-worker-0/INFO] [xaero.lib.XaeroLib/]: Loading primary common config for channel xaerolib:main!
+[219月2026 22:11:33.171] [modloading-worker-0/INFO] [xaero.lib.XaeroLib/]: Loading server config profiles for channel xaerolib:main!
+[219月2026 22:11:33.184] [modloading-worker-0/INFO] [xaero.lib.XaeroLib/]: Loading primary client config for channel xaerolib:main!
+[219月2026 22:11:33.192] [modloading-worker-0/INFO] [xaero.lib.XaeroLib/]: Loading client config profiles for channel xaerolib:main!
+[219月2026 22:11:33.201] [modloading-worker-0/INFO] [xaero.map.WorldMap/]: Registering common data for channel xaeroworldmap:main!
+[219月2026 22:11:33.299] [modloading-worker-0/INFO] [xaero.map.WorldMap/]: Registering client data for channel xaeroworldmap:main!
+[219月2026 22:11:33.326] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[219月2026 22:11:33.342] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 10.36 ms
+[219月2026 22:11:33.351] [modloading-worker-0/INFO] [xaero.map.WorldMap/]: Loading primary common config for channel xaeroworldmap:main!
+[219月2026 22:11:33.366] [modloading-worker-0/INFO] [xaero.map.WorldMap/]: Loading server config profiles for channel xaeroworldmap:main!
+[219月2026 22:11:33.375] [modloading-worker-0/INFO] [xaero.map.WorldMap/]: Loading primary client config for channel xaeroworldmap:main!
+[219月2026 22:11:33.384] [modloading-worker-0/INFO] [xaero.map.WorldMap/]: Loading client config profiles for channel xaeroworldmap:main!
+[219月2026 22:11:33.396] [modloading-worker-0/INFO] [xaero.common.HudMod/]: Registering common data for channel xaerominimap:main!
+[219月2026 22:11:33.528] [modloading-worker-0/INFO] [xaero.common.HudMod/]: Registering client data for channel xaerominimap:main!
+[219月2026 22:11:33.536] [modloading-worker-0/INFO] [com.mimiworld.mimiworld.MimiWorld/]: MimiWorld mod loaded
+[219月2026 22:11:33.623] [modloading-worker-0/INFO] [xaero.common.HudMod/]: Loading primary common config for channel xaerominimap:main!
+[219月2026 22:11:33.637] [modloading-worker-0/INFO] [xaero.common.HudMod/]: Loading server config profiles for channel xaerominimap:main!
+[219月2026 22:11:33.648] [modloading-worker-0/INFO] [xaero.common.HudMod/]: Loading primary client config for channel xaerominimap:main!
+[219月2026 22:11:33.655] [modloading-worker-0/INFO] [xaero.common.HudMod/]: Loading client config profiles for channel xaerominimap:main!
+[219月2026 22:11:33.856] [Moonlight Hub Fetcher/WARN] [Moonlight/]: Failed to fetch hub info from https://raw.githubusercontent.com/MehVahdJukaar/Moonlight/1.21/supplementaries_team_info.json: java.net.ConnectException: Connection refused: no further information
+[219月2026 22:11:34.144] [main/INFO] [Moonlight/]: Initialized block sets in 16ms
+[219月2026 22:11:34.534] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/m3198/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[219月2026 22:11:34.535] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/m3198/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[219月2026 22:11:34.841] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[219月2026 22:11:34.962] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 121 ms
+[219月2026 22:11:34.962] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 123 ms
+[219月2026 22:11:35.004] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 276, old count: 220, new count: 277, removed stale: 0, written: 58

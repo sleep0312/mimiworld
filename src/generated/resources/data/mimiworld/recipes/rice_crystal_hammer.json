@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:crystallized_rice_meal"
+    },
+    "F": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "S": {
+      "item": "mimiworld:reinforced_rice_stick"
+    }
+  },
+  "pattern": [
+    "AFA",
+    "ASA",
+    " S "
+  ],
+  "result": {
+    "item": "mimiworld:rice_crystal_hammer"
+  },
+  "show_notification": true
+}

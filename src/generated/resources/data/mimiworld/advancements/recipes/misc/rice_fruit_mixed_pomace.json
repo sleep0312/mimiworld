@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rice_fruit_compound_solution": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:rice_fruit_compound_solution"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:rice_fruit_mixed_pomace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_rice_fruit_compound_solution",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:rice_fruit_mixed_pomace"
+    ]
+  },
+  "sends_telemetry_event": false
+}

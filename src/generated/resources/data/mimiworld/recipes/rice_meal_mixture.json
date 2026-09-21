@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:rice_bucket"
+    },
+    "P": {
+      "item": "mimiworld:rice_pail"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "   ",
+    "PWB",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:rice_meal_mixture"
+  },
+  "show_notification": true
+}

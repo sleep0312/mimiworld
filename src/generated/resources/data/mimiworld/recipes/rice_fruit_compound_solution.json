@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:rice_fruit_analyzing_solution"
+    },
+    "M": {
+      "item": "mimiworld:rice_meal_mixture"
+    }
+  },
+  "pattern": [
+    "   ",
+    "MAM",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:rice_fruit_compound_solution"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:super_crystal_cow_king_spawn_egg"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tiger_king_razor_claw": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:tiger_king_razor_claw"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tiger_king_razor_claw",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:super_crystal_cow_king_spawn_egg"
+    ]
+  },
+  "sends_telemetry_event": false
+}

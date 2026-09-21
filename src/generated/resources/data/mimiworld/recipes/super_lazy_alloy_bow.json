@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "mimiworld:super_lazy_alloy_bow_blank"
+    },
+    "S": {
+      "item": "mimiworld:advanced_bowstring_ingot"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SBS",
+    " S "
+  ],
+  "result": {
+    "item": "mimiworld:super_lazy_alloy_bow"
+  },
+  "show_notification": true
+}

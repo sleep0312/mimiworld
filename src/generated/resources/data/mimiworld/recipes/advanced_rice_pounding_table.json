@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "H": {
+      "item": "mimiworld:rice_crystal_alloy_hammer"
+    },
+    "P": {
+      "item": "mimiworld:rice_planks"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "RHR",
+    "PPP"
+  ],
+  "result": {
+    "item": "mimiworld:advanced_rice_pounding_table"
+  },
+  "show_notification": true
+}

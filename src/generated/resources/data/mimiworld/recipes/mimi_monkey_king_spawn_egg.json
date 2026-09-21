@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:rice_fruit_black_mixture"
+    },
+    "E": {
+      "item": "minecraft:dragon_egg"
+    },
+    "S": {
+      "item": "mimiworld:reinforced_rice_stick"
+    }
+  },
+  "pattern": [
+    "SAS",
+    "AEA",
+    "SAS"
+  ],
+  "result": {
+    "item": "mimiworld:mimi_monkey_king_spawn_egg"
+  },
+  "show_notification": true
+}

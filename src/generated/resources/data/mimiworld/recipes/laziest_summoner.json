@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:redstone_block"
+    },
+    "C": {
+      "item": "mimiworld:laziest_summon_core"
+    },
+    "K": {
+      "item": "minecraft:slime_block"
+    },
+    "R": {
+      "item": "mimiworld:rice_block"
+    }
+  },
+  "pattern": [
+    "RBR",
+    "KRK",
+    "RCR"
+  ],
+  "result": {
+    "item": "mimiworld:laziest_summoner"
+  },
+  "show_notification": true
+}

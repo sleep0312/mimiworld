@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "mimiworld:rice_block"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BWB",
+    "BBB"
+  ],
+  "result": {
+    "item": "mimiworld:rice_bucket"
+  },
+  "show_notification": true
+}

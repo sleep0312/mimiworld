@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 40,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "mimiworld:combustible_mixture"
+  },
+  "result": "mimiworld:combustible_solid"
+}

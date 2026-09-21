@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
+    "R": {
       "item": "mimiworld:rice"
     }
   },
   "pattern": [
-    "BB ",
-    "BB ",
-    "   "
+    "   ",
+    " RR",
+    " RR"
   ],
   "result": {
     "item": "mimiworld:rice_ball"

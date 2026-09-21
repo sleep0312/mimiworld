@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:rice_crystal_alloy_ingot"
+    },
+    "B": {
+      "item": "mimiworld:super_crystal_block"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "ADA",
+    "BNB",
+    "ADA"
+  ],
+  "result": {
+    "item": "mimiworld:super_heavy_crystal"
+  },
+  "show_notification": true
+}

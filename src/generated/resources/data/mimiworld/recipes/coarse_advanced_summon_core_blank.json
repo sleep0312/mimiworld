@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:advanced_summon_core_blank"
+    },
+    "F": {
+      "item": "mimiworld:combustible_mixture"
+    }
+  },
+  "pattern": [
+    " F ",
+    "FBF",
+    " F "
+  ],
+  "result": {
+    "item": "mimiworld:coarse_advanced_summon_core_blank"
+  },
+  "show_notification": true
+}

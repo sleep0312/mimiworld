@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rice_meal_mixture": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:rice_meal_mixture"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:rice_fruit_compound_solution"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_rice_meal_mixture",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:rice_fruit_compound_solution"
+    ]
+  },
+  "sends_telemetry_event": false
+}

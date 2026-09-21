@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:coarse_rice_block"
+    },
+    "C": {
+      "item": "mimiworld:advanced_summon_core"
+    },
+    "D": {
+      "item": "minecraft:redstone"
+    },
+    "R": {
+      "item": "mimiworld:rice_block"
+    },
+    "S": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "pattern": [
+    "ADA",
+    "SRS",
+    "ACA"
+  ],
+  "result": {
+    "item": "mimiworld:large_summoner"
+  },
+  "show_notification": true
+}

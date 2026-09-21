@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "category": "misc",
-  "cookingtime": 100,
+  "cookingtime": 30,
   "experience": 0.7,
   "ingredient": {
     "item": "mimiworld:crystallized_rice_ore"

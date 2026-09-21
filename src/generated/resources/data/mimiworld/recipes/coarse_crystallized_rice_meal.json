@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:compressed_rice_pail"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "ANA",
+    "NAN",
+    "ANA"
+  ],
+  "result": {
+    "item": "mimiworld:coarse_crystallized_rice_meal"
+  },
+  "show_notification": true
+}

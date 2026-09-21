@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "mimiworld:super_heavy_crystal"
+    },
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "R": {
+      "item": "mimiworld:rice"
+    },
+    "S": {
+      "item": "minecraft:sculk"
+    }
+  },
+  "pattern": [
+    "RHR",
+    "SMS",
+    "RHR"
+  ],
+  "result": {
+    "item": "mimiworld:mimi_phantom_membrane"
+  },
+  "show_notification": true
+}

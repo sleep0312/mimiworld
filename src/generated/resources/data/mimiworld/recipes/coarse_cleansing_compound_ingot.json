@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "P": {
+      "item": "mimiworld:compound_rice_meal_ingot"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "NNN",
+    "PPP"
+  ],
+  "result": {
+    "item": "mimiworld:coarse_cleansing_compound_ingot"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "mimiworld:rice_flour"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "   ",
+    "FWF",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:rice_baton"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:sword_temper_ingot"
+    },
+    "B": {
+      "item": "mimiworld:cleansing_compound_sword_blank"
+    }
+  },
+  "pattern": [
+    "   ",
+    " B ",
+    "AAA"
+  ],
+  "result": {
+    "item": "mimiworld:cleansing_compound_sword"
+  },
+  "show_notification": true
+}

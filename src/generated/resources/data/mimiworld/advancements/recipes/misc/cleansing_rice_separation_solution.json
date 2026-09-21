@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rice_fruit_cleansing_solution": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:rice_fruit_cleansing_solution"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:cleansing_rice_separation_solution"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_rice_fruit_cleansing_solution",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:cleansing_rice_separation_solution"
+    ]
+  },
+  "sends_telemetry_event": false
+}

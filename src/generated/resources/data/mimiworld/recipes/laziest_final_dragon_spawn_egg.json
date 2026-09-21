@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "R": {
+      "item": "mimiworld:super_crystal"
+    }
+  },
+  "pattern": [
+    "RNR",
+    "NRN",
+    "RNR"
+  ],
+  "result": {
+    "item": "mimiworld:laziest_final_dragon_spawn_egg"
+  },
+  "show_notification": true
+}

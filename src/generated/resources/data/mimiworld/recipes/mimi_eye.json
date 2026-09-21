@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "R": {
+      "item": "mimiworld:rice"
+    }
+  },
+  "pattern": [
+    "RER",
+    "ERE",
+    "RER"
+  ],
+  "result": {
+    "item": "mimiworld:mimi_eye"
+  },
+  "show_notification": true
+}

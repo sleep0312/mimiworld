@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "D": {
+      "item": "minecraft:dragon_breath"
+    }
+  },
+  "pattern": [
+    "BDB",
+    "D D",
+    "BDB"
+  ],
+  "result": {
+    "item": "minecraft:dragon_egg"
+  },
+  "show_notification": true
+}

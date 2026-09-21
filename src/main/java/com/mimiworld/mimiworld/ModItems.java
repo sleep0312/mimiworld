@@ -3,6 +3,7 @@ package com.mimiworld.mimiworld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
+import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -2440,22 +2441,23 @@ public class ModItems {
     public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEAD = registerItem("final_sin_dragon_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ---- 391-394 残堕宗罪套装（ArmorItem，最大堆叠 1；修复材料 383 号宗罪龙头冠，材质 REMNANT_FALLEN_CARDINAL_SIN） ----
+    // ---- 391-394 残堕宗罪套装（GeckoLib 4 动态 3D 盔甲，最大堆叠 1；修复材料 383 号宗罪龙头冠，
+    //      材质 REMNANT_FALLEN_CARDINAL_SIN；模型/动画见 RemnantFallenCardinalSinArmorItem） ----
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_HELMET =
             registerItem("remnant_fallen_cardinal_sin_helmet",
-                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+                    () -> new RemnantFallenCardinalSinArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_CHESTPLATE =
             registerItem("remnant_fallen_cardinal_sin_chestplate",
-                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+                    () -> new RemnantFallenCardinalSinArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_LEGGINGS =
             registerItem("remnant_fallen_cardinal_sin_leggings",
-                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+                    () -> new RemnantFallenCardinalSinArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_BOOTS =
             registerItem("remnant_fallen_cardinal_sin_boots",
-                    () -> new ArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+                    () -> new RemnantFallenCardinalSinArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
     // 编码 395 = 残堕宗罪之弓（Remnant Fallen Cardinal Sin Bow）：BowItem，耐久 2304（设耐久后自动堆叠 1）
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_BOW =

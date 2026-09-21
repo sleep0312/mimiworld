@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 40,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "mimiworld:refined_reinforced_wet_grass_net"
+  },
+  "result": "mimiworld:refined_reinforced_rice_net"
+}

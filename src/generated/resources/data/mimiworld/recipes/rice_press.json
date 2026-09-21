@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "mimiworld:rice_block"
+    },
+    "L": {
+      "item": "mimiworld:rice_log"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "BRB",
+    "LLL"
+  ],
+  "result": {
+    "item": "mimiworld:rice_press"
+  },
+  "show_notification": true
+}

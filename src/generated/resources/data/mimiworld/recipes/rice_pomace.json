@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "mimiworld:rice_fruit"
+    },
+    "H": {
+      "item": "mimiworld:rice_crystal_hammer"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "FHF",
+    "FFF"
+  ],
+  "result": {
+    "item": "mimiworld:rice_pomace"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "mimiworld:combustible_rice"
+    },
+    "M": {
+      "item": "mimiworld:rice_meal_mixture"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "FMF",
+    "FFF"
+  ],
+  "result": {
+    "item": "mimiworld:combustible_mixture"
+  },
+  "show_notification": true
+}

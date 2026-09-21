@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_monkey_king_ruyi_staff": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:monkey_king_ruyi_staff"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:rice_crystal_tiger_king_spawn_egg"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_monkey_king_ruyi_staff",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:rice_crystal_tiger_king_spawn_egg"
+    ]
+  },
+  "sends_telemetry_event": false
+}

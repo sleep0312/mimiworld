@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "O": {
+      "item": "mimiworld:reinforced_wet_grass_net"
+    }
+  },
+  "pattern": [
+    "   ",
+    "FOF",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:refined_reinforced_wet_grass_net"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "mimiworld:rabbit_king_bloody_red_eye"
+    },
+    "R": {
+      "item": "mimiworld:rice_crystal_alloy_ingot"
+    },
+    "Y": {
+      "item": "mimiworld:yanmi_heart_sip_liquid"
+    }
+  },
+  "pattern": [
+    "RYR",
+    "YEY",
+    "RYR"
+  ],
+  "result": {
+    "item": "mimiworld:compound_azure_python_spawn_egg"
+  },
+  "show_notification": true
+}

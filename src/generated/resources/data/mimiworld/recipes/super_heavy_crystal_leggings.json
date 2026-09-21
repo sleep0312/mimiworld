@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:rice_crystal_alloy_ingot"
+    },
+    "F": {
+      "item": "mimiworld:coarse_rice_net"
+    },
+    "H": {
+      "item": "mimiworld:super_heavy_crystal"
+    }
+  },
+  "pattern": [
+    "HAH",
+    "HFH",
+    "HFH"
+  ],
+  "result": {
+    "item": "mimiworld:super_heavy_crystal_leggings"
+  },
+  "show_notification": true
+}

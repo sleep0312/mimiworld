@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 80,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "mimiworld:rice_ball"
+  },
+  "result": "mimiworld:cooked_rice_ball"
+}

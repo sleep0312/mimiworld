@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "P": {
+      "item": "mimiworld:compound_rice_meal_ingot"
+    }
+  },
+  "pattern": [
+    "   ",
+    "PMP",
+    "PMP"
+  ],
+  "result": {
+    "item": "mimiworld:compound_rice_meal_boots"
+  },
+  "show_notification": true
+}

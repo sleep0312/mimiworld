@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "item": "mimiworld:super_heavy_crystal"
+    },
+    "M": {
+      "item": "mimiworld:refined_rice_fiber"
+    }
+  },
+  "pattern": [
+    "   ",
+    "HMH",
+    "HMH"
+  ],
+  "result": {
+    "item": "mimiworld:super_heavy_crystal_boots"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "mimiworld:cleansing_compound_bow_blank"
+    },
+    "S": {
+      "item": "mimiworld:bowstring_ingot"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SBS",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:cleansing_compound_bow"
+  },
+  "show_notification": true
+}

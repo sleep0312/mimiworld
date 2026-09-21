@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "mimiworld:coarse_rice_fiber"
+    },
+    "W": {
+      "item": "mimiworld:wet_grass_net"
+    }
+  },
+  "pattern": [
+    "   ",
+    "FWF",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:coarse_wet_grass_net"
+  },
+  "show_notification": true
+}

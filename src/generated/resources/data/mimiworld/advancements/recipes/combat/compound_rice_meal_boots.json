@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_compound_rice_meal_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:compound_rice_meal_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:compound_rice_meal_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_compound_rice_meal_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:compound_rice_meal_boots"
+    ]
+  },
+  "sends_telemetry_event": false
+}

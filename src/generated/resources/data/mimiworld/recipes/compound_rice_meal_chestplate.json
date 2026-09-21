@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "item": "mimiworld:super_heavy_crystal"
+    },
+    "N": {
+      "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "P": {
+      "item": "mimiworld:compound_rice_meal_ingot"
+    }
+  },
+  "pattern": [
+    "PNP",
+    "PPP",
+    "HPH"
+  ],
+  "result": {
+    "item": "mimiworld:compound_rice_meal_chestplate"
+  },
+  "show_notification": true
+}

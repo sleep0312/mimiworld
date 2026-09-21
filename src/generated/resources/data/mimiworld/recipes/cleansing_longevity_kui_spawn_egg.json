@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:dragon_breath"
+    },
+    "F": {
+      "item": "mimiworld:venom_azure_python_fang"
+    },
+    "M": {
+      "item": "mimiworld:mimi_medley_liquid"
+    }
+  },
+  "pattern": [
+    "BMB",
+    "MFM",
+    "BMB"
+  ],
+  "result": {
+    "item": "mimiworld:cleansing_longevity_kui_spawn_egg"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "mimiworld:crystallized_rice"
+    },
+    "W": {
+      "item": "mimiworld:wet_grass_fiber"
+    }
+  },
+  "pattern": [
+    "   ",
+    "CWC",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:reinforced_wet_grass_fiber"
+  },
+  "show_notification": true
+}

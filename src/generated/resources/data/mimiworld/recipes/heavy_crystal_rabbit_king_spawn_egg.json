@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "mimiworld:poprice_heart_sip_liquid"
+    },
+    "O": {
+      "item": "mimiworld:ox_king_crystal_horn"
+    },
+    "R": {
+      "item": "mimiworld:crystallized_rice_meal"
+    }
+  },
+  "pattern": [
+    "RHR",
+    "HOH",
+    "RHR"
+  ],
+  "result": {
+    "item": "mimiworld:heavy_crystal_rabbit_king_spawn_egg"
+  },
+  "show_notification": true
+}

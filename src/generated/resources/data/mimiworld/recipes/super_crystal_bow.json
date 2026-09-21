@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "S": {
+      "item": "mimiworld:rice_baton"
+    },
+    "X": {
+      "item": "mimiworld:super_crystal"
+    }
+  },
+  "pattern": [
+    " XS",
+    "XFS",
+    " XS"
+  ],
+  "result": {
+    "item": "mimiworld:super_crystal_bow"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 40,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "mimiworld:coarse_advanced_summon_core_blank"
+  },
+  "result": "mimiworld:advanced_summon_core"
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cleansing_compound_armor_blank": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:cleansing_compound_armor_blank"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:cleansing_compound_chestplate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cleansing_compound_armor_blank",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:cleansing_compound_chestplate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:advanced_sword_temper_ingot"
+    },
+    "B": {
+      "item": "mimiworld:super_lazy_alloy_sword_blank"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "item": "mimiworld:super_lazy_alloy_sword"
+  },
+  "show_notification": true
+}

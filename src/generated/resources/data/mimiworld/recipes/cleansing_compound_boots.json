@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:armor_core_ingot"
+    },
+    "B": {
+      "item": "mimiworld:cleansing_compound_armor_blank"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "A A",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:cleansing_compound_boots"
+  },
+  "show_notification": true
+}

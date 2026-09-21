@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "H": {
+      "item": "mimiworld:rice_crystal_alloy_hammer"
+    },
+    "L": {
+      "item": "mimiworld:rice_log"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "mimiworld:rice_stone_block"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "RHR",
+    "LLL"
+  ],
+  "result": {
+    "item": "mimiworld:ionization_table"
+  },
+  "show_notification": true
+}

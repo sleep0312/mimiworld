@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "mimiworld:super_heavy_crystal"
+    },
+    "B": {
+      "item": "mimiworld:rice_book"
+    },
+    "H": {
+      "item": "mimiworld:rice_crystal_hammer"
+    },
+    "P": {
+      "item": "mimiworld:rice_planks"
+    }
+  },
+  "pattern": [
+    " A ",
+    "BHB",
+    "PPP"
+  ],
+  "result": {
+    "item": "mimiworld:dissociation_table"
+  },
+  "show_notification": true
+}
