@@ -19,9 +19,10 @@ public class DataGenerators {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
 
-        // 服务端数据（配方等）
+        // 服务端数据（配方、实体战利品表等）
         if (event.includeServer()) {
             generator.addProvider(true, new ModRecipeProvider(packOutput));
+            generator.addProvider(true, new ModLootTableProvider(packOutput));
         }
     }
 }

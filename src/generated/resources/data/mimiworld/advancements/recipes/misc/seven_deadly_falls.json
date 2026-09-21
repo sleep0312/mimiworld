@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fallen_crown": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:fallen_crown"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:seven_deadly_falls"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_fallen_crown",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:seven_deadly_falls"
+    ]
+  },
+  "sends_telemetry_event": false
+}

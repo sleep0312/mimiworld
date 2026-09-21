@@ -3,7 +3,6 @@ package com.mimiworld.mimiworld;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,8 +19,8 @@ public class ModCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> MIMI_TAB = CREATIVE_MODE_TABS.register("mimi", () ->
             CreativeModeTab.builder()
-                    // TODO: 图标物品待定，暂用原版草方块占位，确定后替换为对应 Item
-                    .icon(() -> Items.GRASS_BLOCK.getDefaultInstance())
+                    // 图标：296 界天脑花
+                    .icon(() -> ModItems.REALM_HEAVEN_BRAIN_FLOWER.get().getDefaultInstance())
                     .title(Component.translatable("itemGroup.mimiworld.mimi"))
                     .displayItems((parameters, output) ->
                             // 自动添加本模组所有已注册物品/方块物品；

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:blood_vial"
+    },
+    "L": {
+      "item": "mimiworld:rice_fruit_cleansing_solution"
+    },
+    "R": {
+      "item": "mimiworld:cleansing_rice_separation_solution"
+    },
+    "V": {
+      "item": "mimiworld:rice_bucket"
+    }
+  },
+  "pattern": [
+    "VBV",
+    "LBR",
+    "VBV"
+  ],
+  "result": {
+    "item": "mimiworld:sword_quenching_liquid"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_final_sword_codex": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:final_sword_codex"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:laziest_heavenfall_sword_counterfeit"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_final_sword_codex",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:laziest_heavenfall_sword_counterfeit"
+    ]
+  },
+  "sends_telemetry_event": false
+}

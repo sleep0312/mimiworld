@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "J": {
+      "item": "mimiworld:divine_jade"
+    },
+    "R": {
+      "item": "mimiworld:recrystallized_rice"
+    },
+    "S": {
+      "item": "mimiworld:cleansing_compound_sword_blank"
+    }
+  },
+  "pattern": [
+    "SJS",
+    "RGR",
+    "SJS"
+  ],
+  "result": {
+    "item": "mimiworld:golden_rice_jade"
+  },
+  "show_notification": true
+}

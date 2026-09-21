@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ancient_sword_soul": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:ancient_sword_soul"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:primordial_sword_soul"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ancient_sword_soul",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:primordial_sword_soul"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:sword_quenching_table"
+    },
+    "B": {
+      "item": "mimiworld:super_lazy_divine_sword_complete"
+    },
+    "C": {
+      "item": "mimiworld:final_sword_codex"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
+  ],
+  "result": {
+    "item": "mimiworld:laziest_heavenfall_sword_counterfeit"
+  },
+  "show_notification": true
+}

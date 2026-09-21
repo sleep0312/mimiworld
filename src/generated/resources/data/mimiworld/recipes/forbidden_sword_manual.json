@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:rice_book"
+    },
+    "N": {
+      "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "T": {
+      "item": "minecraft:ghast_tear"
+    }
+  },
+  "pattern": [
+    "TNT",
+    "BBB",
+    "TNT"
+  ],
+  "result": {
+    "item": "mimiworld:forbidden_sword_manual"
+  },
+  "show_notification": true
+}

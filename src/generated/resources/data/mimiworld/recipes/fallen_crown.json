@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:super_lazy_alloy_ingot"
+    },
+    "B": {
+      "item": "mimiworld:ruined_heart"
+    },
+    "G": {
+      "item": "minecraft:emerald"
+    },
+    "R": {
+      "item": "mimiworld:recrystallized_rice"
+    }
+  },
+  "pattern": [
+    "RGR",
+    "RBR",
+    "AAA"
+  ],
+  "result": {
+    "item": "mimiworld:fallen_crown"
+  },
+  "show_notification": true
+}

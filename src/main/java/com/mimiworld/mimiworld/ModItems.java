@@ -333,7 +333,7 @@ import java.util.function.Supplier;
  *   293 = remnant_fallen_world_essence_ingot（残堕世界精华锭，普通物品，最大堆叠 64；英文名 Remnant Fallen World Essence Ingot）
  *   294 = world_tear（世界之泪，普通物品，最大堆叠 64；英文名 Tear of the World）
  *   295 = realm_lord_token（界主令牌，普通物品，最大堆叠 64；英文名 Realm Lord Token）
- *   296 = placeholder_296（待定占位，不进创造标签页；英文名 Reserved Slot 296）
+ *   296 = realm_heaven_brain_flower（界天脑花，普通物品，最大堆叠 64；英文名 Realm-Heaven Brain Flower）
  *   297 = cooked_realm_heaven_embryo_flower（熟界天胎花，食物，最大堆叠 64，2饱食度；英文名 Cooked Realm-Heaven Embryo Flower）
  *   298 = void_touch_tentacle（虚无触足，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Void Touch Tentacle）
  *   299 = cooked_void_touch_tentacle（熟虚无触足，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Void Touch Tentacle）
@@ -2029,8 +2029,8 @@ public class ModItems {
     public static final RegistryObject<Item> REALM_LORD_TOKEN = registerItem("realm_lord_token",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 296 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
-    public static final RegistryObject<Item> PLACEHOLDER_296 = registerItem("placeholder_296",
+    // 编码 296 = 界天脑花（Realm-Heaven Brain Flower）：界天米掉落的普通材料物品
+    public static final RegistryObject<Item> REALM_HEAVEN_BRAIN_FLOWER = registerItem("realm_heaven_brain_flower",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 297 = 熟界天胎花（Cooked Realm-Heaven Embryo Flower）：熟食，2 饱食度

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:sword_quenching_table"
+    },
+    "B": {
+      "item": "mimiworld:seven_deadly_falls"
+    },
+    "C": {
+      "item": "mimiworld:fallen_crown"
+    },
+    "D": {
+      "item": "mimiworld:laziest_heavenfall_sword_counterfeit"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "NBN",
+    "ADA"
+  ],
+  "result": {
+    "item": "mimiworld:laziest_heavenfall_sword_original_sin"
+  },
+  "show_notification": true
+}

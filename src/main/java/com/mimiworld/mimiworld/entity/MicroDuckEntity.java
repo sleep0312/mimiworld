@@ -44,12 +44,12 @@ public class MicroDuckEntity extends PathfinderMob implements GeoEntity {
     }
 
     /**
-     * 实体属性：16 点血、0.25 基础移速（与小型生物的观感匹配，可按需调整）。
+     * 实体属性：盗米者（用户实体编号 19）750 心 = 1500 点血、0.25 基础移速。
      * 在 ModEntityAttributes 的 EntityAttributeCreationEvent 中注册。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 16.0D)
+                .add(Attributes.MAX_HEALTH, 1500.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 

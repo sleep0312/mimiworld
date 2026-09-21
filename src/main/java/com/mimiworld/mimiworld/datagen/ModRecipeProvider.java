@@ -1416,6 +1416,307 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('D', Items.DRAGON_BREATH)
                 .unlockedBy("has_dragon_breath", has(Items.DRAGON_BREATH))
                 .save(consumer, MimiWorld.MODID + ":dragon_egg");
+
+        // ================= 第六批：#161-#192（神翼/神剑魄→剑诀/天堕套装/食材） =================
+
+        // #161：0 127 0 / 0 159 0 / 0 0 0 = 161（超懒神翼胸甲；A=127 超懒合金胸甲 W=159 米米神翼）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.byCode(161))
+                .pattern(" A ")
+                .pattern(" W ")
+                .pattern("   ")
+                .define('A', ModItems.byCode(127))
+                .define('W', ModItems.byCode(159))
+                .unlockedBy("has_mimi_divine_wings", has(ModItems.byCode(159)))
+                .save(consumer);
+
+        // #162：末影龙头 末影水晶 末影龙头 / 123 紫晶幽匿感应器 123 / 末影龙头 末地水晶 末影龙头 = 162（上古剑意）
+        // 判定：mod 无此物品，"紫晶幽匿感应器"=原版校准幽匿感测体 CALIBRATED_SCULK_SENSOR（紫水晶合成的校准版）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(162))
+                .pattern("HEH")
+                .pattern("ACA")
+                .pattern("HEH")
+                .define('H', Items.DRAGON_HEAD)
+                .define('E', Items.END_CRYSTAL)
+                .define('A', ModItems.byCode(123))
+                .define('C', Items.CALIBRATED_SCULK_SENSOR)
+                .unlockedBy("has_dragon_head", has(Items.DRAGON_HEAD))
+                .save(consumer);
+
+        // #163：0 0 0 / 0 124 162 / 0 0 0 = 163（超懒神剑·残缺·壹）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(163))
+                .pattern("   ")
+                .pattern(" SW")
+                .pattern("   ")
+                .define('S', ModItems.byCode(124))
+                .define('W', ModItems.byCode(162))
+                .unlockedBy("has_ancient_sword_intent", has(ModItems.byCode(162)))
+                .save(consumer);
+
+        // #164：80 80 80 / 19 83 19 / 19 19 19 = 164（淬剑台，机器方块）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(164))
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .define('A', ModItems.byCode(80))
+                .define('B', ModItems.byCode(19))
+                .define('C', ModItems.byCode(83))
+                .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.byCode(80)))
+                .save(consumer);
+
+        // #166：83 7 83 / 6 7 6 / 5 5 5 = 166（汲血台，机器方块；T=7 米棍 W=6 米木板 L=5 米原木）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(166))
+                .pattern("STS")
+                .pattern("WTW")
+                .pattern("LLL")
+                .define('S', ModItems.byCode(83))
+                .define('T', ModItems.byCode(7))
+                .define('W', ModItems.byCode(6))
+                .define('L', ModItems.byCode(5))
+                .unlockedBy("has_combustible_solid", has(ModItems.byCode(83)))
+                .save(consumer);
+
+        // #168：9 167 9 / 71 167 84 / 9 167 9 = 168（淬剑液；9=米桶 B=167 血瓶 L=71 米果清洁液 R=84 清洁米沉离液）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(168))
+                .pattern("VBV")
+                .pattern("LBR")
+                .pattern("VBV")
+                .define('V', ModItems.byCode(9))
+                .define('B', ModItems.byCode(167))
+                .define('L', ModItems.byCode(71))
+                .define('R', ModItems.byCode(84))
+                .unlockedBy("has_blood_vial", has(ModItems.byCode(167)))
+                .save(consumer);
+
+        // #169：远古残骸 83 远古残骸 / 83 162 83 / 远古残骸 83 远古残骸 = 169（远古剑魄）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(169))
+                .pattern("DSD")
+                .pattern("SWS")
+                .pattern("DSD")
+                .define('D', Items.ANCIENT_DEBRIS)
+                .define('S', ModItems.byCode(83))
+                .define('W', ModItems.byCode(162))
+                .unlockedBy("has_ancient_sword_intent", has(ModItems.byCode(162)))
+                .save(consumer);
+
+        // #171：80 80 80 / 83 169 83 / 80 80 80 = 171（太古剑魄）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(171))
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("AAA")
+                .define('A', ModItems.byCode(80))
+                .define('B', ModItems.byCode(83))
+                .define('C', ModItems.byCode(169))
+                .unlockedBy("has_ancient_sword_soul", has(ModItems.byCode(169)))
+                .save(consumer);
+
+        // #173：龙息 龙息 龙息 / 龙息 紫水晶碎片 龙息 / 龙息 龙息 龙息 = 173（神玉）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(173))
+                .pattern("DDD")
+                .pattern("DAD")
+                .pattern("DDD")
+                .define('D', Items.DRAGON_BREATH)
+                .define('A', Items.AMETHYST_SHARD)
+                .unlockedBy("has_dragon_breath", has(Items.DRAGON_BREATH))
+                .save(consumer);
+
+        // #174：112 173 112 / 19 金锭 19 / 112 173 112 = 174（金米玉）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(174))
+                .pattern("SJS")
+                .pattern("RGR")
+                .pattern("SJS")
+                .define('S', ModItems.byCode(112))
+                .define('J', ModItems.byCode(173))
+                .define('R', ModItems.byCode(19))
+                .define('G', Items.GOLD_INGOT)
+                .unlockedBy("has_divine_jade", has(ModItems.byCode(173)))
+                .save(consumer);
+
+        // #175：83 174 174 / 174 171 174 / 174 174 83 = 175（神剑鉴玉）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(175))
+                .pattern("SJJ")
+                .pattern("JBJ")
+                .pattern("JJS")
+                .define('S', ModItems.byCode(83))
+                .define('J', ModItems.byCode(174))
+                .define('B', ModItems.byCode(171))
+                .unlockedBy("has_golden_rice_jade", has(ModItems.byCode(174)))
+                .save(consumer);
+
+        // #177：恶魂之泪 46 恶魂之泪 / 65 65 65 / 恶魂之泪 46 恶魂之泪 = 177（剑法禁卷；46=精制强化米网 65=米书）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(177))
+                .pattern("TNT")
+                .pattern("BBB")
+                .pattern("TNT")
+                .define('T', Items.GHAST_TEAR)
+                .define('N', ModItems.byCode(46))
+                .define('B', ModItems.byCode(65))
+                .unlockedBy("has_ghast_tear", has(Items.GHAST_TEAR))
+                .save(consumer);
+
+        // #178：174 177 174 / 174 175 80 / 80 80 80 = 178（超懒剑法）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(178))
+                .pattern("ABA")
+                .pattern("ACD")
+                .pattern("DDD")
+                .define('A', ModItems.byCode(174))
+                .define('B', ModItems.byCode(177))
+                .define('C', ModItems.byCode(175))
+                .define('D', ModItems.byCode(80))
+                .unlockedBy("has_forbidden_sword_manual", has(ModItems.byCode(177)))
+                .save(consumer);
+
+        // #180：83 83 83 / 71 174 71 / 83 83 83 = 180（结晶米玉）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(180))
+                .pattern("SSS")
+                .pattern("LJL")
+                .pattern("SSS")
+                .define('S', ModItems.byCode(83))
+                .define('L', ModItems.byCode(71))
+                .define('J', ModItems.byCode(174))
+                .unlockedBy("has_golden_rice_jade", has(ModItems.byCode(174)))
+                .save(consumer);
+
+        // #181：末影龙头 80 80 / 180 178 180 / 80 80 末影龙头 = 181（终末剑诀）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(181))
+                .pattern("HAA")
+                .pattern("CBC")
+                .pattern("AAH")
+                .define('H', Items.DRAGON_HEAD)
+                .define('A', ModItems.byCode(80))
+                .define('C', ModItems.byCode(180))
+                .define('B', ModItems.byCode(178))
+                .unlockedBy("has_crystallized_rice_jade", has(ModItems.byCode(180)))
+                .save(consumer);
+
+        // #182：164 179 164 / 164 181 164 / 164 164 164 = 182（最懒天堕剑·赝品；179=超懒神剑·完整）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(182))
+                .pattern("ABA")
+                .pattern("ACA")
+                .pattern("AAA")
+                .define('A', ModItems.byCode(164))
+                .define('B', ModItems.byCode(179))
+                .define('C', ModItems.byCode(181))
+                .unlockedBy("has_final_sword_codex", has(ModItems.byCode(181)))
+                .save(consumer);
+
+        // #183：末影之眼 47 末影之眼 / 龙息 幽匿感应器 龙息 / 末影之眼 47 龙息 = 183（破败之心）
+        // 判定：mod 无此物品，"幽匿感应器"=原版幽匿感测体 SCULK_SENSOR；47=饭晶合金锤
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(183))
+                .pattern("ENE")
+                .pattern("DSD")
+                .pattern("END")
+                .define('E', Items.ENDER_EYE)
+                .define('N', ModItems.byCode(47))
+                .define('D', Items.DRAGON_BREATH)
+                .define('S', Items.SCULK_SENSOR)
+                .unlockedBy("has_sculk_sensor", has(Items.SCULK_SENSOR))
+                .save(consumer);
+
+        // #184：84 183 84 / 183 84 183 / 84 183 84 = 184（堕落之心，棋盘交错）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(184))
+                .pattern("ABA")
+                .pattern("BAB")
+                .pattern("ABA")
+                .define('A', ModItems.byCode(84))
+                .define('B', ModItems.byCode(183))
+                .unlockedBy("has_ruined_heart", has(ModItems.byCode(183)))
+                .save(consumer);
+
+        // #185：19 绿宝石 19 / 19 183 19 / 80 80 80 = 185（堕落王冠）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(185))
+                .pattern("RGR")
+                .pattern("RBR")
+                .pattern("AAA")
+                .define('R', ModItems.byCode(19))
+                .define('G', Items.EMERALD)
+                .define('B', ModItems.byCode(183))
+                .define('A', ModItems.byCode(80))
+                .unlockedBy("has_ruined_heart", has(ModItems.byCode(183)))
+                .save(consumer);
+
+        // #186：256 185 256 / 84 181 84 / 下界之星 184 下界之星 = 186（七宗堕落）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(186))
+                .pattern("CBC")
+                .pattern("AWA")
+                .pattern("NTN")
+                .define('C', ModItems.byCode(256))
+                .define('B', ModItems.byCode(185))
+                .define('A', ModItems.byCode(84))
+                .define('W', ModItems.byCode(181))
+                .define('N', Items.NETHER_STAR)
+                .define('T', ModItems.byCode(184))
+                .unlockedBy("has_fallen_crown", has(ModItems.byCode(185)))
+                .save(consumer);
+
+        // #187：164 185 164 / 下界之星 186 下界之星 / 164 182 164 = 187（最懒天堕剑·原罪）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(187))
+                .pattern("ACA")
+                .pattern("NBN")
+                .pattern("ADA")
+                .define('A', ModItems.byCode(164))
+                .define('C', ModItems.byCode(185))
+                .define('N', Items.NETHER_STAR)
+                .define('B', ModItems.byCode(186))
+                .define('D', ModItems.byCode(182))
+                .unlockedBy("has_seven_deadly_falls", has(ModItems.byCode(186)))
+                .save(consumer);
+
+        // #188：80 185 80 / 80 161 80 / 80 186 80 = 188（天堕翼胸甲）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.byCode(188))
+                .pattern("ABA")
+                .pattern("ACA")
+                .pattern("ADA")
+                .define('A', ModItems.byCode(80))
+                .define('B', ModItems.byCode(185))
+                .define('C', ModItems.byCode(161))
+                .define('D', ModItems.byCode(186))
+                .unlockedBy("has_seven_deadly_falls", has(ModItems.byCode(186)))
+                .save(consumer);
+
+        // #189：80 185 80 / 164 126 164 / 80 186 80 = 189（最懒天堕头盔）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.byCode(189))
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern("AEA")
+                .define('A', ModItems.byCode(80))
+                .define('B', ModItems.byCode(185))
+                .define('C', ModItems.byCode(164))
+                .define('D', ModItems.byCode(126))
+                .define('E', ModItems.byCode(186))
+                .unlockedBy("has_seven_deadly_falls", has(ModItems.byCode(186)))
+                .save(consumer);
+
+        // #190：80 185 80 / 164 128 164 / 80 186 80 = 190（最懒天堕护腿）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.byCode(190))
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern("AEA")
+                .define('A', ModItems.byCode(80))
+                .define('B', ModItems.byCode(185))
+                .define('C', ModItems.byCode(164))
+                .define('D', ModItems.byCode(128))
+                .define('E', ModItems.byCode(186))
+                .unlockedBy("has_seven_deadly_falls", has(ModItems.byCode(186)))
+                .save(consumer);
+
+        // #191：80 185 80 / 164 129 164 / 80 186 80 = 191（最懒天堕靴子）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.byCode(191))
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern("AEA")
+                .define('A', ModItems.byCode(80))
+                .define('B', ModItems.byCode(185))
+                .define('C', ModItems.byCode(164))
+                .define('D', ModItems.byCode(129))
+                .define('E', ModItems.byCode(186))
+                .unlockedBy("has_seven_deadly_falls", has(ModItems.byCode(186)))
+                .save(consumer);
+
+        // #192：246 号咧米鸡肉（生）在熔炉烧 2s（40t）→ 192 号熟咧米鸡肉
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.byCode(246)), RecipeCategory.FOOD,
+                        ModItems.byCode(192), 0.3F, 40)
+                .unlockedBy("has_liemi_chicken", has(ModItems.byCode(246)))
+                .save(consumer);
     }
 
     /**

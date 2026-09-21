@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:golden_rice_jade"
+    },
+    "B": {
+      "item": "mimiworld:forbidden_sword_manual"
+    },
+    "C": {
+      "item": "mimiworld:divine_sword_appraisal_jade"
+    },
+    "D": {
+      "item": "mimiworld:super_lazy_alloy_ingot"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ACD",
+    "DDD"
+  ],
+  "result": {
+    "item": "mimiworld:super_lazy_sword_art"
+  },
+  "show_notification": true
+}

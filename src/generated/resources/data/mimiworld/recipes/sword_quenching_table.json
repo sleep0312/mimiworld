@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:super_lazy_alloy_ingot"
+    },
+    "B": {
+      "item": "mimiworld:recrystallized_rice"
+    },
+    "C": {
+      "item": "mimiworld:combustible_solid"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BCB",
+    "BBB"
+  ],
+  "result": {
+    "item": "mimiworld:sword_quenching_table"
+  },
+  "show_notification": true
+}

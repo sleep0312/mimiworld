@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:primordial_sword_soul"
+    },
+    "J": {
+      "item": "mimiworld:golden_rice_jade"
+    },
+    "S": {
+      "item": "mimiworld:combustible_solid"
+    }
+  },
+  "pattern": [
+    "SJJ",
+    "JBJ",
+    "JJS"
+  ],
+  "result": {
+    "item": "mimiworld:divine_sword_appraisal_jade"
+  },
+  "show_notification": true
+}

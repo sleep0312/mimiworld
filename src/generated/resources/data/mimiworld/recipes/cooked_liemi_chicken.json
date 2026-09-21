@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 40,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "mimiworld:liemi_chicken"
+  },
+  "result": "mimiworld:cooked_liemi_chicken"
+}

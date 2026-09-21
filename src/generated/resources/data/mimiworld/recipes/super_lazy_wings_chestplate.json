@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:super_lazy_alloy_chestplate"
+    },
+    "W": {
+      "item": "mimiworld:mimi_divine_wings"
+    }
+  },
+  "pattern": [
+    " A ",
+    " W ",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:super_lazy_wings_chestplate"
+  },
+  "show_notification": true
+}

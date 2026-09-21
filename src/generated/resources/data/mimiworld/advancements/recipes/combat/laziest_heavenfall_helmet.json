@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_seven_deadly_falls": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:seven_deadly_falls"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:laziest_heavenfall_helmet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_seven_deadly_falls",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:laziest_heavenfall_helmet"
+    ]
+  },
+  "sends_telemetry_event": false
+}

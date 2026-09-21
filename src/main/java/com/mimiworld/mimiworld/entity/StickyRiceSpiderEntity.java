@@ -81,12 +81,12 @@ public class StickyRiceSpiderEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性与原版蜘蛛完全相同：16 血、0.3 移速、2 近战攻击力。
+     * 用户实体编号 17：24 心 = 48 血、0.3 移速、2 近战攻击力。
      * 在 ModEntityAttributes 的 EntityAttributeCreationEvent 中注册。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 16.0D)
+                .add(Attributes.MAX_HEALTH, 48.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.30000001192092896D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D);
     }

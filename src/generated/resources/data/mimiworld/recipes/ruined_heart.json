@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:dragon_breath"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "N": {
+      "item": "mimiworld:rice_crystal_alloy_hammer"
+    },
+    "S": {
+      "item": "minecraft:sculk_sensor"
+    }
+  },
+  "pattern": [
+    "ENE",
+    "DSD",
+    "END"
+  ],
+  "result": {
+    "item": "mimiworld:ruined_heart"
+  },
+  "show_notification": true
+}

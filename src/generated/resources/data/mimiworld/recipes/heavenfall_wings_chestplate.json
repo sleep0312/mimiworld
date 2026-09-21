@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:super_lazy_alloy_ingot"
+    },
+    "B": {
+      "item": "mimiworld:fallen_crown"
+    },
+    "C": {
+      "item": "mimiworld:super_lazy_wings_chestplate"
+    },
+    "D": {
+      "item": "mimiworld:seven_deadly_falls"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "ADA"
+  ],
+  "result": {
+    "item": "mimiworld:heavenfall_wings_chestplate"
+  },
+  "show_notification": true
+}

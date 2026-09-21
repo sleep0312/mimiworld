@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "D": {
+      "item": "minecraft:dragon_breath"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "DAD",
+    "DDD"
+  ],
+  "result": {
+    "item": "mimiworld:divine_jade"
+  },
+  "show_notification": true
+}
