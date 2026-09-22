@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cooked_realm_heaven_embryo_flower": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:cooked_realm_heaven_embryo_flower"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:celestial_brain_rice_ball"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cooked_realm_heaven_embryo_flower",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:celestial_brain_rice_ball"
+    ]
+  },
+  "sends_telemetry_event": false
+}

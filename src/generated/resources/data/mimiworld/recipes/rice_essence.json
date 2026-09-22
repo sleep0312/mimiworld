@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:rice_bone_meal"
+    },
+    "P": {
+      "item": "mimiworld:huomi_powder"
+    }
+  },
+  "pattern": [
+    " B ",
+    "BPB",
+    " B "
+  ],
+  "result": {
+    "item": "mimiworld:rice_essence"
+  },
+  "show_notification": true
+}

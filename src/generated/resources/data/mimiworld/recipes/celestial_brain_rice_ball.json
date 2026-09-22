@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:kelp_slice"
+    },
+    "B": {
+      "item": "mimiworld:onigiri"
+    },
+    "C": {
+      "item": "mimiworld:cooked_realm_heaven_embryo_flower"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "ABA"
+  ],
+  "result": {
+    "item": "mimiworld:celestial_brain_rice_ball"
+  },
+  "show_notification": true
+}

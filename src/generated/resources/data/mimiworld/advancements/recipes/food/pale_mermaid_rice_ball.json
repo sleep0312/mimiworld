@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cooked_pale_mermaid_tail": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:cooked_pale_mermaid_tail"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:pale_mermaid_rice_ball"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cooked_pale_mermaid_tail",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:pale_mermaid_rice_ball"
+    ]
+  },
+  "sends_telemetry_event": false
+}

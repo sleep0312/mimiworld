@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:laziest_end_dragon_head"
+    },
+    "B": {
+      "item": "mimiworld:polished_remnant_fallen_abyss_rock"
+    },
+    "C": {
+      "item": "mimiworld:world_tear"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "item": "mimiworld:realm_lord_token"
+  },
+  "show_notification": true
+}

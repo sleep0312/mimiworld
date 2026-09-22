@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "mimiworld:rice_stick"
+    }
+  },
+  "pattern": [
+    "S  ",
+    "S I",
+    "II "
+  ],
+  "result": {
+    "item": "mimiworld:spoon"
+  },
+  "show_notification": true
+}

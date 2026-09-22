@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "U": {
+      "item": "mimiworld:deep_dyed_mirage_bone"
+    },
+    "V": {
+      "item": "mimiworld:deep_dyed_moon_devourer_wolf_claw"
+    },
+    "W": {
+      "item": "mimiworld:polished_remnant_fallen_world_essence"
+    },
+    "X": {
+      "item": "mimiworld:deep_dyed_celestial_phoenix_beak"
+    },
+    "Y": {
+      "item": "mimiworld:deep_dyed_faded_flower_branch"
+    },
+    "Z": {
+      "item": "mimiworld:deep_dyed_remnant_fallen_rice_essence"
+    }
+  },
+  "pattern": [
+    "XYZ",
+    "WWW",
+    "UYV"
+  ],
+  "result": {
+    "item": "mimiworld:polished_remnant_fallen_essence_solution"
+  },
+  "show_notification": true
+}

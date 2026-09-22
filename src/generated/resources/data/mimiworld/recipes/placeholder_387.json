@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:dragon_blood"
+    },
+    "B": {
+      "item": "mimiworld:dragon_scale"
+    },
+    "C": {
+      "item": "mimiworld:dragon_bone"
+    },
+    "D": {
+      "item": "mimiworld:seven_deadly_falls"
+    },
+    "X": {
+      "item": "mimiworld:li_pearl"
+    }
+  },
+  "pattern": [
+    "ABC",
+    "DXD",
+    "ABC"
+  ],
+  "result": {
+    "item": "mimiworld:placeholder_387"
+  },
+  "show_notification": true
+}

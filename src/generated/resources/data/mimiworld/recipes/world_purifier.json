@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:purification_framework"
+    },
+    "B": {
+      "item": "mimiworld:dragon_scale_might"
+    },
+    "C": {
+      "item": "mimiworld:dragon_yuan"
+    },
+    "D": {
+      "item": "mimiworld:cardinal_sin_dragon_crown"
+    },
+    "E": {
+      "item": "mimiworld:dragon_head_wrath"
+    },
+    "F": {
+      "item": "mimiworld:final_sin_realm_heart"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CDE",
+    "AFA"
+  ],
+  "result": {
+    "item": "mimiworld:world_purifier"
+  },
+  "show_notification": true
+}

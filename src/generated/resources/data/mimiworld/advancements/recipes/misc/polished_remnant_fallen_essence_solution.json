@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deep_dyed_phoenix_beak": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:deep_dyed_celestial_phoenix_beak"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:polished_remnant_fallen_essence_solution"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_deep_dyed_phoenix_beak",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:polished_remnant_fallen_essence_solution"
+    ]
+  },
+  "sends_telemetry_event": false
+}

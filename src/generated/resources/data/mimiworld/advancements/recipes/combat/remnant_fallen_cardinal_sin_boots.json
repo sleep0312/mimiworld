@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_laziest_heavenfall_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:laziest_heavenfall_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:remnant_fallen_cardinal_sin_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_laziest_heavenfall_boots",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:remnant_fallen_cardinal_sin_boots"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -75,11 +75,13 @@ public class ModLootTableProvider extends LootTableProvider {
                 d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(302), 1, 2)};
         DROPS[25] = new Drop[]{d(ModItems.byCode(264), 16, 16), d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(304), 10, 20)};
         DROPS[26] = new Drop[]{d(ModItems.byCode(266), 3, 5), d(ModItems.byCode(80), 1, 1),
-                d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(306), 1, 1)};
+                d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(306), 1, 1),
+                d(ModItems.byCode(331), 1, 2)};
         DROPS[27] = new Drop[]{d(ModItems.byCode(267), 1, 4), d(ModItems.byCode(185), 1, 1),
                 d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(308), 1, 4)};
         DROPS[28] = new Drop[]{d(ModItems.byCode(268), 1, 1), d(ModItems.byCode(84), 3, 3),
-                d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(310), 5, 6)};
+                d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(310), 5, 6),
+                d(ModItems.byCode(330), 5, 6)};
         DROPS[29] = new Drop[]{d(ModItems.byCode(269), 1, 1), d(ModItems.byCode(60), 3, 5),
                 d(ModItems.byCode(265), 1, 1), d(ModItems.byCode(312), 0, 1), d(ModItems.byCode(313), 16, 24)};
         DROPS[30] = new Drop[]{d(ModItems.byCode(270), 2, 2), d(Items.NETHER_STAR, 3, 3),

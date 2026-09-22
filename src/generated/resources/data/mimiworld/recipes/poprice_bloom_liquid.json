@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:rice_fruit_viscous_mixture"
+    },
+    "F": {
+      "item": "mimiworld:huomi_powder"
+    },
+    "P": {
+      "item": "mimiworld:baoliemi_rod"
+    }
+  },
+  "pattern": [
+    "PFP",
+    "FBF",
+    "PFP"
+  ],
+  "result": {
+    "item": "mimiworld:poprice_bloom_liquid"
+  },
+  "show_notification": true
+}

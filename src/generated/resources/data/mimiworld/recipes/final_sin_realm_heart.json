@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:dragon_bone_framework"
+    },
+    "B": {
+      "item": "mimiworld:realm_lord_dragon_heart"
+    },
+    "C": {
+      "item": "mimiworld:dragon_blood_essence"
+    },
+    "D": {
+      "item": "mimiworld:dragon_scale_block"
+    }
+  },
+  "pattern": [
+    " A ",
+    "CBD",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:final_sin_realm_heart"
+  },
+  "show_notification": true
+}

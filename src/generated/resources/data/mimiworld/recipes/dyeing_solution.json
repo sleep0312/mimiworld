@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:remnant_fallen_rice_essence"
+    },
+    "B": {
+      "item": "mimiworld:mimi_medley_liquid"
+    },
+    "C": {
+      "item": "mimiworld:cleansing_rice_separation_solution"
+    },
+    "D": {
+      "item": "mimiworld:remnant_fallen_ingot"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CDC",
+    "ABA"
+  ],
+  "result": {
+    "item": "mimiworld:dyeing_solution"
+  },
+  "show_notification": true
+}

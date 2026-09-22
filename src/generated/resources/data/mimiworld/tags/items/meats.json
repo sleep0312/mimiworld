@@ -1,0 +1,32 @@
+{
+  "values": [
+    "minecraft:beef",
+    "minecraft:porkchop",
+    "minecraft:chicken",
+    "minecraft:mutton",
+    "minecraft:rabbit",
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:tropical_fish",
+    "minecraft:pufferfish",
+    "minecraft:cooked_beef",
+    "minecraft:cooked_porkchop",
+    "minecraft:cooked_chicken",
+    "minecraft:cooked_mutton",
+    "minecraft:cooked_rabbit",
+    "minecraft:cooked_cod",
+    "minecraft:cooked_salmon",
+    "minecraft:rotten_flesh",
+    "mimiworld:raw_mimoo_beef",
+    "mimiworld:raw_mimi_mutton",
+    "mimiworld:raw_miheng_pork",
+    "mimiworld:raw_tanmi_fish",
+    "mimiworld:liemi_chicken",
+    "mimiworld:cooked_liemi_chicken",
+    "mimiworld:cooked_mimoo_beef",
+    "mimiworld:cooked_mimi_mutton",
+    "mimiworld:cooked_miheng_pork",
+    "mimiworld:cooked_tanmi_fish",
+    "mimiworld:rotten_rice_flesh"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:dragon_bone_framework"
+    },
+    "C": {
+      "item": "mimiworld:dragon_blood_essence"
+    }
+  },
+  "pattern": [
+    "A C",
+    "   ",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:purification_framework"
+  },
+  "show_notification": true
+}

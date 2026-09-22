@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_poprice_heart_sip_liquid": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:poprice_heart_sip_liquid"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:yanmi_heart_sip_liquid"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_poprice_heart_sip_liquid",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:yanmi_heart_sip_liquid"
+    ]
+  },
+  "sends_telemetry_event": false
+}

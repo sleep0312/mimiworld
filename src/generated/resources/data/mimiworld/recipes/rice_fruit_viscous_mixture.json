@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:rice_fruit_black_mixture"
+    },
+    "S": {
+      "item": "mimiworld:nianmi_silk_thread"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SBS",
+    " S "
+  ],
+  "result": {
+    "item": "mimiworld:rice_fruit_viscous_mixture"
+  },
+  "show_notification": true
+}

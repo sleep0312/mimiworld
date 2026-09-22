@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "mimiworld:dragon_scale"
+    },
+    "C": {
+      "item": "mimiworld:yu_sin_dragon_reverse_scale"
+    },
+    "D": {
+      "item": "mimiworld:laziest_heavenfall_sword_original_sin"
+    }
+  },
+  "pattern": [
+    "BCB",
+    "BDB",
+    "BBB"
+  ],
+  "result": {
+    "item": "mimiworld:remnant_fallen_reverse_scale_sword"
+  },
+  "show_notification": true
+}

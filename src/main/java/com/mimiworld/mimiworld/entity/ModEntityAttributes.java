@@ -25,7 +25,8 @@ public class ModEntityAttributes {
         event.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossEntity.createAttributes().build());
-        event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossEntity.createAttributes().build());
+        // 157 最懒终末龙：真实飞行 Boss（属性沿用原占位数值 + FLYING_SPEED/满击退抗性）
+        event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonEntity.createAttributes().build());
         // 19 盗米者：GeckoLib 微型鸭实体（血量已按用户数据改为 1500）
         event.put(ModEntities.RICE_STEALER.get(), MicroDuckEntity.createAttributes().build());
         // 17 黏米之蛛：真实蜘蛛实体（血量已按用户数据改为 48）

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:li_pearl"
+    },
+    "C": {
+      "item": "mimiworld:dragon_blood_essence"
+    },
+    "D": {
+      "item": "mimiworld:seven_deadly_falls"
+    },
+    "E": {
+      "item": "mimiworld:deep_dyed_moon_devourer_wolf_claw"
+    }
+  },
+  "pattern": [
+    "DCD",
+    "CBC",
+    "DED"
+  ],
+  "result": {
+    "item": "mimiworld:dragon_yuan"
+  },
+  "show_notification": true
+}

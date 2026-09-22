@@ -55,9 +55,14 @@ public class ModEntities {
     // 156 清洁长命夔：巨型走兽
     public static final RegistryObject<EntityType<PendingBossEntity>> CLEANSING_LONGEVITY_KUI =
             registerBoss("cleansing_longevity_kui", 1.6F, 2.2F);
-    // 157 最懒终末龙：超巨型
-    public static final RegistryObject<EntityType<PendingBossEntity>> LAZIEST_FINAL_DRAGON =
-            registerBoss("laziest_final_dragon", 2.5F, 3.5F);
+    // 157 最懒终末龙：超巨型飞行 Boss（已转正：GeckoLib 宗罪龙模型，末影龙式盘旋/俯冲 AI，火焰免疫）
+    public static final RegistryObject<EntityType<LaziestFinalDragonEntity>> LAZIEST_FINAL_DRAGON =
+            ENTITY_TYPES.register("laziest_final_dragon", () ->
+                    EntityType.Builder.<LaziestFinalDragonEntity>of(LaziestFinalDragonEntity::new, MobCategory.MONSTER)
+                            .sized(2.5F, 3.5F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("laziest_final_dragon"));
 
     // ===== 257 盗米者生物蛋绑定的实体：MicroDuckEntity（GeckoLib microduck 模型，小型 0.5×1.0） =====
     // 注册名仍为 rice_stealer，因此 257 号生物蛋（ForgeSpawnEggItem 绑定 RICE_STEALER）无需任何改动

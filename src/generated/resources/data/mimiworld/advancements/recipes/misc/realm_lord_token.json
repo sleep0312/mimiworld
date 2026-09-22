@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:realm_lord_token"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_world_tear": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:world_tear"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_world_tear",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:realm_lord_token"
+    ]
+  },
+  "sends_telemetry_event": false
+}

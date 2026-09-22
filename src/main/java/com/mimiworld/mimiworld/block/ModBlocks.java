@@ -354,6 +354,27 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
+    // 残堕深渊岩（273 号）：深渊层原生岩石，深板岩质地全立方块（硬度 3.0、抗爆 6.0、深板岩声）。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/remnant_fallen_abyss_rock.json）。
+    // 同时是 #286 粗制残堕世界精华、#287 碾磨台的合成材料。
+    public static final RegistryObject<Block> REMNANT_FALLEN_ABYSS_ROCK =
+            BLOCKS.register("remnant_fallen_abyss_rock", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.DEEPSLATE)));
+
+    // 残堕基岩（274 号）：深渊层致密基岩，硬度 4.0、抗爆 9.0、深板岩声，比深渊岩更坚固。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/remnant_fallen_bedrock.json）。
+    public static final RegistryObject<Block> REMNANT_FALLEN_BEDROCK =
+            BLOCKS.register("remnant_fallen_bedrock", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(4.0F, 9.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.DEEPSLATE)));
+
     // 磨制残堕深渊岩（288 号）：残堕深渊岩石的磨制变体，深板岩质地全立方块（硬度 3.0、抗爆 6.0、深板岩声）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/polished_remnant_fallen_abyss_rock.json）。
@@ -462,6 +483,17 @@ public class ModBlocks {
                             .strength(5.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.NETHERITE_BLOCK)));
+
+    // 巨无霸大大大煮锅（371 号 BlockItem）：370 超大煮锅之上的特级烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/jumbo_mega_cooking_pot.json）。
+    public static final RegistryObject<Block> JUMBO_MEGA_COOKING_POT =
+            BLOCKS.register("jumbo_mega_cooking_pot", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
 
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

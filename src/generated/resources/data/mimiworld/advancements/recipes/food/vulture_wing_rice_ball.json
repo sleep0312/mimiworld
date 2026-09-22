@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cooked_devourer_vulture_wing": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:cooked_devourer_vulture_wing"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:vulture_wing_rice_ball"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cooked_devourer_vulture_wing",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:vulture_wing_rice_ball"
+    ]
+  },
+  "sends_telemetry_event": false
+}

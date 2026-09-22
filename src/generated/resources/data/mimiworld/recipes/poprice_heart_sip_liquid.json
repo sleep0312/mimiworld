@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:poprice_bloom_liquid"
+    },
+    "W": {
+      "item": "mimiworld:haomi_wolf_heart"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WBW",
+    " W "
+  ],
+  "result": {
+    "item": "mimiworld:poprice_heart_sip_liquid"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:dyeing_solution"
+    },
+    "B": {
+      "item": "mimiworld:remnant_fallen_ingot"
+    },
+    "C": {
+      "item": "mimiworld:celestial_phoenix_beak"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "item": "mimiworld:deep_dyed_celestial_phoenix_beak"
+  },
+  "show_notification": true
+}

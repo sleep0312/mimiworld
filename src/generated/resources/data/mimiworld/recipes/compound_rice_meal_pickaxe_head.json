@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "mimiworld:crystallized_rice"
+    },
+    "F": {
+      "item": "mimiworld:compound_rice_meal_ingot"
+    },
+    "S": {
+      "item": "mimiworld:rice_stone"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "CFC",
+    "SCS"
+  ],
+  "result": {
+    "item": "mimiworld:compound_rice_meal_pickaxe_head"
+  },
+  "show_notification": true
+}

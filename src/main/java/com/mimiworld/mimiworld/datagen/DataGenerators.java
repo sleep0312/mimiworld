@@ -23,6 +23,8 @@ public class DataGenerators {
         if (event.includeServer()) {
             generator.addProvider(true, new ModRecipeProvider(packOutput));
             generator.addProvider(true, new ModLootTableProvider(packOutput));
+            generator.addProvider(true, new ModItemTagsProvider(packOutput, event.getLookupProvider(),
+                    event.getExistingFileHelper()));
         }
     }
 }

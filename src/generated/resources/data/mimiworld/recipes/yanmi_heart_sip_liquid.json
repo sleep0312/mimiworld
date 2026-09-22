@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "mimiworld:poprice_heart_sip_liquid"
+    },
+    "E": {
+      "item": "mimiworld:yanmi_pearl"
+    }
+  },
+  "pattern": [
+    " E ",
+    "EBE",
+    " E "
+  ],
+  "result": {
+    "item": "mimiworld:yanmi_heart_sip_liquid"
+  },
+  "show_notification": true
+}

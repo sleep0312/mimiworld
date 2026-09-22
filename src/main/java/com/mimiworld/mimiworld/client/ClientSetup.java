@@ -2,6 +2,7 @@ package com.mimiworld.mimiworld.client;
 
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
+import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.StickyRiceSpiderRenderer;
@@ -43,7 +44,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
-        event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), PendingBossRenderer::new);
+        // 157 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
+        event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonRenderer::new);
         // 257 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染
         event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), MicroDuckRenderer::new);
         // 黏米之蛛：GeckoLib spider 模型（idle/walk/attack 动画）

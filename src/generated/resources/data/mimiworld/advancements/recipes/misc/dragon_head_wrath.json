@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:dragon_head_wrath"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yu_sin_dragon_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:yu_sin_dragon_head"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_yu_sin_dragon_head",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:dragon_head_wrath"
+    ]
+  },
+  "sends_telemetry_event": false
+}

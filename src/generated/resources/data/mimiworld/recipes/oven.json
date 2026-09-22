@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:charcoal"
+    },
+    "P": {
+      "item": "minecraft:heavy_weighted_pressure_plate"
+    },
+    "R": {
+      "item": "mimiworld:placeholder_333"
+    }
+  },
+  "pattern": [
+    "PRP",
+    "PRP",
+    "CRC"
+  ],
+  "result": {
+    "item": "mimiworld:oven"
+  },
+  "show_notification": true
+}

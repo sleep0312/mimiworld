@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:super_lazy_alloy_ingot"
+    },
+    "B": {
+      "item": "mimiworld:remnant_fallen_abyss_rock"
+    },
+    "C": {
+      "item": "mimiworld:remnant_fallen_ingot"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ACA",
+    "BBB"
+  ],
+  "result": {
+    "item": "mimiworld:grinding_table"
+  },
+  "show_notification": true
+}

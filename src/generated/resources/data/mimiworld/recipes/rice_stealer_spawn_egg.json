@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "R": {
+      "item": "mimiworld:rice_bucket"
+    },
+    "S": {
+      "item": "minecraft:sculk_sensor"
+    }
+  },
+  "pattern": [
+    "ESE",
+    "RSR",
+    "ESE"
+  ],
+  "result": {
+    "item": "mimiworld:rice_stealer_spawn_egg"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:poprice_bloom_liquid"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_viscous_mixture": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:rice_fruit_viscous_mixture"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_viscous_mixture",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:poprice_bloom_liquid"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:cleansing_compound_ingot"
+    },
+    "B": {
+      "item": "mimiworld:cleansing_compound_rod"
+    },
+    "C": {
+      "item": "mimiworld:rice_stone"
+    }
+  },
+  "pattern": [
+    " A ",
+    " B ",
+    " C "
+  ],
+  "result": {
+    "item": "mimiworld:cleansing_compound_arrow"
+  },
+  "show_notification": true
+}

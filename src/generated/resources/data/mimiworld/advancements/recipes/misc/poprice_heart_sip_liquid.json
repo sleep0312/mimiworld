@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bloom_liquid": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:poprice_bloom_liquid"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:poprice_heart_sip_liquid"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_bloom_liquid",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:poprice_heart_sip_liquid"
+    ]
+  },
+  "sends_telemetry_event": false
+}

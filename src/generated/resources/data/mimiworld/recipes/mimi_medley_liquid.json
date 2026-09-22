@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:mimi_medley"
+    },
+    "B": {
+      "item": "mimiworld:yanmi_heart_sip_liquid"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "item": "mimiworld:mimi_medley_liquid"
+  },
+  "show_notification": true
+}

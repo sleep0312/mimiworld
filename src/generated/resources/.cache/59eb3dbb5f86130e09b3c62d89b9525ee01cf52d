@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-22T00:06:11.8823417	Loot Tables
+// 1.20.1	2026-09-22T18:35:04.9743935	Loot Tables
 f2d666857d1772dcab581fc556077ae61dae0715 data/mimiworld/loot_tables/entities/blighted_thorn_flower.json
 7571654704eb824435665a6f43b31738ebf6c14d data/mimiworld/loot_tables/entities/carved_rice_skeleton.json
 8ead86cd5999bf5d87269240bfd3dd5b76e1dd1b data/mimiworld/loot_tables/entities/chaotic_void_toucher.json
@@ -16,11 +16,11 @@ c8954278526c631b37a1dbc48be54ce799590249 data/mimiworld/loot_tables/entities/mim
 49696b1359664cc414d8b61e04841c2f4cc7bcda data/mimiworld/loot_tables/entities/mimi_skeleton.json
 13f37b8f7f2873b093d851d27b51b2b2bd6ba3d4 data/mimiworld/loot_tables/entities/mimoo_cow.json
 218e38e81bbbf1071421c92eddd4960f3b55d0ae data/mimiworld/loot_tables/entities/momi_entrant.json
-6bb42d9f4f465d09d38c12030b6918f1a6d1e1c9 data/mimiworld/loot_tables/entities/pale_mermaid.json
+f46d7b3d913d72419f0f359e1d126dca8ddd9349 data/mimiworld/loot_tables/entities/pale_mermaid.json
 3cf6d503b4b8eb2577e569c9baa3dcb49eb7eb85 data/mimiworld/loot_tables/entities/pami_crawler.json
 f6cd7d55d87736d2eecdb538f791f97873b91063 data/mimiworld/loot_tables/entities/penmi_fish.json
 058c74387a59a284f915b45b0b9c603d8bb8aa03 data/mimiworld/loot_tables/entities/rice_golem.json
-f8495239085b7b58188f5ebe9935da2bb83edab1 data/mimiworld/loot_tables/entities/rice_mirage.json
+9d5c27e7cc167098cb849dff97189f60f6f30e3e data/mimiworld/loot_tables/entities/rice_mirage.json
 1bc8db9b1d94a55e58229af1fb432cffc4fda390 data/mimiworld/loot_tables/entities/rice_soul.json
 700d8b5dfbb5f69838dbee47b102e39b422238c4 data/mimiworld/loot_tables/entities/rice_stealer.json
 0b7fe5ecc763f88925142b6bf2ae58f1c7335d12 data/mimiworld/loot_tables/entities/rice_witch.json

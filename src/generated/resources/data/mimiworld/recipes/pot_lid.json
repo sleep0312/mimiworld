@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:heavy_weighted_pressure_plate"
+    },
+    "W": {
+      "tag": "minecraft:wooden_buttons"
+    }
+  },
+  "pattern": [
+    " W ",
+    " P ",
+    "   "
+  ],
+  "result": {
+    "item": "mimiworld:pot_lid"
+  },
+  "show_notification": true
+}

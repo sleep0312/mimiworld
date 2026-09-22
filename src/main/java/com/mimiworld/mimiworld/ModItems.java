@@ -297,7 +297,7 @@ import java.util.function.Supplier;
  *   257 = rice_stealer_spawn_egg（盗米者生物蛋，ForgeSpawnEggItem，绑定实体 rice_stealer（当前 PendingBossEntity 占位）；英文名 Rice Stealer Spawn Egg）
  *   258 = rice_soul_tear（米魂之泪，普通物品，最大堆叠 64；英文名 Rice Soul Tear）
  *   259 = remnant_heaven_wing（残天翼，普通物品，最大堆叠 64；英文名 Remnant Heaven Wing）
- *   260 = placeholder_260（待定占位，不进创造标签页；英文名 Reserved Slot 260）
+ *   260 = super_lazy_alloy_arrow（超懒合金箭，普通物品，最大堆叠 64；英文名 Super Lazy Alloy Arrow）
  *   261 = void_touch（虚无之触，普通物品，最大堆叠 64；英文名 Void Touch）
  *   262 = faded_flower_branch（残花枝，普通物品，最大堆叠 64；英文名 Faded Flower Branch）
  *   263 = celestial_phoenix_beak（天凤之喙，普通物品，最大堆叠 64；英文名 Celestial Phoenix Beak）
@@ -310,8 +310,8 @@ import java.util.function.Supplier;
  *   270 = moon_devourer_wolf_claw（噬月狼爪，普通物品，最大堆叠 64；英文名 Moon Devourer Wolf Claw）
  *   271 = fallen_altar（堕落台，方块物品 BlockItem；暗合金仪式台方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Fallen Altar）
  *   272 = fallen_cross（堕落十字架，普通物品，最大堆叠 64；英文名 Fallen Cross）
- *   273 = placeholder_273（待定占位，不进创造标签页；英文名 Reserved Slot 273）
- *   274 = placeholder_274（待定占位，不进创造标签页；英文名 Reserved Slot 274）
+ *   273 = remnant_fallen_abyss_rock（残堕深渊岩，方块物品 BlockItem；深渊原生岩石，深板岩质地，镐挖掘等级3=钻石镐，破坏掉落本身，#286/#287 合成材料，方块本体见 block.ModBlocks；英文名 Remnant Fallen Abyss Rock）
+ *   274 = remnant_fallen_bedrock（残堕基岩，方块物品 BlockItem；深渊致密基岩，硬度4/抗爆9，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Remnant Fallen Bedrock）
  *   275 = dyeing_solution（浸染液，普通物品，最大堆叠 64；英文名 Dyeing Solution）
  *   276 = deep_dyed_remnant_heaven_wing（深染残天翼，鞘翅类装备，胸甲槽可滑翔，耐久 432 自动锁定堆叠 1；英文名 Deep-Dyed Remnant Heaven Wing）
  *   277 = deep_dyed_void_touch（深染虚无之触，普通物品，最大堆叠 64；英文名 Deep-Dyed Void Touch）
@@ -327,7 +327,7 @@ import java.util.function.Supplier;
  *   287 = grinding_table（碾磨台，方块物品 BlockItem；石质工作台方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Grinding Table）
  *   288 = polished_remnant_fallen_abyss_rock（磨制残堕深渊岩，方块物品 BlockItem；深板岩质地方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Polished Remnant Fallen Abyss Rock）
  *   289 = pestle_realm_table（杵界台，方块物品 BlockItem；金属仪式工作台方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Pestle Realm Table）
- *   290 = placeholder_290（待定占位，不进创造标签页；英文名 Reserved Slot 290）
+ *   290 = polished_remnant_fallen_world_essence（磨制残堕世界精华，普通物品，最大堆叠 64；286 粗制精华的磨制成品、291 材料；英文名 Polished Remnant Fallen World Essence）
  *   291 = polished_remnant_fallen_essence_solution（磨制残堕精华液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Polished Remnant Fallen Essence Solution）
  *   292 = ingot_condensation_table（凝锭台，方块物品 BlockItem；金属工艺机器方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Ingot Condensation Table）
  *   293 = remnant_fallen_world_essence_ingot（残堕世界精华锭，普通物品，最大堆叠 64；英文名 Remnant Fallen World Essence Ingot）
@@ -367,8 +367,8 @@ import java.util.function.Supplier;
  *   327 = phoenix_ball（凤球，食物（熟/肉丸），最大堆叠 64，2.5饱食度；英文名 Phoenix Ball）
  *   328 = plate（盘子，普通物品（餐具），最大堆叠 64；英文名 Plate）
  *   329 = sauce_roasted_vulture_wing（酱烤鹫翅，食物（熟），最大堆叠 64，3.5饱食度；英文名 Sauce-Roasted Vulture Wing）
- *   330 = placeholder_330（待定占位，不进创造标签页；英文名 Reserved Slot 330）
- *   331 = placeholder_331（待定占位，不进创造标签页；英文名 Reserved Slot 331）
+ *   330 = rice_mirage_grease（米蜃油脂，普通物品，最大堆叠 64；米蜃 5-6 掉落；英文名 Rice Mirage Grease）
+ *   331 = dyed_mermaid_grease（染鲛油脂，普通物品，最大堆叠 64；浅染鲛 1-2 掉落；英文名 Dyed Mermaid Grease）
  *   332 = oil_bottle（油瓶，普通物品（油料），最大堆叠 64；英文名 Oil Bottle）
  *   333 = placeholder_333（待定占位，不进创造标签页；英文名 Reserved Slot 333）
  *   334 = marinade（腌料，普通物品（调料），最大堆叠 64；英文名 Marinade）
@@ -383,7 +383,7 @@ import java.util.function.Supplier;
  *   343 = compound_oil（复合油，普通物品（油料），最大堆叠 64；英文名 Compound Oil）
  *   344 = mermaid_leg_fried_rice（蛟足炒饭，食物（熟），最大堆叠 64，4饱食度；英文名 Mermaid Leg Fried Rice）
  *   345 = dragon_phoenix_flower_soup（龙凤花汤，食物（熟），最大堆叠 64，3饱食度；英文名 Dragon-Phoenix Flower Soup）
- *   346 = placeholder_346（待定占位，不进创造标签页；英文名 Reserved Slot 346）
+ *   346 = mirage_illusion（蜃楼幻想，普通物品，最大堆叠 64；英文名 Mirage Illusion）
  *   347 = floral_mermaid_tail（花香蛟尾，食物（熟），最大堆叠 64，3饱食度；英文名 Floral Mermaid Tail）
  *   348 = sea_beast_jiao_rice（海兽相交饭，食物（熟），最大堆叠 64，4饱食度；英文名 Sea Beast Jiao Rice）
  *   349 = buddha_illusion（佛幻想，食物（熟/豪华料理），最大堆叠 64，5饱食度；英文名 Buddha Illusion）
@@ -408,10 +408,10 @@ import java.util.function.Supplier;
  *   368 = placeholder_368（待定占位，不进创造标签页；英文名 Reserved Slot 368）
  *   369 = large_cooking_pot（大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Large Cooking Pot）
  *   370 = extra_large_cooking_pot（超大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Extra-Large Cooking Pot）
- *   371 = placeholder_371（待定占位，不进创造标签页；英文名 Reserved Slot 371）
+ *   371 = jumbo_mega_cooking_pot（巨无霸大大大煮锅，方块物品 BlockItem；特级烹饪方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Jumbo Mega Cooking Pot）
  *   372 = iron_wok（铁锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Iron Wok）
  *   373 = oven（烤箱，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Oven）
- *   374 = placeholder_374（待定占位，不进创造标签页；英文名 Reserved Slot 374）
+ *   374 = pot_lid（盖子，普通物品，最大堆叠 64；烹饪机器链公共部件，木按钮+重型压力板合成；英文名 Pot Lid）
  *   375 = spoon（勺子，普通物品，最大堆叠 64；英文名 Spoon）
  *   376 = li_pearl（骊珠，普通物品，最大堆叠 64；英文名 Li Pearl）
  *   377 = dragon_blood（龙血，普通物品，最大堆叠 64；英文名 Dragon Blood）
@@ -1858,8 +1858,8 @@ public class ModItems {
     public static final RegistryObject<Item> REMNANT_HEAVEN_WING = registerItem("remnant_heaven_wing",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 260 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
-    public static final RegistryObject<Item> PLACEHOLDER_260 = registerItem("placeholder_260",
+    // 编码 260 = 超懒合金箭（Super Lazy Alloy Arrow）：普通物品，最大堆叠 64（当前为材料，非可发射箭矢）
+    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_ARROW = registerItem("super_lazy_alloy_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // ===== 261-270：残/仙/神兽系列掉落（均为普通物品，最大堆叠 64；精灵帽仅为同名物品不可穿戴） =====
@@ -1916,13 +1916,15 @@ public class ModItems {
     public static final RegistryObject<Item> FALLEN_CROSS = registerItem("fallen_cross",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 273 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
-    public static final RegistryObject<Item> PLACEHOLDER_273 = registerItem("placeholder_273",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 273 = 残堕深渊岩（Remnant Fallen Abyss Rock）：深渊层原生岩石方块，深板岩质地，镐挖掘等级 3 = 钻石镐
+    public static final RegistryObject<Item> REMNANT_FALLEN_ABYSS_ROCK =
+            registerItem("remnant_fallen_abyss_rock",
+                    () -> new BlockItem(ModBlocks.REMNANT_FALLEN_ABYSS_ROCK.get(), new Item.Properties()));
 
-    // 编码 274 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
-    public static final RegistryObject<Item> PLACEHOLDER_274 = registerItem("placeholder_274",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 274 = 残堕基岩（Remnant Fallen Bedrock）：深渊层致密基岩方块，镐挖掘等级 3 = 钻石镐
+    public static final RegistryObject<Item> REMNANT_FALLEN_BEDROCK =
+            registerItem("remnant_fallen_bedrock",
+                    () -> new BlockItem(ModBlocks.REMNANT_FALLEN_BEDROCK.get(), new Item.Properties()));
 
     // 编码 275 = 浸染液（Dyeing Solution）：深染系列材料的浸染原料
     public static final RegistryObject<Item> DYEING_SOLUTION = registerItem("dyeing_solution",
@@ -2000,9 +2002,11 @@ public class ModItems {
     public static final RegistryObject<Item> PESTLE_REALM_TABLE = registerItem("pestle_realm_table",
             () -> new BlockItem(ModBlocks.PESTLE_REALM_TABLE.get(), new Item.Properties()));
 
-    // 编码 290 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
-    public static final RegistryObject<Item> PLACEHOLDER_290 = registerItem("placeholder_290",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 290 = 磨制残堕世界精华（Polished Remnant Fallen World Essence）：粗制精华（286）的磨制成品，
+    // #291 磨制残堕精华液的材料，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_WORLD_ESSENCE =
+            registerItem("polished_remnant_fallen_world_essence",
+                    () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 291 = 磨制残堕精华液（Polished Remnant Fallen Essence Solution）：
     // 普通物品非流体、药水瓶造型（贴图/模型见资源文件），最大堆叠 64
@@ -2181,12 +2185,12 @@ public class ModItems {
             registerItem("sauce_roasted_vulture_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
 
-    // 编码 330 = 占位（Reserved Slot 330）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_330 = registerItem("placeholder_330",
+    // 编码 330 = 米蜃油脂（Rice Mirage Grease）：米蜃掉落的油脂材料，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> RICE_MIRAGE_GREASE = registerItem("rice_mirage_grease",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 331 = 占位（Reserved Slot 331）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_331 = registerItem("placeholder_331",
+    // 编码 331 = 染鲛油脂（Dyed Mermaid Grease）：浅染鲛掉落的油脂材料，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> DYED_MERMAID_GREASE = registerItem("dyed_mermaid_grease",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 332 = 油瓶（Oil Bottle）：普通物品（油料），最大堆叠 64
@@ -2252,8 +2256,8 @@ public class ModItems {
             registerItem("dragon_phoenix_flower_soup",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 346 = 占位（Reserved Slot 346）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_346 = registerItem("placeholder_346",
+    // 编码 346 = 蜃楼幻想（Mirage Illusion）：蜃楼幻象材料，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> MIRAGE_ILLUSION = registerItem("mirage_illusion",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 347 = 花香蛟尾（Floral Mermaid Tail）：熟食，3 饱食度
@@ -2358,9 +2362,10 @@ public class ModItems {
     public static final RegistryObject<Item> EXTRA_LARGE_COOKING_POT = registerItem("extra_large_cooking_pot",
             () -> new BlockItem(ModBlocks.EXTRA_LARGE_COOKING_POT.get(), new Item.Properties()));
 
-    // 编码 371 = 占位（Reserved Slot 371）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_371 = registerItem("placeholder_371",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 371 = 巨无霸大大大煮锅（Jumbo Mega Cooking Pot）：方块物品 BlockItem；370 超大煮锅之上的特级烹饪方块，
+    // 镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> JUMBO_MEGA_COOKING_POT = registerItem("jumbo_mega_cooking_pot",
+            () -> new BlockItem(ModBlocks.JUMBO_MEGA_COOKING_POT.get(), new Item.Properties()));
 
     // 编码 372 = 铁锅（Iron Wok）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> IRON_WOK = registerItem("iron_wok",
@@ -2372,8 +2377,9 @@ public class ModItems {
 
     // ===== 374-409：龙系素材/残堕宗罪装备/箭支批次（严格按编号顺序追加，禁止插入） =====
 
-    // 编码 374 = 占位（Reserved Slot 374）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_374 = registerItem("placeholder_374",
+    // 编码 374 = 盖子（Pot Lid）：烹饪机器链公共部件（搅碎器/搅拌器/三级煮锅/铁锅都要用），
+    // 木按钮 + 重型压力板合成，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> POT_LID = registerItem("pot_lid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 375 = 勺子（Spoon）：普通物品，最大堆叠 64

@@ -52,6 +52,30 @@ public final class ModMachineRecipes {
                 Items.NETHERITE_INGOT,
                 new ItemStack(ModItems.byCode(148)));
 
+        // #247：锤米台 —— 左上角 55 号超重结晶 + 左下角 11 号硬化米 → 247 号超重结晶棒（镐手柄）
+        RicePoundingTableBlockEntity.registerRecipe(
+                ModItems.byCode(55),
+                ModItems.byCode(11),
+                new ItemStack(ModItems.byCode(247)));
+
+        // #248：锤米台 —— 左上角 60 号复合米饭锭 + 左下角 16 号结晶米 → 248 号复合米饭棒
+        RicePoundingTableBlockEntity.registerRecipe(
+                ModItems.byCode(60),
+                ModItems.byCode(16),
+                new ItemStack(ModItems.byCode(248)));
+
+        // #249：锤米台 —— 左上角 75 号清洁复合锭 + 左下角 19 号重结晶米 → 249 号清洁复合棒
+        RicePoundingTableBlockEntity.registerRecipe(
+                ModItems.byCode(75),
+                ModItems.byCode(19),
+                new ItemStack(ModItems.byCode(249)));
+
+        // #250：锤米台 —— 左上角 80 号超懒合金锭 + 左下角 147 号熔融混合结晶 → 250 号超懒合金棒
+        RicePoundingTableBlockEntity.registerRecipe(
+                ModItems.byCode(80),
+                ModItems.byCode(147),
+                new ItemStack(ModItems.byCode(250)));
+
         // #32：压饭机 —— 9 个 30 号饭桶 → 1 个 32 号压缩饭桶。
         // 压饭机仅按输入槽 shrink(1) 消耗，不触发原版合成剩余物逻辑，因此【桶不返还】。
         Item[] ninePails = new Item[RicePressBlockEntity.INPUT_SLOTS];

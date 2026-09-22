@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": {
+      "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "H": {
+      "item": "mimiworld:super_lazy_alloy_pickaxe_head"
+    },
+    "R": {
+      "item": "mimiworld:super_lazy_alloy_rod"
+    }
+  },
+  "pattern": [
+    "HHH",
+    " FH",
+    "R H"
+  ],
+  "result": {
+    "item": "mimiworld:super_lazy_alloy_pickaxe"
+  },
+  "show_notification": true
+}
