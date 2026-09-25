@@ -46,6 +46,46 @@ public class ModMenuTypes {
             MENUS.register("precipitation_table",
                     () -> IForgeMenuType.create(PrecipitationTableMenu::new));
 
+    // 离解台菜单
+    public static final RegistryObject<MenuType<DissociationTableMenu>> DISSOCIATION_TABLE_MENU =
+            MENUS.register("dissociation_table",
+                    () -> IForgeMenuType.create(DissociationTableMenu::new));
+
+    // 铸剑台菜单
+    public static final RegistryObject<MenuType<SwordForgingTableMenu>> SWORD_FORGING_TABLE_MENU =
+            MENUS.register("sword_forging_table",
+                    () -> IForgeMenuType.create(SwordForgingTableMenu::new));
+
+    // 铸甲台菜单
+    public static final RegistryObject<MenuType<ArmorForgingTableMenu>> ARMOR_FORGING_TABLE_MENU =
+            MENUS.register("armor_forging_table",
+                    () -> IForgeMenuType.create(ArmorForgingTableMenu::new));
+
+    // 铸弓台菜单
+    public static final RegistryObject<MenuType<BowForgingTableMenu>> BOW_FORGING_TABLE_MENU =
+            MENUS.register("bow_forging_table",
+                    () -> IForgeMenuType.create(BowForgingTableMenu::new));
+
+    // 淬剑台菜单
+    public static final RegistryObject<MenuType<SwordQuenchingTableMenu>> SWORD_QUENCHING_TABLE_MENU =
+            MENUS.register("sword_quenching_table",
+                    () -> IForgeMenuType.create(SwordQuenchingTableMenu::new));
+
+    // 汲血台菜单
+    public static final RegistryObject<MenuType<BloodlettingTableMenu>> BLOODLETTING_TABLE_MENU =
+            MENUS.register("bloodletting_table",
+                    () -> IForgeMenuType.create(BloodlettingTableMenu::new));
+
+    // 碾磨台菜单
+    public static final RegistryObject<MenuType<GrindingTableMenu>> GRINDING_TABLE_MENU =
+            MENUS.register("grinding_table",
+                    () -> IForgeMenuType.create(GrindingTableMenu::new));
+
+    // 搅碎器菜单
+    public static final RegistryObject<MenuType<CrusherMenu>> CRUSHER_MENU =
+            MENUS.register("crusher",
+                    () -> IForgeMenuType.create(CrusherMenu::new));
+
     public static void register(IEventBus modEventBus) {
         MENUS.register(modEventBus);
     }

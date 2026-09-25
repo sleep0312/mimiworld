@@ -12,6 +12,14 @@ import com.mimiworld.mimiworld.client.screen.RicePressScreen;
 import com.mimiworld.mimiworld.client.screen.AdvancedRicePoundingTableScreen;
 import com.mimiworld.mimiworld.client.screen.IonizationTableScreen;
 import com.mimiworld.mimiworld.client.screen.PrecipitationTableScreen;
+import com.mimiworld.mimiworld.client.screen.DissociationTableScreen;
+import com.mimiworld.mimiworld.client.screen.SwordForgingTableScreen;
+import com.mimiworld.mimiworld.client.screen.ArmorForgingTableScreen;
+import com.mimiworld.mimiworld.client.screen.BowForgingTableScreen;
+import com.mimiworld.mimiworld.client.screen.SwordQuenchingTableScreen;
+import com.mimiworld.mimiworld.client.screen.BloodlettingTableScreen;
+import com.mimiworld.mimiworld.client.screen.GrindingTableScreen;
+import com.mimiworld.mimiworld.client.screen.CrusherScreen;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
@@ -82,6 +90,17 @@ public class ClientSetup {
             MenuScreens.register(ModMenuTypes.IONIZATION_TABLE_MENU.get(), IonizationTableScreen::new);
             // 绑定沉淀台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.PRECIPITATION_TABLE_MENU.get(), PrecipitationTableScreen::new);
+            // 绑定离解台菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.DISSOCIATION_TABLE_MENU.get(), DissociationTableScreen::new);
+            // 绑定铸剑台/铸甲台/铸弓台菜单与 GUI 屏幕（原版工作台外观，各自独立配方表）
+            MenuScreens.register(ModMenuTypes.SWORD_FORGING_TABLE_MENU.get(), SwordForgingTableScreen::new);
+            MenuScreens.register(ModMenuTypes.ARMOR_FORGING_TABLE_MENU.get(), ArmorForgingTableScreen::new);
+            MenuScreens.register(ModMenuTypes.BOW_FORGING_TABLE_MENU.get(), BowForgingTableScreen::new);
+            // 绑定淬剑台/汲血台/碾磨台/搅碎器菜单与 GUI 屏幕（多输入熔炉式定时加工）
+            MenuScreens.register(ModMenuTypes.SWORD_QUENCHING_TABLE_MENU.get(), SwordQuenchingTableScreen::new);
+            MenuScreens.register(ModMenuTypes.BLOODLETTING_TABLE_MENU.get(), BloodlettingTableScreen::new);
+            MenuScreens.register(ModMenuTypes.GRINDING_TABLE_MENU.get(), GrindingTableScreen::new);
+            MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
         });
     }
 }
