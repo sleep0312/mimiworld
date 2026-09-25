@@ -473,6 +473,50 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
+    // 锅（317 号 BlockItem）：基础铁制烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/pot.json）。
+    public static final RegistryObject<Block> POT =
+            BLOCKS.register("pot", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 大锅（318 号 BlockItem）：铜箍加固的大型烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/big_pot.json）。
+    public static final RegistryObject<Block> BIG_POT =
+            BLOCKS.register("big_pot", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 小煮锅（367 号 BlockItem）：带支脚的小型烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/small_cooking_pot.json）。
+    public static final RegistryObject<Block> SMALL_COOKING_POT =
+            BLOCKS.register("small_cooking_pot", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
+    // 煮锅（368 号 BlockItem）：铜箍加固的标准烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
+    // 破坏掉落本身（loot_tables/blocks/cooking_pot.json）。
+    public static final RegistryObject<Block> COOKING_POT =
+            BLOCKS.register("cooking_pot", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
     // 龙鳞块（386 号 BlockItem）：378 号龙鳞的压缩存储块，致密龙鳞质地全立方块
     // （硬度照铁块 5.0、抗爆 6.0、下界合金块声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。

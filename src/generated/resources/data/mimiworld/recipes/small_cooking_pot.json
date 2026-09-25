@@ -5,9 +5,6 @@
     "H": {
       "item": "mimiworld:spoon"
     },
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
     "P": {
       "item": "minecraft:heavy_weighted_pressure_plate"
     },
@@ -17,11 +14,11 @@
   },
   "pattern": [
     " R ",
-    "IHI",
+    " H ",
     " P "
   ],
   "result": {
-    "item": "mimiworld:placeholder_368"
+    "item": "mimiworld:small_cooking_pot"
   },
   "show_notification": true
 }

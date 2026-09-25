@@ -15,7 +15,7 @@
       "item": "mimiworld:seven_deadly_falls"
     },
     "X": {
-      "item": "mimiworld:celestial_void_thorn_brain_soup"
+      "item": "mimiworld:li_pearl"
     }
   },
   "pattern": [
@@ -24,7 +24,7 @@
     "ABC"
   ],
   "result": {
-    "item": "mimiworld:placeholder_388_mmjm"
+    "item": "mimiworld:final_sin_li_pearl"
   },
   "show_notification": true
 }

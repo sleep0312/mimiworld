@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_spoon": {
+    "has_rice_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:spoon"
+              "mimiworld:rice_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mimiworld:placeholder_367"
+        "recipe": "mimiworld:big_bowl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_spoon",
+      "has_rice_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mimiworld:placeholder_367"
+      "mimiworld:big_bowl"
     ]
   },
   "sends_telemetry_event": false

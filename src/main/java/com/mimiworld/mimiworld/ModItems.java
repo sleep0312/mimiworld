@@ -353,9 +353,9 @@ import java.util.function.Supplier;
  *   313 = fragrant_powder（香粉，普通物品，最大堆叠 64；英文名 Fragrant Powder）
  *   314 = devourer_vulture_wing（噬鹫翅，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Devourer Vulture Wing）
  *   315 = cooked_devourer_vulture_wing（熟噬鹫翅，食物，最大堆叠 64，3饱食度；英文名 Cooked Devourer Vulture Wing）
- *   316 = placeholder_316（待定占位，不进创造标签页；英文名 Reserved Slot 316）
- *   317 = placeholder_317（待定占位，不进创造标签页；英文名 Reserved Slot 317）
- *   318 = placeholder_318（待定占位，不进创造标签页；英文名 Reserved Slot 318）
+ *   316 = big_bowl（大碗，普通物品×64；英文名 Big Bowl）
+ *   317 = pot（锅，方块物品 BlockItem；基础铁制烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Pot）
+ *   318 = big_pot（大锅，方块物品 BlockItem；铜箍加固大型烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Big Pot）
  *   319 = celestial_void_thorn_brain_soup（天虚棘脑汤，食物（熟），最大堆叠 64，3饱食度；英文名 Celestial Void Thorn Brain Soup）
  *   320 = fragrant_mixed_meat_slice（香混肉片，食物（熟），最大堆叠 64，3饱食度；英文名 Fragrant Mixed Meat Slices）
  *   321 = sauce_glazed_twin_mermaid_tail（酱香双鲛尾，食物（熟），最大堆叠 64，4饱食度；英文名 Sauce-Glazed Twin Mermaid Tails）
@@ -370,7 +370,7 @@ import java.util.function.Supplier;
  *   330 = rice_mirage_grease（米蜃油脂，普通物品，最大堆叠 64；米蜃 5-6 掉落；英文名 Rice Mirage Grease）
  *   331 = dyed_mermaid_grease（染鲛油脂，普通物品，最大堆叠 64；浅染鲛 1-2 掉落；英文名 Dyed Mermaid Grease）
  *   332 = oil_bottle（油瓶，普通物品（油料），最大堆叠 64；英文名 Oil Bottle）
- *   333 = placeholder_333（待定占位，不进创造标签页；英文名 Reserved Slot 333）
+ *   333 = rice_paper_plate（米木纸盘，普通物品×64，#373 烤箱合成配料；英文名 Rice Paper Plate）
  *   334 = marinade（腌料，普通物品（调料），最大堆叠 64；英文名 Marinade）
  *   335 = marinated_vulture_wing（腌鹫翅，食物（腌制），最大堆叠 64，1.5饱食度，20%饥饿30s；英文名 Marinated Vulture Wing）
  *   336 = fallen_rice_meatball_soup（堕米肉丸汤，食物（熟），最大堆叠 64，3饱食度；英文名 Fallen Rice Meatball Soup）
@@ -401,11 +401,11 @@ import java.util.function.Supplier;
  *   361 = pale_mermaid_rice_ball（浅鲛饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Pale Mermaid Rice Ball）
  *   362 = mermaid_leg_rice_ball（蛟足饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Mermaid Leg Rice Ball）
  *   363 = vulture_wing_rice_ball（鹫翅饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Vulture Wing Rice Ball）
- *   364 = placeholder_364（待定占位，不进创造标签页；英文名 Reserved Slot 364）
+ *   364 = super_grand_stew（超级大乱炖，食物（熟），最大堆叠 64，10饱食度/0.9饱和；英文名 Super Grand Stew）
  *   365 = crusher（搅碎器，方块物品 BlockItem；食材加工机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Crusher）
  *   366 = mixer（搅拌器，方块物品 BlockItem；食材加工机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Mixer）
- *   367 = placeholder_367（待定占位，不进创造标签页；英文名 Reserved Slot 367）
- *   368 = placeholder_368（待定占位，不进创造标签页；英文名 Reserved Slot 368）
+ *   367 = small_cooking_pot（小煮锅，方块物品 BlockItem；带支脚小型烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Small Cooking Pot）
+ *   368 = cooking_pot（煮锅，方块物品 BlockItem；铜箍加固标准烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Cooking Pot）
  *   369 = large_cooking_pot（大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Large Cooking Pot）
  *   370 = extra_large_cooking_pot（超大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Extra-Large Cooking Pot）
  *   371 = jumbo_mega_cooking_pot（巨无霸大大大煮锅，方块物品 BlockItem；特级烹饪方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Jumbo Mega Cooking Pot）
@@ -424,8 +424,8 @@ import java.util.function.Supplier;
  *   384 = dragon_bone_framework（龙骨架构，普通物品，最大堆叠 64；英文名 Dragon Bone Framework）
  *   385 = dragon_blood_essence（龙血精华，普通物品，最大堆叠 64；英文名 Dragon Blood Essence）
  *   386 = dragon_scale_block（龙鳞块，方块物品 BlockItem；龙鳞压缩块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Block of Dragon Scale）
- *   387 = placeholder_387（待定占位，不进创造标签页；英文名 Reserved Slot 387）
- *   388 = placeholder_388_mmjm（待定占位 mmjm，不进创造标签页；英文名 Reserved Slot 388 MMJM）
+ *   387 = final_sin_li_pearl（终罪骊珠，普通物品×64；英文名 Final Sin Li Pearl）
+ *   388 = final_sin_reverse_scale（终罪逆鳞，普通物品×64；英文名 Final Sin Reverse Scale）
  *   389 = final_sin_dragon_heart（终罪龙心，普通物品，最大堆叠 64；英文名 Final Sin Dragon Heart）
  *   390 = final_sin_dragon_head（终罪龙头，普通物品，最大堆叠 64；英文名 Final Sin Dragon Head）
  *   391 = remnant_fallen_cardinal_sin_helmet（残堕宗罪头盔，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Helmet）
@@ -2124,17 +2124,17 @@ public class ModItems {
             registerItem("cooked_devourer_vulture_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
 
-    // 编码 316 = 占位（Reserved Slot 316）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_316 = registerItem("placeholder_316",
+    // 编码 316 = 大碗（Big Bowl）：米木制大碗餐具，普通物品，最大堆叠 64
+    public static final RegistryObject<Item> BIG_BOWL = registerItem("big_bowl",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 317 = 占位（Reserved Slot 317）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_317 = registerItem("placeholder_317",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 317 = 锅（Pot）：方块物品 BlockItem；基础铁制烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> POT = registerItem("pot",
+            () -> new BlockItem(ModBlocks.POT.get(), new Item.Properties()));
 
-    // 编码 318 = 占位（Reserved Slot 318）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_318 = registerItem("placeholder_318",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 318 = 大锅（Big Pot）：方块物品 BlockItem；铜箍加固的大型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> BIG_POT = registerItem("big_pot",
+            () -> new BlockItem(ModBlocks.BIG_POT.get(), new Item.Properties()));
 
     // 编码 319 = 天虚棘脑汤（Celestial Void Thorn Brain Soup）：熟食，3 饱食度
     public static final RegistryObject<Item> CELESTIAL_VOID_THORN_BRAIN_SOUP =
@@ -2197,8 +2197,8 @@ public class ModItems {
     public static final RegistryObject<Item> OIL_BOTTLE = registerItem("oil_bottle",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 333 = 占位（Reserved Slot 333）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_333 = registerItem("placeholder_333",
+    // 编码 333 = 米木纸盘（Rice Paper Plate）：米木薄板制成的一次性纸盘，普通物品，最大堆叠 64；#373 烤箱的合成配料
+    public static final RegistryObject<Item> RICE_PAPER_PLATE = registerItem("rice_paper_plate",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 334 = 腌料（Marinade）：普通物品（调料），最大堆叠 64
@@ -2334,9 +2334,9 @@ public class ModItems {
             registerItem("vulture_wing_rice_ball",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 364 = 占位（Reserved Slot 364）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_364 = registerItem("placeholder_364",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 364 = 超级大乱炖（Super Grand Stew）：熟食，豪华大杂烩炖菜，10 饱食度 / 0.9 饱和度（当前熟食最高档），最大堆叠 64
+    public static final RegistryObject<Item> SUPER_GRAND_STEW = registerItem("super_grand_stew",
+            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(10, 0.9F))));
 
     // 编码 365 = 搅碎器（Crusher）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> CRUSHER = registerItem("crusher",
@@ -2346,13 +2346,13 @@ public class ModItems {
     public static final RegistryObject<Item> MIXER = registerItem("mixer",
             () -> new BlockItem(ModBlocks.MIXER.get(), new Item.Properties()));
 
-    // 编码 367 = 占位（Reserved Slot 367）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_367 = registerItem("placeholder_367",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 367 = 小煮锅（Small Cooking Pot）：方块物品 BlockItem；带支脚的小型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> SMALL_COOKING_POT = registerItem("small_cooking_pot",
+            () -> new BlockItem(ModBlocks.SMALL_COOKING_POT.get(), new Item.Properties()));
 
-    // 编码 368 = 占位（Reserved Slot 368）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_368 = registerItem("placeholder_368",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 编码 368 = 煮锅（Cooking Pot）：方块物品 BlockItem；铜箍加固的标准烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> COOKING_POT = registerItem("cooking_pot",
+            () -> new BlockItem(ModBlocks.COOKING_POT.get(), new Item.Properties()));
 
     // 编码 369 = 大煮锅（Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> LARGE_COOKING_POT = registerItem("large_cooking_pot",
@@ -2431,12 +2431,12 @@ public class ModItems {
     public static final RegistryObject<Item> DRAGON_SCALE_BLOCK = registerItem("dragon_scale_block",
             () -> new BlockItem(ModBlocks.DRAGON_SCALE_BLOCK.get(), new Item.Properties()));
 
-    // 编码 387 = 占位（Reserved Slot 387）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_387 = registerItem("placeholder_387",
+    // 编码 387 = 终罪骊珠（Final Sin Li Pearl）：终罪龙之力凝结的暗紫骊珠（376 骊珠的终罪形态），普通物品，最大堆叠 64
+    public static final RegistryObject<Item> FINAL_SIN_LI_PEARL = registerItem("final_sin_li_pearl",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 388 = 占位 mmjm（Reserved Slot 388 MMJM）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_388_MMJM = registerItem("placeholder_388_mmjm",
+    // 编码 388 = 终罪逆鳞（Final Sin Reverse Scale）：终罪龙逆生之鳞（注册名去掉历史后缀 mmjm），普通物品，最大堆叠 64
+    public static final RegistryObject<Item> FINAL_SIN_REVERSE_SCALE = registerItem("final_sin_reverse_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 389 = 终罪龙心（Final Sin Dragon Heart）：普通物品，最大堆叠 64

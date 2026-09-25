@@ -4,18 +4,15 @@
   "key": {
     "A": {
       "item": "mimiworld:rice_planks"
-    },
-    "P": {
-      "item": "minecraft:paper"
     }
   },
   "pattern": [
     "   ",
-    "APA",
+    "A A",
     " A "
   ],
   "result": {
-    "item": "mimiworld:placeholder_333"
+    "item": "mimiworld:big_bowl"
   },
   "show_notification": true
 }

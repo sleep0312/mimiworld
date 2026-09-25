@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_celestial_void_thorn_brain_soup": {
+    "has_spoon": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:celestial_void_thorn_brain_soup"
+              "mimiworld:spoon"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mimiworld:placeholder_388_mmjm"
+        "recipe": "mimiworld:small_cooking_pot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_celestial_void_thorn_brain_soup",
+      "has_spoon",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mimiworld:placeholder_388_mmjm"
+      "mimiworld:small_cooking_pot"
     ]
   },
   "sends_telemetry_event": false

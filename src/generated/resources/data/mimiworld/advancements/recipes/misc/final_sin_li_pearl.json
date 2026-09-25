@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_paper": {
+    "has_li_pearl": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:paper"
+              "mimiworld:li_pearl"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mimiworld:placeholder_333"
+        "recipe": "mimiworld:final_sin_li_pearl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_paper",
+      "has_li_pearl",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mimiworld:placeholder_333"
+      "mimiworld:final_sin_li_pearl"
     ]
   },
   "sends_telemetry_event": false
