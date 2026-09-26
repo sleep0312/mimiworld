@@ -99,6 +99,30 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(CrusherBlockEntity::new,
                             ModBlocks.CRUSHER.get()).build(null));
 
+    // 杵界台（289 号方块 pestle_realm_table）：2x2 网格（4 入）+右下输出槽工作台式即时合成，GUI 见 menu.PestleRealmTableMenu
+    public static final RegistryObject<BlockEntityType<PestleRealmTableBlockEntity>> PESTLE_REALM_TABLE =
+            BLOCK_ENTITIES.register("pestle_realm_table",
+                    () -> BlockEntityType.Builder.of(PestleRealmTableBlockEntity::new,
+                            ModBlocks.PESTLE_REALM_TABLE.get()).build(null));
+
+    // 凝锭台（292 号方块 ingot_condensation_table）：5x5 网格（25 入）+下方中央输出槽工作台式即时合成（面板加高），GUI 见 menu.IngotCondensationTableMenu
+    public static final RegistryObject<BlockEntityType<IngotCondensationTableBlockEntity>> INGOT_CONDENSATION_TABLE =
+            BLOCK_ENTITIES.register("ingot_condensation_table",
+                    () -> BlockEntityType.Builder.of(IngotCondensationTableBlockEntity::new,
+                            ModBlocks.INGOT_CONDENSATION_TABLE.get()).build(null));
+
+    // 搅拌器（366 号方块 mixer）：9 输入 + 1 输出工作台式无序即时合成（加高面板），GUI 见 menu.MixerMenu
+    public static final RegistryObject<BlockEntityType<MixerBlockEntity>> MIXER =
+            BLOCK_ENTITIES.register("mixer",
+                    () -> BlockEntityType.Builder.of(MixerBlockEntity::new,
+                            ModBlocks.MIXER.get()).build(null));
+
+    // 小煮锅（367 号方块 small_cooking_pot）：1 输入 + 1 燃料 + 1 输出熔炉式定时加工，GUI 见 menu.SmallCookingPotMenu
+    public static final RegistryObject<BlockEntityType<SmallCookingPotBlockEntity>> SMALL_COOKING_POT =
+            BLOCK_ENTITIES.register("small_cooking_pot",
+                    () -> BlockEntityType.Builder.of(SmallCookingPotBlockEntity::new,
+                            ModBlocks.SMALL_COOKING_POT.get()).build(null));
+
     public static void register(IEventBus modEventBus) {
         BLOCK_ENTITIES.register(modEventBus);
     }

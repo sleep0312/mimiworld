@@ -385,23 +385,23 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.DEEPSLATE)));
 
-    // 杵界台（289 号）：杵界仪式工作台方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 杵界台（289 号）：杵界仪式工作台方块（PestleRealmTableBlock），右键打开 2x2 网格（4 输入）+右下输出槽即时合成 GUI，
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/pestle_realm_table.json）。
     public static final RegistryObject<Block> PESTLE_REALM_TABLE =
-            BLOCKS.register("pestle_realm_table", () -> new Block(
+            BLOCKS.register("pestle_realm_table", () -> new PestleRealmTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 凝锭台（292 号）：熔融金属冷凝成锭的工艺机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 凝锭台（292 号）：熔融金属冷凝成锭的工艺机器方块（IngotCondensationTableBlock），右键打开 5x5 网格（25 输入）+下方中央输出槽即时合成 GUI，
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/ingot_condensation_table.json）。
     public static final RegistryObject<Block> INGOT_CONDENSATION_TABLE =
-            BLOCKS.register("ingot_condensation_table", () -> new Block(
+            BLOCKS.register("ingot_condensation_table", () -> new IngotCondensationTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -418,12 +418,12 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 搅拌器（366 号 BlockItem）：食材加工机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 搅拌器（366 号 BlockItem）：9 输入 + 1 输出工作台式即时合成机器方块（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/mixer.json）。
     public static final RegistryObject<Block> MIXER =
-            BLOCKS.register("mixer", () -> new Block(
+            BLOCKS.register("mixer", () -> new MixerBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -495,12 +495,12 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 小煮锅（367 号 BlockItem）：带支脚的小型烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 小煮锅（367 号 BlockItem）：带支脚的小型烹饪锅方块，1 输入 + 1 燃料 + 1 输出熔炉式定时加工（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/small_cooking_pot.json）。
     public static final RegistryObject<Block> SMALL_COOKING_POT =
-            BLOCKS.register("small_cooking_pot", () -> new Block(
+            BLOCKS.register("small_cooking_pot", () -> new SmallCookingPotBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()

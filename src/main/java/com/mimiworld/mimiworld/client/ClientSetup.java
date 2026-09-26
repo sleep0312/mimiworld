@@ -20,6 +20,10 @@ import com.mimiworld.mimiworld.client.screen.SwordQuenchingTableScreen;
 import com.mimiworld.mimiworld.client.screen.BloodlettingTableScreen;
 import com.mimiworld.mimiworld.client.screen.GrindingTableScreen;
 import com.mimiworld.mimiworld.client.screen.CrusherScreen;
+import com.mimiworld.mimiworld.client.screen.PestleRealmTableScreen;
+import com.mimiworld.mimiworld.client.screen.IngotCondensationTableScreen;
+import com.mimiworld.mimiworld.client.screen.MixerScreen;
+import com.mimiworld.mimiworld.client.screen.SmallCookingPotScreen;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
@@ -101,6 +105,12 @@ public class ClientSetup {
             MenuScreens.register(ModMenuTypes.BLOODLETTING_TABLE_MENU.get(), BloodlettingTableScreen::new);
             MenuScreens.register(ModMenuTypes.GRINDING_TABLE_MENU.get(), GrindingTableScreen::new);
             MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
+            // 绑定杵界台/凝锭台菜单与 GUI 屏幕（NxN 网格工作台式即时合成）
+            MenuScreens.register(ModMenuTypes.PESTLE_REALM_TABLE_MENU.get(), PestleRealmTableScreen::new);
+            MenuScreens.register(ModMenuTypes.INGOT_CONDENSATION_TABLE_MENU.get(), IngotCondensationTableScreen::new);
+            // 绑定搅拌器（9 入 1 出即时合成）/ 小煮锅（熔炉式燃料加工）菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.MIXER_MENU.get(), MixerScreen::new);
+            MenuScreens.register(ModMenuTypes.SMALL_COOKING_POT_MENU.get(), SmallCookingPotScreen::new);
         });
     }
 }

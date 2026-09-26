@@ -86,6 +86,26 @@ public class ModMenuTypes {
             MENUS.register("crusher",
                     () -> IForgeMenuType.create(CrusherMenu::new));
 
+    // 杵界台菜单
+    public static final RegistryObject<MenuType<PestleRealmTableMenu>> PESTLE_REALM_TABLE_MENU =
+            MENUS.register("pestle_realm_table",
+                    () -> IForgeMenuType.create(PestleRealmTableMenu::new));
+
+    // 凝锭台菜单
+    public static final RegistryObject<MenuType<IngotCondensationTableMenu>> INGOT_CONDENSATION_TABLE_MENU =
+            MENUS.register("ingot_condensation_table",
+                    () -> IForgeMenuType.create(IngotCondensationTableMenu::new));
+
+    // 搅拌器菜单
+    public static final RegistryObject<MenuType<MixerMenu>> MIXER_MENU =
+            MENUS.register("mixer",
+                    () -> IForgeMenuType.create(MixerMenu::new));
+
+    // 小煮锅菜单
+    public static final RegistryObject<MenuType<SmallCookingPotMenu>> SMALL_COOKING_POT_MENU =
+            MENUS.register("small_cooking_pot",
+                    () -> IForgeMenuType.create(SmallCookingPotMenu::new));
+
     public static void register(IEventBus modEventBus) {
         MENUS.register(modEventBus);
     }
