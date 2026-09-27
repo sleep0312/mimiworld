@@ -114,6 +114,11 @@ public class MixerBlockEntity extends BlockEntity implements MenuProvider, Conta
 
     private LazyOptional<IItemHandler> itemHandler;
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static List<MixerRecipe> jeiRecipes() {
+        return List.copyOf(RECIPES);
+    }
+
     public MixerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.MIXER.get(), pos, state);
         this.itemHandler = LazyOptional.of(() -> new InvWrapper(inputOnlyView));

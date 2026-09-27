@@ -37,6 +37,11 @@ public class CrusherBlockEntity extends MultiInputProcessorBlockEntity {
                 result.copy(), processTicks));
     }
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static List<ProcessorRecipe> jeiRecipes() {
+        return List.copyOf(RECIPES);
+    }
+
     public CrusherBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CRUSHER.get(), pos, state, INPUTS);
     }

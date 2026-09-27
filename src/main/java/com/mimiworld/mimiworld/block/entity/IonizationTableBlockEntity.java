@@ -44,6 +44,11 @@ public class IonizationTableBlockEntity extends DualInputProcessorBlockEntity {
         return RECIPES.get(recipeKey(inputA.getItem(), inputB.getItem()));
     }
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static java.util.List<ProcessorRecipe> jeiRecipes() {
+        return java.util.List.copyOf(RECIPES.values());
+    }
+
     public IonizationTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.IONIZATION_TABLE.get(), pos, state);
     }

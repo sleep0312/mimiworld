@@ -120,6 +120,32 @@ public abstract class GridCraftingTableBlockEntity extends BlockEntity implement
             return result;
         }
 
+        // -------------------- JEI 插件只读访问 --------------------
+
+        /** JEI：配方所属网格边长 */
+        public int jeiGridSize() {
+            return gridSize;
+        }
+
+        /** JEI：有序配方裁剪后的矩阵副本（null 元素=空格）；无序配方返回 null */
+        @Nullable
+        public Item[][] jeiShaped() {
+            if (shaped == null) {
+                return null;
+            }
+            Item[][] copy = new Item[shaped.length][];
+            for (int r = 0; r < shaped.length; r++) {
+                copy[r] = shaped[r].clone();
+            }
+            return copy;
+        }
+
+        /** JEI：无序配料表（有序配方返回 null） */
+        @Nullable
+        public List<Item> jeiShapeless() {
+            return shapeless;
+        }
+
         /** 判断 NxN 网格（长度 N*N，行优先）是否命中本配方（只看物品种类，不看每格数量） */
         public boolean matches(ItemStack[] grid) {
             return shaped != null ? matchesShaped(grid) : matchesShapeless(grid);

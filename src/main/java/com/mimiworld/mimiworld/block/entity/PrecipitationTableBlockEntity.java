@@ -74,6 +74,11 @@ public class PrecipitationTableBlockEntity extends DualInputProcessorBlockEntity
         return RECIPES.get(singleInputKey(single));
     }
 
+    /** JEI 插件读取：本机已注册配方（含单输入配方）的只读快照 */
+    public static java.util.List<ProcessorRecipe> jeiRecipes() {
+        return java.util.List.copyOf(RECIPES.values());
+    }
+
     public PrecipitationTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PRECIPITATION_TABLE.get(), pos, state);
     }

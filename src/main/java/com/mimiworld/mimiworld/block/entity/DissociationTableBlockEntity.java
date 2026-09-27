@@ -107,6 +107,11 @@ public class DissociationTableBlockEntity extends BlockEntity
         return RECIPES.get(recipeKey(top.getItem(), bottom.getItem()));
     }
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static java.util.List<DissociationRecipe> jeiRecipes() {
+        return java.util.List.copyOf(RECIPES.values());
+    }
+
     public DissociationTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DISSOCIATION_TABLE.get(), pos, state);
         this.data.set(DATA_MAX_PROGRESS, DEFAULT_PROCESS_TICKS);

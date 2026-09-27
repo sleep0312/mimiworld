@@ -31,7 +31,7 @@ public class BloodlettingTableBlockEntity extends MultiInputProcessorBlockEntity
     private static final List<TaggedRecipe> TAG_RECIPES = new ArrayList<>();
 
     /** 上槽标签配方：上槽物品属于 tag、下槽恰为 bottom → result */
-    private record TaggedRecipe(TagKey<Item> topTag, Item bottom, ItemStack result, int processTicks) {
+    public record TaggedRecipe(TagKey<Item> topTag, Item bottom, ItemStack result, int processTicks) {
     }
 
     /** 注册一条汲血配方：input0（左上槽）+ input1（左下槽）→ result，时长默认 200 tick */
@@ -59,6 +59,16 @@ public class BloodlettingTableBlockEntity extends MultiInputProcessorBlockEntity
     public static void registerRecipe(ItemStack result, int processTicks,
                                       TagKey<Item> topTag, Item bottom) {
         TAG_RECIPES.add(new TaggedRecipe(topTag, bottom, result.copy(), processTicks));
+    }
+
+    /** JEI 插件读取：精确物品配方只读快照 */
+    public static List<ProcessorRecipe> jeiRecipes() {
+        return List.copyOf(RECIPES);
+    }
+
+    /** JEI 插件读取：标签配方只读快照 */
+    public static List<TaggedRecipe> jeiTaggedRecipes() {
+        return List.copyOf(TAG_RECIPES);
     }
 
     public BloodlettingTableBlockEntity(BlockPos pos, BlockState state) {

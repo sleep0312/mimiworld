@@ -89,6 +89,11 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
         return input.isEmpty() ? null : RECIPES.get(input.getItem());
     }
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static java.util.List<RiceRecipe> jeiRecipes() {
+        return java.util.List.copyOf(RECIPES.values());
+    }
+
     // -------------------- 状态 --------------------
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(TOTAL_SLOTS, ItemStack.EMPTY);

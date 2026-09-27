@@ -39,6 +39,11 @@ public class PestleRealmTableBlockEntity extends GridCraftingTableBlockEntity {
         RECIPES.add(GridRecipe.shapeless(GRID, result, ingredients));
     }
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static List<GridRecipe> jeiRecipes() {
+        return List.copyOf(RECIPES);
+    }
+
     public PestleRealmTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PESTLE_REALM_TABLE.get(), pos, state, GRID);
     }

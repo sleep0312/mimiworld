@@ -115,6 +115,11 @@ public class RicePressBlockEntity extends BlockEntity implements MenuProvider, C
     // 在构造器中初始化（inputOnlyView 在下方声明，字段初始化器不能非法前向引用）
     private LazyOptional<IItemHandler> itemHandler;
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static List<PressRecipe> jeiRecipes() {
+        return List.copyOf(RECIPES.values());
+    }
+
     public RicePressBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.RICE_PRESS.get(), pos, state);
         this.itemHandler = LazyOptional.of(() -> new InvWrapper(inputOnlyView));

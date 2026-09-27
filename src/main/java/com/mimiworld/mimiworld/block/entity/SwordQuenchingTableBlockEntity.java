@@ -40,6 +40,11 @@ public class SwordQuenchingTableBlockEntity extends MultiInputProcessorBlockEnti
                 result.copy(), processTicks));
     }
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static List<ProcessorRecipe> jeiRecipes() {
+        return List.copyOf(RECIPES);
+    }
+
     public SwordQuenchingTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SWORD_QUENCHING_TABLE.get(), pos, state, INPUTS);
     }

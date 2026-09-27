@@ -33,6 +33,11 @@ public class ExtraLargeCookingPotBlockEntity extends GridCookingPotBlockEntity {
         RECIPES.add(new PotRecipe(copy, extra, result.copy(), cookTicks));
     }
 
+    /** JEI 插件读取：本机已注册配方的只读快照 */
+    public static List<PotRecipe> jeiRecipes() {
+        return List.copyOf(RECIPES);
+    }
+
     public ExtraLargeCookingPotBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.EXTRA_LARGE_COOKING_POT.get(), pos, state, 4);
     }
