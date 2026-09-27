@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_food_296": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:realm_heaven_brain_flower"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:cooked_realm_heaven_embryo_flower"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_food_296",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:cooked_realm_heaven_embryo_flower"
+    ]
+  },
+  "sends_telemetry_event": false
+}

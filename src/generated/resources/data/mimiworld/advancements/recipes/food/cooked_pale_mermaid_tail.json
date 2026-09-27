@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_food_306": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:pale_mermaid_tail"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:cooked_pale_mermaid_tail"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_food_306",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:cooked_pale_mermaid_tail"
+    ]
+  },
+  "sends_telemetry_event": false
+}

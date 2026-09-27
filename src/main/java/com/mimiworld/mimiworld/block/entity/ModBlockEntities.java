@@ -123,6 +123,42 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(SmallCookingPotBlockEntity::new,
                             ModBlocks.SMALL_COOKING_POT.get()).build(null));
 
+    // 煮锅（368 号方块 cooking_pot）：2x2 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.CookingPotMenu
+    public static final RegistryObject<BlockEntityType<CookingPotBlockEntity>> COOKING_POT =
+            BLOCK_ENTITIES.register("cooking_pot",
+                    () -> BlockEntityType.Builder.of(CookingPotBlockEntity::new,
+                            ModBlocks.COOKING_POT.get()).build(null));
+
+    // 大煮锅（369 号方块 large_cooking_pot）：3x3 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.LargeCookingPotMenu
+    public static final RegistryObject<BlockEntityType<LargeCookingPotBlockEntity>> LARGE_COOKING_POT =
+            BLOCK_ENTITIES.register("large_cooking_pot",
+                    () -> BlockEntityType.Builder.of(LargeCookingPotBlockEntity::new,
+                            ModBlocks.LARGE_COOKING_POT.get()).build(null));
+
+    // 超大煮锅（370 号方块 extra_large_cooking_pot）：4x4 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.ExtraLargeCookingPotMenu
+    public static final RegistryObject<BlockEntityType<ExtraLargeCookingPotBlockEntity>> EXTRA_LARGE_COOKING_POT =
+            BLOCK_ENTITIES.register("extra_large_cooking_pot",
+                    () -> BlockEntityType.Builder.of(ExtraLargeCookingPotBlockEntity::new,
+                            ModBlocks.EXTRA_LARGE_COOKING_POT.get()).build(null));
+
+    // 巨无霸大大大煮锅（371 号方块 jumbo_mega_cooking_pot）：5x5 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.JumboMegaCookingPotMenu
+    public static final RegistryObject<BlockEntityType<JumboMegaCookingPotBlockEntity>> JUMBO_MEGA_COOKING_POT =
+            BLOCK_ENTITIES.register("jumbo_mega_cooking_pot",
+                    () -> BlockEntityType.Builder.of(JumboMegaCookingPotBlockEntity::new,
+                            ModBlocks.JUMBO_MEGA_COOKING_POT.get()).build(null));
+
+    // 铁锅（372 号方块 iron_wok）：菱形 4 输入 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.IronWokMenu
+    public static final RegistryObject<BlockEntityType<IronWokBlockEntity>> IRON_WOK =
+            BLOCK_ENTITIES.register("iron_wok",
+                    () -> BlockEntityType.Builder.of(IronWokBlockEntity::new,
+                            ModBlocks.IRON_WOK.get()).build(null));
+
+    // 烤箱（373 号方块 oven）：GUI 同大煮锅（3x3 网格 9 入）但配方独立，GUI 见 menu.OvenMenu
+    public static final RegistryObject<BlockEntityType<OvenBlockEntity>> OVEN =
+            BLOCK_ENTITIES.register("oven",
+                    () -> BlockEntityType.Builder.of(OvenBlockEntity::new,
+                            ModBlocks.OVEN.get()).build(null));
+
     public static void register(IEventBus modEventBus) {
         BLOCK_ENTITIES.register(modEventBus);
     }

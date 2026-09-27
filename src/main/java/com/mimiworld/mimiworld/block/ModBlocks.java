@@ -429,45 +429,45 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 大煮锅（369 号 BlockItem）：烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 大煮锅（369 号 BlockItem）：3x3 共 9 个网格输入槽 + 右上输入 + 燃料 + 输出的熔炉式煮锅（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/large_cooking_pot.json）。
     public static final RegistryObject<Block> LARGE_COOKING_POT =
-            BLOCKS.register("large_cooking_pot", () -> new Block(
+            BLOCKS.register("large_cooking_pot", () -> new LargeCookingPotBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 超大煮锅（370 号 BlockItem）：369 大煮锅的强化版烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 超大煮锅（370 号 BlockItem）：4x4 共 16 个网格输入槽 + 右上输入 + 燃料 + 输出的熔炉式煮锅（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/extra_large_cooking_pot.json）。
     public static final RegistryObject<Block> EXTRA_LARGE_COOKING_POT =
-            BLOCKS.register("extra_large_cooking_pot", () -> new Block(
+            BLOCKS.register("extra_large_cooking_pot", () -> new ExtraLargeCookingPotBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 铁锅（372 号 BlockItem）：烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 铁锅（372 号 BlockItem）：菱形 4 输入 + 右上输入 + 燃料 + 输出的熔炉式炒锅（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/iron_wok.json）。
     public static final RegistryObject<Block> IRON_WOK =
-            BLOCKS.register("iron_wok", () -> new Block(
+            BLOCKS.register("iron_wok", () -> new IronWokBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 烤箱（373 号 BlockItem）：烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 烤箱（373 号 BlockItem）：GUI 同大煮锅（3x3 网格 9 入 + 右上输入 + 燃料 + 输出）但配方独立（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/oven.json）。
     public static final RegistryObject<Block> OVEN =
-            BLOCKS.register("oven", () -> new Block(
+            BLOCKS.register("oven", () -> new OvenBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -506,12 +506,12 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 煮锅（368 号 BlockItem）：铜箍加固的标准烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 煮锅（368 号 BlockItem）：2x2 共 4 个网格输入槽 + 右上输入 + 燃料 + 输出的熔炉式煮锅（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/cooking_pot.json）。
     public static final RegistryObject<Block> COOKING_POT =
-            BLOCKS.register("cooking_pot", () -> new Block(
+            BLOCKS.register("cooking_pot", () -> new CookingPotMachineBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -528,12 +528,12 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.NETHERITE_BLOCK)));
 
-    // 巨无霸大大大煮锅（371 号 BlockItem）：370 超大煮锅之上的特级烹饪机器方块（当前为装饰性全立方块，无 GUI/交互逻辑），
+    // 巨无霸大大大煮锅（371 号 BlockItem）：5x5 共 25 个网格输入槽 + 右上输入 + 燃料 + 输出的熔炉式煮锅（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
     // 破坏掉落本身（loot_tables/blocks/jumbo_mega_cooking_pot.json）。
     public static final RegistryObject<Block> JUMBO_MEGA_COOKING_POT =
-            BLOCKS.register("jumbo_mega_cooking_pot", () -> new Block(
+            BLOCKS.register("jumbo_mega_cooking_pot", () -> new JumboMegaCookingPotBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "mimiworld:void_touch_tentacle"
+  },
+  "result": "mimiworld:cooked_void_touch_tentacle"
+}

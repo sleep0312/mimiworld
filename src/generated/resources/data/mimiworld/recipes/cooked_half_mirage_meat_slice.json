@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "mimiworld:half_mirage_meat_slice"
+  },
+  "result": "mimiworld:cooked_half_mirage_meat_slice"
+}

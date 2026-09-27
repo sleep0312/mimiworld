@@ -113,6 +113,23 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_combustible_rice_ore", has(ModItems.byCode(21)))
                 .save(consumer, MimiWorld.MODID + ":combustible_rice_blasting");
 
+        // ================= 生鲜食材熔炉烧炼（统一 200t=10s，经验 0.35）=================
+        // 297 的生版物品在代码中不存在，经用户确认用 296 界天脑花烧制 297 熟界天胎花。
+        int[][] smeltPairs = {
+                {193, 194}, {195, 196}, {197, 198}, {199, 200},
+                {296, 297}, {298, 299}, {300, 301}, {302, 303},
+                {304, 305}, {306, 307}, {308, 309}, {310, 311}, {314, 315}
+        };
+        for (int[] pair : smeltPairs) {
+            int raw = pair[0];
+            int cooked = pair[1];
+            SimpleCookingRecipeBuilder
+                    .smelting(Ingredient.of(ModItems.byCode(raw)), RecipeCategory.FOOD,
+                            ModItems.byCode(cooked), 0.35F, 200)
+                    .unlockedBy("has_raw_food_" + raw, has(ModItems.byCode(raw)))
+                    .save(consumer);
+        }
+
         // ================= 工作台有序合成 =================
 
         // #3：0 0 0 / 0 1 1 / 0 1 1 = 3（4 个 1 号米在右下 2×2 → 3 号米球）
@@ -128,6 +145,15 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.byCode(7))
                 .pattern("   ")
                 .pattern(" P ")
+                .pattern(" P ")
+                .define('P', ModItems.byCode(6))
+                .unlockedBy("has_rice_planks", has(ModItems.byCode(6)))
+                .save(consumer);
+
+        // #317：0 0 0 / 6 0 6 / 0 6 0 = 317（3 个 6 号米木板摆倒 T 形 → 317 号锅）
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.byCode(317))
+                .pattern("   ")
+                .pattern("P P")
                 .pattern(" P ")
                 .define('P', ModItems.byCode(6))
                 .unlockedBy("has_rice_planks", has(ModItems.byCode(6)))

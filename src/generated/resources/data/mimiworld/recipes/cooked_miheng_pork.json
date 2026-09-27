@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "mimiworld:raw_miheng_pork"
+  },
+  "result": "mimiworld:cooked_miheng_pork"
+}

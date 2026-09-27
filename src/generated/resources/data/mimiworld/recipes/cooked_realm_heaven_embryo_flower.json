@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "mimiworld:realm_heaven_brain_flower"
+  },
+  "result": "mimiworld:cooked_realm_heaven_embryo_flower"
+}

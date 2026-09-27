@@ -2,6 +2,7 @@ package com.mimiworld.mimiworld.block.entity;
 
 import com.mimiworld.mimiworld.menu.PrecipitationTableMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -36,12 +37,41 @@ public class PrecipitationTableBlockEntity extends DualInputProcessorBlockEntity
         registerRecipe(inputA, inputB, result, DEFAULT_PROCESS_TICKS);
     }
 
+    /**
+     * 注册一条【单输入】沉淀配方：原料放任意一个输入槽、另一个输入槽必须为空时加工。
+     * 键低位用 {@link #EMPTY_SLOT_MARKER} 占位，与任何双输入配方键都不冲突。
+     */
+    public static void registerRecipe(Item singleInput, ItemStack result, int processTicks) {
+        RECIPES.put(singleInputKey(singleInput),
+                new ProcessorRecipe(singleInput, null, result, processTicks));
+    }
+
+    /** 注册一条单输入沉淀配方（使用默认加工时长 {@value #DEFAULT_PROCESS_TICKS} tick） */
+    public static void registerRecipe(Item singleInput, ItemStack result) {
+        registerRecipe(singleInput, result, DEFAULT_PROCESS_TICKS);
+    }
+
+    /** 低位 32 位全 1 作为"另一槽为空"标记（真实物品注册 ID 不可能为 -1） */
+    private static final long EMPTY_SLOT_MARKER = 0xFFFFFFFFL;
+
+    private static long singleInputKey(Item input) {
+        return ((long) BuiltInRegistries.ITEM.getId(input) << 32) | EMPTY_SLOT_MARKER;
+    }
+
     @Nullable
     public static ProcessorRecipe findRecipeStatic(ItemStack inputA, ItemStack inputB) {
-        if (inputA.isEmpty() || inputB.isEmpty()) {
+        boolean emptyA = inputA.isEmpty();
+        boolean emptyB = inputB.isEmpty();
+        if (emptyA && emptyB) {
             return null;
         }
-        return RECIPES.get(recipeKey(inputA.getItem(), inputB.getItem()));
+        if (!emptyA && !emptyB) {
+            // 双输入：无序匹配
+            return RECIPES.get(recipeKey(inputA.getItem(), inputB.getItem()));
+        }
+        // 恰好一个槽有料：命中单输入配方（放 A 或 B 均可）
+        Item single = emptyA ? inputB.getItem() : inputA.getItem();
+        return RECIPES.get(singleInputKey(single));
     }
 
     public PrecipitationTableBlockEntity(BlockPos pos, BlockState state) {

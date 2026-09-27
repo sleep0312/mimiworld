@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "mimiworld:specialty_fallen_rice"
+  },
+  "result": "mimiworld:cooked_specialty_fallen_rice"
+}

@@ -24,6 +24,12 @@ import com.mimiworld.mimiworld.client.screen.PestleRealmTableScreen;
 import com.mimiworld.mimiworld.client.screen.IngotCondensationTableScreen;
 import com.mimiworld.mimiworld.client.screen.MixerScreen;
 import com.mimiworld.mimiworld.client.screen.SmallCookingPotScreen;
+import com.mimiworld.mimiworld.client.screen.CookingPotScreen;
+import com.mimiworld.mimiworld.client.screen.LargeCookingPotScreen;
+import com.mimiworld.mimiworld.client.screen.ExtraLargeCookingPotScreen;
+import com.mimiworld.mimiworld.client.screen.JumboMegaCookingPotScreen;
+import com.mimiworld.mimiworld.client.screen.IronWokScreen;
+import com.mimiworld.mimiworld.client.screen.OvenScreen;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
@@ -111,6 +117,14 @@ public class ClientSetup {
             // 绑定搅拌器（9 入 1 出即时合成）/ 小煮锅（熔炉式燃料加工）菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.MIXER_MENU.get(), MixerScreen::new);
             MenuScreens.register(ModMenuTypes.SMALL_COOKING_POT_MENU.get(), SmallCookingPotScreen::new);
+            // 绑定煮锅/大煮锅/超大煮锅/巨无霸大大大煮锅菜单与 GUI 屏幕（NxN 网格熔炉式燃料加工）
+            MenuScreens.register(ModMenuTypes.COOKING_POT_MENU.get(), CookingPotScreen::new);
+            MenuScreens.register(ModMenuTypes.LARGE_COOKING_POT_MENU.get(), LargeCookingPotScreen::new);
+            MenuScreens.register(ModMenuTypes.EXTRA_LARGE_COOKING_POT_MENU.get(), ExtraLargeCookingPotScreen::new);
+            MenuScreens.register(ModMenuTypes.JUMBO_MEGA_COOKING_POT_MENU.get(), JumboMegaCookingPotScreen::new);
+            // 绑定铁锅（菱形 4 输入）/ 烤箱（几何同大煮锅、配方独立）菜单与 GUI 屏幕
+            MenuScreens.register(ModMenuTypes.IRON_WOK_MENU.get(), IronWokScreen::new);
+            MenuScreens.register(ModMenuTypes.OVEN_MENU.get(), OvenScreen::new);
         });
     }
 }

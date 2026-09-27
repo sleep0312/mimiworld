@@ -32,32 +32,49 @@ import java.util.List;
  * 搅拌器方块实体（方块编码 366 = mixer）。
  * 工作台式<b>即时合成</b>（同原版工作台：摆好即预览、取走各配料消耗 1、shift 批量合成）：
  * <ul>
- *   <li>槽 0~7：两列 x4 输入槽；</li>
- *   <li>槽 8：箭头上方居中输入槽；</li>
+ *   <li>槽 0~7：两列 x4 普通输入槽；</li>
+ *   <li>槽 8：输出槽上方居中的<b>额外输入槽</b>（碗/瓶等额外配料只能放此槽）；</li>
  *   <li>槽 9：结果预览槽，禁止手动放入，关闭/破坏时清空。</li>
  * </ul>
- * 配方为<b>无序</b>匹配（搅拌混合语义）：9 个输入槽非空物品的种类多重集与配料一致即命中，
- * 与槽位顺序无关。配方表独立且当前为空，通过 {@link #registerRecipe} 注册扩展。
+ * 配方为<b>无序</b>匹配（搅拌混合语义），分两种：
+ * <ul>
+ *   <li>带额外配料（extra 非 null）：槽 8 必须恰好放该额外物，槽 0~7 非空物品的种类多重集
+ *       与配料一致（每格 1 件，顺序无关）；</li>
+ *   <li>无额外配料（extra 为 null）：全部 9 个输入槽非空物品的种类多重集与配料一致
+ *       （额外槽当普通槽使用）。</li>
+ * </ul>
+ * 配方表独立且当前为空，通过 {@link #registerRecipe} 注册扩展。
  */
 public class MixerBlockEntity extends BlockEntity implements MenuProvider, Container {
 
     public static final int INPUT_SLOTS = 9;
+    /** 槽 8：额外输入槽（输出槽上方居中） */
+    public static final int SLOT_EXTRA = 8;
     public static final int SLOT_RESULT = 9;
     public static final int TOTAL_SLOTS = 10;
 
-    /** 一条搅拌配方：非空输入物品种类多重集必须与配料完全一致（每格 1 件，顺序无关） */
-    public record MixerRecipe(List<Item> ingredients, ItemStack result) {
+    /**
+     * 一条搅拌配方：ingredients 为普通配料多重集（每格 1 件，顺序无关）；
+     * extra 非 null 时必须放在槽 8（额外输入槽），为 null 时额外槽按普通槽参与多重集匹配。
+     */
+    public record MixerRecipe(List<Item> ingredients, Item extra, ItemStack result) {
     }
 
     private static final List<MixerRecipe> RECIPES = new ArrayList<>();
 
-    /** 注册一条无序配方：给出的物品各 1 件，可放在 9 个输入槽的任意位置 */
-    public static void registerRecipe(ItemStack result, Item... ingredients) {
+    /**
+     * 注册一条搅拌配方。
+     *
+     * @param extra       额外输入槽（槽 8）专属物品：碗/瓶等只能放此槽；null 表示无额外配料，
+     *                    此时 9 个槽整体按无序多重集匹配
+     * @param ingredients 普通配料（槽 0~7；extra 为 null 时可占满 9 槽），各 1 件，顺序无关
+     */
+    public static void registerRecipe(ItemStack result, Item extra, Item... ingredients) {
         List<Item> list = new ArrayList<>(ingredients.length);
         for (Item item : ingredients) {
             list.add(item);
         }
-        RECIPES.add(new MixerRecipe(List.copyOf(list), result.copy()));
+        RECIPES.add(new MixerRecipe(List.copyOf(list), extra, result.copy()));
     }
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(TOTAL_SLOTS, ItemStack.EMPTY);
@@ -105,14 +122,33 @@ public class MixerBlockEntity extends BlockEntity implements MenuProvider, Conta
     // -------------------- 配方匹配 --------------------
 
     private ItemStack findRecipe() {
-        List<Item> have = new ArrayList<>(INPUT_SLOTS);
-        for (int i = 0; i < INPUT_SLOTS; i++) {
+        // 普通槽 0~7 的非空物品多重集
+        List<Item> grid = new ArrayList<>(INPUT_SLOTS);
+        for (int i = 0; i < SLOT_EXTRA; i++) {
             ItemStack s = items.get(i);
             if (!s.isEmpty()) {
-                have.add(s.getItem());
+                grid.add(s.getItem());
             }
         }
+        ItemStack extraStack = items.get(SLOT_EXTRA);
+        // 全部 9 槽的非空物品多重集（无额外配料的配方使用：此时槽 8 当普通第 9 槽）
+        List<Item> all = new ArrayList<>(grid);
+        if (!extraStack.isEmpty()) {
+            all.add(extraStack.getItem());
+        }
         for (MixerRecipe recipe : RECIPES) {
+            List<Item> have;
+            Item expectedExtra = recipe.extra();
+            if (expectedExtra != null) {
+                // 带额外配料：额外物必须恰好放在槽 8，普通配料只能来自槽 0~7
+                if (extraStack.isEmpty() || extraStack.getItem() != expectedExtra) {
+                    continue;
+                }
+                have = grid;
+            } else {
+                // 无额外配料：9 槽整体无序匹配（槽 8 可放普通配料，如 #358 的 9 料）
+                have = all;
+            }
             if (recipe.ingredients().size() != have.size()) {
                 continue;
             }

@@ -106,6 +106,32 @@ public class ModMenuTypes {
             MENUS.register("small_cooking_pot",
                     () -> IForgeMenuType.create(SmallCookingPotMenu::new));
 
+    // 煮锅 / 大煮锅 / 超大煮锅 / 巨无霸大大大煮锅菜单
+    public static final RegistryObject<MenuType<CookingPotMenu>> COOKING_POT_MENU =
+            MENUS.register("cooking_pot",
+                    () -> IForgeMenuType.create(CookingPotMenu::new));
+
+    public static final RegistryObject<MenuType<LargeCookingPotMenu>> LARGE_COOKING_POT_MENU =
+            MENUS.register("large_cooking_pot",
+                    () -> IForgeMenuType.create(LargeCookingPotMenu::new));
+
+    public static final RegistryObject<MenuType<ExtraLargeCookingPotMenu>> EXTRA_LARGE_COOKING_POT_MENU =
+            MENUS.register("extra_large_cooking_pot",
+                    () -> IForgeMenuType.create(ExtraLargeCookingPotMenu::new));
+
+    public static final RegistryObject<MenuType<JumboMegaCookingPotMenu>> JUMBO_MEGA_COOKING_POT_MENU =
+            MENUS.register("jumbo_mega_cooking_pot",
+                    () -> IForgeMenuType.create(JumboMegaCookingPotMenu::new));
+
+    // 铁锅菜单（菱形 4 输入）/ 烤箱菜单（几何同大煮锅）
+    public static final RegistryObject<MenuType<IronWokMenu>> IRON_WOK_MENU =
+            MENUS.register("iron_wok",
+                    () -> IForgeMenuType.create(IronWokMenu::new));
+
+    public static final RegistryObject<MenuType<OvenMenu>> OVEN_MENU =
+            MENUS.register("oven",
+                    () -> IForgeMenuType.create(OvenMenu::new));
+
     public static void register(IEventBus modEventBus) {
         MENUS.register(modEventBus);
     }
