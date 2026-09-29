@@ -643,12 +643,14 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 17 = crystallized_rice_ore（结晶米矿石）：石头类矿石方块物品，放置后对应 ModBlocks.CRYSTALLIZED_RICE_ORE；
-    // 下界合金镐才能采集，破坏掉 3~7 经验，可烧炼成 16 号结晶米锭
+    // 下界合金镐才能采集。普通开采掉 16 号结晶米（时运可增产），精准采集才掉矿石本身；
+    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼成 16 号结晶米
     public static final RegistryObject<Item> CRYSTALLIZED_RICE_ORE = registerItem("crystallized_rice_ore",
             () -> new BlockItem(ModBlocks.CRYSTALLIZED_RICE_ORE.get(), new Item.Properties()));
 
     // 编码 18 = recrystallized_rice_ore（重结晶米矿石）：深板岩质地矿石，
-    // 放置后对应 ModBlocks.RECRYSTALLIZED_RICE_ORE；下界合金镐采集，破坏掉 3~7 经验，烧炼得 19 号重结晶米
+    // 放置后对应 ModBlocks.RECRYSTALLIZED_RICE_ORE；下界合金镐采集。普通开采掉 19 号重结晶米（时运可增产），
+    // 精准采集才掉矿石本身；非精准开采另掉 3~7 经验球；矿石也可烧炼得 19 号重结晶米
     public static final RegistryObject<Item> RECRYSTALLIZED_RICE_ORE = registerItem("recrystallized_rice_ore",
             () -> new BlockItem(ModBlocks.RECRYSTALLIZED_RICE_ORE.get(), new Item.Properties()));
 
@@ -662,7 +664,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 21 = combustible_rice_ore（可燃米矿石）：石头类矿石方块物品，放置后对应 ModBlocks.COMBUSTIBLE_RICE_ORE；
-    // 下界合金镐采集，破坏掉 3~7 经验，熔炉/高炉烧炼得 20 号可燃米
+    // 下界合金镐采集。普通开采掉 20 号可燃米（时运可增产），精准采集才掉矿石本身；
+    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼得 20 号可燃米
     public static final RegistryObject<Item> COMBUSTIBLE_RICE_ORE = registerItem("combustible_rice_ore",
             () -> new BlockItem(ModBlocks.COMBUSTIBLE_RICE_ORE.get(), new Item.Properties()));
 
@@ -793,7 +796,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 编码 52 = rice_ore（米矿石，Rice Ore）：铁矿石类方块物品，放置后对应 ModBlocks.RICE_ORE；
-    // 钻石镐（挖掘等级3）采集，破坏掉落本身并额外掉 3~7 经验球（非精准采集）
+    // 钻石镐（挖掘等级3）采集。普通开采掉 53 号米石（时运可增产），精准采集才掉矿石本身；
+    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼成 53 号米石
     public static final RegistryObject<Item> RICE_ORE = registerItem("rice_ore",
             () -> new BlockItem(ModBlocks.RICE_ORE.get(), new Item.Properties()));
 

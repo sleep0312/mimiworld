@@ -116,7 +116,9 @@ public class ModBlocks {
 
     // 结晶米矿石：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 4 = 下界合金镐（needs_netherite_tool 标签）。
-    // 继承原版 DropExperienceBlock + UniformInt(3,7)：用正确工具且非精准采集破坏时掉落 3~7 经验球，
+    // 战利品表同原版矿石（loot_tables/blocks/crystallized_rice_ore.json）：普通开采掉 16 号结晶米
+    // （时运按 ore_drops 增产），精准采集才掉矿石方块本身。
+    // 继承原版 DropExperienceBlock + UniformInt(3,7)：用正确工具且非精准采集破坏时另掉 3~7 经验球，
     // 精准采集不掉经验（与原版煤矿/钻石矿等掉经验矿石行为一致）。
     public static final RegistryObject<Block> CRYSTALLIZED_RICE_ORE =
             BLOCKS.register("crystallized_rice_ore", () -> new DropExperienceBlock(
@@ -127,8 +129,9 @@ public class ModBlocks {
                     UniformInt.of(3, 7)));
 
     // 重结晶米矿石（18 号，原 deepslate_crystallized_rice_ore 已按中文名整体改名）：
-    // 深板岩质地矿石，硬度/抗爆照抄深层铁矿 4.5/3.0，深板岩声；挖掘等级 4 = 下界合金镐；破坏掉 3~7 经验，精准采集不掉；
-    // 烧炼得 19 号重结晶米。
+    // 深板岩质地矿石，硬度/抗爆照抄深层铁矿 4.5/3.0，深板岩声；挖掘等级 4 = 下界合金镐。
+    // 战利品表同原版矿石：普通开采掉 19 号重结晶米（时运增产），精准采集掉矿石本身，非精准另掉 3~7 经验；
+    // 矿石也可烧炼得 19 号重结晶米。
     public static final RegistryObject<Block> RECRYSTALLIZED_RICE_ORE =
             BLOCKS.register("recrystallized_rice_ore", () -> new DropExperienceBlock(
                     BlockBehaviour.Properties.of()
@@ -139,7 +142,8 @@ public class ModBlocks {
 
     // 可燃米矿石：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 4 = 下界合金镐（needs_netherite_tool 标签）。
-    // DropExperienceBlock + UniformInt(3,7)：用正确工具且非精准采集破坏时掉 3~7 经验；烧炼得 20 号可燃米。
+    // 战利品表同原版矿石：普通开采掉 20 号可燃米（时运增产），精准采集掉矿石本身，非精准另掉 3~7 经验；
+    // 矿石也可烧炼得 20 号可燃米。
     public static final RegistryObject<Block> COMBUSTIBLE_RICE_ORE =
             BLOCKS.register("combustible_rice_ore", () -> new DropExperienceBlock(
                     BlockBehaviour.Properties.of()
@@ -222,8 +226,9 @@ public class ModBlocks {
 
     // 米矿石（52 号）：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 继承原版 DropExperienceBlock + UniformInt(3,7)：用正确工具且非精准采集破坏时掉 3~7 经验球（精准采集不掉经验）；
-    // 方块本身由 loot_tables/blocks/rice_ore.json 掉落。
+    // 战利品表同原版矿石（loot_tables/blocks/rice_ore.json）：普通开采掉 53 号米石（时运增产），
+    // 精准采集才掉矿石方块本身；继承原版 DropExperienceBlock + UniformInt(3,7)：非精准采集另掉 3~7 经验球，
+    // 精准采集不掉经验；矿石也可烧炼成 53 号米石。
     public static final RegistryObject<Block> RICE_ORE =
             BLOCKS.register("rice_ore", () -> new DropExperienceBlock(
                     BlockBehaviour.Properties.of()
