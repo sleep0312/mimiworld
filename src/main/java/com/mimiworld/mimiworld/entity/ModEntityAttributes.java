@@ -31,11 +31,13 @@ public class ModEntityAttributes {
         event.put(ModEntities.RICE_STEALER.get(), MicroDuckEntity.createAttributes().build());
         // 17 黏米之蛛：真实蜘蛛实体（血量已按用户数据改为 48）
         event.put(ModEntities.STICKY_RICE_SPIDER.get(), StickyRiceSpiderEntity.createAttributes().build());
+        // 3 米羊羊：真实 GeckoLib 羊实体（8 心、移速 0.23，对齐原版羊）
+        event.put(ModEntities.MIMI_SHEEP.get(), MimiSheepEntity.createAttributes().build());
 
         // 用户实体编号 1-30（占位实体）：逐项按 SPECS 注册最大血量/攻击力/移速/追击范围
         for (int code = 1; code <= 30; code++) {
-            if (code == 17 || code == 19) {
-                continue; // 两个真实实体已在上方注册
+            if (code == 3 || code == 17 || code == 19) {
+                continue; // 三个真实实体已在上方注册
             }
             ModEntities.MobSpec spec = ModEntities.SPECS[code];
             var builder = Mob.createMobAttributes()

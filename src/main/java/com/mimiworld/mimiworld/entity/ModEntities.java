@@ -82,11 +82,22 @@ public class ModEntities {
                             .clientTrackingRange(8)
                             .build("sticky_rice_spider"));
 
+    // ===== 米羊羊：GeckoLib mimi_sheep 模型，友好生物 0.9×1.3（对齐原版羊碰撞箱） =====
+    // 用户实体编号 3 转正：注册名仍为 mimi_sheep，占位实体 PlaceholderRiceMobEntity 不再使用；
+    // 生物逻辑同原版羊（漂浮/受击惊慌逃跑/避水游荡/张望，羊叫声），但不注册吃草 AI，暂不注册刷怪蛋。
+    // 可用 /summon mimiworld:mimi_sheep 召唤测试。
+    public static final RegistryObject<EntityType<MimiSheepEntity>> MIMI_SHEEP =
+            ENTITY_TYPES.register("mimi_sheep", () ->
+                    EntityType.Builder.<MimiSheepEntity>of(MimiSheepEntity::new, MobCategory.CREATURE)
+                            .sized(0.9F, 1.3F)
+                            .clientTrackingRange(8)
+                            .build("mimi_sheep"));
+
     // ============================================================================
     // 【用户实体编号 1-30】（2026-09-21 批次）
     // 1-20 = 友好生物（MobCategory.CREATURE）；21-30 = 敌对生物（MobCategory.MONSTER）。
-    // 除 17 黏米之蛛（STICKY_RICE_SPIDER）、19 盗米者（RICE_STEALER）已有真实实体类外，
-    // 其余 28 个统一用 PlaceholderRiceMobEntity 占位；真实类实现后只替换工厂，编号/生物蛋不变。
+    // 除 3 米羊羊（MIMI_SHEEP）、17 黏米之蛛（STICKY_RICE_SPIDER）、19 盗米者（RICE_STEALER）
+    // 已有真实实体类外，其余 27 个统一用 PlaceholderRiceMobEntity 占位；真实类实现后只替换工厂，编号/生物蛋不变。
     // 每个实体的血量(×2=心/血)与攻击力记录在 SPECS[编号]，由 ModEntityAttributes 逐项注册。
     // ============================================================================
 
@@ -94,6 +105,7 @@ public class ModEntities {
     // 17/19 两个真实实体的血量以本批用户数据为准（蛛 48、盗米者 1500）。
     public static final MobSpec[] SPECS = new MobSpec[31];
     static {
+        SPECS[3] = new MobSpec(MIMI_SHEEP, 16.0D, 0.0D);
         SPECS[17] = new MobSpec(STICKY_RICE_SPIDER, 48.0D, 2.0D);
         SPECS[19] = new MobSpec(RICE_STEALER, 1500.0D, 0.0D);
     }
@@ -105,9 +117,7 @@ public class ModEntities {
     // 2 米哞牛 10 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIMOO_COW =
             registerPlaceholder(2, "mimoo_cow", MobCategory.CREATURE, 0.9F, 1.4F, 20.0D, 0.0D);
-    // 3 米羊羊 8 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIMI_SHEEP =
-            registerPlaceholder(3, "mimi_sheep", MobCategory.CREATURE, 0.9F, 1.3F, 16.0D, 0.0D);
+    // 3 米羊羊 8 心（真实类 MimiSheepEntity，已在上方注册）
     // 4 米哼猪 10 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIHENG_PIG =
             registerPlaceholder(4, "miheng_pig", MobCategory.CREATURE, 0.9F, 1.3F, 20.0D, 0.0D);

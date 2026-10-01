@@ -3,6 +3,7 @@ package com.mimiworld.mimiworld.client;
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
+import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.StickyRiceSpiderRenderer;
@@ -68,6 +69,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), MicroDuckRenderer::new);
         // 黏米之蛛：GeckoLib spider 模型（idle/walk/attack 动画）
         event.registerEntityRenderer(ModEntities.STICKY_RICE_SPIDER.get(), StickyRiceSpiderRenderer::new);
+        // 3 米羊羊：GeckoLib mimi_sheep 模型（idle/walk/scared_run 动画）
+        event.registerEntityRenderer(ModEntities.MIMI_SHEEP.get(), MimiSheepRenderer::new);
     }
 
     // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）
