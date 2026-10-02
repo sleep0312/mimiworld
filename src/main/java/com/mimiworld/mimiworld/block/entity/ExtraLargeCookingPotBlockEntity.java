@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 超大煮锅方块实体（方块编码 370 = extra_large_cooking_pot）：4x4 网格（16 入）+ 右上单独输入 + 燃料 + 输出。
+ * 超大煮锅方块实体（extra_large_cooking_pot）：4x4 网格（16 入）+ 右上单独输入 + 燃料 + 输出。
  * 配方为网格有序 + 右上槽指定物品，配方表独立且当前为空。
  */
 public class ExtraLargeCookingPotBlockEntity extends GridCookingPotBlockEntity {

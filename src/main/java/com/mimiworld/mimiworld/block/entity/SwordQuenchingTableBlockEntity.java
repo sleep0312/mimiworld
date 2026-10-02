@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 淬剑台方块实体（方块编码 164 = sword_quenching_table）。
+ * 淬剑台方块实体（sword_quenching_table）。
  * <p>
  * 有序三输入熔炉式定时加工：槽0=左上、槽1=右上、槽2=正中间 → 槽3=最下方输出。
  * <b>不自动运转</b>：玩家必须按下 GUI 右侧"开始"按钮（{@link #requiresStartButton()}

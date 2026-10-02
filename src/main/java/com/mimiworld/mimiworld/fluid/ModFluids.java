@@ -38,13 +38,13 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /**
- * 米米世界流体注册：米汤（rice_soup，9 号米桶）与饭汤（rice_broth，30 号饭桶）。
+ * 米米世界流体注册：米汤（rice_soup，米桶）与饭汤（rice_broth，饭桶）。
  *
  * 1.20.1 Forge 47.x 的流体三件套（旧版 FluidAttributes 已改名 FluidType）：
  * <ol>
  *     <li>FluidType：密度/粘度/亮度/音效/染色等「属性」，注册到 ForgeRegistries.Keys.FLUID_TYPES；</li>
  *     <li>源流体 + 流动流体（ForgeFlowingFluid.Source/Flowing），注册到 ForgeRegistries.FLUIDS；</li>
- *     <li>世界中的流体方块（LiquidBlock，无 BlockItem、不占物品编码）。</li>
+ *     <li>世界中的流体方块（LiquidBlock，无 BlockItem、不注册为物品）。</li>
  * </ol>
  * 米汤与饭汤各注册一个专属炼药锅；两种桶行为均同原版水桶。
  */
@@ -127,7 +127,7 @@ public class ModFluids {
                             .liquid()
                             .sound(SoundType.EMPTY)));
 
-    // ===== 4. 米汤炼药锅（无 BlockItem、不占物品编码：只能由米桶倒入/空桶舀出，破坏后掉原版空锅） =====
+    // ===== 4. 米汤炼药锅（无 BlockItem、不注册为物品：只能由米桶倒入/空桶舀出，破坏后掉原版空锅） =====
     // 交互表：必须用 fastutil 的 Object2ObjectOpenHashMap 并设置默认返回 PASS——
     // AbstractCauldronBlock#use 对 map.get(item) 的结果不做 null 判断（原版地图靠 defaultReturnValue 兜底）。
     public static final Map<Item, CauldronInteraction> RICE_SOUP_CAULDRON_INTERACTIONS =
@@ -214,8 +214,8 @@ public class ModFluids {
                             .liquid()
                             .sound(SoundType.EMPTY)));
 
-    // ===== 4. 饭汤炼药锅（无 BlockItem、不占物品编码：只能由饭桶倒入/空桶舀出，破坏后掉原版空锅） =====
-    // 交互表规则与米汤锅完全一致，仅产物换成 30 号饭桶。
+    // ===== 4. 饭汤炼药锅（无 BlockItem、不注册为物品：只能由饭桶倒入/空桶舀出，破坏后掉原版空锅） =====
+    // 交互表规则与米汤锅完全一致，仅产物换成饭桶。
     public static final Map<Item, CauldronInteraction> RICE_BROTH_CAULDRON_INTERACTIONS =
             Util.make(new Object2ObjectOpenHashMap<>(), map -> {
                 map.defaultReturnValue((state, level, pos, player, hand, stack) -> InteractionResult.PASS);
@@ -244,14 +244,14 @@ public class ModFluids {
                     LayeredCauldronBlock.RAIN,
                     RICE_BROTH_CAULDRON_INTERACTIONS));
 
-    // ForgeFlowingFluid 属性：类型 + 源/流动互引 + 流体方块 + 桶（9 号米桶）
+    // ForgeFlowingFluid 属性：类型 + 源/流动互引 + 流体方块 + 桶（米桶）
     private static ForgeFlowingFluid.Properties makeProperties() {
         return new ForgeFlowingFluid.Properties(RICE_SOUP_TYPE, RICE_SOUP, FLOWING_RICE_SOUP)
                 .block(RICE_SOUP_BLOCK)
                 .bucket(() -> ModItems.RICE_BUCKET.get());
     }
 
-    // 饭汤 ForgeFlowingFluid 属性：桶绑定 30 号饭桶（RicePailItem）
+    // 饭汤 ForgeFlowingFluid 属性：桶绑定饭桶（RicePailItem）
     private static ForgeFlowingFluid.Properties makeBrothProperties() {
         return new ForgeFlowingFluid.Properties(RICE_BROTH_TYPE, RICE_BROTH, FLOWING_RICE_BROTH)
                 .block(RICE_BROTH_BLOCK)

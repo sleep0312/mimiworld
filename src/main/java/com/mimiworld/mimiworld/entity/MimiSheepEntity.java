@@ -24,7 +24,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
- * 米羊羊（Mimi Sheep）——用户实体编号 3，占位实体转正后的真实 GeckoLib 实体。
+ * 米羊羊（Mimi Sheep）——占位实体转正后的真实 GeckoLib 实体。
  *
  * <p>模型/贴图/动画资源：
  * geo/mimi_sheep.geo.json、textures/entity/mimi_sheep.png、
@@ -62,9 +62,9 @@ public class MimiSheepEntity extends PathfinderMob implements GeoEntity {
     }
 
     /**
-     * AI 目标（优先级编号沿用原版羊的排布，便于以后补繁殖/引诱时直接插回 2~5 位）：
+     * AI 目标（优先级数值沿用原版羊的排布，便于以后补繁殖/引诱时直接插回 2~5 位）：
      * 0 水上漂浮；1 受击/着火惊慌逃跑；6 避水随机游荡；7 看向玩家；8 四处张望。
-     * 故意不注册原版羊的 5 号 EatBlockGoal（吃草）。
+     * 故意不注册原版羊的 EatBlockGoal（吃草）。
      */
     @Override
     protected void registerGoals() {

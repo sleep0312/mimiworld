@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_food_300": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:cooked_thorn_petal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_thorn_petal": {
       "conditions": {
         "items": [
           {
@@ -12,17 +18,11 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "mimiworld:cooked_thorn_petal"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_raw_food_300",
+      "has_thorn_petal",
       "has_the_recipe"
     ]
   ],

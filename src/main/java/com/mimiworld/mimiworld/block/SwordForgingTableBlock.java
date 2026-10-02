@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 铸剑台（编码 130 = sword_forging_table）：绑定 SwordForgingTableBlockEntity，
+ * 铸剑台（sword_forging_table）：绑定 SwordForgingTableBlockEntity，
  * 右键打开与原版工作台外观一致的 3x3 即时合成 GUI，配方表独立。
  */
 public class SwordForgingTableBlock extends ForgingTableBlock {

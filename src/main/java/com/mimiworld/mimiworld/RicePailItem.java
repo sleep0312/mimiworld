@@ -8,7 +8,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.function.Supplier;
 
 /**
- * 饭桶（30 号物品）：绑定饭汤流体，行为与原版水桶完全一致——右键把饭汤倒入世界，
+ * 饭桶：绑定饭汤流体，行为与原版水桶完全一致——右键把饭汤倒入世界，
  * 对饭汤源方块右键可重新装回（倒出/装填音效来自饭汤 FluidType 的 BUCKET_EMPTY/BUCKET_FILL 配置）。
  * 原版空铁桶也能舀起饭汤源（Forge 流体经 ForgeFlowingFluid.Properties#bucket 关联本物品，
  * LiquidBlock.pickupBlock 会返回本物品）。

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_food_199": {
+    "has_raw_tanmi_fish": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_raw_food_199",
+      "has_raw_tanmi_fish",
       "has_the_recipe"
     ]
   ],

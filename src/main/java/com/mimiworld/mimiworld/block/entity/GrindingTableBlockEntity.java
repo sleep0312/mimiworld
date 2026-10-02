@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 碾磨台方块实体（方块编码 287 = grinding_table）。
+ * 碾磨台方块实体（grinding_table）。
  * 有序六输入熔炉式定时加工：槽0~2 为左列上中下、槽3~5 为右列上中下 → 槽6 底部中央输出；
  * 配方表独立，当前为空。
  */

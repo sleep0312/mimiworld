@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 煮锅（编码 368 = cooking_pot）：2x2 共 4 个网格输入槽的熔炉式燃料煮锅。
+ * 煮锅（cooking_pot）：2x2 共 4 个网格输入槽的熔炉式燃料煮锅。
  */
 public class CookingPotMachineBlock extends GridCookingPotBlock {
 

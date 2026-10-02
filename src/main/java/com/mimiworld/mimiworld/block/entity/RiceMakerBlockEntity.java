@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 造米台方块实体（方块编码 27 = rice_maker）。
+ * 造米台方块实体（rice_maker）。
  * <p>
  * 3 个物品槽：
  * <ul>

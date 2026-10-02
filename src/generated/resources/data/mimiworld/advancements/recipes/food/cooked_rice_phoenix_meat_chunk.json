@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_food_302": {
+    "has_rice_phoenix_meat_chunk": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_raw_food_302",
+      "has_rice_phoenix_meat_chunk",
       "has_the_recipe"
     ]
   ],

@@ -37,11 +37,11 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 Items.COOKED_RABBIT, Items.COOKED_COD, Items.COOKED_SALMON,
                 // 原版腐肉
                 Items.ROTTEN_FLESH,
-                // 本模生/熟肉（193/195/197/199/246 生，192/194/196/198/200 熟，215 腐米肉）
-                ModItems.byCode(193), ModItems.byCode(195), ModItems.byCode(197),
-                ModItems.byCode(199), ModItems.byCode(246),
-                ModItems.byCode(192), ModItems.byCode(194), ModItems.byCode(196),
-                ModItems.byCode(198), ModItems.byCode(200),
-                ModItems.byCode(215));
+                // 本模生肉 5 种、熟肉 5 种与腐米肉（顺序见下）
+                ModItems.RAW_MIMOO_BEEF.get(), ModItems.RAW_MIMI_MUTTON.get(), ModItems.RAW_MIHENG_PORK.get(),
+                ModItems.RAW_TANMI_FISH.get(), ModItems.ZHUOMI_CHICKEN.get(),
+                ModItems.COOKED_ZHUOMI_CHICKEN.get(), ModItems.COOKED_MIMOO_BEEF.get(), ModItems.COOKED_MIMI_MUTTON.get(),
+                ModItems.COOKED_MIHENG_PORK.get(), ModItems.COOKED_TANMI_FISH.get(),
+                ModItems.ROTTEN_RICE_FLESH.get());
     }
 }

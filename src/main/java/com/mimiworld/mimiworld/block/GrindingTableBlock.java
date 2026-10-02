@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 碾磨台（编码 287 = grinding_table）：绑定 GrindingTableBlockEntity，
+ * 碾磨台（grinding_table）：绑定 GrindingTableBlockEntity，
  * 右键打开六输入熔炉式加工 GUI（左右两列各三个输入槽，底部中央输出；面板加高）。
  */
 public class GrindingTableBlock extends MultiInputProcessorBlock {

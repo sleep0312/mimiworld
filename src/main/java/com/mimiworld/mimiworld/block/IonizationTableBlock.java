@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 电离台（编码 56 = ionization_table）：绑定 IonizationTableBlockEntity 的机器方块，
+ * 电离台（ionization_table）：绑定 IonizationTableBlockEntity 的机器方块，
  * 右键打开双输入定时加工 GUI（无燃料）。
  */
 public class IonizationTableBlock extends DualInputProcessorBlock {

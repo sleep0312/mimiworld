@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 铸甲台方块实体（方块编码 131 = armor_forging_table）。
+ * 铸甲台方块实体（armor_forging_table）。
  * 3x3 工作台式即时合成（见 {@link ForgingTableBlockEntity}），配方表<b>独立</b>，
  * 与铸剑台/铸弓台/原版工作台均不通用。当前配方表为空，通过 {@link #registerShaped}
  * / {@link #registerShapeless} 注册扩展。

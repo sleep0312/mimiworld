@@ -19,12 +19,12 @@ public class ModCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> MIMI_TAB = CREATIVE_MODE_TABS.register("mimi", () ->
             CreativeModeTab.builder()
-                    // 图标：296 界天脑花
+                    // 图标：界天脑花
                     .icon(() -> ModItems.REALM_HEAVEN_BRAIN_FLOWER.get().getDefaultInstance())
                     .title(Component.translatable("itemGroup.mimiworld.mimi"))
                     .displayItems((parameters, output) ->
                             // 自动添加本模组所有已注册物品/方块物品；
-                            // placeholder_ 前缀为锁定编码用的占位物品（当前已无占位物），不显示
+                            // placeholder_ 前缀的占位物品（当前已无占位物）不显示
                             ForgeRegistries.ITEMS.getEntries().stream()
                                     .filter(entry -> entry.getKey().location().getNamespace().equals(MimiWorld.MODID))
                                     .filter(entry -> !entry.getKey().location().getPath().startsWith("placeholder_"))

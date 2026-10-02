@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 锤米台（编码 29 = rice_pounding_table）：绑定 RicePoundingTableBlockEntity。
+ * 锤米台（rice_pounding_table）：绑定 RicePoundingTableBlockEntity。
  * 外观仍是普通全立方块（模型/贴图/挖掘标签沿用原方块资源），右键打开锤米 GUI：
  * 左列两个输入槽 + 右上输出槽（工作台式即时合成，当前无配方）。
  */

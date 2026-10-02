@@ -10,7 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 
 /**
- * 151-157 生物蛋绑定的「待定 Boss」占位实体。
+ * 各 Boss 生物蛋绑定的「待定 Boss」占位实体。
  *
  * <p>当前七种 Boss（米米猴王/饭晶虎王/超晶牛王/重晶兔王/复晶天青蟒/清洁长命夔/最懒终末龙）
  * 的专属 AI、模型与属性尚未设计，先用本类统一占位，保证生物蛋可注册、可生成、不崩游戏。

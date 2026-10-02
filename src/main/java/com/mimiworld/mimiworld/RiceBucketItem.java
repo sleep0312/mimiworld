@@ -8,7 +8,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.function.Supplier;
 
 /**
- * 米桶（9 号物品）：绑定米汤流体，行为与原版水桶完全一致——右键把米汤倒入世界/空炼药锅，
+ * 米桶：绑定米汤流体，行为与原版水桶完全一致——右键把米汤倒入世界/空炼药锅，
  * 对米汤源方块右键可重新装回（倒出/装填音效来自米汤 FluidType 的 BUCKET_EMPTY/BUCKET_FILL 配置）。
  * 原版空铁桶也能舀起米汤源（Forge 流体经 ForgeFlowingFluid.Properties#bucket 关联本物品，
  * LiquidBlock.pickupBlock 会返回本物品）；装满的米汤炼药锅同样可用空桶舀回本物品。

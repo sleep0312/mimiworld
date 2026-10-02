@@ -20,7 +20,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 /**
- * 391-394 残堕宗罪套装：GeckoLib 4 动态 3D 盔甲。
+ * 残堕宗罪套装：GeckoLib 4 动态 3D 盔甲。
  * 四件共用同一个 geo/animation/texture（geo 内用 armor* 占位骨按装备槽控制显隐，
  * 翅膀与尾巴挂在 armorBody 下，仅胸甲穿戴时显示）。
  *

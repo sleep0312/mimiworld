@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 造米台（编码 27 = rice_maker）：绑定 RiceMakerBlockEntity 的机器方块。
+ * 造米台（rice_maker）：绑定 RiceMakerBlockEntity 的机器方块。
  * 外观仍是普通全立方块（模型/贴图/挖掘标签沿用原方块资源），右键打开加工 GUI。
  */
 public class RiceMakerBlock extends BaseEntityBlock {

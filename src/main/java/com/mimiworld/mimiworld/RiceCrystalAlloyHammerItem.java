@@ -14,13 +14,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 饭晶合金锤（编码 47，Rice Crystal Alloy Hammer）——自定义工具类物品，36 号饭晶锤的合金强化版。
+ * 饭晶合金锤（Rice Crystal Alloy Hammer）——自定义工具类物品，饭晶锤的合金强化版。
  *
  * <p>设计要点与 {@link RiceCrystalHammerItem} 一致：最大堆叠 1（与普通工具一致）。本类直接继承
  * {@link Item}（而非 DiggerItem/PickaxeItem），自行实现镐类工具的挖掘行为，不使用耐久系统。</p>
  *
  * <p>属性在饭晶锤基础上整体提升一档（参照下界合金：耐久 2031 / 速度 9 / 等级 3 / 附魔值 18），
- * 修复材料仍为 35 号饭晶合金锭。近战为更重的重锤：基础攻击伤害 +9（含玩家自身共 10 点），
+ * 修复材料仍为饭晶合金锭。近战为更重的重锤：基础攻击伤害 +9（含玩家自身共 10 点），
  * 攻速 -3.1（慢速高伤）。</p>
  */
 public class RiceCrystalAlloyHammerItem extends Item {

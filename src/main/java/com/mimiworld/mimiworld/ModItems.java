@@ -4,7 +4,6 @@ import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -22,456 +21,23 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 /**
  * 米米世界物品注册类。所有物品类新内容统一在此注册。
  * 注册的物品会被 ModCreativeTabs 按命名空间自动收录进「米米世界」创造标签页。
- *
- * ================== 物品编码备忘录（仅代码层可见，游戏内不显示） ==================
- * 每个物品按【注册顺序】自动获得从 1 开始的连续编号，配方等代码用 byCode(n) 引用，
- * 不需要写物品注册名。编号由 registerItem() 内的计数器自动分配，严禁手工指定。
- *
- * 铁律：新物品只能【追加在本类注册区末尾】，禁止插入到已有物品之间或调整顺序，
- * 否则历史编号会整体错位，已写好的配方引用将全部错乱。
- *
- * 编码表（每新增一个物品，在此补一行注释）：
- *   1 = rice（米）
- *   2 = cooked_rice（熟米）
- *   3 = rice_ball（米团，可投掷）
- *   4 = cooked_rice_ball（熟米团，可投掷）
- *   5 = rice_log（米原木，方块物品 BlockItem；方块本体见 block.ModBlocks，不另编号）
- *   6 = rice_planks（米木板，方块物品 BlockItem；方块本体见 block.ModBlocks，不另编号）
- *   7 = rice_stick（米木棍，可燃烧 300t = 1.5 个物品）
- *   8 = rice_leaves（米树叶，方块物品 BlockItem；方块本体见 block.ModBlocks，不另编号）
- *   9 = rice_bucket（米桶，堆叠 1，BucketItem 绑定米汤流体 mimiworld:rice_soup，见 fluid.ModFluids/RiceBucketItem）
- *   10 = rice_sapling（米树苗，方块物品 BlockItem；骨粉催熟长成米树，方块本体见 block.ModBlocks）
- *   11 = hardened_rice（硬化米，方块物品 BlockItem；石头类方块，铁镐挖掘等级2，方块本体见 block.ModBlocks）
- *   12 = deepslate_hardened_rice（深层硬化米，方块物品 BlockItem；石头类方块，铁镐挖掘等级2，方块本体见 block.ModBlocks）
- *   13 = rice_bedrock（基米，方块物品 BlockItem；基岩类方块，生存不可破坏，方块本体见 block.ModBlocks）
- *   14 = rice_grass（米草，方块物品 BlockItem，自定义 RiceGrassItem；可放置的草类植物，剪刀采集；可食用，方块本体见 block.ModBlocks）
- *   15 = rice_fruit（米果，类似原版苹果的食物；漂浮I/反胃I/虚弱I，食用2s）
- *   16 = crystallized_rice（结晶米，类似原版锭的矿石材料）
- *   17 = crystallized_rice_ore（结晶米矿石，方块物品 BlockItem；下界合金镐挖掘等级4，掉经验3-7，方块本体见 block.ModBlocks）
- *   18 = recrystallized_rice_ore（重结晶米矿石，方块物品 BlockItem；深板岩质地，下界合金镐，掉经验3-7，烧炼得19号；原名 deepslate_crystallized_rice_ore 已按中文名整体改名，方块本体见 block.ModBlocks）
- *   19 = recrystallized_rice（重结晶米，精炼锭类材料；由18号重结晶米矿石烧炼得到）
- *   20 = combustible_rice（可燃米，普通材料；熔炉燃料 6400t = 可烧 32 个物品，见 event.ModFuelEvents）
- *   21 = combustible_rice_ore（可燃米矿石，方块物品 BlockItem；石头类矿石，下界合金镐，掉经验3-7，烧炼得20号，方块本体见 block.ModBlocks）
- *   22 = mud_rice（泥米，方块物品 BlockItem；泥巴质地，铲挖掘等级2=铁铲，方块本体见 block.ModBlocks）
- *   23 = reinforced_rice_stick（强化米棍，普通材料物品，最大堆叠 64）
- *   24 = rice_baton（米棍，普通材料物品，最大堆叠 64；英文名 Rice Baton，避开 7 号米木棍已占用的 Rice Stick）
- *   25 = rice_flour（米粉，普通材料物品，最大堆叠 64；英文名 Rice Flour）
- *   26 = coarse_rice_block（粗米块，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
- *   27 = rice_maker（造米机，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
- *   28 = rice_block（米块，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
- *   29 = rice_pounding_table（锤米台，方块物品 BlockItem；石头类方块，镐挖掘等级3=钻石镐，方块本体见 block.ModBlocks）
- *   30 = rice_pail（饭桶，自定义桶物品 RicePailItem extends BucketItem，最大堆叠 1；绑定饭汤 rice_broth 流体，行为同原版水桶；英文名 Rice Pail，避开 9 号 rice_bucket）
- *   31 = rice_press（压饭机，方块物品 BlockItem；石头类方块，镐挖掘等级2=铁镐，方块本体见 block.ModBlocks；英文名 Rice Press）
- *   32 = compressed_rice_pail（压缩饭桶，普通物品，最大堆叠 64；英文名 Compressed Rice Pail）
- *   33 = coarse_crystallized_rice_meal（粗制结晶饭，普通物品，最大堆叠 64；英文名 Coarse Crystallized Rice Meal）
- *   34 = crystallized_rice_meal（结晶饭，普通物品，最大堆叠 64；英文名 Crystallized Rice Meal，区别于 16 号结晶米 crystallized_rice）
- *   35 = rice_crystal_alloy_ingot（饭晶合金锭，普通物品，最大堆叠 64；英文名 Rice Crystal Alloy Ingot）
- *   36 = rice_crystal_hammer（饭晶锤，自定义工具类物品 RiceCrystalHammerItem，最大堆叠 1；镐类挖掘、钻石级 tier，英文名 Rice Crystal Hammer）
- *   37 = wet_grass_fiber（湿草麻，普通物品，最大堆叠 64；英文名 Wet Grass Fiber）
- *   38 = coarse_rice_fiber（粗制米麻，普通物品，最大堆叠 64；英文名 Coarse Rice Fiber）
- *   39 = reinforced_wet_grass_fiber（强化湿草麻，普通物品，最大堆叠 64；英文名 Reinforced Wet Grass Fiber）
- *   40 = refined_rice_fiber（精制米麻，普通物品，最大堆叠 64；英文名 Refined Rice Fiber）
- *   41 = wet_grass_net（湿草网，普通物品，最大堆叠 64；英文名 Wet Grass Net）
- *   42 = coarse_wet_grass_net（粗制湿草网，普通物品，最大堆叠 64；英文名 Coarse Wet Grass Net）
- *   43 = coarse_rice_net（粗制米网，普通物品，最大堆叠 64；英文名 Coarse Rice Net）
- *   44 = reinforced_wet_grass_net（强化湿草网，普通物品，最大堆叠 64；英文名 Reinforced Wet Grass Net）
- *   45 = refined_reinforced_wet_grass_net（精制强化湿草网，普通物品，最大堆叠 64；英文名 Refined Reinforced Wet Grass Net）
- *   46 = refined_reinforced_rice_net（精制强化米网，普通物品，最大堆叠 64；英文名 Refined Reinforced Rice Net）
- *   47 = rice_crystal_alloy_hammer（饭晶合金锤，自定义工具类物品 RiceCrystalAlloyHammerItem，最大堆叠 1；镐类挖掘、下界合金级 tier，36号饭晶锤强化版，英文名 Rice Crystal Alloy Hammer）
- *   48 = rice_crystal_bow（饭晶弓，工具类物品 BowItem，最大堆叠 1，耐久 384，饭晶等级见 ModItemTiers；英文名 Rice Crystal Bow）
- *   49 = advanced_rice_pounding_table（高级锤米台，方块物品 BlockItem；石头类方块，镐挖掘等级2=铁镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Advanced Rice Pounding Table）
- *   50 = coarse_super_crystal（粗超结晶，普通物品，最大堆叠 64；英文名 Coarse Super Crystal）
- *   51 = super_crystal（超结晶，普通物品，最大堆叠 64；英文名 Super Crystal）
- *   52 = rice_ore（米矿石，方块物品 BlockItem；铁矿石类方块，镐挖掘等级3=钻石镐，破坏掉本身并掉3~7经验，方块本体见 block.ModBlocks；英文名 Rice Ore）
- *   53 = rice_stone（米石，普通物品，最大堆叠 64；嵌有米纹的小石块，英文名 Rice Stone）
- *   54 = super_crystal_block（超结晶块，方块物品 BlockItem；晶块类方块，镐挖掘等级2=铁镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Block of Super Crystal）
- *   55 = super_heavy_crystal（超重结晶，普通物品，最大堆叠 64；英文名 Super Heavy Crystal）
- *   56 = ionization_table（电离台，方块物品 BlockItem；金属机器方块，镐挖掘等级3=钻石镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Ionization Table）
- *   57 = precipitation_table（沉淀台，方块物品 BlockItem；金属机器方块，镐挖掘等级3=钻石镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Precipitation Table）
- *   58 = coarse_compound_rice_meal_ingot（粗制复合米饭锭，普通物品，最大堆叠 64；英文名 Coarse Compound Rice Meal Ingot）
- *   59 = compound_rice_meal_plate（复合米饭板，普通物品，最大堆叠 64；英文名 Compound Rice Meal Plate）
- *   60 = compound_rice_meal_ingot（复合米饭锭，普通物品，最大堆叠 64；英文名 Compound Rice Meal Ingot）
- *   61 = rice_pomace（米果渣，普通物品，最大堆叠 64；英文名 Rice Pomace）
- *   62 = rice_fruit_juice（米果汁，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Rice Fruit Juice）
- *   63 = rice_fruit_mixture（米果混合液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Rice Fruit Mixture）
- *   64 = dissociation_table（离解台，方块物品 BlockItem；金属机器方块，镐挖掘等级2=铁镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Dissociation Table）
- *   65 = rice_book（米书，普通物品，最大堆叠 64；英文名 Rice Book）
- *   66 = rice_paper（米纸，普通物品，最大堆叠 64；英文名 Rice Paper）
- *   67 = rice_fruit_analyzing_solution（米果解析液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Rice Fruit Analyzing Solution）
- *   68 = rice_fruit_compound_solution（米果复合液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Rice Fruit Compound Solution）
- *   69 = rice_meal_mixture（米饭混合液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Rice Meal Mixture）
- *   70 = rice_fruit_mixed_pomace（米果混合渣，普通物品，最大堆叠 64；英文名 Rice Fruit Mixed Pomace）
- *   71 = rice_fruit_cleansing_solution（米果清洁液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Rice Fruit Cleansing Solution）
- *   72 = coarse_cleansing_compound_ingot（粗制清洁复合锭，普通物品，最大堆叠 64；英文名 Coarse Cleansing Compound Ingot）
- *   73 = cleansing_compound_chunk（清洁复合碎块，普通物品，最大堆叠 64；英文名 Cleansing Compound Chunk）
- *   74 = cleansing_compound_plate（清洁复合板，普通物品，最大堆叠 64；英文名 Cleansing Compound Plate）
- *   75 = cleansing_compound_ingot（清洁复合锭，普通物品，最大堆叠 64；英文名 Cleansing Compound Ingot）
- *   76 = coarse_super_lazy_alloy_ingot（粗制超懒合金锭，普通物品，最大堆叠 64；英文名 Coarse Super Lazy Alloy Ingot）
- *   77 = super_lazy_alloy_ionic_form（超懒合金离子态，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Super Lazy Alloy Ionic Form）
- *   78 = super_lazy_alloy_dust（超懒合金粉，粉末状普通物品，最大堆叠 64；英文名 Super Lazy Alloy Dust）
- *   79 = super_lazy_alloy_chunk（超懒合金碎块，普通物品，最大堆叠 64；英文名 Super Lazy Alloy Chunk）
- *   80 = super_lazy_alloy_ingot（超懒合金锭，普通物品，最大堆叠 64；英文名 Super Lazy Alloy Ingot）
- *   81 = rice_stone_block（米石块，方块物品 BlockItem；石头类方块，镐挖掘等级2=铁镐，破坏掉本身，方块本体见 block.ModBlocks；英文名 Block of Rice Stone）
- *   82 = combustible_mixture（可燃混合液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Combustible Mixture）
- *   83 = combustible_solid（可燃固态物，普通物品，最大堆叠 64；英文名 Combustible Solid）
- *   84 = cleansing_rice_separation_solution（清洁米沉离液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Cleansing Rice Separation Solution）
- *   85 = rice_crystal_sword（饭晶剑，工具类 SwordItem，最大堆叠 1，ModItemTiers.RICE_CRYSTAL；英文名 Rice Crystal Sword）
- *   86 = super_crystal_sword（超结晶剑，工具类 SwordItem，最大堆叠 1，SUPER_CRYSTAL；英文名 Super Crystal Sword）
- *   87 = super_crystal_bow（超结晶弓，BowItem，最大堆叠 1，耐久 640；英文名 Super Crystal Bow）
- *   88 = rice_crystal_alloy_sword（饭晶合金剑，SwordItem，最大堆叠 1，RICE_CRYSTAL_ALLOY；英文名 Rice Crystal Alloy Sword）
- *   89 = rice_crystal_alloy_bow（饭晶合金弓，BowItem，最大堆叠 1，耐久 896；英文名 Rice Crystal Alloy Bow）
- *   90 = rice_crystal_alloy_helmet（饭晶合金头盔，ArmorItem，最大堆叠 1；英文名 Rice Crystal Alloy Helmet）
- *   91 = rice_crystal_alloy_chestplate（饭晶合金胸甲，ArmorItem，最大堆叠 1；英文名 Rice Crystal Alloy Chestplate）
- *   92 = rice_crystal_alloy_leggings（饭晶合金护腿，ArmorItem，最大堆叠 1；英文名 Rice Crystal Alloy Leggings）
- *   93 = rice_crystal_alloy_boots（饭晶合金靴子，ArmorItem，最大堆叠 1；英文名 Rice Crystal Alloy Boots）
- *   94 = super_heavy_crystal_sword（超重结晶剑，SwordItem，最大堆叠 1，SUPER_HEAVY_CRYSTAL；英文名 Super Heavy Crystal Sword）
- *   95 = super_heavy_crystal_bow（超重结晶弓，BowItem，最大堆叠 1，耐久 1024；英文名 Super Heavy Crystal Bow）
- *   96 = sword_temper_ingot（磨剑锭，普通物品，最大堆叠 64；英文名 Sword Temper Ingot）
- *   97 = bowstring_ingot（弓弦锭，普通物品，最大堆叠 64；英文名 Bowstring Ingot）
- *   98 = armor_core_ingot（含甲锭，普通物品，最大堆叠 64；英文名 Armor Core Ingot）
- *   99 = advanced_sword_temper_ingot（高级磨剑锭，普通物品，最大堆叠 64；英文名 Advanced Sword Temper Ingot）
- *   100 = advanced_bowstring_ingot（高级弓弦锭，普通物品，最大堆叠 64；英文名 Advanced Bowstring Ingot）
- *   101 = advanced_armor_core_ingot（高级含甲锭，普通物品，最大堆叠 64；英文名 Advanced Armor Core Ingot）
- *   102 = super_heavy_crystal_helmet（超重结晶头盔，ArmorItem，最大堆叠 1；英文名 Super Heavy Crystal Helmet）
- *   103 = super_heavy_crystal_chestplate（超重结晶胸甲，ArmorItem，最大堆叠 1；英文名 Super Heavy Crystal Chestplate）
- *   104 = super_heavy_crystal_leggings（超重结晶护腿，ArmorItem，最大堆叠 1；英文名 Super Heavy Crystal Leggings）
- *   105 = super_heavy_crystal_boots（超重结晶靴子，ArmorItem，最大堆叠 1；英文名 Super Heavy Crystal Boots）
- *   106 = compound_rice_meal_sword（复合米饭剑，SwordItem，最大堆叠 1，COMPOUND_RICE_MEAL；英文名 Compound Rice Meal Sword）
- *   107 = compound_rice_meal_bow（复合米饭弓，BowItem，最大堆叠 1，耐久 1280；英文名 Compound Rice Meal Bow）
- *   108 = compound_rice_meal_helmet（复合米饭头盔，ArmorItem，最大堆叠 1；英文名 Compound Rice Meal Helmet）
- *   109 = compound_rice_meal_chestplate（复合米饭胸甲，ArmorItem，最大堆叠 1；英文名 Compound Rice Meal Chestplate）
- *   110 = compound_rice_meal_leggings（复合米饭护腿，ArmorItem，最大堆叠 1；英文名 Compound Rice Meal Leggings）
- *   111 = compound_rice_meal_boots（复合米饭靴子，ArmorItem，最大堆叠 1；英文名 Compound Rice Meal Boots）
- *   112 = cleansing_compound_sword_blank（清洁复合剑胚，普通物品，最大堆叠 64；英文名 Cleansing Compound Sword Blank）
- *   113 = cleansing_compound_bow_blank（清洁复合弓胚，普通物品，最大堆叠 64；英文名 Cleansing Compound Bow Blank）
- *   114 = cleansing_compound_sword（清洁复合剑，SwordItem，最大堆叠 1，CLEANSING_COMPOUND；英文名 Cleansing Compound Sword）
- *   115 = cleansing_compound_bow（清洁复合弓，BowItem，最大堆叠 1，耐久 1536；英文名 Cleansing Compound Bow）
- *   116 = cleansing_compound_armor_blank（清洁复合甲胚，普通物品，最大堆叠 64；英文名 Cleansing Compound Armor Blank）
- *   117 = cleansing_compound_helmet（清洁复合头盔，ArmorItem，最大堆叠 1；英文名 Cleansing Compound Helmet）
- *   118 = cleansing_compound_chestplate（清洁复合胸甲，ArmorItem，最大堆叠 1；英文名 Cleansing Compound Chestplate）
- *   119 = cleansing_compound_leggings（清洁复合护腿，ArmorItem，最大堆叠 1；英文名 Cleansing Compound Leggings）
- *   120 = cleansing_compound_boots（清洁复合靴子，ArmorItem，最大堆叠 1；英文名 Cleansing Compound Boots）
- *   121 = super_lazy_alloy_sword_blank（超懒合金剑胚，普通物品，最大堆叠 64；英文名 Super Lazy Alloy Sword Blank）
- *   122 = super_lazy_alloy_bow_blank（超懒合金弓胚，普通物品，最大堆叠 64；英文名 Super Lazy Alloy Bow Blank）
- *   123 = super_lazy_alloy_armor_blank（超懒合金甲胚，普通物品，最大堆叠 64；英文名 Super Lazy Alloy Armor Blank）
- *   124 = super_lazy_alloy_sword（超懒合金剑，SwordItem，最大堆叠 1，SUPER_LAZY_ALLOY；英文名 Super Lazy Alloy Sword）
- *   125 = super_lazy_alloy_bow（超懒合金弓，BowItem，最大堆叠 1，耐久 2048；英文名 Super Lazy Alloy Bow）
- *   126 = super_lazy_alloy_helmet（超懒合金头盔，ArmorItem，最大堆叠 1；英文名 Super Lazy Alloy Helmet）
- *   127 = super_lazy_alloy_chestplate（超懒合金胸甲，ArmorItem，最大堆叠 1；英文名 Super Lazy Alloy Chestplate）
- *   128 = super_lazy_alloy_leggings（超懒合金护腿，ArmorItem，最大堆叠 1；英文名 Super Lazy Alloy Leggings）
- *   129 = super_lazy_alloy_boots（超懒合金靴子，ArmorItem，最大堆叠 1；英文名 Super Lazy Alloy Boots）
- *   130 = sword_forging_table（铸剑台，方块物品 BlockItem；金属机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Sword Forging Table）
- *   131 = armor_forging_table（铸甲台，方块物品 BlockItem；金属机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Armor Forging Table）
- *   132 = bow_forging_table（铸弓台，方块物品 BlockItem；金属机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Bow Forging Table）
- *   133 = mimi_eye（米米之眼，普通物品，最大堆叠 64；英文名 Eye of Mimi）
- *   134 = mimi_teleporter（米米传送器，普通物品，最大堆叠 64；英文名 Mimi Teleporter）
- *   135 = small_summoner（小型召唤器，普通物品，最大堆叠 64；英文名 Small Summoner）
- *   136 = placeholder_136（待定占位，不进创造标签页；英文名 Reserved Slot 136）
- *   137 = medium_summoner（中型召唤器，普通物品，最大堆叠 64；英文名 Medium Summoner）
- *   138 = large_summoner（大型召唤器，普通物品，最大堆叠 64；英文名 Large Summoner）
- *   139 = laziest_summoner（最懒召唤器，普通物品，最大堆叠 64；英文名 Laziest Summoner）
- *   140 = summon_core_blank（召唤核心胚，普通物品，最大堆叠 64；英文名 Summon Core Blank）
- *   141 = coarse_summon_core_blank（粗制召唤核心胚，普通物品，最大堆叠 64；英文名 Coarse Summon Core Blank）
- *   142 = summon_core（召唤核心，普通物品，最大堆叠 64；英文名 Summon Core）
- *   143 = advanced_summon_core_blank（高级召唤核心胚，普通物品，最大堆叠 64；英文名 Advanced Summon Core Blank）
- *   144 = coarse_advanced_summon_core_blank（粗制高级召唤核心胚，普通物品，最大堆叠 64；英文名 Coarse Advanced Summon Core Blank）
- *   145 = advanced_summon_core（高级召唤核心，普通物品，最大堆叠 64；英文名 Advanced Summon Core）
- *   146 = mixed_crystal（混合结晶，普通物品，最大堆叠 64；英文名 Mixed Crystal）
- *   147 = molten_mixed_crystal（熔融混合结晶，普通物品，最大堆叠 64；英文名 Molten Mixed Crystal）
- *   148 = laziest_summon_core_blank（最懒召唤核心胚，普通物品，最大堆叠 64；英文名 Laziest Summon Core Blank）
- *   149 = coarse_laziest_summon_core_blank（粗制最懒召唤核心胚，普通物品，最大堆叠 64；英文名 Coarse Laziest Summon Core Blank）
- *   150 = laziest_summon_core（手稿写"最懒召唤核心胚"与148重名，按胚/粗胚/核心三级链修正为【最懒召唤核心】，普通物品，最大堆叠 64；英文名 Laziest Summon Core）
- *   151 = mimi_monkey_king_spawn_egg（米米猴王生物蛋，ForgeSpawnEggItem，绑定实体 mimi_monkey_king；英文名 Mimi Monkey King Spawn Egg）
- *   152 = rice_crystal_tiger_king_spawn_egg（饭晶虎王生物蛋；英文名 Rice Crystal Tiger King Spawn Egg）
- *   153 = super_crystal_cow_king_spawn_egg（超晶牛王生物蛋；英文名 Super Crystal Cow King Spawn Egg）
- *   154 = heavy_crystal_rabbit_king_spawn_egg（重晶兔王生物蛋；英文名 Heavy Crystal Rabbit King Spawn Egg）
- *   155 = compound_azure_python_spawn_egg（复晶天青蟒生物蛋；英文名 Compound Azure Python Spawn Egg）
- *   156 = cleansing_longevity_kui_spawn_egg（清洁长命夔生物蛋；英文名 Cleansing Longevity Kui Spawn Egg）
- *   157 = laziest_final_dragon_spawn_egg（最懒终末龙生物蛋；英文名 Laziest Final Dragon Spawn Egg）
- *   158 = placeholder_158（待定占位，不进创造标签页；英文名 Reserved Slot 158）
- *   159 = mimi_divine_wings（米米神翼，ArmorItem 胸甲，最大堆叠 1，MIMI_WINGS；英文名 Mimi Divine Wings）
- *   160 = mimi_phantom_membrane（米米幻翼膜，普通物品，最大堆叠 64；英文名 Mimi Phantom Membrane）
- *   161 = super_lazy_wings_chestplate（超懒神翼胸甲，ArmorItem 胸甲，最大堆叠 1，SUPER_LAZY_WINGS；英文名 Super Lazy Divine Wings Chestplate）
- *   162 = ancient_sword_intent（上古剑意，普通物品，最大堆叠 64；英文名 Ancient Sword Intent）
- *   163 = super_lazy_divine_sword_broken_1（超懒神剑·残缺·壹，普通物品【非装备】，最大堆叠 1，RainbowNameItem 动态彩虹渐变名称；英文名 Super Lazy Divine Sword - Broken I）
- *   164 = sword_quenching_table（淬剑台，方块物品 BlockItem；金属机器方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Sword Quenching Table）
- *   165 = super_lazy_divine_sword_broken_2（超懒神剑·残缺·贰，普通物品【非装备】，最大堆叠 1，RainbowNameItem 动态彩虹渐变名称；英文名 Super Lazy Divine Sword - Broken II）
- *   166 = bloodletting_table（汲血台，方块物品 BlockItem；金属机器方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Bloodletting Table）
- *   167 = blood_vial（血瓶，普通物品，最大堆叠 64；英文名 Blood Vial）
- *   168 = sword_quenching_liquid（淬剑液，普通物品，最大堆叠 64；英文名 Sword Quenching Liquid）
- *   169 = ancient_sword_soul（远古剑魄，普通物品，最大堆叠 64；英文名 Ancient Sword Soul）
- *   170 = super_lazy_divine_sword_defective（超懒神剑·残次，普通物品【非装备】，最大堆叠 1，RainbowNameItem 动态彩虹渐变名称；英文名 Super Lazy Divine Sword - Defective）
- *   171 = primordial_sword_soul（太古剑魄，普通物品，最大堆叠 64；英文名 Primordial Sword Soul）
- *   172 = super_lazy_divine_sword_counterfeit（超懒神剑·赝品，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Divine Sword - Counterfeit）
- *   173 = divine_jade（神玉，普通物品，最大堆叠 64；英文名 Divine Jade）
- *   174 = golden_rice_jade（金米玉，普通物品，最大堆叠 64；英文名 Golden Rice Jade）
- *   175 = divine_sword_appraisal_jade（神剑鉴玉，普通物品，最大堆叠 64；英文名 Divine Sword Appraisal Jade）
- *   176 = super_lazy_divine_sword_flawed（超懒神剑·瑕疵，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Divine Sword - Flawed）
- *   177 = forbidden_sword_manual（剑法禁卷，普通物品，最大堆叠 64；英文名 Forbidden Sword Manual）
- *   178 = super_lazy_sword_art（超懒剑法，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Sword Art）
- *   179 = super_lazy_divine_sword_complete（超懒神剑·完整，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Super Lazy Divine Sword - Complete）
- *   180 = crystallized_rice_jade（结晶米玉，普通物品，最大堆叠 64；英文名 Crystallized Rice Jade）
- *   181 = final_sword_codex（终末剑诀，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Final Sword Codex）
- *   182 = laziest_heavenfall_sword_counterfeit（最懒天堕剑·赝品，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Laziest Heavenfall Sword - Counterfeit）
- *   183 = ruined_heart（破败之心，普通物品，最大堆叠 64；英文名 Ruined Heart）
- *   184 = fallen_heart（堕落之心，普通物品，最大堆叠 64；英文名 Fallen Heart；同时是 HEAVENFALL 盔甲修复材料）
- *   185 = fallen_crown（堕落王冠，普通物品，最大堆叠 64；英文名 Fallen Crown）
- *   186 = seven_deadly_falls（七宗堕落，普通物品，最大堆叠 64；英文名 Seven Deadly Falls）
- *   187 = laziest_heavenfall_sword_original_sin（最懒天堕剑·原罪，普通物品【非装备】，最大堆叠 1，RainbowNameItem；英文名 Laziest Heavenfall Sword - Original Sin）
- *   188 = heavenfall_wings_chestplate（天堕翼胸甲，ArmorItem 胸甲，最大堆叠 1，HEAVENFALL；英文名 Heavenfall Wing Chestplate）
- *   189 = laziest_heavenfall_helmet（最懒天堕头盔，ArmorItem 头盔，最大堆叠 1，HEAVENFALL；英文名 Laziest Heavenfall Helmet）
- *   190 = laziest_heavenfall_leggings（最懒天堕护腿，ArmorItem 护腿，最大堆叠 1，HEAVENFALL；英文名 Laziest Heavenfall Leggings）
- *   191 = laziest_heavenfall_boots（最懒天堕靴子，ArmorItem 靴子，最大堆叠 1，HEAVENFALL；英文名 Laziest Heavenfall Boots）
- *   192 = cooked_liemi_chicken（熟咧米鸡肉，食物，最大堆叠 64，2.5饱食度；1%中毒10s/50%反胃5s，食用1.5s；英文名 Cooked Liemi Chicken）
- *   193 = raw_mimoo_beef（米吽牛肉，食物，最大堆叠 64，1饱食度；100%反胃20s/100%饥饿30s/5%中毒25s，食用1.5s；英文名 Raw Mimoo Beef）
- *   194 = cooked_mimoo_beef（熟米吽牛肉，食物，最大堆叠 64，4饱食度；100%缓慢2s/25%反胃10s，食用1.5s；英文名 Cooked Mimoo Beef）
- *   195 = raw_mimi_mutton（米羊羊肉，食物，最大堆叠 64，1饱食度；50%虚弱10s/70%饥饿20s/100%反胃10s，食用1.5s；英文名 Raw Mimi Mutton）
- *   196 = cooked_mimi_mutton（熟米羊羊肉，食物，最大堆叠 64，3饱食度；10%反胃5s/1%虚弱2s，食用1.5s；英文名 Cooked Mimi Mutton）
- *   197 = raw_miheng_pork（米哼猪肉，食物，最大堆叠 64，2饱食度；100%失明/虚弱/缓慢/中毒/反胃各10s，食用1.5s；英文名 Raw Miheng Pork）
- *   198 = cooked_miheng_pork（熟米哼猪肉，食物，最大堆叠 64，6饱食度；100%失明10s/100%虚弱10s/50%缓慢10s/50%反胃10s，食用1.5s；英文名 Cooked Miheng Pork）
- *   199 = raw_tanmi_fish（贪米鱼肉，食物，最大堆叠 64，0.5饱食度；100%缓慢10s，食用1.5s；英文名 Raw Tanmi Fish）
- *   200 = cooked_tanmi_fish（熟贪米鱼肉，食物，最大堆叠 64，3饱食度；100%缓慢5s/100%虚弱10s，食用1.5s；英文名 Cooked Tanmi Fish）
- *   201 = zhuomi_feather（啄米羽毛，生物掉落普通材料，最大堆叠 64；英文名 Zhuomi Feather）
- *   202 = mimoo_leather（米哞皮革，生物掉落普通材料，最大堆叠 64；英文名 Mimoo Leather）
- *   203 = mimi_wool（米羊羊毛，生物掉落普通材料，最大堆叠 64；英文名 Mimi Wool）
- *   204 = miheng_hide（米哼猪皮，生物掉落普通材料，最大堆叠 64；英文名 Miheng Hide）
- *   205 = penmi_fish_sac（喷米鱼囊，生物掉落普通材料，最大堆叠 64；英文名 Penmi Fish Sac）
- *   206 = haomi_wolf_heart（嗥米狼心，生物掉落普通材料，最大堆叠 64；英文名 Haomi Wolf Heart）
- *   207 = rice_bone（米骨，生物掉落普通材料，最大堆叠 64；英文名 Rice Bone）
- *   208 = rice_arrow（米箭，生物掉落普通材料，最大堆叠 64；英文名 Rice Arrow）
- *   209 = huomi_powder（火米药，生物掉落普通材料，最大堆叠 64；英文名 Huomi Powder）
- *   210 = yanmi_pearl（眼米珍珠，生物掉落普通材料，最大堆叠 64；英文名 Yanmi Pearl）
- *   211 = baoliemi_rod（爆烈米棒，生物掉落普通材料，最大堆叠 64；英文名 Baoliemi Rod）
- *   212 = carved_rice_bone（雕米骨，生物掉落普通材料，最大堆叠 64；英文名 Carved Rice Bone）
- *   213 = milaima_ball（米莱马球，生物掉落普通材料，最大堆叠 64；英文名 Milaima Ball）
- *   214 = nianmi_silk_thread（黏米丝线，生物掉落普通材料，最大堆叠 64；英文名 Nianmi Silk Thread）
- *   215 = rotten_rice_flesh（腐米肉，食物，最大堆叠 64，1饱食度；100%中毒5s/100%饥饿30s/100%缓慢10s/1%中毒60s，食用1.5s；英文名 Rotten Rice Flesh）
- *   216 = mimi_medley（米米大杂烩，普通物品，最大堆叠 64；英文名 Mimi Medley）
- *   217 = rice_bone_meal（米骨粉，普通物品，最大堆叠 64；英文名 Rice Bone Meal）
- *   218 = rice_essence（米精，普通物品，最大堆叠 64；英文名 Rice Essence）
- *   219 = coarse_rice（粗米，普通物品，最大堆叠 64；英文名 Coarse Rice）
- *   220 = rice_brush_pen（米笔，普通物品，最大堆叠 64；英文名 Rice Brush Pen）
- *   221 = book_rice_pen（书米笔，普通物品，最大堆叠 64；英文名 Book Rice Pen）
- *   222 = rice_fruit_black_mixture（米果黑混液，普通物品（非流体），最大堆叠 64，药水瓶外形；英文名 Rice Fruit Black Mixture）
- *   223 = rice_fruit_viscous_mixture（米果混黏液，普通物品（非流体），最大堆叠 64，药水瓶外形；英文名 Rice Fruit Viscous Mixture）
- *   224 = poprice_bloom_liquid（爆米绽放液，普通物品（非流体），最大堆叠 64，药水瓶外形；英文名 Poprice Bloom Liquid）
- *   225 = yanmi_heart_sip_liquid（眼米嘬心液，普通物品（非流体），最大堆叠 64，药水瓶外形；英文名 Yanmi Heart-Sip Liquid）
- *   226 = mimi_medley_liquid（米米杂烩液，普通物品（非流体），最大堆叠 64，药水瓶外形；英文名 Mimi Medley Liquid）
- *   227 = monkey_king_ruyi_staff（猴王如意棍，普通物品，最大堆叠 64；英文名 Monkey King Ruyi Staff）
- *   228 = mimi_monkey_head（米米猴头，普通物品，最大堆叠 64；英文名 Mimi Monkey Head）
- *   229 = tiger_king_razor_claw（虎王利爪，普通物品，最大堆叠 64；英文名 Tiger King Razor Claw）
- *   230 = rice_crystal_tiger_king_head（饭晶虎王头，普通物品，最大堆叠 64；英文名 Rice Crystal Tiger King Head）
- *   231 = ox_king_crystal_horn（牛王晶角，普通物品，最大堆叠 64；英文名 Ox King Crystal Horn）
- *   232 = super_crystal_ox_head（超晶牛头，普通物品，最大堆叠 64；英文名 Super Crystal Ox Head）
- *   233 = rabbit_king_bloody_red_eye（兔王腥红眼，普通物品，最大堆叠 64；英文名 Rabbit King Bloody Red Eye）
- *   234 = heavy_crystal_rabbit_king_head（重晶兔王头，普通物品，最大堆叠 64；英文名 Heavy Crystal Rabbit King Head）
- *   235 = venom_azure_python_fang（极毒青蟒牙，普通物品，最大堆叠 64；英文名 Venom Azure Python Fang）
- *   236 = compound_crystal_azure_python_head（复晶天青蟒头，普通物品，最大堆叠 64；英文名 Compound Crystal Azure Python Head）
- *   237 = evil_kui_longevity_horn（恶夔长命角，普通物品，最大堆叠 64；英文名 Evil Kui Longevity Horn）
- *   238 = purified_longevity_kui_head（清洁长命夔头，普通物品，最大堆叠 64；英文名 Purified Longevity Kui Head）
- *   239 = end_dragon_reverse_scale（终末龙逆鳞，普通物品，最大堆叠 64；英文名 End Dragon Reverse Scale）
- *   240 = laziest_end_dragon_head（最懒终末龙头，普通物品，最大堆叠 64；英文名 Laziest End Dragon Head）
- *   241 = poprice_heart_sip_liquid（爆米嘬心液，普通物品（非流体），最大堆叠 64，药水瓶外形；英文名 Poprice Heart-Sip Liquid）
- *   242 = super_heavy_crystal_pickaxe_head（超重结晶镐头，普通物品（镐头部部件），最大堆叠 64；英文名 Super Heavy Crystal Pickaxe Head）
- *   243 = compound_rice_meal_pickaxe_head（复合米饭镐头，普通物品（镐头部部件），最大堆叠 64；英文名 Compound Rice Meal Pickaxe Head）
- *   244 = cleansing_compound_pickaxe_head（清洁复合镐头，普通物品（镐头部部件），最大堆叠 64；英文名 Cleansing Compound Pickaxe Head）
- *   245 = super_lazy_alloy_pickaxe_head（超懒合金镐头，普通物品（镐头部部件），最大堆叠 64；英文名 Super Lazy Alloy Pickaxe Head）
- *   246 = liemi_chicken（咧米鸡肉，食物，最大堆叠 64，0.5饱食度；10%中毒20s/90%饥饿30s/100%反胃15s，食用1.5s；英文名 Liemi Chicken）
- *   247 = super_heavy_crystal_rod（超重结晶棒，普通物品（手柄部件），最大堆叠 64；英文名 Super Heavy Crystal Rod）
- *   248 = compound_rice_meal_rod（复合米饭棒，普通物品（手柄部件），最大堆叠 64；英文名 Compound Rice Meal Rod）
- *   249 = cleansing_compound_rod（清洁复合棒，普通物品（手柄部件），最大堆叠 64；英文名 Cleansing Compound Rod）
- *   250 = super_lazy_alloy_rod（超懒合金棒，普通物品（手柄部件），最大堆叠 64；英文名 Super Lazy Alloy Rod）
- *   251 = super_heavy_crystal_pickaxe（超重结晶镐，工具类 PickaxeItem，最大堆叠 1，SUPER_HEAVY_CRYSTAL；英文名 Super Heavy Crystal Pickaxe）
- *   252 = compound_rice_meal_pickaxe（复合米饭镐，工具类 PickaxeItem，最大堆叠 1，COMPOUND_RICE_MEAL；英文名 Compound Rice Meal Pickaxe）
- *   253 = cleansing_compound_pickaxe（清洁复合镐，工具类 PickaxeItem，最大堆叠 1，CLEANSING_COMPOUND；英文名 Cleansing Compound Pickaxe）
- *   254 = super_lazy_alloy_pickaxe（超懒合金镐，工具类 PickaxeItem，最大堆叠 1，SUPER_LAZY_ALLOY；英文名 Super Lazy Alloy Pickaxe）
- *   255 = laziest_heavenfall_pickaxe（最懒天堕镐，工具类 PickaxeItem，最大堆叠 1，LAZIEST_HEAVENFALL（修复材料 184 堕落之心）；英文名 Laziest Heavenfall Pickaxe）
- *   256 = rice_stealer_heart（盗米之心，普通物品，最大堆叠 64；英文名 Rice Stealer Heart）
- *   257 = rice_stealer_spawn_egg（盗米者生物蛋，ForgeSpawnEggItem，绑定实体 rice_stealer（当前 PendingBossEntity 占位）；英文名 Rice Stealer Spawn Egg）
- *   258 = rice_soul_tear（米魂之泪，普通物品，最大堆叠 64；英文名 Rice Soul Tear）
- *   259 = remnant_heaven_wing（残天翼，普通物品，最大堆叠 64；英文名 Remnant Heaven Wing）
- *   260 = super_lazy_alloy_arrow（超懒合金箭，普通物品，最大堆叠 64；英文名 Super Lazy Alloy Arrow）
- *   261 = void_touch（虚无之触，普通物品，最大堆叠 64；英文名 Void Touch）
- *   262 = faded_flower_branch（残花枝，普通物品，最大堆叠 64；英文名 Faded Flower Branch）
- *   263 = celestial_phoenix_beak（天凤之喙，普通物品，最大堆叠 64；英文名 Celestial Phoenix Beak）
- *   264 = remnant_fallen_rice_essence（残堕米精，普通物品，最大堆叠 64；英文名 Remnant Fallen Rice Essence）
- *   265 = remnant_fallen_ingot（残堕锭，普通物品，最大堆叠 64；英文名 Remnant Fallen Ingot）
- *   266 = mermaid_tear（鲛泪，普通物品，最大堆叠 64；英文名 Mermaid Tear）
- *   267 = jiaolong_talon（蛟龙爪，普通物品，最大堆叠 64；英文名 Jiaolong Talon）
- *   268 = mirage_bone（蜃楼骨，普通物品，最大堆叠 64；英文名 Mirage Bone）
- *   269 = elf_hat（精灵帽，普通物品【非装备】，最大堆叠 64；英文名 Elf Hat）
- *   270 = moon_devourer_wolf_claw（噬月狼爪，普通物品，最大堆叠 64；英文名 Moon Devourer Wolf Claw）
- *   271 = fallen_altar（堕落台，方块物品 BlockItem；暗合金仪式台方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Fallen Altar）
- *   272 = fallen_cross（堕落十字架，普通物品，最大堆叠 64；英文名 Fallen Cross）
- *   273 = remnant_fallen_abyss_rock（残堕深渊岩，方块物品 BlockItem；深渊原生岩石，深板岩质地，镐挖掘等级3=钻石镐，破坏掉落本身，#286/#287 合成材料，方块本体见 block.ModBlocks；英文名 Remnant Fallen Abyss Rock）
- *   274 = remnant_fallen_bedrock（残堕基岩，方块物品 BlockItem；深渊致密基岩，硬度4/抗爆9，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Remnant Fallen Bedrock）
- *   275 = dyeing_solution（浸染液，普通物品，最大堆叠 64；英文名 Dyeing Solution）
- *   276 = deep_dyed_remnant_heaven_wing（深染残天翼，鞘翅类装备，胸甲槽可滑翔，耐久 432 自动锁定堆叠 1；英文名 Deep-Dyed Remnant Heaven Wing）
- *   277 = deep_dyed_void_touch（深染虚无之触，普通物品，最大堆叠 64；英文名 Deep-Dyed Void Touch）
- *   278 = deep_dyed_faded_flower_branch（深染残花枝，普通物品，最大堆叠 64；英文名 Deep-Dyed Faded Flower Branch）
- *   279 = deep_dyed_celestial_phoenix_beak（深染天凤之喙，普通物品，最大堆叠 64；英文名 Deep-Dyed Celestial Phoenix Beak）
- *   280 = deep_dyed_remnant_fallen_rice_essence（深染残堕米精，普通物品，最大堆叠 64；英文名 Deep-Dyed Remnant Fallen Rice Essence）
- *   281 = deep_dyed_mermaid_tear（深染鲛泪，普通物品，最大堆叠 64；英文名 Deep-Dyed Mermaid Tear）
- *   282 = deep_dyed_jiaolong_talon（深染蛟龙爪，普通物品，最大堆叠 64；英文名 Deep-Dyed Jiaolong Talon）
- *   283 = deep_dyed_mirage_bone（深染蜃楼骨，普通物品，最大堆叠 64；英文名 Deep-Dyed Mirage Bone）
- *   284 = deep_dyed_elf_hat（深染精灵帽，普通物品【非装备】，最大堆叠 64；英文名 Deep-Dyed Elf Hat）
- *   285 = deep_dyed_moon_devourer_wolf_claw（深染噬月狼爪，普通物品，最大堆叠 64；英文名 Deep-Dyed Moon Devourer Wolf Claw）
- *   286 = coarse_remnant_fallen_world_essence（粗制残堕世界精华，普通物品，最大堆叠 64；英文名 Coarse Remnant Fallen World Essence）
- *   287 = grinding_table（碾磨台，方块物品 BlockItem；石质工作台方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Grinding Table）
- *   288 = polished_remnant_fallen_abyss_rock（磨制残堕深渊岩，方块物品 BlockItem；深板岩质地方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Polished Remnant Fallen Abyss Rock）
- *   289 = pestle_realm_table（杵界台，方块物品 BlockItem；金属仪式工作台方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Pestle Realm Table）
- *   290 = polished_remnant_fallen_world_essence（磨制残堕世界精华，普通物品，最大堆叠 64；286 粗制精华的磨制成品、291 材料；英文名 Polished Remnant Fallen World Essence）
- *   291 = polished_remnant_fallen_essence_solution（磨制残堕精华液，普通物品非流体、药水瓶造型，最大堆叠 64；英文名 Polished Remnant Fallen Essence Solution）
- *   292 = ingot_condensation_table（凝锭台，方块物品 BlockItem；金属工艺机器方块，镐挖掘等级2=铁镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Ingot Condensation Table）
- *   293 = remnant_fallen_world_essence_ingot（残堕世界精华锭，普通物品，最大堆叠 64；英文名 Remnant Fallen World Essence Ingot）
- *   294 = world_tear（世界之泪，普通物品，最大堆叠 64；英文名 Tear of the World）
- *   295 = realm_lord_token（界主令牌，普通物品，最大堆叠 64；英文名 Realm Lord Token）
- *   296 = realm_heaven_brain_flower（界天脑花，普通物品，最大堆叠 64；英文名 Realm-Heaven Brain Flower）
- *   297 = cooked_realm_heaven_embryo_flower（熟界天胎花，食物，最大堆叠 64，2饱食度；英文名 Cooked Realm-Heaven Embryo Flower）
- *   298 = void_touch_tentacle（虚无触足，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Void Touch Tentacle）
- *   299 = cooked_void_touch_tentacle（熟虚无触足，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Void Touch Tentacle）
- *   300 = thorn_petal（棘花瓣，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Thorn Petal）
- *   301 = cooked_thorn_petal（熟棘花瓣，食物，最大堆叠 64，2饱食度；英文名 Cooked Thorn Petal）
- *   302 = rice_phoenix_meat_chunk（米凤肉块，食物，最大堆叠 64，1.5饱食度，30%饥饿30s；英文名 Rice Phoenix Meat Chunk）
- *   303 = cooked_rice_phoenix_meat_chunk（熟米凤肉块，食物，最大堆叠 64，3.5饱食度；英文名 Cooked Rice Phoenix Meat Chunk）
- *   304 = specialty_fallen_rice（特色堕落米，食物（生），最大堆叠 64，1.5饱食度，30%饥饿30s；英文名 Specialty Fallen Rice）
- *   305 = cooked_specialty_fallen_rice（熟特色堕落米，食物（熟），最大堆叠 64，3.5饱食度；英文名 Cooked Specialty Fallen Rice）
- *   306 = pale_mermaid_tail（浅鲛尾，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Pale Mermaid Tail）
- *   307 = cooked_pale_mermaid_tail（熟浅鲛尾，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Pale Mermaid Tail）
- *   308 = wangmi_wounded_mermaid_leg（望米伤鲛足，食物，最大堆叠 64，1饱食度，40%饥饿30s；英文名 Wangmi Wounded Mermaid Leg）
- *   309 = cooked_wangmi_wounded_mermaid_leg（熟望米伤鲛足，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Wangmi Wounded Mermaid Leg）
- *   310 = half_mirage_meat_slice（半蜃肉片，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Half Mirage Meat Slice）
- *   311 = cooked_half_mirage_meat_slice（熟半蜃肉片，食物，最大堆叠 64，2.5饱食度；英文名 Cooked Half Mirage Meat Slice）
- *   312 = fragrant_pouch（香袋，普通物品，最大堆叠 64；英文名 Fragrant Pouch）
- *   313 = fragrant_powder（香粉，普通物品，最大堆叠 64；英文名 Fragrant Powder）
- *   314 = devourer_vulture_wing（噬鹫翅，食物，最大堆叠 64，1饱食度，30%饥饿30s；英文名 Devourer Vulture Wing）
- *   315 = cooked_devourer_vulture_wing（熟噬鹫翅，食物，最大堆叠 64，3饱食度；英文名 Cooked Devourer Vulture Wing）
- *   316 = big_bowl（大碗，普通物品×64；英文名 Big Bowl）
- *   317 = pot（锅，方块物品 BlockItem；基础铁制烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Pot）
- *   318 = big_pot（大锅，方块物品 BlockItem；铜箍加固大型烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Big Pot）
- *   319 = celestial_void_thorn_brain_soup（天虚棘脑汤，食物（熟），最大堆叠 64，3饱食度；英文名 Celestial Void Thorn Brain Soup）
- *   320 = fragrant_mixed_meat_slice（香混肉片，食物（熟），最大堆叠 64，3饱食度；英文名 Fragrant Mixed Meat Slices）
- *   321 = sauce_glazed_twin_mermaid_tail（酱香双鲛尾，食物（熟），最大堆叠 64，4饱食度；英文名 Sauce-Glazed Twin Mermaid Tails）
- *   322 = celestial_brain_juice（天脑汁，食物（熟/饮品），最大堆叠 64，2饱食度；英文名 Celestial Brain Juice）
- *   323 = sauced_brain（酱脑，食物（熟），最大堆叠 64，2.5饱食度；英文名 Sauced Brain）
- *   324 = fallen_rice_juice（米堕汁，食物（熟/饮品），最大堆叠 64，2饱食度；英文名 Fallen Rice Juice）
- *   325 = placeholder_325（待定占位，不进创造标签页；英文名 Reserved Slot 325）
- *   326 = phoenix_meat_paste（凤肉泥，食物（生/肉泥原料），最大堆叠 64，1饱食度，30%饥饿30s；英文名 Phoenix Meat Paste）
- *   327 = phoenix_ball（凤球，食物（熟/肉丸），最大堆叠 64，2.5饱食度；英文名 Phoenix Ball）
- *   328 = plate（盘子，普通物品（餐具），最大堆叠 64；英文名 Plate）
- *   329 = sauce_roasted_vulture_wing（酱烤鹫翅，食物（熟），最大堆叠 64，3.5饱食度；英文名 Sauce-Roasted Vulture Wing）
- *   330 = rice_mirage_grease（米蜃油脂，普通物品，最大堆叠 64；米蜃 5-6 掉落；英文名 Rice Mirage Grease）
- *   331 = dyed_mermaid_grease（染鲛油脂，普通物品，最大堆叠 64；浅染鲛 1-2 掉落；英文名 Dyed Mermaid Grease）
- *   332 = oil_bottle（油瓶，普通物品（油料），最大堆叠 64；英文名 Oil Bottle）
- *   333 = rice_paper_plate（米木纸盘，普通物品×64，#373 烤箱合成配料；英文名 Rice Paper Plate）
- *   334 = marinade（腌料，普通物品（调料），最大堆叠 64；英文名 Marinade）
- *   335 = marinated_vulture_wing（腌鹫翅，食物（腌制），最大堆叠 64，1.5饱食度，20%饥饿30s；英文名 Marinated Vulture Wing）
- *   336 = fallen_rice_meatball_soup（堕米肉丸汤，食物（熟），最大堆叠 64，3饱食度；英文名 Fallen Rice Meatball Soup）
- *   337 = jiao_mermaid_meat_paste（蛟鲛肉泥，食物（生/肉泥原料），最大堆叠 64，1饱食度，30%饥饿30s；英文名 Jiao Mermaid Meat Paste）
- *   338 = phoenix_mirage_meat_paste（凤蜃肉泥，食物（生/肉泥原料），最大堆叠 64，1饱食度，30%饥饿30s；英文名 Phoenix Mirage Meat Paste）
- *   339 = precious_seasoning（珍贵调料，普通物品（调料），最大堆叠 64；英文名 Precious Seasoning）
- *   340 = oil_seared_void_tentacle（油爆虚无触，食物（熟），最大堆叠 64，3.5饱食度；英文名 Oil-Seared Void Tentacle）
- *   341 = bbq_powder（烧烤粉，普通物品（调料），最大堆叠 64；英文名 BBQ Powder）
- *   342 = floral_fragrance_oil（花香油，普通物品（油料），最大堆叠 64；英文名 Floral Fragrance Oil）
- *   343 = compound_oil（复合油，普通物品（油料），最大堆叠 64；英文名 Compound Oil）
- *   344 = mermaid_leg_fried_rice（蛟足炒饭，食物（熟），最大堆叠 64，4饱食度；英文名 Mermaid Leg Fried Rice）
- *   345 = dragon_phoenix_flower_soup（龙凤花汤，食物（熟），最大堆叠 64，3饱食度；英文名 Dragon-Phoenix Flower Soup）
- *   346 = mirage_illusion（蜃楼幻想，普通物品，最大堆叠 64；英文名 Mirage Illusion）
- *   347 = floral_mermaid_tail（花香蛟尾，食物（熟），最大堆叠 64，3饱食度；英文名 Floral Mermaid Tail）
- *   348 = sea_beast_jiao_rice（海兽相交饭，食物（熟），最大堆叠 64，4饱食度；英文名 Sea Beast Jiao Rice）
- *   349 = buddha_illusion（佛幻想，食物（熟/豪华料理），最大堆叠 64，5饱食度；英文名 Buddha Illusion）
- *   350 = rice_snow_tea（米雪茶，食物（熟/饮品），最大堆叠 64，1饱食度；英文名 Rice Snow Tea）
- *   351 = pan_fried_dragon_phoenix_cake（煎龙凤饼，食物（熟），最大堆叠 64，3.5饱食度；英文名 Pan-Fried Dragon-Phoenix Cake）
- *   352 = celestial_fallen_tea（天堕茶，食物（熟/饮品），最大堆叠 64，1饱食度；英文名 Celestial Fallen Tea）
- *   353 = phoenix_wrapped_wing（凤包翅，食物（熟），最大堆叠 64，3.5饱食度；英文名 Phoenix-Wrapped Wing）
- *   354 = marinated_wing_wrap（腌翅包，食物（腌制），最大堆叠 64，1.5饱食度，20%饥饿30s；英文名 Marinated Wing Wrap）
- *   355 = marinated_meat_slice（腌肉片，食物（腌制），最大堆叠 64，1饱食度，20%饥饿30s；英文名 Marinated Meat Slices）
- *   356 = meat_slice_congee（肉片粥，食物（熟），最大堆叠 64，2.5饱食度；英文名 Meat Slice Congee）
- *   357 = limb_skewer（肢体烤串，食物（熟），最大堆叠 64，3饱食度；英文名 Limb Skewer）
- *   358 = onigiri（饭团，食物（熟），最大堆叠 64，2饱食度；注册名避开编码3的 rice_ball=米团（可投掷）；英文名 Onigiri）
- *   359 = kelp_slice（海带片，普通物品（食材），最大堆叠 64；英文名 Kelp Slices）
- *   360 = celestial_brain_rice_ball（天脑饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Celestial Brain Rice Ball）
- *   361 = pale_mermaid_rice_ball（浅鲛饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Pale Mermaid Rice Ball）
- *   362 = mermaid_leg_rice_ball（蛟足饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Mermaid Leg Rice Ball）
- *   363 = vulture_wing_rice_ball（鹫翅饭团，食物（熟），最大堆叠 64，3饱食度；英文名 Vulture Wing Rice Ball）
- *   364 = super_grand_stew（超级大乱炖，食物（熟），最大堆叠 64，10饱食度/0.9饱和；英文名 Super Grand Stew）
- *   365 = crusher（搅碎器，方块物品 BlockItem；食材加工机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Crusher）
- *   366 = mixer（搅拌器，方块物品 BlockItem；食材加工机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Mixer）
- *   367 = small_cooking_pot（小煮锅，方块物品 BlockItem；带支脚小型烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Small Cooking Pot）
- *   368 = cooking_pot（煮锅，方块物品 BlockItem；铜箍加固标准烹饪锅方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Cooking Pot）
- *   369 = large_cooking_pot（大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Large Cooking Pot）
- *   370 = extra_large_cooking_pot（超大煮锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Extra-Large Cooking Pot）
- *   371 = jumbo_mega_cooking_pot（巨无霸大大大煮锅，方块物品 BlockItem；特级烹饪方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Jumbo Mega Cooking Pot）
- *   372 = iron_wok（铁锅，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Iron Wok）
- *   373 = oven（烤箱，方块物品 BlockItem；烹饪机器方块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Oven）
- *   374 = pot_lid（盖子，普通物品，最大堆叠 64；烹饪机器链公共部件，木按钮+重型压力板合成；英文名 Pot Lid）
- *   375 = spoon（勺子，普通物品，最大堆叠 64；英文名 Spoon）
- *   376 = li_pearl（骊珠，普通物品，最大堆叠 64；英文名 Li Pearl）
- *   377 = dragon_blood（龙血，普通物品，最大堆叠 64；英文名 Dragon Blood）
- *   378 = dragon_scale（龙鳞，普通物品，最大堆叠 64；英文名 Dragon Scale）
- *   379 = yu_sin_dragon_reverse_scale（宇罪龙逆鳞，普通物品，最大堆叠 64；同时是 396/397 残堕工具的修复材料；英文名 Yu Sin Dragon Reverse Scale）
- *   380 = dragon_bone（龙骨，普通物品，最大堆叠 64；英文名 Dragon Bone）
- *   381 = realm_lord_dragon_heart（界主龙心，普通物品，最大堆叠 64；英文名 Realm Lord Dragon Heart）
- *   382 = yu_sin_dragon_head（宇罪龙头，普通物品，最大堆叠 64；英文名 Yu Sin Dragon Head）
- *   383 = cardinal_sin_dragon_crown（宗罪龙头冠，普通物品，最大堆叠 64；同时是 391-394 残堕宗罪套装的修复材料；英文名 Cardinal Sin Dragon Crown）
- *   384 = dragon_bone_framework（龙骨架构，普通物品，最大堆叠 64；英文名 Dragon Bone Framework）
- *   385 = dragon_blood_essence（龙血精华，普通物品，最大堆叠 64；英文名 Dragon Blood Essence）
- *   386 = dragon_scale_block（龙鳞块，方块物品 BlockItem；龙鳞压缩块，镐挖掘等级3=钻石镐，破坏掉落本身，方块本体见 block.ModBlocks；英文名 Block of Dragon Scale）
- *   387 = final_sin_li_pearl（终罪骊珠，普通物品×64；英文名 Final Sin Li Pearl）
- *   388 = final_sin_reverse_scale（终罪逆鳞，普通物品×64；英文名 Final Sin Reverse Scale）
- *   389 = final_sin_dragon_heart（终罪龙心，普通物品，最大堆叠 64；英文名 Final Sin Dragon Heart）
- *   390 = final_sin_dragon_head（终罪龙头，普通物品，最大堆叠 64；英文名 Final Sin Dragon Head）
- *   391 = remnant_fallen_cardinal_sin_helmet（残堕宗罪头盔，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Helmet）
- *   392 = remnant_fallen_cardinal_sin_chestplate（残堕宗罪胸甲，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Chestplate）
- *   393 = remnant_fallen_cardinal_sin_leggings（残堕宗罪护腿，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Leggings）
- *   394 = remnant_fallen_cardinal_sin_boots（残堕宗罪靴子，ArmorItem，最大堆叠 1，REMNANT_FALLEN_CARDINAL_SIN；英文名 Remnant Fallen Cardinal Sin Boots）
- *   395 = remnant_fallen_cardinal_sin_bow（残堕宗罪之弓，BowItem，最大堆叠 1，耐久 2304；英文名 Remnant Fallen Cardinal Sin Bow）
- *   396 = remnant_fallen_disintegration_pickaxe（残堕崩解之镐，工具类 PickaxeItem，最大堆叠 1，REMNANT_FALLEN（修复材料 379 宇罪龙逆鳞）；英文名 Remnant Fallen Disintegration Pickaxe）
- *   397 = remnant_fallen_reverse_scale_sword（残堕逆鳞之剑，工具类 SwordItem，最大堆叠 1，REMNANT_FALLEN（修复材料 379 宇罪龙逆鳞）；英文名 Remnant Fallen Reverse Scale Sword）
- *   398 = dragon_scale_might（龙鳞之威，普通物品，最大堆叠 64；英文名 Dragon Scale Might）
- *   399 = dragon_yuan（龙元，普通物品，最大堆叠 64；英文名 Dragon Yuan）
- *   400 = dragon_head_wrath（龙首之怒，普通物品，最大堆叠 64；英文名 Dragon Head Wrath）
- *   401 = final_sin_realm_heart（终罪界心，普通物品，最大堆叠 64；英文名 Final Sin Realm Heart）
- *   402 = purification_framework（净化架构，普通物品，最大堆叠 64；英文名 Purification Framework）
- *   403 = world_purifier（世界净化器，普通物品，最大堆叠 64；英文名 World Purifier）
- *   404 = rice_crystal_arrow（饭晶箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Rice Crystal Arrow）
- *   405 = super_crystal_arrow（超结晶箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Super Crystal Arrow）
- *   406 = rice_crystal_alloy_arrow（饭晶合金箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Rice Crystal Alloy Arrow）
- *   407 = super_heavy_crystal_arrow（超重结晶箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Super Heavy Crystal Arrow）
- *   408 = compound_rice_meal_arrow（复合米饭箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Compound Rice Meal Arrow）
- *   409 = cleansing_compound_arrow（清洁复合箭，普通物品暂不设投掷效果，最大堆叠 64；英文名 Cleansing Compound Arrow）
- * ================================================================================
  */
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, MimiWorld.MODID);
 
-    // 自动编号计数器与双向映射表
-    private static int nextItemCode = 0;
-    private static final Map<Integer, RegistryObject<Item>> ITEM_BY_CODE = new HashMap<>();
-    private static final Map<ResourceLocation, Integer> CODE_BY_ITEM = new HashMap<>();
-
-    /**
-     * 注册物品并自动分配下一个连续编号（1, 2, 3 ...）。
-     * 物品字段必须按声明顺序从上到下排列，编号即注册顺序。
-     */
+    /** 注册物品（所有物品统一经此入口注册到 ITEMS 延迟注册表）。 */
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> factory) {
-        int code = ++nextItemCode;
-        RegistryObject<Item> item = ITEMS.register(name, factory);
-        ITEM_BY_CODE.put(code, item);
-        CODE_BY_ITEM.put(item.getId(), code);
-        return item;
+        return ITEMS.register(name, factory);
     }
 
     /**
-     * 熟食食物属性：仅饱食度/饱和度，无负面效果（293-315 批次的各「熟」食材使用）。
+     * 熟食食物属性：仅饱食度/饱和度，无负面效果（后续批次的各「熟」食材使用）。
      *
      * @param nutrition  饱食度（鸡腿数，1=半个鸡腿）
      * @param saturation 饱和度系数
@@ -498,35 +64,8 @@ public class ModItems {
         return builder.build();
     }
 
-    /** 按编码获取物品实例（配方代码里用编码表达需求时使用），编码不存在则抛异常 */
-    public static Item byCode(int code) {
-        RegistryObject<Item> item = ITEM_BY_CODE.get(code);
-        if (item == null) {
-            throw new IllegalArgumentException("不存在的物品编码: " + code);
-        }
-        return item.get();
-    }
 
-    /** 按编码获取物品注册名（生成配方 JSON / 数据包内容时使用） */
-    public static ResourceLocation idOfCode(int code) {
-        RegistryObject<Item> item = ITEM_BY_CODE.get(code);
-        if (item == null) {
-            throw new IllegalArgumentException("不存在的物品编码: " + code);
-        }
-        return item.getId();
-    }
-
-    /** 查询某物品对应的编码（反向查询），未注册物品抛异常 */
-    public static int codeOf(Item item) {
-        ResourceLocation key = ForgeRegistries.ITEMS.getKey(item);
-        Integer code = key == null ? null : CODE_BY_ITEM.get(key);
-        if (code == null) {
-            throw new IllegalArgumentException("未登记编码的物品: " + key);
-        }
-        return code;
-    }
-
-    // ============================ 物品注册区（只能末尾追加） ============================
+    // ============================ 物品注册区 ============================
 
     // 米（Rice）：可食用，最大堆叠 64；食用后 100% 触发四种负面效果（20 tick = 1 秒，amplifier 从 0 起算）
     public static final FoodProperties RICE_FOOD = new FoodProperties.Builder()
@@ -538,7 +77,7 @@ public class ModItems {
             .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 1.0F)       // 饥饿 I 30s
             .build();
 
-    // 编码 1 = rice（米）
+    // 米
     public static final RegistryObject<Item> RICE = registerItem("rice",
             () -> new Item(new Item.Properties().stacksTo(64).food(RICE_FOOD)));
 
@@ -550,7 +89,7 @@ public class ModItems {
             .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 100, 0), 1.0F) // 反胃 I 5s
             .build();
 
-    // 编码 2 = cooked_rice（熟米）
+    // 熟米
     public static final RegistryObject<Item> COOKED_RICE = registerItem("cooked_rice",
             () -> new Item(new Item.Properties().stacksTo(64).food(COOKED_RICE_FOOD)) {
                 @Override
@@ -559,48 +98,48 @@ public class ModItems {
                 }
             });
 
-    // 编码 3 = rice_ball（米团）：可投掷，命中造成 1 伤害 + 反胃 I/缓慢 I 各 10s，投掷冷却 2s（逻辑见 RiceBallItem / RiceBallProjectile）
+    // 米团：可投掷，命中造成 1 伤害 + 反胃 I/缓慢 I 各 10s，投掷冷却 2s（逻辑见 RiceBallItem / RiceBallProjectile）
     public static final RegistryObject<Item> RICE_BALL = registerItem("rice_ball",
             () -> new RiceBallItem(new Item.Properties().stacksTo(64)));
 
-    // 编码 4 = cooked_rice_ball（熟米团）：可投掷，命中 2.5 伤害 + 缓慢 III/失明 II 各 10s，投掷冷却 2s（逻辑见 CookedRiceBallItem / CookedRiceBallProjectile）
+    // 熟米团：可投掷，命中 2.5 伤害 + 缓慢 III/失明 II 各 10s，投掷冷却 2s（逻辑见 CookedRiceBallItem / CookedRiceBallProjectile）
     public static final RegistryObject<Item> COOKED_RICE_BALL = registerItem("cooked_rice_ball",
             () -> new CookedRiceBallItem(new Item.Properties().stacksTo(64)));
 
-    // 编码 5 = rice_log（米原木）：方块物品，放置后对应 ModBlocks.RICE_LOG；破坏掉落自身（loot table），斧/挖掘等级 1 由方块标签控制
+    // 米原木：方块物品，放置后对应 ModBlocks.RICE_LOG；破坏掉落自身（loot table），斧/挖掘等级 1 由方块标签控制
     public static final RegistryObject<Item> RICE_LOG = registerItem("rice_log",
             () -> new BlockItem(ModBlocks.RICE_LOG.get(), new Item.Properties()));
 
-    // 编码 6 = rice_planks（米木板）：方块物品，放置后对应 ModBlocks.RICE_PLANKS；破坏掉落自身，斧可挖、挖掘等级 0（无 needs_*_tool 标签）
+    // 米木板：方块物品，放置后对应 ModBlocks.RICE_PLANKS；破坏掉落自身，斧可挖、挖掘等级 0（无 needs_*_tool 标签）
     public static final RegistryObject<Item> RICE_PLANKS = registerItem("rice_planks",
             () -> new BlockItem(ModBlocks.RICE_PLANKS.get(), new Item.Properties()));
 
-    // 编码 7 = rice_stick（米木棍）：普通材料物品，最大堆叠 64；熔炉燃料 300t（可烧 1.5 个物品，见 event.ModFuelEvents）
+    // 米木棍：普通材料物品，最大堆叠 64；熔炉燃料 300t（可烧 1.5 个物品，见 event.ModFuelEvents）
     public static final RegistryObject<Item> RICE_STICK = registerItem("rice_stick",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 8 = rice_leaves（米树叶）：方块物品，放置后对应 ModBlocks.RICE_LEAVES；破坏掉落自身，剪刀可快速采集、挖掘等级 0，燃料 100t
+    // 米树叶：方块物品，放置后对应 ModBlocks.RICE_LEAVES；破坏掉落自身，剪刀可快速采集、挖掘等级 0，燃料 100t
     public static final RegistryObject<Item> RICE_LEAVES = registerItem("rice_leaves",
             () -> new BlockItem(ModBlocks.RICE_LEAVES.get(), new Item.Properties()));
 
-    // 编码 9 = rice_bucket（米桶）：米汤桶，最大堆叠 1；RiceBucketItem 继承 BucketItem，
+    // 米桶：米汤桶，最大堆叠 1；RiceBucketItem 继承 BucketItem，
     // 构造器内部绑定 fluid.ModFluids.RICE_SOUP（米汤源流体），行为同原版水桶
     public static final RegistryObject<Item> RICE_BUCKET = registerItem("rice_bucket",
             () -> new RiceBucketItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 10 = rice_sapling（米树苗）：方块物品，放置后对应 ModBlocks.RICE_SAPLING；可骨粉催熟/随机刻长成米树（白桦形态，米原木+米树叶）
+    // 米树苗：方块物品，放置后对应 ModBlocks.RICE_SAPLING；可骨粉催熟/随机刻长成米树（白桦形态，米原木+米树叶）
     public static final RegistryObject<Item> RICE_SAPLING = registerItem("rice_sapling",
             () -> new BlockItem(ModBlocks.RICE_SAPLING.get(), new Item.Properties()));
 
-    // 编码 11 = hardened_rice（硬化米）：石头类方块物品，放置后对应 ModBlocks.HARDENED_RICE
+    // 硬化米：石头类方块物品，放置后对应 ModBlocks.HARDENED_RICE
     public static final RegistryObject<Item> HARDENED_RICE = registerItem("hardened_rice",
             () -> new BlockItem(ModBlocks.HARDENED_RICE.get(), new Item.Properties()));
 
-    // 编码 12 = deepslate_hardened_rice（深层硬化米）：石头类方块物品，放置后对应 ModBlocks.DEEPSLATE_HARDENED_RICE
+    // 深层硬化米：石头类方块物品，放置后对应 ModBlocks.DEEPSLATE_HARDENED_RICE
     public static final RegistryObject<Item> DEEPSLATE_HARDENED_RICE = registerItem("deepslate_hardened_rice",
             () -> new BlockItem(ModBlocks.DEEPSLATE_HARDENED_RICE.get(), new Item.Properties()));
 
-    // 编码 13 = rice_bedrock（基米）：基岩类方块物品，放置后对应 ModBlocks.RICE_BEDROCK；仅创造模式获取
+    // 基米：基岩类方块物品，放置后对应 ModBlocks.RICE_BEDROCK；仅创造模式获取
     public static final RegistryObject<Item> RICE_BEDROCK = registerItem("rice_bedrock",
             () -> new BlockItem(ModBlocks.RICE_BEDROCK.get(), new Item.Properties()));
 
@@ -613,7 +152,7 @@ public class ModItems {
             .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1), 1.0F) // 缓慢 II 5s
             .build();
 
-    // 编码 14 = rice_grass（米草）：可放置的草类植物方块物品（自定义 RiceGrassItem，右键可种草也可食用）；
+    // 米草：可放置的草类植物方块物品（自定义 RiceGrassItem，右键可种草也可食用）；
     // 放置后对应 ModBlocks.RICE_GRASS，该植物空手破坏不掉落，仅剪刀采集掉本物品
     public static final RegistryObject<Item> RICE_GRASS = registerItem("rice_grass",
             () -> new RiceGrassItem(ModBlocks.RICE_GRASS.get(),
@@ -629,7 +168,7 @@ public class ModItems {
             .effect(() -> new MobEffectInstance(MobEffects.WEAKNESS, 600, 0), 1.0F)  // 虚弱 I 30s
             .build();
 
-    // 编码 15 = rice_fruit（米果）：普通食物物品，最大堆叠 64；食用耗时 2s（默认食物 32t ≈ 1.6s，这里覆盖为 40t）
+    // 米果：普通食物物品，最大堆叠 64；食用耗时 2s（默认食物 32t ≈ 1.6s，这里覆盖为 40t）
     public static final RegistryObject<Item> RICE_FRUIT = registerItem("rice_fruit",
             () -> new Item(new Item.Properties().stacksTo(64).food(RICE_FRUIT_FOOD)) {
                 @Override
@@ -638,338 +177,338 @@ public class ModItems {
                 }
             });
 
-    // 编码 16 = crystallized_rice（结晶米）：类似原版锭的普通矿石材料，最大堆叠 64
+    // 结晶米：类似原版锭的普通矿石材料，最大堆叠 64
     public static final RegistryObject<Item> CRYSTALLIZED_RICE = registerItem("crystallized_rice",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 17 = crystallized_rice_ore（结晶米矿石）：石头类矿石方块物品，放置后对应 ModBlocks.CRYSTALLIZED_RICE_ORE；
-    // 下界合金镐才能采集。普通开采掉 16 号结晶米（时运可增产），精准采集才掉矿石本身；
-    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼成 16 号结晶米
+    // 结晶米矿石：石头类矿石方块物品，放置后对应 ModBlocks.CRYSTALLIZED_RICE_ORE；
+    // 下界合金镐才能采集。普通开采掉结晶米（时运可增产），精准采集才掉矿石本身；
+    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼成结晶米
     public static final RegistryObject<Item> CRYSTALLIZED_RICE_ORE = registerItem("crystallized_rice_ore",
             () -> new BlockItem(ModBlocks.CRYSTALLIZED_RICE_ORE.get(), new Item.Properties()));
 
-    // 编码 18 = recrystallized_rice_ore（重结晶米矿石）：深板岩质地矿石，
-    // 放置后对应 ModBlocks.RECRYSTALLIZED_RICE_ORE；下界合金镐采集。普通开采掉 19 号重结晶米（时运可增产），
-    // 精准采集才掉矿石本身；非精准开采另掉 3~7 经验球；矿石也可烧炼得 19 号重结晶米
+    // 重结晶米矿石：深板岩质地矿石，
+    // 放置后对应 ModBlocks.RECRYSTALLIZED_RICE_ORE；下界合金镐采集。普通开采掉重结晶米（时运可增产），
+    // 精准采集才掉矿石本身；非精准开采另掉 3~7 经验球；矿石也可烧炼得重结晶米
     public static final RegistryObject<Item> RECRYSTALLIZED_RICE_ORE = registerItem("recrystallized_rice_ore",
             () -> new BlockItem(ModBlocks.RECRYSTALLIZED_RICE_ORE.get(), new Item.Properties()));
 
-    // 编码 19 = recrystallized_rice（重结晶米）：精炼锭类普通材料，最大堆叠 64；由 18 号重结晶米矿石熔炉/高炉烧炼得到
+    // 重结晶米：精炼锭类普通材料，最大堆叠 64；由重结晶米矿石熔炉/高炉烧炼得到
     public static final RegistryObject<Item> RECRYSTALLIZED_RICE = registerItem("recrystallized_rice",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 20 = combustible_rice（可燃米）：普通材料，最大堆叠 64；
+    // 可燃米：普通材料，最大堆叠 64；
     // 作为熔炉燃料可烧 32 个物品（6400 tick），燃料值在 event.ModFuelEvents 中赋予
     public static final RegistryObject<Item> COMBUSTIBLE_RICE = registerItem("combustible_rice",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 21 = combustible_rice_ore（可燃米矿石）：石头类矿石方块物品，放置后对应 ModBlocks.COMBUSTIBLE_RICE_ORE；
-    // 下界合金镐采集。普通开采掉 20 号可燃米（时运可增产），精准采集才掉矿石本身；
-    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼得 20 号可燃米
+    // 可燃米矿石：石头类矿石方块物品，放置后对应 ModBlocks.COMBUSTIBLE_RICE_ORE；
+    // 下界合金镐采集。普通开采掉可燃米（时运可增产），精准采集才掉矿石本身；
+    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼得可燃米
     public static final RegistryObject<Item> COMBUSTIBLE_RICE_ORE = registerItem("combustible_rice_ore",
             () -> new BlockItem(ModBlocks.COMBUSTIBLE_RICE_ORE.get(), new Item.Properties()));
 
-    // 编码 22 = mud_rice（泥米）：泥巴质地方块物品，放置后对应 ModBlocks.MUD_RICE；铁铲（挖掘等级2）采集
+    // 泥米：泥巴质地方块物品，放置后对应 ModBlocks.MUD_RICE；铁铲（挖掘等级2）采集
     public static final RegistryObject<Item> MUD_RICE = registerItem("mud_rice",
             () -> new BlockItem(ModBlocks.MUD_RICE.get(), new Item.Properties()));
 
-    // 编码 23 = reinforced_rice_stick（强化米棍，Reinforced Rice Stick）：普通材料物品，最大堆叠 64
+    // 强化米棍，Reinforced Rice Stick：普通材料物品，最大堆叠 64
     public static final RegistryObject<Item> REINFORCED_RICE_STICK = registerItem("reinforced_rice_stick",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 24 = rice_baton（米棍，Rice Baton）：普通材料物品，最大堆叠 64
+    // 米棍，Rice Baton：普通材料物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_BATON = registerItem("rice_baton",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 25 = rice_flour（米粉，Rice Flour）：普通材料物品，最大堆叠 64
+    // 米粉，Rice Flour：普通材料物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_FLOUR = registerItem("rice_flour",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 26 = coarse_rice_block（粗米块，Coarse Rice Block）：石头类方块物品，放置后对应 ModBlocks.COARSE_RICE_BLOCK；钻石镐（挖掘等级3）采集
+    // 粗米块，Coarse Rice Block：石头类方块物品，放置后对应 ModBlocks.COARSE_RICE_BLOCK；钻石镐（挖掘等级3）采集
     public static final RegistryObject<Item> COARSE_RICE_BLOCK = registerItem("coarse_rice_block",
             () -> new BlockItem(ModBlocks.COARSE_RICE_BLOCK.get(), new Item.Properties()));
 
-    // 编码 27 = rice_maker（造米机，Rice Maker）：石头类方块物品，放置后对应 ModBlocks.RICE_MAKER；钻石镐（挖掘等级3）采集
+    // 造米机，Rice Maker：石头类方块物品，放置后对应 ModBlocks.RICE_MAKER；钻石镐（挖掘等级3）采集
     public static final RegistryObject<Item> RICE_MAKER = registerItem("rice_maker",
             () -> new BlockItem(ModBlocks.RICE_MAKER.get(), new Item.Properties()));
 
-    // 编码 28 = rice_block（米块，Rice Block）：石头类方块物品，放置后对应 ModBlocks.RICE_BLOCK；钻石镐（挖掘等级3）采集
+    // 米块，Rice Block：石头类方块物品，放置后对应 ModBlocks.RICE_BLOCK；钻石镐（挖掘等级3）采集
     public static final RegistryObject<Item> RICE_BLOCK = registerItem("rice_block",
             () -> new BlockItem(ModBlocks.RICE_BLOCK.get(), new Item.Properties()));
 
-    // 编码 29 = rice_pounding_table（锤米台，Rice Pounding Table）：石头类方块物品，放置后对应 ModBlocks.RICE_POUNDING_TABLE；钻石镐（挖掘等级3）采集
+    // 锤米台，Rice Pounding Table：石头类方块物品，放置后对应 ModBlocks.RICE_POUNDING_TABLE；钻石镐（挖掘等级3）采集
     public static final RegistryObject<Item> RICE_POUNDING_TABLE = registerItem("rice_pounding_table",
             () -> new BlockItem(ModBlocks.RICE_POUNDING_TABLE.get(), new Item.Properties()));
 
-    // 编码 30 = rice_pail（饭桶，Rice Pail）：饭汤桶，最大堆叠 1；RicePailItem 继承 BucketItem，
+    // 饭桶，Rice Pail：饭汤桶，最大堆叠 1；RicePailItem 继承 BucketItem，
     // 构造器内部绑定 fluid.ModFluids.RICE_BROTH（饭汤源流体），行为同原版水桶
     public static final RegistryObject<Item> RICE_PAIL = registerItem("rice_pail",
             () -> new RicePailItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 31 = rice_press（压饭机，Rice Press）：石头类方块物品，放置后对应 ModBlocks.RICE_PRESS；铁镐（挖掘等级2）采集
+    // 压饭机，Rice Press：石头类方块物品，放置后对应 ModBlocks.RICE_PRESS；铁镐（挖掘等级2）采集
     public static final RegistryObject<Item> RICE_PRESS = registerItem("rice_press",
             () -> new BlockItem(ModBlocks.RICE_PRESS.get(), new Item.Properties()));
 
-    // 编码 32 = compressed_rice_pail（压缩饭桶，Compressed Rice Pail）：普通物品，最大堆叠 64
+    // 压缩饭桶，Compressed Rice Pail：普通物品，最大堆叠 64
     public static final RegistryObject<Item> COMPRESSED_RICE_PAIL = registerItem("compressed_rice_pail",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 33 = coarse_crystallized_rice_meal（粗制结晶饭，Coarse Crystallized Rice Meal）：普通物品，最大堆叠 64
+    // 粗制结晶饭，Coarse Crystallized Rice Meal：普通物品，最大堆叠 64
     public static final RegistryObject<Item> COARSE_CRYSTALLIZED_RICE_MEAL = registerItem("coarse_crystallized_rice_meal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 34 = crystallized_rice_meal（结晶饭，Crystallized Rice Meal）：普通物品，最大堆叠 64；注意区别于 16 号结晶米 CRYSTALLIZED_RICE
+    // 结晶饭，Crystallized Rice Meal：普通物品，最大堆叠 64；注意区别于结晶米 CRYSTALLIZED_RICE
     public static final RegistryObject<Item> CRYSTALLIZED_RICE_MEAL = registerItem("crystallized_rice_meal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 35 = rice_crystal_alloy_ingot（饭晶合金锭，Rice Crystal Alloy Ingot）：普通物品，最大堆叠 64
+    // 饭晶合金锭，Rice Crystal Alloy Ingot：普通物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_INGOT = registerItem("rice_crystal_alloy_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 36 = rice_crystal_hammer（饭晶锤，Rice Crystal Hammer）：自定义工具类，镐类挖掘（钻石级 tier），近战 +7 伤害/-3.2 攻速；
+    // 饭晶锤，Rice Crystal Hammer：自定义工具类，镐类挖掘（钻石级 tier），近战 +7 伤害/-3.2 攻速；
     // 直接继承 Item（非 DiggerItem），stacksTo(1) 与普通工具一致，逻辑见 RiceCrystalHammerItem
     public static final RegistryObject<Item> RICE_CRYSTAL_HAMMER = registerItem("rice_crystal_hammer",
             RiceCrystalHammerItem::new);
 
-    // 编码 37 = wet_grass_fiber（湿草麻，Wet Grass Fiber）：纤维束材料
+    // 湿草麻，Wet Grass Fiber：纤维束材料
     public static final RegistryObject<Item> WET_GRASS_FIBER = registerItem("wet_grass_fiber",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 38 = coarse_rice_fiber（粗制米麻，Coarse Rice Fiber）：纤维束材料
+    // 粗制米麻，Coarse Rice Fiber：纤维束材料
     public static final RegistryObject<Item> COARSE_RICE_FIBER = registerItem("coarse_rice_fiber",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 39 = reinforced_wet_grass_fiber（强化湿草麻，Reinforced Wet Grass Fiber）：纤维束材料
+    // 强化湿草麻，Reinforced Wet Grass Fiber：纤维束材料
     public static final RegistryObject<Item> REINFORCED_WET_GRASS_FIBER = registerItem("reinforced_wet_grass_fiber",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 40 = refined_rice_fiber（精制米麻，Refined Rice Fiber）：纤维束材料
+    // 精制米麻，Refined Rice Fiber：纤维束材料
     public static final RegistryObject<Item> REFINED_RICE_FIBER = registerItem("refined_rice_fiber",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 41 = wet_grass_net（湿草网，Wet Grass Net）：编织网材料
+    // 湿草网，Wet Grass Net：编织网材料
     public static final RegistryObject<Item> WET_GRASS_NET = registerItem("wet_grass_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 42 = coarse_wet_grass_net（粗制湿草网，Coarse Wet Grass Net）：编织网材料
+    // 粗制湿草网，Coarse Wet Grass Net：编织网材料
     public static final RegistryObject<Item> COARSE_WET_GRASS_NET = registerItem("coarse_wet_grass_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 43 = coarse_rice_net（粗制米网，Coarse Rice Net）：编织网材料
+    // 粗制米网，Coarse Rice Net：编织网材料
     public static final RegistryObject<Item> COARSE_RICE_NET = registerItem("coarse_rice_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 44 = reinforced_wet_grass_net（强化湿草网，Reinforced Wet Grass Net）：编织网材料
+    // 强化湿草网，Reinforced Wet Grass Net：编织网材料
     public static final RegistryObject<Item> REINFORCED_WET_GRASS_NET = registerItem("reinforced_wet_grass_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 45 = refined_reinforced_wet_grass_net（精制强化湿草网，Refined Reinforced Wet Grass Net）：编织网材料
+    // 精制强化湿草网，Refined Reinforced Wet Grass Net：编织网材料
     public static final RegistryObject<Item> REFINED_REINFORCED_WET_GRASS_NET = registerItem("refined_reinforced_wet_grass_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 46 = refined_reinforced_rice_net（精制强化米网，Refined Reinforced Rice Net）：编织网材料
+    // 精制强化米网，Refined Reinforced Rice Net：编织网材料
     public static final RegistryObject<Item> REFINED_REINFORCED_RICE_NET = registerItem("refined_reinforced_rice_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 47 = rice_crystal_alloy_hammer（饭晶合金锤，Rice Crystal Alloy Hammer）：自定义工具类，
-    // 36号饭晶锤的合金强化版；镐类挖掘（下界合金级 tier，speed 9.0），近战 +9 伤害/-3.1 攻速；
+    // 饭晶合金锤，Rice Crystal Alloy Hammer：自定义工具类，
+    // 饭晶锤的合金强化版；镐类挖掘（下界合金级 tier，speed 9.0），近战 +9 伤害/-3.1 攻速；
     // 直接继承 Item（非 DiggerItem），stacksTo(1) 与普通工具一致，逻辑见 RiceCrystalAlloyHammerItem
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_HAMMER = registerItem("rice_crystal_alloy_hammer",
             RiceCrystalAlloyHammerItem::new);
 
-    // 编码 48 = rice_crystal_bow（饭晶弓，Rice Crystal Bow）：工具类弓（BowItem），最大堆叠 1，
-    // 耐久 384（与原版弓一致）；原 placeholder_48 占位物按手稿原位替换为该物品，编码 48 不变
+    // 饭晶弓，Rice Crystal Bow：工具类弓（BowItem），最大堆叠 1，
+    // 耐久 384（与原版弓一致）；由占位物原位替换为该物品
     public static final RegistryObject<Item> RICE_CRYSTAL_BOW = registerItem("rice_crystal_bow",
             () -> new BowItem(new Item.Properties().durability(384)));
 
-    // 编码 49 = advanced_rice_pounding_table（高级锤米台，Advanced Rice Pounding Table）：石头类方块物品，
+    // 高级锤米台，Advanced Rice Pounding Table：石头类方块物品，
     // 放置后对应 ModBlocks.ADVANCED_RICE_POUNDING_TABLE；铁镐（挖掘等级2）采集，破坏掉落本身
     public static final RegistryObject<Item> ADVANCED_RICE_POUNDING_TABLE = registerItem("advanced_rice_pounding_table",
             () -> new BlockItem(ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get(), new Item.Properties()));
 
-    // 编码 50 = coarse_super_crystal（粗超结晶，Coarse Super Crystal）：结晶材料，粗糙灰蓝晶簇含金色杂质
+    // 粗超结晶，Coarse Super Crystal：结晶材料，粗糙灰蓝晶簇含金色杂质
     public static final RegistryObject<Item> COARSE_SUPER_CRYSTAL = registerItem("coarse_super_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 51 = super_crystal（超结晶，Super Crystal）：结晶材料，高纯度亮蓝晶簇含金核
+    // 超结晶，Super Crystal：结晶材料，高纯度亮蓝晶簇含金核
     public static final RegistryObject<Item> SUPER_CRYSTAL = registerItem("super_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 52 = rice_ore（米矿石，Rice Ore）：铁矿石类方块物品，放置后对应 ModBlocks.RICE_ORE；
-    // 钻石镐（挖掘等级3）采集。普通开采掉 53 号米石（时运可增产），精准采集才掉矿石本身；
-    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼成 53 号米石
+    // 米矿石，Rice Ore：铁矿石类方块物品，放置后对应 ModBlocks.RICE_ORE；
+    // 钻石镐（挖掘等级3）采集。普通开采掉米石（时运可增产），精准采集才掉矿石本身；
+    // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼成米石
     public static final RegistryObject<Item> RICE_ORE = registerItem("rice_ore",
             () -> new BlockItem(ModBlocks.RICE_ORE.get(), new Item.Properties()));
 
-    // 编码 53 = rice_stone（米石，Rice Stone）：嵌有奶白米纹的小石块，普通材料物品，最大堆叠 64
+    // 米石，Rice Stone：嵌有奶白米纹的小石块，普通材料物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_STONE = registerItem("rice_stone",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 54 = super_crystal_block（超结晶块，Block of Super Crystal）：51号超结晶的压缩块，
+    // 超结晶块，Block of Super Crystal：超结晶的压缩块，
     // 放置后对应 ModBlocks.SUPER_CRYSTAL_BLOCK；铁镐（挖掘等级2）采集，破坏掉落本身
     public static final RegistryObject<Item> SUPER_CRYSTAL_BLOCK = registerItem("super_crystal_block",
             () -> new BlockItem(ModBlocks.SUPER_CRYSTAL_BLOCK.get(), new Item.Properties()));
 
-    // 编码 55 = super_heavy_crystal（超重结晶，Super Heavy Crystal）：高密度重晶材料，普通物品，最大堆叠 64
+    // 超重结晶，Super Heavy Crystal：高密度重晶材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL = registerItem("super_heavy_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 56 = ionization_table（电离台，Ionization Table）：工艺机器方块（装饰性全立方块），
+    // 电离台，Ionization Table：工艺机器方块（装饰性全立方块），
     // 放置后对应 ModBlocks.IONIZATION_TABLE；钻石镐（挖掘等级3）采集，破坏掉落本身
     public static final RegistryObject<Item> IONIZATION_TABLE = registerItem("ionization_table",
             () -> new BlockItem(ModBlocks.IONIZATION_TABLE.get(), new Item.Properties()));
 
-    // 编码 57 = precipitation_table（沉淀台，Precipitation Table）：工艺机器方块（装饰性全立方块），
+    // 沉淀台，Precipitation Table：工艺机器方块（装饰性全立方块），
     // 放置后对应 ModBlocks.PRECIPITATION_TABLE；钻石镐（挖掘等级3）采集，破坏掉落本身
     public static final RegistryObject<Item> PRECIPITATION_TABLE = registerItem("precipitation_table",
             () -> new BlockItem(ModBlocks.PRECIPITATION_TABLE.get(), new Item.Properties()));
 
-    // 编码 58 = coarse_compound_rice_meal_ingot（粗制复合米饭锭，Coarse Compound Rice Meal Ingot）：粗糙半成品锭
+    // 粗制复合米饭锭，Coarse Compound Rice Meal Ingot：粗糙半成品锭
     public static final RegistryObject<Item> COARSE_COMPOUND_RICE_MEAL_INGOT =
             registerItem("coarse_compound_rice_meal_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 59 = compound_rice_meal_plate（复合米饭板，Compound Rice Meal Plate）：压制薄板半成品
+    // 复合米饭板，Compound Rice Meal Plate：压制薄板半成品
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_PLATE =
             registerItem("compound_rice_meal_plate",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 60 = compound_rice_meal_ingot（复合米饭锭，Compound Rice Meal Ingot）：精制光滑成品锭
+    // 复合米饭锭，Compound Rice Meal Ingot：精制光滑成品锭
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_INGOT =
             registerItem("compound_rice_meal_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 61 = rice_pomace（米果渣，Rice Pomace）：榨汁后的米果残渣
+    // 米果渣，Rice Pomace：榨汁后的米果残渣
     public static final RegistryObject<Item> RICE_POMACE = registerItem("rice_pomace",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 62 = rice_fruit_juice（米果汁，Rice Fruit Juice）：药水瓶造型的普通物品（非流体、不可倒出）
+    // 米果汁，Rice Fruit Juice：药水瓶造型的普通物品（非流体、不可倒出）
     public static final RegistryObject<Item> RICE_FRUIT_JUICE = registerItem("rice_fruit_juice",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 63 = rice_fruit_mixture（米果混合液，Rice Fruit Mixture）：药水瓶造型的普通物品（非流体、不可倒出）
+    // 米果混合液，Rice Fruit Mixture：药水瓶造型的普通物品（非流体、不可倒出）
     public static final RegistryObject<Item> RICE_FRUIT_MIXTURE = registerItem("rice_fruit_mixture",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 64 = dissociation_table（离解台，Dissociation Table）：工艺机器方块（装饰性全立方块），
+    // 离解台，Dissociation Table：工艺机器方块（装饰性全立方块），
     // 放置后对应 ModBlocks.DISSOCIATION_TABLE；铁镐（挖掘等级2）采集，破坏掉落本身
     public static final RegistryObject<Item> DISSOCIATION_TABLE = registerItem("dissociation_table",
             () -> new BlockItem(ModBlocks.DISSOCIATION_TABLE.get(), new Item.Properties()));
 
-    // ===== 65-80：米纸文书、米果加工液/渣、清洁复合与超懒合金材料链（均为普通物品，最大堆叠 64） =====
+    // ===== 米纸文书、米果加工液/渣、清洁复合与超懒合金材料链（均为普通物品，最大堆叠 64） =====
 
-    // 编码 65 = rice_book（米书，Rice Book）
+    // 米书，Rice Book
     public static final RegistryObject<Item> RICE_BOOK = registerItem("rice_book",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 66 = rice_paper（米纸，Rice Paper）
+    // 米纸，Rice Paper
     public static final RegistryObject<Item> RICE_PAPER = registerItem("rice_paper",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 67 = rice_fruit_analyzing_solution（米果解析液，Rice Fruit Analyzing Solution）：药水瓶造型普通物品（非流体）
+    // 米果解析液，Rice Fruit Analyzing Solution：药水瓶造型普通物品（非流体）
     public static final RegistryObject<Item> RICE_FRUIT_ANALYZING_SOLUTION =
             registerItem("rice_fruit_analyzing_solution",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 68 = rice_fruit_compound_solution（米果复合液，Rice Fruit Compound Solution）：药水瓶造型普通物品（非流体）
+    // 米果复合液，Rice Fruit Compound Solution：药水瓶造型普通物品（非流体）
     public static final RegistryObject<Item> RICE_FRUIT_COMPOUND_SOLUTION =
             registerItem("rice_fruit_compound_solution",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 69 = rice_meal_mixture（米饭混合液，Rice Meal Mixture）：药水瓶造型普通物品（非流体）
+    // 米饭混合液，Rice Meal Mixture：药水瓶造型普通物品（非流体）
     public static final RegistryObject<Item> RICE_MEAL_MIXTURE = registerItem("rice_meal_mixture",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 70 = rice_fruit_mixed_pomace（米果混合渣，Rice Fruit Mixed Pomace）
+    // 米果混合渣，Rice Fruit Mixed Pomace
     public static final RegistryObject<Item> RICE_FRUIT_MIXED_POMACE =
             registerItem("rice_fruit_mixed_pomace",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 71 = rice_fruit_cleansing_solution（米果清洁液，Rice Fruit Cleansing Solution）：药水瓶造型普通物品（非流体）
+    // 米果清洁液，Rice Fruit Cleansing Solution：药水瓶造型普通物品（非流体）
     public static final RegistryObject<Item> RICE_FRUIT_CLEANSING_SOLUTION =
             registerItem("rice_fruit_cleansing_solution",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 72 = coarse_cleansing_compound_ingot（粗制清洁复合锭，Coarse Cleansing Compound Ingot）：粗糙半成品锭
+    // 粗制清洁复合锭，Coarse Cleansing Compound Ingot：粗糙半成品锭
     public static final RegistryObject<Item> COARSE_CLEANSING_COMPOUND_INGOT =
             registerItem("coarse_cleansing_compound_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 73 = cleansing_compound_chunk（清洁复合碎块，Cleansing Compound Chunk）
+    // 清洁复合碎块，Cleansing Compound Chunk
     public static final RegistryObject<Item> CLEANSING_COMPOUND_CHUNK =
             registerItem("cleansing_compound_chunk",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 74 = cleansing_compound_plate（清洁复合板，Cleansing Compound Plate）
+    // 清洁复合板，Cleansing Compound Plate
     public static final RegistryObject<Item> CLEANSING_COMPOUND_PLATE =
             registerItem("cleansing_compound_plate",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 75 = cleansing_compound_ingot（清洁复合锭，Cleansing Compound Ingot）：精制光滑成品锭
+    // 清洁复合锭，Cleansing Compound Ingot：精制光滑成品锭
     public static final RegistryObject<Item> CLEANSING_COMPOUND_INGOT =
             registerItem("cleansing_compound_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 76 = coarse_super_lazy_alloy_ingot（粗制超懒合金锭，Coarse Super Lazy Alloy Ingot）：粗糙半成品锭
+    // 粗制超懒合金锭，Coarse Super Lazy Alloy Ingot：粗糙半成品锭
     public static final RegistryObject<Item> COARSE_SUPER_LAZY_ALLOY_INGOT =
             registerItem("coarse_super_lazy_alloy_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 77 = super_lazy_alloy_ionic_form（超懒合金离子态，Super Lazy Alloy Ionic Form）：药水瓶造型普通物品（非流体）
+    // 超懒合金离子态，Super Lazy Alloy Ionic Form：药水瓶造型普通物品（非流体）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_IONIC_FORM =
             registerItem("super_lazy_alloy_ionic_form",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 78 = super_lazy_alloy_dust（超懒合金粉，Super Lazy Alloy Dust）：粉末状普通物品
+    // 超懒合金粉，Super Lazy Alloy Dust：粉末状普通物品
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_DUST =
             registerItem("super_lazy_alloy_dust",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 79 = super_lazy_alloy_chunk（超懒合金碎块，Super Lazy Alloy Chunk）
+    // 超懒合金碎块，Super Lazy Alloy Chunk
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_CHUNK =
             registerItem("super_lazy_alloy_chunk",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 80 = super_lazy_alloy_ingot（超懒合金锭，Super Lazy Alloy Ingot）：精制光滑成品锭
+    // 超懒合金锭，Super Lazy Alloy Ingot：精制光滑成品锭
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_INGOT =
             registerItem("super_lazy_alloy_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 81 = rice_stone_block（米石块，Block of Rice Stone）：53号米石的压缩存储块，
+    // 米石块，Block of Rice Stone：米石的压缩存储块，
     // 放置后对应 ModBlocks.RICE_STONE_BLOCK；铁镐（挖掘等级2）采集，破坏掉落本身
     public static final RegistryObject<Item> RICE_STONE_BLOCK = registerItem("rice_stone_block",
             () -> new BlockItem(ModBlocks.RICE_STONE_BLOCK.get(), new Item.Properties()));
 
-    // 编码 82 = combustible_mixture（可燃混合液，Combustible Mixture）：药水瓶造型普通物品（非流体），橙红易燃液
+    // 可燃混合液，Combustible Mixture：药水瓶造型普通物品（非流体），橙红易燃液
     public static final RegistryObject<Item> COMBUSTIBLE_MIXTURE = registerItem("combustible_mixture",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 83 = combustible_solid（可燃固态物，Combustible Solid）：带余烬裂纹的可燃硬块
+    // 可燃固态物，Combustible Solid：带余烬裂纹的可燃硬块
     public static final RegistryObject<Item> COMBUSTIBLE_SOLID = registerItem("combustible_solid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 84 = cleansing_rice_separation_solution（清洁米沉离液，Cleansing Rice Separation Solution）：
+    // 清洁米沉离液，Cleansing Rice Separation Solution：
     // 药水瓶造型普通物品（非流体），瓶内上层清洁清液、下层米质沉离
     public static final RegistryObject<Item> CLEANSING_RICE_SEPARATION_SOLUTION =
             registerItem("cleansing_rice_separation_solution",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ================== 85-129：装备材料链（米木<饭晶<饭晶合金<超重结晶<复合米饭<清洁复合<超懒合金） ==================
+    // ================== 装备材料链（米木<饭晶<饭晶合金<超重结晶<复合米饭<清洁复合<超懒合金） ==================
 
-    // ---- 85-87 饭晶 / 超结晶基础武器 ----
-    // 编码 85 = rice_crystal_sword（饭晶剑）：珍珠米白晶质剑，ModItemTiers.RICE_CRYSTAL（修复材料16号结晶米）
+    // ---- 饭晶 / 超结晶基础武器 ----
+    // 饭晶剑：珍珠米白晶质剑，ModItemTiers.RICE_CRYSTAL（修复材料结晶米）
     public static final RegistryObject<Item> RICE_CRYSTAL_SWORD = registerItem("rice_crystal_sword",
             () -> new SwordItem(ModItemTiers.RICE_CRYSTAL, 3, -2.4F, new Item.Properties().stacksTo(1)));
 
-    // 编码 86 = super_crystal_sword（超结晶剑）：蓝晶金核剑，SUPER_CRYSTAL（修复材料51号超结晶）
+    // 超结晶剑：蓝晶金核剑，SUPER_CRYSTAL（修复材料超结晶）
     public static final RegistryObject<Item> SUPER_CRYSTAL_SWORD = registerItem("super_crystal_sword",
             () -> new SwordItem(ModItemTiers.SUPER_CRYSTAL, 3, -2.4F, new Item.Properties().stacksTo(1)));
 
-    // 编码 87 = super_crystal_bow（超结晶弓）：耐久 640 的弓
+    // 超结晶弓：耐久 640 的弓
     public static final RegistryObject<Item> SUPER_CRYSTAL_BOW = registerItem("super_crystal_bow",
             () -> new BowItem(new Item.Properties().durability(640)));
 
-    // ---- 88-93 饭晶合金武器/防具（修复材料35号饭晶合金锭） ----
+    // ---- 饭晶合金武器/防具（修复材料饭晶合金锭） ----
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_SWORD = registerItem("rice_crystal_alloy_sword",
             () -> new SwordItem(ModItemTiers.RICE_CRYSTAL_ALLOY, 3, -2.4F, new Item.Properties().stacksTo(1)));
 
@@ -988,39 +527,39 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_BOOTS = registerItem("rice_crystal_alloy_boots",
             () -> new ArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // ---- 94-95 超重结晶武器（慢速重武器，修复材料55号超重结晶） ----
+    // ---- 超重结晶武器（慢速重武器，修复材料超重结晶） ----
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_SWORD = registerItem("super_heavy_crystal_sword",
             () -> new SwordItem(ModItemTiers.SUPER_HEAVY_CRYSTAL, 5, -2.8F, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_BOW = registerItem("super_heavy_crystal_bow",
             () -> new BowItem(new Item.Properties().durability(1024)));
 
-    // ---- 96-101 装备锻打专用锭（普通材料，堆叠64） ----
-    // 编码 96 = sword_temper_ingot（磨剑锭）：锻打剑刃用
+    // ---- 装备锻打专用锭（普通材料，堆叠64） ----
+    // 磨剑锭：锻打剑刃用
     public static final RegistryObject<Item> SWORD_TEMPER_INGOT = registerItem("sword_temper_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 97 = bowstring_ingot（弓弦锭）：锻打弓弦用
+    // 弓弦锭：锻打弓弦用
     public static final RegistryObject<Item> BOWSTRING_INGOT = registerItem("bowstring_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 98 = armor_core_ingot（含甲锭）：锻打甲片用
+    // 含甲锭：锻打甲片用
     public static final RegistryObject<Item> ARMOR_CORE_INGOT = registerItem("armor_core_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 99 = advanced_sword_temper_ingot（高级磨剑锭）
+    // 高级磨剑锭
     public static final RegistryObject<Item> ADVANCED_SWORD_TEMPER_INGOT = registerItem("advanced_sword_temper_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 100 = advanced_bowstring_ingot（高级弓弦锭）
+    // 高级弓弦锭
     public static final RegistryObject<Item> ADVANCED_BOWSTRING_INGOT = registerItem("advanced_bowstring_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 101 = advanced_armor_core_ingot（高级含甲锭）
+    // 高级含甲锭
     public static final RegistryObject<Item> ADVANCED_ARMOR_CORE_INGOT = registerItem("advanced_armor_core_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ---- 102-105 超重结晶防具（高防重甲，修复材料55号超重结晶） ----
+    // ---- 超重结晶防具（高防重甲，修复材料超重结晶） ----
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_HELMET = registerItem("super_heavy_crystal_helmet",
             () -> new ArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
 
@@ -1033,7 +572,7 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_BOOTS = registerItem("super_heavy_crystal_boots",
             () -> new ArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // ---- 106-111 复合米饭武器/防具（修复材料60号复合米饭锭） ----
+    // ---- 复合米饭武器/防具（修复材料复合米饭锭） ----
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_SWORD = registerItem("compound_rice_meal_sword",
             () -> new SwordItem(ModItemTiers.COMPOUND_RICE_MEAL, 4, -2.4F, new Item.Properties().stacksTo(1)));
 
@@ -1052,7 +591,7 @@ public class ModItems {
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_BOOTS = registerItem("compound_rice_meal_boots",
             () -> new ArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // ---- 112-120 清洁复合胚件与成品（修复材料75号清洁复合锭） ----
+    // ---- 清洁复合胚件与成品（修复材料清洁复合锭） ----
     // 胚件是锻打中间产物（普通材料，堆叠64）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD_BLANK = registerItem("cleansing_compound_sword_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
@@ -1081,7 +620,7 @@ public class ModItems {
     public static final RegistryObject<Item> CLEANSING_COMPOUND_BOOTS = registerItem("cleansing_compound_boots",
             () -> new ArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // ---- 121-129 超懒合金胚件与终极成品（修复材料80号超懒合金锭） ----
+    // ---- 超懒合金胚件与终极成品（修复材料超懒合金锭） ----
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_SWORD_BLANK = registerItem("super_lazy_alloy_sword_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
@@ -1109,330 +648,330 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOOTS = registerItem("super_lazy_alloy_boots",
             () -> new ArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // ===== 130-132：装备锻造台系列方块（金属机器方块，钻石镐采集，破坏掉落本身） =====
+    // ===== 装备锻造台系列方块（金属机器方块，钻石镐采集，破坏掉落本身） =====
 
-    // 编码 130 = sword_forging_table（铸剑台，Sword Forging Table）：放置后对应 ModBlocks.SWORD_FORGING_TABLE
+    // 铸剑台，Sword Forging Table：放置后对应 ModBlocks.SWORD_FORGING_TABLE
     public static final RegistryObject<Item> SWORD_FORGING_TABLE = registerItem("sword_forging_table",
             () -> new BlockItem(ModBlocks.SWORD_FORGING_TABLE.get(), new Item.Properties()));
 
-    // 编码 131 = armor_forging_table（铸甲台，Armor Forging Table）：放置后对应 ModBlocks.ARMOR_FORGING_TABLE
+    // 铸甲台，Armor Forging Table：放置后对应 ModBlocks.ARMOR_FORGING_TABLE
     public static final RegistryObject<Item> ARMOR_FORGING_TABLE = registerItem("armor_forging_table",
             () -> new BlockItem(ModBlocks.ARMOR_FORGING_TABLE.get(), new Item.Properties()));
 
-    // 编码 132 = bow_forging_table（铸弓台，Bow Forging Table）：放置后对应 ModBlocks.BOW_FORGING_TABLE
+    // 铸弓台，Bow Forging Table：放置后对应 ModBlocks.BOW_FORGING_TABLE
     public static final RegistryObject<Item> BOW_FORGING_TABLE = registerItem("bow_forging_table",
             () -> new BlockItem(ModBlocks.BOW_FORGING_TABLE.get(), new Item.Properties()));
 
-    // ===== 133-139：米米之眼/传送器/召唤器系列（普通物品，最大堆叠 64） =====
+    // ===== 米米之眼/传送器/召唤器系列（普通物品，最大堆叠 64） =====
 
-    // 编码 133 = 米米之眼（Eye of Mimi）
+    // 米米之眼（Eye of Mimi）
     public static final RegistryObject<Item> MIMI_EYE = registerItem("mimi_eye",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 134 = 米米传送器（Mimi Teleporter）
+    // 米米传送器（Mimi Teleporter）
     public static final RegistryObject<Item> MIMI_TELEPORTER = registerItem("mimi_teleporter",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 135 = 小型召唤器（Small Summoner）
+    // 小型召唤器（Small Summoner）
     public static final RegistryObject<Item> SMALL_SUMMONER = registerItem("small_summoner",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 136 = 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀），仅锁定编码
+    // 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀）
     public static final RegistryObject<Item> PLACEHOLDER_136 = registerItem("placeholder_136",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 137 = 中型召唤器（Medium Summoner）
+    // 中型召唤器（Medium Summoner）
     public static final RegistryObject<Item> MEDIUM_SUMMONER = registerItem("medium_summoner",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 138 = 大型召唤器（Large Summoner）
+    // 大型召唤器（Large Summoner）
     public static final RegistryObject<Item> LARGE_SUMMONER = registerItem("large_summoner",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 139 = 最懒召唤器（Laziest Summoner）
+    // 最懒召唤器（Laziest Summoner）
     public static final RegistryObject<Item> LAZIEST_SUMMONER = registerItem("laziest_summoner",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 140-145：召唤核心三级链（胚 → 粗制胚 → 核心），普通物品堆叠 64 =====
+    // ===== 召唤核心三级链（胚 → 粗制胚 → 核心），普通物品堆叠 64 =====
 
-    // 编码 140 = 召唤核心胚
+    // 召唤核心胚
     public static final RegistryObject<Item> SUMMON_CORE_BLANK = registerItem("summon_core_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 141 = 粗制召唤核心胚
+    // 粗制召唤核心胚
     public static final RegistryObject<Item> COARSE_SUMMON_CORE_BLANK = registerItem("coarse_summon_core_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 142 = 召唤核心
+    // 召唤核心
     public static final RegistryObject<Item> SUMMON_CORE = registerItem("summon_core",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 143 = 高级召唤核心胚
+    // 高级召唤核心胚
     public static final RegistryObject<Item> ADVANCED_SUMMON_CORE_BLANK = registerItem("advanced_summon_core_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 144 = 粗制高级召唤核心胚
+    // 粗制高级召唤核心胚
     public static final RegistryObject<Item> COARSE_ADVANCED_SUMMON_CORE_BLANK =
             registerItem("coarse_advanced_summon_core_blank",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 145 = 高级召唤核心
+    // 高级召唤核心
     public static final RegistryObject<Item> ADVANCED_SUMMON_CORE = registerItem("advanced_summon_core",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 146-147：混合结晶加工中间体 =====
+    // ===== 混合结晶加工中间体 =====
 
-    // 编码 146 = 混合结晶（Mixed Crystal）
+    // 混合结晶（Mixed Crystal）
     public static final RegistryObject<Item> MIXED_CRYSTAL = registerItem("mixed_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 147 = 熔融混合结晶（Molten Mixed Crystal）
+    // 熔融混合结晶（Molten Mixed Crystal）
     public static final RegistryObject<Item> MOLTEN_MIXED_CRYSTAL = registerItem("molten_mixed_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 148-150：最懒召唤核心三级链 =====
+    // ===== 最懒召唤核心三级链 =====
 
-    // 编码 148 = 最懒召唤核心胚
+    // 最懒召唤核心胚
     public static final RegistryObject<Item> LAZIEST_SUMMON_CORE_BLANK = registerItem("laziest_summon_core_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 149 = 粗制最懒召唤核心胚
+    // 粗制最懒召唤核心胚
     public static final RegistryObject<Item> COARSE_LAZIEST_SUMMON_CORE_BLANK =
             registerItem("coarse_laziest_summon_core_blank",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 150 = 最懒召唤核心（手稿 150 与 148 同名，按三级链判定为最终核心，详见编码表注释）
+    // 最懒召唤核心（三级链的最终核心）
     public static final RegistryObject<Item> LAZIEST_SUMMON_CORE = registerItem("laziest_summon_core",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 151-157：七大 Boss 生物蛋（ForgeSpawnEggItem；实体当前为 PendingBossEntity 占位，后续替换真实 Boss） =====
+    // ===== 七大 Boss 生物蛋（ForgeSpawnEggItem；实体当前为 PendingBossEntity 占位，后续替换真实 Boss） =====
 
-    // 编码 151 = 米米猴王生物蛋：棕底/米黄斑点
+    // 米米猴王生物蛋：棕底/米黄斑点
     public static final RegistryObject<Item> MIMI_MONKEY_KING_SPAWN_EGG =
             registerItem("mimi_monkey_king_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.MIMI_MONKEY_KING, 0x8C5A2B, 0xE8C26A, new Item.Properties()));
 
-    // 编码 152 = 饭晶虎王生物蛋：米白底/金斑
+    // 饭晶虎王生物蛋：米白底/金斑
     public static final RegistryObject<Item> RICE_CRYSTAL_TIGER_KING_SPAWN_EGG =
             registerItem("rice_crystal_tiger_king_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.RICE_CRYSTAL_TIGER_KING, 0xEDE2C8, 0xC98A2E, new Item.Properties()));
 
-    // 编码 153 = 超晶牛王生物蛋：深蓝底/亮蓝斑
+    // 超晶牛王生物蛋：深蓝底/亮蓝斑
     public static final RegistryObject<Item> SUPER_CRYSTAL_COW_KING_SPAWN_EGG =
             registerItem("super_crystal_cow_king_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.SUPER_CRYSTAL_COW_KING, 0x2E4A80, 0x7FB6E8, new Item.Properties()));
 
-    // 编码 154 = 重晶兔王生物蛋：紫底/浅紫斑
+    // 重晶兔王生物蛋：紫底/浅紫斑
     public static final RegistryObject<Item> HEAVY_CRYSTAL_RABBIT_KING_SPAWN_EGG =
             registerItem("heavy_crystal_rabbit_king_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.HEAVY_CRYSTAL_RABBIT_KING, 0x6E4E96, 0xD3B8F0, new Item.Properties()));
 
-    // 编码 155 = 复晶天青蟒生物蛋：青底/薄荷斑
+    // 复晶天青蟒生物蛋：青底/薄荷斑
     public static final RegistryObject<Item> COMPOUND_AZURE_PYTHON_SPAWN_EGG =
             registerItem("compound_azure_python_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.COMPOUND_AZURE_PYTHON, 0x1F7A72, 0x8FE0D2, new Item.Properties()));
 
-    // 编码 156 = 清洁长命夔生物蛋：青白底/天青斑
+    // 清洁长命夔生物蛋：青白底/天青斑
     public static final RegistryObject<Item> CLEANSING_LONGEVITY_KUI_SPAWN_EGG =
             registerItem("cleansing_longevity_kui_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.CLEANSING_LONGEVITY_KUI, 0xCFEAF2, 0x3FA0BC, new Item.Properties()));
 
-    // 编码 157 = 最懒终末龙生物蛋：暗紫底/幻紫斑
+    // 最懒终末龙生物蛋：暗紫底/幻紫斑
     public static final RegistryObject<Item> LAZIEST_FINAL_DRAGON_SPAWN_EGG =
             registerItem("laziest_final_dragon_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.LAZIEST_FINAL_DRAGON, 0x2E1E4A, 0xA974E0, new Item.Properties()));
 
-    // 编码 158 = 待定占位：不进创造标签页，仅锁定编码
+    // 待定占位：不进创造标签页
     public static final RegistryObject<Item> PLACEHOLDER_158 = registerItem("placeholder_158",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 159-163：米米神翼系列 + 上古剑意 + 超懒神剑残片 =====
+    // ===== 米米神翼系列 + 上古剑意 + 超懒神剑残片 =====
 
-    // 编码 159 = 米米神翼（Mimi Divine Wings）：胸甲装备，MIMI_WINGS 材质
+    // 米米神翼（Mimi Divine Wings）：胸甲装备，MIMI_WINGS 材质
     public static final RegistryObject<Item> MIMI_DIVINE_WINGS = registerItem("mimi_divine_wings",
             () -> new ArmorItem(ModArmorMaterials.MIMI_WINGS, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
-    // 编码 160 = 米米幻翼膜（Mimi Phantom Membrane）：神翼修复材料，普通物品
+    // 米米幻翼膜（Mimi Phantom Membrane）：神翼修复材料，普通物品
     public static final RegistryObject<Item> MIMI_PHANTOM_MEMBRANE = registerItem("mimi_phantom_membrane",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 161 = 超懒神翼胸甲（Super Lazy Divine Wings Chestplate）：终极翼甲，SUPER_LAZY_WINGS 材质
+    // 超懒神翼胸甲（Super Lazy Divine Wings Chestplate）：终极翼甲，SUPER_LAZY_WINGS 材质
     public static final RegistryObject<Item> SUPER_LAZY_WINGS_CHESTPLATE =
             registerItem("super_lazy_wings_chestplate",
                     () -> new ArmorItem(ModArmorMaterials.SUPER_LAZY_WINGS, ArmorItem.Type.CHESTPLATE,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 162 = 上古剑意（Ancient Sword Intent）：普通物品
+    // 上古剑意（Ancient Sword Intent）：普通物品
     public static final RegistryObject<Item> ANCIENT_SWORD_INTENT = registerItem("ancient_sword_intent",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 163 = 超懒神剑·残缺·壹（Super Lazy Divine Sword - Broken I）：普通物品【非装备】，
+    // 超懒神剑·残缺·壹（Super Lazy Divine Sword - Broken I）：普通物品【非装备】，
     // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_1 =
             registerItem("super_lazy_divine_sword_broken_1",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 164 = 淬剑台（Sword Quenching Table）：放置后对应 ModBlocks.SWORD_QUENCHING_TABLE
+    // 淬剑台（Sword Quenching Table）：放置后对应 ModBlocks.SWORD_QUENCHING_TABLE
     public static final RegistryObject<Item> SWORD_QUENCHING_TABLE = registerItem("sword_quenching_table",
             () -> new BlockItem(ModBlocks.SWORD_QUENCHING_TABLE.get(), new Item.Properties()));
 
-    // 编码 165 = 超懒神剑·残缺·贰（Super Lazy Divine Sword - Broken II）：普通物品【非装备】，
-    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变（与163残缺·壹同款）
+    // 超懒神剑·残缺·贰（Super Lazy Divine Sword - Broken II）：普通物品【非装备】，
+    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变（与超懒神剑·残缺·壹同款）
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_2 =
             registerItem("super_lazy_divine_sword_broken_2",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 166 = 汲血台（Bloodletting Table）：放置后对应 ModBlocks.BLOODLETTING_TABLE
+    // 汲血台（Bloodletting Table）：放置后对应 ModBlocks.BLOODLETTING_TABLE
     public static final RegistryObject<Item> BLOODLETTING_TABLE = registerItem("bloodletting_table",
             () -> new BlockItem(ModBlocks.BLOODLETTING_TABLE.get(), new Item.Properties()));
 
-    // ===== 167-168：血瓶 / 淬剑液（普通物品，最大堆叠 64） =====
+    // ===== 血瓶 / 淬剑液（普通物品，最大堆叠 64） =====
 
-    // 编码 167 = 血瓶（Blood Vial）
+    // 血瓶（Blood Vial）
     public static final RegistryObject<Item> BLOOD_VIAL = registerItem("blood_vial",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 168 = 淬剑液（Sword Quenching Liquid）
+    // 淬剑液（Sword Quenching Liquid）
     public static final RegistryObject<Item> SWORD_QUENCHING_LIQUID = registerItem("sword_quenching_liquid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 169-172：剑魄与超懒神剑·残次/赝品 =====
+    // ===== 剑魄与超懒神剑·残次/赝品 =====
 
-    // 编码 169 = 远古剑魄（Ancient Sword Soul）
+    // 远古剑魄（Ancient Sword Soul）
     public static final RegistryObject<Item> ANCIENT_SWORD_SOUL = registerItem("ancient_sword_soul",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 170 = 超懒神剑·残次：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·残次：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_DEFECTIVE =
             registerItem("super_lazy_divine_sword_defective",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 171 = 太古剑魄（Primordial Sword Soul）
+    // 太古剑魄（Primordial Sword Soul）
     public static final RegistryObject<Item> PRIMORDIAL_SWORD_SOUL = registerItem("primordial_sword_soul",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 172 = 超懒神剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT =
             registerItem("super_lazy_divine_sword_counterfeit",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // ===== 173-176：神玉系列与超懒神剑·瑕疵 =====
+    // ===== 神玉系列与超懒神剑·瑕疵 =====
 
-    // 编码 173 = 神玉（Divine Jade）
+    // 神玉（Divine Jade）
     public static final RegistryObject<Item> DIVINE_JADE = registerItem("divine_jade",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 174 = 金米玉（Golden Rice Jade）
+    // 金米玉（Golden Rice Jade）
     public static final RegistryObject<Item> GOLDEN_RICE_JADE = registerItem("golden_rice_jade",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 175 = 神剑鉴玉（Divine Sword Appraisal Jade）
+    // 神剑鉴玉（Divine Sword Appraisal Jade）
     public static final RegistryObject<Item> DIVINE_SWORD_APPRAISAL_JADE =
             registerItem("divine_sword_appraisal_jade",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 176 = 超懒神剑·瑕疵：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·瑕疵：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_FLAWED =
             registerItem("super_lazy_divine_sword_flawed",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // ===== 177-181：剑谱系列（178/179/181 为彩虹名堆叠1） =====
+    // ===== 剑谱系列（彩虹名物品堆叠 1） =====
 
-    // 编码 177 = 剑法禁卷（Forbidden Sword Manual）
+    // 剑法禁卷（Forbidden Sword Manual）
     public static final RegistryObject<Item> FORBIDDEN_SWORD_MANUAL = registerItem("forbidden_sword_manual",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 178 = 超懒剑法：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒剑法：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_SWORD_ART = registerItem("super_lazy_sword_art",
             () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 179 = 超懒神剑·完整：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·完整：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COMPLETE =
             registerItem("super_lazy_divine_sword_complete",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 180 = 结晶米玉（Crystallized Rice Jade）
+    // 结晶米玉（Crystallized Rice Jade）
     public static final RegistryObject<Item> CRYSTALLIZED_RICE_JADE = registerItem("crystallized_rice_jade",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 181 = 终末剑诀：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 终末剑诀：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> FINAL_SWORD_CODEX = registerItem("final_sword_codex",
             () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // ===== 182-187：天堕/堕落系列 =====
+    // ===== 天堕/堕落系列 =====
 
-    // 编码 182 = 最懒天堕剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 最懒天堕剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_COUNTERFEIT =
             registerItem("laziest_heavenfall_sword_counterfeit",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 编码 183 = 破败之心（Ruined Heart）
+    // 破败之心（Ruined Heart）
     public static final RegistryObject<Item> RUINED_HEART = registerItem("ruined_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 184 = 堕落之心（Fallen Heart）：HEAVENFALL 盔甲的修复材料
+    // 堕落之心（Fallen Heart）：HEAVENFALL 盔甲的修复材料
     public static final RegistryObject<Item> FALLEN_HEART = registerItem("fallen_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 185 = 堕落王冠（Fallen Crown）
+    // 堕落王冠（Fallen Crown）
     public static final RegistryObject<Item> FALLEN_CROWN = registerItem("fallen_crown",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 186 = 七宗堕落（Seven Deadly Falls）
+    // 七宗堕落（Seven Deadly Falls）
     public static final RegistryObject<Item> SEVEN_DEADLY_FALLS = registerItem("seven_deadly_falls",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 187 = 最懒天堕剑·原罪：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 最懒天堕剑·原罪：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_ORIGINAL_SIN =
             registerItem("laziest_heavenfall_sword_original_sin",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // ===== 188-191：最懒天堕盔甲四件套（HEAVENFALL 材质，全部 stacksTo 1） =====
+    // ===== 最懒天堕盔甲四件套（HEAVENFALL 材质，全部 stacksTo 1） =====
 
-    // 编码 188 = 天堕翼胸甲：CHESTPLATE
+    // 天堕翼胸甲：CHESTPLATE
     public static final RegistryObject<Item> HEAVENFALL_WINGS_CHESTPLATE =
             registerItem("heavenfall_wings_chestplate",
                     () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.CHESTPLATE,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 189 = 最懒天堕头盔：HELMET
+    // 最懒天堕头盔：HELMET
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_HELMET =
             registerItem("laziest_heavenfall_helmet",
                     () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.HELMET,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 190 = 最懒天堕护腿：LEGGINGS
+    // 最懒天堕护腿：LEGGINGS
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_LEGGINGS =
             registerItem("laziest_heavenfall_leggings",
                     () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.LEGGINGS,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 191 = 最懒天堕靴子：BOOTS
+    // 最懒天堕靴子：BOOTS
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_BOOTS =
             registerItem("laziest_heavenfall_boots",
                     () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.BOOTS,
                             new Item.Properties().stacksTo(1)));
 
-    // ===== 192-200：米米系列肉鱼食物（全部食用时长 1.5s = 30t，nutrition 单位=半个鸡腿） =====
+    // ===== 米米系列肉鱼食物（全部食用时长 1.5s = 30t，nutrition 单位=半个鸡腿） =====
 
-    // 编码 192 = 熟咧米鸡肉（Cooked Liemi Chicken）：2.5 饱食度(nutrition=5)；1% 中毒 10s + 50% 反胃 5s
-    public static final FoodProperties COOKED_LIEMI_CHICKEN_FOOD = new FoodProperties.Builder()
+    // 熟啄米鸡肉（Cooked Zhuomi Chicken）：2.5 饱食度(nutrition=5)；1% 中毒 10s + 50% 反胃 5s
+    public static final FoodProperties COOKED_ZHUOMI_CHICKEN_FOOD = new FoodProperties.Builder()
             .nutrition(5)
             .saturationMod(0.3F)
             .effect(() -> new MobEffectInstance(MobEffects.POISON, 200, 0), 0.01F)
             .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 100, 0), 0.5F)
             .build();
 
-    public static final RegistryObject<Item> COOKED_LIEMI_CHICKEN = registerItem("cooked_liemi_chicken",
-            () -> new Item(new Item.Properties().stacksTo(64).food(COOKED_LIEMI_CHICKEN_FOOD)) {
+    public static final RegistryObject<Item> COOKED_ZHUOMI_CHICKEN = registerItem("cooked_zhuomi_chicken",
+            () -> new Item(new Item.Properties().stacksTo(64).food(COOKED_ZHUOMI_CHICKEN_FOOD)) {
                 @Override
                 public int getUseDuration(ItemStack stack) {
                     return 30; // 食用时间 1.5 秒
                 }
             });
 
-    // 编码 193 = 米吽牛肉（Raw Mimoo Beef）：1 饱食度(nutrition=2)；100% 反胃 20s + 100% 饥饿 30s + 5% 中毒 25s
+    // 米吽牛肉（Raw Mimoo Beef）：1 饱食度(nutrition=2)；100% 反胃 20s + 100% 饥饿 30s + 5% 中毒 25s
     public static final FoodProperties RAW_MIMOO_BEEF_FOOD = new FoodProperties.Builder()
             .nutrition(2)
             .saturationMod(0.3F)
@@ -1449,7 +988,7 @@ public class ModItems {
                 }
             });
 
-    // 编码 194 = 熟米吽牛肉（Cooked Mimoo Beef）：4 饱食度(nutrition=8)；100% 缓慢 2s + 25% 反胃 10s
+    // 熟米吽牛肉（Cooked Mimoo Beef）：4 饱食度(nutrition=8)；100% 缓慢 2s + 25% 反胃 10s
     public static final FoodProperties COOKED_MIMOO_BEEF_FOOD = new FoodProperties.Builder()
             .nutrition(8)
             .saturationMod(0.3F)
@@ -1465,7 +1004,7 @@ public class ModItems {
                 }
             });
 
-    // 编码 195 = 米羊羊肉（Raw Mimi Mutton）：1 饱食度(nutrition=2)；50% 虚弱 10s + 70% 饥饿 20s + 100% 反胃 10s
+    // 米羊羊肉（Raw Mimi Mutton）：1 饱食度(nutrition=2)；50% 虚弱 10s + 70% 饥饿 20s + 100% 反胃 10s
     public static final FoodProperties RAW_MIMI_MUTTON_FOOD = new FoodProperties.Builder()
             .nutrition(2)
             .saturationMod(0.3F)
@@ -1482,7 +1021,7 @@ public class ModItems {
                 }
             });
 
-    // 编码 196 = 熟米羊羊肉（Cooked Mimi Mutton）：3 饱食度(nutrition=6)；10% 反胃 5s + 1% 虚弱 2s
+    // 熟米羊羊肉（Cooked Mimi Mutton）：3 饱食度(nutrition=6)；10% 反胃 5s + 1% 虚弱 2s
     public static final FoodProperties COOKED_MIMI_MUTTON_FOOD = new FoodProperties.Builder()
             .nutrition(6)
             .saturationMod(0.3F)
@@ -1498,7 +1037,7 @@ public class ModItems {
                 }
             });
 
-    // 编码 197 = 米哼猪肉（Raw Miheng Pork）：2 饱食度(nutrition=4)；
+    // 米哼猪肉（Raw Miheng Pork）：2 饱食度(nutrition=4)；
     // 100% 失明 10s + 100% 虚弱 10s + 100% 缓慢 10s + 100% 中毒 10s + 100% 反胃 10s
     public static final FoodProperties RAW_MIHENG_PORK_FOOD = new FoodProperties.Builder()
             .nutrition(4)
@@ -1518,7 +1057,7 @@ public class ModItems {
                 }
             });
 
-    // 编码 198 = 熟米哼猪肉（Cooked Miheng Pork）：6 饱食度(nutrition=12)；
+    // 熟米哼猪肉（Cooked Miheng Pork）：6 饱食度(nutrition=12)；
     // 100% 失明 10s + 100% 虚弱 10s + 50% 缓慢 10s + 50% 反胃 10s
     public static final FoodProperties COOKED_MIHENG_PORK_FOOD = new FoodProperties.Builder()
             .nutrition(12)
@@ -1537,7 +1076,7 @@ public class ModItems {
                 }
             });
 
-    // 编码 199 = 贪米鱼肉（Raw Tanmi Fish）：0.5 饱食度(nutrition=1)；100% 缓慢 10s
+    // 贪米鱼肉（Raw Tanmi Fish）：0.5 饱食度(nutrition=1)；100% 缓慢 10s
     public static final FoodProperties RAW_TANMI_FISH_FOOD = new FoodProperties.Builder()
             .nutrition(1)
             .saturationMod(0.3F)
@@ -1552,7 +1091,7 @@ public class ModItems {
                 }
             });
 
-    // 编码 200 = 熟贪米鱼肉（Cooked Tanmi Fish）：3 饱食度(nutrition=6)；100% 缓慢 5s + 100% 虚弱 10s
+    // 熟贪米鱼肉（Cooked Tanmi Fish）：3 饱食度(nutrition=6)；100% 缓慢 5s + 100% 虚弱 10s
     public static final FoodProperties COOKED_TANMI_FISH_FOOD = new FoodProperties.Builder()
             .nutrition(6)
             .saturationMod(0.3F)
@@ -1568,65 +1107,65 @@ public class ModItems {
                 }
             });
 
-    // ===== 201-214：米米生物掉落材料（均为普通物品，最大堆叠 64，无食用属性） =====
+    // ===== 米米生物掉落材料（均为普通物品，最大堆叠 64，无食用属性） =====
 
-    // 编码 201 = 啄米羽毛（Zhuomi Feather）
+    // 啄米羽毛（Zhuomi Feather）
     public static final RegistryObject<Item> ZHUOMI_FEATHER = registerItem("zhuomi_feather",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 202 = 米哞皮革（Mimoo Leather）
+    // 米哞皮革（Mimoo Leather）
     public static final RegistryObject<Item> MIMOO_LEATHER = registerItem("mimoo_leather",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 203 = 米羊羊毛（Mimi Wool）
+    // 米羊羊毛（Mimi Wool）
     public static final RegistryObject<Item> MIMI_WOOL = registerItem("mimi_wool",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 204 = 米哼猪皮（Miheng Hide）
+    // 米哼猪皮（Miheng Hide）
     public static final RegistryObject<Item> MIHENG_HIDE = registerItem("miheng_hide",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 205 = 喷米鱼囊（Penmi Fish Sac）
+    // 喷米鱼囊（Penmi Fish Sac）
     public static final RegistryObject<Item> PENMI_FISH_SAC = registerItem("penmi_fish_sac",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 206 = 嗥米狼心（Haomi Wolf Heart）
+    // 嗥米狼心（Haomi Wolf Heart）
     public static final RegistryObject<Item> HAOMI_WOLF_HEART = registerItem("haomi_wolf_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 207 = 米骨（Rice Bone）
+    // 米骨（Rice Bone）
     public static final RegistryObject<Item> RICE_BONE = registerItem("rice_bone",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 208 = 米箭（Rice Arrow）
+    // 米箭（Rice Arrow）
     public static final RegistryObject<Item> RICE_ARROW = registerItem("rice_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 209 = 火米药（Huomi Powder）
+    // 火米药（Huomi Powder）
     public static final RegistryObject<Item> HUOMI_POWDER = registerItem("huomi_powder",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 210 = 眼米珍珠（Yanmi Pearl）
+    // 眼米珍珠（Yanmi Pearl）
     public static final RegistryObject<Item> YANMI_PEARL = registerItem("yanmi_pearl",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 211 = 爆烈米棒（Baoliemi Rod）
+    // 爆烈米棒（Baoliemi Rod）
     public static final RegistryObject<Item> BAOLIEMI_ROD = registerItem("baoliemi_rod",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 212 = 雕米骨（Carved Rice Bone）
+    // 雕米骨（Carved Rice Bone）
     public static final RegistryObject<Item> CARVED_RICE_BONE = registerItem("carved_rice_bone",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 213 = 米莱马球（Milaima Ball）
+    // 米莱马球（Milaima Ball）
     public static final RegistryObject<Item> MILAIMA_BALL = registerItem("milaima_ball",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 214 = 黏米丝线（Nianmi Silk Thread）
+    // 黏米丝线（Nianmi Silk Thread）
     public static final RegistryObject<Item> NIANMI_SILK_THREAD = registerItem("nianmi_silk_thread",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 215 = 腐米肉（Rotten Rice Flesh）：1 饱食度(nutrition=2)，食用时长 1.5s(30t)；
+    // 腐米肉（Rotten Rice Flesh）：1 饱食度(nutrition=2)，食用时长 1.5s(30t)；
     // 100% 中毒 5s + 100% 饥饿 30s + 100% 缓慢 10s + 1% 中毒 60s（与 5s 中毒同等级，触发时按原版规则取较长 60s）
     public static final FoodProperties ROTTEN_RICE_FLESH_FOOD = new FoodProperties.Builder()
             .nutrition(2)
@@ -1645,139 +1184,139 @@ public class ModItems {
                 }
             });
 
-    // ===== 216-226：米米加工材料/液体（均为普通物品，最大堆叠 64；222-226 液体为药水瓶外形的非流体物品） =====
+    // ===== 米米加工材料/液体（均为普通物品，最大堆叠 64；液体为药水瓶外形的非流体物品） =====
 
-    // 编码 216 = 米米大杂烩（Mimi Medley）
+    // 米米大杂烩（Mimi Medley）
     public static final RegistryObject<Item> MIMI_MEDLEY = registerItem("mimi_medley",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 217 = 米骨粉（Rice Bone Meal）
+    // 米骨粉（Rice Bone Meal）
     public static final RegistryObject<Item> RICE_BONE_MEAL = registerItem("rice_bone_meal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 218 = 米精（Rice Essence）
+    // 米精（Rice Essence）
     public static final RegistryObject<Item> RICE_ESSENCE = registerItem("rice_essence",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 219 = 粗米（Coarse Rice）
+    // 粗米（Coarse Rice）
     public static final RegistryObject<Item> COARSE_RICE = registerItem("coarse_rice",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 220 = 米笔（Rice Brush Pen）
+    // 米笔（Rice Brush Pen）
     public static final RegistryObject<Item> RICE_BRUSH_PEN = registerItem("rice_brush_pen",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 221 = 书米笔（Book Rice Pen）
+    // 书米笔（Book Rice Pen）
     public static final RegistryObject<Item> BOOK_RICE_PEN = registerItem("book_rice_pen",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 222 = 米果黑混液（Rice Fruit Black Mixture）
+    // 米果黑混液（Rice Fruit Black Mixture）
     public static final RegistryObject<Item> RICE_FRUIT_BLACK_MIXTURE = registerItem("rice_fruit_black_mixture",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 223 = 米果混黏液（Rice Fruit Viscous Mixture）
+    // 米果混黏液（Rice Fruit Viscous Mixture）
     public static final RegistryObject<Item> RICE_FRUIT_VISCOUS_MIXTURE = registerItem("rice_fruit_viscous_mixture",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 224 = 爆米绽放液（Poprice Bloom Liquid）
+    // 爆米绽放液（Poprice Bloom Liquid）
     public static final RegistryObject<Item> POPRICE_BLOOM_LIQUID = registerItem("poprice_bloom_liquid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 225 = 眼米嘬心液（Yanmi Heart-Sip Liquid）
+    // 眼米嘬心液（Yanmi Heart-Sip Liquid）
     public static final RegistryObject<Item> YANMI_HEART_SIP_LIQUID = registerItem("yanmi_heart_sip_liquid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 226 = 米米杂烩液（Mimi Medley Liquid）
+    // 米米杂烩液（Mimi Medley Liquid）
     public static final RegistryObject<Item> MIMI_MEDLEY_LIQUID = registerItem("mimi_medley_liquid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 227-240：BOSS/神兽掉落（均为普通物品，最大堆叠 64；"头/棍/爪/角/牙/鳞"仅为同名掉落物，无装备/武器功能） =====
+    // ===== BOSS/神兽掉落（均为普通物品，最大堆叠 64；"头/棍/爪/角/牙/鳞"仅为同名掉落物，无装备/武器功能） =====
 
-    // 编码 227 = 猴王如意棍（Monkey King Ruyi Staff）
+    // 猴王如意棍（Monkey King Ruyi Staff）
     public static final RegistryObject<Item> MONKEY_KING_RUYI_STAFF = registerItem("monkey_king_ruyi_staff",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 228 = 米米猴头（Mimi Monkey Head）
+    // 米米猴头（Mimi Monkey Head）
     public static final RegistryObject<Item> MIMI_MONKEY_HEAD = registerItem("mimi_monkey_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 229 = 虎王利爪（Tiger King Razor Claw）
+    // 虎王利爪（Tiger King Razor Claw）
     public static final RegistryObject<Item> TIGER_KING_RAZOR_CLAW = registerItem("tiger_king_razor_claw",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 230 = 饭晶虎王头（Rice Crystal Tiger King Head）
+    // 饭晶虎王头（Rice Crystal Tiger King Head）
     public static final RegistryObject<Item> RICE_CRYSTAL_TIGER_KING_HEAD = registerItem("rice_crystal_tiger_king_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 231 = 牛王晶角（Ox King Crystal Horn）
+    // 牛王晶角（Ox King Crystal Horn）
     public static final RegistryObject<Item> OX_KING_CRYSTAL_HORN = registerItem("ox_king_crystal_horn",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 232 = 超晶牛头（Super Crystal Ox Head）
+    // 超晶牛头（Super Crystal Ox Head）
     public static final RegistryObject<Item> SUPER_CRYSTAL_OX_HEAD = registerItem("super_crystal_ox_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 233 = 兔王腥红眼（Rabbit King Bloody Red Eye）
+    // 兔王腥红眼（Rabbit King Bloody Red Eye）
     public static final RegistryObject<Item> RABBIT_KING_BLOODY_RED_EYE = registerItem("rabbit_king_bloody_red_eye",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 234 = 重晶兔王头（Heavy Crystal Rabbit King Head）
+    // 重晶兔王头（Heavy Crystal Rabbit King Head）
     public static final RegistryObject<Item> HEAVY_CRYSTAL_RABBIT_KING_HEAD = registerItem("heavy_crystal_rabbit_king_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 235 = 极毒青蟒牙（Venom Azure Python Fang）
+    // 极毒青蟒牙（Venom Azure Python Fang）
     public static final RegistryObject<Item> VENOM_AZURE_PYTHON_FANG = registerItem("venom_azure_python_fang",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 236 = 复晶天青蟒头（Compound Crystal Azure Python Head）
+    // 复晶天青蟒头（Compound Crystal Azure Python Head）
     public static final RegistryObject<Item> COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD = registerItem("compound_crystal_azure_python_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 237 = 恶夔长命角（Evil Kui Longevity Horn）
+    // 恶夔长命角（Evil Kui Longevity Horn）
     public static final RegistryObject<Item> EVIL_KUI_LONGEVITY_HORN = registerItem("evil_kui_longevity_horn",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 238 = 清洁长命夔头（Purified Longevity Kui Head）
+    // 清洁长命夔头（Purified Longevity Kui Head）
     public static final RegistryObject<Item> PURIFIED_LONGEVITY_KUI_HEAD = registerItem("purified_longevity_kui_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 239 = 终末龙逆鳞（End Dragon Reverse Scale）
+    // 终末龙逆鳞（End Dragon Reverse Scale）
     public static final RegistryObject<Item> END_DRAGON_REVERSE_SCALE = registerItem("end_dragon_reverse_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 240 = 最懒终末龙头（Laziest End Dragon Head）
+    // 最懒终末龙头（Laziest End Dragon Head）
     public static final RegistryObject<Item> LAZIEST_END_DRAGON_HEAD = registerItem("laziest_end_dragon_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 241-245：爆米嘬心液 + 四档镐头部件（均为普通物品，最大堆叠 64） =====
+    // ===== 爆米嘬心液 + 四档镐头部件（均为普通物品，最大堆叠 64） =====
 
-    // 编码 241 = 爆米嘬心液（Poprice Heart-Sip Liquid）：药水瓶外形的非流体物品
+    // 爆米嘬心液（Poprice Heart-Sip Liquid）：药水瓶外形的非流体物品
     public static final RegistryObject<Item> POPRICE_HEART_SIP_LIQUID = registerItem("poprice_heart_sip_liquid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 242 = 超重结晶镐头（Super Heavy Crystal Pickaxe Head）
+    // 超重结晶镐头（Super Heavy Crystal Pickaxe Head）
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_PICKAXE_HEAD =
             registerItem("super_heavy_crystal_pickaxe_head",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 243 = 复合米饭镐头（Compound Rice Meal Pickaxe Head）
+    // 复合米饭镐头（Compound Rice Meal Pickaxe Head）
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_PICKAXE_HEAD =
             registerItem("compound_rice_meal_pickaxe_head",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 244 = 清洁复合镐头（Cleansing Compound Pickaxe Head）
+    // 清洁复合镐头（Cleansing Compound Pickaxe Head）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_PICKAXE_HEAD =
             registerItem("cleansing_compound_pickaxe_head",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 245 = 超懒合金镐头（Super Lazy Alloy Pickaxe Head）
+    // 超懒合金镐头（Super Lazy Alloy Pickaxe Head）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_PICKAXE_HEAD =
             registerItem("super_lazy_alloy_pickaxe_head",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 246 = 咧米鸡肉（Liemi Chicken）：0.5 饱食度(nutrition=1)，食用时长 1.5s(30t)；
+    // 啄米鸡肉（Zhuomi Chicken）：0.5 饱食度(nutrition=1)，食用时长 1.5s(30t)；
     // 10% 中毒 20s + 90% 饥饿 30s + 100% 反胃 15s
-    public static final FoodProperties LIEMI_CHICKEN_FOOD = new FoodProperties.Builder()
+    public static final FoodProperties ZHUOMI_CHICKEN_FOOD = new FoodProperties.Builder()
             .nutrition(1)
             .saturationMod(0.1F)
             .effect(() -> new MobEffectInstance(MobEffects.POISON, 400, 0), 0.1F)
@@ -1785,673 +1324,673 @@ public class ModItems {
             .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 300, 0), 1.0F)
             .build();
 
-    public static final RegistryObject<Item> LIEMI_CHICKEN = registerItem("liemi_chicken",
-            () -> new Item(new Item.Properties().stacksTo(64).food(LIEMI_CHICKEN_FOOD)) {
+    public static final RegistryObject<Item> ZHUOMI_CHICKEN = registerItem("zhuomi_chicken",
+            () -> new Item(new Item.Properties().stacksTo(64).food(ZHUOMI_CHICKEN_FOOD)) {
                 @Override
                 public int getUseDuration(ItemStack stack) {
                     return 30; // 食用时间 1.5 秒
                 }
             });
 
-    // ===== 247-250：四档棒（手柄部件，均为普通物品，最大堆叠 64） =====
+    // ===== 四档棒（手柄部件，均为普通物品，最大堆叠 64） =====
 
-    // 编码 247 = 超重结晶棒（Super Heavy Crystal Rod）
+    // 超重结晶棒（Super Heavy Crystal Rod）
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_ROD = registerItem("super_heavy_crystal_rod",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 248 = 复合米饭棒（Compound Rice Meal Rod）
+    // 复合米饭棒（Compound Rice Meal Rod）
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_ROD = registerItem("compound_rice_meal_rod",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 249 = 清洁复合棒（Cleansing Compound Rod）
+    // 清洁复合棒（Cleansing Compound Rod）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_ROD = registerItem("cleansing_compound_rod",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 250 = 超懒合金棒（Super Lazy Alloy Rod）
+    // 超懒合金棒（Super Lazy Alloy Rod）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_ROD = registerItem("super_lazy_alloy_rod",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 251-255：五档镐（PickaxeItem 工具类，最大堆叠 1；镐头+棒合成的成品） =====
+    // ===== 五档镐（PickaxeItem 工具类，最大堆叠 1；镐头+棒合成的成品） =====
 
-    // 编码 251 = 超重结晶镐（Super Heavy Crystal Pickaxe）
+    // 超重结晶镐（Super Heavy Crystal Pickaxe）
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_PICKAXE =
             registerItem("super_heavy_crystal_pickaxe",
                     () -> new PickaxeItem(ModItemTiers.SUPER_HEAVY_CRYSTAL, 1, -2.8F,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 252 = 复合米饭镐（Compound Rice Meal Pickaxe）
+    // 复合米饭镐（Compound Rice Meal Pickaxe）
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_PICKAXE =
             registerItem("compound_rice_meal_pickaxe",
                     () -> new PickaxeItem(ModItemTiers.COMPOUND_RICE_MEAL, 1, -2.8F,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 253 = 清洁复合镐（Cleansing Compound Pickaxe）
+    // 清洁复合镐（Cleansing Compound Pickaxe）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_PICKAXE =
             registerItem("cleansing_compound_pickaxe",
                     () -> new PickaxeItem(ModItemTiers.CLEANSING_COMPOUND, 1, -2.8F,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 254 = 超懒合金镐（Super Lazy Alloy Pickaxe）
+    // 超懒合金镐（Super Lazy Alloy Pickaxe）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_PICKAXE =
             registerItem("super_lazy_alloy_pickaxe",
                     () -> new PickaxeItem(ModItemTiers.SUPER_LAZY_ALLOY, 1, -2.8F,
                             new Item.Properties().stacksTo(1)));
 
-    // 编码 255 = 最懒天堕镐（Laziest Heavenfall Pickaxe）：传说级，堕落之心修复
+    // 最懒天堕镐（Laziest Heavenfall Pickaxe）：传说级，堕落之心修复
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_PICKAXE =
             registerItem("laziest_heavenfall_pickaxe",
                     () -> new PickaxeItem(ModItemTiers.LAZIEST_HEAVENFALL, 1, -2.8F,
                             new Item.Properties().stacksTo(1)));
 
-    // ===== 256-259：盗米者系列 + 米魂残天（均为普通物品，最大堆叠 64；257 除外为生物蛋） =====
+    // ===== 盗米者系列 + 米魂残天（均为普通物品，最大堆叠 64；盗米者生物蛋除外） =====
 
-    // 编码 256 = 盗米之心（Rice Stealer Heart）
+    // 盗米之心（Rice Stealer Heart）
     public static final RegistryObject<Item> RICE_STEALER_HEART = registerItem("rice_stealer_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 257 = 盗米者生物蛋：米白底/贼墨黑斑（实体 rice_stealer 当前为 PendingBossEntity 占位，后续替换真实生物）
+    // 盗米者生物蛋：米白底/贼墨黑斑（实体 rice_stealer 当前为 PendingBossEntity 占位，后续替换真实生物）
     public static final RegistryObject<Item> RICE_STEALER_SPAWN_EGG =
             registerItem("rice_stealer_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.RICE_STEALER, 0xEDE6D2, 0x3A3A4A, new Item.Properties()));
 
-    // 编码 258 = 米魂之泪（Rice Soul Tear）
+    // 米魂之泪（Rice Soul Tear）
     public static final RegistryObject<Item> RICE_SOUL_TEAR = registerItem("rice_soul_tear",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 259 = 残天翼（Remnant Heaven Wing）
+    // 残天翼（Remnant Heaven Wing）
     public static final RegistryObject<Item> REMNANT_HEAVEN_WING = registerItem("remnant_heaven_wing",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 260 = 超懒合金箭（Super Lazy Alloy Arrow）：普通物品，最大堆叠 64（当前为材料，非可发射箭矢）
+    // 超懒合金箭（Super Lazy Alloy Arrow）：普通物品，最大堆叠 64（当前为材料，非可发射箭矢）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_ARROW = registerItem("super_lazy_alloy_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 261-270：残/仙/神兽系列掉落（均为普通物品，最大堆叠 64；精灵帽仅为同名物品不可穿戴） =====
+    // ===== 残/仙/神兽系列掉落（均为普通物品，最大堆叠 64；精灵帽仅为同名物品不可穿戴） =====
 
-    // 编码 261 = 虚无之触（Void Touch）
+    // 虚无之触（Void Touch）
     public static final RegistryObject<Item> VOID_TOUCH = registerItem("void_touch",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 262 = 残花枝（Faded Flower Branch）
+    // 残花枝（Faded Flower Branch）
     public static final RegistryObject<Item> FADED_FLOWER_BRANCH = registerItem("faded_flower_branch",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 263 = 天凤之喙（Celestial Phoenix Beak）
+    // 天凤之喙（Celestial Phoenix Beak）
     public static final RegistryObject<Item> CELESTIAL_PHOENIX_BEAK = registerItem("celestial_phoenix_beak",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 264 = 残堕米精（Remnant Fallen Rice Essence）
+    // 残堕米精（Remnant Fallen Rice Essence）
     public static final RegistryObject<Item> REMNANT_FALLEN_RICE_ESSENCE =
             registerItem("remnant_fallen_rice_essence",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 265 = 残堕锭（Remnant Fallen Ingot）
+    // 残堕锭（Remnant Fallen Ingot）
     public static final RegistryObject<Item> REMNANT_FALLEN_INGOT = registerItem("remnant_fallen_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 266 = 鲛泪（Mermaid Tear）
+    // 鲛泪（Mermaid Tear）
     public static final RegistryObject<Item> MERMAID_TEAR = registerItem("mermaid_tear",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 267 = 蛟龙爪（Jiaolong Talon）
+    // 蛟龙爪（Jiaolong Talon）
     public static final RegistryObject<Item> JIAOLONG_TALON = registerItem("jiaolong_talon",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 268 = 蜃楼骨（Mirage Bone）
+    // 蜃楼骨（Mirage Bone）
     public static final RegistryObject<Item> MIRAGE_BONE = registerItem("mirage_bone",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 269 = 精灵帽（Elf Hat）：普通物品【非装备】，不可穿戴
+    // 精灵帽（Elf Hat）：普通物品【非装备】，不可穿戴
     public static final RegistryObject<Item> ELF_HAT = registerItem("elf_hat",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 270 = 噬月狼爪（Moon Devourer Wolf Claw）
+    // 噬月狼爪（Moon Devourer Wolf Claw）
     public static final RegistryObject<Item> MOON_DEVOURER_WOLF_CLAW =
             registerItem("moon_devourer_wolf_claw",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 271：堕落台（Fallen Altar）：放置后对应 ModBlocks.FALLEN_ALTAR =====
+    // ===== 堕落台（Fallen Altar）：放置后对应 ModBlocks.FALLEN_ALTAR =====
     public static final RegistryObject<Item> FALLEN_ALTAR = registerItem("fallen_altar",
             () -> new BlockItem(ModBlocks.FALLEN_ALTAR.get(), new Item.Properties()));
 
-    // ===== 272-286：堕落十字架 / 浸染液 / 深染系列（273、274 为待定占位，不进创造标签页） =====
+    // ===== 堕落十字架 / 浸染液 / 深染系列（含待定占位，不进创造标签页） =====
 
-    // 编码 272 = 堕落十字架（Fallen Cross）
+    // 堕落十字架（Fallen Cross）
     public static final RegistryObject<Item> FALLEN_CROSS = registerItem("fallen_cross",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 273 = 残堕深渊岩（Remnant Fallen Abyss Rock）：深渊层原生岩石方块，深板岩质地，镐挖掘等级 3 = 钻石镐
+    // 残堕深渊岩（Remnant Fallen Abyss Rock）：深渊层原生岩石方块，深板岩质地，镐挖掘等级 3 = 钻石镐
     public static final RegistryObject<Item> REMNANT_FALLEN_ABYSS_ROCK =
             registerItem("remnant_fallen_abyss_rock",
                     () -> new BlockItem(ModBlocks.REMNANT_FALLEN_ABYSS_ROCK.get(), new Item.Properties()));
 
-    // 编码 274 = 残堕基岩（Remnant Fallen Bedrock）：深渊层致密基岩方块，镐挖掘等级 3 = 钻石镐
+    // 残堕基岩（Remnant Fallen Bedrock）：深渊层致密基岩方块，镐挖掘等级 3 = 钻石镐
     public static final RegistryObject<Item> REMNANT_FALLEN_BEDROCK =
             registerItem("remnant_fallen_bedrock",
                     () -> new BlockItem(ModBlocks.REMNANT_FALLEN_BEDROCK.get(), new Item.Properties()));
 
-    // 编码 275 = 浸染液（Dyeing Solution）：深染系列材料的浸染原料
+    // 浸染液（Dyeing Solution）：深染系列材料的浸染原料
     public static final RegistryObject<Item> DYEING_SOLUTION = registerItem("dyeing_solution",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 276 = 深染残天翼（Deep-Dyed Remnant Heaven Wing）：鞘翅类装备，
+    // 深染残天翼（Deep-Dyed Remnant Heaven Wing）：鞘翅类装备，
     // 直接继承原版 ElytraItem——胸甲槽穿戴、空中跳跃即可滑翔，耐久 432（滑翔每秒损耗1点），
     // .durability(432) 自动锁定最大堆叠为 1，无需也不能再链 .stacksTo(1)
     public static final RegistryObject<Item> DEEP_DYED_REMNANT_HEAVEN_WING =
             registerItem("deep_dyed_remnant_heaven_wing",
                     () -> new ElytraItem(new Item.Properties().durability(432)));
 
-    // 编码 277 = 深染虚无之触（Deep-Dyed Void Touch）
+    // 深染虚无之触（Deep-Dyed Void Touch）
     public static final RegistryObject<Item> DEEP_DYED_VOID_TOUCH =
             registerItem("deep_dyed_void_touch",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 278 = 深染残花枝（Deep-Dyed Faded Flower Branch）
+    // 深染残花枝（Deep-Dyed Faded Flower Branch）
     public static final RegistryObject<Item> DEEP_DYED_FADED_FLOWER_BRANCH =
             registerItem("deep_dyed_faded_flower_branch",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 279 = 深染天凤之喙（Deep-Dyed Celestial Phoenix Beak）
+    // 深染天凤之喙（Deep-Dyed Celestial Phoenix Beak）
     public static final RegistryObject<Item> DEEP_DYED_CELESTIAL_PHOENIX_BEAK =
             registerItem("deep_dyed_celestial_phoenix_beak",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 280 = 深染残堕米精（Deep-Dyed Remnant Fallen Rice Essence）
+    // 深染残堕米精（Deep-Dyed Remnant Fallen Rice Essence）
     public static final RegistryObject<Item> DEEP_DYED_REMNANT_FALLEN_RICE_ESSENCE =
             registerItem("deep_dyed_remnant_fallen_rice_essence",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 281 = 深染鲛泪（Deep-Dyed Mermaid Tear）
+    // 深染鲛泪（Deep-Dyed Mermaid Tear）
     public static final RegistryObject<Item> DEEP_DYED_MERMAID_TEAR =
             registerItem("deep_dyed_mermaid_tear",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 282 = 深染蛟龙爪（Deep-Dyed Jiaolong Talon）
+    // 深染蛟龙爪（Deep-Dyed Jiaolong Talon）
     public static final RegistryObject<Item> DEEP_DYED_JIAOLONG_TALON =
             registerItem("deep_dyed_jiaolong_talon",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 283 = 深染蜃楼骨（Deep-Dyed Mirage Bone）
+    // 深染蜃楼骨（Deep-Dyed Mirage Bone）
     public static final RegistryObject<Item> DEEP_DYED_MIRAGE_BONE =
             registerItem("deep_dyed_mirage_bone",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 284 = 深染精灵帽（Deep-Dyed Elf Hat）：普通物品【非装备】，不可穿戴
+    // 深染精灵帽（Deep-Dyed Elf Hat）：普通物品【非装备】，不可穿戴
     public static final RegistryObject<Item> DEEP_DYED_ELF_HAT =
             registerItem("deep_dyed_elf_hat",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 285 = 深染噬月狼爪（Deep-Dyed Moon Devourer Wolf Claw）
+    // 深染噬月狼爪（Deep-Dyed Moon Devourer Wolf Claw）
     public static final RegistryObject<Item> DEEP_DYED_MOON_DEVOURER_WOLF_CLAW =
             registerItem("deep_dyed_moon_devourer_wolf_claw",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 286 = 粗制残堕世界精华（Coarse Remnant Fallen World Essence）
+    // 粗制残堕世界精华（Coarse Remnant Fallen World Essence）
     public static final RegistryObject<Item> COARSE_REMNANT_FALLEN_WORLD_ESSENCE =
             registerItem("coarse_remnant_fallen_world_essence",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 287-289：方块物品 BlockItem（破坏掉落本身，方块本体见 block.ModBlocks） =====
+    // ===== 方块物品 BlockItem（破坏掉落本身，方块本体见 block.ModBlocks） =====
 
-    // 编码 287 = 碾磨台（Grinding Table）：石质工作台方块，镐挖掘等级 3 = 钻石镐
+    // 碾磨台（Grinding Table）：石质工作台方块，镐挖掘等级 3 = 钻石镐
     public static final RegistryObject<Item> GRINDING_TABLE = registerItem("grinding_table",
             () -> new BlockItem(ModBlocks.GRINDING_TABLE.get(), new Item.Properties()));
 
-    // 编码 288 = 磨制残堕深渊岩（Polished Remnant Fallen Abyss Rock）：深板岩质地方块，镐挖掘等级 3 = 钻石镐
+    // 磨制残堕深渊岩（Polished Remnant Fallen Abyss Rock）：深板岩质地方块，镐挖掘等级 3 = 钻石镐
     public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_ABYSS_ROCK =
             registerItem("polished_remnant_fallen_abyss_rock",
                     () -> new BlockItem(ModBlocks.POLISHED_REMNANT_FALLEN_ABYSS_ROCK.get(), new Item.Properties()));
 
-    // 编码 289 = 杵界台（Pestle Realm Table）：金属仪式工作台方块，镐挖掘等级 3 = 钻石镐
+    // 杵界台（Pestle Realm Table）：金属仪式工作台方块，镐挖掘等级 3 = 钻石镐
     public static final RegistryObject<Item> PESTLE_REALM_TABLE = registerItem("pestle_realm_table",
             () -> new BlockItem(ModBlocks.PESTLE_REALM_TABLE.get(), new Item.Properties()));
 
-    // 编码 290 = 磨制残堕世界精华（Polished Remnant Fallen World Essence）：粗制精华（286）的磨制成品，
-    // #291 磨制残堕精华液的材料，普通物品，最大堆叠 64
+    // 磨制残堕世界精华（Polished Remnant Fallen World Essence）：粗制精华的磨制成品，
+    // 磨制残堕精华液的材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_WORLD_ESSENCE =
             registerItem("polished_remnant_fallen_world_essence",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 291 = 磨制残堕精华液（Polished Remnant Fallen Essence Solution）：
+    // 磨制残堕精华液（Polished Remnant Fallen Essence Solution）：
     // 普通物品非流体、药水瓶造型（贴图/模型见资源文件），最大堆叠 64
     public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_ESSENCE_SOLUTION =
             registerItem("polished_remnant_fallen_essence_solution",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 292 = 凝锭台（Ingot Condensation Table）：金属工艺机器方块，镐挖掘等级 2 = 铁镐
+    // 凝锭台（Ingot Condensation Table）：金属工艺机器方块，镐挖掘等级 2 = 铁镐
     public static final RegistryObject<Item> INGOT_CONDENSATION_TABLE = registerItem("ingot_condensation_table",
             () -> new BlockItem(ModBlocks.INGOT_CONDENSATION_TABLE.get(), new Item.Properties()));
 
-    // ===== 293-315：残堕世界材料 / 令牌 / 生熟食材 / 香料（食材均为食物，最大堆叠 64） =====
+    // ===== 残堕世界材料 / 令牌 / 生熟食材 / 香料（食材均为食物，最大堆叠 64） =====
 
-    // 编码 293 = 残堕世界精华锭（Remnant Fallen World Essence Ingot）：普通材料物品
+    // 残堕世界精华锭（Remnant Fallen World Essence Ingot）：普通材料物品
     public static final RegistryObject<Item> REMNANT_FALLEN_WORLD_ESSENCE_INGOT =
             registerItem("remnant_fallen_world_essence_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 294 = 世界之泪（Tear of the World）：普通材料物品
+    // 世界之泪（Tear of the World）：普通材料物品
     public static final RegistryObject<Item> WORLD_TEAR = registerItem("world_tear",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 295 = 界主令牌（Realm Lord Token）：普通材料物品
+    // 界主令牌（Realm Lord Token）：普通材料物品
     public static final RegistryObject<Item> REALM_LORD_TOKEN = registerItem("realm_lord_token",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 296 = 界天脑花（Realm-Heaven Brain Flower）：界天米掉落的普通材料物品
+    // 界天脑花（Realm-Heaven Brain Flower）：界天米掉落的普通材料物品
     public static final RegistryObject<Item> REALM_HEAVEN_BRAIN_FLOWER = registerItem("realm_heaven_brain_flower",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 297 = 熟界天胎花（Cooked Realm-Heaven Embryo Flower）：熟食，2 饱食度
+    // 熟界天胎花（Cooked Realm-Heaven Embryo Flower）：熟食，2 饱食度
     public static final RegistryObject<Item> COOKED_REALM_HEAVEN_EMBRYO_FLOWER =
             registerItem("cooked_realm_heaven_embryo_flower",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.4F))));
 
-    // 编码 298 = 虚无触足（Void Touch Tentacle）：生食，1 饱食度，30% 饥饿 I 30s
+    // 虚无触足（Void Touch Tentacle）：生食，1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> VOID_TOUCH_TENTACLE = registerItem("void_touch_tentacle",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
 
-    // 编码 299 = 熟虚无触足（Cooked Void Touch Tentacle）：熟食，2.5 饱食度
+    // 熟虚无触足（Cooked Void Touch Tentacle）：熟食，2.5 饱食度
     public static final RegistryObject<Item> COOKED_VOID_TOUCH_TENTACLE =
             registerItem("cooked_void_touch_tentacle",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
 
-    // 编码 300 = 棘花瓣（Thorn Petal）：生食，1 饱食度，30% 饥饿 I 30s
+    // 棘花瓣（Thorn Petal）：生食，1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> THORN_PETAL = registerItem("thorn_petal",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.2F, 0.3F))));
 
-    // 编码 301 = 熟棘花瓣（Cooked Thorn Petal）：熟食，2 饱食度
+    // 熟棘花瓣（Cooked Thorn Petal）：熟食，2 饱食度
     public static final RegistryObject<Item> COOKED_THORN_PETAL = registerItem("cooked_thorn_petal",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.4F))));
 
-    // 编码 302 = 米凤肉块（Rice Phoenix Meat Chunk）：生食，1.5 饱食度，30% 饥饿 I 30s
+    // 米凤肉块（Rice Phoenix Meat Chunk）：生食，1.5 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> RICE_PHOENIX_MEAT_CHUNK =
             registerItem("rice_phoenix_meat_chunk",
                     () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.3F))));
 
-    // 编码 303 = 熟米凤肉块（Cooked Rice Phoenix Meat Chunk）：熟食，3.5 饱食度
+    // 熟米凤肉块（Cooked Rice Phoenix Meat Chunk）：熟食，3.5 饱食度
     public static final RegistryObject<Item> COOKED_RICE_PHOENIX_MEAT_CHUNK =
             registerItem("cooked_rice_phoenix_meat_chunk",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.8F))));
 
-    // 编码 304 = 特色堕落米（Specialty Fallen Rice）：生食（紫米黑碗外观），1.5 饱食度，30% 饥饿 I 30s
+    // 特色堕落米（Specialty Fallen Rice）：生食（紫米黑碗外观），1.5 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> SPECIALTY_FALLEN_RICE = registerItem("specialty_fallen_rice",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.3F))));
 
-    // 编码 305 = 熟特色堕落米（Cooked Specialty Fallen Rice）：304 的熟食版（红米灰碗外观），3.5 饱食度
+    // 熟特色堕落米（Cooked Specialty Fallen Rice）：特色堕落米的熟食版（红米灰碗外观），3.5 饱食度
     public static final RegistryObject<Item> COOKED_SPECIALTY_FALLEN_RICE =
             registerItem("cooked_specialty_fallen_rice",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
 
-    // 编码 306 = 浅鲛尾（Pale Mermaid Tail）：生食，1 饱食度，30% 饥饿 I 30s
+    // 浅鲛尾（Pale Mermaid Tail）：生食，1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> PALE_MERMAID_TAIL = registerItem("pale_mermaid_tail",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.2F, 0.3F))));
 
-    // 编码 307 = 熟浅鲛尾（Cooked Pale Mermaid Tail）：熟食，2.5 饱食度
+    // 熟浅鲛尾（Cooked Pale Mermaid Tail）：熟食，2.5 饱食度
     public static final RegistryObject<Item> COOKED_PALE_MERMAID_TAIL =
             registerItem("cooked_pale_mermaid_tail",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
 
-    // 编码 308 = 望米伤鲛足（Wangmi Wounded Mermaid Leg）：生食，1 饱食度，40% 饥饿 I 30s
+    // 望米伤鲛足（Wangmi Wounded Mermaid Leg）：生食，1 饱食度，40% 饥饿 I 30s
     public static final RegistryObject<Item> WANGMI_WOUNDED_MERMAID_LEG =
             registerItem("wangmi_wounded_mermaid_leg",
                     () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.4F))));
 
-    // 编码 309 = 熟望米伤鲛足（Cooked Wangmi Wounded Mermaid Leg）：熟食，2.5 饱食度
+    // 熟望米伤鲛足（Cooked Wangmi Wounded Mermaid Leg）：熟食，2.5 饱食度
     public static final RegistryObject<Item> COOKED_WANGMI_WOUNDED_MERMAID_LEG =
             registerItem("cooked_wangmi_wounded_mermaid_leg",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
 
-    // 编码 310 = 半蜃肉片（Half Mirage Meat Slice）：生食，1 饱食度，30% 饥饿 I 30s
+    // 半蜃肉片（Half Mirage Meat Slice）：生食，1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> HALF_MIRAGE_MEAT_SLICE =
             registerItem("half_mirage_meat_slice",
                     () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
 
-    // 编码 311 = 熟半蜃肉片（Cooked Half Mirage Meat Slice）：熟食，2.5 饱食度
+    // 熟半蜃肉片（Cooked Half Mirage Meat Slice）：熟食，2.5 饱食度
     public static final RegistryObject<Item> COOKED_HALF_MIRAGE_MEAT_SLICE =
             registerItem("cooked_half_mirage_meat_slice",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
 
-    // 编码 312 = 香袋（Fragrant Pouch）：普通物品（香料袋），最大堆叠 64
+    // 香袋（Fragrant Pouch）：普通物品（香料袋），最大堆叠 64
     public static final RegistryObject<Item> FRAGRANT_POUCH = registerItem("fragrant_pouch",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 313 = 香粉（Fragrant Powder）：普通物品（粉末材料），最大堆叠 64
+    // 香粉（Fragrant Powder）：普通物品（粉末材料），最大堆叠 64
     public static final RegistryObject<Item> FRAGRANT_POWDER = registerItem("fragrant_powder",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 314 = 噬鹫翅（Devourer Vulture Wing）：生食，1 饱食度，30% 饥饿 I 30s
+    // 噬鹫翅（Devourer Vulture Wing）：生食，1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> DEVOURER_VULTURE_WING = registerItem("devourer_vulture_wing",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
 
-    // 编码 315 = 熟噬鹫翅（Cooked Devourer Vulture Wing）：熟食，3 饱食度
+    // 熟噬鹫翅（Cooked Devourer Vulture Wing）：熟食，3 饱食度
     public static final RegistryObject<Item> COOKED_DEVOURER_VULTURE_WING =
             registerItem("cooked_devourer_vulture_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
 
-    // 编码 316 = 大碗（Big Bowl）：米木制大碗餐具，普通物品，最大堆叠 64
+    // 大碗（Big Bowl）：米木制大碗餐具，普通物品，最大堆叠 64
     public static final RegistryObject<Item> BIG_BOWL = registerItem("big_bowl",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 317 = 锅（Pot）：方块物品 BlockItem；基础铁制烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 锅（Pot）：方块物品 BlockItem；基础铁制烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> POT = registerItem("pot",
             () -> new BlockItem(ModBlocks.POT.get(), new Item.Properties()));
 
-    // 编码 318 = 大锅（Big Pot）：方块物品 BlockItem；铜箍加固的大型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 大锅（Big Pot）：方块物品 BlockItem；铜箍加固的大型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> BIG_POT = registerItem("big_pot",
             () -> new BlockItem(ModBlocks.BIG_POT.get(), new Item.Properties()));
 
-    // 编码 319 = 天虚棘脑汤（Celestial Void Thorn Brain Soup）：熟食，3 饱食度
+    // 天虚棘脑汤（Celestial Void Thorn Brain Soup）：熟食，3 饱食度
     public static final RegistryObject<Item> CELESTIAL_VOID_THORN_BRAIN_SOUP =
             registerItem("celestial_void_thorn_brain_soup",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 320 = 香混肉片（Fragrant Mixed Meat Slices）：熟食，3 饱食度
+    // 香混肉片（Fragrant Mixed Meat Slices）：熟食，3 饱食度
     public static final RegistryObject<Item> FRAGRANT_MIXED_MEAT_SLICE =
             registerItem("fragrant_mixed_meat_slice",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 321 = 酱香双鲛尾（Sauce-Glazed Twin Mermaid Tails）：熟食，4 饱食度
+    // 酱香双鲛尾（Sauce-Glazed Twin Mermaid Tails）：熟食，4 饱食度
     public static final RegistryObject<Item> SAUCE_GLAZED_TWIN_MERMAID_TAIL =
             registerItem("sauce_glazed_twin_mermaid_tail",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.8F))));
 
-    // 编码 322 = 天脑汁（Celestial Brain Juice）：熟食（饮品），2 饱食度
+    // 天脑汁（Celestial Brain Juice）：熟食（饮品），2 饱食度
     public static final RegistryObject<Item> CELESTIAL_BRAIN_JUICE =
             registerItem("celestial_brain_juice",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.4F))));
 
-    // 编码 323 = 酱脑（Sauced Brain）：熟食，2.5 饱食度
+    // 酱脑（Sauced Brain）：熟食，2.5 饱食度
     public static final RegistryObject<Item> SAUCED_BRAIN = registerItem("sauced_brain",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
 
-    // 编码 324 = 米堕汁（Fallen Rice Juice）：熟食（饮品），2 饱食度
+    // 米堕汁（Fallen Rice Juice）：熟食（饮品），2 饱食度
     public static final RegistryObject<Item> FALLEN_RICE_JUICE = registerItem("fallen_rice_juice",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.3F))));
 
-    // 编码 325 = 占位（Reserved Slot 325）：无模型/贴图，不进创造标签页
+    // 占位物品（注册名 placeholder_325，转正前无法合法获得）：无模型/贴图，不进创造标签页
     public static final RegistryObject<Item> PLACEHOLDER_325 = registerItem("placeholder_325",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 326 = 凤肉泥（Phoenix Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
+    // 凤肉泥（Phoenix Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> PHOENIX_MEAT_PASTE = registerItem("phoenix_meat_paste",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
 
-    // 编码 327 = 凤球（Phoenix Ball）：熟食（肉丸），2.5 饱食度
+    // 凤球（Phoenix Ball）：熟食（肉丸），2.5 饱食度
     public static final RegistryObject<Item> PHOENIX_BALL = registerItem("phoenix_ball",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.6F))));
 
-    // 编码 328 = 盘子（Plate）：普通物品（餐具），最大堆叠 64
+    // 盘子（Plate）：普通物品（餐具），最大堆叠 64
     public static final RegistryObject<Item> PLATE = registerItem("plate",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 329 = 酱烤鹫翅（Sauce-Roasted Vulture Wing）：熟食，3.5 饱食度
+    // 酱烤鹫翅（Sauce-Roasted Vulture Wing）：熟食，3.5 饱食度
     public static final RegistryObject<Item> SAUCE_ROASTED_VULTURE_WING =
             registerItem("sauce_roasted_vulture_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
 
-    // 编码 330 = 米蜃油脂（Rice Mirage Grease）：米蜃掉落的油脂材料，普通物品，最大堆叠 64
+    // 米蜃油脂（Rice Mirage Grease）：米蜃掉落的油脂材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_MIRAGE_GREASE = registerItem("rice_mirage_grease",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 331 = 染鲛油脂（Dyed Mermaid Grease）：浅染鲛掉落的油脂材料，普通物品，最大堆叠 64
+    // 染鲛油脂（Dyed Mermaid Grease）：浅染鲛掉落的油脂材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> DYED_MERMAID_GREASE = registerItem("dyed_mermaid_grease",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 332 = 油瓶（Oil Bottle）：普通物品（油料），最大堆叠 64
+    // 油瓶（Oil Bottle）：普通物品（油料），最大堆叠 64
     public static final RegistryObject<Item> OIL_BOTTLE = registerItem("oil_bottle",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 333 = 米木纸盘（Rice Paper Plate）：米木薄板制成的一次性纸盘，普通物品，最大堆叠 64；#373 烤箱的合成配料
+    // 米木纸盘（Rice Paper Plate）：米木薄板制成的一次性纸盘，普通物品，最大堆叠 64；烤箱的合成配料
     public static final RegistryObject<Item> RICE_PAPER_PLATE = registerItem("rice_paper_plate",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 334 = 腌料（Marinade）：普通物品（调料），最大堆叠 64
+    // 腌料（Marinade）：普通物品（调料），最大堆叠 64
     public static final RegistryObject<Item> MARINADE = registerItem("marinade",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 335 = 腌鹫翅（Marinated Vulture Wing）：生食（腌制），1.5 饱食度，20% 饥饿 I 30s
+    // 腌鹫翅（Marinated Vulture Wing）：生食（腌制），1.5 饱食度，20% 饥饿 I 30s
     public static final RegistryObject<Item> MARINATED_VULTURE_WING =
             registerItem("marinated_vulture_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.2F))));
 
-    // 编码 336 = 堕米肉丸汤（Fallen Rice Meatball Soup）：熟食，3 饱食度
+    // 堕米肉丸汤（Fallen Rice Meatball Soup）：熟食，3 饱食度
     public static final RegistryObject<Item> FALLEN_RICE_MEATBALL_SOUP =
             registerItem("fallen_rice_meatball_soup",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
 
-    // 编码 337 = 蛟鲛肉泥（Jiao Mermaid Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
+    // 蛟鲛肉泥（Jiao Mermaid Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> JIAO_MERMAID_MEAT_PASTE =
             registerItem("jiao_mermaid_meat_paste",
                     () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
 
-    // 编码 338 = 凤蜃肉泥（Phoenix Mirage Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
+    // 凤蜃肉泥（Phoenix Mirage Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> PHOENIX_MIRAGE_MEAT_PASTE =
             registerItem("phoenix_mirage_meat_paste",
                     () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.3F))));
 
-    // 编码 339 = 珍贵调料（Precious Seasoning）：普通物品（调料），最大堆叠 64
+    // 珍贵调料（Precious Seasoning）：普通物品（调料），最大堆叠 64
     public static final RegistryObject<Item> PRECIOUS_SEASONING = registerItem("precious_seasoning",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 340 = 油爆虚无触（Oil-Seared Void Tentacle）：熟食，3.5 饱食度
+    // 油爆虚无触（Oil-Seared Void Tentacle）：熟食，3.5 饱食度
     public static final RegistryObject<Item> OIL_SEARED_VOID_TENTACLE =
             registerItem("oil_seared_void_tentacle",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.8F))));
 
-    // 编码 341 = 烧烤粉（BBQ Powder）：普通物品（调料），最大堆叠 64
+    // 烧烤粉（BBQ Powder）：普通物品（调料），最大堆叠 64
     public static final RegistryObject<Item> BBQ_POWDER = registerItem("bbq_powder",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 342 = 花香油（Floral Fragrance Oil）：普通物品（油料），最大堆叠 64
+    // 花香油（Floral Fragrance Oil）：普通物品（油料），最大堆叠 64
     public static final RegistryObject<Item> FLORAL_FRAGRANCE_OIL = registerItem("floral_fragrance_oil",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 343 = 复合油（Compound Oil）：普通物品（油料），最大堆叠 64
+    // 复合油（Compound Oil）：普通物品（油料），最大堆叠 64
     public static final RegistryObject<Item> COMPOUND_OIL = registerItem("compound_oil",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 344 = 蛟足炒饭（Mermaid Leg Fried Rice）：熟食，4 饱食度
+    // 蛟足炒饭（Mermaid Leg Fried Rice）：熟食，4 饱食度
     public static final RegistryObject<Item> MERMAID_LEG_FRIED_RICE =
             registerItem("mermaid_leg_fried_rice",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.7F))));
 
-    // 编码 345 = 龙凤花汤（Dragon-Phoenix Flower Soup）：熟食，3 饱食度
+    // 龙凤花汤（Dragon-Phoenix Flower Soup）：熟食，3 饱食度
     public static final RegistryObject<Item> DRAGON_PHOENIX_FLOWER_SOUP =
             registerItem("dragon_phoenix_flower_soup",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 346 = 蜃楼幻想（Mirage Illusion）：蜃楼幻象材料，普通物品，最大堆叠 64
+    // 蜃楼幻想（Mirage Illusion）：蜃楼幻象材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> MIRAGE_ILLUSION = registerItem("mirage_illusion",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 347 = 花香蛟尾（Floral Mermaid Tail）：熟食，3 饱食度
+    // 花香蛟尾（Floral Mermaid Tail）：熟食，3 饱食度
     public static final RegistryObject<Item> FLORAL_MERMAID_TAIL = registerItem("floral_mermaid_tail",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
 
-    // 编码 348 = 海兽相交饭（Sea Beast Jiao Rice）：熟食，4 饱食度
+    // 海兽相交饭（Sea Beast Jiao Rice）：熟食，4 饱食度
     public static final RegistryObject<Item> SEA_BEAST_JIAO_RICE = registerItem("sea_beast_jiao_rice",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.7F))));
 
-    // 编码 349 = 佛幻想（Buddha Illusion）：熟食（豪华料理），5 饱食度
+    // 佛幻想（Buddha Illusion）：熟食（豪华料理），5 饱食度
     public static final RegistryObject<Item> BUDDHA_ILLUSION = registerItem("buddha_illusion",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(10, 0.9F))));
 
-    // 编码 350 = 米雪茶（Rice Snow Tea）：熟食（饮品），1 饱食度
+    // 米雪茶（Rice Snow Tea）：熟食（饮品），1 饱食度
     public static final RegistryObject<Item> RICE_SNOW_TEA = registerItem("rice_snow_tea",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(2, 0.3F))));
 
-    // 编码 351 = 煎龙凤饼（Pan-Fried Dragon-Phoenix Cake）：熟食，3.5 饱食度
+    // 煎龙凤饼（Pan-Fried Dragon-Phoenix Cake）：熟食，3.5 饱食度
     public static final RegistryObject<Item> PAN_FRIED_DRAGON_PHOENIX_CAKE =
             registerItem("pan_fried_dragon_phoenix_cake",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
 
-    // 编码 352 = 天堕茶（Celestial Fallen Tea）：熟食（饮品），1 饱食度
+    // 天堕茶（Celestial Fallen Tea）：熟食（饮品），1 饱食度
     public static final RegistryObject<Item> CELESTIAL_FALLEN_TEA = registerItem("celestial_fallen_tea",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(2, 0.3F))));
 
-    // 编码 353 = 凤包翅（Phoenix-Wrapped Wing）：熟食，3.5 饱食度
+    // 凤包翅（Phoenix-Wrapped Wing）：熟食，3.5 饱食度
     public static final RegistryObject<Item> PHOENIX_WRAPPED_WING =
             registerItem("phoenix_wrapped_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
 
-    // 编码 354 = 腌翅包（Marinated Wing Wrap）：生食（腌制），1.5 饱食度，20% 饥饿 I 30s
+    // 腌翅包（Marinated Wing Wrap）：生食（腌制），1.5 饱食度，20% 饥饿 I 30s
     public static final RegistryObject<Item> MARINATED_WING_WRAP = registerItem("marinated_wing_wrap",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.2F))));
 
-    // 编码 355 = 腌肉片（Marinated Meat Slices）：生食（腌制），1 饱食度，20% 饥饿 I 30s
+    // 腌肉片（Marinated Meat Slices）：生食（腌制），1 饱食度，20% 饥饿 I 30s
     public static final RegistryObject<Item> MARINATED_MEAT_SLICE = registerItem("marinated_meat_slice",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.2F))));
 
-    // 编码 356 = 肉片粥（Meat Slice Congee）：熟食，2.5 饱食度
+    // 肉片粥（Meat Slice Congee）：熟食，2.5 饱食度
     public static final RegistryObject<Item> MEAT_SLICE_CONGEE = registerItem("meat_slice_congee",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.5F))));
 
-    // 编码 357 = 肢体烤串（Limb Skewer）：熟食，3 饱食度
+    // 肢体烤串（Limb Skewer）：熟食，3 饱食度
     public static final RegistryObject<Item> LIMB_SKEWER = registerItem("limb_skewer",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
 
-    // 编码 358 = 饭团（Onigiri）：熟食，2 饱食度（注意：编码 3 的 rice_ball 是另一个可投掷物品「米团」，故本物品注册名为 onigiri）
+    // 饭团（Onigiri）：熟食，2 饱食度（注意：rice_ball「米团」是另一个可投掷物品，故本物品注册名为 onigiri）
     public static final RegistryObject<Item> ONIGIRI = registerItem("onigiri",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.5F))));
 
-    // 编码 359 = 海带片（Kelp Slices）：普通物品（食材），最大堆叠 64
+    // 海带片（Kelp Slices）：普通物品（食材），最大堆叠 64
     public static final RegistryObject<Item> KELP_SLICE = registerItem("kelp_slice",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 360 = 天脑饭团（Celestial Brain Rice Ball）：熟食，3 饱食度
+    // 天脑饭团（Celestial Brain Rice Ball）：熟食，3 饱食度
     public static final RegistryObject<Item> CELESTIAL_BRAIN_RICE_BALL =
             registerItem("celestial_brain_rice_ball",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 361 = 浅鲛饭团（Pale Mermaid Rice Ball）：熟食，3 饱食度
+    // 浅鲛饭团（Pale Mermaid Rice Ball）：熟食，3 饱食度
     public static final RegistryObject<Item> PALE_MERMAID_RICE_BALL =
             registerItem("pale_mermaid_rice_ball",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 362 = 蛟足饭团（Mermaid Leg Rice Ball）：熟食，3 饱食度
+    // 蛟足饭团（Mermaid Leg Rice Ball）：熟食，3 饱食度
     public static final RegistryObject<Item> MERMAID_LEG_RICE_BALL =
             registerItem("mermaid_leg_rice_ball",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 363 = 鹫翅饭团（Vulture Wing Rice Ball）：熟食，3 饱食度
+    // 鹫翅饭团（Vulture Wing Rice Ball）：熟食，3 饱食度
     public static final RegistryObject<Item> VULTURE_WING_RICE_BALL =
             registerItem("vulture_wing_rice_ball",
                     () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
 
-    // 编码 364 = 超级大乱炖（Super Grand Stew）：熟食，豪华大杂烩炖菜，10 饱食度 / 0.9 饱和度（当前熟食最高档），最大堆叠 64
+    // 超级大乱炖（Super Grand Stew）：熟食，豪华大杂烩炖菜，10 饱食度 / 0.9 饱和度（当前熟食最高档），最大堆叠 64
     public static final RegistryObject<Item> SUPER_GRAND_STEW = registerItem("super_grand_stew",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(10, 0.9F))));
 
-    // 编码 365 = 搅碎器（Crusher）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 搅碎器（Crusher）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> CRUSHER = registerItem("crusher",
             () -> new BlockItem(ModBlocks.CRUSHER.get(), new Item.Properties()));
 
-    // 编码 366 = 搅拌器（Mixer）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 搅拌器（Mixer）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> MIXER = registerItem("mixer",
             () -> new BlockItem(ModBlocks.MIXER.get(), new Item.Properties()));
 
-    // 编码 367 = 小煮锅（Small Cooking Pot）：方块物品 BlockItem；带支脚的小型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 小煮锅（Small Cooking Pot）：方块物品 BlockItem；带支脚的小型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> SMALL_COOKING_POT = registerItem("small_cooking_pot",
             () -> new BlockItem(ModBlocks.SMALL_COOKING_POT.get(), new Item.Properties()));
 
-    // 编码 368 = 煮锅（Cooking Pot）：方块物品 BlockItem；铜箍加固的标准烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 煮锅（Cooking Pot）：方块物品 BlockItem；铜箍加固的标准烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> COOKING_POT = registerItem("cooking_pot",
             () -> new BlockItem(ModBlocks.COOKING_POT.get(), new Item.Properties()));
 
-    // 编码 369 = 大煮锅（Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 大煮锅（Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> LARGE_COOKING_POT = registerItem("large_cooking_pot",
             () -> new BlockItem(ModBlocks.LARGE_COOKING_POT.get(), new Item.Properties()));
 
-    // 编码 370 = 超大煮锅（Extra-Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 超大煮锅（Extra-Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> EXTRA_LARGE_COOKING_POT = registerItem("extra_large_cooking_pot",
             () -> new BlockItem(ModBlocks.EXTRA_LARGE_COOKING_POT.get(), new Item.Properties()));
 
-    // 编码 371 = 巨无霸大大大煮锅（Jumbo Mega Cooking Pot）：方块物品 BlockItem；370 超大煮锅之上的特级烹饪方块，
+    // 巨无霸大大大煮锅（Jumbo Mega Cooking Pot）：方块物品 BlockItem；在超大煮锅之上的特级烹饪方块，
     // 镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> JUMBO_MEGA_COOKING_POT = registerItem("jumbo_mega_cooking_pot",
             () -> new BlockItem(ModBlocks.JUMBO_MEGA_COOKING_POT.get(), new Item.Properties()));
 
-    // 编码 372 = 铁锅（Iron Wok）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 铁锅（Iron Wok）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> IRON_WOK = registerItem("iron_wok",
             () -> new BlockItem(ModBlocks.IRON_WOK.get(), new Item.Properties()));
 
-    // 编码 373 = 烤箱（Oven）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
+    // 烤箱（Oven）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> OVEN = registerItem("oven",
             () -> new BlockItem(ModBlocks.OVEN.get(), new Item.Properties()));
 
-    // ===== 374-409：龙系素材/残堕宗罪装备/箭支批次（严格按编号顺序追加，禁止插入） =====
+    // ===== 龙系素材/残堕宗罪装备/箭支批次 =====
 
-    // 编码 374 = 盖子（Pot Lid）：烹饪机器链公共部件（搅碎器/搅拌器/三级煮锅/铁锅都要用），
+    // 盖子（Pot Lid）：烹饪机器链公共部件（搅碎器/搅拌器/三级煮锅/铁锅都要用），
     // 木按钮 + 重型压力板合成，普通物品，最大堆叠 64
     public static final RegistryObject<Item> POT_LID = registerItem("pot_lid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 375 = 勺子（Spoon）：普通物品，最大堆叠 64
+    // 勺子（Spoon）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> SPOON = registerItem("spoon",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 376 = 骊珠（Li Pearl）：黑龙颔下之珠，普通物品，最大堆叠 64
+    // 骊珠（Li Pearl）：黑龙颔下之珠，普通物品，最大堆叠 64
     public static final RegistryObject<Item> LI_PEARL = registerItem("li_pearl",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 377 = 龙血（Dragon Blood）：普通物品，最大堆叠 64
+    // 龙血（Dragon Blood）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> DRAGON_BLOOD = registerItem("dragon_blood",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 378 = 龙鳞（Dragon Scale）：普通物品，最大堆叠 64；9 个可在工作台压缩成 386 号龙鳞块（配方待定）
+    // 龙鳞（Dragon Scale）：普通物品，最大堆叠 64；9 个可在工作台压缩成龙鳞块（配方待定）
     public static final RegistryObject<Item> DRAGON_SCALE = registerItem("dragon_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 379 = 宇罪龙逆鳞（Yu Sin Dragon Reverse Scale）：普通物品，最大堆叠 64；残堕工具（396/397）修复材料
+    // 宇罪龙逆鳞（Yu Sin Dragon Reverse Scale）：普通物品，最大堆叠 64；残堕工具修复材料
     public static final RegistryObject<Item> YU_SIN_DRAGON_REVERSE_SCALE = registerItem("yu_sin_dragon_reverse_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 380 = 龙骨（Dragon Bone）：普通物品，最大堆叠 64
+    // 龙骨（Dragon Bone）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> DRAGON_BONE = registerItem("dragon_bone",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 381 = 界主龙心（Realm Lord Dragon Heart）：普通物品，最大堆叠 64
+    // 界主龙心（Realm Lord Dragon Heart）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> REALM_LORD_DRAGON_HEART = registerItem("realm_lord_dragon_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 382 = 宇罪龙头（Yu Sin Dragon Head）：普通物品，最大堆叠 64
+    // 宇罪龙头（Yu Sin Dragon Head）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> YU_SIN_DRAGON_HEAD = registerItem("yu_sin_dragon_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 383 = 宗罪龙头冠（Cardinal Sin Dragon Crown）：普通物品，最大堆叠 64；残堕宗罪套装（391-394）修复材料
+    // 宗罪龙头冠（Cardinal Sin Dragon Crown）：普通物品，最大堆叠 64；残堕宗罪套装修复材料
     public static final RegistryObject<Item> CARDINAL_SIN_DRAGON_CROWN = registerItem("cardinal_sin_dragon_crown",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 384 = 龙骨架构（Dragon Bone Framework）：普通物品，最大堆叠 64
+    // 龙骨架构（Dragon Bone Framework）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> DRAGON_BONE_FRAMEWORK = registerItem("dragon_bone_framework",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 385 = 龙血精华（Dragon Blood Essence）：普通物品，最大堆叠 64
+    // 龙血精华（Dragon Blood Essence）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> DRAGON_BLOOD_ESSENCE = registerItem("dragon_blood_essence",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 386 = 龙鳞块（Block of Dragon Scale）：378 号龙鳞的压缩存储块，
+    // 龙鳞块（Block of Dragon Scale）：龙鳞的压缩存储块，
     // 放置后对应 ModBlocks.DRAGON_SCALE_BLOCK；钻石镐（挖掘等级3）采集，破坏掉落本身
     public static final RegistryObject<Item> DRAGON_SCALE_BLOCK = registerItem("dragon_scale_block",
             () -> new BlockItem(ModBlocks.DRAGON_SCALE_BLOCK.get(), new Item.Properties()));
 
-    // 编码 387 = 终罪骊珠（Final Sin Li Pearl）：终罪龙之力凝结的暗紫骊珠（376 骊珠的终罪形态），普通物品，最大堆叠 64
+    // 终罪骊珠（Final Sin Li Pearl）：终罪龙之力凝结的暗紫骊珠（骊珠的终罪形态），普通物品，最大堆叠 64
     public static final RegistryObject<Item> FINAL_SIN_LI_PEARL = registerItem("final_sin_li_pearl",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 388 = 终罪逆鳞（Final Sin Reverse Scale）：终罪龙逆生之鳞（注册名去掉历史后缀 mmjm），普通物品，最大堆叠 64
+    // 终罪逆鳞（Final Sin Reverse Scale）：终罪龙逆生之鳞（注册名去掉历史后缀 mmjm），普通物品，最大堆叠 64
     public static final RegistryObject<Item> FINAL_SIN_REVERSE_SCALE = registerItem("final_sin_reverse_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 389 = 终罪龙心（Final Sin Dragon Heart）：普通物品，最大堆叠 64
+    // 终罪龙心（Final Sin Dragon Heart）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEART = registerItem("final_sin_dragon_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 390 = 终罪龙头（Final Sin Dragon Head）：普通物品，最大堆叠 64
+    // 终罪龙头（Final Sin Dragon Head）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEAD = registerItem("final_sin_dragon_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ---- 391-394 残堕宗罪套装（GeckoLib 4 动态 3D 盔甲，最大堆叠 1；修复材料 383 号宗罪龙头冠，
+    // ---- 残堕宗罪套装（GeckoLib 4 动态 3D 盔甲，最大堆叠 1；修复材料宗罪龙头冠，
     //      材质 REMNANT_FALLEN_CARDINAL_SIN；模型/动画见 RemnantFallenCardinalSinArmorItem） ----
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_HELMET =
             registerItem("remnant_fallen_cardinal_sin_helmet",
@@ -2469,73 +2008,73 @@ public class ModItems {
             registerItem("remnant_fallen_cardinal_sin_boots",
                     () -> new RemnantFallenCardinalSinArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // 编码 395 = 残堕宗罪之弓（Remnant Fallen Cardinal Sin Bow）：BowItem，耐久 2304（设耐久后自动堆叠 1）
+    // 残堕宗罪之弓（Remnant Fallen Cardinal Sin Bow）：BowItem，耐久 2304（设耐久后自动堆叠 1）
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_BOW =
             registerItem("remnant_fallen_cardinal_sin_bow",
                     () -> new BowItem(new Item.Properties().durability(2304)));
 
-    // 编码 396 = 残堕崩解之镐（Remnant Fallen Disintegration Pickaxe）：PickaxeItem，最大堆叠 1，
-    // ModItemTiers.REMNANT_FALLEN（修复材料 379 号宇罪龙逆鳞），攻击伤害/攻速与已有各档镐一致
+    // 残堕崩解之镐（Remnant Fallen Disintegration Pickaxe）：PickaxeItem，最大堆叠 1，
+    // ModItemTiers.REMNANT_FALLEN（修复材料宇罪龙逆鳞），攻击伤害/攻速与已有各档镐一致
     public static final RegistryObject<Item> REMNANT_FALLEN_DISINTEGRATION_PICKAXE =
             registerItem("remnant_fallen_disintegration_pickaxe",
                     () -> new PickaxeItem(ModItemTiers.REMNANT_FALLEN, 1, -2.8F, new Item.Properties().stacksTo(1)));
 
-    // 编码 397 = 残堕逆鳞之剑（Remnant Fallen Reverse Scale Sword）：SwordItem，最大堆叠 1，
-    // ModItemTiers.REMNANT_FALLEN（修复材料 379 号宇罪龙逆鳞），慢速重剑（+5 伤害/-2.8 攻速）
+    // 残堕逆鳞之剑（Remnant Fallen Reverse Scale Sword）：SwordItem，最大堆叠 1，
+    // ModItemTiers.REMNANT_FALLEN（修复材料宇罪龙逆鳞），慢速重剑（+5 伤害/-2.8 攻速）
     public static final RegistryObject<Item> REMNANT_FALLEN_REVERSE_SCALE_SWORD =
             registerItem("remnant_fallen_reverse_scale_sword",
                     () -> new SwordItem(ModItemTiers.REMNANT_FALLEN, 5, -2.8F, new Item.Properties().stacksTo(1)));
 
-    // 编码 398 = 龙鳞之威（Dragon Scale Might）：普通物品，最大堆叠 64
+    // 龙鳞之威（Dragon Scale Might）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> DRAGON_SCALE_MIGHT = registerItem("dragon_scale_might",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 399 = 龙元（Dragon Yuan）：普通物品，最大堆叠 64
+    // 龙元（Dragon Yuan）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> DRAGON_YUAN = registerItem("dragon_yuan",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 400 = 龙首之怒（Dragon Head Wrath）：普通物品，最大堆叠 64
+    // 龙首之怒（Dragon Head Wrath）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> DRAGON_HEAD_WRATH = registerItem("dragon_head_wrath",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 401 = 终罪界心（Final Sin Realm Heart）：普通物品，最大堆叠 64
+    // 终罪界心（Final Sin Realm Heart）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> FINAL_SIN_REALM_HEART = registerItem("final_sin_realm_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 402 = 净化架构（Purification Framework）：普通物品，最大堆叠 64
+    // 净化架构（Purification Framework）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> PURIFICATION_FRAMEWORK = registerItem("purification_framework",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 403 = 世界净化器（World Purifier）：普通物品，最大堆叠 64
+    // 世界净化器（World Purifier）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> WORLD_PURIFIER = registerItem("world_purifier",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ---- 404-409 箭支：当前全部为普通物品（最大堆叠 64，不设投掷/伤害效果），后续再替换为自定义箭 ----
-    // 编码 404 = 饭晶箭（Rice Crystal Arrow）
+    // ---- 箭支：当前全部为普通物品（最大堆叠 64，不设投掷/伤害效果），后续再替换为自定义箭 ----
+    // 饭晶箭（Rice Crystal Arrow）
     public static final RegistryObject<Item> RICE_CRYSTAL_ARROW = registerItem("rice_crystal_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 405 = 超结晶箭（Super Crystal Arrow）
+    // 超结晶箭（Super Crystal Arrow）
     public static final RegistryObject<Item> SUPER_CRYSTAL_ARROW = registerItem("super_crystal_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 406 = 饭晶合金箭（Rice Crystal Alloy Arrow）
+    // 饭晶合金箭（Rice Crystal Alloy Arrow）
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_ARROW = registerItem("rice_crystal_alloy_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 407 = 超重结晶箭（Super Heavy Crystal Arrow）
+    // 超重结晶箭（Super Heavy Crystal Arrow）
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_ARROW = registerItem("super_heavy_crystal_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 408 = 复合米饭箭（Compound Rice Meal Arrow）
+    // 复合米饭箭（Compound Rice Meal Arrow）
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_ARROW = registerItem("compound_rice_meal_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 编码 409 = 清洁复合箭（Cleansing Compound Arrow）
+    // 清洁复合箭（Cleansing Compound Arrow）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_ARROW = registerItem("cleansing_compound_arrow",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ============================ 新物品写在这行以上（末尾追加） ============================
+    // ============================ 物品注册区结束 ============================
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);

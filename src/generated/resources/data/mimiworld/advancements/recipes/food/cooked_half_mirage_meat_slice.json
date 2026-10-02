@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_food_310": {
+    "has_half_mirage_meat_slice": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_raw_food_310",
+      "has_half_mirage_meat_slice",
       "has_the_recipe"
     ]
   ],

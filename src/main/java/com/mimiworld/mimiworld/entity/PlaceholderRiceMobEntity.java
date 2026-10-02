@@ -19,15 +19,16 @@ import net.minecraft.sounds.SoundEvents;
 /**
  * 米米世界通用「占位生物」实体。
  *
- * <p>用户实体编号 1-30 中，除 {@link MicroDuckEntity}（盗米者）与
- * {@link StickyRiceSpiderEntity}（黏米之蛛）外，其余 28 个实体的专属 AI/模型
+ * <p>米米系列生物中，除 {@link ZhuomiChickenEntity}（啄米鸡）、
+ * {@link MimiSheepEntity}（米羊羊）、{@link StickyRiceSpiderEntity}（黏米之蛛）与
+ * {@link MicroDuckEntity}（盗米者）外，其余实体的专属 AI/模型
  * 尚未设计，先用本类统一占位，保证实体可注册、可 /summon、可挂载战利品表。</p>
  *
- * <p>每个实体的实际血量/攻击力来自 {@link ModEntities#SPECS}，
- * 在 EntityAttributeCreationEvent 中按编号单独 put，故本类不写死属性。</p>
+ * <p>每个实体的实际血量/攻击力在 ModEntityAttributes 的 EntityAttributeCreationEvent
+ * 中按实体单独注册，故本类不写死属性。</p>
  *
- * <p>AI 按注册时的 MobCategory 自适应：MONSTER（敌对，用户编号 21-30）
- * 带近战攻击与主动索敌；CREATURE（友好，编号 1-20）仅游荡观望。</p>
+ * <p>AI 按注册时的 MobCategory 自适应：MONSTER（敌对）
+ * 带近战攻击与主动索敌；CREATURE（友好）仅游荡观望。</p>
  */
 public class PlaceholderRiceMobEntity extends PathfinderMob {
 

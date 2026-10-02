@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * 163 号「超懒神剑·残缺·壹」专用：普通物品（非装备），但显示名称为动态彩色渐变。
+ * 「超懒神剑·残缺·壹」专用：普通物品（非装备），但显示名称为动态彩色渐变。
  *
  * <p>原理：每次渲染物品名都会调用 {@link #getName}，按系统时间计算基础色相并逐字错开，
  * 每个字符单独 withColor，从而形成持续流动的彩虹渐变。服务端调用时同样安全（仅影响显示文本）。</p>

@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 高级锤米台方块实体（方块编码 49 = advanced_rice_pounding_table）。
+ * 高级锤米台方块实体（advanced_rice_pounding_table）。
  * <p>
  * 行为与普通锤米台 {@link RicePoundingTableBlockEntity} <b>完全一致</b>（仅贴图外观
  * 不同：右上角金色锤子装饰），合成方式类似原版工作台（即时合成、无加工计时）：

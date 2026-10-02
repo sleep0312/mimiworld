@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 压饭机（编码 31 = rice_press）：绑定 RicePressBlockEntity。
+ * 压饭机（rice_press）：绑定 RicePressBlockEntity。
  * 外观仍是普通全立方块（模型/贴图/挖掘标签沿用原方块资源），右键打开压饭 GUI：
  * 上方横排 9 个输入槽 + 下方居中 1 个输出槽（工作台式即时合成，当前无配方）。
  */

@@ -38,7 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.EnumSet;
 
 /**
- * 157 最懒终末龙（Laziest Final Dragon，注册 id = laziest_final_dragon）。
+ * 最懒终末龙（Laziest Final Dragon，注册 id = laziest_final_dragon）。
  *
  * <p>GeckoLib 模型/贴图/动画：geo/laziest_final_dragon.geo.json（超巨型飞龙骨架）、
  * textures/entity/laziest_final_dragon.png（256×256 暗紫鳞片）、

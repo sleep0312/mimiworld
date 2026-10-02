@@ -4,40 +4,40 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
 /**
- * 米米世界自定义工具/武器材料等级（编码 48、85-129 的剑与弓引用本类）。
+ * 米米世界自定义工具/武器材料等级（本模组的剑与弓引用本类）。
  *
  * <p>等级链（从低到高）：米木（原版木制级别）&lt; 饭晶 &lt; 超结晶 &lt; 饭晶合金锭
- * &lt; 超重结晶锭 &lt; 复合米饭锭 &lt; 清洁复合锭 &lt; 超懒合金锭 &lt; 最懒天堕（184 号堕落之心修复）。</p>
+ * &lt; 超重结晶锭 &lt; 复合米饭锭 &lt; 清洁复合锭 &lt; 超懒合金锭 &lt; 最懒天堕（堕落之心修复）。</p>
  *
  * <p>数值逐档递增（耐久/挖掘速度/攻击加成/挖掘等级/附魔能力），修复材料全部用本模组已有物品：</p>
  * <ul>
- *   <li>饭晶 → 16 号结晶米</li>
- *   <li>超结晶 → 51 号超结晶</li>
- *   <li>饭晶合金 → 35 号饭晶合金锭</li>
- *   <li>超重结晶 → 55 号超重结晶</li>
- *   <li>复合米饭 → 60 号复合米饭锭</li>
- *   <li>清洁复合 → 75 号清洁复合锭</li>
- *   <li>超懒合金 → 80 号超懒合金锭</li>
+ *   <li>饭晶 → 结晶米</li>
+ *   <li>超结晶 → 超结晶</li>
+ *   <li>饭晶合金 → 饭晶合金锭</li>
+ *   <li>超重结晶 → 超重结晶</li>
+ *   <li>复合米饭 → 复合米饭锭</li>
+ *   <li>清洁复合 → 清洁复合锭</li>
+ *   <li>超懒合金 → 超懒合金锭</li>
  * </ul>
  */
 public enum ModItemTiers implements Tier {
-    /** 饭晶：约半档钻石，珍珠米白晶质（修复材料 16 号结晶米） */
+    /** 饭晶：约半档钻石，珍珠米白晶质（修复材料结晶米） */
     RICE_CRYSTAL(520, 7.0F, 2.5F, 2, 14, () -> Ingredient.of(ModItems.CRYSTALLIZED_RICE.get())),
-    /** 超结晶：蓝晶含金核，钻石级（修复材料 51 号超结晶） */
+    /** 超结晶：蓝晶含金核，钻石级（修复材料超结晶） */
     SUPER_CRYSTAL(900, 7.5F, 3.0F, 3, 16, () -> Ingredient.of(ModItems.SUPER_CRYSTAL.get())),
-    /** 饭晶合金：与 36 号饭晶锤一致的钻石级（耐久 1561 / 速度 8 / 伤害 3 / 等级 3，修复材料 35 号饭晶合金锭） */
+    /** 饭晶合金：与饭晶锤一致的钻石级（耐久 1561 / 速度 8 / 伤害 3 / 等级 3，修复材料饭晶合金锭） */
     RICE_CRYSTAL_ALLOY(1561, 8.0F, 3.0F, 3, 15, () -> Ingredient.of(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())),
-    /** 超重结晶：慢速重武器路线，攻击加成最高之一（修复材料 55 号超重结晶） */
+    /** 超重结晶：慢速重武器路线，攻击加成最高之一（修复材料超重结晶） */
     SUPER_HEAVY_CRYSTAL(1900, 8.0F, 4.0F, 3, 12, () -> Ingredient.of(ModItems.SUPER_HEAVY_CRYSTAL.get())),
-    /** 复合米饭：超钻石级（修复材料 60 号复合米饭锭） */
+    /** 复合米饭：超钻石级（修复材料复合米饭锭） */
     COMPOUND_RICE_MEAL(2200, 9.0F, 4.0F, 4, 18, () -> Ingredient.of(ModItems.COMPOUND_RICE_MEAL_INGOT.get())),
-    /** 清洁复合：更高一档（修复材料 75 号清洁复合锭） */
+    /** 清洁复合：更高一档（修复材料清洁复合锭） */
     CLEANSING_COMPOUND(2600, 9.5F, 4.5F, 4, 20, () -> Ingredient.of(ModItems.CLEANSING_COMPOUND_INGOT.get())),
-    /** 超懒合金：终极材料（修复材料 80 号超懒合金锭） */
+    /** 超懒合金：终极材料（修复材料超懒合金锭） */
     SUPER_LAZY_ALLOY(3200, 10.0F, 5.0F, 4, 22, () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get())),
-    /** 最懒天堕：超懒合金之上的传说级（编码 255 最懒天堕镐；修复材料 184 号堕落之心，与 HEAVENFALL 盔甲同源） */
+    /** 最懒天堕：超懒合金之上的传说级（最懒天堕镐；修复材料堕落之心，与 HEAVENFALL 盔甲同源） */
     LAZIEST_HEAVENFALL(3800, 11.0F, 5.5F, 4, 24, () -> Ingredient.of(ModItems.FALLEN_HEART.get())),
-    /** 残堕：龙系之上的终末级（编码 396 残堕崩解之镐/397 残堕逆鳞之剑；修复材料 379 号宇罪龙逆鳞） */
+    /** 残堕：龙系之上的终末级（残堕崩解之镐/残堕逆鳞之剑；修复材料宇罪龙逆鳞） */
     REMNANT_FALLEN(4200, 12.0F, 6.0F, 4, 26, () -> Ingredient.of(ModItems.YU_SIN_DRAGON_REVERSE_SCALE.get()));
 
     private final int uses;

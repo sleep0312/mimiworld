@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 锤米台方块实体（方块编码 29 = rice_pounding_table）。
+ * 锤米台方块实体（rice_pounding_table）。
  * <p>
  * 合成方式类似原版工作台（即时合成、无加工计时）：
  * <ul>

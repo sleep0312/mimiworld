@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 高级锤米台（编码 49 = advanced_rice_pounding_table）：绑定
+ * 高级锤米台（advanced_rice_pounding_table）：绑定
  * AdvancedRicePoundingTableBlockEntity。功能与普通锤米台完全一致，仅 GUI 贴图
  * 外观不同（右上角金锤装饰），右键打开锤米 GUI：2 输入 + 1 输出（当前无配方）。
  */

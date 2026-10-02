@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 小煮锅方块实体（方块编码 367 = small_cooking_pot）。
+ * 小煮锅方块实体（small_cooking_pot）。
  * 加工节奏与原版熔炉一致：输入槽放配料、燃料槽放燃料（煤/木板/木棍等，
  * 燃烧时长通过 {@link ForgeHooks#getBurnTime} 获取，本模组 ModFuelEvents 注册的燃料同样生效），
  * 配方命中且输出槽可容纳时持续烹煮，默认 200 tick（10 秒）产出 1 份。

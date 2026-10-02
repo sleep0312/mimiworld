@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 巨无霸大大大煮锅（编码 371 = jumbo_mega_cooking_pot）：5x5 共 25 个网格输入槽的熔炉式燃料煮锅。
+ * 巨无霸大大大煮锅（jumbo_mega_cooking_pot）：5x5 共 25 个网格输入槽的熔炉式燃料煮锅。
  */
 public class JumboMegaCookingPotBlock extends GridCookingPotBlock {
 

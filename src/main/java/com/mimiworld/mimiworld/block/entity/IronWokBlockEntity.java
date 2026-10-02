@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 铁锅方块实体（方块编码 372 = iron_wok）。
+ * 铁锅方块实体（iron_wok）。
  * <p>
  * 逻辑与 2x2 网格煮锅同构（4 个输入槽，仅 GUI 里摆成菱形）：
  * 槽 0~3 = 四个输入（GUI 顺序：左上、右上、左下、右下），槽 4 = 右上单独输入，

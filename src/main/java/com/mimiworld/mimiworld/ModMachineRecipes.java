@@ -39,484 +39,479 @@ public final class ModMachineRecipes {
     }
 
     public static void register() {
-        // #6：锤米台 —— 燧石 + 5 号米原木 → 6 号米木板（两槽无序，各消耗 1 个）
+        // 锤米台 —— 燧石 + 米原木 → 米木板（两槽无序，各消耗 1 个）
         RicePoundingTableBlockEntity.registerRecipe(
                 Items.FLINT,
-                ModItems.byCode(5),
-                new ItemStack(ModItems.byCode(6)));
+                ModItems.RICE_LOG.get(),
+                new ItemStack(ModItems.RICE_PLANKS.get()));
 
-        // #51：锤米台 —— 金锭 + 50 号粗超结晶 → 51 号超结晶（两槽无序，各消耗 1 个）
+        // 锤米台 —— 金锭 + 粗超结晶 → 超结晶（两槽无序，各消耗 1 个）
         RicePoundingTableBlockEntity.registerRecipe(
                 Items.GOLD_INGOT,
-                ModItems.byCode(50),
-                new ItemStack(ModItems.byCode(51)));
+                ModItems.COARSE_SUPER_CRYSTAL.get(),
+                new ItemStack(ModItems.SUPER_CRYSTAL.get()));
 
-        // #140：锤米台 —— 16 号结晶米 + 铁锭 → 140 号召唤核心胚
+        // 锤米台 —— 结晶米 + 铁锭 → 召唤核心胚
         RicePoundingTableBlockEntity.registerRecipe(
-                ModItems.byCode(16),
+                ModItems.CRYSTALLIZED_RICE.get(),
                 Items.IRON_INGOT,
-                new ItemStack(ModItems.byCode(140)));
+                new ItemStack(ModItems.SUMMON_CORE_BLANK.get()));
 
-        // #143：锤米台 —— 19 号再结晶米 + 钻石 → 143 号高级召唤核心胚
+        // 锤米台 —— 再结晶米 + 钻石 → 高级召唤核心胚
         RicePoundingTableBlockEntity.registerRecipe(
-                ModItems.byCode(19),
+                ModItems.RECRYSTALLIZED_RICE.get(),
                 Items.DIAMOND,
-                new ItemStack(ModItems.byCode(143)));
+                new ItemStack(ModItems.ADVANCED_SUMMON_CORE_BLANK.get()));
 
-        // #148：锤米台 —— 147 号熔融混合结晶 + 下界合金锭 → 148 号最懒召唤核心胚
+        // 锤米台 —— 熔融混合结晶 + 下界合金锭 → 最懒召唤核心胚
         RicePoundingTableBlockEntity.registerRecipe(
-                ModItems.byCode(147),
+                ModItems.MOLTEN_MIXED_CRYSTAL.get(),
                 Items.NETHERITE_INGOT,
-                new ItemStack(ModItems.byCode(148)));
+                new ItemStack(ModItems.LAZIEST_SUMMON_CORE_BLANK.get()));
 
-        // #247：锤米台 —— 左上角 55 号超重结晶 + 左下角 11 号硬化米 → 247 号超重结晶棒（镐手柄）
+        // 锤米台 —— 左上角超重结晶 + 左下角硬化米 → 超重结晶棒（镐手柄）
         RicePoundingTableBlockEntity.registerRecipe(
-                ModItems.byCode(55),
-                ModItems.byCode(11),
-                new ItemStack(ModItems.byCode(247)));
+                ModItems.SUPER_HEAVY_CRYSTAL.get(),
+                ModItems.HARDENED_RICE.get(),
+                new ItemStack(ModItems.SUPER_HEAVY_CRYSTAL_ROD.get()));
 
-        // #248：锤米台 —— 左上角 60 号复合米饭锭 + 左下角 16 号结晶米 → 248 号复合米饭棒
+        // 锤米台 —— 左上角复合米饭锭 + 左下角结晶米 → 复合米饭棒
         RicePoundingTableBlockEntity.registerRecipe(
-                ModItems.byCode(60),
-                ModItems.byCode(16),
-                new ItemStack(ModItems.byCode(248)));
+                ModItems.COMPOUND_RICE_MEAL_INGOT.get(),
+                ModItems.CRYSTALLIZED_RICE.get(),
+                new ItemStack(ModItems.COMPOUND_RICE_MEAL_ROD.get()));
 
-        // #249：锤米台 —— 左上角 75 号清洁复合锭 + 左下角 19 号重结晶米 → 249 号清洁复合棒
+        // 锤米台 —— 左上角清洁复合锭 + 左下角重结晶米 → 清洁复合棒
         RicePoundingTableBlockEntity.registerRecipe(
-                ModItems.byCode(75),
-                ModItems.byCode(19),
-                new ItemStack(ModItems.byCode(249)));
+                ModItems.CLEANSING_COMPOUND_INGOT.get(),
+                ModItems.RECRYSTALLIZED_RICE.get(),
+                new ItemStack(ModItems.CLEANSING_COMPOUND_ROD.get()));
 
-        // #250：锤米台 —— 左上角 80 号超懒合金锭 + 左下角 147 号熔融混合结晶 → 250 号超懒合金棒
+        // 锤米台 —— 左上角超懒合金锭 + 左下角熔融混合结晶 → 超懒合金棒
         RicePoundingTableBlockEntity.registerRecipe(
-                ModItems.byCode(80),
-                ModItems.byCode(147),
-                new ItemStack(ModItems.byCode(250)));
+                ModItems.SUPER_LAZY_ALLOY_INGOT.get(),
+                ModItems.MOLTEN_MIXED_CRYSTAL.get(),
+                new ItemStack(ModItems.SUPER_LAZY_ALLOY_ROD.get()));
 
-        // #32：压饭机 —— 9 个 30 号饭桶 → 1 个 32 号压缩饭桶。
+        // 压饭机 —— 9 个饭桶 → 1 个压缩饭桶。
         // 压饭机仅按输入槽 shrink(1) 消耗，不触发原版合成剩余物逻辑，因此【桶不返还】。
         Item[] ninePails = new Item[RicePressBlockEntity.INPUT_SLOTS];
-        Item pail = ModItems.byCode(30);
+        Item pail = ModItems.RICE_PAIL.get();
         for (int i = 0; i < ninePails.length; i++) {
             ninePails[i] = pail;
         }
-        RicePressBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(32)), ninePails);
+        RicePressBlockEntity.registerRecipe(new ItemStack(ModItems.COMPRESSED_RICE_PAIL.get()), ninePails);
 
-        // #77：电离台 —— 左上角 76 号粗制超懒合金锭 + 左下角 84 号清洁米沉离液，
-        // 处理 2s（40t）→ 77 号超懒合金离子态（输入无序，两槽各消耗 1 个）
+        // 电离台 —— 左上角粗制超懒合金锭 + 左下角清洁米沉离液，
+        // 处理 2s（40t）→ 超懒合金离子态（输入无序，两槽各消耗 1 个）
         IonizationTableBlockEntity.registerRecipe(
-                ModItems.byCode(76),
-                ModItems.byCode(84),
-                new ItemStack(ModItems.byCode(77)),
+                ModItems.COARSE_SUPER_LAZY_ALLOY_INGOT.get(),
+                ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get(),
+                new ItemStack(ModItems.SUPER_LAZY_ALLOY_IONIC_FORM.get()),
                 40);
 
-        // #78：沉淀台 —— 左上角 77 号超懒合金离子态 + 左下角 84 号清洁米沉离液，
-        // 处理 2s（40t）→ 78 号超懒合金粉（两槽各消耗 1 个）
+        // 沉淀台 —— 左上角超懒合金离子态 + 左下角清洁米沉离液，
+        // 处理 2s（40t）→ 超懒合金粉（两槽各消耗 1 个）
         PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.byCode(77),
-                ModItems.byCode(84),
-                new ItemStack(ModItems.byCode(78)),
+                ModItems.SUPER_LAZY_ALLOY_IONIC_FORM.get(),
+                ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get(),
+                new ItemStack(ModItems.SUPER_LAZY_ALLOY_DUST.get()),
                 40);
 
-        // #62：沉淀台 —— 单槽 61 号米果渣（另一槽留空）→ 一次产出 3 个 62 号米果汁
+        // 沉淀台 —— 单槽米果渣（另一槽留空）→ 一次产出 3 个米果汁
         PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.byCode(61),
-                new ItemStack(ModItems.byCode(62), 3));
+                ModItems.RICE_POMACE.get(),
+                new ItemStack(ModItems.RICE_FRUIT_JUICE.get(), 3));
 
-        // #71：沉淀台 —— 单槽 70 号米果混合渣（另一槽留空）→ 一次产出 3 个 71 号米果清洁液
+        // 沉淀台 —— 单槽米果混合渣（另一槽留空）→ 一次产出 3 个米果清洁液
         PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.byCode(70),
-                new ItemStack(ModItems.byCode(71), 3));
+                ModItems.RICE_FRUIT_MIXED_POMACE.get(),
+                new ItemStack(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get(), 3));
 
-        // #67：离解台 —— 上槽 63 号米果混合液 + 下槽 1 号米（离解介质）→ 67 号米果解析液
+        // 离解台 —— 上槽米果混合液 + 下槽米（离解介质）→ 米果解析液
         DissociationTableBlockEntity.registerRecipe(
-                ModItems.byCode(63),
-                ModItems.byCode(1),
-                new ItemStack(ModItems.byCode(67)));
+                ModItems.RICE_FRUIT_MIXTURE.get(),
+                ModItems.RICE.get(),
+                new ItemStack(ModItems.RICE_FRUIT_ANALYZING_SOLUTION.get()));
 
-        // #165：淬剑台 —— 左上 124 号超懒合金剑 + 右上 162 号上古剑意 + 中间 168 号淬剑液
-        // → 165 号超懒神剑·残缺·贰（需按"开始"按钮加工一轮）
+        // 淬剑台 —— 左上超懒合金剑 + 右上上古剑意 + 中间淬剑液
+        // → 超懒神剑·残缺·贰（需按"开始"按钮加工一轮）
         SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.byCode(165)),
-                ModItems.byCode(124),
-                ModItems.byCode(162),
-                ModItems.byCode(168));
+                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_BROKEN_2.get()),
+                ModItems.SUPER_LAZY_ALLOY_SWORD.get(),
+                ModItems.ANCIENT_SWORD_INTENT.get(),
+                ModItems.SWORD_QUENCHING_LIQUID.get());
 
-        // #170：淬剑台 —— 左上 165 残缺·贰 + 右上 169 远古剑魄 + 中间 168 淬剑液 → 170 残次
+        // 淬剑台 —— 左上残缺·贰 + 右上远古剑魄 + 中间淬剑液 → 残次
         SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.byCode(170)),
-                ModItems.byCode(165),
-                ModItems.byCode(169),
-                ModItems.byCode(168));
+                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_DEFECTIVE.get()),
+                ModItems.SUPER_LAZY_DIVINE_SWORD_BROKEN_2.get(),
+                ModItems.ANCIENT_SWORD_SOUL.get(),
+                ModItems.SWORD_QUENCHING_LIQUID.get());
 
-        // #172：淬剑台 —— 左上 170 残次 + 右上 171 太古剑魄 + 中间 168 淬剑液 → 172 赝品
+        // 淬剑台 —— 左上残次 + 右上太古剑魄 + 中间淬剑液 → 赝品
         SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.byCode(172)),
-                ModItems.byCode(170),
-                ModItems.byCode(171),
-                ModItems.byCode(168));
+                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT.get()),
+                ModItems.SUPER_LAZY_DIVINE_SWORD_DEFECTIVE.get(),
+                ModItems.PRIMORDIAL_SWORD_SOUL.get(),
+                ModItems.SWORD_QUENCHING_LIQUID.get());
 
-        // #176：淬剑台 —— 左上 172 赝品 + 右上 175 神剑鉴玉 + 中间 168 淬剑液 → 176 瑕疵
+        // 淬剑台 —— 左上赝品 + 右上神剑鉴玉 + 中间淬剑液 → 瑕疵
         SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.byCode(176)),
-                ModItems.byCode(172),
-                ModItems.byCode(175),
-                ModItems.byCode(168));
+                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_FLAWED.get()),
+                ModItems.SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT.get(),
+                ModItems.DIVINE_SWORD_APPRAISAL_JADE.get(),
+                ModItems.SWORD_QUENCHING_LIQUID.get());
 
-        // #179：淬剑台 —— 左上 178 超懒剑法 + 右上 176 瑕疵 + 中间 168 淬剑液 → 179 完整
+        // 淬剑台 —— 左上超懒剑法 + 右上瑕疵 + 中间淬剑液 → 完整
         SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.byCode(179)),
-                ModItems.byCode(178),
-                ModItems.byCode(176),
-                ModItems.byCode(168));
+                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_COMPLETE.get()),
+                ModItems.SUPER_LAZY_SWORD_ART.get(),
+                ModItems.SUPER_LAZY_DIVINE_SWORD_FLAWED.get(),
+                ModItems.SWORD_QUENCHING_LIQUID.get());
 
-        // #288：碾磨台 —— 左列上 265 残堕锭 / 左列中 80 超懒合金锭，左列下与右列三格
-        // 共 4 个 273 残堕深渊岩 → 288 磨制残堕深渊岩（槽序：左上/左中/左下/右上/右中/右下）
-        Item abyssRock = ModItems.byCode(273);
+        // 碾磨台 —— 左列上 残堕锭 / 左列中 超懒合金锭，左列下与右列三格
+        // 共 4 个残堕深渊岩 → 磨制残堕深渊岩（槽序：左上/左中/左下/右上/右中/右下）
+        Item abyssRock = ModItems.REMNANT_FALLEN_ABYSS_ROCK.get();
         GrindingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.byCode(288)),
-                ModItems.byCode(265),
-                ModItems.byCode(80),
+                new ItemStack(ModItems.POLISHED_REMNANT_FALLEN_ABYSS_ROCK.get()),
+                ModItems.REMNANT_FALLEN_INGOT.get(),
+                ModItems.SUPER_LAZY_ALLOY_INGOT.get(),
                 abyssRock,
                 abyssRock,
                 abyssRock,
                 abyssRock);
 
-        // #290：杵界台 —— 2x2 四格各放 1 个 286 号粗制残堕世界精华（无序）→ 290 磨制残堕世界精华
-        Item coarseEssence = ModItems.byCode(286);
+        // 杵界台 —— 2x2 四格各放 1 个粗制残堕世界精华（无序）→ 磨制残堕世界精华
+        Item coarseEssence = ModItems.COARSE_REMNANT_FALLEN_WORLD_ESSENCE.get();
         PestleRealmTableBlockEntity.registerShapeless(
-                new ItemStack(ModItems.byCode(290)),
+                new ItemStack(ModItems.POLISHED_REMNANT_FALLEN_WORLD_ESSENCE.get()),
                 coarseEssence, coarseEssence, coarseEssence, coarseEssence);
 
         // ================= 食物加工链（35 条）=================
         // 用户机器代号：i=搅碎器 ii=搅拌器 iv=煮锅(2x2) v=大煮锅(3x3) vi=超大煮锅(4x4)
         // viii=铁锅(4 槽菱形) vv=烤箱(3x3)；本批未用到 iii 小煮锅、vii 巨无霸大大大煮锅。
-        // 额外槽物品：碗=316 号大碗；玻璃瓶=原版 GLASS_BOTTLE（作为配料被消耗，机器不返还空瓶）；
-        // 干海带=原版 DRIED_KELP；#357 的"额外7"=7 号米木棍。未给额外槽物品时传 null（该槽必须为空）。
-        Item bowl = ModItems.byCode(316);
+        // 额外槽物品：碗=大碗；玻璃瓶=原版 GLASS_BOTTLE（作为配料被消耗，机器不返还空瓶）；
+        // 干海带=原版 DRIED_KELP；烤箱的额外槽物品=米木棍。未给额外槽物品时传 null（该槽必须为空）。
+        Item bowl = ModItems.BIG_BOWL.get();
         Item bottle = Items.GLASS_BOTTLE;
         Item driedKelp = Items.DRIED_KELP;
 
         // ---- i 搅碎器（有序三槽：左上 / 左下=额外槽 / 右上）----
 
-        // #322 天脑汁：296 界天脑花（左上）+ 额外玻璃瓶（左下），右上必须空
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(322)),
-                ModItems.byCode(296), bottle, null);
+        // 天脑汁：界天脑花（左上）+ 额外玻璃瓶（左下），右上必须空
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.CELESTIAL_BRAIN_JUICE.get()),
+                ModItems.REALM_HEAVEN_BRAIN_FLOWER.get(), bottle, null);
 
-        // #324 米堕汁：304 特色堕落米（左上）+ 额外玻璃瓶（左下），右上必须空
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(324)),
-                ModItems.byCode(304), bottle, null);
+        // 米堕汁：特色堕落米（左上）+ 额外玻璃瓶（左下），右上必须空
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.FALLEN_RICE_JUICE.get()),
+                ModItems.SPECIALTY_FALLEN_RICE.get(), bottle, null);
 
-        // #326 凤肉泥：302 米凤肉块（左上），其余槽空
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(326)),
-                ModItems.byCode(302), null, null);
+        // 凤肉泥：米凤肉块（左上），其余槽空
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.PHOENIX_MEAT_PASTE.get()),
+                ModItems.RICE_PHOENIX_MEAT_CHUNK.get(), null, null);
 
-        // #332 油瓶：330 米蜃油脂（左上）+ 331 染鲛油脂（右上）+ 额外玻璃瓶（左下）
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(332)),
-                ModItems.byCode(330), bottle, ModItems.byCode(331));
+        // 油瓶：米蜃油脂（左上）+ 染鲛油脂（右上）+ 额外玻璃瓶（左下）
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.OIL_BOTTLE.get()),
+                ModItems.RICE_MIRAGE_GREASE.get(), bottle, ModItems.DYED_MERMAID_GREASE.get());
 
-        // #337 蛟鲛肉泥：306 浅鲛尾（左上）+ 308 望米伤鲛足（右上）
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(337)),
-                ModItems.byCode(306), null, ModItems.byCode(308));
+        // 蛟鲛肉泥：浅鲛尾（左上）+ 望米伤鲛足（右上）
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.JIAO_MERMAID_MEAT_PASTE.get()),
+                ModItems.PALE_MERMAID_TAIL.get(), null, ModItems.WANGMI_WOUNDED_MERMAID_LEG.get());
 
-        // #338 凤蜃肉泥：302 米凤肉块（左上）+ 310 半蜃肉片（右上）
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(338)),
-                ModItems.byCode(302), null, ModItems.byCode(310));
+        // 凤蜃肉泥：米凤肉块（左上）+ 半蜃肉片（右上）
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.PHOENIX_MIRAGE_MEAT_PASTE.get()),
+                ModItems.RICE_PHOENIX_MEAT_CHUNK.get(), null, ModItems.HALF_MIRAGE_MEAT_SLICE.get());
 
-        // #342 花香油：300 棘花瓣（左上）+ 额外玻璃瓶（左下），右上必须空
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(342)),
-                ModItems.byCode(300), bottle, null);
+        // 花香油：棘花瓣（左上）+ 额外玻璃瓶（左下），右上必须空
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.FLORAL_FRAGRANCE_OIL.get()),
+                ModItems.THORN_PETAL.get(), bottle, null);
 
-        // #350 米雪茶：324 米堕汁（左上）+ 84 清洁米沉离液（右上）+ 额外玻璃瓶（左下）
-        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(350)),
-                ModItems.byCode(324), bottle, ModItems.byCode(84));
+        // 米雪茶：米堕汁（左上）+ 清洁米沉离液（右上）+ 额外玻璃瓶（左下）
+        CrusherBlockEntity.registerRecipe(new ItemStack(ModItems.RICE_SNOW_TEA.get()),
+                ModItems.FALLEN_RICE_JUICE.get(), bottle, ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get());
 
         // ---- ii 搅拌器（registerRecipe(result, 额外槽8物品, 槽0~7 无序配料...)；
-        //      碗/瓶必须放槽 8；无额外物传 null，此时 9 槽整体无序、槽 8 可当第 9 槽）----
+        // 碗/瓶必须放槽 8；无额外物传 null，此时 9 槽整体无序、槽 8 可当第 9 槽）----
 
-        // #323 酱脑：322 天脑汁 + 312 香袋，额外玻璃瓶（槽 8）
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(323)), bottle,
-                ModItems.byCode(322), ModItems.byCode(312));
+        // 酱脑：天脑汁 + 香袋，额外玻璃瓶（槽 8）
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.SAUCED_BRAIN.get()), bottle,
+                ModItems.CELESTIAL_BRAIN_JUICE.get(), ModItems.FRAGRANT_POUCH.get());
 
-        // #327 凤球：326 凤肉泥×1 + 313 香粉×7，无额外槽物品
-        Item fragrantPowder = ModItems.byCode(313);
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(327)), null,
-                ModItems.byCode(326),
+        // 凤球：凤肉泥×1 + 香粉×7，无额外槽物品
+        Item fragrantPowder = ModItems.FRAGRANT_POWDER.get();
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.PHOENIX_BALL.get()), null,
+                ModItems.PHOENIX_MEAT_PASTE.get(),
                 fragrantPowder, fragrantPowder, fragrantPowder,
                 fragrantPowder, fragrantPowder, fragrantPowder, fragrantPowder);
 
-        // #334 腌料：312 香袋 + 332 油瓶 + 300 棘花瓣
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(334)), null,
-                ModItems.byCode(312), ModItems.byCode(332), ModItems.byCode(300));
+        // 腌料：香袋 + 油瓶 + 棘花瓣
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.MARINADE.get()), null,
+                ModItems.FRAGRANT_POUCH.get(), ModItems.OIL_BOTTLE.get(), ModItems.THORN_PETAL.get());
 
-        // #335 腌鹫翅：314 噬鹫翅 + 334 腌料
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(335)), null,
-                ModItems.byCode(314), ModItems.byCode(334));
+        // 腌鹫翅：噬鹫翅 + 腌料
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.MARINATED_VULTURE_WING.get()), null,
+                ModItems.DEVOURER_VULTURE_WING.get(), ModItems.MARINADE.get());
 
-        // #339 珍贵调料：323 酱脑 + 324 米堕汁 + 332 油瓶 + 334 腌料 + 312 香袋
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(339)), null,
-                ModItems.byCode(323), ModItems.byCode(324), ModItems.byCode(332),
-                ModItems.byCode(334), ModItems.byCode(312));
+        // 珍贵调料：酱脑 + 米堕汁 + 油瓶 + 腌料 + 香袋
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.PRECIOUS_SEASONING.get()), null,
+                ModItems.SAUCED_BRAIN.get(), ModItems.FALLEN_RICE_JUICE.get(), ModItems.OIL_BOTTLE.get(),
+                ModItems.MARINADE.get(), ModItems.FRAGRANT_POUCH.get());
 
-        // #341 烧烤粉：313 香粉×4 + 300 棘花瓣
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(341)), null,
+        // 烧烤粉：香粉×4 + 棘花瓣
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.BBQ_POWDER.get()), null,
                 fragrantPowder, fragrantPowder, fragrantPowder, fragrantPowder,
-                ModItems.byCode(300));
+                ModItems.THORN_PETAL.get());
 
-        // #343 复合油：330 米蜃油脂 + 322 天脑汁 + 342 花香油
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(343)), null,
-                ModItems.byCode(330), ModItems.byCode(322), ModItems.byCode(342));
+        // 复合油：米蜃油脂 + 天脑汁 + 花香油
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.COMPOUND_OIL.get()), null,
+                ModItems.RICE_MIRAGE_GREASE.get(), ModItems.CELESTIAL_BRAIN_JUICE.get(), ModItems.FLORAL_FRAGRANCE_OIL.get());
 
-        // #352 天堕茶：324 米堕汁×2 + 322 天脑汁×2 + 84 清洁米沉离液×4（8 个普通槽），额外碗（槽 8）
-        Item juice324 = ModItems.byCode(324);
-        Item juice322 = ModItems.byCode(322);
-        Item liquid84 = ModItems.byCode(84);
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(352)), bowl,
-                juice324, juice324, juice322, juice322,
-                liquid84, liquid84, liquid84, liquid84);
+        // 天堕茶：米堕汁×2 + 天脑汁×2 + 清洁米沉离液×4（8 个普通槽），额外碗（槽 8）
+        Item fallenRiceJuice = ModItems.FALLEN_RICE_JUICE.get();
+        Item brainJuice = ModItems.CELESTIAL_BRAIN_JUICE.get();
+        Item cleansingLiquid = ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get();
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.CELESTIAL_FALLEN_TEA.get()), bowl,
+                fallenRiceJuice, fallenRiceJuice, brainJuice, brainJuice,
+                cleansingLiquid, cleansingLiquid, cleansingLiquid, cleansingLiquid);
 
-        // #354 腌翅包：326 凤肉泥 + 335 腌鹫翅 + 312 香袋
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(354)), null,
-                ModItems.byCode(326), ModItems.byCode(335), ModItems.byCode(312));
+        // 腌翅包：凤肉泥 + 腌鹫翅 + 香袋
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.MARINATED_WING_WRAP.get()), null,
+                ModItems.PHOENIX_MEAT_PASTE.get(), ModItems.MARINATED_VULTURE_WING.get(), ModItems.FRAGRANT_POUCH.get());
 
-        // #355 腌肉片：310 半蜃肉片×5 + 334 腌料
-        Item mirageSlice = ModItems.byCode(310);
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(355)), null,
+        // 腌肉片：半蜃肉片×5 + 腌料
+        Item mirageSlice = ModItems.HALF_MIRAGE_MEAT_SLICE.get();
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.MARINATED_MEAT_SLICE.get()), null,
                 mirageSlice, mirageSlice, mirageSlice, mirageSlice, mirageSlice,
-                ModItems.byCode(334));
+                ModItems.MARINADE.get());
 
-        // #358 饭团：305 熟特色堕落米×8 + 312 香袋（共 9 料，无额外物，槽 8 当普通槽）
-        Item cookedFallenRice = ModItems.byCode(305);
-        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(358)), null,
+        // 饭团：熟特色堕落米×8 + 香袋（共 9 料，无额外物，槽 8 当普通槽）
+        Item cookedFallenRice = ModItems.COOKED_SPECIALTY_FALLEN_RICE.get();
+        MixerBlockEntity.registerRecipe(new ItemStack(ModItems.ONIGIRI.get()), null,
                 cookedFallenRice, cookedFallenRice, cookedFallenRice, cookedFallenRice,
-                ModItems.byCode(312),
+                ModItems.FRAGRANT_POUCH.get(),
                 cookedFallenRice, cookedFallenRice, cookedFallenRice, cookedFallenRice);
 
         // ---- iv 煮锅（2x2 网格行优先 + 右上额外槽）----
 
-        // #321 酱香双鲛尾：323 酱脑 + 324 米堕汁 + 306 浅鲛尾×2，额外碗
-        CookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(321)), bowl,
-                ModItems.byCode(323), ModItems.byCode(324),
-                ModItems.byCode(306), ModItems.byCode(306));
+        // 酱香双鲛尾：酱脑 + 米堕汁 + 浅鲛尾×2，额外碗
+        CookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.SAUCE_GLAZED_TWIN_MERMAID_TAIL.get()), bowl,
+                ModItems.SAUCED_BRAIN.get(), ModItems.FALLEN_RICE_JUICE.get(),
+                ModItems.PALE_MERMAID_TAIL.get(), ModItems.PALE_MERMAID_TAIL.get());
 
         // ---- v 大煮锅（3x3 网格行优先 + 右上额外槽）----
 
-        // #319 天虚棘脑汤：298 虚无触足 / 296 界天脑花 / 298 虚无触足
-        //                                300 棘花瓣 / 300 / 300
-        //                                313 香粉 / 300 / 313，额外碗
-        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(319)), bowl,
-                ModItems.byCode(298), ModItems.byCode(296), ModItems.byCode(298),
-                ModItems.byCode(300), ModItems.byCode(300), ModItems.byCode(300),
-                ModItems.byCode(313), ModItems.byCode(300), ModItems.byCode(313));
+        // 天虚棘脑汤：虚无触足 / 界天脑花 / 虚无触足
+        // 棘花瓣 / 棘花瓣 / 棘花瓣
+        // 香粉 / 棘花瓣 / 香粉，额外碗
+        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.CELESTIAL_VOID_THORN_BRAIN_SOUP.get()), bowl,
+                ModItems.VOID_TOUCH_TENTACLE.get(), ModItems.REALM_HEAVEN_BRAIN_FLOWER.get(), ModItems.VOID_TOUCH_TENTACLE.get(),
+                ModItems.THORN_PETAL.get(), ModItems.THORN_PETAL.get(), ModItems.THORN_PETAL.get(),
+                ModItems.FRAGRANT_POWDER.get(), ModItems.THORN_PETAL.get(), ModItems.FRAGRANT_POWDER.get());
 
-        // #325 占位产物（placeholder_325，转正前无法合法获得）：用户主动给配方，照直译注册。
-        // 327 凤球 / 308 望米伤鲛足 / 327 凤球；300 / 308 / 300；313 香粉×3，额外碗
-        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(325)), bowl,
-                ModItems.byCode(327), ModItems.byCode(308), ModItems.byCode(327),
-                ModItems.byCode(300), ModItems.byCode(308), ModItems.byCode(300),
-                ModItems.byCode(313), ModItems.byCode(313), ModItems.byCode(313));
+        // 占位产物（placeholder_325，转正前无法合法获得）：用户主动给配方，照直译注册。
+        // 凤球 / 望米伤鲛足 / 凤球；棘花瓣 / 望米伤鲛足 / 棘花瓣；香粉×3，额外碗
+        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.PLACEHOLDER_325.get()), bowl,
+                ModItems.PHOENIX_BALL.get(), ModItems.WANGMI_WOUNDED_MERMAID_LEG.get(), ModItems.PHOENIX_BALL.get(),
+                ModItems.THORN_PETAL.get(), ModItems.WANGMI_WOUNDED_MERMAID_LEG.get(), ModItems.THORN_PETAL.get(),
+                ModItems.FRAGRANT_POWDER.get(), ModItems.FRAGRANT_POWDER.get(), ModItems.FRAGRANT_POWDER.get());
 
-        // #348 海兽相交饭：337 蛟鲛肉泥×3；306 浅鲛尾×3；306 / 339 珍贵调料 / 306，额外碗
-        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(348)), bowl,
-                ModItems.byCode(337), ModItems.byCode(337), ModItems.byCode(337),
-                ModItems.byCode(306), ModItems.byCode(306), ModItems.byCode(306),
-                ModItems.byCode(306), ModItems.byCode(339), ModItems.byCode(306));
+        // 海兽相交饭：蛟鲛肉泥×3；浅鲛尾×3；浅鲛尾 / 珍贵调料 / 浅鲛尾，额外碗
+        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.SEA_BEAST_JIAO_RICE.get()), bowl,
+                ModItems.JIAO_MERMAID_MEAT_PASTE.get(), ModItems.JIAO_MERMAID_MEAT_PASTE.get(), ModItems.JIAO_MERMAID_MEAT_PASTE.get(),
+                ModItems.PALE_MERMAID_TAIL.get(), ModItems.PALE_MERMAID_TAIL.get(), ModItems.PALE_MERMAID_TAIL.get(),
+                ModItems.PALE_MERMAID_TAIL.get(), ModItems.PRECIOUS_SEASONING.get(), ModItems.PALE_MERMAID_TAIL.get());
 
         // ---- vi 超大煮锅（4x4 网格行优先 + 右上额外槽；null 位该格必须为空）----
 
-        // #336 堕米肉丸汤：337×4；338×4；339 / 298 / 298 / 300；310 / 310 / 300 / 300，额外碗
-        Item paste337 = ModItems.byCode(337);
-        Item paste338 = ModItems.byCode(338);
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(336)), bowl,
-                paste337, paste337, paste337, paste337,
-                paste338, paste338, paste338, paste338,
-                ModItems.byCode(339), ModItems.byCode(298), ModItems.byCode(298), ModItems.byCode(300),
-                ModItems.byCode(310), ModItems.byCode(310), ModItems.byCode(300), ModItems.byCode(300));
+        // 堕米肉丸汤：蛟鲛肉泥×4；凤蜃肉泥×4；珍贵调料 / 虚无触足×2 / 棘花瓣；
+        // 半蜃肉片×2 / 棘花瓣×2，额外碗
+        Item jiaoPaste = ModItems.JIAO_MERMAID_MEAT_PASTE.get();
+        Item phoenixPaste = ModItems.PHOENIX_MIRAGE_MEAT_PASTE.get();
+        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.FALLEN_RICE_MEATBALL_SOUP.get()), bowl,
+                jiaoPaste, jiaoPaste, jiaoPaste, jiaoPaste,
+                phoenixPaste, phoenixPaste, phoenixPaste, phoenixPaste,
+                ModItems.PRECIOUS_SEASONING.get(), ModItems.VOID_TOUCH_TENTACLE.get(), ModItems.VOID_TOUCH_TENTACLE.get(), ModItems.THORN_PETAL.get(),
+                ModItems.HALF_MIRAGE_MEAT_SLICE.get(), ModItems.HALF_MIRAGE_MEAT_SLICE.get(), ModItems.THORN_PETAL.get(), ModItems.THORN_PETAL.get());
 
-        // #345 龙凤花汤：308×4；302×4；339 / 342 / 342 / 339；空 / 342 / 空 / 空，额外碗
-        Item mermaidLeg = ModItems.byCode(308);
-        Item phoenixMeat = ModItems.byCode(302);
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(345)), bowl,
+        // 龙凤花汤：望米伤鲛足×4；米凤肉块×4；珍贵调料 / 花香油×2 / 珍贵调料；
+        // 空 / 花香油 / 空 / 空，额外碗
+        Item mermaidLeg = ModItems.WANGMI_WOUNDED_MERMAID_LEG.get();
+        Item phoenixMeat = ModItems.RICE_PHOENIX_MEAT_CHUNK.get();
+        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.DRAGON_PHOENIX_FLOWER_SOUP.get()), bowl,
                 mermaidLeg, mermaidLeg, mermaidLeg, mermaidLeg,
                 phoenixMeat, phoenixMeat, phoenixMeat, phoenixMeat,
-                ModItems.byCode(339), ModItems.byCode(342), ModItems.byCode(342), ModItems.byCode(339),
-                null, ModItems.byCode(342), null, null);
+                ModItems.PRECIOUS_SEASONING.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.PRECIOUS_SEASONING.get(),
+                null, ModItems.FLORAL_FRAGRANCE_OIL.get(), null, null);
 
-        // #349 佛幻想：338×3+337；337×3+335×... 按原文逐格：
-        // 行1 338 338 338 337；行2 337 337 335 335；行3 335 342 342 339；行4 339 空 空 空，额外碗
-        Item wing335 = ModItems.byCode(335);
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(349)), bowl,
-                paste338, paste338, paste338, paste337,
-                paste337, paste337, wing335, wing335,
-                wing335, ModItems.byCode(342), ModItems.byCode(342), ModItems.byCode(339),
-                ModItems.byCode(339), null, null, null);
+        // 佛幻想：凤蜃肉泥×3 + 蛟鲛肉泥；蛟鲛肉泥×2 + 腌鹫翅×2；
+        // 腌鹫翅 + 花香油×2 + 珍贵调料；珍贵调料 + 三格空，额外碗
+        Item marinatedWing = ModItems.MARINATED_VULTURE_WING.get();
+        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.BUDDHA_ILLUSION.get()), bowl,
+                phoenixPaste, phoenixPaste, phoenixPaste, jiaoPaste,
+                jiaoPaste, jiaoPaste, marinatedWing, marinatedWing,
+                marinatedWing, ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.PRECIOUS_SEASONING.get(),
+                ModItems.PRECIOUS_SEASONING.get(), null, null, null);
 
-        // #356 肉片粥：行1 355 355 342 355；行2-4 全为 304 特色堕落米（12 个），额外碗
-        Item slice355 = ModItems.byCode(355);
-        Item fallenRice = ModItems.byCode(304);
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(356)), bowl,
-                slice355, slice355, ModItems.byCode(342), slice355,
+        // 肉片粥：腌肉片×3 + 花香油 + 特色堕落米×12，额外碗
+        Item marinatedSlice = ModItems.MARINATED_MEAT_SLICE.get();
+        Item fallenRice = ModItems.SPECIALTY_FALLEN_RICE.get();
+        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.MEAT_SLICE_CONGEE.get()), bowl,
+                marinatedSlice, marinatedSlice, ModItems.FLORAL_FRAGRANCE_OIL.get(), marinatedSlice,
                 fallenRice, fallenRice, fallenRice, fallenRice,
                 fallenRice, fallenRice, fallenRice, fallenRice,
                 fallenRice, fallenRice, fallenRice, fallenRice);
 
         // ---- viii 铁锅（4 槽顺序：左上 / 右上 / 左下 / 右下 + 右上侧额外槽）----
 
-        // #320 香混肉片：355 腌肉片×2 + 300 棘花瓣 + 313 香粉，额外碗
-        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(320)), bowl,
-                slice355, slice355, ModItems.byCode(300), ModItems.byCode(313));
+        // 香混肉片：腌肉片×2 + 棘花瓣 + 香粉，额外碗
+        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.FRAGRANT_MIXED_MEAT_SLICE.get()), bowl,
+                marinatedSlice, marinatedSlice, ModItems.THORN_PETAL.get(), ModItems.FRAGRANT_POWDER.get());
 
-        // #340 油爆虚无触：298 虚无触足×2 + 343 复合油 + 332 油瓶，额外碗
-        Item tentacle = ModItems.byCode(298);
-        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(340)), bowl,
-                tentacle, tentacle, ModItems.byCode(343), ModItems.byCode(332));
+        // 油爆虚无触：虚无触足×2 + 复合油 + 油瓶，额外碗
+        Item tentacle = ModItems.VOID_TOUCH_TENTACLE.get();
+        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.OIL_SEARED_VOID_TENTACLE.get()), bowl,
+                tentacle, tentacle, ModItems.COMPOUND_OIL.get(), ModItems.OIL_BOTTLE.get());
 
-        // #344 蛟足炒饭：308 望米伤鲛足 + 343 复合油 + 304 特色堕落米×2，额外碗
-        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(344)), bowl,
-                mermaidLeg, ModItems.byCode(343), fallenRice, fallenRice);
+        // 蛟足炒饭：望米伤鲛足 + 复合油 + 特色堕落米×2，额外碗
+        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.MERMAID_LEG_FRIED_RICE.get()), bowl,
+                mermaidLeg, ModItems.COMPOUND_OIL.get(), fallenRice, fallenRice);
 
-        // #351 煎龙凤饼：327 凤球 + 308 望米伤鲛足 + 339 珍贵调料 + 343 复合油，额外碗
-        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(351)), bowl,
-                ModItems.byCode(327), mermaidLeg, ModItems.byCode(339), ModItems.byCode(343));
+        // 煎龙凤饼：凤球 + 望米伤鲛足 + 珍贵调料 + 复合油，额外碗
+        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.PAN_FRIED_DRAGON_PHOENIX_CAKE.get()), bowl,
+                ModItems.PHOENIX_BALL.get(), mermaidLeg, ModItems.PRECIOUS_SEASONING.get(), ModItems.COMPOUND_OIL.get());
 
-        // #353 凤包翅：354 腌翅包 + 342 花香油 + 300 棘花瓣（右下空），无额外槽物品
-        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(353)), null,
-                ModItems.byCode(354), ModItems.byCode(342), ModItems.byCode(300), null);
+        // 凤包翅：腌翅包 + 花香油 + 棘花瓣（右下空），无额外槽物品
+        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.PHOENIX_WRAPPED_WING.get()), null,
+                ModItems.MARINATED_WING_WRAP.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.THORN_PETAL.get(), null);
 
-        // #359 海带片：332 油瓶 + 原版干海带×3，无额外槽物品
-        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(359)), null,
-                ModItems.byCode(332), driedKelp, driedKelp, driedKelp);
+        // 海带片：油瓶 + 原版干海带×3，无额外槽物品
+        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.KELP_SLICE.get()), null,
+                ModItems.OIL_BOTTLE.get(), driedKelp, driedKelp, driedKelp);
 
         // ---- vv 烤箱（3x3 网格行优先 + 右上额外槽）----
 
-        // #329 酱烤鹫翅：335 腌鹫翅 / 332 油瓶 / 330 米蜃油脂；313 香粉×3；335 / 332 / 330，额外碗
-        Item grease330 = ModItems.byCode(330);
-        OvenBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(329)), bowl,
-                wing335, ModItems.byCode(332), grease330,
+        // 酱烤鹫翅：腌鹫翅 / 油瓶 / 米蜃油脂；香粉×3；腌鹫翅 / 油瓶 / 米蜃油脂，额外碗
+        Item mirageGrease = ModItems.RICE_MIRAGE_GREASE.get();
+        OvenBlockEntity.registerRecipe(new ItemStack(ModItems.SAUCE_ROASTED_VULTURE_WING.get()), bowl,
+                marinatedWing, ModItems.OIL_BOTTLE.get(), mirageGrease,
                 fragrantPowder, fragrantPowder, fragrantPowder,
-                wing335, ModItems.byCode(332), grease330);
+                marinatedWing, ModItems.OIL_BOTTLE.get(), mirageGrease);
 
-        // #347 花香蛟尾：306 浅鲛尾 / 342 花香油 / 334 腌料，三行同构，额外碗
-        Item mermaidTail = ModItems.byCode(306);
-        Item fragranceOil = ModItems.byCode(342);
-        Item marinade = ModItems.byCode(334);
-        OvenBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(347)), bowl,
+        // 花香蛟尾：浅鲛尾 / 花香油 / 腌料，三行同构，额外碗
+        Item mermaidTail = ModItems.PALE_MERMAID_TAIL.get();
+        Item fragranceOil = ModItems.FLORAL_FRAGRANCE_OIL.get();
+        Item marinade = ModItems.MARINADE.get();
+        OvenBlockEntity.registerRecipe(new ItemStack(ModItems.FLORAL_MERMAID_TAIL.get()), bowl,
                 mermaidTail, fragranceOil, marinade,
-                mermaidTail, ModItems.byCode(339), marinade,
+                mermaidTail, ModItems.PRECIOUS_SEASONING.get(), marinade,
                 mermaidTail, fragranceOil, marinade);
 
-        // #357 肢体烤串：306 / 341 烧烤粉 / 298；308 / 341 / 302；341 / 空 / 341，
-        // 额外槽=7 号米木棍（用户原文"额外7"）
-        Item riceStick = ModItems.byCode(7);
-        Item bbqPowder = ModItems.byCode(341);
-        OvenBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(357)), riceStick,
+        // 肢体烤串：浅鲛尾 / 烧烤粉 / 虚无触足；望米伤鲛足 / 烧烤粉 / 米凤肉块；
+        // 烧烤粉 / 空 / 烧烤粉，额外槽=米木棍
+        Item riceStick = ModItems.RICE_STICK.get();
+        Item bbqPowder = ModItems.BBQ_POWDER.get();
+        OvenBlockEntity.registerRecipe(new ItemStack(ModItems.LIMB_SKEWER.get()), riceStick,
                 mermaidTail, bbqPowder, tentacle,
                 mermaidLeg, bbqPowder, phoenixMeat,
                 bbqPowder, null, bbqPowder);
 
         // ---- vii 巨无霸大大大煮锅（5x5 网格行优先 25 格 + 右上额外槽）----
 
-        // #364 超级大乱炖：5x5 摆 22 种料理 + 3 个 216 米米大杂烩，额外碗。
-        // 行1 319 320 321 216 329；行2 336 340 344 345 346；行3 347 348 349 350 351；
-        // 行4 352 353 356 357 360；行5 361 362 363 216 216。
-        // （用户修订：原第 4 格 325、第 24 格 364 均改为 216，消除自引用与占位物依赖）
-        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(364)), bowl,
-                ModItems.byCode(319), ModItems.byCode(320), ModItems.byCode(321),
-                ModItems.byCode(216), ModItems.byCode(329),
-                ModItems.byCode(336), ModItems.byCode(340), ModItems.byCode(344),
-                ModItems.byCode(345), ModItems.byCode(346),
-                ModItems.byCode(347), ModItems.byCode(348), ModItems.byCode(349),
-                ModItems.byCode(350), ModItems.byCode(351),
-                ModItems.byCode(352), ModItems.byCode(353), ModItems.byCode(356),
-                ModItems.byCode(357), ModItems.byCode(360),
-                ModItems.byCode(361), ModItems.byCode(362), ModItems.byCode(363),
-                ModItems.byCode(216), ModItems.byCode(216));
+        // 超级大乱炖：5x5 摆满 22 种料理 + 3 个米米大杂烩（逐格见下），额外碗。
+        // （用户修订：个别格子改为米米大杂烩，消除自引用与占位物依赖）
+        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.SUPER_GRAND_STEW.get()), bowl,
+                ModItems.CELESTIAL_VOID_THORN_BRAIN_SOUP.get(), ModItems.FRAGRANT_MIXED_MEAT_SLICE.get(), ModItems.SAUCE_GLAZED_TWIN_MERMAID_TAIL.get(),
+                ModItems.MIMI_MEDLEY.get(), ModItems.SAUCE_ROASTED_VULTURE_WING.get(),
+                ModItems.FALLEN_RICE_MEATBALL_SOUP.get(), ModItems.OIL_SEARED_VOID_TENTACLE.get(), ModItems.MERMAID_LEG_FRIED_RICE.get(),
+                ModItems.DRAGON_PHOENIX_FLOWER_SOUP.get(), ModItems.MIRAGE_ILLUSION.get(),
+                ModItems.FLORAL_MERMAID_TAIL.get(), ModItems.SEA_BEAST_JIAO_RICE.get(), ModItems.BUDDHA_ILLUSION.get(),
+                ModItems.RICE_SNOW_TEA.get(), ModItems.PAN_FRIED_DRAGON_PHOENIX_CAKE.get(),
+                ModItems.CELESTIAL_FALLEN_TEA.get(), ModItems.PHOENIX_WRAPPED_WING.get(), ModItems.MEAT_SLICE_CONGEE.get(),
+                ModItems.LIMB_SKEWER.get(), ModItems.CELESTIAL_BRAIN_RICE_BALL.get(),
+                ModItems.PALE_MERMAID_RICE_BALL.get(), ModItems.MERMAID_LEG_RICE_BALL.get(), ModItems.VULTURE_WING_RICE_BALL.get(),
+                ModItems.MIMI_MEDLEY.get(), ModItems.MIMI_MEDLEY.get());
 
-        // #346 蜃楼幻想：5x5 边框与内点（0=该格必须空），额外碗。
-        // 行1 338 334 334 334 338；行2 338 空 334 空 338；行3 338 334 空 343 338；
-        // 行4 338 空 343 空 338；行5 338 334 343 343 338。
-        // 共 338×10（左右两列）、334×6、343×4、空格 5。
-        Item paste338b = ModItems.byCode(338);
-        Item marinade334 = ModItems.byCode(334);
-        Item compoundOil343 = ModItems.byCode(343);
-        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(346)), bowl,
-                paste338b, marinade334, marinade334, marinade334, paste338b,
-                paste338b, null,       marinade334, null,         paste338b,
-                paste338b, marinade334, null,       compoundOil343, paste338b,
-                paste338b, null,       compoundOil343, null,      paste338b,
-                paste338b, marinade334, compoundOil343, compoundOil343, paste338b);
+        // 蜃楼幻想：5x5 边框与内点（null 格必须为空），额外碗。
+        // 凤蜃肉泥×10（左右两列）、腌料×6、复合油×4，空格 5。
+        Item compoundOil = ModItems.COMPOUND_OIL.get();
+        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.MIRAGE_ILLUSION.get()), bowl,
+                phoenixPaste, marinade, marinade, marinade, phoenixPaste,
+                phoenixPaste, null, marinade, null, phoenixPaste,
+                phoenixPaste, marinade, null, compoundOil, phoenixPaste,
+                phoenixPaste, null, compoundOil, null, phoenixPaste,
+                phoenixPaste, marinade, compoundOil, compoundOil, phoenixPaste);
 
         // ---- 汲血台（槽0=左上 / 槽1=左下，各消耗 1 个；支持上槽标签匹配）----
 
-        // #167 血瓶：左上任意肉类（mimiworld:meats 标签，生熟皆可）+ 左下原版玻璃瓶 → 167
-        BloodlettingTableBlockEntity.registerRecipe(new ItemStack(ModItems.byCode(167)),
+        // 血瓶：左上任意肉类（mimiworld:meats 标签，生熟皆可）+ 左下原版玻璃瓶
+        BloodlettingTableBlockEntity.registerRecipe(new ItemStack(ModItems.BLOOD_VIAL.get()),
                 ModItemTags.MEATS, Items.GLASS_BOTTLE);
 
         // ---- 凝锭台（5x5=25 格工作台式即时合成，有序图案；空格' '=该格必须为空）----
 
-        // #293 残堕世界精华锭：深染十素材围边 + 6 个 256 盗米之心 + 9 个 291 磨制残堕精华液
-        // 行1 276 277 278 279 280；行2-4 256 291 291 291 256；行5 281 282 283 284 285
-        Map<Character, Item> keys293 = Map.ofEntries(
-                Map.entry('A', ModItems.byCode(276)),
-                Map.entry('B', ModItems.byCode(277)),
-                Map.entry('C', ModItems.byCode(278)),
-                Map.entry('D', ModItems.byCode(279)),
-                Map.entry('E', ModItems.byCode(280)),
-                Map.entry('F', ModItems.byCode(256)),
-                Map.entry('G', ModItems.byCode(291)),
-                Map.entry('H', ModItems.byCode(281)),
-                Map.entry('I', ModItems.byCode(282)),
-                Map.entry('J', ModItems.byCode(283)),
-                Map.entry('K', ModItems.byCode(284)),
-                Map.entry('L', ModItems.byCode(285)));
-        IngotCondensationTableBlockEntity.registerShaped(new ItemStack(ModItems.byCode(293)),
+        // 残堕世界精华锭：深染十素材围边 + 6 个盗米之心 + 9 个磨制残堕精华液
+        // 图案见下：A-E 与 H-L 为深染十素材，F=盗米之心（6 个），G=磨制残堕精华液（9 个）
+        Map<Character, Item> remnantIngotKeys = Map.ofEntries(
+                Map.entry('A', ModItems.DEEP_DYED_REMNANT_HEAVEN_WING.get()),
+                Map.entry('B', ModItems.DEEP_DYED_VOID_TOUCH.get()),
+                Map.entry('C', ModItems.DEEP_DYED_FADED_FLOWER_BRANCH.get()),
+                Map.entry('D', ModItems.DEEP_DYED_CELESTIAL_PHOENIX_BEAK.get()),
+                Map.entry('E', ModItems.DEEP_DYED_REMNANT_FALLEN_RICE_ESSENCE.get()),
+                Map.entry('F', ModItems.RICE_STEALER_HEART.get()),
+                Map.entry('G', ModItems.POLISHED_REMNANT_FALLEN_ESSENCE_SOLUTION.get()),
+                Map.entry('H', ModItems.DEEP_DYED_MERMAID_TEAR.get()),
+                Map.entry('I', ModItems.DEEP_DYED_JIAOLONG_TALON.get()),
+                Map.entry('J', ModItems.DEEP_DYED_MIRAGE_BONE.get()),
+                Map.entry('K', ModItems.DEEP_DYED_ELF_HAT.get()),
+                Map.entry('L', ModItems.DEEP_DYED_MOON_DEVOURER_WOLF_CLAW.get()));
+        IngotCondensationTableBlockEntity.registerShaped(new ItemStack(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get()),
                 new String[]{
                         "ABCDE",
                         "FGGGF",
                         "FGGGF",
                         "FGGGF",
                         "HIJKL"
-                }, keys293);
+                }, remnantIngotKeys);
 
-        // #294 世界之泪：4 个 240 最懒终末龙头（四角）+ 8 个 258 米魂之泪（十字外沿）
-        // + 13 个 293 残堕世界精华锭（中心菱形）
-        // 行1/5 240 258 293 258 240；行2/4 258 293 293 293 258；行3 全 293
-        Map<Character, Item> keys294 = Map.of(
-                'A', ModItems.byCode(240),
-                'B', ModItems.byCode(258),
-                'X', ModItems.byCode(293));
-        IngotCondensationTableBlockEntity.registerShaped(new ItemStack(ModItems.byCode(294)),
+        // 世界之泪：4 个最懒终末龙头（四角）+ 8 个米魂之泪（十字外沿）
+        // + 13 个残堕世界精华锭（中心菱形），图案见下
+        Map<Character, Item> worldTearKeys = Map.of(
+                'A', ModItems.LAZIEST_END_DRAGON_HEAD.get(),
+                'B', ModItems.RICE_SOUL_TEAR.get(),
+                'X', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get());
+        IngotCondensationTableBlockEntity.registerShaped(new ItemStack(ModItems.WORLD_TEAR.get()),
                 new String[]{
                         "ABXBA",
                         "BXXXB",
                         "XXXXX",
                         "BXXXB",
                         "ABXBA"
-                }, keys294);
+                }, worldTearKeys);
 
         // ---- 凝锭台：25 个相同材料摆满即得 ----
 
-        // #384 龙骨架构：25 个 380 龙骨
-        Item dragonBone = ModItems.byCode(380);
-        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.byCode(384)),
+        // 龙骨架构：25 个龙骨
+        Item dragonBone = ModItems.DRAGON_BONE.get();
+        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.DRAGON_BONE_FRAMEWORK.get()),
                 dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
                 dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
                 dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
                 dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
                 dragonBone, dragonBone, dragonBone, dragonBone, dragonBone);
 
-        // #385 龙血精华：25 个 377 龙血
-        Item dragonBlood = ModItems.byCode(377);
-        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.byCode(385)),
+        // 龙血精华：25 个龙血
+        Item dragonBlood = ModItems.DRAGON_BLOOD.get();
+        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.DRAGON_BLOOD_ESSENCE.get()),
                 dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
                 dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
                 dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
                 dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
                 dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood);
 
-        // #386 龙鳞块：25 个 378 龙鳞
-        Item dragonScale = ModItems.byCode(378);
-        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.byCode(386)),
+        // 龙鳞块：25 个龙鳞
+        Item dragonScale = ModItems.DRAGON_SCALE.get();
+        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.DRAGON_SCALE_BLOCK.get()),
                 dragonScale, dragonScale, dragonScale, dragonScale, dragonScale,
                 dragonScale, dragonScale, dragonScale, dragonScale, dragonScale,
                 dragonScale, dragonScale, dragonScale, dragonScale, dragonScale,

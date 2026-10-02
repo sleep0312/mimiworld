@@ -4,7 +4,7 @@
   "cookingtime": 40,
   "experience": 0.3,
   "ingredient": {
-    "item": "mimiworld:liemi_chicken"
+    "item": "mimiworld:zhuomi_chicken"
   },
-  "result": "mimiworld:cooked_liemi_chicken"
+  "result": "mimiworld:cooked_zhuomi_chicken"
 }

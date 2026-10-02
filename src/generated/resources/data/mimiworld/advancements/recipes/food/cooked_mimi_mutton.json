@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_food_195": {
+    "has_raw_mimi_mutton": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_raw_food_195",
+      "has_raw_mimi_mutton",
       "has_the_recipe"
     ]
   ],

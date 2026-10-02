@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 铸甲台（编码 131 = armor_forging_table）：绑定 ArmorForgingTableBlockEntity，
+ * 铸甲台（armor_forging_table）：绑定 ArmorForgingTableBlockEntity，
  * 右键打开与原版工作台外观一致的 3x3 即时合成 GUI，配方表独立。
  */
 public class ArmorForgingTableBlock extends ForgingTableBlock {

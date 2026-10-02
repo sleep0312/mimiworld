@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_food_304": {
+    "has_specialty_fallen_rice": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_raw_food_304",
+      "has_specialty_fallen_rice",
       "has_the_recipe"
     ]
   ],

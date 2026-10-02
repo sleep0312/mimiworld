@@ -2,7 +2,6 @@ package com.mimiworld.mimiworld.entity;
 
 import com.mimiworld.mimiworld.MimiWorld;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -10,7 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 /**
- * 米米世界实体注册类（投掷物等）。实体不属于「物品编码」体系。
+ * 米米世界实体注册类（投掷物、友好/敌对生物、Boss 等）。
  */
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -34,28 +33,28 @@ public class ModEntities {
                             .updateInterval(10)
                             .build("cooked_rice_ball"));
 
-    // ===== 151-157 生物蛋绑定的七大 Boss（实体待定，当前统一用 PendingBossEntity 占位） =====
+    // ===== 生物蛋绑定的七大 Boss（实体待定，当前统一用 PendingBossEntity 占位） =====
     // 真实 Boss 实现后仅需替换工厂引用 PendingBossEntity::new，生物蛋（ModItems）无需改动。
 
-    // 151 米米猴王：灵巧中型
+    // 米米猴王：灵巧中型
     public static final RegistryObject<EntityType<PendingBossEntity>> MIMI_MONKEY_KING =
             registerBoss("mimi_monkey_king", 0.7F, 1.9F);
-    // 152 饭晶虎王：四足猛兽
+    // 饭晶虎王：四足猛兽
     public static final RegistryObject<EntityType<PendingBossEntity>> RICE_CRYSTAL_TIGER_KING =
             registerBoss("rice_crystal_tiger_king", 1.2F, 1.3F);
-    // 153 超晶牛王：壮硕大体型
+    // 超晶牛王：壮硕大体型
     public static final RegistryObject<EntityType<PendingBossEntity>> SUPER_CRYSTAL_COW_KING =
             registerBoss("super_crystal_cow_king", 1.4F, 1.7F);
-    // 154 重晶兔王：小型
+    // 重晶兔王：小型
     public static final RegistryObject<EntityType<PendingBossEntity>> HEAVY_CRYSTAL_RABBIT_KING =
             registerBoss("heavy_crystal_rabbit_king", 0.7F, 0.9F);
-    // 155 复晶天青蟒：长形低伏
+    // 复晶天青蟒：长形低伏
     public static final RegistryObject<EntityType<PendingBossEntity>> COMPOUND_AZURE_PYTHON =
             registerBoss("compound_azure_python", 1.0F, 0.8F);
-    // 156 清洁长命夔：巨型走兽
+    // 清洁长命夔：巨型走兽
     public static final RegistryObject<EntityType<PendingBossEntity>> CLEANSING_LONGEVITY_KUI =
             registerBoss("cleansing_longevity_kui", 1.6F, 2.2F);
-    // 157 最懒终末龙：超巨型飞行 Boss（已转正：GeckoLib 宗罪龙模型，末影龙式盘旋/俯冲 AI，火焰免疫）
+    // 最懒终末龙：超巨型飞行 Boss（已转正：GeckoLib 宗罪龙模型，末影龙式盘旋/俯冲 AI，火焰免疫）
     public static final RegistryObject<EntityType<LaziestFinalDragonEntity>> LAZIEST_FINAL_DRAGON =
             ENTITY_TYPES.register("laziest_final_dragon", () ->
                     EntityType.Builder.<LaziestFinalDragonEntity>of(LaziestFinalDragonEntity::new, MobCategory.MONSTER)
@@ -64,8 +63,8 @@ public class ModEntities {
                             .fireImmune()
                             .build("laziest_final_dragon"));
 
-    // ===== 257 盗米者生物蛋绑定的实体：MicroDuckEntity（GeckoLib microduck 模型，小型 0.5×1.0） =====
-    // 注册名仍为 rice_stealer，因此 257 号生物蛋（ForgeSpawnEggItem 绑定 RICE_STEALER）无需任何改动
+    // ===== 盗米者生物蛋绑定的实体：MicroDuckEntity（GeckoLib microduck 模型，小型 0.5×1.0） =====
+    // 注册名为 rice_stealer，生物蛋（ForgeSpawnEggItem 绑定 RICE_STEALER）与之同名对应
     public static final RegistryObject<EntityType<MicroDuckEntity>> RICE_STEALER =
             ENTITY_TYPES.register("rice_stealer", () ->
                     EntityType.Builder.<MicroDuckEntity>of(MicroDuckEntity::new, MobCategory.MONSTER)
@@ -83,7 +82,6 @@ public class ModEntities {
                             .build("sticky_rice_spider"));
 
     // ===== 米羊羊：GeckoLib mimi_sheep 模型，友好生物 0.9×1.3（对齐原版羊碰撞箱） =====
-    // 用户实体编号 3 转正：注册名仍为 mimi_sheep，占位实体 PlaceholderRiceMobEntity 不再使用；
     // 生物逻辑同原版羊（漂浮/受击惊慌逃跑/避水游荡/张望，羊叫声），但不注册吃草 AI，暂不注册刷怪蛋。
     // 可用 /summon mimiworld:mimi_sheep 召唤测试。
     public static final RegistryObject<EntityType<MimiSheepEntity>> MIMI_SHEEP =
@@ -93,130 +91,112 @@ public class ModEntities {
                             .clientTrackingRange(8)
                             .build("mimi_sheep"));
 
+    // ===== 啄米鸡：GeckoLib zhuomi_chicken 模型，友好生物 0.6×0.7（对齐原版鸡碰撞箱） =====
+    // 生物逻辑同原版鸡（漂浮/受击惊慌逃跑/避水游荡/张望，鸡叫声），暂不注册繁殖/下蛋 AI。
+    // 可用 /summon mimiworld:zhuomi_chicken 召唤测试。
+    public static final RegistryObject<EntityType<ZhuomiChickenEntity>> ZHUOMI_CHICKEN =
+            ENTITY_TYPES.register("zhuomi_chicken", () ->
+                    EntityType.Builder.<ZhuomiChickenEntity>of(ZhuomiChickenEntity::new, MobCategory.CREATURE)
+                            .sized(0.6F, 0.7F)
+                            .clientTrackingRange(8)
+                            .build("zhuomi_chicken"));
+
     // ============================================================================
-    // 【用户实体编号 1-30】（2026-09-21 批次）
-    // 1-20 = 友好生物（MobCategory.CREATURE）；21-30 = 敌对生物（MobCategory.MONSTER）。
-    // 除 3 米羊羊（MIMI_SHEEP）、17 黏米之蛛（STICKY_RICE_SPIDER）、19 盗米者（RICE_STEALER）
-    // 已有真实实体类外，其余 27 个统一用 PlaceholderRiceMobEntity 占位；真实类实现后只替换工厂，编号/生物蛋不变。
-    // 每个实体的血量(×2=心/血)与攻击力记录在 SPECS[编号]，由 ModEntityAttributes 逐项注册。
+    // 米米系列生物：当前统一用 PlaceholderRiceMobEntity 占位，真实 AI/模型实现后只替换工厂。
+    // 友好生物 = MobCategory.CREATURE；敌对生物 = MobCategory.MONSTER。
+    // 每个实体的最大血量/攻击力在 ModEntityAttributes 中逐项注册。
     // ============================================================================
 
-    // SPECS 必须在上方实体常量「之前」完成初始化：registerPlaceholder 在常量初始化阶段即写入数组。
-    // 17/19 两个真实实体的血量以本批用户数据为准（蛛 48、盗米者 1500）。
-    public static final MobSpec[] SPECS = new MobSpec[31];
-    static {
-        SPECS[3] = new MobSpec(MIMI_SHEEP, 16.0D, 0.0D);
-        SPECS[17] = new MobSpec(STICKY_RICE_SPIDER, 48.0D, 2.0D);
-        SPECS[19] = new MobSpec(RICE_STEALER, 1500.0D, 0.0D);
-    }
-
-    // —— 友好生物 1-20 ——
-    // 1 啄米鸡 4 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> ZHUOMI_CHICKEN =
-            registerPlaceholder(1, "zhuomi_chicken", MobCategory.CREATURE, 0.6F, 0.7F, 8.0D, 0.0D);
-    // 2 米哞牛 10 心
+    // —— 友好生物 ——
+    // 米哞牛 10 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIMOO_COW =
-            registerPlaceholder(2, "mimoo_cow", MobCategory.CREATURE, 0.9F, 1.4F, 20.0D, 0.0D);
-    // 3 米羊羊 8 心（真实类 MimiSheepEntity，已在上方注册）
-    // 4 米哼猪 10 心
+            registerPlaceholder("mimoo_cow", MobCategory.CREATURE, 0.9F, 1.4F);
+    // 米哼猪 10 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIHENG_PIG =
-            registerPlaceholder(4, "miheng_pig", MobCategory.CREATURE, 0.9F, 1.3F, 20.0D, 0.0D);
-    // 5 贪米鱼 4 心
+            registerPlaceholder("miheng_pig", MobCategory.CREATURE, 0.9F, 1.3F);
+    // 贪米鱼 4 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> TANMI_FISH =
-            registerPlaceholder(5, "tanmi_fish", MobCategory.CREATURE, 0.5F, 0.4F, 8.0D, 0.0D);
-    // 6 喷米鱼 4 心
+            registerPlaceholder("tanmi_fish", MobCategory.CREATURE, 0.5F, 0.4F);
+    // 喷米鱼 4 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> PENMI_FISH =
-            registerPlaceholder(6, "penmi_fish", MobCategory.CREATURE, 0.5F, 0.4F, 8.0D, 0.0D);
-    // 7 米傀儡 100 心
+            registerPlaceholder("penmi_fish", MobCategory.CREATURE, 0.5F, 0.4F);
+    // 米傀儡 100 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_GOLEM =
-            registerPlaceholder(7, "rice_golem", MobCategory.CREATURE, 1.4F, 2.7F, 200.0D, 0.0D);
-    // 8 嗥米狼 20 心
+            registerPlaceholder("rice_golem", MobCategory.CREATURE, 1.4F, 2.7F);
+    // 嗥米狼 20 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HAOMI_WOLF =
-            registerPlaceholder(8, "haomi_wolf", MobCategory.CREATURE, 0.6F, 0.85F, 40.0D, 0.0D);
-    // 9 米米骷髅 24 心
+            registerPlaceholder("haomi_wolf", MobCategory.CREATURE, 0.6F, 0.85F);
+    // 米米骷髅 24 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIMI_SKELETON =
-            registerPlaceholder(9, "mimi_skeleton", MobCategory.CREATURE, 0.6F, 1.99F, 48.0D, 0.0D);
-    // 10 糊米古尸 30 心
+            registerPlaceholder("mimi_skeleton", MobCategory.CREATURE, 0.6F, 1.99F);
+    // 糊米古尸 30 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HUMI_CORPSE =
-            registerPlaceholder(10, "humi_corpse", MobCategory.CREATURE, 0.7F, 1.9F, 60.0D, 0.0D);
-    // 11 爪巴米者 12 心
+            registerPlaceholder("humi_corpse", MobCategory.CREATURE, 0.7F, 1.9F);
+    // 爪巴米者 12 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> PAMI_CRAWLER =
-            registerPlaceholder(11, "pami_crawler", MobCategory.CREATURE, 0.7F, 0.8F, 24.0D, 0.0D);
-    // 12 米巫 30 心
+            registerPlaceholder("pami_crawler", MobCategory.CREATURE, 0.7F, 0.8F);
+    // 米巫 30 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_WITCH =
-            registerPlaceholder(12, "rice_witch", MobCategory.CREATURE, 0.6F, 1.95F, 60.0D, 0.0D);
-    // 13 没米入 75 心
+            registerPlaceholder("rice_witch", MobCategory.CREATURE, 0.6F, 1.95F);
+    // 没米入 75 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MOMI_ENTRANT =
-            registerPlaceholder(13, "momi_entrant", MobCategory.CREATURE, 0.9F, 1.9F, 150.0D, 0.0D);
-    // 14 爆烈米灵 60 心
+            registerPlaceholder("momi_entrant", MobCategory.CREATURE, 0.9F, 1.9F);
+    // 爆烈米灵 60 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> EXPLOSIVE_RICE_SPIRIT =
-            registerPlaceholder(14, "explosive_rice_spirit", MobCategory.CREATURE, 0.8F, 1.6F, 120.0D, 0.0D);
-    // 15 雕米骷髅 60 心
+            registerPlaceholder("explosive_rice_spirit", MobCategory.CREATURE, 0.8F, 1.6F);
+    // 雕米骷髅 60 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> CARVED_RICE_SKELETON =
-            registerPlaceholder(15, "carved_rice_skeleton", MobCategory.CREATURE, 0.6F, 2.1F, 120.0D, 0.0D);
-    // 16 米莱马 12 心
+            registerPlaceholder("carved_rice_skeleton", MobCategory.CREATURE, 0.6F, 2.1F);
+    // 米莱马 12 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MILAI_HORSE =
-            registerPlaceholder(16, "milai_horse", MobCategory.CREATURE, 1.2F, 1.6F, 24.0D, 0.0D);
-    // 17 黏米之蛛 24 心（真实类 StickyRiceSpiderEntity，已在上方注册）
-    // 18 米哼猪尸 30 心
+            registerPlaceholder("milai_horse", MobCategory.CREATURE, 1.2F, 1.6F);
+    // 米哼猪尸 30 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIHENG_PIG_CORPSE =
-            registerPlaceholder(18, "miheng_pig_corpse", MobCategory.CREATURE, 0.9F, 0.9F, 60.0D, 0.0D);
-    // 19 盗米者 750 心（真实类 MicroDuckEntity，即上方 RICE_STEALER）
-    // 20 米魂 9 心
+            registerPlaceholder("miheng_pig_corpse", MobCategory.CREATURE, 0.9F, 0.9F);
+    // 米魂 9 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_SOUL =
-            registerPlaceholder(20, "rice_soul", MobCategory.CREATURE, 0.6F, 1.0F, 18.0D, 0.0D);
+            registerPlaceholder("rice_soul", MobCategory.CREATURE, 0.6F, 1.0F);
 
-    // —— 敌对生物 21-30 ——
-    // 21 界天米 200 心 / 攻击 200
+    // —— 敌对生物 ——
+    // 界天米 200 心 / 攻击 200
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> JIETIAN_RICE =
-            registerPlaceholder(21, "jietian_rice", MobCategory.MONSTER, 1.0F, 2.2F, 400.0D, 200.0D);
-    // 22 混沌不可名状之米界虚无触 1500 血 / 攻击 50
+            registerPlaceholder("jietian_rice", MobCategory.MONSTER, 1.0F, 2.2F);
+    // 混沌不可名状之米界虚无触 1500 血 / 攻击 50
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> CHAOTIC_VOID_TOUCHER =
-            registerPlaceholder(22, "chaotic_void_toucher", MobCategory.MONSTER, 2.0F, 3.2F, 1500.0D, 50.0D);
-    // 23 污棘花 500 心 / 攻击 50
+            registerPlaceholder("chaotic_void_toucher", MobCategory.MONSTER, 2.0F, 3.2F);
+    // 污棘花 500 心 / 攻击 50
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> BLIGHTED_THORN_FLOWER =
-            registerPlaceholder(23, "blighted_thorn_flower", MobCategory.MONSTER, 0.9F, 1.8F, 1000.0D, 50.0D);
-    // 24 堕落米凤 1000 心 / 攻击 70
+            registerPlaceholder("blighted_thorn_flower", MobCategory.MONSTER, 0.9F, 1.8F);
+    // 堕落米凤 1000 心 / 攻击 70
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> FALLEN_RICE_PHOENIX =
-            registerPlaceholder(24, "fallen_rice_phoenix", MobCategory.MONSTER, 1.4F, 2.2F, 2000.0D, 70.0D);
-    // 25 化灵米 5000 心 / 攻击 10
+            registerPlaceholder("fallen_rice_phoenix", MobCategory.MONSTER, 1.4F, 2.2F);
+    // 化灵米 5000 心 / 攻击 10
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HUALING_RICE =
-            registerPlaceholder(25, "hualing_rice", MobCategory.MONSTER, 1.0F, 2.0F, 10000.0D, 10.0D);
-    // 26 浅染鲛 750 心 / 攻击 1000
+            registerPlaceholder("hualing_rice", MobCategory.MONSTER, 1.0F, 2.0F);
+    // 浅染鲛 750 心 / 攻击 1000
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> PALE_MERMAID =
-            registerPlaceholder(26, "pale_mermaid", MobCategory.MONSTER, 0.8F, 1.6F, 1500.0D, 1000.0D);
-    // 27 望米伤鲛 1000 心 / 攻击 300
+            registerPlaceholder("pale_mermaid", MobCategory.MONSTER, 0.8F, 1.6F);
+    // 望米伤鲛 1000 心 / 攻击 300
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> WANGMI_WOUNDED_MERMAID =
-            registerPlaceholder(27, "wangmi_wounded_mermaid", MobCategory.MONSTER, 0.8F, 1.6F, 2000.0D, 300.0D);
-    // 28 米蜃 750 心 / 攻击 400
+            registerPlaceholder("wangmi_wounded_mermaid", MobCategory.MONSTER, 0.8F, 1.6F);
+    // 米蜃 750 心 / 攻击 400
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_MIRAGE =
-            registerPlaceholder(28, "rice_mirage", MobCategory.MONSTER, 1.0F, 1.9F, 1500.0D, 400.0D);
-    // 29 懒精灵 400 心 / 攻击 100
+            registerPlaceholder("rice_mirage", MobCategory.MONSTER, 1.0F, 1.9F);
+    // 懒精灵 400 心 / 攻击 100
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> LAZY_ELF =
-            registerPlaceholder(29, "lazy_elf", MobCategory.MONSTER, 0.6F, 1.2F, 800.0D, 100.0D);
-    // 30 哮噬米狼鹫 500 心 / 攻击 500
+            registerPlaceholder("lazy_elf", MobCategory.MONSTER, 0.6F, 1.2F);
+    // 哮噬米狼鹫 500 心 / 攻击 500
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_WOLF_VULTURE =
-            registerPlaceholder(30, "rice_wolf_vulture", MobCategory.MONSTER, 1.2F, 1.9F, 1000.0D, 500.0D);
+            registerPlaceholder("rice_wolf_vulture", MobCategory.MONSTER, 1.2F, 1.9F);
 
-    /**
-     * 实体编号属性表：SPECS[1..30]，index 即用户实体编号。
-     * health=最大血量（心/血 ×2），attack=近战攻击力（友好生物为 0，不带攻击属性）。
-     * 17/19 两个真实实体的血量以本批用户数据为准（蛛 48、盗米者 1500）。
-     */
-    public record MobSpec(RegistryObject<? extends EntityType<? extends LivingEntity>> type, double health, double attack) {
-    }
-
+    /** 占位生物注册：碰撞箱与生物类别随实体给定；属性在 ModEntityAttributes 单独注册。 */
     private static RegistryObject<EntityType<PlaceholderRiceMobEntity>> registerPlaceholder(
-            int code, String id, MobCategory category, float width, float height,
-            double health, double attack) {
-        RegistryObject<EntityType<PlaceholderRiceMobEntity>> result =
-                ENTITY_TYPES.register(id, () ->
-                        EntityType.Builder.<PlaceholderRiceMobEntity>of(PlaceholderRiceMobEntity::new, category)
-                                .sized(width, height)
-                                .clientTrackingRange(category == MobCategory.MONSTER ? 12 : 8)
-                                .build(id));
-        SPECS[code] = new MobSpec(result, health, attack);
-        return result;
+            String id, MobCategory category, float width, float height) {
+        return ENTITY_TYPES.register(id, () ->
+                EntityType.Builder.<PlaceholderRiceMobEntity>of(PlaceholderRiceMobEntity::new, category)
+                        .sized(width, height)
+                        .clientTrackingRange(category == MobCategory.MONSTER ? 12 : 8)
+                        .build(id));
     }
 
     private static RegistryObject<EntityType<PendingBossEntity>> registerBoss(String id, float width, float height) {

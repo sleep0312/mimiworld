@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 沉淀台方块实体（方块编码 57 = precipitation_table）。
+ * 沉淀台方块实体（precipitation_table）。
  * 双输入定时加工、无燃料（见 {@link DualInputProcessorBlockEntity}）；
  * 当前配方表为空，后续内容通过 {@link #registerRecipe} 注册扩展。
  */

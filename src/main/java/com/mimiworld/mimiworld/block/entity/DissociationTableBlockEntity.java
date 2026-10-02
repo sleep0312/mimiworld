@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 离解台方块实体（方块编码 64 = dissociation_table）。
+ * 离解台方块实体（dissociation_table）。
  * <p>
  * 熔炉式加工（不消耗燃料）：上方输入槽放待离解物、正下方输入槽放离解介质，
  * 命中已注册的有序双输入配方且输出槽可容纳时持续推进进度，满一个周期后两种

@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 烤箱（编码 373 = oven）：GUI 与大煮锅完全相同（3x3 共 9 个网格输入槽 + 右上输入 + 燃料 + 输出），
+ * 烤箱（oven）：GUI 与大煮锅完全相同（3x3 共 9 个网格输入槽 + 右上输入 + 燃料 + 输出），
  * 但配方表独立、与大煮锅互不通用。
  */
 public class OvenBlock extends GridCookingPotBlock {

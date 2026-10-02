@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mimiworld:item/liemi_chicken"
+    "layer0": "mimiworld:item/cooked_zhuomi_chicken"
   }
 }

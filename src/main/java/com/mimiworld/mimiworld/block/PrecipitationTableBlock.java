@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 沉淀台（编码 57 = precipitation_table）：绑定 PrecipitationTableBlockEntity 的机器方块，
+ * 沉淀台（precipitation_table）：绑定 PrecipitationTableBlockEntity 的机器方块，
  * 右键打开双输入定时加工 GUI（无燃料）。
  */
 public class PrecipitationTableBlock extends DualInputProcessorBlock {

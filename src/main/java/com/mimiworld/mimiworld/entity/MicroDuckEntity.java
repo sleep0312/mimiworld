@@ -20,7 +20,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
- * 微型鸭（MicroDuck）——盗米者生物蛋（物品编码 257）召唤的真实实体。
+ * 微型鸭（MicroDuck）——盗米者生物蛋召唤的真实实体。
  *
  * <p>基于 GeckoLib 的动画实体：模型/贴图/动画均来自资源文件
  * （geo/microduck.geo.json、animations/microduck.animation.json、textures/entity/microduck.png），
@@ -44,7 +44,7 @@ public class MicroDuckEntity extends PathfinderMob implements GeoEntity {
     }
 
     /**
-     * 实体属性：盗米者（用户实体编号 19）750 心 = 1500 点血、0.25 基础移速。
+     * 实体属性：盗米者 750 心 = 1500 点血、0.25 基础移速。
      * 在 ModEntityAttributes 的 EntityAttributeCreationEvent 中注册。
      */
     public static AttributeSupplier.Builder createAttributes() {

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 汲血台方块实体（方块编码 166 = bloodletting_table）。
+ * 汲血台方块实体（bloodletting_table）。
  * 有序双输入熔炉式定时加工（槽0=左上槽 / 槽1=左下槽 → 槽2 输出），配方表独立。
  * 除普通精确物品配方外，支持上槽按<b>物品标签</b>匹配（如"任意肉类"）：
  * 命中标签配方时以槽内实际物品回填 {@link ProcessorRecipe}，基类仍按两个非空槽各消耗 1 个。

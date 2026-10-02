@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-22T18:35:04.9743935	Loot Tables
+// 1.20.1	2026-10-02T23:34:54.3736815	Loot Tables
 f2d666857d1772dcab581fc556077ae61dae0715 data/mimiworld/loot_tables/entities/blighted_thorn_flower.json
 7571654704eb824435665a6f43b31738ebf6c14d data/mimiworld/loot_tables/entities/carved_rice_skeleton.json
 8ead86cd5999bf5d87269240bfd3dd5b76e1dd1b data/mimiworld/loot_tables/entities/chaotic_void_toucher.json
@@ -28,4 +28,4 @@ f6cd7d55d87736d2eecdb538f791f97873b91063 data/mimiworld/loot_tables/entities/pen
 9dea798c6d45aac10a26535c2c837bd27e7d6254 data/mimiworld/loot_tables/entities/sticky_rice_spider.json
 5cc1045024e8f26db0899ab312f443d5c27b2cda data/mimiworld/loot_tables/entities/tanmi_fish.json
 87ecd4388d0b22ee76c999daa13344dcf879fa2b data/mimiworld/loot_tables/entities/wangmi_wounded_mermaid.json
-849e7d9beb1d7472040e8060b58b809b23f9bc18 data/mimiworld/loot_tables/entities/zhuomi_chicken.json
+4fd5f2f9b2dc79f1c66f6bbfde9b5dc3642ffbdf data/mimiworld/loot_tables/entities/zhuomi_chicken.json

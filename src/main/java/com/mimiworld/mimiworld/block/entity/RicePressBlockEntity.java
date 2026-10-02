@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 压饭机方块实体（方块编码 31 = rice_press）。
+ * 压饭机方块实体（rice_press）。
  * <p>
  * 合成方式类似原版工作台（即时合成、无加工计时）：
  * <ul>

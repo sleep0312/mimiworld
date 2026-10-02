@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 凝锭台（编码 292 = ingot_condensation_table）：绑定 IngotCondensationTableBlockEntity，
+ * 凝锭台（ingot_condensation_table）：绑定 IngotCondensationTableBlockEntity，
  * 右键打开 5x5 网格（25 输入）+ 下方中央输出槽的工作台式即时合成 GUI（面板加高），
  * 配方表独立。
  */

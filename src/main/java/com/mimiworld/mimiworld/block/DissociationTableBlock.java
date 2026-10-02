@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 离解台（编码 64 = dissociation_table）：绑定 DissociationTableBlockEntity 的机器方块，
+ * 离解台（dissociation_table）：绑定 DissociationTableBlockEntity 的机器方块，
  * 右键打开熔炉式加工 GUI（左上输入 → 右上输出，正下方为第二输入槽；无燃料）。
  * 外观为普通全立方块（模型/贴图/挖掘标签沿用方块自身资源）；
  * 加工计时只在服务端跑，破坏时掉落槽内物品。

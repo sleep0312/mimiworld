@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 搅拌器方块实体（方块编码 366 = mixer）。
+ * 搅拌器方块实体（mixer）。
  * 工作台式<b>即时合成</b>（同原版工作台：摆好即预览、取走各配料消耗 1、shift 批量合成）：
  * <ul>
  *   <li>槽 0~7：两列 x4 普通输入槽；</li>
@@ -151,7 +151,7 @@ public class MixerBlockEntity extends BlockEntity implements MenuProvider, Conta
                 }
                 have = grid;
             } else {
-                // 无额外配料：9 槽整体无序匹配（槽 8 可放普通配料，如 #358 的 9 料）
+                // 无额外配料：9 槽整体无序匹配（槽 8 可放普通配料，如饭团的 9 料）
                 have = all;
             }
             if (recipe.ingredients().size() != have.size()) {

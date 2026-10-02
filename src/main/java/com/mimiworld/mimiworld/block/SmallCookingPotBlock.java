@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 小煮锅（编码 367 = small_cooking_pot）：绑定 SmallCookingPotBlockEntity。
+ * 小煮锅（small_cooking_pot）：绑定 SmallCookingPotBlockEntity。
  * 右键打开原版熔炉式 GUI：左上输入、左下燃料、右侧输出，需要烧燃料定时加工。
  */
 public class SmallCookingPotBlock extends BaseEntityBlock {

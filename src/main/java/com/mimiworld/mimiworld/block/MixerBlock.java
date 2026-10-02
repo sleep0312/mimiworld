@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 搅拌器（编码 366 = mixer）：绑定 MixerBlockEntity。
+ * 搅拌器（mixer）：绑定 MixerBlockEntity。
  * 右键打开 9 输入（两列 x4 + 箭头上方中央 1 个）+ 1 输出的工作台式即时合成 GUI，
  * 配方按无序多重集匹配（搅拌混合语义），配方表独立。
  */

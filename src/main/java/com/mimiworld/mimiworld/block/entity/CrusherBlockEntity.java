@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 搅碎器方块实体（方块编码 365 = crusher）。
+ * 搅碎器方块实体（crusher）。
  * 有序三输入熔炉式定时加工：槽0=左上、槽1=左下、槽2=右上 → 槽3=右下输出；
  * 配方表独立，当前为空。
  */

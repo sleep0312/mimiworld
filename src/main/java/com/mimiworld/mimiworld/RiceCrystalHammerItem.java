@@ -14,14 +14,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 饭晶锤（编码 36，Rice Crystal Hammer）——自定义工具类物品。
+ * 饭晶锤（Rice Crystal Hammer）——自定义工具类物品。
  *
  * <p>设计要点：用户要求该工具最大堆叠 1（与普通工具一致）。本类直接继承 {@link Item}
  * （而非 DiggerItem/PickaxeItem），自行实现镐类工具的挖掘行为（挖掘速度 + 正确工具掉落判定），
  * 不使用耐久系统。</p>
  *
  * <p>挖掘等级/速度参考 RICE_CRYSTAL_TIER（钻石级，level=3，speed=8.0），
- * 修复材料为 35 号饭晶合金锭（保留 Tier 以便未来需要时复用）。
+ * 修复材料为饭晶合金锭（保留 Tier 以便未来需要时复用）。
  * 近战定位为重锤：基础攻击伤害 +7（含玩家自身共 8 点），攻速 -3.2（慢速高伤）。</p>
  */
 public class RiceCrystalHammerItem extends Item {

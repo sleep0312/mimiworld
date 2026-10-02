@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 杵界台方块实体（方块编码 289 = pestle_realm_table）。
+ * 杵界台方块实体（pestle_realm_table）。
  * 2x2 工作台式即时合成（见 {@link GridCraftingTableBlockEntity}）：上方 4 格输入、
  * 右下角结果槽，配方表<b>独立</b>，与凝锭台/原版工作台均不通用。
  * 当前配方表为空，通过 {@link #registerShaped} / {@link #registerShapeless} 注册扩展。

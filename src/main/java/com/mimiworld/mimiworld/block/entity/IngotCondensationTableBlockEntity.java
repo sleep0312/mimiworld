@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 凝锭台方块实体（方块编码 292 = ingot_condensation_table）。
+ * 凝锭台方块实体（ingot_condensation_table）。
  * 5x5 工作台式即时合成（见 {@link GridCraftingTableBlockEntity}）：上方 25 格输入、
  * 最下方中央结果槽（面板加高），配方表<b>独立</b>，与杵界台/原版工作台均不通用。
  * 当前配方表为空，通过 {@link #registerShaped} / {@link #registerShapeless} 注册扩展。

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 电离台方块实体（方块编码 56 = ionization_table）。
+ * 电离台方块实体（ionization_table）。
  * 双输入定时加工、无燃料（见 {@link DualInputProcessorBlockEntity}）；
  * 当前配方表为空，后续内容通过 {@link #registerRecipe} 注册扩展。
  */

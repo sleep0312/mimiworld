@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * 淬剑台（编码 164 = sword_quenching_table）：绑定 SwordQuenchingTableBlockEntity，
+ * 淬剑台（sword_quenching_table）：绑定 SwordQuenchingTableBlockEntity，
  * 右键打开三输入加工 GUI（上排两个 + 中间一个输入、最下方输出），
  * 右侧"开始"按钮按下后才加工一轮。
  */

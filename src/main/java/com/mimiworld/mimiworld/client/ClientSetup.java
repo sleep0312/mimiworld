@@ -7,6 +7,7 @@ import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.StickyRiceSpiderRenderer;
+import com.mimiworld.mimiworld.client.renderer.ZhuomiChickenRenderer;
 import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
 import com.mimiworld.mimiworld.client.screen.RicePoundingTableScreen;
 import com.mimiworld.mimiworld.client.screen.RicePressScreen;
@@ -63,14 +64,16 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
-        // 157 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
+        // 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonRenderer::new);
-        // 257 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染
+        // 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染
         event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), MicroDuckRenderer::new);
         // 黏米之蛛：GeckoLib spider 模型（idle/walk/attack 动画）
         event.registerEntityRenderer(ModEntities.STICKY_RICE_SPIDER.get(), StickyRiceSpiderRenderer::new);
-        // 3 米羊羊：GeckoLib mimi_sheep 模型（idle/walk/scared_run 动画）
+        // 米羊羊：GeckoLib mimi_sheep 模型（idle/walk/scared_run 动画）
         event.registerEntityRenderer(ModEntities.MIMI_SHEEP.get(), MimiSheepRenderer::new);
+        // 啄米鸡：GeckoLib zhuomi_chicken 模型（animation.idle/animation.walk 动画）
+        event.registerEntityRenderer(ModEntities.ZHUOMI_CHICKEN.get(), ZhuomiChickenRenderer::new);
     }
 
     // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）
