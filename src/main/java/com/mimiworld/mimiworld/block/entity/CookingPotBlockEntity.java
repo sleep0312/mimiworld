@@ -17,7 +17,7 @@ import java.util.List;
  * 煮锅方块实体（cooking_pot）：2x2 网格（4 入）+ 右上单独输入 + 燃料 + 输出。
  * 配方为网格有序 + 右上槽指定物品，配方表独立且当前为空。
  */
-public class CookingPotBlockEntity extends GridCookingPotBlockEntity {
+public class CookingPotBlockEntity extends GeckoCookingPotBlockEntity {
 
     private static final List<PotRecipe> RECIPES = new ArrayList<>();
 

@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import com.mimiworld.mimiworld.block.CookingHeaters;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -45,6 +46,9 @@ public abstract class GridCookingPotBlockEntity extends BlockEntity
         implements WorldlyContainer, MenuProvider {
 
     public static final int DEFAULT_COOK_TICKS = 200;
+
+    /** 炉灶供能时对外显示的燃料条刻度（litTime=litDuration=此值，火焰恒满） */
+    public static final int STOVE_FULL_LIT = 200;
 
     /** 一条煮锅配方：grid[i] 为网格第 i 格要求物品（null=该格必须为空），extra 为右上槽要求（null=必须空） */
     public record PotRecipe(Item[] grid, Item extra, ItemStack result, int cookTicks) {
@@ -182,8 +186,14 @@ public abstract class GridCookingPotBlockEntity extends BlockEntity
     private void tick() {
         boolean changed = false;
         boolean wasLit = litTime > 0;
+        // 炉灶供能：主方块正下方为 #mimiworld:stoves 标签方块
+        boolean powered = CookingHeaters.hasStoveBelow(level, worldPosition);
 
-        if (litTime > 0) {
+        if (powered) {
+            // 不烧燃料：燃料火焰条保持满格
+            litTime = STOVE_FULL_LIT;
+            litDuration = STOVE_FULL_LIT;
+        } else if (litTime > 0) {
             litTime--;
         }
 
@@ -195,8 +205,8 @@ public abstract class GridCookingPotBlockEntity extends BlockEntity
             cookingTotalTime = recipe.cookTicks();
         }
 
-        // 需要点火且当前火已灭：消耗一个燃料
-        if (litTime == 0 && canCook) {
+        // 无炉灶、需要点火且当前火已灭：消耗一个燃料
+        if (!powered && litTime == 0 && canCook) {
             int burnTime = ForgeHooks.getBurnTime(items.get(fuelSlot), null);
             if (burnTime > 0) {
                 ItemStack fuel = items.get(fuelSlot);
@@ -211,8 +221,9 @@ public abstract class GridCookingPotBlockEntity extends BlockEntity
             }
         }
 
-        // 有火且能煮：推进进度，满一个周期产出
-        if (litTime > 0 && canCook) {
+        // 有热源（炉灶或燃料）且能煮：推进进度，满一个周期产出
+        boolean isLit = powered || litTime > 0;
+        if (isLit && canCook) {
             cookingProgress++;
             if (cookingProgress >= cookingTotalTime) {
                 cookingProgress = 0;

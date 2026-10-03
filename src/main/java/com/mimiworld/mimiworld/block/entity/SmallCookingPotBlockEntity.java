@@ -1,5 +1,6 @@
 package com.mimiworld.mimiworld.block.entity;
 
+import com.mimiworld.mimiworld.block.CookingHeaters;
 import com.mimiworld.mimiworld.menu.SmallCookingPotMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,6 +28,10 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +48,21 @@ import java.util.List;
  * </ul>
  * 配方为单输入 -> 单输出（可指定自定义时长），配方表独立且当前为空。
  */
-public class SmallCookingPotBlockEntity extends BlockEntity implements WorldlyContainer, MenuProvider {
+public class SmallCookingPotBlockEntity extends BlockEntity
+        implements WorldlyContainer, MenuProvider, GeoBlockEntity {
+
+    // GeckoLib：小煮锅无动画，模型以静态姿态渲染，仅需单例实例缓存
+    private final AnimatableInstanceCache geoCache = new SingletonAnimatableInstanceCache(this);
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        // 不注册任何动画控制器：geo 模型保持静态
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return geoCache;
+    }
 
     public static final int SLOT_INPUT = 0;
     public static final int SLOT_FUEL = 1;
@@ -51,6 +70,9 @@ public class SmallCookingPotBlockEntity extends BlockEntity implements WorldlyCo
     public static final int TOTAL_SLOTS = 3;
 
     public static final int DEFAULT_COOK_TICKS = 200;
+
+    /** 炉灶供能时对外显示的燃料条刻度（litTime=litDuration=此值，火焰恒满） */
+    public static final int STOVE_FULL_LIT = 200;
 
     /** 一条烹煮配方：1 件输入 -> 1 份输出，cookTicks 为加工时长 */
     public record CookingRecipe(Item input, ItemStack result, int cookTicks) {
@@ -144,8 +166,14 @@ public class SmallCookingPotBlockEntity extends BlockEntity implements WorldlyCo
     private void tick() {
         boolean changed = false;
         boolean wasLit = litTime > 0;
+        // 炉灶供能：主方块正下方为 #mimiworld:stoves 标签方块
+        boolean powered = CookingHeaters.hasStoveBelow(level, worldPosition);
 
-        if (litTime > 0) {
+        if (powered) {
+            // 不烧燃料：燃料火焰条保持满格
+            litTime = STOVE_FULL_LIT;
+            litDuration = STOVE_FULL_LIT;
+        } else if (litTime > 0) {
             litTime--;
         }
 
@@ -156,8 +184,8 @@ public class SmallCookingPotBlockEntity extends BlockEntity implements WorldlyCo
             cookingTotalTime = recipe.cookTicks();
         }
 
-        // 需要点火且当前火已灭：消耗一个燃料
-        if (litTime == 0 && canCook) {
+        // 无炉灶、需要点火且当前火已灭：消耗一个燃料
+        if (!powered && litTime == 0 && canCook) {
             int burnTime = ForgeHooks.getBurnTime(items.get(SLOT_FUEL), null);
             if (burnTime > 0) {
                 ItemStack fuel = items.get(SLOT_FUEL);
@@ -172,8 +200,9 @@ public class SmallCookingPotBlockEntity extends BlockEntity implements WorldlyCo
             }
         }
 
-        // 有火且能煮：推进进度，满一个周期产出
-        if (litTime > 0 && canCook) {
+        // 有热源（炉灶或燃料）且能煮：推进进度，满一个周期产出
+        boolean isLit = powered || litTime > 0;
+        if (isLit && canCook) {
             cookingProgress++;
             if (cookingProgress >= cookingTotalTime) {
                 cookingProgress = 0;

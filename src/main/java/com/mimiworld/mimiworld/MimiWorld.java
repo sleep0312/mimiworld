@@ -7,6 +7,9 @@ import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
 import com.mojang.logging.LogUtils;
 import software.bernie.geckolib.GeckoLib;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -52,5 +55,12 @@ public class MimiWorld
         event.enqueueWork(ModFluids::registerCauldronInteractions);
         // 工作方块（锤米台/压饭机）即时合成配方，需在注册表冻结后注册
         event.enqueueWork(ModMachineRecipes::register);
+        // 贪米鱼：水下生成规则（同原版鳕鱼——海平面附近、上方为水源的水中），
+        // 具体生物群系（河流/海洋）由 data 下的 forge biome_modifier JSON 添加
+        event.enqueueWork(() -> SpawnPlacements.register(
+                ModEntities.TANMI_FISH.get(),
+                SpawnPlacements.Type.IN_WATER,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                WaterAnimal::checkSurfaceWaterAnimalSpawnRules));
     }
 }

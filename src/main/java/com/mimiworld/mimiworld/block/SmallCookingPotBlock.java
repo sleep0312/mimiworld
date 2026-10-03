@@ -69,6 +69,8 @@ public class SmallCookingPotBlock extends BaseEntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
+        // 世界中的外观完全由 GeckoLib BlockEntityRenderer 渲染，
+        // 不渲染方块自身的 JSON 模型（物品栏图标仍走 models/item，不受影响）
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 }

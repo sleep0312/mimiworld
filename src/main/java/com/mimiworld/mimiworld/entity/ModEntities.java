@@ -73,7 +73,7 @@ public class ModEntities {
                             .build("rice_stealer"));
 
     // ===== 黏米之蛛：GeckoLib spider 模型，行为同原版蜘蛛但全天敌对（1.4×0.9 中型怪物） =====
-    // 暂不注册刷怪蛋，可用 /summon mimiworld:sticky_rice_spider 召唤测试；自然生成规则后续再加
+    // 生物蛋已注册（ModItems.STICKY_RICE_SPIDER_SPAWN_EGG）；自然生成规则后续再加
     public static final RegistryObject<EntityType<StickyRiceSpiderEntity>> STICKY_RICE_SPIDER =
             ENTITY_TYPES.register("sticky_rice_spider", () ->
                     EntityType.Builder.<StickyRiceSpiderEntity>of(StickyRiceSpiderEntity::new, MobCategory.MONSTER)
@@ -82,8 +82,8 @@ public class ModEntities {
                             .build("sticky_rice_spider"));
 
     // ===== 米羊羊：GeckoLib mimi_sheep 模型，友好生物 0.9×1.3（对齐原版羊碰撞箱） =====
-    // 生物逻辑同原版羊（漂浮/受击惊慌逃跑/避水游荡/张望，羊叫声），但不注册吃草 AI，暂不注册刷怪蛋。
-    // 可用 /summon mimiworld:mimi_sheep 召唤测试。
+    // 生物逻辑同原版羊（漂浮/受击惊慌逃跑/避水游荡/张望，羊叫声），但不注册吃草 AI。
+    // 生物蛋已注册（ModItems.MIMI_SHEEP_SPAWN_EGG）。
     public static final RegistryObject<EntityType<MimiSheepEntity>> MIMI_SHEEP =
             ENTITY_TYPES.register("mimi_sheep", () ->
                     EntityType.Builder.<MimiSheepEntity>of(MimiSheepEntity::new, MobCategory.CREATURE)
@@ -108,15 +108,29 @@ public class ModEntities {
     // ============================================================================
 
     // —— 友好生物 ——
-    // 米哞牛 10 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIMOO_COW =
-            registerPlaceholder("mimoo_cow", MobCategory.CREATURE, 0.9F, 1.4F);
-    // 米哼猪 10 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIHENG_PIG =
-            registerPlaceholder("miheng_pig", MobCategory.CREATURE, 0.9F, 1.3F);
-    // 贪米鱼 4 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> TANMI_FISH =
-            registerPlaceholder("tanmi_fish", MobCategory.CREATURE, 0.5F, 0.4F);
+    // 米哞牛 10 心：已转正，GeckoLib mimouniu 模型（idle/walk 动画，大米主题贴图），碰撞箱对齐原版牛
+    public static final RegistryObject<EntityType<MimouniuEntity>> MIMOO_COW =
+            ENTITY_TYPES.register("mimoo_cow", () ->
+                    EntityType.Builder.<MimouniuEntity>of(MimouniuEntity::new, MobCategory.CREATURE)
+                            .sized(0.9F, 1.4F)
+                            .clientTrackingRange(8)
+                            .build("mimoo_cow"));
+    // 米哼猪：已转正，GeckoLib mihengzhu 模型（idle/walk 动画，大米主题贴图），碰撞箱对齐原版猪
+    public static final RegistryObject<EntityType<MihengPigEntity>> MIHENG_PIG =
+            ENTITY_TYPES.register("miheng_pig", () ->
+                    EntityType.Builder.<MihengPigEntity>of(MihengPigEntity::new, MobCategory.CREATURE)
+                            .sized(0.9F, 1.3F)
+                            .clientTrackingRange(8)
+                            .build("miheng_pig"));
+    // 贪米鱼：已转正，GeckoLib tanmiyu 模型（swim/idle 动画）。
+    // 首个水生生物：类别 WATER_AMBIENT（同原版鳕鱼群），碰撞箱 0.5×0.4，水下生成/游泳 AI/可用水桶装起。
+    // 注册名 tanmi_fish 保持不变，生物蛋/战利品表继续按此名引用。
+    public static final RegistryObject<EntityType<TanmiFishEntity>> TANMI_FISH =
+            ENTITY_TYPES.register("tanmi_fish", () ->
+                    EntityType.Builder.<TanmiFishEntity>of(TanmiFishEntity::new, MobCategory.WATER_AMBIENT)
+                            .sized(0.5F, 0.4F)
+                            .clientTrackingRange(4)
+                            .build("tanmi_fish"));
     // 喷米鱼 4 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> PENMI_FISH =
             registerPlaceholder("penmi_fish", MobCategory.CREATURE, 0.5F, 0.4F);

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 /**
  * 超大煮锅（extra_large_cooking_pot）：4x4 共 16 个网格输入槽的熔炉式燃料煮锅。
  */
-public class ExtraLargeCookingPotBlock extends GridCookingPotBlock {
+public class ExtraLargeCookingPotBlock extends GeckoCookingPotBlock {
 
     public ExtraLargeCookingPotBlock(Properties properties) {
         super(properties);

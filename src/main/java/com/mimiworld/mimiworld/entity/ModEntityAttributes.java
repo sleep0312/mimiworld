@@ -41,9 +41,12 @@ public class ModEntityAttributes {
         event.put(ModEntities.ZHUOMI_CHICKEN.get(), ZhuomiChickenEntity.createAttributes().build());
 
         // —— 米米系列占位生物：友好（无攻击力）——
-        event.put(ModEntities.MIMOO_COW.get(), placeholder(20.0D, 0.0D));              // 米哞牛 10 心
-        event.put(ModEntities.MIHENG_PIG.get(), placeholder(20.0D, 0.0D));             // 米哼猪 10 心
-        event.put(ModEntities.TANMI_FISH.get(), placeholder(8.0D, 0.0D));              // 贪米鱼 4 心
+        // 米哞牛：真实 GeckoLib 牛实体（10 心、移速 0.2，对齐原版牛）
+        event.put(ModEntities.MIMOO_COW.get(), MimouniuEntity.createAttributes().build());
+        // 米哼猪：真实 GeckoLib 猪实体（10 心、移速 0.25，对齐原版猪）
+        event.put(ModEntities.MIHENG_PIG.get(), MihengPigEntity.createAttributes().build());
+        // 贪米鱼：真实水生 GeckoLib 实体（4 心、游泳速度 1.0，对齐原版鳕鱼）
+        event.put(ModEntities.TANMI_FISH.get(), TanmiFishEntity.createAttributes().build());
         event.put(ModEntities.PENMI_FISH.get(), placeholder(8.0D, 0.0D));              // 喷米鱼 4 心
         event.put(ModEntities.RICE_GOLEM.get(), placeholder(200.0D, 0.0D));            // 米傀儡 100 心
         event.put(ModEntities.HAOMI_WOLF.get(), placeholder(40.0D, 0.0D));             // 嗥米狼 20 心

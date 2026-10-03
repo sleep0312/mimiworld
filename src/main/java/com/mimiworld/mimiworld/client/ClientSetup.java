@@ -2,11 +2,16 @@ package com.mimiworld.mimiworld.client;
 
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
+import com.mimiworld.mimiworld.block.entity.ModBlockEntities;
+import com.mimiworld.mimiworld.client.renderer.CookingPotGeoBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
+import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
+import com.mimiworld.mimiworld.client.renderer.MihengPigRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.StickyRiceSpiderRenderer;
+import com.mimiworld.mimiworld.client.renderer.TanmiFishRenderer;
 import com.mimiworld.mimiworld.client.renderer.ZhuomiChickenRenderer;
 import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
 import com.mimiworld.mimiworld.client.screen.RicePoundingTableScreen;
@@ -36,6 +41,7 @@ import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -74,6 +80,29 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.MIMI_SHEEP.get(), MimiSheepRenderer::new);
         // 啄米鸡：GeckoLib zhuomi_chicken 模型（animation.idle/animation.walk 动画）
         event.registerEntityRenderer(ModEntities.ZHUOMI_CHICKEN.get(), ZhuomiChickenRenderer::new);
+        // 米哞牛：GeckoLib mimouniu 模型（animation.mimouniu.idle/walk 动画，大米主题贴图）
+        event.registerEntityRenderer(ModEntities.MIMOO_COW.get(), MimouniuRenderer::new);
+        // 米哼猪：GeckoLib mihengzhu 模型（animation.mihengzhu.idle/walk 动画，大米主题贴图）
+        event.registerEntityRenderer(ModEntities.MIHENG_PIG.get(), MihengPigRenderer::new);
+        // 贪米鱼：GeckoLib tanmiyu 模型（animation.tanmiyu.swim/idle 动画，水生鳕鱼式造型）
+        event.registerEntityRenderer(ModEntities.TANMI_FISH.get(), TanmiFishRenderer::new);
+
+        // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）
+        event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),
+                ctx -> new CookingPotGeoBlockRenderer<>(
+                        new ResourceLocation(MimiWorld.MODID, "small_cooking_pot")));
+        event.registerBlockEntityRenderer(ModBlockEntities.COOKING_POT.get(),
+                ctx -> new CookingPotGeoBlockRenderer<>(
+                        new ResourceLocation(MimiWorld.MODID, "cooking_pot")));
+        event.registerBlockEntityRenderer(ModBlockEntities.LARGE_COOKING_POT.get(),
+                ctx -> new CookingPotGeoBlockRenderer<>(
+                        new ResourceLocation(MimiWorld.MODID, "large_cooking_pot")));
+        event.registerBlockEntityRenderer(ModBlockEntities.EXTRA_LARGE_COOKING_POT.get(),
+                ctx -> new CookingPotGeoBlockRenderer<>(
+                        new ResourceLocation(MimiWorld.MODID, "extra_large_cooking_pot")));
+        event.registerBlockEntityRenderer(ModBlockEntities.JUMBO_MEGA_COOKING_POT.get(),
+                ctx -> new CookingPotGeoBlockRenderer<>(
+                        new ResourceLocation(MimiWorld.MODID, "jumbo_mega_cooking_pot")));
     }
 
     // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）

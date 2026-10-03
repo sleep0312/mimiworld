@@ -13,8 +13,11 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -781,6 +784,131 @@ public class ModItems {
             registerItem("laziest_final_dragon_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.LAZIEST_FINAL_DRAGON, 0x2E1E4A, 0xA974E0, new Item.Properties()));
 
+    // ===== 米米系列生物蛋（ForgeSpawnEggItem；模型统一 parent 原版 item/template_spawn_egg，
+    //        底色=蛋身、斑色=斑点，按各生物主题配色；占位实体转正后蛋无需改动） =====
+
+    // —— 已转正 GeckoLib 友好/特殊生物 ——
+    // 黏米之蛛生物蛋：糯米白底/蛛腿墨黑
+    public static final RegistryObject<Item> STICKY_RICE_SPIDER_SPAWN_EGG =
+            registerItem("sticky_rice_spider_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.STICKY_RICE_SPIDER, 0xEDE6D2, 0x3A332E, new Item.Properties()));
+    // 米羊羊生物蛋：羊毛米白/稻金耳蹄
+    public static final RegistryObject<Item> MIMI_SHEEP_SPAWN_EGG =
+            registerItem("mimi_sheep_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.MIMI_SHEEP, 0xEDEDE6, 0xCBB892, new Item.Properties()));
+    // 啄米鸡生物蛋：白羽米白/鸡冠红
+    public static final RegistryObject<Item> ZHUOMI_CHICKEN_SPAWN_EGG =
+            registerItem("zhuomi_chicken_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.ZHUOMI_CHICKEN, 0xF4F1E6, 0xC2472E, new Item.Properties()));
+    // 米哞牛生物蛋：米白毛/稻金角
+    public static final RegistryObject<Item> MIMOO_COW_SPAWN_EGG =
+            registerItem("mimoo_cow_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.MIMOO_COW, 0xEDE2C8, 0xD9A84E, new Item.Properties()));
+    // 米哼猪生物蛋：米白毛/米粉腮红
+    public static final RegistryObject<Item> MIHENG_PIG_SPAWN_EGG =
+            registerItem("miheng_pig_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.MIHENG_PIG, 0xF3E9DC, 0xF0A6B2, new Item.Properties()));
+
+    // —— 友好占位生物 ——
+    // 贪米鱼生物蛋：银蓝鱼鳞/贪金
+    public static final RegistryObject<Item> TANMI_FISH_SPAWN_EGG =
+            registerItem("tanmi_fish_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.TANMI_FISH, 0xA9C4DC, 0xE3C15A, new Item.Properties()));
+    // 喷米鱼生物蛋：水蓝鱼身/喷米白
+    public static final RegistryObject<Item> PENMI_FISH_SPAWN_EGG =
+            registerItem("penmi_fish_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.PENMI_FISH, 0x7FB3D5, 0xF7F3E8, new Item.Properties()));
+    // 米傀儡生物蛋：草垛黄/麻绳褐
+    public static final RegistryObject<Item> RICE_GOLEM_SPAWN_EGG =
+            registerItem("rice_golem_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.RICE_GOLEM, 0xCBB889, 0x8A764A, new Item.Properties()));
+    // 嗥米狼生物蛋：狼灰/米白
+    public static final RegistryObject<Item> HAOMI_WOLF_SPAWN_EGG =
+            registerItem("haomi_wolf_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.HAOMI_WOLF, 0x8A8276, 0xEDE2C8, new Item.Properties()));
+    // 米米骷髅生物蛋：骨白/旧骨灰
+    public static final RegistryObject<Item> MIMI_SKELETON_SPAWN_EGG =
+            registerItem("mimi_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.MIMI_SKELETON, 0xE8E4D6, 0xB0A98F, new Item.Properties()));
+    // 糊米古尸生物蛋：糊米褐/焦壳深褐
+    public static final RegistryObject<Item> HUMI_CORPSE_SPAWN_EGG =
+            registerItem("humi_corpse_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.HUMI_CORPSE, 0x7A6B52, 0x473C2B, new Item.Properties()));
+    // 爪巴米者生物蛋：霉米黄褐/暗斑
+    public static final RegistryObject<Item> PAMI_CRAWLER_SPAWN_EGG =
+            registerItem("pami_crawler_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.PAMI_CRAWLER, 0x9A8E70, 0x5C5338, new Item.Properties()));
+    // 米巫生物蛋：巫袍紫/魔雾浅紫
+    public static final RegistryObject<Item> RICE_WITCH_SPAWN_EGG =
+            registerItem("rice_witch_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.RICE_WITCH, 0x4A3A66, 0x9A86BC, new Item.Properties()));
+    // 没米入生物蛋：暗灰/幽灰
+    public static final RegistryObject<Item> MOMI_ENTRANT_SPAWN_EGG =
+            registerItem("momi_entrant_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.MOMI_ENTRANT, 0x38323E, 0x857B92, new Item.Properties()));
+    // 爆烈米灵生物蛋：爆裂红/火星金
+    public static final RegistryObject<Item> EXPLOSIVE_RICE_SPIRIT_SPAWN_EGG =
+            registerItem("explosive_rice_spirit_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.EXPLOSIVE_RICE_SPIRIT, 0xB0472C, 0xEBC24A, new Item.Properties()));
+    // 雕米骷髅生物蛋：雕骨米黄/刻纹褐
+    public static final RegistryObject<Item> CARVED_RICE_SKELETON_SPAWN_EGG =
+            registerItem("carved_rice_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.CARVED_RICE_SKELETON, 0xD8CFB6, 0x7A6E4F, new Item.Properties()));
+    // 米莱马生物蛋：栗马褐/鬃毛深褐
+    public static final RegistryObject<Item> MILAI_HORSE_SPAWN_EGG =
+            registerItem("milai_horse_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.MILAI_HORSE, 0x8A6B4A, 0x3A2C21, new Item.Properties()));
+    // 米哼猪尸生物蛋：尸绿/腐斑暗绿
+    public static final RegistryObject<Item> MIHENG_PIG_CORPSE_SPAWN_EGG =
+            registerItem("miheng_pig_corpse_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.MIHENG_PIG_CORPSE, 0x7E8C66, 0x56603F, new Item.Properties()));
+    // 米魂生物蛋：魂青白/幽青
+    public static final RegistryObject<Item> RICE_SOUL_SPAWN_EGG =
+            registerItem("rice_soul_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.RICE_SOUL, 0xCDEFF0, 0x74C6CE, new Item.Properties()));
+
+    // —— 敌对占位生物 ——
+    // 界天米生物蛋：帝王金/天权暗金
+    public static final RegistryObject<Item> JIETIAN_RICE_SPAWN_EGG =
+            registerItem("jietian_rice_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.JIETIAN_RICE, 0xC8B04A, 0x86651B, new Item.Properties()));
+    // 混沌不可名状之米界虚无触生物蛋：虚无墨紫/混沌紫
+    public static final RegistryObject<Item> CHAOTIC_VOID_TOUCHER_SPAWN_EGG =
+            registerItem("chaotic_void_toucher_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.CHAOTIC_VOID_TOUCHER, 0x181224, 0x8A3AB0, new Item.Properties()));
+    // 污棘花生物蛋：枯萎绿/污染紫
+    public static final RegistryObject<Item> BLIGHTED_THORN_FLOWER_SPAWN_EGG =
+            registerItem("blighted_thorn_flower_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.BLIGHTED_THORN_FLOWER, 0x495A2E, 0x77478A, new Item.Properties()));
+    // 堕落米凤生物蛋：堕落暗红/余烬橙
+    public static final RegistryObject<Item> FALLEN_RICE_PHOENIX_SPAWN_EGG =
+            registerItem("fallen_rice_phoenix_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.FALLEN_RICE_PHOENIX, 0x7A2A38, 0xE0873A, new Item.Properties()));
+    // 化灵米生物蛋：化灵蓝/灵光白
+    public static final RegistryObject<Item> HUALING_RICE_SPAWN_EGG =
+            registerItem("hualing_rice_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.HUALING_RICE, 0x6A8AC8, 0xE6EEF8, new Item.Properties()));
+    // 浅染鲛生物蛋：浅染苍/深海青
+    public static final RegistryObject<Item> PALE_MERMAID_SPAWN_EGG =
+            registerItem("pale_mermaid_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.PALE_MERMAID, 0xB9CAD9, 0x6689A6, new Item.Properties()));
+    // 望米伤鲛生物蛋：伤灰紫/血痕红
+    public static final RegistryObject<Item> WANGMI_WOUNDED_MERMAID_SPAWN_EGG =
+            registerItem("wangmi_wounded_mermaid_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.WANGMI_WOUNDED_MERMAID, 0x886674, 0xB0485A, new Item.Properties()));
+    // 米蜃生物蛋：蜃气青灰/幻光浅青
+    public static final RegistryObject<Item> RICE_MIRAGE_SPAWN_EGG =
+            registerItem("rice_mirage_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.RICE_MIRAGE, 0x88A89F, 0xC7E0D7, new Item.Properties()));
+    // 懒精灵生物蛋：怠惰灰蓝/慵睡淡紫
+    public static final RegistryObject<Item> LAZY_ELF_SPAWN_EGG =
+            registerItem("lazy_elf_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.LAZY_ELF, 0x989EB6, 0xD6CFE6, new Item.Properties()));
+    // 哮噬米狼鹫生物蛋：猛禽深褐/狼鹫金褐
+    public static final RegistryObject<Item> RICE_WOLF_VULTURE_SPAWN_EGG =
+            registerItem("rice_wolf_vulture_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.RICE_WOLF_VULTURE, 0x493B30, 0x9A7A4A, new Item.Properties()));
+
     // 待定占位：不进创造标签页
     public static final RegistryObject<Item> PLACEHOLDER_158 = registerItem("placeholder_158",
             () -> new Item(new Item.Properties().stacksTo(64)));
@@ -1106,6 +1234,13 @@ public class ModItems {
                     return 30;
                 }
             });
+
+    // 贪米鱼桶（Bucket of Tanmi Fish）：对水中贪米鱼使用水桶装起，倒出可还原活鱼（AbstractFish 原版交互）
+    public static final RegistryObject<Item> TANMI_FISH_BUCKET = registerItem("tanmi_fish_bucket",
+            () -> new MobBucketItem(ModEntities.TANMI_FISH,
+                    () -> Fluids.WATER,
+                    () -> SoundEvents.BUCKET_EMPTY_FISH,
+                    new Item.Properties().stacksTo(1)));
 
     // ===== 米米生物掉落材料（均为普通物品，最大堆叠 64，无食用属性） =====
 
