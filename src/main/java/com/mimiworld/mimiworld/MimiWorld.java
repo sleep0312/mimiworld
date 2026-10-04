@@ -62,5 +62,11 @@ public class MimiWorld
                 SpawnPlacements.Type.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WaterAnimal::checkSurfaceWaterAnimalSpawnRules));
+        // 喷米鱼：水下生成规则（同贪米鱼/原版鳕鱼），生物群系由 forge biome_modifier JSON 添加
+        event.enqueueWork(() -> SpawnPlacements.register(
+                ModEntities.PENMI_FISH.get(),
+                SpawnPlacements.Type.IN_WATER,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                WaterAnimal::checkSurfaceWaterAnimalSpawnRules));
     }
 }

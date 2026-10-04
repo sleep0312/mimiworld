@@ -1242,6 +1242,13 @@ public class ModItems {
                     () -> SoundEvents.BUCKET_EMPTY_FISH,
                     new Item.Properties().stacksTo(1)));
 
+    // 喷米鱼桶（Bucket of Penmi Fish）：对水中喷米鱼使用水桶装起，倒出可还原活鱼（AbstractFish 原版交互）
+    public static final RegistryObject<Item> PENMI_FISH_BUCKET = registerItem("penmi_fish_bucket",
+            () -> new MobBucketItem(ModEntities.PENMI_FISH,
+                    () -> Fluids.WATER,
+                    () -> SoundEvents.BUCKET_EMPTY_FISH,
+                    new Item.Properties().stacksTo(1)));
+
     // ===== 米米生物掉落材料（均为普通物品，最大堆叠 64，无食用属性） =====
 
     // 啄米羽毛（Zhuomi Feather）

@@ -47,13 +47,20 @@ public class ModEntityAttributes {
         event.put(ModEntities.MIHENG_PIG.get(), MihengPigEntity.createAttributes().build());
         // 贪米鱼：真实水生 GeckoLib 实体（4 心、游泳速度 1.0，对齐原版鳕鱼）
         event.put(ModEntities.TANMI_FISH.get(), TanmiFishEntity.createAttributes().build());
-        event.put(ModEntities.PENMI_FISH.get(), placeholder(8.0D, 0.0D));              // 喷米鱼 4 心
-        event.put(ModEntities.RICE_GOLEM.get(), placeholder(200.0D, 0.0D));            // 米傀儡 100 心
-        event.put(ModEntities.HAOMI_WOLF.get(), placeholder(40.0D, 0.0D));             // 嗥米狼 20 心
-        event.put(ModEntities.MIMI_SKELETON.get(), placeholder(48.0D, 0.0D));          // 米米骷髅 24 心
-        event.put(ModEntities.HUMI_CORPSE.get(), placeholder(60.0D, 0.0D));            // 糊米古尸 30 心
-        event.put(ModEntities.PAMI_CRAWLER.get(), placeholder(24.0D, 0.0D));           // 爪巴米者 12 心
-        event.put(ModEntities.RICE_WITCH.get(), placeholder(60.0D, 0.0D));             // 米巫 30 心
+        // 喷米鱼：真实水生 GeckoLib 实体（4 心、游泳速度 1.0，对齐原版鳕鱼）
+        event.put(ModEntities.PENMI_FISH.get(), PenmiFishEntity.createAttributes().build());
+        // 米傀儡：真实 GeckoLib 铁傀儡型实体（100 心、移速 0.25、满击退抗性，对齐原版铁傀儡）
+        event.put(ModEntities.RICE_GOLEM.get(), RiceGolemEntity.createAttributes().build());
+        // 嗥米狼：真实 GeckoLib 狼实体（20 心、移速 0.3，对齐原版狼）
+        event.put(ModEntities.HAOMI_WOLF.get(), HaomiWolfEntity.createAttributes().build());
+        // 米米骷髅：真实 GeckoLib 骷髅实体（24 心、移速 0.25，对齐原版骷髅）
+        event.put(ModEntities.MIMI_SKELETON.get(), MimiSkeletonEntity.createAttributes().build());
+        // 糊米古尸：真实 GeckoLib 敌对亡灵实体（30 心、移速 0.23、攻击 3，对齐原版僵尸）
+        event.put(ModEntities.HUMI_CORPSE.get(), HumiCorpseEntity.createAttributes().build());
+        // 爪巴米者：真实 GeckoLib 自爆怪物实体（12 心、移速 0.25，对齐原版苦力怕；无近战攻击，攻击方式为自爆）
+        event.put(ModEntities.PAMI_CRAWLER.get(), PamiCrawlerEntity.createAttributes().build());
+        // 米巫：真实 GeckoLib 敌对女巫实体（30 心、移速 0.25、近战攻击 4；远程丢溅射药水）
+        event.put(ModEntities.RICE_WITCH.get(), RiceWitchEntity.createAttributes().build());
         event.put(ModEntities.MOMI_ENTRANT.get(), placeholder(150.0D, 0.0D));          // 没米入 75 心
         event.put(ModEntities.EXPLOSIVE_RICE_SPIRIT.get(), placeholder(120.0D, 0.0D)); // 爆烈米灵 60 心
         event.put(ModEntities.CARVED_RICE_SKELETON.get(), placeholder(120.0D, 0.0D));  // 雕米骷髅 60 心

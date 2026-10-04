@@ -131,27 +131,66 @@ public class ModEntities {
                             .sized(0.5F, 0.4F)
                             .clientTrackingRange(4)
                             .build("tanmi_fish"));
-    // 喷米鱼 4 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> PENMI_FISH =
-            registerPlaceholder("penmi_fish", MobCategory.CREATURE, 0.5F, 0.4F);
-    // 米傀儡 100 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_GOLEM =
-            registerPlaceholder("rice_golem", MobCategory.CREATURE, 1.4F, 2.7F);
-    // 嗥米狼 20 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HAOMI_WOLF =
-            registerPlaceholder("haomi_wolf", MobCategory.CREATURE, 0.6F, 0.85F);
-    // 米米骷髅 24 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIMI_SKELETON =
-            registerPlaceholder("mimi_skeleton", MobCategory.CREATURE, 0.6F, 1.99F);
-    // 糊米古尸 30 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HUMI_CORPSE =
-            registerPlaceholder("humi_corpse", MobCategory.CREATURE, 0.7F, 1.9F);
-    // 爪巴米者 12 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> PAMI_CRAWLER =
-            registerPlaceholder("pami_crawler", MobCategory.CREATURE, 0.7F, 0.8F);
-    // 米巫 30 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_WITCH =
-            registerPlaceholder("rice_witch", MobCategory.CREATURE, 0.6F, 1.95F);
+    // 喷米鱼：已转正，GeckoLib penmiyu 模型（swim/idle 动画）。
+    // 第二个水生生物：类别 WATER_AMBIENT（同原版鳕鱼群），碰撞箱 0.5×0.4，水下生成/游泳 AI/可用水桶装起。
+    // 注册名 penmi_fish 保持不变，生物蛋/喷米鱼囊掉落继续按此名引用。
+    public static final RegistryObject<EntityType<PenmiFishEntity>> PENMI_FISH =
+            ENTITY_TYPES.register("penmi_fish", () ->
+                    EntityType.Builder.<PenmiFishEntity>of(PenmiFishEntity::new, MobCategory.WATER_AMBIENT)
+                            .sized(0.5F, 0.4F)
+                            .clientTrackingRange(4)
+                            .build("penmi_fish"));
+    // 米傀儡：已转正，GeckoLib rice_golem 模型（idle/walk 动画，稻草+麻绳大米主题贴图），
+    // 碰撞箱 1.4×2.7、100 心，属性/音效对齐原版铁傀儡；生物蛋 ModItems.RICE_GOLEM_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<RiceGolemEntity>> RICE_GOLEM =
+            ENTITY_TYPES.register("rice_golem", () ->
+                    EntityType.Builder.<RiceGolemEntity>of(RiceGolemEntity::new, MobCategory.CREATURE)
+                            .sized(1.4F, 2.7F)
+                            .clientTrackingRange(8)
+                            .build("rice_golem"));
+    // 嗥米狼：已转正，GeckoLib haomi_wolf 模型（idle/walk 动画，狼灰+米白+稻草金大米主题贴图），
+    // 碰撞箱 0.6×1.7（模型实测约 27px 高）、20 心，属性/音效对齐原版狼；生物蛋 ModItems.HAOMI_WOLF_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<HaomiWolfEntity>> HAOMI_WOLF =
+            ENTITY_TYPES.register("haomi_wolf", () ->
+                    EntityType.Builder.<HaomiWolfEntity>of(HaomiWolfEntity::new, MobCategory.CREATURE)
+                            .sized(0.6F, 1.7F)
+                            .clientTrackingRange(8)
+                            .build("haomi_wolf"));
+    // 米米骷髅：已转正，GeckoLib mimi_skeleton 模型（animation.idle/walk 动画，陈米骨色+稻绿鬼火眼+米袋腰裙贴图），
+    // 碰撞箱 0.6×1.99（模型实测 33px 高，骨冠略高出箱体）、24 心，属性/音效对齐原版骷髅；生物蛋 ModItems.MIMI_SKELETON_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<MimiSkeletonEntity>> MIMI_SKELETON =
+            ENTITY_TYPES.register("mimi_skeleton", () ->
+                    EntityType.Builder.<MimiSkeletonEntity>of(MimiSkeletonEntity::new, MobCategory.CREATURE)
+                            .sized(0.6F, 1.99F)
+                            .clientTrackingRange(8)
+                            .build("mimi_skeleton"));
+    // 糊米古尸：已转正，敌对亡灵 GeckoLib humi_corpse 模型（animation.idle/walk/attack 动画，
+    // 陈米尸肤+糊米痂+青灰官袍+额头符纸贴图，僵尸跳步态+双爪扑击），碰撞箱 0.7×1.9（模型实测 31.1px 高）、
+    // 30 心，属性/音效对齐原版僵尸；生物蛋 ModItems.HUMI_CORPSE_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<HumiCorpseEntity>> HUMI_CORPSE =
+            ENTITY_TYPES.register("humi_corpse", () ->
+                    EntityType.Builder.<HumiCorpseEntity>of(HumiCorpseEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 1.9F)
+                            .clientTrackingRange(8)
+                            .build("humi_corpse"));
+    // 爪巴米者：已转正，敌对 GeckoLib pami_crawler 模型（animation.idle/walk/attack 动画，
+    // 旧米麻袋+苦脸+稻芽贴图，四足爬行），碰撞箱 0.7×0.8、12 心；
+    // 行为同原版苦力怕——不近战，靠近 3 格点燃 30tick 引信后自爆；生物蛋 ModItems.PAMI_CRAWLER_SPAWN_EGG
+    public static final RegistryObject<EntityType<PamiCrawlerEntity>> PAMI_CRAWLER =
+            ENTITY_TYPES.register("pami_crawler", () ->
+                    EntityType.Builder.<PamiCrawlerEntity>of(PamiCrawlerEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 0.8F)
+                            .clientTrackingRange(8)
+                            .build("pami_crawler"));
+    // 米巫：已转正，敌对 GeckoLib rice_witch 模型（animation.idle/walk/attack/throw 动画，
+    // 黑紫丝绒+金边+米饰贴图，弯帽尖+后腰药袋药瓶），碰撞箱 0.6×1.95（帽尖略高出箱体）、
+    // 30 心，远程丢溅射药水（中毒/缓慢/瞬间伤害）+近身魔法推击；生物蛋 ModItems.RICE_WITCH_SPAWN_EGG
+    public static final RegistryObject<EntityType<RiceWitchEntity>> RICE_WITCH =
+            ENTITY_TYPES.register("rice_witch", () ->
+                    EntityType.Builder.<RiceWitchEntity>of(RiceWitchEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.95F)
+                            .clientTrackingRange(8)
+                            .build("rice_witch"));
     // 没米入 75 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MOMI_ENTRANT =
             registerPlaceholder("momi_entrant", MobCategory.CREATURE, 0.9F, 1.9F);

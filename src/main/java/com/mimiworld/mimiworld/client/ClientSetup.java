@@ -10,6 +10,13 @@ import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
+import com.mimiworld.mimiworld.client.renderer.PenmiFishRenderer;
+import com.mimiworld.mimiworld.client.renderer.RiceGolemRenderer;
+import com.mimiworld.mimiworld.client.renderer.HaomiWolfRenderer;
+import com.mimiworld.mimiworld.client.renderer.HumiCorpseRenderer;
+import com.mimiworld.mimiworld.client.renderer.PamiCrawlerRenderer;
+import com.mimiworld.mimiworld.client.renderer.RiceWitchRenderer;
+import com.mimiworld.mimiworld.client.renderer.MimiSkeletonRenderer;
 import com.mimiworld.mimiworld.client.renderer.StickyRiceSpiderRenderer;
 import com.mimiworld.mimiworld.client.renderer.TanmiFishRenderer;
 import com.mimiworld.mimiworld.client.renderer.ZhuomiChickenRenderer;
@@ -86,6 +93,19 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.MIHENG_PIG.get(), MihengPigRenderer::new);
         // 贪米鱼：GeckoLib tanmiyu 模型（animation.tanmiyu.swim/idle 动画，水生鳕鱼式造型）
         event.registerEntityRenderer(ModEntities.TANMI_FISH.get(), TanmiFishRenderer::new);
+        // 喷米鱼：GeckoLib penmiyu 模型（animation.penmiyu.swim/idle 动画，水生造型）
+        event.registerEntityRenderer(ModEntities.PENMI_FISH.get(), PenmiFishRenderer::new);
+        // 米傀儡：GeckoLib rice_golem 模型（animation.rice_golem.idle/walk 动画，稻草+麻绳贴图）
+        event.registerEntityRenderer(ModEntities.RICE_GOLEM.get(), RiceGolemRenderer::new);
+        // 嗥米狼：GeckoLib haomi_wolf 模型（animation.idle/animation.walk 动画，狼灰+米白+稻草金贴图）
+        event.registerEntityRenderer(ModEntities.HAOMI_WOLF.get(), HaomiWolfRenderer::new);
+        // 米米骷髅：GeckoLib mimi_skeleton 模型（animation.idle/animation.walk 动画，陈米骨色+稻绿鬼火眼+米袋腰裙贴图）
+        event.registerEntityRenderer(ModEntities.MIMI_SKELETON.get(), MimiSkeletonRenderer::new);
+        // 糊米古尸：GeckoLib humi_corpse 模型（animation.idle/walk/attack 动画，陈米尸肤+符纸+青灰官袍贴图）
+        event.registerEntityRenderer(ModEntities.HUMI_CORPSE.get(), HumiCorpseRenderer::new);
+        // 爪巴米者：GeckoLib pami_crawler 模型（animation.idle/walk/attack 动画，旧米麻袋苦力怕贴图），引信期间 energySwirl 白闪
+        event.registerEntityRenderer(ModEntities.PAMI_CRAWLER.get(), PamiCrawlerRenderer::new);
+        event.registerEntityRenderer(ModEntities.RICE_WITCH.get(), RiceWitchRenderer::new);
 
         // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）
         event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),
