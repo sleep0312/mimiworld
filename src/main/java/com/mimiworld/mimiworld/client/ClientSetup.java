@@ -4,22 +4,28 @@ import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.block.entity.ModBlockEntities;
 import com.mimiworld.mimiworld.client.renderer.CookingPotGeoBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.DiaomikulouRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
+import com.mimiworld.mimiworld.client.renderer.MihengPigCorpseRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigRenderer;
+import com.mimiworld.mimiworld.client.renderer.RiceSoulRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.PenmiFishRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceGolemRenderer;
 import com.mimiworld.mimiworld.client.renderer.HaomiWolfRenderer;
+import com.mimiworld.mimiworld.client.renderer.BaoliemilingRenderer;
 import com.mimiworld.mimiworld.client.renderer.HumiCorpseRenderer;
 import com.mimiworld.mimiworld.client.renderer.MeimiruRenderer;
+import com.mimiworld.mimiworld.client.renderer.MilaimaRenderer;
 import com.mimiworld.mimiworld.client.renderer.PamiCrawlerRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceWitchRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSkeletonRenderer;
 import com.mimiworld.mimiworld.client.renderer.StickyRiceSpiderRenderer;
 import com.mimiworld.mimiworld.client.renderer.TanmiFishRenderer;
+import com.mimiworld.mimiworld.client.renderer.WujihuaRenderer;
 import com.mimiworld.mimiworld.client.renderer.ZhuomiChickenRenderer;
 import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
 import com.mimiworld.mimiworld.client.screen.RicePoundingTableScreen;
@@ -109,6 +115,19 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.RICE_WITCH.get(), RiceWitchRenderer::new);
         // 没米入：GeckoLib meimiru 模型（animation.idle/walk/attack 动画，末影暗紫+米白+金稻穗贴图），渲染放大 1.15
         event.registerEntityRenderer(ModEntities.MOMI_ENTRANT.get(), MeimiruRenderer::new);
+        // 爆烈米灵：GeckoLib baoliemiling 模型（animation.baoliemiling.idle/walk/attack 动画，白米怒脸+金米棒贴图），烈焰人式飞行敌对
+        event.registerEntityRenderer(ModEntities.EXPLOSIVE_RICE_SPIRIT.get(), BaoliemilingRenderer::new);
+        // 雕米骷髅：GeckoLib diaomikulou 模型（animation.diaomikulou.idle/walk/attack 动画，米白骨+金稻穗腰带+黑布裙+骨角爪+魂火眼贴图）
+        event.registerEntityRenderer(ModEntities.CARVED_RICE_SKELETON.get(), DiaomikulouRenderer::new);
+        // 米莱马：GeckoLib milaima 模型（animation.milaima.idle/walk/attack 动画，米浆凝胶+米粒+酱油眼+稻绿嫩芽贴图），
+        // 史莱姆型敌对生物，渲染放大 1.3 对齐 1.02×1.02 碰撞箱
+        event.registerEntityRenderer(ModEntities.MILAI_HORSE.get(), MilaimaRenderer::new);
+        // 米哼猪尸：GeckoLib mihengzhushi 模型（animation.mihengzhushi.idle/walk/attack 动画），陆地敌对亡灵
+        event.registerEntityRenderer(ModEntities.MIHENG_PIG_CORPSE.get(), MihengPigCorpseRenderer::new);
+        // 米魂：GeckoLib mihun 模型（animation.mihun.idle/walk/attack 动画），敌对飞行魂体
+        event.registerEntityRenderer(ModEntities.RICE_SOUL.get(), RiceSoulRenderer::new);
+        // 污棘花：GeckoLib wujihua 模型（animation.wujihua.idle/attack 动画），扎根不动敌对植物
+        event.registerEntityRenderer(ModEntities.BLIGHTED_THORN_FLOWER.get(), WujihuaRenderer::new);
 
         // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）
         event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),

@@ -201,21 +201,53 @@ public class ModEntities {
                             .sized(0.6F, 2.5F)
                             .clientTrackingRange(8)
                             .build("momi_entrant"));
-    // 爆烈米灵 60 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> EXPLOSIVE_RICE_SPIRIT =
-            registerPlaceholder("explosive_rice_spirit", MobCategory.CREATURE, 0.8F, 1.6F);
-    // 雕米骷髅 60 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> CARVED_RICE_SKELETON =
-            registerPlaceholder("carved_rice_skeleton", MobCategory.CREATURE, 0.6F, 2.1F);
-    // 米莱马 12 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MILAI_HORSE =
-            registerPlaceholder("milai_horse", MobCategory.CREATURE, 1.2F, 1.6F);
-    // 米哼猪尸 30 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MIHENG_PIG_CORPSE =
-            registerPlaceholder("miheng_pig_corpse", MobCategory.CREATURE, 0.9F, 0.9F);
-    // 米魂 9 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_SOUL =
-            registerPlaceholder("rice_soul", MobCategory.CREATURE, 0.6F, 1.0F);
+    // 爆烈米灵：已转正，敌对飞行 GeckoLib baoliemiling 模型（animation.baoliemiling.idle/walk/attack 动画，
+    // 白米怒脸+金米棒+爆裂火红贴图），烈焰人式常驻悬浮飞行、火焰免疫、近战+三连发火米弹；
+    // 碰撞箱 0.8×1.8（模型实测约 26.5px 高，含头顶火焰冠）、60 心；生物蛋 ModItems.EXPLOSIVE_RICE_SPIRIT_SPAWN_EGG
+    public static final RegistryObject<EntityType<BaoliemilingEntity>> EXPLOSIVE_RICE_SPIRIT =
+            ENTITY_TYPES.register("explosive_rice_spirit", () ->
+                    EntityType.Builder.<BaoliemilingEntity>of(BaoliemilingEntity::new, MobCategory.MONSTER)
+                            .sized(0.8F, 1.8F)
+                            .clientTrackingRange(8)
+                            .fireImmune()
+                            .build("explosive_rice_spirit"));
+    // 雕米骷髅：已转正，敌对亡灵 GeckoLib diaomikulou 模型（animation.diaomikulou.idle/walk/attack 动画，
+    // 米白骨体+米金稻穗腰带+凋零黑布破裙+黑骨角骨爪+魂火眼贴图，双爪扑击），碰撞箱 0.6×2.2
+    // （模型实测约 36.2px 高，骨冠略高出箱体）、60 心，属性/音效对齐原版骷髅；生物蛋 ModItems.CARVED_RICE_SKELETON_SPAWN_EGG
+    public static final RegistryObject<EntityType<DiaomikulouEntity>> CARVED_RICE_SKELETON =
+            ENTITY_TYPES.register("carved_rice_skeleton", () ->
+                    EntityType.Builder.<DiaomikulouEntity>of(DiaomikulouEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.2F)
+                            .clientTrackingRange(8)
+                            .build("carved_rice_skeleton"));
+    // 米莱马：已转正，敌对史莱姆型 GeckoLib 实体（animation.milaima.idle/walk/attack 动画，
+    // 暖白米浆凝胶+悬浮米粒+酱油大眼+稻绿嫩芽贴图），继承原版史莱姆：随机蹦跳+朝目标扑跳近战+squish 音效，
+    // 固定 2 号体型（碰撞箱 1.02×1.02）、12 心、接触伤害 4，死亡不分裂不掉黏液球；
+    // 生物蛋 ModItems.MILAI_HORSE_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<MilaimaEntity>> MILAI_HORSE =
+            ENTITY_TYPES.register("milai_horse", () ->
+                    EntityType.Builder.<MilaimaEntity>of(MilaimaEntity::new, MobCategory.MONSTER)
+                            .sized(1.02F, 1.02F)
+                            .clientTrackingRange(8)
+                            .build("milai_horse"));
+    // 米哼猪尸：已转正，敌对亡灵 GeckoLib mihengzhushi 模型（animation.mihengzhushi.idle/walk/attack 动画，
+    // 腐烂米猪尸体造型），陆地近战扑咬，碰撞箱 0.9×1.6（模型实测约 25.6px 高）、30 心；
+    // 生物蛋 ModItems.MIHENG_PIG_CORPSE_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<MihengPigCorpseEntity>> MIHENG_PIG_CORPSE =
+            ENTITY_TYPES.register("miheng_pig_corpse", () ->
+                    EntityType.Builder.<MihengPigCorpseEntity>of(MihengPigCorpseEntity::new, MobCategory.MONSTER)
+                            .sized(0.9F, 1.6F)
+                            .clientTrackingRange(12)
+                            .build("miheng_pig_corpse"));
+    // 米魂：已转正，敌对飞行 GeckoLib mihun 模型（animation.mihun.idle/walk/attack 动画，
+    // 伞状魂体+8 触须+魂火飘带），常驻悬浮飞行、触须近战扑击，碰撞箱 1.1×1.6（含触须约 24px 高）、9 心；
+    // 生物蛋 ModItems.RICE_SOUL_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<RiceSoulEntity>> RICE_SOUL =
+            ENTITY_TYPES.register("rice_soul", () ->
+                    EntityType.Builder.<RiceSoulEntity>of(RiceSoulEntity::new, MobCategory.MONSTER)
+                            .sized(1.1F, 1.6F)
+                            .clientTrackingRange(12)
+                            .build("rice_soul"));
 
     // —— 敌对生物 ——
     // 界天米 200 心 / 攻击 200
@@ -224,9 +256,15 @@ public class ModEntities {
     // 混沌不可名状之米界虚无触 1500 血 / 攻击 50
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> CHAOTIC_VOID_TOUCHER =
             registerPlaceholder("chaotic_void_toucher", MobCategory.MONSTER, 2.0F, 3.2F);
-    // 污棘花 500 心 / 攻击 50
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> BLIGHTED_THORN_FLOWER =
-            registerPlaceholder("blighted_thorn_flower", MobCategory.MONSTER, 0.9F, 1.8F);
+    // 污棘花：已转正，扎根不动敌对植物 GeckoLib wujihua 模型（animation.wujihua.idle/attack 动画，
+    // 米白鳞茎+稻叶+厚唇米牙大嘴花造型），不会移动、原地张嘴啃咬进入范围的玩家，
+    // 碰撞箱 0.9×1.8、500 心 / 攻击 50（沿用占位数值）；生物蛋 ModItems.BLIGHTED_THORN_FLOWER_SPAWN_EGG
+    public static final RegistryObject<EntityType<WujihuaEntity>> BLIGHTED_THORN_FLOWER =
+            ENTITY_TYPES.register("blighted_thorn_flower", () ->
+                    EntityType.Builder.<WujihuaEntity>of(WujihuaEntity::new, MobCategory.MONSTER)
+                            .sized(0.9F, 1.8F)
+                            .clientTrackingRange(12)
+                            .build("blighted_thorn_flower"));
     // 堕落米凤 1000 心 / 攻击 70
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> FALLEN_RICE_PHOENIX =
             registerPlaceholder("fallen_rice_phoenix", MobCategory.MONSTER, 1.4F, 2.2F);

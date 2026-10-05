@@ -63,16 +63,22 @@ public class ModEntityAttributes {
         event.put(ModEntities.RICE_WITCH.get(), RiceWitchEntity.createAttributes().build());
         // 没米入：真实 GeckoLib 中立末影系实体（75 心；攻击 7/移速 0.3 等其余属性继承原版末影人）
         event.put(ModEntities.MOMI_ENTRANT.get(), MeimiruEntity.createAttributes().build());
-        event.put(ModEntities.EXPLOSIVE_RICE_SPIRIT.get(), placeholder(120.0D, 0.0D)); // 爆烈米灵 60 心
-        event.put(ModEntities.CARVED_RICE_SKELETON.get(), placeholder(120.0D, 0.0D));  // 雕米骷髅 60 心
-        event.put(ModEntities.MILAI_HORSE.get(), placeholder(24.0D, 0.0D));            // 米莱马 12 心
-        event.put(ModEntities.MIHENG_PIG_CORPSE.get(), placeholder(60.0D, 0.0D));      // 米哼猪尸 30 心
-        event.put(ModEntities.RICE_SOUL.get(), placeholder(18.0D, 0.0D));             // 米魂 9 心
+        // 爆烈米灵：真实烈焰人式飞行敌对 GeckoLib 实体（60 心、移速 0.23/飞行 1.0、近战 6、追击 48，火焰免疫）
+        event.put(ModEntities.EXPLOSIVE_RICE_SPIRIT.get(), BaoliemilingEntity.createAttributes().build());
+        // 雕米骷髅：真实 GeckoLib 敌对亡灵实体（60 心、移速 0.25 对齐原版骷髅、近战攻击 5）
+        event.put(ModEntities.CARVED_RICE_SKELETON.get(), DiaomikulouEntity.createAttributes().build());
+        // 米莱马：真实史莱姆型敌对 GeckoLib 实体（12 心、移速 0.28、接触伤害 4，继承原版史莱姆蹦跳扑咬）
+        event.put(ModEntities.MILAI_HORSE.get(), MilaimaEntity.createAttributes().build());
+        // 米哼猪尸：真实 GeckoLib 敌对亡灵实体（30 心、移速 0.23、近战 5，陆地扑咬）
+        event.put(ModEntities.MIHENG_PIG_CORPSE.get(), MihengPigCorpseEntity.createAttributes().build());
+        // 米魂：真实 GeckoLib 敌对飞行实体（9 心、移速 0.25/飞行 1.0、近战 3，空中悬浮触须扑击）
+        event.put(ModEntities.RICE_SOUL.get(), RiceSoulEntity.createAttributes().build());
 
         // —— 米米系列占位生物：敌对（带近战攻击力）——
         event.put(ModEntities.JIETIAN_RICE.get(), placeholder(400.0D, 200.0D));             // 界天米 200 心
         event.put(ModEntities.CHAOTIC_VOID_TOUCHER.get(), placeholder(1500.0D, 50.0D));     // 混沌虚无触 1500 血
-        event.put(ModEntities.BLIGHTED_THORN_FLOWER.get(), placeholder(1000.0D, 50.0D));    // 污棘花 500 心
+        // 污棘花：真实扎根不动 GeckoLib 敌对植物（500 心、近战 50、移速 0、满击退抗性，原地啃咬）
+        event.put(ModEntities.BLIGHTED_THORN_FLOWER.get(), WujihuaEntity.createAttributes().build());
         event.put(ModEntities.FALLEN_RICE_PHOENIX.get(), placeholder(2000.0D, 70.0D));      // 堕落米凤 1000 心
         event.put(ModEntities.HUALING_RICE.get(), placeholder(10000.0D, 10.0D));            // 化灵米 5000 心
         event.put(ModEntities.PALE_MERMAID.get(), placeholder(1500.0D, 1000.0D));           // 浅染鲛 750 心
