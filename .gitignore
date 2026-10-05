@@ -20,6 +20,21 @@ build
 # other
 eclipse
 run
+run-data/
+
+# logs & crash reports (本地可留存，不入库)
+*.log
+*.log.gz
+logs/
+crash-reports/
+hs_err_pid*
+replay_pid*
+
+# ide
+.vscode/
+
+# blockbench 临时工作目录
+.bb_tmp/
 
 # Files from Forge MDK
 forge*changelog.txt

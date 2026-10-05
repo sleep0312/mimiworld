@@ -14,6 +14,7 @@ import com.mimiworld.mimiworld.client.renderer.PenmiFishRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceGolemRenderer;
 import com.mimiworld.mimiworld.client.renderer.HaomiWolfRenderer;
 import com.mimiworld.mimiworld.client.renderer.HumiCorpseRenderer;
+import com.mimiworld.mimiworld.client.renderer.MeimiruRenderer;
 import com.mimiworld.mimiworld.client.renderer.PamiCrawlerRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceWitchRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSkeletonRenderer;
@@ -106,6 +107,8 @@ public class ClientSetup {
         // 爪巴米者：GeckoLib pami_crawler 模型（animation.idle/walk/attack 动画，旧米麻袋苦力怕贴图），引信期间 energySwirl 白闪
         event.registerEntityRenderer(ModEntities.PAMI_CRAWLER.get(), PamiCrawlerRenderer::new);
         event.registerEntityRenderer(ModEntities.RICE_WITCH.get(), RiceWitchRenderer::new);
+        // 没米入：GeckoLib meimiru 模型（animation.idle/walk/attack 动画，末影暗紫+米白+金稻穗贴图），渲染放大 1.15
+        event.registerEntityRenderer(ModEntities.MOMI_ENTRANT.get(), MeimiruRenderer::new);
 
         // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）
         event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),

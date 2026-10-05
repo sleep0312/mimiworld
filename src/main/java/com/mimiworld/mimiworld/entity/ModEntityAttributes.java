@@ -61,7 +61,8 @@ public class ModEntityAttributes {
         event.put(ModEntities.PAMI_CRAWLER.get(), PamiCrawlerEntity.createAttributes().build());
         // 米巫：真实 GeckoLib 敌对女巫实体（30 心、移速 0.25、近战攻击 4；远程丢溅射药水）
         event.put(ModEntities.RICE_WITCH.get(), RiceWitchEntity.createAttributes().build());
-        event.put(ModEntities.MOMI_ENTRANT.get(), placeholder(150.0D, 0.0D));          // 没米入 75 心
+        // 没米入：真实 GeckoLib 中立末影系实体（75 心；攻击 7/移速 0.3 等其余属性继承原版末影人）
+        event.put(ModEntities.MOMI_ENTRANT.get(), MeimiruEntity.createAttributes().build());
         event.put(ModEntities.EXPLOSIVE_RICE_SPIRIT.get(), placeholder(120.0D, 0.0D)); // 爆烈米灵 60 心
         event.put(ModEntities.CARVED_RICE_SKELETON.get(), placeholder(120.0D, 0.0D));  // 雕米骷髅 60 心
         event.put(ModEntities.MILAI_HORSE.get(), placeholder(24.0D, 0.0D));            // 米莱马 12 心

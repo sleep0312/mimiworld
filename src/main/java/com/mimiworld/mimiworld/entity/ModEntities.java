@@ -191,9 +191,16 @@ public class ModEntities {
                             .sized(0.6F, 1.95F)
                             .clientTrackingRange(8)
                             .build("rice_witch"));
-    // 没米入 75 心
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> MOMI_ENTRANT =
-            registerPlaceholder("momi_entrant", MobCategory.CREATURE, 0.9F, 1.9F);
+    // 没米入：已转正，中立末影系 GeckoLib meimiru 模型（animation.idle/walk/attack 动画，
+    // 末影暗紫+米白骨角爪+金稻穗+发光紫眼贴图，继承原版末影人：盯视/受击激怒+瞬移+怕水），
+    // 模型实测约 34.5px（≈2.16 格）渲染放大 1.15 撑满 2.5 格箱体、碰撞箱 0.6×2.5、
+    // 75 心（攻击 7/移速 0.3 对齐原版末影人）；生物蛋 ModItems.MOMI_ENTRANT_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<MeimiruEntity>> MOMI_ENTRANT =
+            ENTITY_TYPES.register("momi_entrant", () ->
+                    EntityType.Builder.<MeimiruEntity>of(MeimiruEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 2.5F)
+                            .clientTrackingRange(8)
+                            .build("momi_entrant"));
     // 爆烈米灵 60 心
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> EXPLOSIVE_RICE_SPIRIT =
             registerPlaceholder("explosive_rice_spirit", MobCategory.CREATURE, 0.8F, 1.6F);
