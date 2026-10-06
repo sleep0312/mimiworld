@@ -76,16 +76,18 @@ public class ModEntityAttributes {
 
         // —— 米米系列占位生物：敌对（带近战攻击力）——
         event.put(ModEntities.JIETIAN_RICE.get(), placeholder(400.0D, 200.0D));             // 界天米 200 心
-        event.put(ModEntities.CHAOTIC_VOID_TOUCHER.get(), placeholder(1500.0D, 50.0D));     // 混沌虚无触 1500 血
+        // 混沌虚无触：真实扎根不动 GeckoLib 触手巢 Boss（1500 血、近战 50、移速 0、追击 36、满击退抗性，触手抽击+喷毒）
+        event.put(ModEntities.CHAOTIC_VOID_TOUCHER.get(), ChaoticVoidToucherEntity.createAttributes().build());
         // 污棘花：真实扎根不动 GeckoLib 敌对植物（500 心、近战 50、移速 0、满击退抗性，原地啃咬）
         event.put(ModEntities.BLIGHTED_THORN_FLOWER.get(), WujihuaEntity.createAttributes().build());
-        event.put(ModEntities.FALLEN_RICE_PHOENIX.get(), placeholder(2000.0D, 70.0D));      // 堕落米凤 1000 心
+        event.put(ModEntities.FALLEN_RICE_PHOENIX.get(), FallenRicePhoenixEntity.createAttributes().build()); // 堕落米凤 1000 心 / 攻击 70（陆空飞行）
         event.put(ModEntities.HUALING_RICE.get(), placeholder(10000.0D, 10.0D));            // 化灵米 5000 心
         event.put(ModEntities.PALE_MERMAID.get(), placeholder(1500.0D, 1000.0D));           // 浅染鲛 750 心
         event.put(ModEntities.WANGMI_WOUNDED_MERMAID.get(), placeholder(2000.0D, 300.0D));  // 望米伤鲛 1000 心
         event.put(ModEntities.RICE_MIRAGE.get(), placeholder(1500.0D, 400.0D));             // 米蜃 750 心
         event.put(ModEntities.LAZY_ELF.get(), placeholder(800.0D, 100.0D));                 // 懒精灵 400 心
-        event.put(ModEntities.RICE_WOLF_VULTURE.get(), placeholder(1000.0D, 500.0D));       // 哮噬米狼鹫 500 心
+        // 哮噬米狼鹫：真实陆空敌对 GeckoLib 狼鹫实体（500 心、攻击 500、移速 0.32/追击 40、满击退抗性，啃咬+俯冲撞击）
+        event.put(ModEntities.RICE_WOLF_VULTURE.get(), RiceWolfVultureEntity.createAttributes().build());
     }
 
     /**

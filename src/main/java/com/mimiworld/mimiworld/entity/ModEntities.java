@@ -33,6 +33,15 @@ public class ModEntities {
                             .updateInterval(10)
                             .build("cooked_rice_ball"));
 
+    // 虚无触毒液：小型抛物线投掷物（史莱姆球贴图），命中造成伤害+中毒 II
+    public static final RegistryObject<EntityType<VoidPoisonSpitEntity>> VOID_POISON_SPIT =
+            ENTITY_TYPES.register("void_poison_spit", () ->
+                    EntityType.Builder.<VoidPoisonSpitEntity>of(VoidPoisonSpitEntity::new, MobCategory.MISC)
+                            .sized(0.35F, 0.35F)
+                            .clientTrackingRange(4)
+                            .updateInterval(10)
+                            .build("void_poison_spit"));
+
     // ===== 生物蛋绑定的七大 Boss（实体待定，当前统一用 PendingBossEntity 占位） =====
     // 真实 Boss 实现后仅需替换工厂引用 PendingBossEntity::new，生物蛋（ModItems）无需改动。
 
@@ -253,9 +262,15 @@ public class ModEntities {
     // 界天米 200 心 / 攻击 200
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> JIETIAN_RICE =
             registerPlaceholder("jietian_rice", MobCategory.MONSTER, 1.0F, 2.2F);
-    // 混沌不可名状之米界虚无触 1500 血 / 攻击 50
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> CHAOTIC_VOID_TOUCHER =
-            registerPlaceholder("chaotic_void_toucher", MobCategory.MONSTER, 2.0F, 3.2F);
+    // 混沌不可名状之米界虚无触：已转正，扎根不动触手巢 Boss GeckoLib 模型
+    // （idle/attack/attack_spit 动画），不会移动，近身触手抽击（50 伤害）+ 远程喷毒（中毒 II），
+    // 模型静止约 1.2 格高、放大 1.5 倍渲染，碰撞箱 2.2×1.6；1500 血；生物蛋 ModItems.CHAOTIC_VOID_TOUCHER_SPAWN_EGG
+    public static final RegistryObject<EntityType<ChaoticVoidToucherEntity>> CHAOTIC_VOID_TOUCHER =
+            ENTITY_TYPES.register("chaotic_void_toucher", () ->
+                    EntityType.Builder.<ChaoticVoidToucherEntity>of(ChaoticVoidToucherEntity::new, MobCategory.MONSTER)
+                            .sized(2.2F, 1.6F)
+                            .clientTrackingRange(12)
+                            .build("chaotic_void_toucher"));
     // 污棘花：已转正，扎根不动敌对植物 GeckoLib wujihua 模型（animation.wujihua.idle/attack 动画，
     // 米白鳞茎+稻叶+厚唇米牙大嘴花造型），不会移动、原地张嘴啃咬进入范围的玩家，
     // 碰撞箱 0.9×1.8、500 心 / 攻击 50（沿用占位数值）；生物蛋 ModItems.BLIGHTED_THORN_FLOWER_SPAWN_EGG
@@ -265,9 +280,15 @@ public class ModEntities {
                             .sized(0.9F, 1.8F)
                             .clientTrackingRange(12)
                             .build("blighted_thorn_flower"));
-    // 堕落米凤 1000 心 / 攻击 70
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> FALLEN_RICE_PHOENIX =
-            registerPlaceholder("fallen_rice_phoenix", MobCategory.MONSTER, 1.4F, 2.2F);
+    // 堕落米凤：已转正，陆空敌对 GeckoLib duoluomifeng 模型（animation.idle/walk/attack/flying 动画，
+    // 米白堕落羽+黑翅尖+金冠贴图），幻翼式空中水平巡航/俯冲啄击，周期性落地休息+地面走动；
+    // 碰撞箱 1.4×2.2（直立约 43px 高，冠顶略高出箱体）、1000 心 / 攻击 70；生物蛋 ModItems.FALLEN_RICE_PHOENIX_SPAWN_EGG
+    public static final RegistryObject<EntityType<FallenRicePhoenixEntity>> FALLEN_RICE_PHOENIX =
+            ENTITY_TYPES.register("fallen_rice_phoenix", () ->
+                    EntityType.Builder.<FallenRicePhoenixEntity>of(FallenRicePhoenixEntity::new, MobCategory.MONSTER)
+                            .sized(1.4F, 2.2F)
+                            .clientTrackingRange(12)
+                            .build("fallen_rice_phoenix"));
     // 化灵米 5000 心 / 攻击 10
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HUALING_RICE =
             registerPlaceholder("hualing_rice", MobCategory.MONSTER, 1.0F, 2.0F);
@@ -283,9 +304,15 @@ public class ModEntities {
     // 懒精灵 400 心 / 攻击 100
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> LAZY_ELF =
             registerPlaceholder("lazy_elf", MobCategory.MONSTER, 0.6F, 1.2F);
-    // 哮噬米狼鹫 500 心 / 攻击 500
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_WOLF_VULTURE =
-            registerPlaceholder("rice_wolf_vulture", MobCategory.MONSTER, 1.2F, 1.9F);
+    // 哮噬米狼鹫：已转正，陆空敌对 GeckoLib xiaoshimilangjiu 模型（idle/walk/attack_bite/attack_dive 动画，
+    // 米白狼毛+金绿稻羽+金竖瞳贴图），四足行走+前扑啃咬+盘旋俯冲撞击；模型脚底贴地实测约 22.15px（≈1.38 格）高、
+    // 折翼全宽约 2.37 格，碰撞箱 1.2×1.5（躯干宽，翼尖超出箱体）；500 心 / 攻击 500，生物蛋无需改动
+    public static final RegistryObject<EntityType<RiceWolfVultureEntity>> RICE_WOLF_VULTURE =
+            ENTITY_TYPES.register("rice_wolf_vulture", () ->
+                    EntityType.Builder.<RiceWolfVultureEntity>of(RiceWolfVultureEntity::new, MobCategory.MONSTER)
+                            .sized(1.2F, 1.5F)
+                            .clientTrackingRange(12)
+                            .build("rice_wolf_vulture"));
 
     /** 占位生物注册：碰撞箱与生物类别随实体给定；属性在 ModEntityAttributes 单独注册。 */
     private static RegistryObject<EntityType<PlaceholderRiceMobEntity>> registerPlaceholder(

@@ -5,6 +5,7 @@ import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.block.entity.ModBlockEntities;
 import com.mimiworld.mimiworld.client.renderer.CookingPotGeoBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.DiaomikulouRenderer;
+import com.mimiworld.mimiworld.client.renderer.FallenRicePhoenixRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
@@ -12,11 +13,13 @@ import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigCorpseRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceSoulRenderer;
+import com.mimiworld.mimiworld.client.renderer.RiceWolfVultureRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.PenmiFishRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceGolemRenderer;
 import com.mimiworld.mimiworld.client.renderer.HaomiWolfRenderer;
 import com.mimiworld.mimiworld.client.renderer.BaoliemilingRenderer;
+import com.mimiworld.mimiworld.client.renderer.ChaoticVoidToucherRenderer;
 import com.mimiworld.mimiworld.client.renderer.HumiCorpseRenderer;
 import com.mimiworld.mimiworld.client.renderer.MeimiruRenderer;
 import com.mimiworld.mimiworld.client.renderer.MilaimaRenderer;
@@ -76,6 +79,8 @@ public class ClientSetup {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.RICE_BALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.COOKED_RICE_BALL.get(), ThrownItemRenderer::new);
+        // 虚无触毒液：ThrownItemRenderer 渲染史莱姆球贴图
+        event.registerEntityRenderer(ModEntities.VOID_POISON_SPIT.get(), ThrownItemRenderer::new);
 
         // 七个待定 Boss 统一使用 Steve 人形模型占位，真实 GeckoLib 模型实现后在此替换
         event.registerEntityRenderer(ModEntities.MIMI_MONKEY_KING.get(), PendingBossRenderer::new);
@@ -128,6 +133,13 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.RICE_SOUL.get(), RiceSoulRenderer::new);
         // 污棘花：GeckoLib wujihua 模型（animation.wujihua.idle/attack 动画），扎根不动敌对植物
         event.registerEntityRenderer(ModEntities.BLIGHTED_THORN_FLOWER.get(), WujihuaRenderer::new);
+        // 混沌虚无触：GeckoLib hundunbukemingzhuangzhimijiexuwuchu 模型（idle/attack/attack_spit 动画），
+        // 扎根不动触手巢 Boss（触手抽击+张口喷毒），渲染放大 1.5 倍
+        event.registerEntityRenderer(ModEntities.CHAOTIC_VOID_TOUCHER.get(), ChaoticVoidToucherRenderer::new);
+        // 哮噬米狼鹫：GeckoLib xiaoshimilangjiu 模型（idle/walk/attack_bite/attack_dive 动画），陆空敌对狼鹫
+        event.registerEntityRenderer(ModEntities.RICE_WOLF_VULTURE.get(), RiceWolfVultureRenderer::new);
+        // 堕落米凤：GeckoLib duoluomifeng 模型（animation.idle/walk/attack/flying 动画），幻翼式巡航俯冲+落地休息
+        event.registerEntityRenderer(ModEntities.FALLEN_RICE_PHOENIX.get(), FallenRicePhoenixRenderer::new);
 
         // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）
         event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),
