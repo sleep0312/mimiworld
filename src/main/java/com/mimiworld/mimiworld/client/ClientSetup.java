@@ -7,6 +7,7 @@ import com.mimiworld.mimiworld.client.renderer.CookingPotGeoBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.DiaomikulouRenderer;
 import com.mimiworld.mimiworld.client.renderer.FallenRicePhoenixRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
+import com.mimiworld.mimiworld.client.renderer.LazyElfRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
@@ -16,11 +17,15 @@ import com.mimiworld.mimiworld.client.renderer.RiceSoulRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceWolfVultureRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.PenmiFishRenderer;
+import com.mimiworld.mimiworld.client.renderer.QianranjiaoRenderer;
+import com.mimiworld.mimiworld.client.renderer.MishenRenderer;
+import com.mimiworld.mimiworld.client.renderer.WangmishangjiaoRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceGolemRenderer;
 import com.mimiworld.mimiworld.client.renderer.HaomiWolfRenderer;
 import com.mimiworld.mimiworld.client.renderer.BaoliemilingRenderer;
 import com.mimiworld.mimiworld.client.renderer.ChaoticVoidToucherRenderer;
 import com.mimiworld.mimiworld.client.renderer.HumiCorpseRenderer;
+import com.mimiworld.mimiworld.client.renderer.JietianmiRenderer;
 import com.mimiworld.mimiworld.client.renderer.MeimiruRenderer;
 import com.mimiworld.mimiworld.client.renderer.MilaimaRenderer;
 import com.mimiworld.mimiworld.client.renderer.PamiCrawlerRenderer;
@@ -140,6 +145,16 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.RICE_WOLF_VULTURE.get(), RiceWolfVultureRenderer::new);
         // 堕落米凤：GeckoLib duoluomifeng 模型（animation.idle/walk/attack/flying 动画），幻翼式巡航俯冲+落地休息
         event.registerEntityRenderer(ModEntities.FALLEN_RICE_PHOENIX.get(), FallenRicePhoenixRenderer::new);
+        // 浅染鲛：GeckoLib qianranjiao 模型（idle/walk/attack 动画），水生敌对鲸类，纵向摆尾巡游+突进啃咬
+        event.registerEntityRenderer(ModEntities.PALE_MERMAID.get(), QianranjiaoRenderer::new);
+        // 望米伤鲛：GeckoLib wangmishangjiao 巨型古鲸模型（idle/walk/attack 动画），深海巨兽冲刺啃咬
+        event.registerEntityRenderer(ModEntities.WANGMI_WOUNDED_MERMAID.get(), WangmishangjiaoRenderer::new);
+        // 米蜃：GeckoLib mishen 爬虫模型（idle/walk/attack 动画），陆地敌对蠹虫式贴地疾冲大颚啃咬
+        event.registerEntityRenderer(ModEntities.RICE_MIRAGE.get(), MishenRenderer::new);
+        // 懒精灵：GeckoLib lanjingling 小人型模型（idle/walk/attack 动画），陆地敌对哥布林式碎步扑击撕咬
+        event.registerEntityRenderer(ModEntities.LAZY_ELF.get(), LazyElfRenderer::new);
+        // 界天米：GeckoLib jietianmi 独眼飞行模型（idle/walk/attack 动画），守卫者式凝视蓄力激光，渲染放大 1.2
+        event.registerEntityRenderer(ModEntities.JIETIAN_RICE.get(), JietianmiRenderer::new);
 
         // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）
         event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),

@@ -259,9 +259,15 @@ public class ModEntities {
                             .build("rice_soul"));
 
     // —— 敌对生物 ——
-    // 界天米 200 心 / 攻击 200
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> JIETIAN_RICE =
-            registerPlaceholder("jietian_rice", MobCategory.MONSTER, 1.0F, 2.2F);
+    // 界天米 200 心 / 光束攻击 200：已转正，独眼空中悬浮 GeckoLib 飞行敌对实体
+    // （jietianmi idle/walk/attack 动画），守卫者式凝视蓄力激光，渲染放大 1.2 倍，碰撞箱 1.3×1.9；
+    // 生物蛋 ModItems.JIETIAN_RICE_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<JietianmiEntity>> JIETIAN_RICE =
+            ENTITY_TYPES.register("jietian_rice", () ->
+                    EntityType.Builder.<JietianmiEntity>of(JietianmiEntity::new, MobCategory.MONSTER)
+                            .sized(1.3F, 1.9F)
+                            .clientTrackingRange(12)
+                            .build("jietian_rice"));
     // 混沌不可名状之米界虚无触：已转正，扎根不动触手巢 Boss GeckoLib 模型
     // （idle/attack/attack_spit 动画），不会移动，近身触手抽击（50 伤害）+ 远程喷毒（中毒 II），
     // 模型静止约 1.2 格高、放大 1.5 倍渲染，碰撞箱 2.2×1.6；1500 血；生物蛋 ModItems.CHAOTIC_VOID_TOUCHER_SPAWN_EGG
@@ -292,18 +298,43 @@ public class ModEntities {
     // 化灵米 5000 心 / 攻击 10
     public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HUALING_RICE =
             registerPlaceholder("hualing_rice", MobCategory.MONSTER, 1.0F, 2.0F);
-    // 浅染鲛 750 心 / 攻击 1000
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> PALE_MERMAID =
-            registerPlaceholder("pale_mermaid", MobCategory.MONSTER, 0.8F, 1.6F);
-    // 望米伤鲛 1000 心 / 攻击 300
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> WANGMI_WOUNDED_MERMAID =
-            registerPlaceholder("wangmi_wounded_mermaid", MobCategory.MONSTER, 0.8F, 1.6F);
-    // 米蜃 750 心 / 攻击 400
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> RICE_MIRAGE =
-            registerPlaceholder("rice_mirage", MobCategory.MONSTER, 1.0F, 1.9F);
-    // 懒精灵 400 心 / 攻击 100
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> LAZY_ELF =
-            registerPlaceholder("lazy_elf", MobCategory.MONSTER, 0.6F, 1.2F);
+    // 浅染鲛：已转正，水生敌对 GeckoLib qianranjiao 模型（idle/walk/attack 动画，
+    // 生米白+红曲斑块大米主题贴图），虎鲸式纵向摆尾巡游+突进啃咬，搁浅会扑腾回水中；
+    // 模型长约 5 格，碰撞箱 2.6×2.0；60 心 / 攻击 10；生物蛋 ModItems.PALE_MERMAID_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<QianranjiaoEntity>> PALE_MERMAID =
+            ENTITY_TYPES.register("pale_mermaid", () ->
+                    EntityType.Builder.<QianranjiaoEntity>of(QianranjiaoEntity::new, MobCategory.MONSTER)
+                            .sized(2.6F, 2.0F)
+                            .clientTrackingRange(12)
+                            .build("pale_mermaid"));
+    // 望米伤鲛：已转正，水生敌对巨型古鲸 GeckoLib wangmishangjiao 模型（idle/walk/attack 动画，
+    // 陈米重甲+折断长牙大米主题贴图），缓慢深海巡游+巨兽冲刺前冲张口啃咬、咬住甩头，搁浅会笨重扑腾回水中；
+    // 模型躯干宽约 2.9 格、高约 4.2 格（全长约 15 格），碰撞箱 3.0×4.2（鳍展超出箱体）；
+    // 1000 心 / 攻击 300；生物蛋 ModItems.WANGMI_WOUNDED_MERMAID_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<WangmishangjiaoEntity>> WANGMI_WOUNDED_MERMAID =
+            ENTITY_TYPES.register("wangmi_wounded_mermaid", () ->
+                    EntityType.Builder.<WangmishangjiaoEntity>of(WangmishangjiaoEntity::new, MobCategory.MONSTER)
+                            .sized(3.0F, 4.2F)
+                            .clientTrackingRange(12)
+                            .build("wangmi_wounded_mermaid"));
+    // 米蜃：已转正，陆地敌对 GeckoLib mishen 爬虫模型（idle/walk/attack 动画，
+    // 珍珠米白+稻壳背甲+红曲斑大米主题贴图），六足贴地疾行+猛冲大颚啃咬；
+    // 贴地低伏，碰撞箱 1.0×0.8；750 心 / 攻击 400；生物蛋 ModItems.RICE_MIRAGE_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<MishenEntity>> RICE_MIRAGE =
+            ENTITY_TYPES.register("rice_mirage", () ->
+                    EntityType.Builder.<MishenEntity>of(MishenEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 0.8F)
+                            .clientTrackingRange(12)
+                            .build("rice_mirage"));
+    // 懒精灵：已转正，陆地敌对 GeckoLib lanjingling 小人型模型（idle/walk/attack 动画，
+    // 稻草歪帽+米袋破袍+红曲腮斑大米主题贴图），佝偻碎步游荡+蹲身蓄力扑击双爪撕咬；
+    // 碰撞箱 0.6×1.2；400 心 / 攻击 100；生物蛋 ModItems.LAZY_ELF_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<LazyElfEntity>> LAZY_ELF =
+            ENTITY_TYPES.register("lazy_elf", () ->
+                    EntityType.Builder.<LazyElfEntity>of(LazyElfEntity::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.2F)
+                            .clientTrackingRange(12)
+                            .build("lazy_elf"));
     // 哮噬米狼鹫：已转正，陆空敌对 GeckoLib xiaoshimilangjiu 模型（idle/walk/attack_bite/attack_dive 动画，
     // 米白狼毛+金绿稻羽+金竖瞳贴图），四足行走+前扑啃咬+盘旋俯冲撞击；模型脚底贴地实测约 22.15px（≈1.38 格）高、
     // 折翼全宽约 2.37 格，碰撞箱 1.2×1.5（躯干宽，翼尖超出箱体）；500 心 / 攻击 500，生物蛋无需改动

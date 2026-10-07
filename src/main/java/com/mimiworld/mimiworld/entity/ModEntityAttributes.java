@@ -75,17 +75,22 @@ public class ModEntityAttributes {
         event.put(ModEntities.RICE_SOUL.get(), RiceSoulEntity.createAttributes().build());
 
         // —— 米米系列占位生物：敌对（带近战攻击力）——
-        event.put(ModEntities.JIETIAN_RICE.get(), placeholder(400.0D, 200.0D));             // 界天米 200 心
+        // 界天米：真实空中悬浮 GeckoLib 独眼敌对实体（400 血、光束魔法 200、移速 0.25/飞行 1.0、追击 40）
+        event.put(ModEntities.JIETIAN_RICE.get(), JietianmiEntity.createAttributes().build());
         // 混沌虚无触：真实扎根不动 GeckoLib 触手巢 Boss（1500 血、近战 50、移速 0、追击 36、满击退抗性，触手抽击+喷毒）
         event.put(ModEntities.CHAOTIC_VOID_TOUCHER.get(), ChaoticVoidToucherEntity.createAttributes().build());
         // 污棘花：真实扎根不动 GeckoLib 敌对植物（500 心、近战 50、移速 0、满击退抗性，原地啃咬）
         event.put(ModEntities.BLIGHTED_THORN_FLOWER.get(), WujihuaEntity.createAttributes().build());
         event.put(ModEntities.FALLEN_RICE_PHOENIX.get(), FallenRicePhoenixEntity.createAttributes().build()); // 堕落米凤 1000 心 / 攻击 70（陆空飞行）
         event.put(ModEntities.HUALING_RICE.get(), placeholder(10000.0D, 10.0D));            // 化灵米 5000 心
-        event.put(ModEntities.PALE_MERMAID.get(), placeholder(1500.0D, 1000.0D));           // 浅染鲛 750 心
-        event.put(ModEntities.WANGMI_WOUNDED_MERMAID.get(), placeholder(2000.0D, 300.0D));  // 望米伤鲛 1000 心
-        event.put(ModEntities.RICE_MIRAGE.get(), placeholder(1500.0D, 400.0D));             // 米蜃 750 心
-        event.put(ModEntities.LAZY_ELF.get(), placeholder(800.0D, 100.0D));                 // 懒精灵 400 心
+        // 浅染鲛：真实水生敌对 GeckoLib 实体（60 心、水中巡游速度 1.2、啃咬 10、追击 32，搁浅扑腾回水中）
+        event.put(ModEntities.PALE_MERMAID.get(), QianranjiaoEntity.createAttributes().build());
+        // 望米伤鲛：真实水生敌对巨型古鲸 GeckoLib 实体（1000 心、巨兽巡游速度 1.0、啃咬 300、追击 48、高击退抗性，搁浅扑腾回水中）
+        event.put(ModEntities.WANGMI_WOUNDED_MERMAID.get(), WangmishangjiaoEntity.createAttributes().build());
+        // 米蜃：真实陆地敌对 GeckoLib 爬虫实体（750 心、疾行 0.35、啃咬 400、追击 32）
+        event.put(ModEntities.RICE_MIRAGE.get(), MishenEntity.createAttributes().build());
+        // 懒精灵：真实陆地敌对 GeckoLib 小人型实体（400 心、移速 0.3、撕咬 100、追击 32，扑击近战）
+        event.put(ModEntities.LAZY_ELF.get(), LazyElfEntity.createAttributes().build());
         // 哮噬米狼鹫：真实陆空敌对 GeckoLib 狼鹫实体（500 心、攻击 500、移速 0.32/追击 40、满击退抗性，啃咬+俯冲撞击）
         event.put(ModEntities.RICE_WOLF_VULTURE.get(), RiceWolfVultureEntity.createAttributes().build());
     }
