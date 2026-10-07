@@ -23,11 +23,9 @@ public class ModCreativeTabs {
                     .icon(() -> ModItems.REALM_HEAVEN_BRAIN_FLOWER.get().getDefaultInstance())
                     .title(Component.translatable("itemGroup.mimiworld.mimi"))
                     .displayItems((parameters, output) ->
-                            // 自动添加本模组所有已注册物品/方块物品；
-                            // placeholder_ 前缀的占位物品（当前已无占位物）不显示
+                            // 自动添加本模组所有已注册物品/方块物品
                             ForgeRegistries.ITEMS.getEntries().stream()
                                     .filter(entry -> entry.getKey().location().getNamespace().equals(MimiWorld.MODID))
-                                    .filter(entry -> !entry.getKey().location().getPath().startsWith("placeholder_"))
                                     .forEach(entry -> output.accept(entry.getValue())))
                     .build());
 

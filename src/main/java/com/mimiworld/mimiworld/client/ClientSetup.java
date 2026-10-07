@@ -94,6 +94,9 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
+        // 化灵米：尚无专属模型，PlaceholderRiceMobEntity 占位实体，借用 Steve 模型；
+        // 不注册渲染器会导致生物蛋生成后客户端渲染线程 NPE 崩溃
+        event.registerEntityRenderer(ModEntities.HUALING_RICE.get(), PendingBossRenderer::new);
         // 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonRenderer::new);
         // 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染

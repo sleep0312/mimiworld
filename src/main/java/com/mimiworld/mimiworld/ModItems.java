@@ -2,6 +2,7 @@ package com.mimiworld.mimiworld;
 
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
+import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -671,16 +672,18 @@ public class ModItems {
     public static final RegistryObject<Item> MIMI_EYE = registerItem("mimi_eye",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
+    // 米米图腾（Mimi Totem）：不死图腾，主手/副手持有受致命伤时免死一次；
+    // 效果与原版一致（回 1 血+再生 II 45s+伤害吸收 II 5s+抗火 I 40s），
+    // 触发逻辑见 mixin.LivingEntityMixin；默认堆叠 64 同原版图腾；暂无配方
+    public static final RegistryObject<Item> MIMI_TOTEM = registerItem("mimi_totem",
+            () -> new MimiTotemItem(new Item.Properties()));
+
     // 米米传送器（Mimi Teleporter）
     public static final RegistryObject<Item> MIMI_TELEPORTER = registerItem("mimi_teleporter",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 小型召唤器（Small Summoner）
     public static final RegistryObject<Item> SMALL_SUMMONER = registerItem("small_summoner",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 待定占位：不进创造标签页（ModCreativeTabs 过滤 placeholder_ 前缀）
-    public static final RegistryObject<Item> PLACEHOLDER_136 = registerItem("placeholder_136",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 中型召唤器（Medium Summoner）
@@ -908,10 +911,6 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_WOLF_VULTURE_SPAWN_EGG =
             registerItem("rice_wolf_vulture_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.RICE_WOLF_VULTURE, 0x493B30, 0x9A7A4A, new Item.Properties()));
-
-    // 待定占位：不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_158 = registerItem("placeholder_158",
-            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // ===== 米米神翼系列 + 上古剑意 + 超懒神剑残片 =====
 
@@ -1848,10 +1847,6 @@ public class ModItems {
     // 米堕汁（Fallen Rice Juice）：熟食（饮品），2 饱食度
     public static final RegistryObject<Item> FALLEN_RICE_JUICE = registerItem("fallen_rice_juice",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.3F))));
-
-    // 占位物品（注册名 placeholder_325，转正前无法合法获得）：无模型/贴图，不进创造标签页
-    public static final RegistryObject<Item> PLACEHOLDER_325 = registerItem("placeholder_325",
-            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 凤肉泥（Phoenix Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> PHOENIX_MEAT_PASTE = registerItem("phoenix_meat_paste",

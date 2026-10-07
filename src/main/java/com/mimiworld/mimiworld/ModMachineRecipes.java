@@ -309,13 +309,6 @@ public final class ModMachineRecipes {
                 ModItems.THORN_PETAL.get(), ModItems.THORN_PETAL.get(), ModItems.THORN_PETAL.get(),
                 ModItems.FRAGRANT_POWDER.get(), ModItems.THORN_PETAL.get(), ModItems.FRAGRANT_POWDER.get());
 
-        // 占位产物（placeholder_325，转正前无法合法获得）：用户主动给配方，照直译注册。
-        // 凤球 / 望米伤鲛足 / 凤球；棘花瓣 / 望米伤鲛足 / 棘花瓣；香粉×3，额外碗
-        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.PLACEHOLDER_325.get()), bowl,
-                ModItems.PHOENIX_BALL.get(), ModItems.WANGMI_WOUNDED_MERMAID_LEG.get(), ModItems.PHOENIX_BALL.get(),
-                ModItems.THORN_PETAL.get(), ModItems.WANGMI_WOUNDED_MERMAID_LEG.get(), ModItems.THORN_PETAL.get(),
-                ModItems.FRAGRANT_POWDER.get(), ModItems.FRAGRANT_POWDER.get(), ModItems.FRAGRANT_POWDER.get());
-
         // 海兽相交饭：蛟鲛肉泥×3；浅鲛尾×3；浅鲛尾 / 珍贵调料 / 浅鲛尾，额外碗
         LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.SEA_BEAST_JIAO_RICE.get()), bowl,
                 ModItems.JIAO_MERMAID_MEAT_PASTE.get(), ModItems.JIAO_MERMAID_MEAT_PASTE.get(), ModItems.JIAO_MERMAID_MEAT_PASTE.get(),

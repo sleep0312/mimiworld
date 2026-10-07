@@ -310,10 +310,25 @@ tasks.named('processResources', ProcessResources).configure {
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
+
+    // 开发环境（runClient/runServer/IDE 运行）本 mod 以展开目录 build/resources/main 形式加载，
+    // Mixin 只会从 META-INF/MANIFEST.MF 的 MixinConfigs 属性发现配置（已对 mixin 0.8.5 字节码核实：
+    // MainAttributes.getDirAttributes 只读该文件，不存在则静默没有任何 mixin 配置）。
+    // 生产 jar 的同名属性由下方 jar.manifest 提供，与这里无关。
+    doLast {
+        def metaInfDir = new File(destinationDir, 'META-INF')
+        metaInfDir.mkdirs()
+        new File(metaInfDir, 'MANIFEST.MF').setText(
+                'Manifest-Version: 1.0\r\nMixinConfigs: mimiworld.mixins.json\r\n\r\n',
+                'UTF-8')
+    }
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
 tasks.named('jar', Jar).configure {
+    // 开发用 MANIFEST.MF 由 processResources 生成进资源目录；打包时排除它，
+    // MANIFEST.MF 一律以本任务 manifest {} 块生成的为准（避免重复条目）
+    exclude 'META-INF/MANIFEST.MF'
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,

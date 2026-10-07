@@ -6,9 +6,12 @@
   "refmap": "mimiworld.refmap.json",
   "mixins": [
     "CauldronBlockMixin",
-    "LayeredCauldronBlockMixin"
+    "LayeredCauldronBlockMixin",
+    "LivingEntityMixin"
   ],
-  "client": [],
+  "client": [
+    "client.ClientPacketListenerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
