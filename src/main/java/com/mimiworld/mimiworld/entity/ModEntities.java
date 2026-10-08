@@ -45,9 +45,24 @@ public class ModEntities {
     // ===== 生物蛋绑定的七大 Boss（实体待定，当前统一用 PendingBossEntity 占位） =====
     // 真实 Boss 实现后仅需替换工厂引用 PendingBossEntity::new，生物蛋（ModItems）无需改动。
 
-    // 米米猴王：灵巧中型
-    public static final RegistryObject<EntityType<PendingBossEntity>> MIMI_MONKEY_KING =
-            registerBoss("mimi_monkey_king", 0.7F, 1.9F);
+    // 米米猴王扔出的金箍棒投掷物：无重力直线飞行 1 秒后追踪飞回，路径 20 伤害（MobCategory.MISC）
+    public static final RegistryObject<EntityType<ThrownMonkeyStaffEntity>> THROWN_MONKEY_STAFF =
+            ENTITY_TYPES.register("thrown_monkey_staff", () ->
+                    EntityType.Builder.<ThrownMonkeyStaffEntity>of(ThrownMonkeyStaffEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(8)
+                            .updateInterval(1)
+                            .build("thrown_monkey_staff"));
+
+    // 米米猴王：已转正，GeckoLib mimihouwang 模型（idle/walk/attack/attack_slam/throw 动画），
+    // 灵巧中型陆地 Boss（普攻 5 + 劈地 7 CD5.5s + 扔棒 20 CD3s），碰撞箱 0.7×1.9，火焰免疫
+    public static final RegistryObject<EntityType<MimiMonkeyKingEntity>> MIMI_MONKEY_KING =
+            ENTITY_TYPES.register("mimi_monkey_king", () ->
+                    EntityType.Builder.<MimiMonkeyKingEntity>of(MimiMonkeyKingEntity::new, MobCategory.MONSTER)
+                            .sized(0.7F, 1.9F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("mimi_monkey_king"));
     // 饭晶虎王：四足猛兽
     public static final RegistryObject<EntityType<PendingBossEntity>> RICE_CRYSTAL_TIGER_KING =
             registerBoss("rice_crystal_tiger_king", 1.2F, 1.3F);
@@ -295,9 +310,15 @@ public class ModEntities {
                             .sized(1.4F, 2.2F)
                             .clientTrackingRange(12)
                             .build("fallen_rice_phoenix"));
-    // 化灵米 5000 心 / 攻击 10
-    public static final RegistryObject<EntityType<PlaceholderRiceMobEntity>> HUALING_RICE =
-            registerPlaceholder("hualing_rice", MobCategory.MONSTER, 1.0F, 2.0F);
+    // 化灵米：已转正，敌对飞行 GeckoLib hualingmi 模型（animation.hualingmi.idle/fly/attack 动画，
+    // 米胎白脸+稻穗耳羽+灵青魂晶+雾蓝幽灵尾贴图），恼鬼式常驻无重力悬浮追击但不能穿墙、永不落地，近战扑击；
+    // 碰撞箱 1.0×2.0（模型直立约 26px 高）、5000 心 / 攻击 10；生物蛋 ModItems.HUALING_RICE_SPAWN_EGG 无需改动
+    public static final RegistryObject<EntityType<HualingmiEntity>> HUALING_RICE =
+            ENTITY_TYPES.register("hualing_rice", () ->
+                    EntityType.Builder.<HualingmiEntity>of(HualingmiEntity::new, MobCategory.MONSTER)
+                            .sized(1.0F, 2.0F)
+                            .clientTrackingRange(12)
+                            .build("hualing_rice"));
     // 浅染鲛：已转正，水生敌对 GeckoLib qianranjiao 模型（idle/walk/attack 动画，
     // 生米白+红曲斑块大米主题贴图），虎鲸式纵向摆尾巡游+突进啃咬，搁浅会扑腾回水中；
     // 模型长约 5 格，碰撞箱 2.6×2.0；60 心 / 攻击 10；生物蛋 ModItems.PALE_MERMAID_SPAWN_EGG 无需改动

@@ -21,7 +21,8 @@ public class ModEntityAttributes {
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
         // —— 七大待定 Boss：共用占位属性 ——
-        event.put(ModEntities.MIMI_MONKEY_KING.get(), PendingBossEntity.createAttributes().build());
+        // 米米猴王：已转正（150 血、移速 0.3、普攻 5、护甲 15、50% 击退抗性）
+        event.put(ModEntities.MIMI_MONKEY_KING.get(), MimiMonkeyKingEntity.createAttributes().build());
         event.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossEntity.createAttributes().build());
@@ -82,7 +83,8 @@ public class ModEntityAttributes {
         // 污棘花：真实扎根不动 GeckoLib 敌对植物（500 心、近战 50、移速 0、满击退抗性，原地啃咬）
         event.put(ModEntities.BLIGHTED_THORN_FLOWER.get(), WujihuaEntity.createAttributes().build());
         event.put(ModEntities.FALLEN_RICE_PHOENIX.get(), FallenRicePhoenixEntity.createAttributes().build()); // 堕落米凤 1000 心 / 攻击 70（陆空飞行）
-        event.put(ModEntities.HUALING_RICE.get(), placeholder(10000.0D, 10.0D));            // 化灵米 5000 心
+        // 化灵米：真实常驻飞行 GeckoLib 敌对实体（5000 心、移速 0.25/飞行 1.2、近战 10、追击 40，不穿墙/永不落地）
+        event.put(ModEntities.HUALING_RICE.get(), HualingmiEntity.createAttributes().build());
         // 浅染鲛：真实水生敌对 GeckoLib 实体（60 心、水中巡游速度 1.2、啃咬 10、追击 32，搁浅扑腾回水中）
         event.put(ModEntities.PALE_MERMAID.get(), QianranjiaoEntity.createAttributes().build());
         // 望米伤鲛：真实水生敌对巨型古鲸 GeckoLib 实体（1000 心、巨兽巡游速度 1.0、啃咬 300、追击 48、高击退抗性，搁浅扑腾回水中）

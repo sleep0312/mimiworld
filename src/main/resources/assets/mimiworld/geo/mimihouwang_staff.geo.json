@@ -1,0 +1,31 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.mimihouwang_staff",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2,
+				"visible_bounds_offset": [0, 0, 0]
+			},
+			"bones": [
+				{
+					"name": "staff",
+					"pivot": [0, 0, 0],
+					"rotation": [90, 0, 0],
+					"cubes": [
+						{"origin": [-0.75, -14.2, -0.75], "size": [1.5, 3.9, 1.5], "uv": [101, 53]},
+						{"origin": [-0.5, -10.3, -0.5], "size": [1, 20.6, 1], "uv": [0, 0]},
+						{"origin": [-0.75, 10.3, -0.75], "size": [1.5, 3.9, 1.5], "uv": [110, 53]},
+						{"origin": [-0.9, -11.5, -0.9], "size": [1.8, 1, 1.8], "uv": [20, 67]},
+						{"origin": [-0.9, 10.5, -0.9], "size": [1.8, 1, 1.8], "uv": [29, 67]},
+						{"origin": [-0.9, -13.6, -0.9], "size": [1.8, 0.8, 1.8], "uv": [38, 67]},
+						{"origin": [-0.9, 12.8, -0.9], "size": [1.8, 0.8, 1.8], "uv": [47, 67]}
+					]
+				}
+			]
+		}
+	]
+}

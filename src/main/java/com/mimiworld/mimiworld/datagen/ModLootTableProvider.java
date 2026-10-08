@@ -89,6 +89,9 @@ public class ModLootTableProvider extends LootTableProvider {
                 d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.FRAGRANT_POUCH.get(), 0, 1), d(ModItems.FRAGRANT_POWDER.get(), 16, 24)});
         DROPS.put(ModEntities.RICE_WOLF_VULTURE.get(), new Drop[]{d(ModItems.MOON_DEVOURER_WOLF_CLAW.get(), 2, 2), d(Items.NETHER_STAR, 3, 3),
                 d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.DEVOURER_VULTURE_WING.get(), 1, 2)});
+        // 米米猴王：必掉猴王如意棍×1、米米猴王头×1，外加米 16~32
+        DROPS.put(ModEntities.MIMI_MONKEY_KING.get(), new Drop[]{d(ModItems.MONKEY_KING_RUYI_STAFF.get(), 1, 1),
+                d(ModItems.MIMI_MONKEY_HEAD.get(), 1, 1), d(rice, 16, 32)});
     }
 
     private static Drop d(ItemLike item, int min, int max) {

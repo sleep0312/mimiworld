@@ -1,6 +1,94 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mimiworld:item/monkey_king_ruyi_staff"
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "texture_size": [
+    64,
+    64
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        -93,
+        -55
+      ],
+      "translation": [
+        0.5,
+        -6.75,
+        -8.25
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        -93,
+        -55
+      ],
+      "translation": [
+        0.5,
+        -6.75,
+        -8.25
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        17,
+        -90,
+        22
+      ],
+      "translation": [
+        -0.25,
+        -16,
+        2.5
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        17,
+        -90,
+        22
+      ],
+      "translation": [
+        -0.25,
+        -16,
+        2.5
+      ]
+    },
+    "ground": {
+      "rotation": [
+        100,
+        100,
+        -128
+      ],
+      "scale": [
+        0.35,
+        0.35,
+        0.35
+      ]
+    },
+    "gui": {
+      "rotation": [
+        0,
+        0,
+        45
+      ],
+      "translation": [
+        7,
+        -7,
+        0
+      ]
+    },
+    "fixed": {
+      "translation": [
+        0,
+        -8,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
   }
 }

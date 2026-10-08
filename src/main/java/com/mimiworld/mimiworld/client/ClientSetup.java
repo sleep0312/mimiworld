@@ -9,10 +9,12 @@ import com.mimiworld.mimiworld.client.renderer.FallenRicePhoenixRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.LazyElfRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
+import com.mimiworld.mimiworld.client.renderer.MimiMonkeyKingRenderer;
 import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigCorpseRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigRenderer;
+import com.mimiworld.mimiworld.client.renderer.ThrownMonkeyStaffRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceSoulRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceWolfVultureRenderer;
 import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
@@ -25,6 +27,7 @@ import com.mimiworld.mimiworld.client.renderer.HaomiWolfRenderer;
 import com.mimiworld.mimiworld.client.renderer.BaoliemilingRenderer;
 import com.mimiworld.mimiworld.client.renderer.ChaoticVoidToucherRenderer;
 import com.mimiworld.mimiworld.client.renderer.HumiCorpseRenderer;
+import com.mimiworld.mimiworld.client.renderer.HualingmiRenderer;
 import com.mimiworld.mimiworld.client.renderer.JietianmiRenderer;
 import com.mimiworld.mimiworld.client.renderer.MeimiruRenderer;
 import com.mimiworld.mimiworld.client.renderer.MilaimaRenderer;
@@ -86,17 +89,19 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.COOKED_RICE_BALL.get(), ThrownItemRenderer::new);
         // 虚无触毒液：ThrownItemRenderer 渲染史莱姆球贴图
         event.registerEntityRenderer(ModEntities.VOID_POISON_SPIT.get(), ThrownItemRenderer::new);
+        // 米米猴王扔出的金箍棒：独立 GeckoLib 投掷物模型（复用猴王贴图）
+        event.registerEntityRenderer(ModEntities.THROWN_MONKEY_STAFF.get(), ThrownMonkeyStaffRenderer::new);
 
         // 七个待定 Boss 统一使用 Steve 人形模型占位，真实 GeckoLib 模型实现后在此替换
-        event.registerEntityRenderer(ModEntities.MIMI_MONKEY_KING.get(), PendingBossRenderer::new);
+        // 米米猴王：已转正，GeckoLib mimihouwang 模型（idle/walk/attack/attack_slam/throw 动画）
+        event.registerEntityRenderer(ModEntities.MIMI_MONKEY_KING.get(), MimiMonkeyKingRenderer::new);
         event.registerEntityRenderer(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.SUPER_CRYSTAL_COW_KING.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
-        // 化灵米：尚无专属模型，PlaceholderRiceMobEntity 占位实体，借用 Steve 模型；
-        // 不注册渲染器会导致生物蛋生成后客户端渲染线程 NPE 崩溃
-        event.registerEntityRenderer(ModEntities.HUALING_RICE.get(), PendingBossRenderer::new);
+        // 化灵米：GeckoLib hualingmi 模型（animation.hualingmi.idle/fly/attack 动画），常驻悬浮飞行近战
+        event.registerEntityRenderer(ModEntities.HUALING_RICE.get(), HualingmiRenderer::new);
         // 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonRenderer::new);
         // 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染

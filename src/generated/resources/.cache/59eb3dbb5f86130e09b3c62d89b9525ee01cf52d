@@ -1,4 +1,4 @@
-// 1.20.1	2026-10-02T23:34:54.3736815	Loot Tables
+// 1.20.1	2026-10-08T20:52:40.5723438	Loot Tables
 f2d666857d1772dcab581fc556077ae61dae0715 data/mimiworld/loot_tables/entities/blighted_thorn_flower.json
 7571654704eb824435665a6f43b31738ebf6c14d data/mimiworld/loot_tables/entities/carved_rice_skeleton.json
 8ead86cd5999bf5d87269240bfd3dd5b76e1dd1b data/mimiworld/loot_tables/entities/chaotic_void_toucher.json
@@ -12,6 +12,7 @@ b749d2701e534d85b350cae8bb0f8403a7d46dd0 data/mimiworld/loot_tables/entities/hua
 c9302e854a4b8395e53e35d82ffa8a9817293939 data/mimiworld/loot_tables/entities/miheng_pig.json
 ba4ebe7f75eb5769b001d487e7a5b76491dba9eb data/mimiworld/loot_tables/entities/miheng_pig_corpse.json
 32c21814e325fbeb8df756476ccd8a77bb58c393 data/mimiworld/loot_tables/entities/milai_horse.json
+72b14e76be4225074888817a977d49e0f3b887c7 data/mimiworld/loot_tables/entities/mimi_monkey_king.json
 c8954278526c631b37a1dbc48be54ce799590249 data/mimiworld/loot_tables/entities/mimi_sheep.json
 49696b1359664cc414d8b61e04841c2f4cc7bcda data/mimiworld/loot_tables/entities/mimi_skeleton.json
 13f37b8f7f2873b093d851d27b51b2b2bd6ba3d4 data/mimiworld/loot_tables/entities/mimoo_cow.json

@@ -3,6 +3,7 @@ package com.mimiworld.mimiworld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.item.MimiTotemItem;
+import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -1373,9 +1374,9 @@ public class ModItems {
 
     // ===== BOSS/神兽掉落（均为普通物品，最大堆叠 64；"头/棍/爪/角/牙/鳞"仅为同名掉落物，无装备/武器功能） =====
 
-    // 猴王如意棍（Monkey King Ruyi Staff）
+    // 猴王如意棍（Monkey King Ruyi Staff）：近战武器，16 伤 / 攻速 0.8 / 触及 6 格，命中附加虚弱 I 2s
     public static final RegistryObject<Item> MONKEY_KING_RUYI_STAFF = registerItem("monkey_king_ruyi_staff",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MonkeyKingRuyiStaffItem(new Item.Properties().stacksTo(1)));
 
     // 米米猴头（Mimi Monkey Head）
     public static final RegistryObject<Item> MIMI_MONKEY_HEAD = registerItem("mimi_monkey_head",
