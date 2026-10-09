@@ -87,12 +87,13 @@ public class ModEntities {
                             .fireImmune()
                             .build("laziest_final_dragon"));
 
-    // ===== 盗米者生物蛋绑定的实体：MicroDuckEntity（GeckoLib microduck 模型，小型 0.5×1.0） =====
-    // 注册名为 rice_stealer，生物蛋（ForgeSpawnEggItem 绑定 RICE_STEALER）与之同名对应
-    public static final RegistryObject<EntityType<MicroDuckEntity>> RICE_STEALER =
+    // ===== 盗米者：已转正，GeckoLib daomizhe 狼人模型（idle/walk/attack 动画，
+    // 米白绒毛+稻叶绿+稻穗金大米主题贴图），陆地敌对 0.8×2.1；近战 6 + 60s 偷快捷栏食物后逃走；
+    // 生物蛋（ForgeSpawnEggItem 绑定 RICE_STEALER）与战利品表沿用 rice_stealer 注册名 =====
+    public static final RegistryObject<EntityType<DaomizheEntity>> RICE_STEALER =
             ENTITY_TYPES.register("rice_stealer", () ->
-                    EntityType.Builder.<MicroDuckEntity>of(MicroDuckEntity::new, MobCategory.MONSTER)
-                            .sized(0.5F, 1.0F)
+                    EntityType.Builder.<DaomizheEntity>of(DaomizheEntity::new, MobCategory.MONSTER)
+                            .sized(0.8F, 2.1F)
                             .clientTrackingRange(8)
                             .build("rice_stealer"));
 

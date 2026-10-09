@@ -10,7 +10,7 @@ import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.LazyElfRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiMonkeyKingRenderer;
-import com.mimiworld.mimiworld.client.renderer.MicroDuckRenderer;
+import com.mimiworld.mimiworld.client.renderer.DaomizheRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigCorpseRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigRenderer;
@@ -104,8 +104,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.HUALING_RICE.get(), HualingmiRenderer::new);
         // 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonRenderer::new);
-        // 盗米者：真实 GeckoLib 实体 MicroDuckEntity，使用 microduck 模型渲染
-        event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), MicroDuckRenderer::new);
+        // 盗米者：GeckoLib daomizhe 狼人模型（animation.daomizhe.idle/walk/attack 动画），偷米扑击近战
+        event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), DaomizheRenderer::new);
         // 黏米之蛛：GeckoLib spider 模型（idle/walk/attack 动画）
         event.registerEntityRenderer(ModEntities.STICKY_RICE_SPIDER.get(), StickyRiceSpiderRenderer::new);
         // 米羊羊：GeckoLib mimi_sheep 模型（idle/walk/scared_run 动画）

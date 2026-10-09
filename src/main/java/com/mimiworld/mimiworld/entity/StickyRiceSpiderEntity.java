@@ -114,7 +114,7 @@ public class StickyRiceSpiderEntity extends Monster implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        // 过渡时间 5 tick（与项目内 MicroDuck 一致）
+        // 过渡时间 5 tick（与项目内其他 GeckoLib 实体一致）
         controllers.add(new AnimationController<>(this, "main", 5, this::handleAnimState));
     }
 

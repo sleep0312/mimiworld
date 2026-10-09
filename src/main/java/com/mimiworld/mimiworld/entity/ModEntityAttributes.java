@@ -32,8 +32,8 @@ public class ModEntityAttributes {
         // —— 真实实体 ——
         // 最懒终末龙：真实飞行 Boss（属性沿用原占位数值 + FLYING_SPEED/满击退抗性）
         event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonEntity.createAttributes().build());
-        // 盗米者：GeckoLib 微型鸭实体（1500 血）
-        event.put(ModEntities.RICE_STEALER.get(), MicroDuckEntity.createAttributes().build());
+        // 盗米者：GeckoLib 狼人陆地敌对实体（20 心、移速 0.3、近战 6、索敌 20）
+        event.put(ModEntities.RICE_STEALER.get(), DaomizheEntity.createAttributes().build());
         // 黏米之蛛：真实蜘蛛实体（48 血）
         event.put(ModEntities.STICKY_RICE_SPIDER.get(), StickyRiceSpiderEntity.createAttributes().build());
         // 米羊羊：真实 GeckoLib 羊实体（8 心、移速 0.23，对齐原版羊）

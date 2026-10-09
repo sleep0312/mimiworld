@@ -21,7 +21,7 @@ import net.minecraft.sounds.SoundEvents;
  *
  * <p>米米系列生物中，除 {@link ZhuomiChickenEntity}（啄米鸡）、
  * {@link MimiSheepEntity}（米羊羊）、{@link StickyRiceSpiderEntity}（黏米之蛛）与
- * {@link MicroDuckEntity}（盗米者）外，其余实体的专属 AI/模型
+ * {@link DaomizheEntity}（盗米者）外，其余实体的专属 AI/模型
  * 尚未设计，先用本类统一占位，保证实体可注册、可 /summon、可挂载战利品表。</p>
  *
  * <p>每个实体的实际血量/攻击力在 ModEntityAttributes 的 EntityAttributeCreationEvent
