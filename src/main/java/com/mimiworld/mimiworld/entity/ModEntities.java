@@ -63,12 +63,27 @@ public class ModEntities {
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("mimi_monkey_king"));
-    // 饭晶虎王：四足猛兽
-    public static final RegistryObject<EntityType<PendingBossEntity>> RICE_CRYSTAL_TIGER_KING =
-            registerBoss("rice_crystal_tiger_king", 1.2F, 1.3F);
-    // 超晶牛王：壮硕大体型
-    public static final RegistryObject<EntityType<PendingBossEntity>> SUPER_CRYSTAL_COW_KING =
-            registerBoss("super_crystal_cow_king", 1.4F, 1.7F);
+    // 饭晶虎王：已转正，GeckoLib fanjinghuwang 模型（idle/walk/attack/feast/slam 动画），
+    // 直立型陆地猛兽 Boss（普攻 8 + 大吃一顿撕咬 20 CD3s + 对爪重击 25 CD6s），
+    // 模型直立约 47px≈2.9 格，碰撞箱 1.2×2.9，火焰免疫
+    public static final RegistryObject<EntityType<FanjinghuwangEntity>> RICE_CRYSTAL_TIGER_KING =
+            ENTITY_TYPES.register("rice_crystal_tiger_king", () ->
+                    EntityType.Builder.<FanjinghuwangEntity>of(FanjinghuwangEntity::new, MobCategory.MONSTER)
+                            .sized(1.2F, 2.9F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("rice_crystal_tiger_king"));
+    // 超晶牛王：已转正，GeckoLib super_crystal_cow_king 模型（idle/walk/attack/axe_combo/
+    // charge_start/charge 动画，右臂 45° 斜擎巨斧），壮硕持斧陆地 Boss
+    // （普攻 12 + 猛牛冲撞 20 CD30s + 三段巨斧 10/20/30 CD45s），
+    // 模型直立约 41px≈2.6 格、肩甲宽约 24px，碰撞箱 1.5×2.6，火焰免疫
+    public static final RegistryObject<EntityType<ChaojingniuwangEntity>> SUPER_CRYSTAL_COW_KING =
+            ENTITY_TYPES.register("super_crystal_cow_king", () ->
+                    EntityType.Builder.<ChaojingniuwangEntity>of(ChaojingniuwangEntity::new, MobCategory.MONSTER)
+                            .sized(1.5F, 2.6F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("super_crystal_cow_king"));
     // 重晶兔王：小型
     public static final RegistryObject<EntityType<PendingBossEntity>> HEAVY_CRYSTAL_RABBIT_KING =
             registerBoss("heavy_crystal_rabbit_king", 0.7F, 0.9F);

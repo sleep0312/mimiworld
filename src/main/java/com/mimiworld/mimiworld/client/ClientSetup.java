@@ -10,6 +10,8 @@ import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.LazyElfRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiMonkeyKingRenderer;
+import com.mimiworld.mimiworld.client.renderer.FanjinghuwangRenderer;
+import com.mimiworld.mimiworld.client.renderer.ChaojingniuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.DaomizheRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigCorpseRenderer;
@@ -95,8 +97,10 @@ public class ClientSetup {
         // 七个待定 Boss 统一使用 Steve 人形模型占位，真实 GeckoLib 模型实现后在此替换
         // 米米猴王：已转正，GeckoLib mimihouwang 模型（idle/walk/attack/attack_slam/throw 动画）
         event.registerEntityRenderer(ModEntities.MIMI_MONKEY_KING.get(), MimiMonkeyKingRenderer::new);
-        event.registerEntityRenderer(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), PendingBossRenderer::new);
-        event.registerEntityRenderer(ModEntities.SUPER_CRYSTAL_COW_KING.get(), PendingBossRenderer::new);
+        // 饭晶虎王：已转正，GeckoLib fanjinghuwang 模型（idle/walk/attack/feast/slam 动画）
+        event.registerEntityRenderer(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), FanjinghuwangRenderer::new);
+        // 超晶牛王：已转正，GeckoLib super_crystal_cow_king 模型（idle/walk/attack/axe_combo/charge_start/charge 动画）
+        event.registerEntityRenderer(ModEntities.SUPER_CRYSTAL_COW_KING.get(), ChaojingniuwangRenderer::new);
         event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
         event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);

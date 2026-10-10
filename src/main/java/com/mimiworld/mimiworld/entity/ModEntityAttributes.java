@@ -23,8 +23,10 @@ public class ModEntityAttributes {
         // —— 七大待定 Boss：共用占位属性 ——
         // 米米猴王：已转正（150 血、移速 0.3、普攻 5、护甲 15、50% 击退抗性）
         event.put(ModEntities.MIMI_MONKEY_KING.get(), MimiMonkeyKingEntity.createAttributes().build());
-        event.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), PendingBossEntity.createAttributes().build());
-        event.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), PendingBossEntity.createAttributes().build());
+        // 饭晶虎王：已转正（240 血、移速 0.32、普攻 8、追击 36、护甲 15、韧性 8、60% 击退抗性）
+        event.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), FanjinghuwangEntity.createAttributes().build());
+        // 超晶牛王：已转正（300 血、移速 0.3、普攻 12、追击 40、护甲 14、韧性 8、80% 击退抗性）
+        event.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), ChaojingniuwangEntity.createAttributes().build());
         event.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossEntity.createAttributes().build());
         event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossEntity.createAttributes().build());

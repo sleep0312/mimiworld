@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+
 /**
  * 米米图腾的免死逻辑。
  *
@@ -24,9 +27,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * 但循环内硬编码了 {@link Items#TOTEM_OF_UNDYING}，Forge 的 LivingUseTotemEvent
  * 也只在「手持物已经是原版图腾」时才触发，无法让自定义物品获得图腾能力，只能 HEAD 注入。
  *
- * <p>触发效果逐行复刻 1.20.1 原版：无视无敌的伤害类型（/kill、虚空等）不免死；
- * 依次检查主手、副手；免死时回 1 点血、清空原有效果、附加再生 II 45s / 吸收 II 5s /
- * 抗火 I 40s，广播实体事件 35（客户端播放图腾粒子、音效与第一人称激活动画）。
+ * <p>触发效果：无视无敌的伤害类型（/kill、虚空等）不免死；依次检查主手、副手；
+ * 免死时恢复全部生命值、仅清除负面效果（保留增益）、附加再生 I 10s / 抗火 30s /
+ * 吸收 IV 30s，广播实体事件 35（客户端播放图腾粒子、音效与第一人称激活动画）。
  * 若双手持有原版图腾则交给原版逻辑优先处理，保证原版行为不变。
  */
 @Mixin(LivingEntity.class)
@@ -62,11 +65,20 @@ public abstract class LivingEntityMixin {
                 CriteriaTriggers.USED_TOTEM.trigger(serverPlayer, usedTotem);
             }
 
-            self.setHealth(1.0F);
-            self.removeAllEffects();
-            self.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
-            self.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
-            self.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
+            // 恢复全部已损失的生命值
+            self.setHealth(self.getMaxHealth());
+
+            // 仅清除负面效果，保留已有增益（复制集合避免遍历中修改）
+            for (MobEffectInstance instance : new ArrayList<>(self.getActiveEffects())) {
+                if (instance.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
+                    self.removeEffect(instance.getEffect());
+                }
+            }
+
+            // 生命恢复 I 10s、抗火 30s、伤害吸收 IV 30s（amplifier 从 0 开始，IV 对应 3）
+            self.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0));
+            self.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0));
+            self.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 3));
             self.level().broadcastEntityEvent(self, (byte) 35);
             cir.setReturnValue(true);
         }
