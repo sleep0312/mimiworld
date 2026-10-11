@@ -202,6 +202,10 @@
   "entity.mimiworld.rice_crystal_tiger_king": "饭晶虎王",
   "entity.mimiworld.super_crystal_cow_king": "超晶牛王",
   "entity.mimiworld.heavy_crystal_rabbit_king": "重晶兔王",
+  "death.attack.rabbit_king_slam": "%1$s被重晶兔王跃起重砸，晶裂而亡",
+  "death.attack.dragon_breath": "%1$s被最懒终末龙的龙息吞噬殆尽",
+  "death.attack.dragon_charge": "%1$s被最懒终末龙的巨龙冲撞撞得粉碎",
+  "death.attack.dragon_beam": "%1$s在最懒终末龙的最懒光束中灰飞烟灭",
   "entity.mimiworld.compound_azure_python": "复晶天青蟒",
   "entity.mimiworld.cleansing_longevity_kui": "清洁长命夔",
   "entity.mimiworld.laziest_final_dragon": "最懒终末龙",
@@ -481,5 +485,7 @@
   "item.mimiworld.rice_crystal_alloy_arrow": "饭晶合金箭",
   "item.mimiworld.super_heavy_crystal_arrow": "超重结晶箭",
   "item.mimiworld.compound_rice_meal_arrow": "复合米饭箭",
-  "item.mimiworld.cleansing_compound_arrow": "清洁复合箭"
+  "item.mimiworld.cleansing_compound_arrow": "清洁复合箭",
+  "effect.mimiworld.crimson_candlelight": "腥红烛照",
+  "effect.mimiworld.python_constriction": "蟒蛇缠绕"
 }

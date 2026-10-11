@@ -107,12 +107,12 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
     private static final float[] COMBO_DAMAGE = {10.0F, 20.0F, 30.0F};
     /** 大斧一挥冷却：45 秒 = 900 tick */
     private static final int COMBO_COOLDOWN_TICKS = 900;
-    /** 前两扫判定区：左右半宽 2.2、纵深 2.2（前方 4.4×2.2 横扫区） */
+    /** 前两扫判定区：半宽 2.2 保持，纵深 4.0 格 + margin 覆盖 4.6 格，对齐 4.5 格触发距离 */
     private static final double SWEEP_HALF_WIDTH = 2.2D;
-    private static final double SWEEP_DEPTH = 2.2D;
-    /** 终结重劈判定区：左右半宽 1.4、纵深 3.2（前方 2.8×3.2 纵深区） */
+    private static final double SWEEP_DEPTH = 4.0D;
+    /** 终结重劈判定区：半宽 1.4 保持，纵深 4.0 格 + margin 覆盖 4.6 格 */
     private static final double CHOP_HALF_WIDTH = 1.4D;
-    private static final double CHOP_DEPTH = 3.2D;
+    private static final double CHOP_DEPTH = 4.0D;
 
     /** 猛牛冲撞蓄力 charge_start 动画 0.6 秒 = 12 tick */
     private static final int CHARGE_WINDUP_TICKS = 12;

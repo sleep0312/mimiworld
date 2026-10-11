@@ -92,9 +92,10 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
     private static final int FEAST_COOLDOWN_TICKS = 60;
     /** 大吃一顿伤害 */
     private static final float FEAST_DAMAGE = 20.0F;
-    /** 判定区：左右各 1 格（总宽 2），纵深 1 格（前方 2×1） */
-    private static final double FEAST_HALF_WIDTH = 1.0D;
-    private static final double FEAST_DEPTH = 1.0D;
+    /** 判定区半宽：虎王左右各 1.2 格（总宽 2.4） */
+    private static final double FEAST_HALF_WIDTH = 1.2D;
+    /** 判定区纵深：虎王脚前 2.5 格，加 margin 覆盖 3.1 格，对齐 3.5 格触发距离 */
+    private static final double FEAST_DEPTH = 2.5D;
 
     /** slam 动画 1.6 秒 = 32 tick */
     private static final int SLAM_ANIMATION_TICKS = 32;
@@ -104,9 +105,10 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
     private static final int SLAM_COOLDOWN_TICKS = 120;
     /** 对爪重击伤害 */
     private static final float SLAM_DAMAGE = 25.0F;
-    /** 判定区：左右各 1 格（总宽 2），纵深 2 格（前方 2×2） */
-    private static final double SLAM_HALF_WIDTH = 1.0D;
-    private static final double SLAM_DEPTH = 2.0D;
+    /** 判定区半宽：虎王左右各 1.3 格（总宽 2.6） */
+    private static final double SLAM_HALF_WIDTH = 1.3D;
+    /** 判定区纵深：虎王脚前 3.0 格，加 margin 覆盖 3.6 格，对齐 4.0 格触发距离 */
+    private static final double SLAM_DEPTH = 3.0D;
 
     /** 首次技能前的准备时间，避免出生瞬间立刻出招 */
     private static final int INITIAL_FEAST_DELAY = 40;

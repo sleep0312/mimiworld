@@ -42,6 +42,16 @@ public class ModEntities {
                             .updateInterval(10)
                             .build("void_poison_spit"));
 
+    // 最懒光束渲染载体：无碰撞/无AI/不存档的纯视觉实体，在最懒终末龙与锁定玩家之间渲染紫色光束
+    public static final RegistryObject<EntityType<DragonBeamEntity>> DRAGON_BEAM =
+            ENTITY_TYPES.register("dragon_beam", () ->
+                    EntityType.Builder.<DragonBeamEntity>of(DragonBeamEntity::new, MobCategory.MISC)
+                            .sized(0.1F, 0.1F)
+                            .clientTrackingRange(16)
+                            .updateInterval(Integer.MAX_VALUE)
+                            .fireImmune()
+                            .build("dragon_beam"));
+
     // ===== 生物蛋绑定的七大 Boss（实体待定，当前统一用 PendingBossEntity 占位） =====
     // 真实 Boss 实现后仅需替换工厂引用 PendingBossEntity::new，生物蛋（ModItems）无需改动。
 
@@ -84,21 +94,45 @@ public class ModEntities {
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("super_crystal_cow_king"));
-    // 重晶兔王：小型
-    public static final RegistryObject<EntityType<PendingBossEntity>> HEAVY_CRYSTAL_RABBIT_KING =
-            registerBoss("heavy_crystal_rabbit_king", 0.7F, 0.9F);
-    // 复晶天青蟒：长形低伏
-    public static final RegistryObject<EntityType<PendingBossEntity>> COMPOUND_AZURE_PYTHON =
-            registerBoss("compound_azure_python", 1.0F, 0.8F);
-    // 清洁长命夔：巨型走兽
-    public static final RegistryObject<EntityType<PendingBossEntity>> CLEANSING_LONGEVITY_KUI =
-            registerBoss("cleansing_longevity_kui", 1.6F, 2.2F);
-    // 最懒终末龙：超巨型飞行 Boss（已转正：GeckoLib 宗罪龙模型，末影龙式盘旋/俯冲 AI，火焰免疫）
+    // 重晶兔王：已转正，GeckoLib heavy_crystal_rabbit_king 模型（idle/walk/attack/skill_slam/skill_enrage
+    // 动画，米白+晶青晶刺+血红眼巨兔），敏捷型陆地 Boss（普攻 10 双爪连击 + 出其不意跃砸
+    // 45 无视护甲 CD60s + 腥红烛照近战 ×3 持续 30s CD180s），模型直立约 54px≈3.4 格（耳尖），
+    // 碰撞箱 1.4×3.2，火焰免疫
+    public static final RegistryObject<EntityType<HeavyCrystalRabbitKingEntity>> HEAVY_CRYSTAL_RABBIT_KING =
+            ENTITY_TYPES.register("heavy_crystal_rabbit_king", () ->
+                    EntityType.Builder.<HeavyCrystalRabbitKingEntity>of(HeavyCrystalRabbitKingEntity::new, MobCategory.MONSTER)
+                            .sized(1.4F, 3.2F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("heavy_crystal_rabbit_king"));
+    // 复晶天青蟒：已转正，GeckoLib compound_azure_python 模型（idle/walk/attack/bite/kiss/tail_sweep
+    // 动画，深玉蟒鳞+米白腹甲+青碧复晶+金边兜帽），低伏长身陆地 Boss（普攻 10 + 咬你命三千 16
+    // 附中毒I/缠绕I CD180s + 羽蛇神之吻两连咬共 50 附中毒II CD15s + 扫尾 70 CD30s；缠绕期间玩家
+    // 对其伤害 ×1.5），昂首展兜高约 3.2 格，碰撞箱 1.4×3.2，火焰免疫
+    public static final RegistryObject<EntityType<CompoundAzurePythonEntity>> COMPOUND_AZURE_PYTHON =
+            ENTITY_TYPES.register("compound_azure_python", () ->
+                    EntityType.Builder.<CompoundAzurePythonEntity>of(CompoundAzurePythonEntity::new, MobCategory.MONSTER)
+                            .sized(1.4F, 3.2F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("compound_azure_python"));
+    // 清洁长命夔：已转正，GeckoLib qingjiechangmingkui 模型（idle/walk/attack/roar/stomp/triple_bite
+    // 动画，苍青黑厚皮+青铜夔龙纹+雷电裂隙+发光青眼，单足无角牛形雷兽），巨型陆地 Boss
+    // （普攻 15 + 巨吼音波 60 CD30s + 夔之践踏 100 CD45s + 三连咬 70×3 CD120s），
+    // 模型高约 55px≈3.4 格、巨蹄宽约 22px，碰撞箱 2.2×3.4，火焰免疫
+    public static final RegistryObject<EntityType<QingjiechangmingkuiEntity>> CLEANSING_LONGEVITY_KUI =
+            ENTITY_TYPES.register("cleansing_longevity_kui", () ->
+                    EntityType.Builder.<QingjiechangmingkuiEntity>of(QingjiechangmingkuiEntity::new, MobCategory.MONSTER)
+                            .sized(2.2F, 3.4F)
+                            .clientTrackingRange(12)
+                            .fireImmune()
+                            .build("cleansing_longevity_kui"));
+    // 最懒终末龙：末影龙 Promax 狂暴强化版，超巨型陆空 Boss（GeckoLib：龙息/冲撞/最懒光束/撕咬/盘旋/嘶吼，火焰免疫）
     public static final RegistryObject<EntityType<LaziestFinalDragonEntity>> LAZIEST_FINAL_DRAGON =
             ENTITY_TYPES.register("laziest_final_dragon", () ->
                     EntityType.Builder.<LaziestFinalDragonEntity>of(LaziestFinalDragonEntity::new, MobCategory.MONSTER)
-                            .sized(2.5F, 3.5F)
-                            .clientTrackingRange(12)
+                            .sized(3.5F, 4.0F)
+                            .clientTrackingRange(16)
                             .fireImmune()
                             .build("laziest_final_dragon"));
 

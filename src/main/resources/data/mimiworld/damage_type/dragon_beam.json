@@ -1,0 +1,6 @@
+{
+  "message_id": "dragon_beam",
+  "scaling": "never",
+  "exhaustion": 0.0,
+  "effects": ["bypasses_armor", "no_knockback"]
+}

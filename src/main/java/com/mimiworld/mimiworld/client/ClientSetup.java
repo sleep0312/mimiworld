@@ -5,6 +5,7 @@ import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.block.entity.ModBlockEntities;
 import com.mimiworld.mimiworld.client.renderer.CookingPotGeoBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.DiaomikulouRenderer;
+import com.mimiworld.mimiworld.client.renderer.DragonBeamRenderer;
 import com.mimiworld.mimiworld.client.renderer.FallenRicePhoenixRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.LazyElfRenderer;
@@ -12,6 +13,8 @@ import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiMonkeyKingRenderer;
 import com.mimiworld.mimiworld.client.renderer.FanjinghuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.ChaojingniuwangRenderer;
+import com.mimiworld.mimiworld.client.renderer.CompoundAzurePythonRenderer;
+import com.mimiworld.mimiworld.client.renderer.HeavyCrystalRabbitKingRenderer;
 import com.mimiworld.mimiworld.client.renderer.DaomizheRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimouniuRenderer;
 import com.mimiworld.mimiworld.client.renderer.MihengPigCorpseRenderer;
@@ -19,8 +22,8 @@ import com.mimiworld.mimiworld.client.renderer.MihengPigRenderer;
 import com.mimiworld.mimiworld.client.renderer.ThrownMonkeyStaffRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceSoulRenderer;
 import com.mimiworld.mimiworld.client.renderer.RiceWolfVultureRenderer;
-import com.mimiworld.mimiworld.client.renderer.PendingBossRenderer;
 import com.mimiworld.mimiworld.client.renderer.PenmiFishRenderer;
+import com.mimiworld.mimiworld.client.renderer.QingjiechangmingkuiRenderer;
 import com.mimiworld.mimiworld.client.renderer.QianranjiaoRenderer;
 import com.mimiworld.mimiworld.client.renderer.MishenRenderer;
 import com.mimiworld.mimiworld.client.renderer.WangmishangjiaoRenderer;
@@ -101,13 +104,18 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), FanjinghuwangRenderer::new);
         // 超晶牛王：已转正，GeckoLib super_crystal_cow_king 模型（idle/walk/attack/axe_combo/charge_start/charge 动画）
         event.registerEntityRenderer(ModEntities.SUPER_CRYSTAL_COW_KING.get(), ChaojingniuwangRenderer::new);
-        event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossRenderer::new);
-        event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossRenderer::new);
-        event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossRenderer::new);
+        // 重晶兔王：已转正，GeckoLib heavy_crystal_rabbit_king 模型（idle/walk/attack/skill_slam/skill_enrage 动画）
+        event.registerEntityRenderer(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), HeavyCrystalRabbitKingRenderer::new);
+        // 复晶天青蟒：已转正，GeckoLib compound_azure_python 模型（idle/walk/attack/bite/kiss/tail_sweep 动画）
+        event.registerEntityRenderer(ModEntities.COMPOUND_AZURE_PYTHON.get(), CompoundAzurePythonRenderer::new);
+        // 清洁长命夔：已转正，GeckoLib qingjiechangmingkui 模型（idle/walk/attack/roar/stomp/triple_bite 动画）
+        event.registerEntityRenderer(ModEntities.CLEANSING_LONGEVITY_KUI.get(), QingjiechangmingkuiRenderer::new);
         // 化灵米：GeckoLib hualingmi 模型（animation.hualingmi.idle/fly/attack 动画），常驻悬浮飞行近战
         event.registerEntityRenderer(ModEntities.HUALING_RICE.get(), HualingmiRenderer::new);
         // 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonRenderer::new);
+        // 最懒光束：纯视觉光束载体（紫色实心光束，从龙嘴渲染到锁定玩家）
+        event.registerEntityRenderer(ModEntities.DRAGON_BEAM.get(), DragonBeamRenderer::new);
         // 盗米者：GeckoLib daomizhe 狼人模型（animation.daomizhe.idle/walk/attack 动画），偷米扑击近战
         event.registerEntityRenderer(ModEntities.RICE_STEALER.get(), DaomizheRenderer::new);
         // 黏米之蛛：GeckoLib spider 模型（idle/walk/attack 动画）

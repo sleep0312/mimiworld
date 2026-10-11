@@ -27,9 +27,12 @@ public class ModEntityAttributes {
         event.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), FanjinghuwangEntity.createAttributes().build());
         // 超晶牛王：已转正（300 血、移速 0.3、普攻 12、追击 40、护甲 14、韧性 8、80% 击退抗性）
         event.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), ChaojingniuwangEntity.createAttributes().build());
-        event.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), PendingBossEntity.createAttributes().build());
-        event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), PendingBossEntity.createAttributes().build());
-        event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), PendingBossEntity.createAttributes().build());
+        // 重晶兔王：已转正（300 血、移速 0.34、普攻 10、追击 40、护甲 12、韧性 6、70% 击退抗性）
+        event.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), HeavyCrystalRabbitKingEntity.createAttributes().build());
+        // 复晶天青蟒：已转正（320 血、移速 0.33、普攻 10、追击 40、护甲 14、韧性 6、70% 击退抗性）
+        event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), CompoundAzurePythonEntity.createAttributes().build());
+        // 清洁长命夔：已转正（500 血、移速 0.3、普攻 15、追击 40、护甲 12、韧性 8、80% 击退抗性）
+        event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), QingjiechangmingkuiEntity.createAttributes().build());
 
         // —— 真实实体 ——
         // 最懒终末龙：真实飞行 Boss（属性沿用原占位数值 + FLYING_SPEED/满击退抗性）

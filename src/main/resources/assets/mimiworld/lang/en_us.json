@@ -202,6 +202,10 @@
   "entity.mimiworld.rice_crystal_tiger_king": "Rice Crystal Tiger King",
   "entity.mimiworld.super_crystal_cow_king": "Super Crystal Cow King",
   "entity.mimiworld.heavy_crystal_rabbit_king": "Heavy Crystal Rabbit King",
+  "death.attack.rabbit_king_slam": "%1$s was slammed from the sky and shattered by the Heavy Crystal Rabbit King",
+  "death.attack.dragon_breath": "%1$s was consumed by the Laziest Final Dragon's breath",
+  "death.attack.dragon_charge": "%1$s was crushed by the Laziest Final Dragon's charge",
+  "death.attack.dragon_beam": "%1$s was annihilated by the Laziest Final Dragon's laziest beam",
   "entity.mimiworld.compound_azure_python": "Compound Azure Python",
   "entity.mimiworld.cleansing_longevity_kui": "Cleansing Longevity Kui",
   "entity.mimiworld.laziest_final_dragon": "Laziest Final Dragon",
@@ -468,5 +472,7 @@
   "item.mimiworld.rice_crystal_alloy_arrow": "Rice Crystal Alloy Arrow",
   "item.mimiworld.super_heavy_crystal_arrow": "Super Heavy Crystal Arrow",
   "item.mimiworld.compound_rice_meal_arrow": "Compound Rice Meal Arrow",
-  "item.mimiworld.cleansing_compound_arrow": "Cleansing Compound Arrow"
+  "item.mimiworld.cleansing_compound_arrow": "Cleansing Compound Arrow",
+  "effect.mimiworld.crimson_candlelight": "Crimson Candlelight",
+  "effect.mimiworld.python_constriction": "Python Constriction"
 }

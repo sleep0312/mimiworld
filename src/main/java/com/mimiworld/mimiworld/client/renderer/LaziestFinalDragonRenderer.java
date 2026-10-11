@@ -6,14 +6,14 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 /**
- * 最懒终末龙实体渲染器：GeckoLib 自动完成飞龙模型烘焙与骨骼动画。
+ * 最懒终末龙实体渲染器：GeckoLib 自动完成 Promax 末影龙模型烘焙与骨骼动画。
  * 在 ClientSetup 的 EntityRenderersEvent.RegisterRenderers 中注册给 LAZIEST_FINAL_DRAGON。
- * 超巨型飞行 Boss，投影半径取碰撞箱宽度的 80%（2.5×0.8=2.0）。
+ * 超巨型飞行 Boss，碰撞箱宽 3.5，阴影半径取 3.0。
  */
 public class LaziestFinalDragonRenderer extends GeoEntityRenderer<LaziestFinalDragonEntity> {
 
     public LaziestFinalDragonRenderer(EntityRendererProvider.Context context) {
         super(context, new LaziestFinalDragonModel());
-        this.shadowRadius = 2.0F;
+        this.shadowRadius = 3.0F;
     }
 }

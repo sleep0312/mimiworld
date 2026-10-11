@@ -1,0 +1,6 @@
+{
+  "message_id": "dragon_charge",
+  "scaling": "never",
+  "exhaustion": 0.0,
+  "effects": ["bypasses_armor"]
+}
