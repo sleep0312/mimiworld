@@ -502,7 +502,9 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
             return QingjiechangmingkuiEntity.this.roarCooldown <= 0
                     && !QingjiechangmingkuiEntity.this.isCasting()
                     && target != null && target.isAlive()
-                    && QingjiechangmingkuiEntity.this.distanceToSqr(target) <= 144.0D
+                    // 释放距离必须与音波伤害半径一致：巨吼开始时夔会锁住自身移动，
+                    // 若触发距离大于 ROAR_RADIUS，目标会停在伤害范围之外导致技能空放
+                    && QingjiechangmingkuiEntity.this.distanceToSqr(target) <= ROAR_RADIUS * ROAR_RADIUS
                     && QingjiechangmingkuiEntity.this.hasLineOfSight(target);
         }
 

@@ -126,8 +126,8 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
     private static final int CHARGE_COOLDOWN_TICKS = 1200;
     private static final float CHARGE_DAMAGE = 150.0F;
     private static final double CHARGE_HIT_RADIUS = 4.5D;
-    /** 冲撞位移：格/tick（1.7×24tick ≈ 40 格冲刺距离） */
-    private static final double CHARGE_SPEED = 1.7D;
+    /** 冲撞位移：格/tick（2.4×24tick ≈ 58 格冲刺距离，约 48 格/s，为龙最快动作） */
+    private static final double CHARGE_SPEED = 2.4D;
 
     /** 最懒光束：持续 60s=1200tick，每 10tick（0.5s）造成 500；CD 120s=2400tick */
     private static final int BEAM_DURATION_TICKS = 1200;
@@ -187,15 +187,15 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
     }
 
     /**
-     * 属性：800 血、普攻 20、飞行加速 3.0、索敌 64、10 甲 6 韧性、免疫击退。
+     * 属性：800 血、普攻 20、飞行加速 4.5、索敌 64、10 甲 6 韧性、免疫击退。
      * 飞行生物空中稳态速度 ≈ 0.222 × MoveControl速度系数 × FLYING_SPEED（格/tick），
-     * 3.0 配合盘旋 1.15 系数约 15 格/s、掠飞 2.2 系数约 29 格/s，贴近原版末影龙的迅猛手感。
+     * 4.5 配合盘旋 1.15 系数约 23 格/s、掠飞 2.2 系数约 44 格/s，动作迅猛、压迫感强。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 800.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.FLYING_SPEED, 3.0D)
+                .add(Attributes.FLYING_SPEED, 4.5D)
                 .add(Attributes.ATTACK_DAMAGE, 20.0D)
                 .add(Attributes.FOLLOW_RANGE, 64.0D)
                 .add(Attributes.ARMOR, 10.0D)
@@ -590,7 +590,7 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
 
     /**
      * 【巨龙冲撞】CD 60s：前 10tick 扬翅蓄力锁定（带目标速度提前量），
-     * 11~34tick 沿固定方向以 1.7 格/tick 高速直线冲撞（脚本位移，撞墙提前结束），
+     * 11~34tick 沿固定方向以 2.4 格/tick 高速直线冲撞（脚本位移，撞墙提前结束），
      * 第 22tick（动画俯冲最低点）命中帧结算 150 伤害+强击退，35~46tick 拉起恢复。
      */
     private class DragonChargeGoal extends Goal {
@@ -1106,9 +1106,9 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
             }
         }
 
-        /** 高空大圈巡航：角速度与巡航速度匹配（目标点线速度≈0.76/tick），龙能贴圈飞行不拖尾。 */
+        /** 高空大圈巡航：角速度与巡航速度匹配（目标点线速度≈1.0/tick，龙稳态约1.15/tick，贴圈不拖尾）。 */
         private void tickOrbit(LaziestFinalDragonEntity dragon, LivingEntity target) {
-            this.circleAngle += 0.020D;
+            this.circleAngle += 0.027D;
             double radius = ORBIT_RADIUS + Math.sin(this.circleAngle * 3.0D) * 4.0D;
             double wx = this.centerX + Math.cos(this.circleAngle) * radius;
             double wz = this.centerZ + Math.sin(this.circleAngle) * radius;
@@ -1132,7 +1132,7 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
             }
         }
 
-        /** 掠飞：朝玩家头顶高速逼近（约 29 格/s，不直接造成伤害，伤害由冲撞/撕咬技能结算）。 */
+        /** 掠飞：朝玩家头顶高速逼近（约 44 格/s，不直接造成伤害，伤害由冲撞/撕咬技能结算）。 */
         private void tickStrafe(LaziestFinalDragonEntity dragon, LivingEntity target) {
             dragon.getMoveControl().setWantedPosition(
                     target.getX(), target.getY() + 8.0D, target.getZ(), 2.2D);
