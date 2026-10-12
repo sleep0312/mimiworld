@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mimiworld:geckolib/purified_longevity_kui_head"
+  }
+}

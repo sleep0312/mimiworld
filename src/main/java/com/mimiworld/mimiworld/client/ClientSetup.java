@@ -11,6 +11,13 @@ import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
 import com.mimiworld.mimiworld.client.renderer.LazyElfRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiMonkeyKingRenderer;
+import com.mimiworld.mimiworld.client.renderer.MimiMonkeyHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.RiceCrystalTigerKingHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.SuperCrystalOxHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.HeavyCrystalRabbitKingHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.CompoundCrystalAzurePythonHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.PurifiedLongevityKuiHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.LaziestEndDragonHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.FanjinghuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.ChaojingniuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.CompoundAzurePythonRenderer;
@@ -192,6 +199,27 @@ public class ClientSetup {
         event.registerBlockEntityRenderer(ModBlockEntities.JUMBO_MEGA_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
                         new ResourceLocation(MimiWorld.MODID, "jumbo_mega_cooking_pot")));
+        // 米米猴头：GeckoLib 头颅摆件方块（head+crown 静态模型，渲染器内缩放摆正贴地居中）
+        event.registerBlockEntityRenderer(ModBlockEntities.MIMI_MONKEY_HEAD.get(),
+                ctx -> new MimiMonkeyHeadBlockRenderer<>(ctx));
+        // 饭晶虎王头：GeckoLib 头颅摆件方块（head+双耳+冠+下颌静态模型）
+        event.registerBlockEntityRenderer(ModBlockEntities.RICE_CRYSTAL_TIGER_KING_HEAD.get(),
+                ctx -> new RiceCrystalTigerKingHeadBlockRenderer<>(ctx));
+        // 超晶牛头：GeckoLib 头颅摆件方块（head+双角+双耳静态模型）
+        event.registerBlockEntityRenderer(ModBlockEntities.SUPER_CRYSTAL_OX_HEAD.get(),
+                ctx -> new SuperCrystalOxHeadBlockRenderer<>(ctx));
+        // 重晶兔王头：GeckoLib 头颅摆件方块（head+长双耳静态模型）
+        event.registerBlockEntityRenderer(ModBlockEntities.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get(),
+                ctx -> new HeavyCrystalRabbitKingHeadBlockRenderer<>(ctx));
+        // 复晶天青蟒头：GeckoLib 头颅摆件方块（head+下颌+舌+角静态模型）
+        event.registerBlockEntityRenderer(ModBlockEntities.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get(),
+                ctx -> new CompoundCrystalAzurePythonHeadBlockRenderer<>(ctx));
+        // 清洁长命夔头：GeckoLib 头颅摆件方块（head+长颌静态模型）
+        event.registerBlockEntityRenderer(ModBlockEntities.PURIFIED_LONGEVITY_KUI_HEAD.get(),
+                ctx -> new PurifiedLongevityKuiHeadBlockRenderer<>(ctx));
+        // 最懒终末龙头：GeckoLib 头颅摆件方块（Promax 龙头+下颌静态模型）
+        event.registerBlockEntityRenderer(ModBlockEntities.LAZIEST_END_DRAGON_HEAD.get(),
+                ctx -> new LaziestEndDragonHeadBlockRenderer<>(ctx));
     }
 
     // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）

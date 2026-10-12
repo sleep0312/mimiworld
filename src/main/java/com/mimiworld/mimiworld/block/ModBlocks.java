@@ -544,6 +544,70 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
+    // 米米猴头（BlockItem，沿用物品 id mimi_monkey_head）：米米猴王掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（猴头+金冠+双雉鸡翎），木质音效、硬度 1.0、无工具要求，空手即可采集。
+    // 破坏掉落本身（loot_tables/blocks/mimi_monkey_head.json）。
+    public static final RegistryObject<Block> MIMI_MONKEY_HEAD =
+            BLOCKS.register("mimi_monkey_head", () -> new MimiMonkeyHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
+    // 饭晶虎王头（BlockItem，沿用物品 id rice_crystal_tiger_king_head）：饭晶虎王掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（虎头+双耳+冠+下颌），木质音效、硬度 1.0、空手可采，破坏掉落本身。
+    public static final RegistryObject<Block> RICE_CRYSTAL_TIGER_KING_HEAD =
+            BLOCKS.register("rice_crystal_tiger_king_head", () -> new RiceCrystalTigerKingHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
+    // 超晶牛头（BlockItem，沿用物品 id super_crystal_ox_head）：超晶牛王掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（牛头+双角+双耳），木质音效、硬度 1.0、空手可采，破坏掉落本身。
+    public static final RegistryObject<Block> SUPER_CRYSTAL_OX_HEAD =
+            BLOCKS.register("super_crystal_ox_head", () -> new SuperCrystalOxHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
+    // 重晶兔王头（BlockItem，沿用物品 id heavy_crystal_rabbit_king_head）：重晶兔王掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（兔头+长双耳），木质音效、硬度 1.0、空手可采，破坏掉落本身。
+    public static final RegistryObject<Block> HEAVY_CRYSTAL_RABBIT_KING_HEAD =
+            BLOCKS.register("heavy_crystal_rabbit_king_head", () -> new HeavyCrystalRabbitKingHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
+    // 复晶天青蟒头（BlockItem，沿用物品 id compound_crystal_azure_python_head）：复晶天青蟒掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（蟒头+下颌+舌+角），木质音效、硬度 1.0、空手可采，破坏掉落本身。
+    public static final RegistryObject<Block> COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD =
+            BLOCKS.register("compound_crystal_azure_python_head", () -> new CompoundCrystalAzurePythonHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
+    // 清洁长命夔头（BlockItem，沿用物品 id purified_longevity_kui_head）：清洁长命夔掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（夔头+长颌），木质音效、硬度 1.0、空手可采，破坏掉落本身。
+    public static final RegistryObject<Block> PURIFIED_LONGEVITY_KUI_HEAD =
+            BLOCKS.register("purified_longevity_kui_head", () -> new PurifiedLongevityKuiHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
+    // 最懒终末龙头（BlockItem，沿用物品 id laziest_end_dragon_head）：最懒终末龙掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（Promax 龙头+下颌，双角獠牙紫眼），木质音效、硬度 1.0、空手可采，破坏掉落本身。
+    public static final RegistryObject<Block> LAZIEST_END_DRAGON_HEAD =
+            BLOCKS.register("laziest_end_dragon_head", () -> new LaziestEndDragonHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }

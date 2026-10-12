@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mimiworld:geckolib/compound_crystal_azure_python_head"
+  }
+}

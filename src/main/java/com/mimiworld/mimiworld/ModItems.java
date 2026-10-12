@@ -6,6 +6,7 @@ import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
+import com.mimiworld.mimiworld.item.RiceCrystalAlloyArmorItem;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -520,17 +521,18 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_BOW = registerItem("rice_crystal_alloy_bow",
             () -> new BowItem(new Item.Properties().durability(896)));
 
+    // 饭晶合金四件：GeckoLib 3D 盔甲（RiceCrystalAlloyArmorItem，模型/贴图见 client/model 与 geo/textures 资源）
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_HELMET = registerItem("rice_crystal_alloy_helmet",
-            () -> new ArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+            () -> new RiceCrystalAlloyArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_CHESTPLATE = registerItem("rice_crystal_alloy_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+            () -> new RiceCrystalAlloyArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_LEGGINGS = registerItem("rice_crystal_alloy_leggings",
-            () -> new ArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+            () -> new RiceCrystalAlloyArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_BOOTS = registerItem("rice_crystal_alloy_boots",
-            () -> new ArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+            () -> new RiceCrystalAlloyArmorItem(ModArmorMaterials.RICE_CRYSTAL_ALLOY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
     // ---- 超重结晶武器（慢速重武器，修复材料超重结晶） ----
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_SWORD = registerItem("super_heavy_crystal_sword",
@@ -1378,57 +1380,59 @@ public class ModItems {
     public static final RegistryObject<Item> MONKEY_KING_RUYI_STAFF = registerItem("monkey_king_ruyi_staff",
             () -> new MonkeyKingRuyiStaffItem(new Item.Properties().stacksTo(1)));
 
-    // 米米猴头（Mimi Monkey Head）
+    // 米米猴头（Mimi Monkey Head）：方块物品，放置后对应 ModBlocks.MIMI_MONKEY_HEAD
+    // （GeckoLib 头颅摆件方块，猴头+金冠+双雉鸡翎）；仍可用于如意棍修复等既有引用
     public static final RegistryObject<Item> MIMI_MONKEY_HEAD = registerItem("mimi_monkey_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.MIMI_MONKEY_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // 虎王利爪（Tiger King Razor Claw）
     public static final RegistryObject<Item> TIGER_KING_RAZOR_CLAW = registerItem("tiger_king_razor_claw",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 饭晶虎王头（Rice Crystal Tiger King Head）
+    // 饭晶虎王头（Rice Crystal Tiger King Head）：方块物品，放置后对应 ModBlocks.RICE_CRYSTAL_TIGER_KING_HEAD
+    // （GeckoLib 头颅摆件方块，虎头+双耳+冠+下颌）
     public static final RegistryObject<Item> RICE_CRYSTAL_TIGER_KING_HEAD = registerItem("rice_crystal_tiger_king_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.RICE_CRYSTAL_TIGER_KING_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // 牛王晶角（Ox King Crystal Horn）
     public static final RegistryObject<Item> OX_KING_CRYSTAL_HORN = registerItem("ox_king_crystal_horn",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超晶牛头（Super Crystal Ox Head）
+    // 超晶牛头（Super Crystal Ox Head）：方块物品，放置后对应 ModBlocks.SUPER_CRYSTAL_OX_HEAD
     public static final RegistryObject<Item> SUPER_CRYSTAL_OX_HEAD = registerItem("super_crystal_ox_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.SUPER_CRYSTAL_OX_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // 兔王腥红眼（Rabbit King Bloody Red Eye）
     public static final RegistryObject<Item> RABBIT_KING_BLOODY_RED_EYE = registerItem("rabbit_king_bloody_red_eye",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 重晶兔王头（Heavy Crystal Rabbit King Head）
+    // 重晶兔王头（Heavy Crystal Rabbit King Head）：方块物品，放置后对应 ModBlocks.HEAVY_CRYSTAL_RABBIT_KING_HEAD
     public static final RegistryObject<Item> HEAVY_CRYSTAL_RABBIT_KING_HEAD = registerItem("heavy_crystal_rabbit_king_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // 极毒青蟒牙（Venom Azure Python Fang）
     public static final RegistryObject<Item> VENOM_AZURE_PYTHON_FANG = registerItem("venom_azure_python_fang",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 复晶天青蟒头（Compound Crystal Azure Python Head）
+    // 复晶天青蟒头（Compound Crystal Azure Python Head）：方块物品，放置后对应 ModBlocks.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD
     public static final RegistryObject<Item> COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD = registerItem("compound_crystal_azure_python_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // 恶夔长命角（Evil Kui Longevity Horn）
     public static final RegistryObject<Item> EVIL_KUI_LONGEVITY_HORN = registerItem("evil_kui_longevity_horn",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 清洁长命夔头（Purified Longevity Kui Head）
+    // 清洁长命夔头（Purified Longevity Kui Head）：方块物品，放置后对应 ModBlocks.PURIFIED_LONGEVITY_KUI_HEAD
     public static final RegistryObject<Item> PURIFIED_LONGEVITY_KUI_HEAD = registerItem("purified_longevity_kui_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.PURIFIED_LONGEVITY_KUI_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // 终末龙逆鳞（End Dragon Reverse Scale）
     public static final RegistryObject<Item> END_DRAGON_REVERSE_SCALE = registerItem("end_dragon_reverse_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 最懒终末龙头（Laziest End Dragon Head）
+    // 最懒终末龙头（Laziest End Dragon Head）：方块物品，放置后对应 ModBlocks.LAZIEST_END_DRAGON_HEAD
     public static final RegistryObject<Item> LAZIEST_END_DRAGON_HEAD = registerItem("laziest_end_dragon_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.LAZIEST_END_DRAGON_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // ===== 爆米嘬心液 + 四档镐头部件（均为普通物品，最大堆叠 64） =====
 

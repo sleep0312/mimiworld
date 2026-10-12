@@ -24,6 +24,41 @@
       "type": "minecraft:single",
       "resource": "mimiworld:geckolib/jumbo_mega_cooking_pot",
       "sprite": "mimiworld:geckolib/jumbo_mega_cooking_pot"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/mimi_monkey_head",
+      "sprite": "mimiworld:geckolib/mimi_monkey_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/rice_crystal_tiger_king_head",
+      "sprite": "mimiworld:geckolib/rice_crystal_tiger_king_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/super_crystal_ox_head",
+      "sprite": "mimiworld:geckolib/super_crystal_ox_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/heavy_crystal_rabbit_king_head",
+      "sprite": "mimiworld:geckolib/heavy_crystal_rabbit_king_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/compound_crystal_azure_python_head",
+      "sprite": "mimiworld:geckolib/compound_crystal_azure_python_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/purified_longevity_kui_head",
+      "sprite": "mimiworld:geckolib/purified_longevity_kui_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/laziest_end_dragon_head",
+      "sprite": "mimiworld:geckolib/laziest_end_dragon_head"
     }
   ]
 }

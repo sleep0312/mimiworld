@@ -18,7 +18,10 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -187,18 +190,18 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
     }
 
     /**
-     * 属性：800 血、普攻 20、飞行加速 4.5、索敌 64、10 甲 6 韧性、免疫击退。
+     * 属性：2500 血、普攻 100、飞行加速 4.5、索敌 64、100 甲 6 韧性、免疫击退。
      * 飞行生物空中稳态速度 ≈ 0.222 × MoveControl速度系数 × FLYING_SPEED（格/tick），
      * 4.5 配合盘旋 1.15 系数约 23 格/s、掠飞 2.2 系数约 44 格/s，动作迅猛、压迫感强。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 800.0D)
+                .add(Attributes.MAX_HEALTH, 2500.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.FLYING_SPEED, 4.5D)
-                .add(Attributes.ATTACK_DAMAGE, 20.0D)
+                .add(Attributes.ATTACK_DAMAGE, 100.0D)
                 .add(Attributes.FOLLOW_RANGE, 64.0D)
-                .add(Attributes.ARMOR, 10.0D)
+                .add(Attributes.ARMOR, 100.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 6.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
@@ -207,6 +210,35 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
     @Override
     protected PathNavigation createNavigation(Level level) {
         return new FlyingPathNavigation(this, level);
+    }
+
+    /**
+     * 撕咬命中结算：给自身套上短暂的高额生命恢复，并给被击目标挂上
+     * 虚弱 III、失明、反胃与缓慢 IV 多重负面效果。
+     */
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        if (super.doHurtTarget(target)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 99));
+            if (target instanceof LivingEntity living) {
+                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 400, 2));
+                living.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 200, 0));
+                living.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+                living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3));
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /** 常驻自增益：生命恢复 L + 力量 XX（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    private void maintainPassiveBuffs() {
+        if (!this.hasEffect(MobEffects.REGENERATION)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 49));
+        }
+        if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 19));
+        }
     }
 
     /**
@@ -286,6 +318,7 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            this.maintainPassiveBuffs();
             if (this.breathCooldown > 0) {
                 this.breathCooldown--;
             }

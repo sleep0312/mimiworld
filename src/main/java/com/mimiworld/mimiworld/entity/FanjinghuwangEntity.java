@@ -8,6 +8,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -123,15 +125,15 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性：240 血、移速 0.32、普攻 8、追击 36、护甲 15、护甲韧性 8、60% 击退抗性。
+     * 属性：350 血、移速 0.32、普攻 13、追击 36、护甲 20、护甲韧性 8、60% 击退抗性。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 240.0D)
+                .add(Attributes.MAX_HEALTH, 350.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.32D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0D)
+                .add(Attributes.ATTACK_DAMAGE, 13.0D)
                 .add(Attributes.FOLLOW_RANGE, 36.0D)
-                .add(Attributes.ARMOR, 15.0D)
+                .add(Attributes.ARMOR, 20.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 8.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.6D);
     }
@@ -201,6 +203,16 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
             return true;
         }
         return false;
+    }
+
+    /** 常驻自增益：生命恢复 VII + 力量 III（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    private void maintainPassiveBuffs() {
+        if (!this.hasEffect(MobEffects.REGENERATION)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 6));
+        }
+        if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 2));
+        }
     }
 
     /**
@@ -312,6 +324,7 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            this.maintainPassiveBuffs();
             if (this.feastCooldown > 0) {
                 this.feastCooldown--;
             }

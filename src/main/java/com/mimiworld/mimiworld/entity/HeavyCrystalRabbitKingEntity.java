@@ -17,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -162,15 +163,15 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性：300 血、移速 0.34（敏捷型）、普攻 10、追击 40、护甲 12、护甲韧性 6、70% 击退抗性。
+     * 属性：500 血、移速 0.34（敏捷型）、普攻 30、追击 40、护甲 25、护甲韧性 6、70% 击退抗性。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 300.0D)
+                .add(Attributes.MAX_HEALTH, 500.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.34D)
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, 30.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
-                .add(Attributes.ARMOR, 12.0D)
+                .add(Attributes.ARMOR, 25.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 6.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.7D);
     }
@@ -228,16 +229,28 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
 
     // -------------------- 攻击逻辑 --------------------
 
-    /** 普攻命中时触发 attack 动画（服务端结算成功一次，数据自动同步） */
+    /** 普攻命中时触发 attack 动画，并给自身套上短暂的高额生命恢复与加速。 */
     @Override
     public boolean doHurtTarget(Entity target) {
         if (super.doHurtTarget(target)) {
             if (!this.isCasting()) {
                 this.entityData.set(DATA_ATTACK_ANIM_TICKS, ATTACK_ANIMATION_TICKS);
             }
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 29));
+            this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, 1));
             return true;
         }
         return false;
+    }
+
+    /** 常驻自增益：生命恢复 X + 力量 XX（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    private void maintainPassiveBuffs() {
+        if (!this.hasEffect(MobEffects.REGENERATION)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 9));
+        }
+        if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 19));
+        }
     }
 
     /**
@@ -326,6 +339,7 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            this.maintainPassiveBuffs();
             if (this.slamCooldown > 0) {
                 this.slamCooldown--;
             }

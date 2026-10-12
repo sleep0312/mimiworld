@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mimiworld:geckolib/heavy_crystal_rabbit_king_head"
+  }
+}

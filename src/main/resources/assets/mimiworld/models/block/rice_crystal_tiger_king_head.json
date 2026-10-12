@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mimiworld:geckolib/rice_crystal_tiger_king_head"
+  }
+}

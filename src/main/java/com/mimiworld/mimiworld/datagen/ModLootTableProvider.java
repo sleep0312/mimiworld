@@ -92,6 +92,26 @@ public class ModLootTableProvider extends LootTableProvider {
         // 米米猴王：必掉猴王如意棍×1、米米猴王头×1，外加米 16~32
         DROPS.put(ModEntities.MIMI_MONKEY_KING.get(), new Drop[]{d(ModItems.MONKEY_KING_RUYI_STAFF.get(), 1, 1),
                 d(ModItems.MIMI_MONKEY_HEAD.get(), 1, 1), d(rice, 16, 32)});
+        // 饭晶虎王：必掉结晶饭×12~16、虎王利爪×1、饭晶虎王头×1
+        DROPS.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), new Drop[]{d(ModItems.CRYSTALLIZED_RICE_MEAL.get(), 12, 16),
+                d(ModItems.TIGER_KING_RAZOR_CLAW.get(), 1, 1), d(ModItems.RICE_CRYSTAL_TIGER_KING_HEAD.get(), 1, 1)});
+        // 超晶牛王：必掉饭晶合金锭×4~5、牛王晶角×1、超晶牛王头×1
+        DROPS.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), new Drop[]{d(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get(), 4, 5),
+                d(ModItems.OX_KING_CRYSTAL_HORN.get(), 1, 1), d(ModItems.SUPER_CRYSTAL_OX_HEAD.get(), 1, 1)});
+        // 重晶兔王：必掉超结晶×1~2、兔王腥红眼×1、重晶兔王头×1
+        DROPS.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), new Drop[]{d(ModItems.SUPER_CRYSTAL.get(), 1, 2),
+                d(ModItems.RABBIT_KING_BLOODY_RED_EYE.get(), 1, 1), d(ModItems.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get(), 1, 1)});
+        // 复晶天青蟒：必掉超重结晶×1~2、极毒青蟒牙×1、复晶天青蟒头×1
+        DROPS.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), new Drop[]{d(ModItems.SUPER_HEAVY_CRYSTAL.get(), 1, 2),
+                d(ModItems.VENOM_AZURE_PYTHON_FANG.get(), 1, 1), d(ModItems.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get(), 1, 1)});
+        // 清洁长命夔：必掉精制强化米网×2~3、恶夔长命角×1、清洁长命夔头×1，粗制复合米饭锭 0~2 概率掉落
+        DROPS.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), new Drop[]{d(ModItems.COARSE_COMPOUND_RICE_MEAL_INGOT.get(), 0, 2),
+                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 2, 3), d(ModItems.EVIL_KUI_LONGEVITY_HORN.get(), 1, 1),
+                d(ModItems.PURIFIED_LONGEVITY_KUI_HEAD.get(), 1, 1)});
+        // 最懒终末龙：必掉精制强化米网×4~5、终末龙逆鳞×1、最懒终末龙头×1，粗制清洁复合锭 0~2 概率掉落
+        DROPS.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), new Drop[]{d(ModItems.COARSE_CLEANSING_COMPOUND_INGOT.get(), 0, 2),
+                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 1, 1),
+                d(ModItems.LAZIEST_END_DRAGON_HEAD.get(), 1, 1)});
     }
 
     private static Drop d(ItemLike item, int min, int max) {

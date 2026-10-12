@@ -159,6 +159,48 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(OvenBlockEntity::new,
                             ModBlocks.OVEN.get()).build(null));
 
+    // 米米猴头（方块 mimi_monkey_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<MimiMonkeyHeadBlockEntity>> MIMI_MONKEY_HEAD =
+            BLOCK_ENTITIES.register("mimi_monkey_head",
+                    () -> BlockEntityType.Builder.of(MimiMonkeyHeadBlockEntity::new,
+                            ModBlocks.MIMI_MONKEY_HEAD.get()).build(null));
+
+    // 饭晶虎王头（方块 rice_crystal_tiger_king_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<RiceCrystalTigerKingHeadBlockEntity>> RICE_CRYSTAL_TIGER_KING_HEAD =
+            BLOCK_ENTITIES.register("rice_crystal_tiger_king_head",
+                    () -> BlockEntityType.Builder.of(RiceCrystalTigerKingHeadBlockEntity::new,
+                            ModBlocks.RICE_CRYSTAL_TIGER_KING_HEAD.get()).build(null));
+
+    // 超晶牛头（方块 super_crystal_ox_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<SuperCrystalOxHeadBlockEntity>> SUPER_CRYSTAL_OX_HEAD =
+            BLOCK_ENTITIES.register("super_crystal_ox_head",
+                    () -> BlockEntityType.Builder.of(SuperCrystalOxHeadBlockEntity::new,
+                            ModBlocks.SUPER_CRYSTAL_OX_HEAD.get()).build(null));
+
+    // 重晶兔王头（方块 heavy_crystal_rabbit_king_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<HeavyCrystalRabbitKingHeadBlockEntity>> HEAVY_CRYSTAL_RABBIT_KING_HEAD =
+            BLOCK_ENTITIES.register("heavy_crystal_rabbit_king_head",
+                    () -> BlockEntityType.Builder.of(HeavyCrystalRabbitKingHeadBlockEntity::new,
+                            ModBlocks.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get()).build(null));
+
+    // 复晶天青蟒头（方块 compound_crystal_azure_python_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<CompoundCrystalAzurePythonHeadBlockEntity>> COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD =
+            BLOCK_ENTITIES.register("compound_crystal_azure_python_head",
+                    () -> BlockEntityType.Builder.of(CompoundCrystalAzurePythonHeadBlockEntity::new,
+                            ModBlocks.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get()).build(null));
+
+    // 清洁长命夔头（方块 purified_longevity_kui_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<PurifiedLongevityKuiHeadBlockEntity>> PURIFIED_LONGEVITY_KUI_HEAD =
+            BLOCK_ENTITIES.register("purified_longevity_kui_head",
+                    () -> BlockEntityType.Builder.of(PurifiedLongevityKuiHeadBlockEntity::new,
+                            ModBlocks.PURIFIED_LONGEVITY_KUI_HEAD.get()).build(null));
+
+    // 最懒终末龙头（方块 laziest_end_dragon_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<LaziestEndDragonHeadBlockEntity>> LAZIEST_END_DRAGON_HEAD =
+            BLOCK_ENTITIES.register("laziest_end_dragon_head",
+                    () -> BlockEntityType.Builder.of(LaziestEndDragonHeadBlockEntity::new,
+                            ModBlocks.LAZIEST_END_DRAGON_HEAD.get()).build(null));
+
     public static void register(IEventBus modEventBus) {
         BLOCK_ENTITIES.register(modEventBus);
     }

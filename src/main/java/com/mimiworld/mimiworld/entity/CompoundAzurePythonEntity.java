@@ -139,15 +139,15 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性：320 血、移速 0.33、普攻 10、追击 40、护甲 14、护甲韧性 6、70% 击退抗性。
+     * 属性：750 血、移速 0.33、普攻 25、追击 40、护甲 40、护甲韧性 6、70% 击退抗性。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 320.0D)
+                .add(Attributes.MAX_HEALTH, 750.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.33D)
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, 25.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
-                .add(Attributes.ARMOR, 14.0D)
+                .add(Attributes.ARMOR, 40.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 6.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.7D);
     }
@@ -210,14 +210,28 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
 
     // -------------------- 攻击逻辑 --------------------
 
-    /** 普攻命中时触发 attack 动画（服务端结算成功一次，数据自动同步） */
+    /** 普攻命中时触发 attack 动画，并给被击目标挂上中毒与虚弱。 */
     @Override
     public boolean doHurtTarget(Entity target) {
         if (super.doHurtTarget(target)) {
             this.entityData.set(DATA_ATTACK_ANIM_TICKS, ATTACK_ANIMATION_TICKS);
+            if (target instanceof LivingEntity living) {
+                living.addEffect(new MobEffectInstance(MobEffects.POISON, 120, 2));
+                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 1));
+            }
             return true;
         }
         return false;
+    }
+
+    /** 常驻自增益：生命恢复 XV + 力量 VII（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    private void maintainPassiveBuffs() {
+        if (!this.hasEffect(MobEffects.REGENERATION)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 14));
+        }
+        if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 6));
+        }
     }
 
     /** 把身体/头部朝向硬吸附到目标，返回吸附后的朝向角。 */
@@ -391,6 +405,7 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            this.maintainPassiveBuffs();
             if (this.biteCooldown > 0) {
                 this.biteCooldown--;
             }

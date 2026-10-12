@@ -21,21 +21,21 @@ public class ModEntityAttributes {
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
         // —— 七大待定 Boss：共用占位属性 ——
-        // 米米猴王：已转正（150 血、移速 0.3、普攻 5、护甲 15、50% 击退抗性）
+        // 米米猴王：已转正（150 血、移速 0.3、普攻 7、护甲 15、50% 击退抗性；常驻生命恢复 III/力量 II）
         event.put(ModEntities.MIMI_MONKEY_KING.get(), MimiMonkeyKingEntity.createAttributes().build());
-        // 饭晶虎王：已转正（240 血、移速 0.32、普攻 8、追击 36、护甲 15、韧性 8、60% 击退抗性）
+        // 饭晶虎王：已转正（350 血、移速 0.32、普攻 13、追击 36、护甲 20、韧性 8、60% 击退抗性；常驻生命恢复 VII/力量 III）
         event.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), FanjinghuwangEntity.createAttributes().build());
-        // 超晶牛王：已转正（300 血、移速 0.3、普攻 12、追击 40、护甲 14、韧性 8、80% 击退抗性）
+        // 超晶牛王：已转正（500 血、移速 0.3、普攻 18、追击 40、护甲 30、韧性 8、80% 击退抗性；常驻生命恢复 X/力量 V）
         event.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), ChaojingniuwangEntity.createAttributes().build());
-        // 重晶兔王：已转正（300 血、移速 0.34、普攻 10、追击 40、护甲 12、韧性 6、70% 击退抗性）
+        // 重晶兔王：已转正（500 血、移速 0.34、普攻 30、追击 40、护甲 25、韧性 6、70% 击退抗性；常驻生命恢复 X/力量 XX，击中自回复/加速）
         event.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), HeavyCrystalRabbitKingEntity.createAttributes().build());
-        // 复晶天青蟒：已转正（320 血、移速 0.33、普攻 10、追击 40、护甲 14、韧性 6、70% 击退抗性）
+        // 复晶天青蟒：已转正（750 血、移速 0.33、普攻 25、追击 40、护甲 40、韧性 6、70% 击退抗性；常驻生命恢复 XV/力量 VII，击中目标中毒/虚弱）
         event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), CompoundAzurePythonEntity.createAttributes().build());
-        // 清洁长命夔：已转正（500 血、移速 0.3、普攻 15、追击 40、护甲 12、韧性 8、80% 击退抗性）
+        // 清洁长命夔：已转正（1200 血、移速 0.3、普攻 35、追击 40、护甲 50、韧性 8、80% 击退抗性；常驻生命恢复 XXX/力量 X，击中自回复）
         event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), QingjiechangmingkuiEntity.createAttributes().build());
 
         // —— 真实实体 ——
-        // 最懒终末龙：真实飞行 Boss（属性沿用原占位数值 + FLYING_SPEED/满击退抗性）
+        // 最懒终末龙：真实飞行 Boss（2500 血、普攻 100、护甲 100 + FLYING_SPEED/满击退抗性；常驻生命恢复 L/力量 XX，击中自回复+多重负面）
         event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonEntity.createAttributes().build());
         // 盗米者：GeckoLib 狼人陆地敌对实体（20 心、移速 0.3、近战 6、索敌 20）
         event.put(ModEntities.RICE_STEALER.get(), DaomizheEntity.createAttributes().build());

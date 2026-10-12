@@ -8,6 +8,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -113,13 +115,13 @@ public class MimiMonkeyKingEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性：150 血、移速 0.3、近战攻击 5（普攻伤害）、追击 32、护甲 15、50% 击退抗性。
+     * 属性：150 血、移速 0.3、近战攻击 7（普攻伤害）、追击 32、护甲 15、50% 击退抗性。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 150.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 7.0D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
@@ -194,6 +196,16 @@ public class MimiMonkeyKingEntity extends Monster implements GeoEntity {
             return true;
         }
         return false;
+    }
+
+    /** 常驻自增益：生命恢复 III + 力量 II（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    private void maintainPassiveBuffs() {
+        if (!this.hasEffect(MobEffects.REGENERATION)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 2));
+        }
+        if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 1));
+        }
     }
 
     /**
@@ -289,6 +301,7 @@ public class MimiMonkeyKingEntity extends Monster implements GeoEntity {
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            this.maintainPassiveBuffs();
             if (this.slamCooldown > 0) {
                 this.slamCooldown--;
             }

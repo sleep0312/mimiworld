@@ -13,6 +13,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -140,16 +142,16 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性：500 血、移速 0.3、普攻 15、追击 40、护甲 12、韧性 8、80% 击退抗性、攻击击退 1.5。
+     * 属性：1200 血、移速 0.3、普攻 35、追击 40、护甲 50、韧性 8、80% 击退抗性、攻击击退 1.5。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 500.0D)
+                .add(Attributes.MAX_HEALTH, 1200.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.30D)
-                .add(Attributes.ATTACK_DAMAGE, 15.0D)
+                .add(Attributes.ATTACK_DAMAGE, 35.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.5D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
-                .add(Attributes.ARMOR, 12.0D)
+                .add(Attributes.ARMOR, 50.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 8.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D);
     }
@@ -231,14 +233,25 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
 
     // -------------------- 攻击逻辑 --------------------
 
-    /** 普攻命中时触发 attack 动画。 */
+    /** 普攻命中时触发 attack 动画，并给自身套上短暂的高额生命恢复。 */
     @Override
     public boolean doHurtTarget(Entity target) {
         if (super.doHurtTarget(target)) {
             this.entityData.set(DATA_ATTACK_ANIM_TICKS, ATTACK_ANIMATION_TICKS);
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 49));
             return true;
         }
         return false;
+    }
+
+    /** 常驻自增益：生命恢复 XXX + 力量 X（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    private void maintainPassiveBuffs() {
+        if (!this.hasEffect(MobEffects.REGENERATION)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 29));
+        }
+        if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 9));
+        }
     }
 
     /**
@@ -446,6 +459,7 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            this.maintainPassiveBuffs();
             if (this.roarCooldown > 0) {
                 this.roarCooldown--;
             }

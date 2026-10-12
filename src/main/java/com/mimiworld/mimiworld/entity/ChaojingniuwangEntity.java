@@ -8,6 +8,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -145,15 +147,15 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性：300 血、移速 0.3、普攻 12、追击 40、护甲 14、护甲韧性 8、80% 击退抗性。
+     * 属性：500 血、移速 0.3、普攻 18、追击 40、护甲 30、护甲韧性 8、80% 击退抗性。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 300.0D)
+                .add(Attributes.MAX_HEALTH, 500.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.30D)
-                .add(Attributes.ATTACK_DAMAGE, 12.0D)
+                .add(Attributes.ATTACK_DAMAGE, 18.0D)
                 .add(Attributes.FOLLOW_RANGE, 40.0D)
-                .add(Attributes.ARMOR, 14.0D)
+                .add(Attributes.ARMOR, 30.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 8.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D);
     }
@@ -225,6 +227,16 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
             return true;
         }
         return false;
+    }
+
+    /** 常驻自增益：生命恢复 X + 力量 V（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    private void maintainPassiveBuffs() {
+        if (!this.hasEffect(MobEffects.REGENERATION)) {
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 9));
+        }
+        if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 4));
+        }
     }
 
     /**
@@ -351,6 +363,7 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            this.maintainPassiveBuffs();
             if (this.comboCooldown > 0) {
                 this.comboCooldown--;
             }
