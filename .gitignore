@@ -36,5 +36,8 @@ replay_pid*
 # blockbench 临时工作目录
 .bb_tmp/
 
+# 本地文档资料（不同步到 GitHub）
+docs/
+
 # Files from Forge MDK
 forge*changelog.txt

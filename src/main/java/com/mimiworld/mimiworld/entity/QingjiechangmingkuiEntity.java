@@ -60,7 +60,7 @@ import java.util.List;
  *   <li>普通撕咬：MeleeAttackGoal，15 点伤害，attack 动画 0.8 秒。</li>
  *   <li>【巨吼】（roar，CD 30s）：仰天长啸 2 秒，释放坚守者式音波——
  *       以自身为中心 10 格内所有生物受到 60 点音波伤害与冲击，第 20 tick 爆发。</li>
- *   <li>【夔之践踏】（stomp，CD 45s）：原地以所在位置为中心 3×3 区域，
+ *   <li>【夔之践踏】（stomp，CD 45s）：原地以所在位置为中心 7×7 区域，
  *       5 秒内随机重踏 8 次，落点提前 4 tick 雷光预警，被踩中玩家受到 100 点伤害。</li>
  *   <li>【三连咬】（triple_bite，CD 120s）：向前猛烈撕咬三次，
  *       每次前方扇形判定 70 点伤害，动画 1.6 秒。</li>
@@ -436,9 +436,9 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
             }
         }
 
-        // 踩中判定：以落点为中心 1.3 格内、垂直区间合理的玩家受 100 点伤害并被震飞
-        AABB hitArea = new AABB(cx - 1.3D, this.getY() - 1.0D, cz - 1.3D,
-                cx + 1.3D, this.getY() + 3.2D, cz + 1.3D);
+        // 踩中判定：以落点为中心 2.6 格内、垂直区间合理的玩家受 100 点伤害并被震飞
+        AABB hitArea = new AABB(cx - 2.6D, this.getY() - 1.0D, cz - 2.6D,
+                cx + 2.6D, this.getY() + 3.2D, cz + 2.6D);
         List<Player> players = this.level().getEntitiesOfClass(Player.class, hitArea,
                 player -> player.isAlive() && !player.isAlliedTo(this));
         for (Player player : players) {
@@ -629,7 +629,7 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 【夔之践踏】Goal：目标进入 5 格内时释放，以起手时所在位置为中心 3×3 区域，
+     * 【夔之践踏】Goal：目标进入 5 格内时释放，以起手时所在位置为中心 7×7 区域，
      * 5 秒内随机重踏 8 次，落点提前 4 tick 雷光预警，踩中玩家 100 点伤害；冷却 900 tick。
      */
     private class StompGoal extends Goal {
@@ -685,8 +685,8 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
                     dx = targetBX - this.originBlockX;
                     dz = targetBZ - this.originBlockZ;
                 } else {
-                    dx = QingjiechangmingkuiEntity.this.random.nextInt(3) - 1;
-                    dz = QingjiechangmingkuiEntity.this.random.nextInt(3) - 1;
+                    dx = QingjiechangmingkuiEntity.this.random.nextInt(7) - 3;
+                    dz = QingjiechangmingkuiEntity.this.random.nextInt(7) - 3;
                 }
                 this.stompX[i] = this.originBlockX + dx;
                 this.stompZ[i] = this.originBlockZ + dz;

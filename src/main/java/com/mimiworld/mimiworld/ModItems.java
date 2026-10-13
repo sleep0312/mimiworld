@@ -2,11 +2,15 @@ package com.mimiworld.mimiworld;
 
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.entity.ModEntities;
+import com.mimiworld.mimiworld.item.CleansingCompoundArmorItem;
+import com.mimiworld.mimiworld.item.CompoundRiceMealArmorItem;
 import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
+import com.mimiworld.mimiworld.item.SuperLazyAlloyArmorItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
 import com.mimiworld.mimiworld.item.RiceCrystalAlloyArmorItem;
+import com.mimiworld.mimiworld.item.SuperHeavyCrystalArmorItem;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -566,18 +570,18 @@ public class ModItems {
     public static final RegistryObject<Item> ADVANCED_ARMOR_CORE_INGOT = registerItem("advanced_armor_core_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ---- 超重结晶防具（高防重甲，修复材料超重结晶） ----
+    // ---- 超重结晶防具（高防重甲，修复材料超重结晶）：GeckoLib 3D 重甲（SuperHeavyCrystalArmorItem） ----
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_HELMET = registerItem("super_heavy_crystal_helmet",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+            () -> new SuperHeavyCrystalArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_CHESTPLATE = registerItem("super_heavy_crystal_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+            () -> new SuperHeavyCrystalArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_LEGGINGS = registerItem("super_heavy_crystal_leggings",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+            () -> new SuperHeavyCrystalArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_BOOTS = registerItem("super_heavy_crystal_boots",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+            () -> new SuperHeavyCrystalArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
     // ---- 复合米饭武器/防具（修复材料复合米饭锭） ----
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_SWORD = registerItem("compound_rice_meal_sword",
@@ -586,17 +590,18 @@ public class ModItems {
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_BOW = registerItem("compound_rice_meal_bow",
             () -> new BowItem(new Item.Properties().durability(1280)));
 
+    // ---- 复合米饭防具（钻石同级高附魔，修复材料复合米饭锭）：GeckoLib 3D 附魔甲（CompoundRiceMealArmorItem） ----
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_HELMET = registerItem("compound_rice_meal_helmet",
-            () -> new ArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+            () -> new CompoundRiceMealArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_CHESTPLATE = registerItem("compound_rice_meal_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+            () -> new CompoundRiceMealArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_LEGGINGS = registerItem("compound_rice_meal_leggings",
-            () -> new ArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+            () -> new CompoundRiceMealArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_BOOTS = registerItem("compound_rice_meal_boots",
-            () -> new ArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+            () -> new CompoundRiceMealArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
     // ---- 清洁复合胚件与成品（修复材料清洁复合锭） ----
     // 胚件是锻打中间产物（普通材料，堆叠64）
@@ -615,17 +620,18 @@ public class ModItems {
     public static final RegistryObject<Item> CLEANSING_COMPOUND_ARMOR_BLANK = registerItem("cleansing_compound_armor_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
+    // ---- 清洁米饭防具（下界合金同级华贵重甲，修复材料清洁复合锭）：GeckoLib 3D 紫晶甲（CleansingCompoundArmorItem） ----
     public static final RegistryObject<Item> CLEANSING_COMPOUND_HELMET = registerItem("cleansing_compound_helmet",
-            () -> new ArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+            () -> new CleansingCompoundArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CLEANSING_COMPOUND_CHESTPLATE = registerItem("cleansing_compound_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+            () -> new CleansingCompoundArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CLEANSING_COMPOUND_LEGGINGS = registerItem("cleansing_compound_leggings",
-            () -> new ArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+            () -> new CleansingCompoundArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CLEANSING_COMPOUND_BOOTS = registerItem("cleansing_compound_boots",
-            () -> new ArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+            () -> new CleansingCompoundArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
     // ---- 超懒合金胚件与终极成品（修复材料超懒合金锭） ----
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_SWORD_BLANK = registerItem("super_lazy_alloy_sword_blank",
@@ -643,17 +649,18 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOW = registerItem("super_lazy_alloy_bow",
             () -> new BowItem(new Item.Properties().durability(2048)));
 
+    // ---- 超懒合金防具（终极套总防 26/韧性 5/击退抗 0.15，修复材料超懒合金锭）：GeckoLib 3D 金蟒甲（SuperLazyAlloyArmorItem） ----
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_HELMET = registerItem("super_lazy_alloy_helmet",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
+            () -> new SuperLazyAlloyArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_CHESTPLATE = registerItem("super_lazy_alloy_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
+            () -> new SuperLazyAlloyArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_LEGGINGS = registerItem("super_lazy_alloy_leggings",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
+            () -> new SuperLazyAlloyArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOOTS = registerItem("super_lazy_alloy_boots",
-            () -> new ArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+            () -> new SuperLazyAlloyArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
     // ===== 装备锻造台系列方块（金属机器方块，钻石镐采集，破坏掉落本身） =====
 
