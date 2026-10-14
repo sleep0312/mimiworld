@@ -8,6 +8,7 @@ import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
 import com.mimiworld.mimiworld.item.SuperLazyAlloyArmorItem;
+import com.mimiworld.mimiworld.item.SuperLazyWingsChestplateItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
 import com.mimiworld.mimiworld.item.RiceCrystalAlloyArmorItem;
 import com.mimiworld.mimiworld.item.SuperHeavyCrystalArmorItem;
@@ -933,10 +934,10 @@ public class ModItems {
     public static final RegistryObject<Item> MIMI_PHANTOM_MEMBRANE = registerItem("mimi_phantom_membrane",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神翼胸甲（Super Lazy Divine Wings Chestplate）：终极翼甲，SUPER_LAZY_WINGS 材质
+    // 超懒神翼胸甲（Super Lazy Divine Wings Chestplate）：终极翼甲，GeckoLib 3D 双翼循环扇动
     public static final RegistryObject<Item> SUPER_LAZY_WINGS_CHESTPLATE =
             registerItem("super_lazy_wings_chestplate",
-                    () -> new ArmorItem(ModArmorMaterials.SUPER_LAZY_WINGS, ArmorItem.Type.CHESTPLATE,
+                    () -> new SuperLazyWingsChestplateItem(ModArmorMaterials.SUPER_LAZY_WINGS, ArmorItem.Type.CHESTPLATE,
                             new Item.Properties().stacksTo(1)));
 
     // 上古剑意（Ancient Sword Intent）：普通物品
