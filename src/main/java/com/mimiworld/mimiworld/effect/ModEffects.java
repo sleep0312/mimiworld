@@ -41,6 +41,15 @@ public class ModEffects {
             "python_constriction",
             () -> new PythonConstrictionEffect(MobEffectCategory.HARMFUL, 0xFF2D6A4F));
 
+    /**
+     * 创造飞行 —— 正面效果。食用特定料理获得，效果本身不做任何事，
+     * 玩家的 mayfly 能力由 {@link com.mimiworld.mimiworld.event.ModEffectEvents}
+     * 在 PlayerTickEvent 中逐 tick 授予，效果结束后撤销。颜色 #79E0F5 天蓝。
+     */
+    public static final RegistryObject<MobEffect> CREATIVE_FLIGHT = MOB_EFFECTS.register(
+            "creative_flight",
+            () -> new CreativeFlightEffect(MobEffectCategory.BENEFICIAL, 0xFF79E0F5));
+
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
     }

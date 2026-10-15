@@ -35,6 +35,9 @@
       "mimiworld:ore_crystallized_rice_upper",
       "mimiworld:ore_crystallized_rice_middle",
       "mimiworld:ore_crystallized_rice_small",
+      "mimiworld:ore_rice_upper",
+      "mimiworld:ore_rice_middle",
+      "mimiworld:ore_rice_small",
       "mimiworld:ore_recrystallized_rice",
       "mimiworld:ore_recrystallized_rice_large",
       "mimiworld:ore_recrystallized_rice_buried"
@@ -100,6 +103,42 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 1
+      },
+      {
+        "type": "mimiworld:mimi_sheep",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 12
+      },
+      {
+        "type": "mimiworld:zhuomi_chicken",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 10
+      },
+      {
+        "type": "mimiworld:miheng_pig",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 10
+      },
+      {
+        "type": "mimiworld:mimoo_cow",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 8
+      },
+      {
+        "type": "mimiworld:haomi_wolf",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 8
+      },
+      {
+        "type": "mimiworld:rice_golem",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
       }
     ],
     "misc": [],
@@ -151,6 +190,78 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 5
+      },
+      {
+        "type": "mimiworld:mimi_skeleton",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "mimiworld:carved_rice_skeleton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "mimiworld:humi_corpse",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 95
+      },
+      {
+        "type": "mimiworld:miheng_pig_corpse",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "mimiworld:pami_crawler",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "mimiworld:sticky_rice_spider",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "mimiworld:milai_horse",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "mimiworld:momi_entrant",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "mimiworld:rice_witch",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "mimiworld:explosive_rice_spirit",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "mimiworld:rice_stealer",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "mimiworld:rice_soul",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "underground_water_creature": [
@@ -161,7 +272,20 @@
         "weight": 10
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "mimiworld:tanmi_fish",
+        "maxCount": 6,
+        "minCount": 3,
+        "weight": 10
+      },
+      {
+        "type": "mimiworld:penmi_fish",
+        "maxCount": 6,
+        "minCount": 3,
+        "weight": 10
+      }
+    ],
     "water_creature": []
   },
   "temperature": 0.8

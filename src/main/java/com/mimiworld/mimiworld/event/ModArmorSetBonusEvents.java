@@ -85,5 +85,25 @@ public class ModArmorSetBonusEvents {
                 player.removeEffect(effect);
             }
         }
+
+        // 创造飞行能力：穿戴中维持 mayfly；脱下（且非创造模式）撤销 mayfly 并强制落地
+        boolean grantsFlight = false;
+        for (EquipmentSlot slot : ARMOR_SLOTS) {
+            Item item = player.getItemBySlot(slot).getItem();
+            if (item instanceof ArmorPieceEffects piece && piece.grantsFlight(slot)) {
+                grantsFlight = true;
+                break;
+            }
+        }
+        if (grantsFlight) {
+            if (!player.getAbilities().mayfly) {
+                player.getAbilities().mayfly = true;
+                player.onUpdateAbilities();
+            }
+        } else if (!player.getAbilities().instabuild && player.getAbilities().mayfly) {
+            player.getAbilities().mayfly = false;
+            player.getAbilities().flying = false;
+            player.onUpdateAbilities();
+        }
     }
 }

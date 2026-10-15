@@ -21,6 +21,8 @@ import java.util.UUID;
  *       {@code getAttributeModifiers} 合成一个 MAX_HEALTH 属性加持，随穿/脱由原版自动增删）。</li>
  *   <li>{@link #getWornEffects}：穿戴期间持续生效的药水效果（由
  *       {@code ModArmorSetBonusEvents} 逐 tick 刷新，脱下后清理残留）。</li>
+ *   <li>{@link #grantsFlight}：穿戴时是否给予创造飞行能力（mayfly，由
+ *       {@code ModArmorSetBonusEvents} 逐 tick 维持/脱下撤销）。</li>
  * </ul>
  */
 public interface ArmorPieceEffects {
@@ -30,6 +32,11 @@ public interface ArmorPieceEffects {
 
     /** 指定槽位穿戴时的持续药水效果（效果 -> 放大器，1级=0；无效果返回空 Map）。 */
     Map<MobEffect, Integer> getWornEffects(EquipmentSlot slot);
+
+    /** 指定槽位穿戴时是否给予创造飞行能力（mayfly）。 */
+    default boolean grantsFlight(EquipmentSlot slot) {
+        return false;
+    }
 
     /**
      * 把原盔甲守卫/韧性等属性表与本件的最大生命值加成合并，供盔甲 Item 的

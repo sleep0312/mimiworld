@@ -3,10 +3,16 @@ package com.mimiworld.mimiworld.event;
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.effect.ModEffects;
 import com.mimiworld.mimiworld.entity.CompoundAzurePythonEntity;
+import com.mimiworld.mimiworld.item.ArmorPieceEffects;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,10 +25,19 @@ import net.minecraftforge.fml.common.Mod;
  *   <li>{@code crimson_candlelight}（腥红烛照）：LivingHurtEvent 中检查伤害源的攻击方是否拥有该效果，
  *       若有则将最终伤害乘以 (amplifier + 2)。覆盖近战、远程（弹射物追溯发射者）等攻击类伤害。</li>
  *   <li>{@code python_constriction}（蟒蛇缠绕）：拥有该效果的攻击方对复晶天青蟒造成的伤害 ×1.5。</li>
+ *   <li>{@code creative_flight}（创造飞行）：PlayerTickEvent 中拥有该效果时授予 mayfly，
+ *       效果结束后撤销（创造模式或穿戴飞行盔甲时保留）。</li>
  * </ul>
  */
 @Mod.EventBusSubscriber(modid = MimiWorld.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEffectEvents {
+
+    /** 记录玩家当前的 mayfly 是否由「食用创造飞行料理」授予，用于效果结束后精确撤销。 */
+    private static final String FOOD_FLIGHT_FLAG = "mimiworld.food_creative_flight";
+
+    private static final EquipmentSlot[] ARMOR_SLOTS =
+            {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
+
 
     /**
      * 腥红烛照伤害倍率处理。
@@ -90,5 +105,49 @@ public class ModEffectEvents {
                 && livingAttacker.hasEffect(ModEffects.PYTHON_CONSTRICTION.get())) {
             event.setAmount(event.getAmount() * 1.5F);
         }
+    }
+
+    /**
+     * 创造飞行（creative_flight）处理：拥有该效果时授予 mayfly，效果结束后撤销。
+     *
+     * <p>用 {@code persistentData} 记录「mayfly 是否由本效果授予」，避免误撤创造模式
+     * 或飞行盔甲（{@link ArmorPieceEffects#grantsFlight}）提供的飞行能力。</p>
+     */
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) {
+            return;
+        }
+        Player player = event.player;
+        if (player.level().isClientSide) {
+            return;
+        }
+
+        CompoundTag data = player.getPersistentData();
+        if (player.hasEffect(ModEffects.CREATIVE_FLIGHT.get())) {
+            if (!player.getAbilities().mayfly) {
+                player.getAbilities().mayfly = true;
+                player.onUpdateAbilities();
+            }
+            data.putBoolean(FOOD_FLIGHT_FLAG, true);
+        } else if (data.getBoolean(FOOD_FLIGHT_FLAG)) {
+            if (!player.getAbilities().instabuild && !wearsFlightArmor(player)) {
+                player.getAbilities().mayfly = false;
+                player.getAbilities().flying = false;
+                player.onUpdateAbilities();
+            }
+            data.putBoolean(FOOD_FLIGHT_FLAG, false);
+        }
+    }
+
+    /** 玩家是否穿着任一提供创造飞行的盔甲部件。 */
+    private static boolean wearsFlightArmor(Player player) {
+        for (EquipmentSlot slot : ARMOR_SLOTS) {
+            if (player.getItemBySlot(slot).getItem() instanceof ArmorPieceEffects piece
+                    && piece.grantsFlight(slot)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -38,6 +38,7 @@ replay_pid*
 
 # 本地文档资料（不同步到 GitHub）
 docs/
+.trae/
 
 # Files from Forge MDK
 forge*changelog.txt

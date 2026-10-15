@@ -1,0 +1,11 @@
+{
+  "type": "mimiworld:remnant_fallen_realm",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "mimiworld:remnant_fallen_realm",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "mimiworld:remnant_fallen_wastes"
+    }
+  }
+}

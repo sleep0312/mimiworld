@@ -348,6 +348,18 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.NETHERITE_BLOCK)));
 
+    // 堕落十字架（fallen_cross）：带基座的华丽十字架装饰方块（FallenCrossBlock），
+    // 世界外观由 GeckoLib BlockEntityRenderer 渲染（紫黑本体 + 金纹 + 双面紫宝石，BER 内缩放收进一格贴地居中）。
+    // 暗下界合金质地、硬度 3.0、抗爆 6.0，需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/fallen_cross.json）。
+    public static final RegistryObject<Block> FALLEN_CROSS =
+            BLOCKS.register("fallen_cross", () -> new FallenCrossBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.NETHERITE_BLOCK)));
+
     // 碾磨台：石质碾磨工作台（GrindingTableBlock），右键打开 6 入 1 出熔炉式加工 GUI（左右两列各 3 输入、底部输出，面板加高），
     // 硬度照原版砂轮 2.0、抗爆 6.0、石声、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
@@ -379,6 +391,19 @@ public class ModBlocks {
                             .strength(4.0F, 9.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.DEEPSLATE)));
+
+    // 残堕界传送门方块（remnant_fallen_portal）：由「四个堕落台 + 四个堕落十字架」的 4×4 仪式
+    // 自动生成的贴地传送门（RemnantFallenPortalBlock），外观为薄薄一层紫色星空平面，
+    // 行为参照原版末地门：无碰撞、不遮挡、发光 11、不可破坏（生存模式无法挖掘，无 BlockItem、无战利品表），
+    // 实体踩入即与残堕界双向传送（落点见 world/RemnantFallenTeleporter）。
+    public static final RegistryObject<Block> REMNANT_FALLEN_PORTAL =
+            BLOCKS.register("remnant_fallen_portal", () -> new RemnantFallenPortalBlock(
+                    BlockBehaviour.Properties.of()
+                            .noCollission()
+                            .noOcclusion()
+                            .lightLevel(state -> 11)
+                            .strength(-1.0F, 3600000.0F)
+                            .sound(SoundType.GLASS)));
 
     // 磨制残堕深渊岩（）：残堕深渊岩石的磨制变体，深板岩质地全立方块（硬度 3.0、抗爆 6.0、深板岩声）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。

@@ -18,6 +18,7 @@ import com.mimiworld.mimiworld.client.renderer.HeavyCrystalRabbitKingHeadBlockRe
 import com.mimiworld.mimiworld.client.renderer.CompoundCrystalAzurePythonHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.PurifiedLongevityKuiHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestEndDragonHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.FallenCrossBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.FanjinghuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.ChaojingniuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.CompoundAzurePythonRenderer;
@@ -220,6 +221,9 @@ public class ClientSetup {
         // 最懒终末龙头：GeckoLib 头颅摆件方块（Promax 龙头+下颌静态模型）
         event.registerBlockEntityRenderer(ModBlockEntities.LAZIEST_END_DRAGON_HEAD.get(),
                 ctx -> new LaziestEndDragonHeadBlockRenderer<>(ctx));
+        // 堕落十字架：GeckoLib 华丽十字架方块（基座+紫黑十字+金纹+双面宝石静态模型，渲染器内 16/27 缩放收进一格贴地居中）
+        event.registerBlockEntityRenderer(ModBlockEntities.FALLEN_CROSS.get(),
+                ctx -> new FallenCrossBlockRenderer<>(ctx));
     }
 
     // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）

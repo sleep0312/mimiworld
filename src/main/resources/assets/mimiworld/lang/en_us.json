@@ -1,5 +1,6 @@
 {
   "dimension.mimiworld.mimi_dimension": "Mimi Dimension",
+  "dimension.mimiworld.remnant_fallen_realm": "Remnant Fallen Realm",
   "itemGroup.mimiworld.mimi": "Mimi World",
   "item.mimiworld.rice": "Rice",
   "item.mimiworld.cooked_rice": "Cooked Rice",
@@ -356,6 +357,8 @@
   "item.mimiworld.elf_hat": "Elf Hat",
   "item.mimiworld.moon_devourer_wolf_claw": "Moon Devourer Wolf Claw",
   "block.mimiworld.fallen_altar": "Fallen Altar",
+  "block.mimiworld.fallen_cross": "Fallen Cross",
+  "block.mimiworld.remnant_fallen_portal": "Remnant Fallen Realm Portal",
   "block.mimiworld.grinding_table": "Grinding Table",
   "block.mimiworld.remnant_fallen_abyss_rock": "Remnant Fallen Abyss Rock",
   "block.mimiworld.remnant_fallen_bedrock": "Remnant Fallen Bedrock",

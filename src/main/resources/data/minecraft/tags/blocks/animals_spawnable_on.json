@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mimiworld:mud_rice"
+    "mimiworld:mud_rice",
+    "mimiworld:hardened_rice"
   ]
 }

@@ -231,10 +231,13 @@ public class ModEntities {
                             .clientTrackingRange(8)
                             .build("haomi_wolf"));
     // 米米骷髅：已转正，GeckoLib mimi_skeleton 模型（animation.idle/walk 动画，陈米骨色+稻绿鬼火眼+米袋腰裙贴图），
-    // 碰撞箱 0.6×1.99（模型实测 33px 高，骨冠略高出箱体）、24 心，属性/音效对齐原版骷髅；生物蛋 ModItems.MIMI_SKELETON_SPAWN_EGG 无需改动
+    // 碰撞箱 0.6×1.99（模型实测 33px 高，骨冠略高出箱体）、24 心，属性/音效对齐原版骷髅；
+    // 类别 MONSTER：按本文件约定「敌对生物 = MobCategory.MONSTER」，在米米维度按原版骷髅的黑暗规律刷怪。
+    // 注意实体自身仍继承 PathfinderMob，且因无攻击动画未注册攻击目标 AI，如需真正主动攻击需另加 AI；
+    // 生物蛋 ModItems.MIMI_SKELETON_SPAWN_EGG 无需改动
     public static final RegistryObject<EntityType<MimiSkeletonEntity>> MIMI_SKELETON =
             ENTITY_TYPES.register("mimi_skeleton", () ->
-                    EntityType.Builder.<MimiSkeletonEntity>of(MimiSkeletonEntity::new, MobCategory.CREATURE)
+                    EntityType.Builder.<MimiSkeletonEntity>of(MimiSkeletonEntity::new, MobCategory.MONSTER)
                             .sized(0.6F, 1.99F)
                             .clientTrackingRange(8)
                             .build("mimi_skeleton"));

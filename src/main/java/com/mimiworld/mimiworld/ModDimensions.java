@@ -25,4 +25,14 @@ public class ModDimensions {
     // 米米维度类型 Key
     public static final ResourceKey<DimensionType> MIMI_DIMENSION_TYPE =
             ResourceKey.create(Registries.DIMENSION_TYPE, id("mimi_dimension"));
+
+    // 残堕界（Remnant Fallen Realm，世界维度 Key）：生成逻辑参照原版地狱，
+    // 由数据包 JSON 注册：data/mimiworld/dimension_type/remnant_fallen_realm.json
+    // 与 data/mimiworld/dimension/remnant_fallen_realm.json。
+    public static final ResourceKey<Level> REMNANT_FALLEN_REALM =
+            ResourceKey.create(Registries.DIMENSION, id("remnant_fallen_realm"));
+
+    // 残堕界维度类型 Key
+    public static final ResourceKey<DimensionType> REMNANT_FALLEN_REALM_TYPE =
+            ResourceKey.create(Registries.DIMENSION_TYPE, id("remnant_fallen_realm"));
 }

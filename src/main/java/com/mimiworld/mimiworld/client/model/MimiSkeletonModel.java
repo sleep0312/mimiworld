@@ -13,7 +13,7 @@ import software.bernie.geckolib.model.GeoModel;
  *   <li>模型：assets/mimiworld/geo/mimi_skeleton.geo.json（Blockbench 导出，7 根骨骼：
  *       root/body/head/rightArm/leftArm/rightLeg/leftLeg）</li>
  *   <li>贴图：assets/mimiworld/textures/entity/mimi_skeleton.png（128×128，大米骷髅配色）</li>
- *   <li>动画：assets/mimiworld/animations/mimi_skeleton.animation.json（animation.idle / animation.walk）</li>
+ *   <li>动画：assets/mimiworld/animations/mimi_skeleton.animation.json（animation.idle / animation.walk / animation.attack）</li>
  * </ul>
  * 动画名与 MimiSkeletonEntity 中 RawAnimation 引用的键名严格一致。
  */

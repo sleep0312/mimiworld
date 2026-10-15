@@ -1,9 +1,11 @@
 package com.mimiworld.mimiworld;
 
 import com.mimiworld.mimiworld.block.ModBlocks;
+import com.mimiworld.mimiworld.effect.ModEffects;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.item.CleansingCompoundArmorItem;
 import com.mimiworld.mimiworld.item.CompoundRiceMealArmorItem;
+import com.mimiworld.mimiworld.item.EffectFoodItem;
 import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
@@ -12,6 +14,7 @@ import com.mimiworld.mimiworld.item.SuperLazyWingsChestplateItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
 import com.mimiworld.mimiworld.item.RiceCrystalAlloyArmorItem;
 import com.mimiworld.mimiworld.item.SuperHeavyCrystalArmorItem;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -32,6 +35,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -73,6 +77,38 @@ public class ModItems {
             builder.effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), hungerChance);
         }
         return builder.build();
+    }
+
+    // 食用效果持续时间常量（tick）
+    private static final int SEC_10 = 200;
+    private static final int SEC_30 = 600;
+    private static final int MIN_1 = 1200;
+    private static final int MIN_2 = 2400;
+    private static final int MIN_3 = 3600;
+    private static final int MIN_5 = 6000;
+    private static final int MIN_15 = 18000;
+    private static final int MIN_20 = 24000;
+    private static final int MIN_30 = 36000;
+    private static final int HOUR_1 = 72000;
+
+    /**
+     * 带食用效果的食物属性：只设饱食度，饱和度取与饱食度同值。
+     * （饱和度换算为 nutrition × saturationMod × 2，故 saturationMod = 0.5 时两者相等。）
+     */
+    private static FoodProperties effectFood(int hunger) {
+        return new FoodProperties.Builder().nutrition(hunger).saturationMod(0.5F).build();
+    }
+
+    /** 声明一条食用效果：等级 N → 放大器 N-1（一级 = 0），durationTicks 为持续时间（tick）。 */
+    private static EffectFoodItem.AppliedEffect effect(Supplier<MobEffect> effect, int level, int durationTicks) {
+        return new EffectFoodItem.AppliedEffect(effect, level - 1, durationTicks);
+    }
+
+    /** 注册「饱食度 + 若干食用效果」的食物。 */
+    private static RegistryObject<Item> registerEffectFood(String name, int hunger,
+                                                           EffectFoodItem.AppliedEffect... effects) {
+        return registerItem(name, () -> new EffectFoodItem(
+                new Item.Properties().stacksTo(64).food(effectFood(hunger)), List.of(effects)));
     }
 
 
@@ -1609,9 +1645,9 @@ public class ModItems {
 
     // ===== 堕落十字架 / 浸染液 / 深染系列（含待定占位，不进创造标签页） =====
 
-    // 堕落十字架（Fallen Cross）
+    // 堕落十字架（Fallen Cross）：放置后对应 ModBlocks.FALLEN_CROSS（GeckoLib 装饰方块）
     public static final RegistryObject<Item> FALLEN_CROSS = registerItem("fallen_cross",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.FALLEN_CROSS.get(), new Item.Properties()));
 
     // 残堕深渊岩（Remnant Fallen Abyss Rock）：深渊层原生岩石方块，深板岩质地，镐挖掘等级 3 = 钻石镐
     public static final RegistryObject<Item> REMNANT_FALLEN_ABYSS_ROCK =
@@ -1833,20 +1869,24 @@ public class ModItems {
     public static final RegistryObject<Item> BIG_POT = registerItem("big_pot",
             () -> new BlockItem(ModBlocks.BIG_POT.get(), new Item.Properties()));
 
-    // 天虚棘脑汤（Celestial Void Thorn Brain Soup）：熟食，3 饱食度
+    // 天虚棘脑汤（Celestial Void Thorn Brain Soup）：熟食，饱食度 10；力量 20/1min、生命恢复 100/5min、迅捷 10/2min
     public static final RegistryObject<Item> CELESTIAL_VOID_THORN_BRAIN_SOUP =
-            registerItem("celestial_void_thorn_brain_soup",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            registerEffectFood("celestial_void_thorn_brain_soup", 10,
+                    effect(() -> MobEffects.DAMAGE_BOOST, 20, MIN_1),
+                    effect(() -> MobEffects.REGENERATION, 100, MIN_5),
+                    effect(() -> MobEffects.MOVEMENT_SPEED, 10, MIN_2));
 
-    // 香混肉片（Fragrant Mixed Meat Slices）：熟食，3 饱食度
+    // 香混肉片（Fragrant Mixed Meat Slices）：熟食，饱食度 10；虚弱 1/1min、生命恢复 255/1min
     public static final RegistryObject<Item> FRAGRANT_MIXED_MEAT_SLICE =
-            registerItem("fragrant_mixed_meat_slice",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            registerEffectFood("fragrant_mixed_meat_slice", 10,
+                    effect(() -> MobEffects.WEAKNESS, 1, MIN_1),
+                    effect(() -> MobEffects.REGENERATION, 255, MIN_1));
 
-    // 酱香双鲛尾（Sauce-Glazed Twin Mermaid Tails）：熟食，4 饱食度
+    // 酱香双鲛尾（Sauce-Glazed Twin Mermaid Tails）：熟食，饱食度 10；迅捷 20/2min、跳跃提升 5/5min
     public static final RegistryObject<Item> SAUCE_GLAZED_TWIN_MERMAID_TAIL =
-            registerItem("sauce_glazed_twin_mermaid_tail",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.8F))));
+            registerEffectFood("sauce_glazed_twin_mermaid_tail", 10,
+                    effect(() -> MobEffects.MOVEMENT_SPEED, 20, MIN_2),
+                    effect(() -> MobEffects.JUMP, 5, MIN_5));
 
     // 天脑汁（Celestial Brain Juice）：熟食（饮品），2 饱食度
     public static final RegistryObject<Item> CELESTIAL_BRAIN_JUICE =
@@ -1873,10 +1913,11 @@ public class ModItems {
     public static final RegistryObject<Item> PLATE = registerItem("plate",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 酱烤鹫翅（Sauce-Roasted Vulture Wing）：熟食，3.5 饱食度
+    // 酱烤鹫翅（Sauce-Roasted Vulture Wing）：熟食，饱食度 10；创造飞行/1min、生命恢复 50/3min
     public static final RegistryObject<Item> SAUCE_ROASTED_VULTURE_WING =
-            registerItem("sauce_roasted_vulture_wing",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
+            registerEffectFood("sauce_roasted_vulture_wing", 10,
+                    effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_1),
+                    effect(() -> MobEffects.REGENERATION, 50, MIN_3));
 
     // 米蜃油脂（Rice Mirage Grease）：米蜃掉落的油脂材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_MIRAGE_GREASE = registerItem("rice_mirage_grease",
@@ -1903,10 +1944,12 @@ public class ModItems {
             registerItem("marinated_vulture_wing",
                     () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(3, 0.3F, 0.2F))));
 
-    // 堕米肉丸汤（Fallen Rice Meatball Soup）：熟食，3 饱食度
+    // 堕米肉丸汤（Fallen Rice Meatball Soup）：熟食，饱食度 10；缓慢 2/3min、生命恢复 255/1min、力量 50/1min
     public static final RegistryObject<Item> FALLEN_RICE_MEATBALL_SOUP =
-            registerItem("fallen_rice_meatball_soup",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
+            registerEffectFood("fallen_rice_meatball_soup", 10,
+                    effect(() -> MobEffects.MOVEMENT_SLOWDOWN, 2, MIN_3),
+                    effect(() -> MobEffects.REGENERATION, 255, MIN_1),
+                    effect(() -> MobEffects.DAMAGE_BOOST, 50, MIN_1));
 
     // 蛟鲛肉泥（Jiao Mermaid Meat Paste）：生食（肉泥原料），1 饱食度，30% 饥饿 I 30s
     public static final RegistryObject<Item> JIAO_MERMAID_MEAT_PASTE =
@@ -1922,10 +1965,11 @@ public class ModItems {
     public static final RegistryObject<Item> PRECIOUS_SEASONING = registerItem("precious_seasoning",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 油爆虚无触（Oil-Seared Void Tentacle）：熟食，3.5 饱食度
+    // 油爆虚无触（Oil-Seared Void Tentacle）：熟食，饱食度 10；迅捷 10/2min、力量 30/3min
     public static final RegistryObject<Item> OIL_SEARED_VOID_TENTACLE =
-            registerItem("oil_seared_void_tentacle",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.8F))));
+            registerEffectFood("oil_seared_void_tentacle", 10,
+                    effect(() -> MobEffects.MOVEMENT_SPEED, 10, MIN_2),
+                    effect(() -> MobEffects.DAMAGE_BOOST, 30, MIN_3));
 
     // 烧烤粉（BBQ Powder）：普通物品（调料），最大堆叠 64
     public static final RegistryObject<Item> BBQ_POWDER = registerItem("bbq_powder",
@@ -1939,49 +1983,74 @@ public class ModItems {
     public static final RegistryObject<Item> COMPOUND_OIL = registerItem("compound_oil",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 蛟足炒饭（Mermaid Leg Fried Rice）：熟食，4 饱食度
+    // 蛟足炒饭（Mermaid Leg Fried Rice）：熟食，饱食度 10；迅捷 20/1min、力量 100/1min
     public static final RegistryObject<Item> MERMAID_LEG_FRIED_RICE =
-            registerItem("mermaid_leg_fried_rice",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.7F))));
+            registerEffectFood("mermaid_leg_fried_rice", 10,
+                    effect(() -> MobEffects.MOVEMENT_SPEED, 20, MIN_1),
+                    effect(() -> MobEffects.DAMAGE_BOOST, 100, MIN_1));
 
-    // 龙凤花汤（Dragon-Phoenix Flower Soup）：熟食，3 饱食度
+    // 龙凤花汤（Dragon-Phoenix Flower Soup）：熟食，饱食度 10；生命恢复 255/1min、生命提升 50/3min、虚弱 5/2min
     public static final RegistryObject<Item> DRAGON_PHOENIX_FLOWER_SOUP =
-            registerItem("dragon_phoenix_flower_soup",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            registerEffectFood("dragon_phoenix_flower_soup", 10,
+                    effect(() -> MobEffects.REGENERATION, 255, MIN_1),
+                    effect(() -> MobEffects.HEALTH_BOOST, 50, MIN_3),
+                    effect(() -> MobEffects.WEAKNESS, 5, MIN_2));
 
-    // 蜃楼幻想（Mirage Illusion）：蜃楼幻象材料，普通物品，最大堆叠 64
-    public static final RegistryObject<Item> MIRAGE_ILLUSION = registerItem("mirage_illusion",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // 凤伤汤（Phoenix Wound Soup）：熟食，饱食度 10；缓慢 1/1min、生命恢复 200/2min、力量 5/5min
+    public static final RegistryObject<Item> PHOENIX_WOUND_SOUP = registerEffectFood("phoenix_wound_soup", 10,
+            effect(() -> MobEffects.MOVEMENT_SLOWDOWN, 1, MIN_1),
+            effect(() -> MobEffects.REGENERATION, 200, MIN_2),
+            effect(() -> MobEffects.DAMAGE_BOOST, 5, MIN_5));
 
-    // 花香蛟尾（Floral Mermaid Tail）：熟食，3 饱食度
-    public static final RegistryObject<Item> FLORAL_MERMAID_TAIL = registerItem("floral_mermaid_tail",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
+    // 蜃楼幻想（Mirage Illusion）：熟食，饱食度 10；反胃 255/30s、瞬间恢复 255
+    public static final RegistryObject<Item> MIRAGE_ILLUSION = registerEffectFood("mirage_illusion", 10,
+            effect(() -> MobEffects.CONFUSION, 255, SEC_30),
+            effect(() -> MobEffects.HEAL, 255, MIN_5));
 
-    // 海兽相交饭（Sea Beast Jiao Rice）：熟食，4 饱食度
-    public static final RegistryObject<Item> SEA_BEAST_JIAO_RICE = registerItem("sea_beast_jiao_rice",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(8, 0.7F))));
+    // 花香蛟尾（Floral Mermaid Tail）：熟食，饱食度 10；生命恢复 255/1min、生命提升 50/1min
+    public static final RegistryObject<Item> FLORAL_MERMAID_TAIL =
+            registerEffectFood("floral_mermaid_tail", 10,
+                    effect(() -> MobEffects.REGENERATION, 255, MIN_1),
+                    effect(() -> MobEffects.HEALTH_BOOST, 50, MIN_1));
 
-    // 佛幻想（Buddha Illusion）：熟食（豪华料理），5 饱食度
-    public static final RegistryObject<Item> BUDDHA_ILLUSION = registerItem("buddha_illusion",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(10, 0.9F))));
+    // 海兽相交饭（Sea Beast Jiao Rice）：熟食，饱食度 10；反胃 255/1min、虚弱 255/30s、生命恢复 255/1min、瞬间治疗 255、生命提升 255/1min
+    public static final RegistryObject<Item> SEA_BEAST_JIAO_RICE = registerEffectFood("sea_beast_jiao_rice", 10,
+            effect(() -> MobEffects.CONFUSION, 255, MIN_1),
+            effect(() -> MobEffects.WEAKNESS, 255, SEC_30),
+            effect(() -> MobEffects.REGENERATION, 255, MIN_1),
+            effect(() -> MobEffects.HEAL, 255, MIN_1),
+            effect(() -> MobEffects.HEALTH_BOOST, 255, MIN_1));
 
-    // 米雪茶（Rice Snow Tea）：熟食（饮品），1 饱食度
-    public static final RegistryObject<Item> RICE_SNOW_TEA = registerItem("rice_snow_tea",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(2, 0.3F))));
+    // 佛幻想（Buddha Illusion）：熟食（豪华料理），饱食度 10；反胃 255/1min、失明/1min、迅捷 50/1min、创造飞行/1min、生命恢复 255/10s
+    public static final RegistryObject<Item> BUDDHA_ILLUSION = registerEffectFood("buddha_illusion", 10,
+            effect(() -> MobEffects.CONFUSION, 255, MIN_1),
+            effect(() -> MobEffects.BLINDNESS, 1, MIN_1),
+            effect(() -> MobEffects.MOVEMENT_SPEED, 50, MIN_1),
+            effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_1),
+            effect(() -> MobEffects.REGENERATION, 255, SEC_10));
 
-    // 煎龙凤饼（Pan-Fried Dragon-Phoenix Cake）：熟食，3.5 饱食度
+    // 米雪茶（Rice Snow Tea）：熟食（饮品），饱食度 10；生命恢复 255/30s、瞬间治疗 255、生命提升 255/1min
+    public static final RegistryObject<Item> RICE_SNOW_TEA = registerEffectFood("rice_snow_tea", 10,
+            effect(() -> MobEffects.REGENERATION, 255, SEC_30),
+            effect(() -> MobEffects.HEAL, 255, SEC_30),
+            effect(() -> MobEffects.HEALTH_BOOST, 255, MIN_1));
+
+    // 煎龙凤饼（Pan-Fried Dragon-Phoenix Cake）：熟食，饱食度 10；生命恢复 255/3min、中毒 100/3min
     public static final RegistryObject<Item> PAN_FRIED_DRAGON_PHOENIX_CAKE =
-            registerItem("pan_fried_dragon_phoenix_cake",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
+            registerEffectFood("pan_fried_dragon_phoenix_cake", 10,
+                    effect(() -> MobEffects.REGENERATION, 255, MIN_3),
+                    effect(() -> MobEffects.POISON, 100, MIN_3));
 
-    // 天堕茶（Celestial Fallen Tea）：熟食（饮品），1 饱食度
-    public static final RegistryObject<Item> CELESTIAL_FALLEN_TEA = registerItem("celestial_fallen_tea",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(2, 0.3F))));
+    // 天堕茶（Celestial Fallen Tea）：熟食（饮品），饱食度 10；创造飞行/1min、缓慢 2/2min
+    public static final RegistryObject<Item> CELESTIAL_FALLEN_TEA = registerEffectFood("celestial_fallen_tea", 10,
+            effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_1),
+            effect(() -> MobEffects.MOVEMENT_SLOWDOWN, 2, MIN_2));
 
-    // 凤包翅（Phoenix-Wrapped Wing）：熟食，3.5 饱食度
+    // 凤包翅（Phoenix-Wrapped Wing）：熟食，饱食度 10；创造飞行/1min、力量 10/1min
     public static final RegistryObject<Item> PHOENIX_WRAPPED_WING =
-            registerItem("phoenix_wrapped_wing",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(7, 0.7F))));
+            registerEffectFood("phoenix_wrapped_wing", 10,
+                    effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_1),
+                    effect(() -> MobEffects.DAMAGE_BOOST, 10, MIN_1));
 
     // 腌翅包（Marinated Wing Wrap）：生食（腌制），1.5 饱食度，20% 饥饿 I 30s
     public static final RegistryObject<Item> MARINATED_WING_WRAP = registerItem("marinated_wing_wrap",
@@ -1991,45 +2060,69 @@ public class ModItems {
     public static final RegistryObject<Item> MARINATED_MEAT_SLICE = registerItem("marinated_meat_slice",
             () -> new Item(new Item.Properties().stacksTo(64).food(rawFood(2, 0.3F, 0.2F))));
 
-    // 肉片粥（Meat Slice Congee）：熟食，2.5 饱食度
-    public static final RegistryObject<Item> MEAT_SLICE_CONGEE = registerItem("meat_slice_congee",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(5, 0.5F))));
+    // 肉片粥（Meat Slice Congee）：熟食，饱食度 10；力量 20/3min、迅捷 20/5min
+    public static final RegistryObject<Item> MEAT_SLICE_CONGEE = registerEffectFood("meat_slice_congee", 10,
+            effect(() -> MobEffects.DAMAGE_BOOST, 20, MIN_3),
+            effect(() -> MobEffects.MOVEMENT_SPEED, 20, MIN_5));
 
     // 肢体烤串（Limb Skewer）：熟食，3 饱食度
     public static final RegistryObject<Item> LIMB_SKEWER = registerItem("limb_skewer",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
 
-    // 饭团（Onigiri）：熟食，2 饱食度（注意：rice_ball「米团」是另一个可投掷物品，故本物品注册名为 onigiri）
-    public static final RegistryObject<Item> ONIGIRI = registerItem("onigiri",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(4, 0.5F))));
+    // 蜃虚龙凤烤串（Mirage Void Dragon-Phoenix Skewer）：熟食，饱食度 10；反胃 255/30s、创造飞行/5min、生命恢复 255/30s
+    public static final RegistryObject<Item> MIRAGE_VOID_DRAGON_PHOENIX_SKEWER =
+            registerEffectFood("mirage_void_dragon_phoenix_skewer", 10,
+                    effect(() -> MobEffects.CONFUSION, 255, SEC_30),
+                    effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_5),
+                    effect(() -> MobEffects.REGENERATION, 255, SEC_30));
+
+    // 饭团（Onigiri）：熟食，饱食度 666；生命恢复 255/2min、缓慢 5/1min（注意：rice_ball「米团」是另一个可投掷物品，故本物品注册名为 onigiri）
+    public static final RegistryObject<Item> ONIGIRI = registerEffectFood("onigiri", 666,
+            effect(() -> MobEffects.REGENERATION, 255, MIN_2),
+            effect(() -> MobEffects.MOVEMENT_SLOWDOWN, 5, MIN_1));
 
     // 海带片（Kelp Slices）：普通物品（食材），最大堆叠 64
     public static final RegistryObject<Item> KELP_SLICE = registerItem("kelp_slice",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 天脑饭团（Celestial Brain Rice Ball）：熟食，3 饱食度
+    // 天脑饭团（Celestial Brain Rice Ball）：熟食，饱食度 10；反胃 255/1min、创造飞行/2min、迅捷 10/3min
     public static final RegistryObject<Item> CELESTIAL_BRAIN_RICE_BALL =
-            registerItem("celestial_brain_rice_ball",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            registerEffectFood("celestial_brain_rice_ball", 10,
+                    effect(() -> MobEffects.CONFUSION, 255, MIN_1),
+                    effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_2),
+                    effect(() -> MobEffects.MOVEMENT_SPEED, 10, MIN_3));
 
-    // 浅鲛饭团（Pale Mermaid Rice Ball）：熟食，3 饱食度
+    // 浅鲛饭团（Pale Mermaid Rice Ball）：熟食，饱食度 10；虚弱 5/1min、迅捷 30/2min、力量 50/30s
     public static final RegistryObject<Item> PALE_MERMAID_RICE_BALL =
-            registerItem("pale_mermaid_rice_ball",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            registerEffectFood("pale_mermaid_rice_ball", 10,
+                    effect(() -> MobEffects.WEAKNESS, 5, MIN_1),
+                    effect(() -> MobEffects.MOVEMENT_SPEED, 30, MIN_2),
+                    effect(() -> MobEffects.DAMAGE_BOOST, 50, SEC_30));
 
-    // 蛟足饭团（Mermaid Leg Rice Ball）：熟食，3 饱食度
+    // 蛟足饭团（Mermaid Leg Rice Ball）：熟食，饱食度 10；力量 20/2min、生命恢复 50/1min
     public static final RegistryObject<Item> MERMAID_LEG_RICE_BALL =
-            registerItem("mermaid_leg_rice_ball",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            registerEffectFood("mermaid_leg_rice_ball", 10,
+                    effect(() -> MobEffects.DAMAGE_BOOST, 20, MIN_2),
+                    effect(() -> MobEffects.REGENERATION, 50, MIN_1));
 
-    // 鹫翅饭团（Vulture Wing Rice Ball）：熟食，3 饱食度
+    // 鹫翅饭团（Vulture Wing Rice Ball）：熟食，饱食度 10；创造飞行/30s、力量 20/1min、迅捷 10/1min
     public static final RegistryObject<Item> VULTURE_WING_RICE_BALL =
-            registerItem("vulture_wing_rice_ball",
-                    () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.6F))));
+            registerEffectFood("vulture_wing_rice_ball", 10,
+                    effect(ModEffects.CREATIVE_FLIGHT::get, 1, SEC_30),
+                    effect(() -> MobEffects.DAMAGE_BOOST, 20, MIN_1),
+                    effect(() -> MobEffects.MOVEMENT_SPEED, 10, MIN_1));
 
-    // 超级大乱炖（Super Grand Stew）：熟食，豪华大杂烩炖菜，10 饱食度 / 0.9 饱和度（当前熟食最高档），最大堆叠 64
-    public static final RegistryObject<Item> SUPER_GRAND_STEW = registerItem("super_grand_stew",
-            () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(10, 0.9F))));
+    // 超级大乱炖（Super Grand Stew）：熟食，豪华大杂烩炖菜，饱食度 666；创造飞行 15min、力量 255/30min、急迫 255/15min、迅捷 50/15min、生命提升 255/30min、瞬间恢复 255、防火/1h、隐身/20min、夜视/1h
+    public static final RegistryObject<Item> SUPER_GRAND_STEW = registerEffectFood("super_grand_stew", 666,
+            effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_15),
+            effect(() -> MobEffects.DAMAGE_BOOST, 255, MIN_30),
+            effect(() -> MobEffects.DIG_SPEED, 255, MIN_15),
+            effect(() -> MobEffects.MOVEMENT_SPEED, 50, MIN_15),
+            effect(() -> MobEffects.HEALTH_BOOST, 255, MIN_30),
+            effect(() -> MobEffects.HEAL, 255, MIN_30),
+            effect(() -> MobEffects.FIRE_RESISTANCE, 1, HOUR_1),
+            effect(() -> MobEffects.INVISIBILITY, 1, MIN_20),
+            effect(() -> MobEffects.NIGHT_VISION, 1, HOUR_1));
 
     // 搅碎器（Crusher）：方块物品 BlockItem；食材加工机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> CRUSHER = registerItem("crusher",

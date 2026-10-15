@@ -59,6 +59,11 @@
       "type": "minecraft:single",
       "resource": "mimiworld:geckolib/laziest_end_dragon_head",
       "sprite": "mimiworld:geckolib/laziest_end_dragon_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mimiworld:geckolib/fallen_cross",
+      "sprite": "mimiworld:geckolib/fallen_cross"
     }
   ]
 }

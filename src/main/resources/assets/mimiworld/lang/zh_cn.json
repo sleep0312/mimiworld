@@ -1,5 +1,6 @@
 {
   "dimension.mimiworld.mimi_dimension": "米米维度",
+  "dimension.mimiworld.remnant_fallen_realm": "残堕界",
   "itemGroup.mimiworld.mimi": "米米世界",
   "item.mimiworld.rice": "米",
   "item.mimiworld.cooked_rice": "熟米",
@@ -16,8 +17,8 @@
   "item.mimiworld.rice_flour": "米粉",
   "item.mimiworld.rice_pail": "饭桶",
   "item.mimiworld.compressed_rice_pail": "压缩饭桶",
-  "item.mimiworld.coarse_crystallized_rice_meal": "粗制结晶饭",
-  "item.mimiworld.crystallized_rice_meal": "结晶饭",
+  "item.mimiworld.coarse_crystallized_rice_meal": "粗制饭晶",
+  "item.mimiworld.crystallized_rice_meal": "饭晶",
   "item.mimiworld.rice_crystal_alloy_ingot": "饭晶合金锭",
   "item.mimiworld.rice_crystal_hammer": "饭晶锤",
   "item.mimiworld.wet_grass_fiber": "湿草麻",
@@ -356,7 +357,8 @@
   "item.mimiworld.elf_hat": "精灵帽",
   "item.mimiworld.moon_devourer_wolf_claw": "噬月狼爪",
   "block.mimiworld.fallen_altar": "堕落台",
-  "item.mimiworld.fallen_cross": "堕落十字架",
+  "block.mimiworld.fallen_cross": "堕落十字架",
+  "block.mimiworld.remnant_fallen_portal": "残堕界传送门",
   "block.mimiworld.remnant_fallen_abyss_rock": "残堕深渊岩",
   "block.mimiworld.remnant_fallen_bedrock": "残堕基岩",
   "item.mimiworld.dyeing_solution": "浸染液",
@@ -429,6 +431,7 @@
   "item.mimiworld.compound_oil": "复合油",
   "item.mimiworld.mermaid_leg_fried_rice": "蛟足炒饭",
   "item.mimiworld.dragon_phoenix_flower_soup": "龙凤花汤",
+  "item.mimiworld.phoenix_wound_soup": "凤伤汤",
   "item.mimiworld.mirage_illusion": "蜃楼幻想",
   "item.mimiworld.floral_mermaid_tail": "花香蛟尾",
   "item.mimiworld.sea_beast_jiao_rice": "海兽相交饭",
@@ -441,6 +444,7 @@
   "item.mimiworld.marinated_meat_slice": "腌肉片",
   "item.mimiworld.meat_slice_congee": "肉片粥",
   "item.mimiworld.limb_skewer": "肢体烤串",
+  "item.mimiworld.mirage_void_dragon_phoenix_skewer": "蜃虚龙凤烤串",
   "item.mimiworld.onigiri": "饭团",
   "item.mimiworld.kelp_slice": "海带片",
   "item.mimiworld.celestial_brain_rice_ball": "天脑饭团",
@@ -494,5 +498,6 @@
   "item.mimiworld.compound_rice_meal_arrow": "复合米饭箭",
   "item.mimiworld.cleansing_compound_arrow": "清洁复合箭",
   "effect.mimiworld.crimson_candlelight": "腥红烛照",
-  "effect.mimiworld.python_constriction": "蟒蛇缠绕"
+  "effect.mimiworld.python_constriction": "蟒蛇缠绕",
+  "effect.mimiworld.creative_flight": "创造飞行"
 }
