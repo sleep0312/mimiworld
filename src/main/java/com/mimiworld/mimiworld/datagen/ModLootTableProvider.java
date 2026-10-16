@@ -92,7 +92,7 @@ public class ModLootTableProvider extends LootTableProvider {
         // 米米猴王：必掉猴王如意棍×1、米米猴王头×1，外加米 16~32
         DROPS.put(ModEntities.MIMI_MONKEY_KING.get(), new Drop[]{d(ModItems.MONKEY_KING_RUYI_STAFF.get(), 1, 1),
                 d(ModItems.MIMI_MONKEY_HEAD.get(), 1, 1), d(rice, 16, 32)});
-        // 饭晶虎王：必掉结晶饭×12~16、虎王利爪×1、饭晶虎王头×1
+        // 饭晶虎王：必掉饭晶×12~16、虎王利爪×1、饭晶虎王头×1
         DROPS.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), new Drop[]{d(ModItems.CRYSTALLIZED_RICE_MEAL.get(), 12, 16),
                 d(ModItems.TIGER_KING_RAZOR_CLAW.get(), 1, 1), d(ModItems.RICE_CRYSTAL_TIGER_KING_HEAD.get(), 1, 1)});
         // 超晶牛王：必掉饭晶合金锭×4~5、牛王晶角×1、超晶牛王头×1

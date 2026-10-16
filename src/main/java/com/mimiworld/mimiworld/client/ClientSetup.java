@@ -82,6 +82,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -102,6 +103,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.COOKED_RICE_BALL.get(), ThrownItemRenderer::new);
         // 虚无触毒液：ThrownItemRenderer 渲染史莱姆球贴图
         event.registerEntityRenderer(ModEntities.VOID_POISON_SPIT.get(), ThrownItemRenderer::new);
+        // 米米世界箭矢：沿用原版箭模型与 ARROW 模型层贴图
+        event.registerEntityRenderer(ModEntities.MIMI_ARROW.get(), TippableArrowRenderer::new);
         // 米米猴王扔出的金箍棒：独立 GeckoLib 投掷物模型（复用猴王贴图）
         event.registerEntityRenderer(ModEntities.THROWN_MONKEY_STAFF.get(), ThrownMonkeyStaffRenderer::new);
 

@@ -268,7 +268,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         //
-        // （5 个压缩饭桶与 4 个下界合金锭交错 → 粗制结晶饭）
+        // （5 个压缩饭桶与 4 个下界合金锭交错 → 粗制饭晶）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COARSE_CRYSTALLIZED_RICE_MEAL.get())
                 .pattern("ANA")
                 .pattern("NAN")
@@ -282,7 +282,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // ---------- 熔炉烧炼（1s=20t，时长严格按用户秒数） ----------
 
-        // 粗制结晶饭 熔炉 6s（120t）→ 结晶饭
+        // 粗制饭晶 熔炉 6s（120t）→ 饭晶
         SimpleCookingRecipeBuilder
                 .smelting(Ingredient.of(ModItems.COARSE_CRYSTALLIZED_RICE_MEAL.get()), RecipeCategory.MISC, ModItems.CRYSTALLIZED_RICE_MEAL.get(), 0.3F, 120)
                 .unlockedBy("has_coarse_crystallized_rice_meal", has(ModItems.COARSE_CRYSTALLIZED_RICE_MEAL.get()))
@@ -584,7 +584,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // ---------- 工作台有序合成 ----------
 
-        // （饭晶弓；A=结晶饭 F=粗制米麻 S=米棍）
+        // （饭晶弓；A=饭晶 F=粗制米麻 S=米棍）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.RICE_CRYSTAL_BOW.get())
                 .pattern(" AS")
                 .pattern("AFS")
@@ -2651,7 +2651,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         // ---- 箭系列：竖列 材料 / 棒 / 米石 ----
-        // （饭晶箭；结晶饭 米棍）
+        // （饭晶箭；饭晶 米棍）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RICE_CRYSTAL_ARROW.get())
                 .pattern(" A ")
                 .pattern(" B ")

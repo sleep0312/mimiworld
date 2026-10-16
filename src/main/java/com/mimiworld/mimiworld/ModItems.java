@@ -6,6 +6,7 @@ import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.item.CleansingCompoundArmorItem;
 import com.mimiworld.mimiworld.item.CompoundRiceMealArmorItem;
 import com.mimiworld.mimiworld.item.EffectFoodItem;
+import com.mimiworld.mimiworld.item.MimiArrowItem;
 import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
@@ -20,7 +21,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BowItem;
+import com.mimiworld.mimiworld.item.MimiBowItem;
+import com.mimiworld.mimiworld.item.MubangongBowItem;
+import com.mimiworld.mimiworld.item.RiceCrystalBowItem;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -300,11 +303,11 @@ public class ModItems {
     public static final RegistryObject<Item> COMPRESSED_RICE_PAIL = registerItem("compressed_rice_pail",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 粗制结晶饭，Coarse Crystallized Rice Meal：普通物品，最大堆叠 64
+    // 粗制饭晶，Coarse Crystallized Rice Meal：普通物品，最大堆叠 64
     public static final RegistryObject<Item> COARSE_CRYSTALLIZED_RICE_MEAL = registerItem("coarse_crystallized_rice_meal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 结晶饭，Crystallized Rice Meal：普通物品，最大堆叠 64；注意区别于结晶米 CRYSTALLIZED_RICE
+    // 饭晶，Crystallized Rice Meal：普通物品，最大堆叠 64；注意区别于结晶米 CRYSTALLIZED_RICE
     public static final RegistryObject<Item> CRYSTALLIZED_RICE_MEAL = registerItem("crystallized_rice_meal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
@@ -363,10 +366,11 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_HAMMER = registerItem("rice_crystal_alloy_hammer",
             RiceCrystalAlloyHammerItem::new);
 
-    // 饭晶弓，Rice Crystal Bow：工具类弓（BowItem），最大堆叠 1，
-    // 耐久 384（与原版弓一致）；由占位物原位替换为该物品
+    // 饭晶弓，Rice Crystal Bow：GeckoLib 3D 模型的弓（RiceCrystalBowItem，伤害倍率 ×1.2），
+    // 资源 geo/fanjinggong.geo.json + textures/item/fanjinggong.png + animations/fanjinggong.animation.json，
+    // 最大堆叠 1，耐久 384（与原版弓一致）
     public static final RegistryObject<Item> RICE_CRYSTAL_BOW = registerItem("rice_crystal_bow",
-            () -> new BowItem(new Item.Properties().durability(384)));
+            () -> new RiceCrystalBowItem(1.2D, new Item.Properties().durability(384)));
 
     // 高级锤米台，Advanced Rice Pounding Table：石头类方块物品，
     // 放置后对应 ModBlocks.ADVANCED_RICE_POUNDING_TABLE；铁镐（挖掘等级2）采集，破坏掉落本身
@@ -551,16 +555,17 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_CRYSTAL_SWORD = registerItem("super_crystal_sword",
             () -> new SwordItem(ModItemTiers.SUPER_CRYSTAL, 3, -2.4F, new Item.Properties().stacksTo(1)));
 
-    // 超结晶弓：耐久 640 的弓
+    // 超结晶弓：耐久 640 的弓，伤害倍率 ×1.5；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> SUPER_CRYSTAL_BOW = registerItem("super_crystal_bow",
-            () -> new BowItem(new Item.Properties().durability(640)));
+            () -> new MubangongBowItem(1.5D, "chaojiejinggong", new Item.Properties().durability(640)));
 
     // ---- 饭晶合金武器/防具（修复材料饭晶合金锭） ----
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_SWORD = registerItem("rice_crystal_alloy_sword",
             () -> new SwordItem(ModItemTiers.RICE_CRYSTAL_ALLOY, 3, -2.4F, new Item.Properties().stacksTo(1)));
 
+    // 饭晶合金弓：耐久 896 的弓，伤害倍率 ×2；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_BOW = registerItem("rice_crystal_alloy_bow",
-            () -> new BowItem(new Item.Properties().durability(896)));
+            () -> new MubangongBowItem(2.0D, "fanjinghejingong", new Item.Properties().durability(896)));
 
     // 饭晶合金四件：GeckoLib 3D 盔甲（RiceCrystalAlloyArmorItem，模型/贴图见 client/model 与 geo/textures 资源）
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_HELMET = registerItem("rice_crystal_alloy_helmet",
@@ -579,8 +584,9 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_SWORD = registerItem("super_heavy_crystal_sword",
             () -> new SwordItem(ModItemTiers.SUPER_HEAVY_CRYSTAL, 5, -2.8F, new Item.Properties().stacksTo(1)));
 
+    // 超重结晶弓：耐久 1024 的弓，伤害倍率 ×5；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_BOW = registerItem("super_heavy_crystal_bow",
-            () -> new BowItem(new Item.Properties().durability(1024)));
+            () -> new MubangongBowItem(5.0D, "chaozhongjiejinggong", new Item.Properties().durability(1024)));
 
     // ---- 装备锻打专用锭（普通材料，堆叠64） ----
     // 磨剑锭：锻打剑刃用
@@ -624,8 +630,9 @@ public class ModItems {
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_SWORD = registerItem("compound_rice_meal_sword",
             () -> new SwordItem(ModItemTiers.COMPOUND_RICE_MEAL, 4, -2.4F, new Item.Properties().stacksTo(1)));
 
+    // 复合米饭弓：耐久 1280 的弓，伤害倍率 ×10；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_BOW = registerItem("compound_rice_meal_bow",
-            () -> new BowItem(new Item.Properties().durability(1280)));
+            () -> new MubangongBowItem(10.0D, "fuhemifangong", new Item.Properties().durability(1280)));
 
     // ---- 复合米饭防具（钻石同级高附魔，修复材料复合米饭锭）：GeckoLib 3D 附魔甲（CompoundRiceMealArmorItem） ----
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_HELMET = registerItem("compound_rice_meal_helmet",
@@ -651,8 +658,9 @@ public class ModItems {
     public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD = registerItem("cleansing_compound_sword",
             () -> new SwordItem(ModItemTiers.CLEANSING_COMPOUND, 4, -2.4F, new Item.Properties().stacksTo(1)));
 
+    // 清洁复合弓：耐久 1536 的弓，伤害倍率 ×20；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_BOW = registerItem("cleansing_compound_bow",
-            () -> new BowItem(new Item.Properties().durability(1536)));
+            () -> new MubangongBowItem(20.0D, "qingjiefuhegong", new Item.Properties().durability(1536)));
 
     public static final RegistryObject<Item> CLEANSING_COMPOUND_ARMOR_BLANK = registerItem("cleansing_compound_armor_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
@@ -683,8 +691,9 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_SWORD = registerItem("super_lazy_alloy_sword",
             () -> new SwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 5, -2.4F, new Item.Properties().stacksTo(1)));
 
+    // 超懒合金弓：耐久 2048 的弓，伤害倍率 ×50；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOW = registerItem("super_lazy_alloy_bow",
-            () -> new BowItem(new Item.Properties().durability(2048)));
+            () -> new MubangongBowItem(50.0D, "chaolanhejingong", new Item.Properties().durability(2048)));
 
     // ---- 超懒合金防具（终极套总防 26/韧性 5/击退抗 0.15，修复材料超懒合金锭）：GeckoLib 3D 金蟒甲（SuperLazyAlloyArmorItem） ----
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_HELMET = registerItem("super_lazy_alloy_helmet",
@@ -1325,9 +1334,9 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_BONE = registerItem("rice_bone",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 米箭（Rice Arrow）
+    // 米箭（Rice Arrow）：可发射箭矢，命中固定 1 伤害、无附加效果
     public static final RegistryObject<Item> RICE_ARROW = registerItem("rice_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(1.0D, 0, new Item.Properties().stacksTo(64)));
 
     // 火米药（Huomi Powder）
     public static final RegistryObject<Item> HUOMI_POWDER = registerItem("huomi_powder",
@@ -1591,9 +1600,9 @@ public class ModItems {
     public static final RegistryObject<Item> REMNANT_HEAVEN_WING = registerItem("remnant_heaven_wing",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒合金箭（Super Lazy Alloy Arrow）：普通物品，最大堆叠 64（当前为材料，非可发射箭矢）
+    // 超懒合金箭（Super Lazy Alloy Arrow）：可发射箭矢，命中 250 伤害 + 中毒 XX 10s
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_ARROW = registerItem("super_lazy_alloy_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(250.0D, 20, new Item.Properties().stacksTo(64)));
 
     // ===== 残/仙/神兽系列掉落（均为普通物品，最大堆叠 64；精灵帽仅为同名物品不可穿戴） =====
 
@@ -2251,10 +2260,11 @@ public class ModItems {
             registerItem("remnant_fallen_cardinal_sin_boots",
                     () -> new RemnantFallenCardinalSinArmorItem(ModArmorMaterials.REMNANT_FALLEN_CARDINAL_SIN, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // 残堕宗罪之弓（Remnant Fallen Cardinal Sin Bow）：BowItem，耐久 2304（设耐久后自动堆叠 1）
+    // 残堕宗罪之弓（Remnant Fallen Cardinal Sin Bow）：耐久 2304（设耐久后自动堆叠 1），
+    // 伤害倍率 ×100（全模组最高）；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_BOW =
             registerItem("remnant_fallen_cardinal_sin_bow",
-                    () -> new BowItem(new Item.Properties().durability(2304)));
+                    () -> new MubangongBowItem(100.0D, "canduozongzuizhigong", new Item.Properties().durability(2304)));
 
     // 残堕崩解之镐（Remnant Fallen Disintegration Pickaxe）：PickaxeItem，最大堆叠 1，
     // ModItemTiers.REMNANT_FALLEN（修复材料宇罪龙逆鳞），攻击伤害/攻速与已有各档镐一致
@@ -2292,30 +2302,30 @@ public class ModItems {
     public static final RegistryObject<Item> WORLD_PURIFIER = registerItem("world_purifier",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ---- 箭支：当前全部为普通物品（最大堆叠 64，不设投掷/伤害效果），后续再替换为自定义箭 ----
-    // 饭晶箭（Rice Crystal Arrow）
+    // ---- 箭支：均为可发射箭矢（MimiArrowItem），命中结算固定伤害 + 中毒（等级 0 无中毒） ----
+    // 饭晶箭（Rice Crystal Arrow）：5 伤害 + 中毒 I 10s
     public static final RegistryObject<Item> RICE_CRYSTAL_ARROW = registerItem("rice_crystal_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(5.0D, 1, new Item.Properties().stacksTo(64)));
 
-    // 超结晶箭（Super Crystal Arrow）
+    // 超结晶箭（Super Crystal Arrow）：10 伤害 + 中毒 II 10s
     public static final RegistryObject<Item> SUPER_CRYSTAL_ARROW = registerItem("super_crystal_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(10.0D, 2, new Item.Properties().stacksTo(64)));
 
-    // 饭晶合金箭（Rice Crystal Alloy Arrow）
+    // 饭晶合金箭（Rice Crystal Alloy Arrow）：20 伤害 + 中毒 III 10s
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_ARROW = registerItem("rice_crystal_alloy_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(20.0D, 3, new Item.Properties().stacksTo(64)));
 
-    // 超重结晶箭（Super Heavy Crystal Arrow）
+    // 超重结晶箭（Super Heavy Crystal Arrow）：25 伤害 + 中毒 V 10s
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_ARROW = registerItem("super_heavy_crystal_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(25.0D, 5, new Item.Properties().stacksTo(64)));
 
-    // 复合米饭箭（Compound Rice Meal Arrow）
+    // 复合米饭箭（Compound Rice Meal Arrow）：100 伤害 + 中毒 VII 10s
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_ARROW = registerItem("compound_rice_meal_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(100.0D, 7, new Item.Properties().stacksTo(64)));
 
-    // 清洁复合箭（Cleansing Compound Arrow）
+    // 清洁复合箭（Cleansing Compound Arrow）：100 伤害 + 中毒 X 10s
     public static final RegistryObject<Item> CLEANSING_COMPOUND_ARROW = registerItem("cleansing_compound_arrow",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiArrowItem(100.0D, 10, new Item.Properties().stacksTo(64)));
 
     // ============================ 物品注册区结束 ============================
 

@@ -1,6 +1,83 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mimiworld:item/rice_crystal_alloy_bow"
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -95,
+        0
+      ],
+      "translation": [
+        0,
+        4.75,
+        1
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        95,
+        0
+      ],
+      "translation": [
+        0,
+        4.75,
+        1
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        11,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        0,
+        0,
+        -45
+      ],
+      "translation": [
+        0,
+        0.5,
+        0
+      ],
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ]
+    },
+    "fixed": {
+      "translation": [
+        0,
+        0,
+        -0.75
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ]
+    },
+    "on_shelf": {
+      "translation": [
+        1.75,
+        0,
+        0
+      ]
+    }
   }
 }

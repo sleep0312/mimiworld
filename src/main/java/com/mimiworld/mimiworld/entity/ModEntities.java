@@ -42,6 +42,15 @@ public class ModEntities {
                             .updateInterval(10)
                             .build("void_poison_spit"));
 
+    // 米米世界箭矢实体：8 种箭共用，携带固定伤害+命中中毒，视觉沿用原版箭模型/贴图
+    public static final RegistryObject<EntityType<MimiArrowEntity>> MIMI_ARROW =
+            ENTITY_TYPES.register("mimi_arrow", () ->
+                    EntityType.Builder.<MimiArrowEntity>of(MimiArrowEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(4)
+                            .updateInterval(20)
+                            .build("mimi_arrow"));
+
     // 最懒光束渲染载体：无碰撞/无AI/不存档的纯视觉实体，在最懒终末龙与锁定玩家之间渲染紫色光束
     public static final RegistryObject<EntityType<DragonBeamEntity>> DRAGON_BEAM =
             ENTITY_TYPES.register("dragon_beam", () ->

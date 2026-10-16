@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "mimiworld:rice_arrow",
+    "mimiworld:super_lazy_alloy_arrow",
+    "mimiworld:rice_crystal_arrow",
+    "mimiworld:super_crystal_arrow",
+    "mimiworld:rice_crystal_alloy_arrow",
+    "mimiworld:super_heavy_crystal_arrow",
+    "mimiworld:compound_rice_meal_arrow",
+    "mimiworld:cleansing_compound_arrow"
+  ]
+}
