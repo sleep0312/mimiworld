@@ -1,12 +1,12 @@
 package com.mimiworld.mimiworld.item;
 
 import com.mimiworld.mimiworld.client.model.RiceCrystalBowModel;
+import com.mimiworld.mimiworld.client.renderer.BowArrowHelper;
+import com.mimiworld.mimiworld.client.renderer.NockedArrowLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -72,7 +72,7 @@ public class RiceCrystalBowItem extends MimiBowItem implements GeoItem {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (this.renderer == null) {
-                    this.renderer = new GeoItemRenderer<RiceCrystalBowItem>(new RiceCrystalBowModel()) {
+                    GeoItemRenderer<RiceCrystalBowItem> renderer = new GeoItemRenderer<RiceCrystalBowItem>(new RiceCrystalBowModel()) {
                         /**
                          * 改用「当前渲染的这个 ItemStack 对象」作为实例 id。
                          * GeckoLib 默认取 stack 的 GeckoLibID，而没走服务端派发 id 的普通物品
@@ -85,6 +85,9 @@ public class RiceCrystalBowItem extends MimiBowItem implements GeoItem {
                             return System.identityHashCode(this.getCurrentItemStack());
                         }
                     };
+                    // 拉弓时在 string 骨骼上渲染搭在弦上的箭（贴图取自持有者将射出的那支箭）
+                    renderer.addRenderLayer(new NockedArrowLayer<>(renderer));
+                    this.renderer = renderer;
                 }
                 return this.renderer;
             }
@@ -110,7 +113,7 @@ public class RiceCrystalBowItem extends MimiBowItem implements GeoItem {
         ClientLevel level = Minecraft.getInstance().level;
         long now = level == null ? 0L : level.getGameTime();
 
-        if (this.findHolder(state.getData(DataTickets.ITEMSTACK)) != null) {
+        if (BowArrowHelper.findHolder(state.getData(DataTickets.ITEMSTACK)) != null) {
             drawState.drawing = true;
             drawState.lastSeenTick = now;
             return DRAW;
@@ -125,31 +128,6 @@ public class RiceCrystalBowItem extends MimiBowItem implements GeoItem {
             return SHOOT;
         }
         return IDLE;
-    }
-
-    /**
-     * 找出正在拉这把弓的玩家：正在渲染的 stack 与该玩家的 {@code getUseItem()} 是同一个
-     * ItemStack 对象——原版拉弓贴图（bow_pulling_*）的切换就是这么判断的，
-     * 因此对本地玩家和其他玩家同样成立。
-     * 拿不到持有者（物品栏图标、地上掉落物、展示框等）时返回 null，即显示 idle。
-     */
-    private LivingEntity findHolder(ItemStack rendered) {
-        if (rendered == null || rendered.isEmpty()) {
-            return null;
-        }
-        ClientLevel level = Minecraft.getInstance().level;
-        if (level != null) {
-            for (Player player : level.players()) {
-                if (player.isUsingItem() && player.getUseItem() == rendered) {
-                    return player;
-                }
-            }
-        }
-        LocalPlayer self = Minecraft.getInstance().player;
-        if (self != null && self.isUsingItem() && self.getUseItem() == rendered) {
-            return self;
-        }
-        return null;
     }
 
     @Override

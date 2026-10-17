@@ -2,14 +2,21 @@
   "credit": "Made with Blockbench",
   "parent": "builtin/entity",
   "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        10,
+        -90,
+        0
+      ]
+    },
     "firstperson_righthand": {
       "rotation": [
-        0,
-        -95,
+        15,
+        -65,
         0
       ],
       "translation": [
-        0,
+        1.5,
         4.75,
         1
       ],
