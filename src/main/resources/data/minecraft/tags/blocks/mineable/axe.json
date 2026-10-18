@@ -3,6 +3,9 @@
   "values": [
     "mimiworld:rice_log",
     "mimiworld:rice_planks",
+    "mimiworld:rice_stairs",
+    "mimiworld:rice_slab",
+    "mimiworld:rice_fence",
     "mimiworld:rice_sapling"
   ]
 }

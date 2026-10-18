@@ -155,6 +155,31 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice_planks", has(ModItems.RICE_PLANKS.get()))
                 .save(consumer);
 
+        // （6 个米木板摆阶梯形 → 4 个米楼梯，同原版楼梯配方）
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.RICE_STAIRS.get(), 4)
+                .pattern("  P")
+                .pattern(" PP")
+                .pattern("PPP")
+                .define('P', ModItems.RICE_PLANKS.get())
+                .unlockedBy("has_rice_planks", has(ModItems.RICE_PLANKS.get()))
+                .save(consumer);
+
+        // （3 个米木板横排 → 6 个米台阶，同原版台阶配方）
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.RICE_SLAB.get(), 6)
+                .pattern("PPP")
+                .define('P', ModItems.RICE_PLANKS.get())
+                .unlockedBy("has_rice_planks", has(ModItems.RICE_PLANKS.get()))
+                .save(consumer);
+
+        // （4 个米木板 + 2 个米木棍 → 3 个米栅栏，同原版栅栏配方，棍用本模米木棍）
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.RICE_FENCE.get(), 3)
+                .pattern("PSP")
+                .pattern("PSP")
+                .define('P', ModItems.RICE_PLANKS.get())
+                .define('S', ModItems.RICE_STICK.get())
+                .unlockedBy("has_rice_planks", has(ModItems.RICE_PLANKS.get()))
+                .save(consumer);
+
         // （3 个米木板摆倒 T 形 → 锅）
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.POT.get())
                 .pattern("   ")

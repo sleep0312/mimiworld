@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "mimiworld:block/rice_planks",
+    "side": "mimiworld:block/rice_planks",
+    "top": "mimiworld:block/rice_planks"
+  }
+}

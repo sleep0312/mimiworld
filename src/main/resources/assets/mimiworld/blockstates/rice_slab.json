@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mimiworld:block/rice_slab"
+    },
+    "type=double": {
+      "model": "mimiworld:block/rice_planks"
+    },
+    "type=top": {
+      "model": "mimiworld:block/rice_slab_top"
+    }
+  }
+}

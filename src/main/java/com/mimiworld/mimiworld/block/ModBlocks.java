@@ -7,10 +7,13 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -39,6 +42,31 @@ public class ModBlocks {
     // 斧可快速挖掘（mineable/axe 标签）；挖掘等级 0 = 不需要 needs_*_tool 标签，空手也能掉落。
     public static final RegistryObject<Block> RICE_PLANKS =
             BLOCKS.register("rice_planks", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)));
+
+    // 米楼梯：木制楼梯（原版 StairBlock），基础状态取自米木板；属性照抄原版橡木楼梯（硬度/音效同米木板）。
+    // 斧可快速挖掘（mineable/axe 标签）；挖掘等级 0，空手也能掉落；破坏掉落本身。
+    public static final RegistryObject<Block> RICE_STAIRS =
+            BLOCKS.register("rice_stairs", () -> new StairBlock(
+                    () -> RICE_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of()
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)));
+
+    // 米台阶：木制半砖（原版 SlabBlock），属性照抄原版橡木台阶（硬度/音效同米木板）。
+    // 斧可快速挖掘（mineable/axe 标签）；挖掘等级 0，空手也能掉落；破坏掉落本身。
+    public static final RegistryObject<Block> RICE_SLAB =
+            BLOCKS.register("rice_slab", () -> new SlabBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)));
+
+    // 米栅栏：木制栅栏（原版 FenceBlock），属性照抄原版橡木栅栏（硬度/音效同米木板）。
+    // 斧可快速挖掘（mineable/axe 标签）；挖掘等级 0，空手也能掉落；破坏掉落本身。
+    public static final RegistryObject<Block> RICE_FENCE =
+            BLOCKS.register("rice_fence", () -> new FenceBlock(
                     BlockBehaviour.Properties.of()
                             .strength(2.0F)
                             .sound(SoundType.WOOD)));

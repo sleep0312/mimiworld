@@ -164,6 +164,18 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_PLANKS = registerItem("rice_planks",
             () -> new BlockItem(ModBlocks.RICE_PLANKS.get(), new Item.Properties()));
 
+    // 米楼梯：方块物品，放置后对应 ModBlocks.RICE_STAIRS；破坏掉落自身，斧可挖、挖掘等级 0
+    public static final RegistryObject<Item> RICE_STAIRS = registerItem("rice_stairs",
+            () -> new BlockItem(ModBlocks.RICE_STAIRS.get(), new Item.Properties()));
+
+    // 米台阶：方块物品，放置后对应 ModBlocks.RICE_SLAB；破坏掉落自身，斧可挖、挖掘等级 0
+    public static final RegistryObject<Item> RICE_SLAB = registerItem("rice_slab",
+            () -> new BlockItem(ModBlocks.RICE_SLAB.get(), new Item.Properties()));
+
+    // 米栅栏：方块物品，放置后对应 ModBlocks.RICE_FENCE；破坏掉落自身，斧可挖、挖掘等级 0
+    public static final RegistryObject<Item> RICE_FENCE = registerItem("rice_fence",
+            () -> new BlockItem(ModBlocks.RICE_FENCE.get(), new Item.Properties()));
+
     // 米木棍：普通材料物品，最大堆叠 64；熔炉燃料 300t（可烧 1.5 个物品，见 event.ModFuelEvents）
     public static final RegistryObject<Item> RICE_STICK = registerItem("rice_stick",
             () -> new Item(new Item.Properties().stacksTo(64)));
