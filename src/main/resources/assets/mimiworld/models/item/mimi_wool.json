@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mimiworld:item/mimi_wool"
-  }
+  "parent": "mimiworld:block/mimi_wool"
 }

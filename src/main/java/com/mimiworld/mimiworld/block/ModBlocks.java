@@ -142,6 +142,14 @@ public class ModBlocks {
                             .ignitedByLava()
                             .pushReaction(PushReaction.DESTROY)));
 
+    // 米羊羊毛：羊毛类普通全立方块，属性照抄原版白色羊毛（硬度 0.8、羊毛声、无工具要求空手可挖）。
+    // 破坏掉落本身（loot_tables/blocks/mimi_wool.json）；物品侧为 BlockItem（ModItems.MIMI_WOOL）。
+    public static final RegistryObject<Block> MIMI_WOOL =
+            BLOCKS.register("mimi_wool", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(0.8F)
+                            .sound(SoundType.WOOL)));
+
     // 结晶米矿石：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 4 = 下界合金镐（needs_netherite_tool 标签）。
     // 战利品表同原版矿石（loot_tables/blocks/crystallized_rice_ore.json）：普通开采掉结晶米

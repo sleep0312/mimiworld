@@ -22,6 +22,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import com.mimiworld.mimiworld.item.MimiBowItem;
+import com.mimiworld.mimiworld.item.MubangongBlankItem;
 import com.mimiworld.mimiworld.item.MubangongBowItem;
 import com.mimiworld.mimiworld.item.RiceCrystalBowItem;
 import net.minecraft.world.item.ElytraItem;
@@ -664,8 +665,9 @@ public class ModItems {
     public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD_BLANK = registerItem("cleansing_compound_sword_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
+    // 弓胚显示与正式弓相同的 GeckoLib 3D 模型，但仅为合成材料（堆叠64、无使用效果）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_BOW_BLANK = registerItem("cleansing_compound_bow_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MubangongBlankItem("cleansing_compound_bow_blank", new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD = registerItem("cleansing_compound_sword",
             () -> new SwordItem(ModItemTiers.CLEANSING_COMPOUND, 4, -2.4F, new Item.Properties().stacksTo(1)));
@@ -694,8 +696,9 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_SWORD_BLANK = registerItem("super_lazy_alloy_sword_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
+    // 弓胚显示与正式弓相同的 GeckoLib 3D 模型，但仅为合成材料（堆叠64、无使用效果）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOW_BLANK = registerItem("super_lazy_alloy_bow_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MubangongBlankItem("super_lazy_alloy_bow_blank", new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_ARMOR_BLANK = registerItem("super_lazy_alloy_armor_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
@@ -1326,9 +1329,9 @@ public class ModItems {
     public static final RegistryObject<Item> MIMOO_LEATHER = registerItem("mimoo_leather",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 米羊羊毛（Mimi Wool）
+    // 米羊羊毛（Mimi Wool）：羊毛方块的 BlockItem（可放置，方块本体见 block.ModBlocks.MIMI_WOOL）
     public static final RegistryObject<Item> MIMI_WOOL = registerItem("mimi_wool",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.MIMI_WOOL.get(), new Item.Properties().stacksTo(64)));
 
     // 米哼猪皮（Miheng Hide）
     public static final RegistryObject<Item> MIHENG_HIDE = registerItem("miheng_hide",
@@ -2205,7 +2208,7 @@ public class ModItems {
     public static final RegistryObject<Item> DRAGON_SCALE = registerItem("dragon_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 宇罪龙逆鳞（Yu Sin Dragon Reverse Scale）：普通物品，最大堆叠 64；残堕工具修复材料
+    // 宗罪龙逆鳞（Yu Sin Dragon Reverse Scale）：普通物品，最大堆叠 64；残堕工具修复材料
     public static final RegistryObject<Item> YU_SIN_DRAGON_REVERSE_SCALE = registerItem("yu_sin_dragon_reverse_scale",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
@@ -2217,7 +2220,7 @@ public class ModItems {
     public static final RegistryObject<Item> REALM_LORD_DRAGON_HEART = registerItem("realm_lord_dragon_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 宇罪龙头（Yu Sin Dragon Head）：普通物品，最大堆叠 64
+    // 宗罪龙头（Yu Sin Dragon Head）：普通物品，最大堆叠 64
     public static final RegistryObject<Item> YU_SIN_DRAGON_HEAD = registerItem("yu_sin_dragon_head",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
@@ -2279,13 +2282,13 @@ public class ModItems {
                     () -> new MubangongBowItem(100.0D, "canduozongzuizhigong", new Item.Properties().durability(2304)));
 
     // 残堕崩解之镐（Remnant Fallen Disintegration Pickaxe）：PickaxeItem，最大堆叠 1，
-    // ModItemTiers.REMNANT_FALLEN（修复材料宇罪龙逆鳞），攻击伤害/攻速与已有各档镐一致
+    // ModItemTiers.REMNANT_FALLEN（修复材料宗罪龙逆鳞），攻击伤害/攻速与已有各档镐一致
     public static final RegistryObject<Item> REMNANT_FALLEN_DISINTEGRATION_PICKAXE =
             registerItem("remnant_fallen_disintegration_pickaxe",
                     () -> new PickaxeItem(ModItemTiers.REMNANT_FALLEN, 1, -2.8F, new Item.Properties().stacksTo(1)));
 
     // 残堕逆鳞之剑（Remnant Fallen Reverse Scale Sword）：SwordItem，最大堆叠 1，
-    // ModItemTiers.REMNANT_FALLEN（修复材料宇罪龙逆鳞），慢速重剑（+5 伤害/-2.8 攻速）
+    // ModItemTiers.REMNANT_FALLEN（修复材料宗罪龙逆鳞），慢速重剑（+5 伤害/-2.8 攻速）
     public static final RegistryObject<Item> REMNANT_FALLEN_REVERSE_SCALE_SWORD =
             registerItem("remnant_fallen_reverse_scale_sword",
                     () -> new SwordItem(ModItemTiers.REMNANT_FALLEN, 5, -2.8F, new Item.Properties().stacksTo(1)));

@@ -2509,7 +2509,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_dragon_scale", has(ModItems.DRAGON_SCALE.get()))
                 .save(consumer);
 
-        // 同上，中心宇罪龙头 = 终罪龙头
+        // 同上，中心宗罪龙头 = 终罪龙头
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.FINAL_SIN_DRAGON_HEAD.get())
                 .pattern("ABC")
                 .pattern("DXD")
@@ -2594,7 +2594,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_laziest_heavenfall_pickaxe", has(ModItems.LAZIEST_HEAVENFALL_PICKAXE.get()))
                 .save(consumer);
 
-        // （残堕逆鳞之剑；COMBAT；宇罪龙逆鳞 最懒天堕剑·原罪）
+        // （残堕逆鳞之剑；COMBAT；宗罪龙逆鳞 最懒天堕剑·原罪）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.REMNANT_FALLEN_REVERSE_SCALE_SWORD.get())
                 .pattern("BCB")
                 .pattern("BDB")
@@ -2605,7 +2605,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_laziest_heavenfall_sword_original_sin", has(ModItems.LAZIEST_HEAVENFALL_SWORD_ORIGINAL_SIN.get()))
                 .save(consumer);
 
-        // （龙鳞之威；龙骨架构 宇罪龙逆鳞）
+        // （龙鳞之威；龙骨架构 宗罪龙逆鳞）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DRAGON_SCALE_MIGHT.get())
                 .pattern("DCD")
                 .pattern("CBC")
@@ -2628,7 +2628,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_li_pearl", has(ModItems.LI_PEARL.get()))
                 .save(consumer);
 
-        // （龙首之怒；龙鳞块 宇罪龙头）
+        // （龙首之怒；龙鳞块 宗罪龙头）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DRAGON_HEAD_WRATH.get())
                 .pattern("DCD")
                 .pattern("CBC")
