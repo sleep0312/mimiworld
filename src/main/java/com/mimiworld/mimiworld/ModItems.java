@@ -22,6 +22,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import com.mimiworld.mimiworld.item.MimiBowItem;
+import com.mimiworld.mimiworld.item.MubangongBlankItem;
 import com.mimiworld.mimiworld.item.MubangongBowItem;
 import com.mimiworld.mimiworld.item.RiceCrystalBowItem;
 import net.minecraft.world.item.ElytraItem;
@@ -664,8 +665,9 @@ public class ModItems {
     public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD_BLANK = registerItem("cleansing_compound_sword_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
+    // 弓胚显示与正式弓相同的 GeckoLib 3D 模型，但仅为合成材料（堆叠64、无使用效果）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_BOW_BLANK = registerItem("cleansing_compound_bow_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MubangongBlankItem("cleansing_compound_bow_blank", new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD = registerItem("cleansing_compound_sword",
             () -> new SwordItem(ModItemTiers.CLEANSING_COMPOUND, 4, -2.4F, new Item.Properties().stacksTo(1)));
@@ -694,8 +696,9 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_SWORD_BLANK = registerItem("super_lazy_alloy_sword_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
+    // 弓胚显示与正式弓相同的 GeckoLib 3D 模型，但仅为合成材料（堆叠64、无使用效果）
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOW_BLANK = registerItem("super_lazy_alloy_bow_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MubangongBlankItem("super_lazy_alloy_bow_blank", new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_ARMOR_BLANK = registerItem("super_lazy_alloy_armor_blank",
             () -> new Item(new Item.Properties().stacksTo(64)));
