@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "mimiworld:block/pestle_realm_table"
+    "bottom": "mimiworld:block/pestle_realm_table",
+    "side": "mimiworld:block/pestle_realm_table",
+    "top": "mimiworld:block/pestle_realm_table_top"
   }
 }

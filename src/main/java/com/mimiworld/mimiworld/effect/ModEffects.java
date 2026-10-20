@@ -50,6 +50,15 @@ public class ModEffects {
             "creative_flight",
             () -> new CreativeFlightEffect(MobEffectCategory.BENEFICIAL, 0xFF79E0F5));
 
+    /**
+     * 残堕化 —— 正面效果。颜色 #A02A2A 残堕暗红。
+     * 每级减少 10% 受到的伤害，由 {@link com.mimiworld.mimiworld.event.ModEffectEvents}
+     * 在 LivingHurtEvent 中处理。
+     */
+    public static final RegistryObject<MobEffect> REMNANT_CORRUPTION = MOB_EFFECTS.register(
+            "remnant_corruption",
+            () -> new RemnantCorruptionEffect(MobEffectCategory.BENEFICIAL, 0xFFA02A2A));
+
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
     }
