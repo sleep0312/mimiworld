@@ -6,11 +6,13 @@
   "refmap": "mimiworld.refmap.json",
   "mixins": [
     "CauldronBlockMixin",
+    "JadeStatusEffectsProviderMixin",
     "LayeredCauldronBlockMixin",
     "LivingEntityMixin"
   ],
   "client": [
-    "client.ClientPacketListenerMixin"
+    "client.ClientPacketListenerMixin",
+    "client.EffectRenderingInventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

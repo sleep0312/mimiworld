@@ -268,6 +268,8 @@ dependencies {
 
     // Jade 11.13.2 - HUD 信息显示（无前置）
     runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
+    // 仅编译期引用 Jade 类做可选兼容 mixin（运行时仍由上面的 runtimeOnly 提供）
+    compileOnly fg.deobf("curse.maven:jade-324717:6855440")
     // Moonlight Lib 2.16.34 - 通用前置库，Dummmmmmy 必需
     runtimeOnly fg.deobf("curse.maven:moonlight-499980:8261419")
     // Dummmmmmy 2.0.6 - 训练假人（前置 Moonlight）

@@ -3,19 +3,25 @@ package com.mimiworld.mimiworld.event;
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.effect.ModEffects;
 import com.mimiworld.mimiworld.entity.CompoundAzurePythonEntity;
+import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.item.ArmorPieceEffects;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Collections;
 
 /**
  * 药水效果相关事件处理器（Forge EVENT_BUS）。
@@ -25,7 +31,8 @@ import net.minecraftforge.fml.common.Mod;
  *   <li>{@code crimson_candlelight}（腥红烛照）：LivingHurtEvent 中检查伤害源的攻击方是否拥有该效果，
  *       若有则将最终伤害乘以 (amplifier + 2)。覆盖近战、远程（弹射物追溯发射者）等攻击类伤害。</li>
  *   <li>{@code python_constriction}（蟒蛇缠绕）：拥有该效果的攻击方对复晶天青蟒造成的伤害 ×1.5。</li>
- *   <li>{@code remnant_corruption}（残堕化）：受击者每级减少 10% 受到的伤害。</li>
+ *   <li>{@code remnant_corruption}（残堕化）：受击者每级减少 10% 受到的伤害；
+ *       第一至第八 Boss 生成/载入时永久获得对应等级（I～VIII 级）。</li>
  *   <li>{@code creative_flight}（创造飞行）：PlayerTickEvent 中拥有该效果时授予 mayfly，
  *       效果结束后撤销（创造模式或穿戴飞行盔甲时保留）。</li>
  * </ul>
@@ -103,6 +110,61 @@ public class ModEffectEvents {
         float reduction = 0.1F * (effectInstance.getAmplifier() + 1);
         float multiplier = Math.max(0.0F, 1.0F - reduction);
         event.setAmount(event.getAmount() * multiplier);
+    }
+
+    /**
+     * Boss 残堕化等级赋予：第一至第八 Boss 生成或随存档载入时，
+     * 永久获得对应等级的 {@code remnant_corruption}（I～VIII 级，amplifier 0～7）。
+     */
+    @SubscribeEvent
+    public static void onBossJoinLevel(EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide() || !(event.getEntity() instanceof LivingEntity living)) {
+            return;
+        }
+
+        int tier = bossTier(living.getType());
+        if (tier <= 0) {
+            return;
+        }
+
+        MobEffectInstance instance = new MobEffectInstance(
+                ModEffects.REMNANT_CORRUPTION.get(),
+                MobEffectInstance.INFINITE_DURATION,
+                tier - 1,
+                false,  // ambient
+                false,  // visible（不显示粒子）
+                true);  // showIcon
+        instance.setCurativeItems(Collections.emptyList());
+        living.addEffect(instance);
+    }
+
+    /** 第一至第八 Boss 对应的残堕化等级（按 ModEntities 注册顺序），非 Boss 返回 0。 */
+    private static int bossTier(EntityType<?> type) {
+        if (type == ModEntities.MIMI_MONKEY_KING.get()) {
+            return 1;
+        }
+        if (type == ModEntities.RICE_CRYSTAL_TIGER_KING.get()) {
+            return 2;
+        }
+        if (type == ModEntities.SUPER_CRYSTAL_COW_KING.get()) {
+            return 3;
+        }
+        if (type == ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get()) {
+            return 4;
+        }
+        if (type == ModEntities.COMPOUND_AZURE_PYTHON.get()) {
+            return 5;
+        }
+        if (type == ModEntities.CLEANSING_LONGEVITY_KUI.get()) {
+            return 6;
+        }
+        if (type == ModEntities.LAZIEST_FINAL_DRAGON.get()) {
+            return 7;
+        }
+        if (type == ModEntities.DIBAZONGZUILONG.get()) {
+            return 8;
+        }
+        return 0;
     }
 
     /**
