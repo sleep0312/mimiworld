@@ -112,6 +112,10 @@ public class ModLootTableProvider extends LootTableProvider {
         DROPS.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), new Drop[]{d(ModItems.COARSE_CLEANSING_COMPOUND_INGOT.get(), 0, 2),
                 d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 1, 1),
                 d(ModItems.LAZIEST_END_DRAGON_HEAD.get(), 1, 1)});
+        // 第八宗罪龙：最终 Boss，掉落沿用最懒终末龙并追加残堕精华锭 1~3，头颅换为第八宗罪龙头
+        DROPS.put(ModEntities.DIBAZONGZUILONG.get(), new Drop[]{d(ModItems.COARSE_CLEANSING_COMPOUND_INGOT.get(), 0, 2),
+                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 1, 1),
+                d(ModItems.DIBAZONGZUI_HEAD.get(), 1, 1), d(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get(), 1, 3)});
     }
 
     private static Drop d(ItemLike item, int min, int max) {

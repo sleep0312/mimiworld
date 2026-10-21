@@ -8,6 +8,7 @@ import com.mimiworld.mimiworld.client.renderer.DiaomikulouRenderer;
 import com.mimiworld.mimiworld.client.renderer.DragonBeamRenderer;
 import com.mimiworld.mimiworld.client.renderer.FallenRicePhoenixRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestFinalDragonRenderer;
+import com.mimiworld.mimiworld.client.renderer.DibazongzuilongRenderer;
 import com.mimiworld.mimiworld.client.renderer.LazyElfRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiSheepRenderer;
 import com.mimiworld.mimiworld.client.renderer.MimiMonkeyKingRenderer;
@@ -18,6 +19,7 @@ import com.mimiworld.mimiworld.client.renderer.HeavyCrystalRabbitKingHeadBlockRe
 import com.mimiworld.mimiworld.client.renderer.CompoundCrystalAzurePythonHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.PurifiedLongevityKuiHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.LaziestEndDragonHeadBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.DibazongzuiHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.FallenCrossBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.FanjinghuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.ChaojingniuwangRenderer;
@@ -125,6 +127,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.HUALING_RICE.get(), HualingmiRenderer::new);
         // 最懒终末龙：GeckoLib 宗罪龙模型（idle/flying 动画），其余六个 Boss 仍用 Steve 占位
         event.registerEntityRenderer(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonRenderer::new);
+        // 第八宗罪龙：最终 Boss，GeckoLib 宗罪龙模型（451 方块/2048 贴图，六动画复用最懒终末龙）
+        event.registerEntityRenderer(ModEntities.DIBAZONGZUILONG.get(), DibazongzuilongRenderer::new);
         // 最懒光束：纯视觉光束载体（紫色实心光束，从龙嘴渲染到锁定玩家）
         event.registerEntityRenderer(ModEntities.DRAGON_BEAM.get(), DragonBeamRenderer::new);
         // 盗米者：GeckoLib daomizhe 狼人模型（animation.daomizhe.idle/walk/attack 动画），偷米扑击近战
@@ -224,6 +228,9 @@ public class ClientSetup {
         // 最懒终末龙头：GeckoLib 头颅摆件方块（Promax 龙头+下颌静态模型）
         event.registerBlockEntityRenderer(ModBlockEntities.LAZIEST_END_DRAGON_HEAD.get(),
                 ctx -> new LaziestEndDragonHeadBlockRenderer<>(ctx));
+        // 第八宗罪龙头：GeckoLib 头颅摆件方块（龙头+下颌静态模型，渲染器内 16/150 缩放收进一格贴地居中）
+        event.registerBlockEntityRenderer(ModBlockEntities.DIBAZONGZUI_HEAD.get(),
+                ctx -> new DibazongzuiHeadBlockRenderer<>(ctx));
         // 堕落十字架：GeckoLib 华丽十字架方块（基座+紫黑十字+金纹+双面宝石静态模型，渲染器内 16/27 缩放收进一格贴地居中）
         event.registerBlockEntityRenderer(ModBlockEntities.FALLEN_CROSS.get(),
                 ctx -> new FallenCrossBlockRenderer<>(ctx));

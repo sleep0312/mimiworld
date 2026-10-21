@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -36,8 +37,8 @@ public class DragonBeamEntity extends Entity {
         this.setInvisible(true);
     }
 
-    /** 服务端生成一条持续 {@code lifeTicks} 的光束，挂在施化龙与锁定玩家之间。 */
-    public static DragonBeamEntity spawn(ServerLevel level, LaziestFinalDragonEntity dragon,
+    /** 服务端生成一条持续 {@code lifeTicks} 的光束，挂在施化龙与锁定玩家之间（最懒终末龙/第八宗罪龙通用）。 */
+    public static DragonBeamEntity spawn(ServerLevel level, PathfinderMob dragon,
                                         Player target, int lifeTicks) {
         DragonBeamEntity beam = new DragonBeamEntity(ModEntities.DRAGON_BEAM.get(), level);
         // 实体位置跟随龙，纯粹用于区块加载/网络同步范围判定；渲染坐标从 owner 实时取

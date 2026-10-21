@@ -144,6 +144,15 @@ public class ModEntities {
                             .clientTrackingRange(16)
                             .fireImmune()
                             .build("laziest_final_dragon"));
+    // 第八宗罪龙：最终 Boss，龙系超巨型陆空 Boss（GeckoLib，最懒终末龙 1.5 倍体型/翼展 919.5px，
+    // 技能复用最懒终末龙：龙息 50 CD30s / 冲撞 150 CD60s / 光束 500×每0.5s CD120s / 普攻撕咬 20，火焰免疫）
+    public static final RegistryObject<EntityType<DibazongzuilongEntity>> DIBAZONGZUILONG =
+            ENTITY_TYPES.register("dibazongzuilong", () ->
+                    EntityType.Builder.<DibazongzuilongEntity>of(DibazongzuilongEntity::new, MobCategory.MONSTER)
+                            .sized(5.25F, 6.0F)
+                            .clientTrackingRange(16)
+                            .fireImmune()
+                            .build("dibazongzuilong"));
 
     // ===== 盗米者：已转正，GeckoLib daomizhe 狼人模型（idle/walk/attack 动画，
     // 米白绒毛+稻叶绿+稻穗金大米主题贴图），陆地敌对 0.8×2.1；近战 6 + 60s 偷快捷栏食物后逃走；

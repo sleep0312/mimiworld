@@ -858,6 +858,11 @@ public class ModItems {
             registerItem("laziest_final_dragon_spawn_egg", () -> new ForgeSpawnEggItem(
                     ModEntities.LAZIEST_FINAL_DRAGON, 0x2E1E4A, 0xA974E0, new Item.Properties()));
 
+    // 第八宗罪龙生物蛋：残堕红底/暗紫斑（最终 Boss）
+    public static final RegistryObject<Item> DIBAZONGZUILONG_SPAWN_EGG =
+            registerItem("dibazongzuilong_spawn_egg", () -> new ForgeSpawnEggItem(
+                    ModEntities.DIBAZONGZUILONG, 0xBC0000, 0x3A1040, new Item.Properties()));
+
     // ===== 米米系列生物蛋（ForgeSpawnEggItem；模型统一 parent 原版 item/template_spawn_egg，
     //        底色=蛋身、斑色=斑点，按各生物主题配色；占位实体转正后蛋无需改动） =====
 
@@ -1501,6 +1506,10 @@ public class ModItems {
     // 最懒终末龙头（Laziest End Dragon Head）：方块物品，放置后对应 ModBlocks.LAZIEST_END_DRAGON_HEAD
     public static final RegistryObject<Item> LAZIEST_END_DRAGON_HEAD = registerItem("laziest_end_dragon_head",
             () -> new BlockItem(ModBlocks.LAZIEST_END_DRAGON_HEAD.get(), new Item.Properties().stacksTo(64)));
+
+    // 第八宗罪龙头（Dibazongzui Head）：方块物品，放置后对应 ModBlocks.DIBAZONGZUI_HEAD
+    public static final RegistryObject<Item> DIBAZONGZUI_HEAD = registerItem("dibazongzui_head",
+            () -> new BlockItem(ModBlocks.DIBAZONGZUI_HEAD.get(), new Item.Properties().stacksTo(64)));
 
     // ===== 爆米嘬心液 + 四档镐头部件（均为普通物品，最大堆叠 64） =====
 

@@ -1443,6 +1443,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_netherite_scrap", has(Items.NETHERITE_SCRAP))
                 .save(consumer);
 
+        // （第八宗罪龙生物蛋）：残堕精华锭 + 下界合金锭，终末级材料区分于第七Boss
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DIBAZONGZUILONG_SPAWN_EGG.get())
+                .pattern("RNR")
+                .pattern("NRN")
+                .pattern("RNR")
+                .define('R', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get())
+                .define('N', Items.NETHERITE_INGOT)
+                .unlockedBy("has_remnant_fallen_world_essence_ingot", has(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get()))
+                .save(consumer);
+
         // （米米神翼；米米幻翼膜）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.MIMI_DIVINE_WINGS.get())
                 .pattern("AMA")

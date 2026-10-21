@@ -1,9 +1,10 @@
-// 1.20.1	2026-10-12T21:25:49.6474141	Loot Tables
+// 1.20.1	2026-10-21T13:37:49.6462329	Loot Tables
 f2d666857d1772dcab581fc556077ae61dae0715 data/mimiworld/loot_tables/entities/blighted_thorn_flower.json
 7571654704eb824435665a6f43b31738ebf6c14d data/mimiworld/loot_tables/entities/carved_rice_skeleton.json
 8ead86cd5999bf5d87269240bfd3dd5b76e1dd1b data/mimiworld/loot_tables/entities/chaotic_void_toucher.json
 380e081c81474d6a67773d12f05e49e29c687b0f data/mimiworld/loot_tables/entities/cleansing_longevity_kui.json
 739ce8ef3525266825a778f8c8933e69bde5e5aa data/mimiworld/loot_tables/entities/compound_azure_python.json
+12e55f1207b002cf512babb4fc8f104309fd510a data/mimiworld/loot_tables/entities/dibazongzuilong.json
 15697db26718b2f65189a4553c34dbce870a6464 data/mimiworld/loot_tables/entities/explosive_rice_spirit.json
 d6a3004a16b646510cfdcf2d22a95370e6ef8e3b data/mimiworld/loot_tables/entities/fallen_rice_phoenix.json
 6ddd46da5cb580980e77c38aa35d9d74a8b86370 data/mimiworld/loot_tables/entities/haomi_wolf.json

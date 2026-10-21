@@ -1,6 +1,7 @@
 package com.mimiworld.mimiworld.client.renderer;
 
 import com.mimiworld.mimiworld.entity.DragonBeamEntity;
+import com.mimiworld.mimiworld.entity.DibazongzuilongEntity;
 import com.mimiworld.mimiworld.entity.LaziestFinalDragonEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix3f;
@@ -54,7 +56,13 @@ public class DragonBeamRenderer extends EntityRenderer<DragonBeamEntity> {
     @Override
     public void render(DragonBeamEntity beam, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
-        if (!(beam.getOwner() instanceof LaziestFinalDragonEntity dragon)) {
+        Entity owner = beam.getOwner();
+        Vec3 start;
+        if (owner instanceof LaziestFinalDragonEntity laziest) {
+            start = laziest.getMouthPosition(partialTick);
+        } else if (owner instanceof DibazongzuilongEntity zuiLong) {
+            start = zuiLong.getMouthPosition(partialTick);
+        } else {
             return;
         }
         Player target = beam.getTargetPlayer();
@@ -63,7 +71,6 @@ public class DragonBeamRenderer extends EntityRenderer<DragonBeamEntity> {
         }
 
         // 起点：龙嘴（按龙头骨骼在模型空间的位置换算，非实体中心）；终点：目标躯干，二者均做帧间插值
-        Vec3 start = dragon.getMouthPosition(partialTick);
         Vec3 end = target.getPosition(partialTick).add(0.0D, target.getBbHeight() * 0.55D, 0.0D);
 
         Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();

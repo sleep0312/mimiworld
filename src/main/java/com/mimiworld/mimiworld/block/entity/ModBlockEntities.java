@@ -201,6 +201,12 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(LaziestEndDragonHeadBlockEntity::new,
                             ModBlocks.LAZIEST_END_DRAGON_HEAD.get()).build(null));
 
+    // 第八宗罪龙头（方块 dibazongzui_head）：纯装饰 GeckoLib 头颅摆件方块，无 GUI 无动画不 tick
+    public static final RegistryObject<BlockEntityType<DibazongzuiHeadBlockEntity>> DIBAZONGZUI_HEAD =
+            BLOCK_ENTITIES.register("dibazongzui_head",
+                    () -> BlockEntityType.Builder.of(DibazongzuiHeadBlockEntity::new,
+                            ModBlocks.DIBAZONGZUI_HEAD.get()).build(null));
+
     // 堕落十字架（方块 fallen_cross）：纯装饰 GeckoLib 华丽十字架方块，无 GUI 无动画不 tick
     public static final RegistryObject<BlockEntityType<FallenCrossBlockEntity>> FALLEN_CROSS =
             BLOCK_ENTITIES.register("fallen_cross",

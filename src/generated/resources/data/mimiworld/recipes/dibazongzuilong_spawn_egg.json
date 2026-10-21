@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "R": {
+      "item": "mimiworld:remnant_fallen_world_essence_ingot"
+    }
+  },
+  "pattern": [
+    "RNR",
+    "NRN",
+    "RNR"
+  ],
+  "result": {
+    "item": "mimiworld:dibazongzuilong_spawn_egg"
+  },
+  "show_notification": true
+}

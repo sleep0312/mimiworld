@@ -37,6 +37,8 @@ public class ModEntityAttributes {
         // —— 真实实体 ——
         // 最懒终末龙：真实飞行 Boss（2500 血、普攻 100、护甲 100 + FLYING_SPEED/满击退抗性；常驻生命恢复 L/力量 XX，击中自回复+多重负面）
         event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonEntity.createAttributes().build());
+        // 第八宗罪龙：最终飞行 Boss（属性与最懒终末龙一致：2500 血、普攻 100、护甲 100 + FLYING_SPEED/满击退抗性）
+        event.put(ModEntities.DIBAZONGZUILONG.get(), DibazongzuilongEntity.createAttributes().build());
         // 盗米者：GeckoLib 狼人陆地敌对实体（20 心、移速 0.3、近战 6、索敌 20）
         event.put(ModEntities.RICE_STEALER.get(), DaomizheEntity.createAttributes().build());
         // 黏米之蛛：真实蜘蛛实体（48 血）

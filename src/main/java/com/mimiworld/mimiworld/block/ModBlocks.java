@@ -669,6 +669,15 @@ public class ModBlocks {
                             .sound(SoundType.WOOD)
                             .noOcclusion()));
 
+    // 第八宗罪龙头（BlockItem，物品 id dibazongzui_head）：最终 Boss 第八宗罪龙掉落的头颅摆件方块，
+    // 外观由 GeckoLib 渲染（龙头+下颌，99 cube），木质音效、硬度 1.0、空手可采，破坏掉落本身。
+    public static final RegistryObject<Block> DIBAZONGZUI_HEAD =
+            BLOCKS.register("dibazongzui_head", () -> new DibazongzuiHeadBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()));
+
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }

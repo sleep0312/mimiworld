@@ -1,4 +1,4 @@
-// 1.20.1	2026-10-18T10:33:08.8291527	Recipes
+// 1.20.1	2026-10-21T13:08:57.2115995	Recipes
 a9e42d2b028c3271eea171b8b28eddafd1f3cf47 data/mimiworld/advancements/recipes/building_blocks/advanced_rice_pounding_table.json
 2f81d1d68c7a455c5e45ded9987821b99a2b88ff data/mimiworld/advancements/recipes/building_blocks/coarse_rice_block.json
 5ce99bcb1c9584c4fc5f877394b18e763d1bf231 data/mimiworld/advancements/recipes/building_blocks/dissociation_table.json
@@ -144,6 +144,7 @@ f43d4df6747f5f8ee793f14ef5e49b4cd2031ddf data/mimiworld/advancements/recipes/mis
 286de528e232a87e7696a13500f5d7974de9f8b2 data/mimiworld/advancements/recipes/misc/deep_dyed_moon_devourer_wolf_claw.json
 12a8b08b27fcaa19cbcc67ac03f11a85712a0402 data/mimiworld/advancements/recipes/misc/deep_dyed_remnant_fallen_rice_essence.json
 33d66f9c5debb1932d6adbfa41b7cfd54740e894 data/mimiworld/advancements/recipes/misc/deep_dyed_void_touch.json
+48c8c81e867b1700bea223e0eeda22d3d7d983d5 data/mimiworld/advancements/recipes/misc/dibazongzuilong_spawn_egg.json
 99bd64a0bf6395cb4e717e8afa0c2072711f1004 data/mimiworld/advancements/recipes/misc/divine_jade.json
 b6c8d6f9c272ef69e9be688a9c3a905eb8af12cb data/mimiworld/advancements/recipes/misc/divine_sword_appraisal_jade.json
 72c53f921b7f6540a715e514ae98712bb356bec1 data/mimiworld/advancements/recipes/misc/dragon_egg.json
@@ -358,6 +359,7 @@ b45d595205f349bd1089f676670facd2d3284adf data/mimiworld/recipes/deep_dyed_moon_d
 62561ed53024c19ea2d4506421f09cff11458a2e data/mimiworld/recipes/deep_dyed_remnant_fallen_rice_essence.json
 b0d68e5d2f7d04d3ad5a3f193aa39e8c3c33ff98 data/mimiworld/recipes/deep_dyed_remnant_heaven_wing.json
 9cff9e61229f66acb266bf678206bf8bf35c68d4 data/mimiworld/recipes/deep_dyed_void_touch.json
+96961840f0db36fbc01acf65db9bc8c96636a623 data/mimiworld/recipes/dibazongzuilong_spawn_egg.json
 649025787395ea65bbca517982f61c684e6726a2 data/mimiworld/recipes/dissociation_table.json
 3ea1311093c9a03a1e849d88462079a3fc57e602 data/mimiworld/recipes/divine_jade.json
 687ecb5c58e8da96382c50a108857ae41d2c0fe2 data/mimiworld/recipes/divine_sword_appraisal_jade.json
