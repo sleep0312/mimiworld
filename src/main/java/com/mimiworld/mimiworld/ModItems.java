@@ -10,6 +10,7 @@ import com.mimiworld.mimiworld.item.MimiArrowItem;
 import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
+import com.mimiworld.mimiworld.item.RainbowNameSwordItem;
 import com.mimiworld.mimiworld.item.SuperLazyAlloyArmorItem;
 import com.mimiworld.mimiworld.item.SuperLazyWingsChestplateItem;
 import com.mimiworld.mimiworld.item.RemnantFallenCardinalSinArmorItem;
@@ -1009,7 +1010,7 @@ public class ModItems {
     public static final RegistryObject<Item> ANCIENT_SWORD_INTENT = registerItem("ancient_sword_intent",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·残缺·壹（Super Lazy Divine Sword - Broken I）：普通物品【非装备】，
+    // 超懒神剑·残缺·壹（Super Lazy Divine Sword - Broken I）：仅作合成材料（普通物品）【非装备】，
     // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_1 =
             registerItem("super_lazy_divine_sword_broken_1",
@@ -1019,8 +1020,8 @@ public class ModItems {
     public static final RegistryObject<Item> SWORD_QUENCHING_TABLE = registerItem("sword_quenching_table",
             () -> new BlockItem(ModBlocks.SWORD_QUENCHING_TABLE.get(), new Item.Properties()));
 
-    // 超懒神剑·残缺·贰（Super Lazy Divine Sword - Broken II）：普通物品【非装备】，
-    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变（与超懒神剑·残缺·壹同款）
+    // 超懒神剑·残缺·贰（Super Lazy Divine Sword - Broken II）：仅作合成材料（普通物品）【非装备】，
+    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变（与残缺·壹同款）
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_2 =
             registerItem("super_lazy_divine_sword_broken_2",
                     () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
@@ -1045,19 +1046,21 @@ public class ModItems {
     public static final RegistryObject<Item> ANCIENT_SWORD_SOUL = registerItem("ancient_sword_soul",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·残次：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·残次：剑类武器，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_DEFECTIVE =
             registerItem("super_lazy_divine_sword_defective",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+                    () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 5, -2.4F,
+                            new Item.Properties().stacksTo(1)));
 
     // 太古剑魄（Primordial Sword Soul）
     public static final RegistryObject<Item> PRIMORDIAL_SWORD_SOUL = registerItem("primordial_sword_soul",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·赝品：剑类武器，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT =
             registerItem("super_lazy_divine_sword_counterfeit",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+                    () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 6, -2.4F,
+                            new Item.Properties().stacksTo(1)));
 
     // ===== 神玉系列与超懒神剑·瑕疵 =====
 
@@ -1074,10 +1077,11 @@ public class ModItems {
             registerItem("divine_sword_appraisal_jade",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·瑕疵：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·瑕疵：剑类武器，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_FLAWED =
             registerItem("super_lazy_divine_sword_flawed",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+                    () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 7, -2.4F,
+                            new Item.Properties().stacksTo(1)));
 
     // ===== 剑谱系列（彩虹名物品堆叠 1） =====
 
@@ -1089,10 +1093,11 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_LAZY_SWORD_ART = registerItem("super_lazy_sword_art",
             () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 超懒神剑·完整：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 超懒神剑·完整：剑类武器，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COMPLETE =
             registerItem("super_lazy_divine_sword_complete",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+                    () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 8, -2.4F,
+                            new Item.Properties().stacksTo(1)));
 
     // 结晶米玉（Crystallized Rice Jade）
     public static final RegistryObject<Item> CRYSTALLIZED_RICE_JADE = registerItem("crystallized_rice_jade",
@@ -1104,10 +1109,11 @@ public class ModItems {
 
     // ===== 天堕/堕落系列 =====
 
-    // 最懒天堕剑·赝品：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 最懒天堕剑·赝品：剑类武器，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_COUNTERFEIT =
             registerItem("laziest_heavenfall_sword_counterfeit",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+                    () -> new RainbowNameSwordItem(ModItemTiers.LAZIEST_HEAVENFALL, 6, -2.4F,
+                            new Item.Properties().stacksTo(1)));
 
     // 破败之心（Ruined Heart）
     public static final RegistryObject<Item> RUINED_HEART = registerItem("ruined_heart",
@@ -1125,10 +1131,11 @@ public class ModItems {
     public static final RegistryObject<Item> SEVEN_DEADLY_FALLS = registerItem("seven_deadly_falls",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 最懒天堕剑·原罪：普通物品【非装备】，堆叠 1，动态彩虹渐变名称
+    // 最懒天堕剑·原罪：剑类武器，堆叠 1，动态彩虹渐变名称
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_ORIGINAL_SIN =
             registerItem("laziest_heavenfall_sword_original_sin",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
+                    () -> new RainbowNameSwordItem(ModItemTiers.LAZIEST_HEAVENFALL, 8, -2.4F,
+                            new Item.Properties().stacksTo(1)));
 
     // ===== 最懒天堕盔甲四件套（HEAVENFALL 材质，全部 stacksTo 1） =====
 

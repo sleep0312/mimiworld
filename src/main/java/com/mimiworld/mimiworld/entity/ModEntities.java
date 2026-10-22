@@ -74,82 +74,84 @@ public class ModEntities {
                             .build("thrown_monkey_staff"));
 
     // 米米猴王：已转正，GeckoLib mimihouwang 模型（idle/walk/attack/attack_slam/throw 动画），
-    // 灵巧中型陆地 Boss（普攻 5 + 劈地 7 CD5.5s + 扔棒 20 CD3s），碰撞箱 0.7×1.9，火焰免疫
+    // 灵巧中型陆地 Boss（普攻 5 + 劈地 7 CD5.5s + 扔棒 20 CD3s），碰撞箱 1.0×2.3（覆盖双臂与冠），火焰免疫
     public static final RegistryObject<EntityType<MimiMonkeyKingEntity>> MIMI_MONKEY_KING =
             ENTITY_TYPES.register("mimi_monkey_king", () ->
                     EntityType.Builder.<MimiMonkeyKingEntity>of(MimiMonkeyKingEntity::new, MobCategory.MONSTER)
-                            .sized(0.7F, 1.9F)
+                            .sized(1.0F, 2.3F)
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("mimi_monkey_king"));
     // 饭晶虎王：已转正，GeckoLib fanjinghuwang 模型（idle/walk/attack/feast/slam 动画），
     // 直立型陆地猛兽 Boss（普攻 8 + 大吃一顿撕咬 20 CD3s + 对爪重击 25 CD6s），
-    // 模型直立约 47px≈2.9 格，碰撞箱 1.2×2.9，火焰免疫
+    // 模型直立约 47px≈2.9 格，碰撞箱 1.35×3.0，火焰免疫
     public static final RegistryObject<EntityType<FanjinghuwangEntity>> RICE_CRYSTAL_TIGER_KING =
             ENTITY_TYPES.register("rice_crystal_tiger_king", () ->
                     EntityType.Builder.<FanjinghuwangEntity>of(FanjinghuwangEntity::new, MobCategory.MONSTER)
-                            .sized(1.2F, 2.9F)
+                            .sized(1.35F, 3.0F)
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("rice_crystal_tiger_king"));
     // 超晶牛王：已转正，GeckoLib super_crystal_cow_king 模型（idle/walk/attack/axe_combo/
     // charge_start/charge 动画，右臂 45° 斜擎巨斧），壮硕持斧陆地 Boss
     // （普攻 12 + 猛牛冲撞 20 CD30s + 三段巨斧 10/20/30 CD45s），
-    // 模型直立约 41px≈2.6 格、肩甲宽约 24px，碰撞箱 1.5×2.6，火焰免疫
+    // 模型直立约 41px≈2.6 格、肩甲宽约 24px，碰撞箱 1.6×2.6，火焰免疫
     public static final RegistryObject<EntityType<ChaojingniuwangEntity>> SUPER_CRYSTAL_COW_KING =
             ENTITY_TYPES.register("super_crystal_cow_king", () ->
                     EntityType.Builder.<ChaojingniuwangEntity>of(ChaojingniuwangEntity::new, MobCategory.MONSTER)
-                            .sized(1.5F, 2.6F)
+                            .sized(1.6F, 2.6F)
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("super_crystal_cow_king"));
     // 重晶兔王：已转正，GeckoLib heavy_crystal_rabbit_king 模型（idle/walk/attack/skill_slam/skill_enrage
     // 动画，米白+晶青晶刺+血红眼巨兔），敏捷型陆地 Boss（普攻 10 双爪连击 + 出其不意跃砸
     // 45 无视护甲 CD60s + 腥红烛照近战 ×3 持续 30s CD180s），模型直立约 54px≈3.4 格（耳尖），
-    // 碰撞箱 1.4×3.2，火焰免疫
+    // 碰撞箱 1.5×3.2，火焰免疫
     public static final RegistryObject<EntityType<HeavyCrystalRabbitKingEntity>> HEAVY_CRYSTAL_RABBIT_KING =
             ENTITY_TYPES.register("heavy_crystal_rabbit_king", () ->
                     EntityType.Builder.<HeavyCrystalRabbitKingEntity>of(HeavyCrystalRabbitKingEntity::new, MobCategory.MONSTER)
-                            .sized(1.4F, 3.2F)
+                            .sized(1.5F, 3.2F)
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("heavy_crystal_rabbit_king"));
     // 复晶天青蟒：已转正，GeckoLib compound_azure_python 模型（idle/walk/attack/bite/kiss/tail_sweep
     // 动画，深玉蟒鳞+米白腹甲+青碧复晶+金边兜帽），低伏长身陆地 Boss（普攻 10 + 咬你命三千 16
     // 附中毒I/缠绕I CD180s + 羽蛇神之吻两连咬共 50 附中毒II CD15s + 扫尾 70 CD30s；缠绕期间玩家
-    // 对其伤害 ×1.5），昂首展兜高约 3.2 格，碰撞箱 1.4×3.2，火焰免疫
+    // 对其伤害 ×1.5），昂首展兜高约 3.2 格，模型最宽为展开的兜帽（约 3.6 格），碰撞箱 2.6×3.5，火焰免疫
     public static final RegistryObject<EntityType<CompoundAzurePythonEntity>> COMPOUND_AZURE_PYTHON =
             ENTITY_TYPES.register("compound_azure_python", () ->
                     EntityType.Builder.<CompoundAzurePythonEntity>of(CompoundAzurePythonEntity::new, MobCategory.MONSTER)
-                            .sized(1.4F, 3.2F)
+                            .sized(2.6F, 3.5F)
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("compound_azure_python"));
     // 清洁长命夔：已转正，GeckoLib qingjiechangmingkui 模型（idle/walk/attack/roar/stomp/triple_bite
     // 动画，苍青黑厚皮+青铜夔龙纹+雷电裂隙+发光青眼，单足无角牛形雷兽），巨型陆地 Boss
     // （普攻 15 + 巨吼音波 60 CD30s + 夔之践踏 100 CD45s + 三连咬 70×3 CD120s），
-    // 模型高约 55px≈3.4 格、巨蹄宽约 22px，碰撞箱 2.2×3.4，火焰免疫
+    // 模型高约 55px≈3.4 格、巨蹄宽约 22px，碰撞箱 2.6×3.6，火焰免疫
     public static final RegistryObject<EntityType<QingjiechangmingkuiEntity>> CLEANSING_LONGEVITY_KUI =
             ENTITY_TYPES.register("cleansing_longevity_kui", () ->
                     EntityType.Builder.<QingjiechangmingkuiEntity>of(QingjiechangmingkuiEntity::new, MobCategory.MONSTER)
-                            .sized(2.2F, 3.4F)
+                            .sized(2.6F, 3.6F)
                             .clientTrackingRange(12)
                             .fireImmune()
                             .build("cleansing_longevity_kui"));
     // 最懒终末龙：末影龙 Promax 狂暴强化版，超巨型陆空 Boss（GeckoLib：龙息/冲撞/最懒光束/撕咬/盘旋/嘶吼，火焰免疫）
+    // 模型实测包围盒：翼展 16.88 格 × 高 7.84 格（双翼展开、脚底距原点 0.56），碰撞箱取 17.0×8.5 覆盖整条龙
     public static final RegistryObject<EntityType<LaziestFinalDragonEntity>> LAZIEST_FINAL_DRAGON =
             ENTITY_TYPES.register("laziest_final_dragon", () ->
                     EntityType.Builder.<LaziestFinalDragonEntity>of(LaziestFinalDragonEntity::new, MobCategory.MONSTER)
-                            .sized(3.5F, 4.0F)
+                            .sized(17.0F, 8.5F)
                             .clientTrackingRange(16)
                             .fireImmune()
                             .build("laziest_final_dragon"));
     // 第八宗罪龙：最终 Boss，龙系超巨型陆空 Boss（GeckoLib，最懒终末龙 1.5 倍体型/翼展 919.5px，
     // 技能复用最懒终末龙：龙息 50 CD30s / 冲撞 150 CD60s / 光束 500×每0.5s CD120s / 普攻撕咬 20，火焰免疫）
+    // 模型实测包围盒：翼展 57.5 格 × 高 11.8 格（脚底距原点 0.84），碰撞箱取 58.0×12.75 覆盖整条龙
     public static final RegistryObject<EntityType<DibazongzuilongEntity>> DIBAZONGZUILONG =
             ENTITY_TYPES.register("dibazongzuilong", () ->
                     EntityType.Builder.<DibazongzuilongEntity>of(DibazongzuilongEntity::new, MobCategory.MONSTER)
-                            .sized(5.25F, 6.0F)
+                            .sized(58.0F, 12.75F)
                             .clientTrackingRange(16)
                             .fireImmune()
                             .build("dibazongzuilong"));

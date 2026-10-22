@@ -26,7 +26,11 @@ public class RainbowNameItem extends Item {
     @Override
     public Component getName(ItemStack stack) {
         // 先按当前语言解析出最终名称文本（与普通翻译名表现一致），再逐字上色
-        String text = Component.translatable(getDescriptionId(stack)).getString();
+        return rainbow(Component.translatable(getDescriptionId(stack)).getString());
+    }
+
+    /** 把任意文本渲染成逐字彩虹渐变（超懒神剑系列剑类等其它物品复用同一套配色算法）。 */
+    public static Component rainbow(String text) {
         float baseHue = (Util.getMillis() % CYCLE_MS) / (float) CYCLE_MS;
         MutableComponent result = Component.empty();
         for (int i = 0; i < text.length(); i++) {

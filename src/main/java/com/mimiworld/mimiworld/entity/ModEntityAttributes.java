@@ -31,11 +31,11 @@ public class ModEntityAttributes {
         event.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), HeavyCrystalRabbitKingEntity.createAttributes().build());
         // 复晶天青蟒：已转正（750 血、移速 0.33、普攻 25、追击 40、护甲 40、韧性 6、70% 击退抗性；常驻生命恢复 XV/力量 VII，击中目标中毒/虚弱）
         event.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), CompoundAzurePythonEntity.createAttributes().build());
-        // 清洁长命夔：已转正（1200 血、移速 0.3、普攻 35、追击 40、护甲 50、韧性 8、80% 击退抗性；常驻生命恢复 XXX/力量 X，击中自回复）
+        // 清洁长命夔：已转正（2500 血、移速 0.3、普攻 35、追击 40、护甲 50、韧性 8、80% 击退抗性；常驻生命恢复 XXX/力量 X，击中自回复）
         event.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), QingjiechangmingkuiEntity.createAttributes().build());
 
         // —— 真实实体 ——
-        // 最懒终末龙：真实飞行 Boss（2500 血、普攻 100、护甲 100 + FLYING_SPEED/满击退抗性；常驻生命恢复 L/力量 XX，击中自回复+多重负面）
+        // 最懒终末龙：真实飞行 Boss（5000 血、普攻 100、护甲 100 + FLYING_SPEED/满击退抗性；常驻生命恢复 L/力量 XX，击中自回复+多重负面）
         event.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), LaziestFinalDragonEntity.createAttributes().build());
         // 第八宗罪龙：最终飞行 Boss（属性与最懒终末龙一致：2500 血、普攻 100、护甲 100 + FLYING_SPEED/满击退抗性）
         event.put(ModEntities.DIBAZONGZUILONG.get(), DibazongzuilongEntity.createAttributes().build());

@@ -142,11 +142,11 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     }
 
     /**
-     * 属性：1200 血、移速 0.3、普攻 35、追击 40、护甲 50、韧性 8、80% 击退抗性、攻击击退 1.5。
+     * 属性：2500 血、移速 0.3、普攻 35、追击 40、护甲 50、韧性 8、80% 击退抗性、攻击击退 1.5。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 1200.0D)
+                .add(Attributes.MAX_HEALTH, 2500.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.30D)
                 .add(Attributes.ATTACK_DAMAGE, 35.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.5D)

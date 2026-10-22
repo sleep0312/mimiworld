@@ -190,13 +190,13 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
     }
 
     /**
-     * 属性：2500 血、普攻 100、飞行加速 4.5、索敌 64、100 甲 6 韧性、免疫击退。
+     * 属性：5000 血、普攻 100、飞行加速 4.5、索敌 64、100 甲 6 韧性、免疫击退。
      * 飞行生物空中稳态速度 ≈ 0.222 × MoveControl速度系数 × FLYING_SPEED（格/tick），
      * 4.5 配合盘旋 1.15 系数约 23 格/s、掠飞 2.2 系数约 44 格/s，动作迅猛、压迫感强。
      */
     public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 2500.0D)
+                .add(Attributes.MAX_HEALTH, 5000.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.FLYING_SPEED, 4.5D)
                 .add(Attributes.ATTACK_DAMAGE, 100.0D)
@@ -694,8 +694,11 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
                 }
             } else if (this.runTicks <= CHARGE_DASH_END_TICK) {
                 // 高速直线冲撞：脚本位移 + 碰撞检测（撞墙立刻进入拉起）
+                // 碰撞箱已扩到整条龙翼展，探墙改用龙体核心 3×3 小箱，避免贴地/掠林时整箱误判撞墙
                 Vec3 move = this.dashDir.scale(CHARGE_SPEED);
-                AABB nextBox = dragon.getBoundingBox().move(move);
+                AABB nextBox = new AABB(
+                        dragon.getX() - 1.5D, dragon.getY(), dragon.getZ() - 1.5D,
+                        dragon.getX() + 1.5D, dragon.getY() + dragon.getBbHeight(), dragon.getZ() + 1.5D).move(move);
                 if (dragon.level().noCollision(dragon, nextBox)) {
                     dragon.setPos(dragon.getX() + move.x, dragon.getY() + move.y, dragon.getZ() + move.z);
                     dragon.setDeltaMovement(move);
@@ -708,8 +711,8 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
                 if (dragon.level() instanceof ServerLevel serverLevel && this.runTicks % 2 == 0) {
                     serverLevel.sendParticles(ParticleTypes.DRAGON_BREATH,
                             dragon.getX(), dragon.getY() + dragon.getBbHeight() * 0.5D, dragon.getZ(),
-                            6, dragon.getBbWidth() * 0.5D, dragon.getBbHeight() * 0.4D,
-                            dragon.getBbWidth() * 0.5D, 0.02D);
+                            6, 2.0D, dragon.getBbHeight() * 0.35D,
+                            2.0D, 0.02D);
                 }
 
                 if (!this.hitDone && this.runTicks >= CHARGE_HIT_TICK) {
@@ -736,7 +739,11 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
     /** 冲撞命中帧：龙体周围 4.5 格内玩家受 150 伤害并沿冲撞方向被轰飞。 */
     private void performChargeHit() {
         this.playSound(SoundEvents.GENERIC_EXPLODE, 1.6F, 0.7F);
-        AABB hitArea = this.getBoundingBox().inflate(CHARGE_HIT_RADIUS);
+        // 命中范围按龙体核心固定盒计算：碰撞箱已扩到翼展，直接 inflate 会让判定扩散到三十格外
+        AABB hitArea = new AABB(
+                this.getX() - CHARGE_HIT_RADIUS, this.getY(), this.getZ() - CHARGE_HIT_RADIUS,
+                this.getX() + CHARGE_HIT_RADIUS, this.getY() + this.getBbHeight(),
+                this.getZ() + CHARGE_HIT_RADIUS);
         List<Player> players = this.level().getEntitiesOfClass(Player.class, hitArea,
                 LaziestFinalDragonEntity::validTarget);
         for (Player player : players) {

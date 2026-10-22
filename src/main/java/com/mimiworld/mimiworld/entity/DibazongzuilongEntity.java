@@ -694,8 +694,11 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
                 }
             } else if (this.runTicks <= CHARGE_DASH_END_TICK) {
                 // 高速直线冲撞：脚本位移 + 碰撞检测（撞墙立刻进入拉起）
+                // 碰撞箱已扩到整条龙翼展，探墙改用龙体核心 3×3 小箱，避免贴地/掠林时整箱误判撞墙
                 Vec3 move = this.dashDir.scale(CHARGE_SPEED);
-                AABB nextBox = dragon.getBoundingBox().move(move);
+                AABB nextBox = new AABB(
+                        dragon.getX() - 1.5D, dragon.getY(), dragon.getZ() - 1.5D,
+                        dragon.getX() + 1.5D, dragon.getY() + dragon.getBbHeight(), dragon.getZ() + 1.5D).move(move);
                 if (dragon.level().noCollision(dragon, nextBox)) {
                     dragon.setPos(dragon.getX() + move.x, dragon.getY() + move.y, dragon.getZ() + move.z);
                     dragon.setDeltaMovement(move);
@@ -708,8 +711,8 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
                 if (dragon.level() instanceof ServerLevel serverLevel && this.runTicks % 2 == 0) {
                     serverLevel.sendParticles(ParticleTypes.DRAGON_BREATH,
                             dragon.getX(), dragon.getY() + dragon.getBbHeight() * 0.5D, dragon.getZ(),
-                            6, dragon.getBbWidth() * 0.5D, dragon.getBbHeight() * 0.4D,
-                            dragon.getBbWidth() * 0.5D, 0.02D);
+                            6, 2.0D, dragon.getBbHeight() * 0.35D,
+                            2.0D, 0.02D);
                 }
 
                 if (!this.hitDone && this.runTicks >= CHARGE_HIT_TICK) {
@@ -736,7 +739,11 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
     /** 冲撞命中帧：龙体周围 4.5 格内玩家受 150 伤害并沿冲撞方向被轰飞。 */
     private void performChargeHit() {
         this.playSound(SoundEvents.GENERIC_EXPLODE, 1.6F, 0.7F);
-        AABB hitArea = this.getBoundingBox().inflate(CHARGE_HIT_RADIUS);
+        // 命中范围按龙体核心固定盒计算：碰撞箱已扩到翼展，直接 inflate 会让判定扩散到三十格外
+        AABB hitArea = new AABB(
+                this.getX() - CHARGE_HIT_RADIUS, this.getY(), this.getZ() - CHARGE_HIT_RADIUS,
+                this.getX() + CHARGE_HIT_RADIUS, this.getY() + this.getBbHeight(),
+                this.getZ() + CHARGE_HIT_RADIUS);
         List<Player> players = this.level().getEntitiesOfClass(Player.class, hitArea,
                 DibazongzuilongEntity::validTarget);
         for (Player player : players) {

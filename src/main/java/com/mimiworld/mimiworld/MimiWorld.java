@@ -38,6 +38,9 @@ public class MimiWorld
     {
         IEventBus modEventBus = context.getModEventBus();
 
+        // 数值配置文件：config/mimiworld-common.toml（怪物/防具/武器/战斗/掉落）
+        ModConfig.register();
+
         // GeckoLib 初始化：内部完成网络注册与客户端渲染/重载监听等事件总线订阅，
         // 是后续自定义 Geo 生物、立体 Geo 盔甲、动画方块/物品的必要前置（有 hasInitialized 防重入）
         GeckoLib.initialize();

@@ -80,17 +80,22 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     @Override
     public int getDurabilityForType(ArmorItem.Type type) {
-        return BASE_DURABILITY[type.getSlot().getIndex()] * durabilityMultiplier;
+        ModConfig.ArmorStats stats = ModConfig.armor(name);
+        int multiplier = stats == null ? durabilityMultiplier : ModConfig.read(stats.durabilityMultiplier());
+        return BASE_DURABILITY[type.getSlot().getIndex()] * multiplier;
     }
 
     @Override
     public int getDefenseForType(ArmorItem.Type type) {
-        return defenseForSlot[type.getSlot().getIndex()];
+        int slot = type.getSlot().getIndex();
+        ModConfig.ArmorStats stats = ModConfig.armor(name);
+        return stats == null ? defenseForSlot[slot] : ModConfig.read(stats.defense().get(slot));
     }
 
     @Override
     public int getEnchantmentValue() {
-        return enchantmentValue;
+        ModConfig.ArmorStats stats = ModConfig.armor(name);
+        return stats == null ? enchantmentValue : ModConfig.read(stats.enchantmentValue());
     }
 
     @Override
@@ -111,11 +116,38 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     @Override
     public float getToughness() {
-        return toughness;
+        ModConfig.ArmorStats stats = ModConfig.armor(name);
+        return stats == null ? toughness : (float) (double) ModConfig.read(stats.toughness());
     }
 
     @Override
     public float getKnockbackResistance() {
+        ModConfig.ArmorStats stats = ModConfig.armor(name);
+        return stats == null ? knockbackResistance
+                : (float) (double) ModConfig.read(stats.knockbackResistance());
+    }
+
+    String id() {
+        return name;
+    }
+
+    int rawDefense(int slot) {
+        return defenseForSlot[slot];
+    }
+
+    int rawDurabilityMultiplier() {
+        return durabilityMultiplier;
+    }
+
+    int rawEnchantmentValue() {
+        return enchantmentValue;
+    }
+
+    float rawToughness() {
+        return toughness;
+    }
+
+    float rawKnockbackResistance() {
         return knockbackResistance;
     }
 

@@ -59,17 +59,20 @@ public enum ModItemTiers implements Tier {
 
     @Override
     public int getUses() {
-        return uses;
+        ModConfig.WeaponStats stats = ModConfig.weapon(name().toLowerCase(java.util.Locale.ROOT));
+        return stats == null ? uses : ModConfig.read(stats.uses());
     }
 
     @Override
     public float getSpeed() {
-        return speed;
+        ModConfig.WeaponStats stats = ModConfig.weapon(name().toLowerCase(java.util.Locale.ROOT));
+        return stats == null ? speed : (float) (double) ModConfig.read(stats.miningSpeed());
     }
 
     @Override
     public float getAttackDamageBonus() {
-        return attackDamageBonus;
+        ModConfig.WeaponStats stats = ModConfig.weapon(name().toLowerCase(java.util.Locale.ROOT));
+        return stats == null ? attackDamageBonus : (float) (double) ModConfig.read(stats.attackDamageBonus());
     }
 
     @Override
@@ -79,12 +82,31 @@ public enum ModItemTiers implements Tier {
 
     @Override
     public int getEnchantmentValue() {
-        return enchantmentValue;
+        ModConfig.WeaponStats stats = ModConfig.weapon(name().toLowerCase(java.util.Locale.ROOT));
+        return stats == null ? enchantmentValue : ModConfig.read(stats.enchantmentValue());
     }
 
     @Override
     public Ingredient getRepairIngredient() {
         // 运行期才调用，此时 ModItems 已完成注册
         return repairIngredient.get();
+    }
+
+    // ===== 供 ModConfig 构建配置默认值使用的原始数值（避免默认值两处维护） =====
+
+    int rawUses() {
+        return uses;
+    }
+
+    float rawSpeed() {
+        return speed;
+    }
+
+    float rawAttackDamageBonus() {
+        return attackDamageBonus;
+    }
+
+    int rawEnchantmentValue() {
+        return enchantmentValue;
     }
 }

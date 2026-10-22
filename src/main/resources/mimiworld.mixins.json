@@ -8,7 +8,8 @@
     "CauldronBlockMixin",
     "JadeStatusEffectsProviderMixin",
     "LayeredCauldronBlockMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "RangedAttributeMixin"
   ],
   "client": [
     "client.ClientPacketListenerMixin",
