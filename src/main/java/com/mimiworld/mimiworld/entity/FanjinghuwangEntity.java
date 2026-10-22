@@ -106,7 +106,7 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
     /** 对爪重击冷却：6 秒 = 120 tick */
     private static final int SLAM_COOLDOWN_TICKS = 120;
     /** 对爪重击伤害 */
-    private static final float SLAM_DAMAGE = 25.0F;
+    private static final float SLAM_DAMAGE = 26.0F;
     /** 判定区半宽：虎王左右各 1.3 格（总宽 2.6） */
     private static final double SLAM_HALF_WIDTH = 1.3D;
     /** 判定区纵深：虎王脚前 3.0 格，加 margin 覆盖 3.6 格，对齐 4.0 格触发距离 */
@@ -208,10 +208,10 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
     /** 常驻自增益：生命恢复 VII + 力量 III（服务端 aiStep 中调用，效果过期后自动续接）。 */
     private void maintainPassiveBuffs() {
         if (!this.hasEffect(MobEffects.REGENERATION)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 6));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 0));
         }
         if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
-            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 2));
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 0));
         }
     }
 

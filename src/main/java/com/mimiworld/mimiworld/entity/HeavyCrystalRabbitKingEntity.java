@@ -128,7 +128,7 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
     /** 起跳水平位移上限：5 格（防止飞过头，落点偏差由 4 格 AOE 兜底） */
     private static final double SLAM_LEAP_HORIZONTAL_LIMIT = 5.0D;
     /** 砸地伤害：45 点无视护甲 */
-    private static final float SLAM_DAMAGE = 45.0F;
+    private static final float SLAM_DAMAGE = 40.0F;
     /** 砸地 AOE 半径：4 格 */
     private static final double SLAM_RADIUS = 4.0D;
     /** 砸地冷却：60 秒 = 1200 tick */
@@ -236,7 +236,7 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
             if (!this.isCasting()) {
                 this.entityData.set(DATA_ATTACK_ANIM_TICKS, ATTACK_ANIMATION_TICKS);
             }
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 29));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 1));
             this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, 1));
             return true;
         }
@@ -246,10 +246,10 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
     /** 常驻自增益：生命恢复 X + 力量 XX（服务端 aiStep 中调用，效果过期后自动续接）。 */
     private void maintainPassiveBuffs() {
         if (!this.hasEffect(MobEffects.REGENERATION)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 9));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 1));
         }
         if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
-            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 19));
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 1));
         }
     }
 
@@ -327,7 +327,7 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
     private void applyEnrageBuff() {
         this.entityData.set(DATA_ENRAGE_BUFF_TICKS, ENRAGE_BUFF_DURATION);
         this.addEffect(new MobEffectInstance(ModEffects.CRIMSON_CANDLELIGHT.get(),
-                ENRAGE_BUFF_DURATION, 1));
+                ENRAGE_BUFF_DURATION, 0));
     }
 
     /** 猩红增益结束：移除药水效果（效果到期时也会自行消失，这里做兜底）。 */

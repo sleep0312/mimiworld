@@ -110,32 +110,32 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
 
     // -------------------- 技能数值 --------------------
 
-    /** 龙息：动画 2.45s=49tick，第 17tick（0.85s）张口喷射；CD 30s=600tick；每跳 50 伤害 */
+    /** 龙息：动画 2.45s=49tick，第 17tick（0.85s）张口喷射；CD 30s=600tick；每跳 30 伤害 */
     private static final int BREATH_ANIMATION_TICKS = 49;
     private static final int BREATH_HIT_TICK = 17;
     private static final int BREATH_COOLDOWN_TICKS = 600;
-    private static final float BREATH_DAMAGE = 50.0F;
+    private static final float BREATH_DAMAGE = 30.0F;
     private static final double BREATH_RANGE_SQR = 32.0D * 32.0D;
     private static final float BREATH_CLOUD_RADIUS = 4.5F;
     private static final int BREATH_CLOUD_DURATION = 120;
     /** 龙息云伤害跳间隔（tick）：20tick=1s，对齐原版末影龙龙息云的结算节奏 */
     private static final int BREATH_CLOUD_HIT_INTERVAL = 20;
 
-    /** 冲撞：动画 2.3s=46tick，10tick 蓄力，第 22tick（1.1s）命中；CD 60s=1200tick；150 伤害 */
+    /** 冲撞：动画 2.3s=46tick，10tick 蓄力，第 22tick（1.1s）命中；CD 60s=1200tick；60 伤害 */
     private static final int CHARGE_ANIMATION_TICKS = 46;
     private static final int CHARGE_WINDUP_TICKS = 10;
     private static final int CHARGE_HIT_TICK = 22;
     private static final int CHARGE_DASH_END_TICK = 34;
     private static final int CHARGE_COOLDOWN_TICKS = 1200;
-    private static final float CHARGE_DAMAGE = 150.0F;
+    private static final float CHARGE_DAMAGE = 60.0F;
     private static final double CHARGE_HIT_RADIUS = 4.5D;
     /** 冲撞位移：格/tick（2.4×24tick ≈ 58 格冲刺距离，约 48 格/s，为龙最快动作） */
     private static final double CHARGE_SPEED = 2.4D;
 
-    /** 最懒光束：持续 60s=1200tick，每 10tick（0.5s）造成 500；CD 120s=2400tick */
+    /** 最懒光束：持续 60s=1200tick，每 10tick（0.5s）造成 20；CD 120s=2400tick */
     private static final int BEAM_DURATION_TICKS = 1200;
     private static final int BEAM_COOLDOWN_TICKS = 2400;
-    private static final float BEAM_DAMAGE = 500.0F;
+    private static final float BEAM_DAMAGE = 20.0F;
     private static final int BEAM_HIT_INTERVAL = 10;
     private static final double BEAM_RANGE = 48.0D;
     /** 悬停照射点与锁定玩家的水平距离（格），垂直高度在 Goal 内取目标上方 9 格 */
@@ -214,14 +214,14 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
 
     /**
      * 撕咬命中结算：给自身套上短暂的高额生命恢复，并给被击目标挂上
-     * 虚弱 III、失明、反胃与缓慢 IV 多重负面效果。
+     * 虚弱 I、失明、反胃与缓慢 IV 多重负面效果。
      */
     @Override
     public boolean doHurtTarget(Entity target) {
         if (super.doHurtTarget(target)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 99));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 1));
             if (target instanceof LivingEntity living) {
-                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 400, 2));
+                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 400, 0));
                 living.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 200, 0));
                 living.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3));
@@ -231,13 +231,13 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
         return false;
     }
 
-    /** 常驻自增益：生命恢复 L + 力量 XX（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    /** 常驻自增益：生命恢复 III + 力量 IV（服务端 aiStep 中调用，效果过期后自动续接）。 */
     private void maintainPassiveBuffs() {
         if (!this.hasEffect(MobEffects.REGENERATION)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 49));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 2));
         }
         if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
-            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 19));
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 3));
         }
     }
 

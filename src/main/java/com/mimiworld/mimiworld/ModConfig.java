@@ -183,67 +183,67 @@ public final class ModConfig {
             builder.comment("自定义生物的数值；改动在生物下次加入世界时生效。").push("mobs");
 
             mob(builder, mobMap, "mimi_monkey_king", "米米猴王",
-                    150, 7, 0.30, 15, 0, 0.5, 32, 0);
+                    300, 9, 0.30, 8, 0, 0.5, 32, 0);
             mob(builder, mobMap, "rice_crystal_tiger_king", "饭晶虎王",
-                    350, 13, 0.32, 20, 8, 0.6, 36, 0);
+                    500, 12, 0.32, 10, 1.0, 0.6, 36, 0);
             mob(builder, mobMap, "super_crystal_cow_king", "超晶牛王",
-                    500, 18, 0.30, 30, 8, 0.8, 40, 0);
+                    700, 16, 0.30, 12, 1.5, 0.8, 40, 0);
             mob(builder, mobMap, "heavy_crystal_rabbit_king", "重晶兔王",
-                    500, 30, 0.34, 25, 6, 0.7, 40, 0);
+                    700, 18, 0.34, 12, 1.5, 0.7, 40, 0);
             mob(builder, mobMap, "compound_azure_python", "复晶天青蟒",
-                    750, 25, 0.33, 40, 6, 0.7, 40, 0);
+                    1200, 20, 0.33, 14, 2.0, 0.7, 40, 0);
             mob(builder, mobMap, "cleansing_longevity_kui", "清洁长命夔",
-                    2500, 35, 0.30, 50, 8, 0.8, 40, 0);
+                    1500, 24, 0.30, 16, 2.5, 0.8, 40, 0);
             mob(builder, mobMap, "laziest_final_dragon", "最懒终末龙",
-                    5000, 100, 0.30, 100, 6, 1.0, 64, 4.5);
+                    2500, 28, 0.30, 18, 3.0, 1.0, 64, 4.5);
             mob(builder, mobMap, "dibazongzuilong", "第八宗罪龙",
-                    2500, 100, 0.30, 100, 6, 1.0, 64, 4.5);
+                    3000, 32, 0.30, 20, 3.5, 1.0, 64, 4.5);
 
             mob(builder, mobMap, "rice_stealer", "盗米者",
-                    40, 6, 0.30, 0, 0, 0, 20, 0);
+                    50, 6, 0.30, 0, 0, 0, 20, 0);
             mob(builder, mobMap, "sticky_rice_spider", "黏米之蛛",
-                    48, 2, 0.30, 0, 0, 0, 16, 0);
+                    40, 3, 0.30, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "mimi_skeleton", "米米骷髅",
-                    48, 4, 0.25, 0, 0, 0, 16, 0);
+                    45, 4, 0.25, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "humi_corpse", "糊米古尸",
-                    60, 3, 0.23, 0, 0, 0, 16, 0);
+                    50, 4, 0.23, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "pami_crawler", "爪巴米者",
                     24, 2, 0.25, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "rice_witch", "米巫",
-                    60, 4, 0.25, 0, 0, 0, 16, 0);
+                    50, 5, 0.25, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "momi_entrant", "没米入",
-                    150, 7, 0.30, 0, 0, 0, 64, 0);
+                    80, 8, 0.30, 0, 0, 0, 64, 0);
             mob(builder, mobMap, "explosive_rice_spirit", "爆烈米灵",
-                    120, 6, 0.23, 0, 0, 0, 48, 1.0);
+                    80, 6, 0.23, 0, 0, 0, 48, 1.0);
             mob(builder, mobMap, "carved_rice_skeleton", "雕米骷髅",
-                    120, 5, 0.25, 0, 0, 0, 16, 0);
+                    70, 6, 0.25, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "milai_horse", "米莱马",
-                    24, 4, 0.28, 0, 0, 0, 16, 0);
+                    32, 4, 0.28, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "miheng_pig_corpse", "米哼猪尸",
-                    60, 5, 0.23, 0, 0, 0, 16, 0);
+                    50, 5, 0.23, 0, 0, 0, 16, 0);
             mob(builder, mobMap, "rice_soul", "米魂",
-                    18, 3, 0.25, 0, 0, 0, 32, 0);
+                    28, 3, 0.25, 0, 0, 0, 32, 0);
 
             mob(builder, mobMap, "jietian_rice", "界天米",
-                    400, 200, 0.25, 0, 0, 0.5, 40, 1.0);
+                    220, 12, 0.25, 0, 0, 0.5, 40, 1.0);
             mob(builder, mobMap, "chaotic_void_toucher", "混沌虚无触",
-                    1500, 50, 0.0, 0, 0, 1.0, 36, 0);
+                    700, 16, 0.0, 0, 0, 1.0, 36, 0);
             mob(builder, mobMap, "blighted_thorn_flower", "污棘花",
-                    1000, 50, 0.0, 0, 0, 1.0, 32, 0);
+                    400, 14, 0.0, 0, 0, 1.0, 32, 0);
             mob(builder, mobMap, "fallen_rice_phoenix", "堕落米凤",
-                    2000, 70, 0.30, 0, 0, 1.0, 40, 1.5);
+                    700, 20, 0.30, 0, 0, 1.0, 40, 1.5);
             mob(builder, mobMap, "hualing_rice", "化灵米",
-                    10000, 10, 0.25, 0, 0, 0, 40, 1.2);
+                    1200, 14, 0.25, 0, 0, 0, 40, 1.2);
             mob(builder, mobMap, "pale_mermaid", "浅染鲛",
                     120, 10, 1.20, 0, 0, 0.5, 32, 0);
             mob(builder, mobMap, "wangmi_wounded_mermaid", "望米伤鲛",
-                    2000, 300, 1.00, 0, 0, 0.8, 48, 0);
+                    800, 24, 1.00, 0, 0, 0.8, 48, 0);
             mob(builder, mobMap, "rice_mirage", "米蜃",
-                    1500, 400, 0.35, 0, 0, 0, 32, 0);
+                    500, 22, 0.35, 0, 0, 0, 32, 0);
             mob(builder, mobMap, "lazy_elf", "懒精灵",
-                    800, 100, 0.30, 0, 0, 0, 32, 0);
+                    400, 16, 0.30, 0, 0, 0, 32, 0);
             mob(builder, mobMap, "rice_wolf_vulture", "哮噬米狼鹫",
-                    1000, 500, 0.32, 0, 0, 1.0, 40, 0);
+                    600, 22, 0.32, 0, 0, 1.0, 40, 0);
 
             mob(builder, mobMap, "mimi_sheep", "米羊羊",
                     16, 0, 0.23, 0, 0, 0, 16, 0);
@@ -346,7 +346,8 @@ public final class ModConfig {
             builder.comment(name + "（mimiworld:" + id + "）").push(id);
             MobStats stats = new MobStats(
                     builder.comment("最大生命值").defineInRange("max_health", maxHealth, 1.0E-4D, 1.0E7D),
-                    builder.comment("近战攻击力").defineInRange("attack_damage", attackDamage, 0.0D, 1.0E7D),
+                    builder.comment("近战攻击力（Boss 的实际伤害还会叠加其常驻力量效果）")
+                            .defineInRange("attack_damage", attackDamage, 0.0D, 1.0E7D),
                     builder.comment("移动速度").defineInRange("movement_speed", movementSpeed, 0.0D, 100.0D),
                     builder.comment("护甲值").defineInRange("armor", armor, 0.0D, 10000.0D),
                     builder.comment("护甲韧性").defineInRange("armor_toughness", armorToughness, 0.0D, 10000.0D),

@@ -31,7 +31,7 @@ import java.util.Collections;
  *   <li>{@code crimson_candlelight}（腥红烛照）：LivingHurtEvent 中检查伤害源的攻击方是否拥有该效果，
  *       若有则将最终伤害乘以 (amplifier + 2)。覆盖近战、远程（弹射物追溯发射者）等攻击类伤害。</li>
  *   <li>{@code python_constriction}（蟒蛇缠绕）：拥有该效果的攻击方对复晶天青蟒造成的伤害 ×1.5。</li>
- *   <li>{@code remnant_corruption}（残堕化）：受击者每级减少 10% 受到的伤害；
+ *   <li>{@code remnant_corruption}（残堕化）：受击者每级减少 3% 受到的伤害；
  *       第一至第八 Boss 生成/载入时永久获得对应等级（I～VIII 级）。</li>
  *   <li>{@code creative_flight}（创造飞行）：PlayerTickEvent 中拥有该效果时授予 mayfly，
  *       效果结束后撤销（创造模式或穿戴飞行盔甲时保留）。</li>
@@ -93,7 +93,7 @@ public class ModEffectEvents {
 
     /**
      * 残堕化减伤处理：受击者拥有 {@code remnant_corruption} 时，
-     * 最终伤害乘以 {@code 1 - 0.1 × (amplifier + 1)}（每级 -10%），最低为 0。
+     * 最终伤害乘以 {@code 1 - 0.03 × (amplifier + 1)}（每级 -3%，VIII 级 -24%），最低为 0。
      */
     @SubscribeEvent
     public static void onRemnantCorruption(LivingHurtEvent event) {
@@ -107,7 +107,7 @@ public class ModEffectEvents {
             return;
         }
 
-        float reduction = 0.1F * (effectInstance.getAmplifier() + 1);
+        float reduction = 0.03F * (effectInstance.getAmplifier() + 1);
         float multiplier = Math.max(0.0F, 1.0F - reduction);
         event.setAmount(event.getAmount() * multiplier);
     }

@@ -106,7 +106,7 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
     /** 三次挥斧伤害结算时刻：动画 0.4/1.15/2.15 秒 = 第 8/23/43 tick */
     private static final int[] COMBO_HIT_TICKS = {8, 23, 43};
     /** 三次挥斧伤害：横扫 10、反扫 20、终结重劈 30 */
-    private static final float[] COMBO_DAMAGE = {10.0F, 20.0F, 30.0F};
+    private static final float[] COMBO_DAMAGE = {10.0F, 16.0F, 22.0F};
     /** 大斧一挥冷却：45 秒 = 900 tick */
     private static final int COMBO_COOLDOWN_TICKS = 900;
     /** 前两扫判定区：半宽 2.2 保持，纵深 4.0 格 + margin 覆盖 4.6 格，对齐 4.5 格触发距离 */
@@ -127,7 +127,7 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
     /** 连续 8 tick 几乎没有位移视为撞墙卡死，强制结束（避免永久锁死） */
     private static final int CHARGE_STUCK_LIMIT = 8;
     /** 冲撞伤害 */
-    private static final float CHARGE_DAMAGE = 20.0F;
+    private static final float CHARGE_DAMAGE = 26.0F;
     /** 猛牛冲撞冷却：30 秒 = 600 tick */
     private static final int CHARGE_COOLDOWN_TICKS = 600;
     /** 冲撞释放距离：3~16 格（近身交给普攻/三段斧） */
@@ -232,10 +232,10 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
     /** 常驻自增益：生命恢复 X + 力量 V（服务端 aiStep 中调用，效果过期后自动续接）。 */
     private void maintainPassiveBuffs() {
         if (!this.hasEffect(MobEffects.REGENERATION)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 9));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 1));
         }
         if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
-            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 4));
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 2));
         }
     }
 

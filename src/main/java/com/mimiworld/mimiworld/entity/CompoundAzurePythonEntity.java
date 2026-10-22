@@ -97,7 +97,7 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
     private static final int BITE_ANIMATION_TICKS = 32;
     private static final int BITE_HIT_TICK = 13;
     private static final int BITE_COOLDOWN_TICKS = 3600;
-    private static final float BITE_DAMAGE = 16.0F;
+    private static final float BITE_DAMAGE = 24.0F;
     private static final double BITE_RANGE = 4.5D;
     private static final int BITE_POISON_DURATION = 600;
     private static final int BITE_CONSTRICTION_DURATION = 600;
@@ -108,7 +108,7 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
     private static final int KISS_HIT_TICK_2 = 20;
     private static final int KISS_COOLDOWN_TICKS = 300;
     /** 单次撕咬 25 点，两咬全吃共 50 点 */
-    private static final float KISS_DAMAGE_PER_BITE = 25.0F;
+    private static final float KISS_DAMAGE_PER_BITE = 16.0F;
     private static final int KISS_POISON_DURATION = 1200;
     /** 判定区半宽：左右各 1.3 格（总宽 2.6） */
     private static final double KISS_HALF_WIDTH = 1.3D;
@@ -119,7 +119,7 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
     private static final int SWEEP_ANIMATION_TICKS = 34;
     private static final int SWEEP_HIT_TICK = 16;
     private static final int SWEEP_COOLDOWN_TICKS = 600;
-    private static final float SWEEP_DAMAGE = 70.0F;
+    private static final float SWEEP_DAMAGE = 45.0F;
     /** 扫尾半径（格）与身后扇形余弦阈值（dot 小于 0.6 ≈ 身体两侧 53° 往后的约 250° 弧） */
     private static final double SWEEP_RADIUS = 5.5D;
     private static final double SWEEP_ARC_COS = 0.6D;
@@ -217,7 +217,7 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
             this.entityData.set(DATA_ATTACK_ANIM_TICKS, ATTACK_ANIMATION_TICKS);
             if (target instanceof LivingEntity living) {
                 living.addEffect(new MobEffectInstance(MobEffects.POISON, 120, 2));
-                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 1));
+                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 0));
             }
             return true;
         }
@@ -227,10 +227,10 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
     /** 常驻自增益：生命恢复 XV + 力量 VII（服务端 aiStep 中调用，效果过期后自动续接）。 */
     private void maintainPassiveBuffs() {
         if (!this.hasEffect(MobEffects.REGENERATION)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 14));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 1));
         }
         if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
-            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 6));
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 2));
         }
     }
 

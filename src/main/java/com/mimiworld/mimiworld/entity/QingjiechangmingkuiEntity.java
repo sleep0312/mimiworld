@@ -59,11 +59,11 @@ import java.util.List;
  * <ol>
  *   <li>普通撕咬：MeleeAttackGoal，15 点伤害，attack 动画 0.8 秒。</li>
  *   <li>【巨吼】（roar，CD 30s）：仰天长啸 2 秒，释放坚守者式音波——
- *       以自身为中心 10 格内所有生物受到 60 点音波伤害与冲击，第 20 tick 爆发。</li>
+ *       以自身为中心 10 格内所有生物受到 30 点音波伤害与冲击，第 20 tick 爆发。</li>
  *   <li>【夔之践踏】（stomp，CD 45s）：原地以所在位置为中心 7×7 区域，
- *       5 秒内随机重踏 8 次，落点提前 4 tick 雷光预警，被踩中玩家受到 100 点伤害。</li>
+ *       5 秒内随机重踏 8 次，落点提前 4 tick 雷光预警，被踩中玩家受到 45 点伤害。</li>
  *   <li>【三连咬】（triple_bite，CD 120s）：向前猛烈撕咬三次，
- *       每次前方扇形判定 70 点伤害，动画 1.6 秒。</li>
+ *       每次前方扇形判定 25 点伤害，动画 1.6 秒。</li>
  * </ol>
  */
 public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
@@ -98,7 +98,7 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     /** 巨吼冷却：30 秒 = 600 tick */
     private static final int ROAR_COOLDOWN_TICKS = 600;
     /** 巨吼伤害（对所有生物） */
-    private static final float ROAR_DAMAGE = 60.0F;
+    private static final float ROAR_DAMAGE = 30.0F;
     /** 音波影响半径（格） */
     private static final double ROAR_RADIUS = 10.0D;
 
@@ -109,7 +109,7 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     /** 践踏冷却：45 秒 = 900 tick */
     private static final int STOMP_COOLDOWN_TICKS = 900;
     /** 践踏伤害（对玩家） */
-    private static final float STOMP_DAMAGE = 100.0F;
+    private static final float STOMP_DAMAGE = 45.0F;
     /** 落点提前预警 tick 数 */
     private static final int STOMP_WARN_TICKS = 4;
 
@@ -120,7 +120,7 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     /** 三连咬冷却：120 秒 = 2400 tick */
     private static final int BITE_COOLDOWN_TICKS = 2400;
     /** 每次撕咬伤害（对玩家） */
-    private static final float BITE_DAMAGE = 70.0F;
+    private static final float BITE_DAMAGE = 25.0F;
     private static final double BITE_HALF_WIDTH = 2.0D;
     private static final double BITE_DEPTH = 3.6D;
 
@@ -238,19 +238,19 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
     public boolean doHurtTarget(Entity target) {
         if (super.doHurtTarget(target)) {
             this.entityData.set(DATA_ATTACK_ANIM_TICKS, ATTACK_ANIMATION_TICKS);
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 49));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 1));
             return true;
         }
         return false;
     }
 
-    /** 常驻自增益：生命恢复 XXX + 力量 X（服务端 aiStep 中调用，效果过期后自动续接）。 */
+    /** 常驻自增益：生命恢复 III + 力量 III（服务端 aiStep 中调用，效果过期后自动续接）。 */
     private void maintainPassiveBuffs() {
         if (!this.hasEffect(MobEffects.REGENERATION)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 29));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 2));
         }
         if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
-            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 9));
+            this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 2));
         }
     }
 

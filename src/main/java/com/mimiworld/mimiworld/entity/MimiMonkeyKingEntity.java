@@ -95,7 +95,7 @@ public class MimiMonkeyKingEntity extends Monster implements GeoEntity {
     /** 劈棍冷却：5.5 秒 = 110 tick */
     private static final int SLAM_COOLDOWN_TICKS = 110;
     /** 劈棍伤害 */
-    private static final float SLAM_DAMAGE = 7.0F;
+    private static final float SLAM_DAMAGE = 10.0F;
     /** throw 动画 2.0 秒 = 40 tick */
     private static final int THROW_ANIMATION_TICKS = 40;
     /** 金箍棒出手时刻：动画 0.5 秒 = 第 10 tick */
@@ -201,7 +201,7 @@ public class MimiMonkeyKingEntity extends Monster implements GeoEntity {
     /** 常驻自增益：生命恢复 III + 力量 II（服务端 aiStep 中调用，效果过期后自动续接）。 */
     private void maintainPassiveBuffs() {
         if (!this.hasEffect(MobEffects.REGENERATION)) {
-            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 2));
+            this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240, 0));
         }
         if (!this.hasEffect(MobEffects.DAMAGE_BOOST)) {
             this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 240, 1));

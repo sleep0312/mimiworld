@@ -21,24 +21,24 @@ import net.minecraft.world.item.crafting.Ingredient;
  * </ul>
  */
 public enum ModItemTiers implements Tier {
-    /** 饭晶：约半档钻石，珍珠米白晶质（修复材料结晶米） */
-    RICE_CRYSTAL(520, 7.0F, 2.5F, 2, 14, () -> Ingredient.of(ModItems.CRYSTALLIZED_RICE.get())),
-    /** 超结晶：蓝晶含金核，钻石级（修复材料超结晶） */
-    SUPER_CRYSTAL(900, 7.5F, 3.0F, 3, 16, () -> Ingredient.of(ModItems.SUPER_CRYSTAL.get())),
-    /** 饭晶合金：与饭晶锤一致的钻石级（耐久 1561 / 速度 8 / 伤害 3 / 等级 3，修复材料饭晶合金锭） */
-    RICE_CRYSTAL_ALLOY(1561, 8.0F, 3.0F, 3, 15, () -> Ingredient.of(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())),
-    /** 超重结晶：慢速重武器路线，攻击加成最高之一（修复材料超重结晶） */
-    SUPER_HEAVY_CRYSTAL(1900, 8.0F, 4.0F, 3, 12, () -> Ingredient.of(ModItems.SUPER_HEAVY_CRYSTAL.get())),
-    /** 复合米饭：超钻石级（修复材料复合米饭锭） */
-    COMPOUND_RICE_MEAL(2200, 9.0F, 4.0F, 4, 18, () -> Ingredient.of(ModItems.COMPOUND_RICE_MEAL_INGOT.get())),
-    /** 清洁复合：更高一档（修复材料清洁复合锭） */
-    CLEANSING_COMPOUND(2600, 9.5F, 4.5F, 4, 20, () -> Ingredient.of(ModItems.CLEANSING_COMPOUND_INGOT.get())),
-    /** 超懒合金：终极材料（修复材料超懒合金锭） */
-    SUPER_LAZY_ALLOY(3200, 10.0F, 5.0F, 4, 22, () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get())),
-    /** 最懒天堕：超懒合金之上的传说级（最懒天堕镐；修复材料堕落之心，与 HEAVENFALL 盔甲同源） */
-    LAZIEST_HEAVENFALL(3800, 11.0F, 5.5F, 4, 24, () -> Ingredient.of(ModItems.FALLEN_HEART.get())),
-    /** 残堕：龙系之上的终末级（残堕崩解之镐/残堕逆鳞之剑；修复材料宗罪龙逆鳞） */
-    REMNANT_FALLEN(4200, 12.0F, 6.0F, 4, 26, () -> Ingredient.of(ModItems.YU_SIN_DRAGON_REVERSE_SCALE.get()));
+    /** 饭晶：钻石级（耐久 1561 / 速度 7 / 伤害 3，剑总伤 7），珍珠米白晶质（修复材料结晶米） */
+    RICE_CRYSTAL(1561, 7.0F, 3.0F, 2, 14, () -> Ingredient.of(ModItems.CRYSTALLIZED_RICE.get())),
+    /** 超结晶：下界合金级（耐久 2031 / 伤害 4，剑总伤 8），蓝晶含金核（修复材料超结晶） */
+    SUPER_CRYSTAL(2031, 8.0F, 4.0F, 3, 16, () -> Ingredient.of(ModItems.SUPER_CRYSTAL.get())),
+    /** 饭晶合金：下界合金级强化的均衡档（耐久 2200 / 伤害 4.5，剑总伤 8.5，修复材料饭晶合金锭） */
+    RICE_CRYSTAL_ALLOY(2200, 8.0F, 4.5F, 3, 15, () -> Ingredient.of(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())),
+    /** 超重结晶：慢速重武器路线（耐久 2400 / 伤害 6，剑总伤 12、攻速 -2.8），修复材料超重结晶 */
+    SUPER_HEAVY_CRYSTAL(2400, 8.0F, 6.0F, 3, 12, () -> Ingredient.of(ModItems.SUPER_HEAVY_CRYSTAL.get())),
+    /** 复合米饭：均衡高伤档（耐久 2600 / 伤害 6.5，剑总伤 11.5，修复材料复合米饭锭） */
+    COMPOUND_RICE_MEAL(2600, 9.0F, 6.5F, 4, 18, () -> Ingredient.of(ModItems.COMPOUND_RICE_MEAL_INGOT.get())),
+    /** 清洁复合：更高一档（耐久 2800 / 伤害 7，剑总伤 12，修复材料清洁复合锭） */
+    CLEANSING_COMPOUND(2800, 9.5F, 7.0F, 4, 20, () -> Ingredient.of(ModItems.CLEANSING_COMPOUND_INGOT.get())),
+    /** 超懒合金：终极材料（耐久 3200 / 伤害 8，剑总伤 14，修复材料超懒合金锭） */
+    SUPER_LAZY_ALLOY(3200, 10.0F, 8.0F, 4, 22, () -> Ingredient.of(ModItems.SUPER_LAZY_ALLOY_INGOT.get())),
+    /** 最懒天堕：超懒合金之上的传说级（耐久 3800 / 伤害 8.5；最懒天堕镐；修复材料堕落之心） */
+    LAZIEST_HEAVENFALL(3800, 11.0F, 8.5F, 4, 24, () -> Ingredient.of(ModItems.FALLEN_HEART.get())),
+    /** 残堕：龙系之上的终末级（耐久 4200 / 伤害 10，剑总伤 16；修复材料宗罪龙逆鳞） */
+    REMNANT_FALLEN(4200, 12.0F, 10.0F, 4, 26, () -> Ingredient.of(ModItems.YU_SIN_DRAGON_REVERSE_SCALE.get()));
 
     private final int uses;
     private final float speed;

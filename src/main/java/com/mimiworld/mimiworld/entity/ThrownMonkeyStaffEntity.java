@@ -25,14 +25,14 @@ import java.util.UUID;
  * 米米猴王扔出的金箍棒投掷物：脱手后无重力直线飞行 20 tick（1 秒），
  * 随后自动追踪猴王飞回手中；撞上方块会立即折返。
  *
- * <p>去程与回程沿途扫过的生物受到 20 点伤害（{@code damageSources().thrown}），
+ * <p>去程与回程沿途扫过的生物受到 14 点伤害（{@code damageSources().thrown}），
  * 同一次扔棒中每个实体最多受伤一次（{@link #hitEntities} 去重），不会伤到猴王自己
  * 及其同盟。服务端权威移动（直接 setPos），客户端只做位置插值与 GeckoLib 渲染。</p>
  */
 public class ThrownMonkeyStaffEntity extends ThrowableProjectile implements GeoEntity {
 
     /** 路径伤害 */
-    public static final float DAMAGE = 20.0F;
+    public static final float DAMAGE = 14.0F;
     /** 去程速度（格/tick） */
     private static final double OUT_SPEED = 1.1D;
     /** 回程追踪速度（格/tick） */
