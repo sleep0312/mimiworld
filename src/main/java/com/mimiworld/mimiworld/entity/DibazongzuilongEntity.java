@@ -44,6 +44,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.ClipContext;
+import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -100,6 +101,13 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
             SynchedEntityData.defineId(DibazongzuilongEntity.class, EntityDataSerializers.INT);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    /**
+     * 身体部位碰撞箱（躯干/颈/头/尾/双翼三段/四肢）。翼展近 58 格的模型无法用单个方块盒贴合，
+     * 因此拆成若干部位：每个部位独立 AABB 只做受击判定，不参与物理推挤，
+     * 伤害统一转交本体（见 {@link BossBodyPart}）。
+     */
+    private final BossBodyPart<DibazongzuilongEntity>[] bodyParts;
 
     private static final RawAnimation ANIM_CIRCLING = RawAnimation.begin().thenLoop("animation.circling");
     private static final RawAnimation ANIM_BREATH = RawAnimation.begin().thenPlay("animation.dragon_breath");
@@ -187,6 +195,92 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.LAVA, -1.0F);
+
+        // 身体部位（偏移取自 dibazongzuilong.geo.json 各骨骼实测包围盒，单位格；
+        // 模型局部 -Z 为头的方向）：躯干 5.8×8.5、颈 3.0×4.1、头 4.5×6.1、
+        // 尾两段、双翼各三段、四肢各一件，共 15 个部位
+        this.bodyParts = new BossBodyPart[]{
+                this.part("body", 5.8F, 8.5F, 0.0F, 4.6F, -0.65F),
+                this.part("neck", 3.0F, 4.1F, 0.0F, 8.4F, -11.9F),
+                this.part("head", 4.5F, 6.1F, 0.0F, 6.7F, -17.25F),
+                this.part("tail_1", 4.4F, 4.0F, 0.0F, 6.55F, 10.5F),
+                this.part("tail_2", 2.9F, 3.6F, 0.0F, 7.5F, 17.35F),
+                this.part("wing_left_inner", 7.6F, 2.6F, 5.1F, 9.0F, -0.2F),
+                this.part("wing_left_mid", 10.5F, 2.7F, 12.5F, 9.95F, -2.2F),
+                this.part("wing_left_outer", 12.7F, 1.6F, 22.4F, 10.5F, -3.9F),
+                this.part("wing_right_inner", 7.6F, 2.6F, -5.1F, 9.0F, -0.2F),
+                this.part("wing_right_mid", 10.5F, 2.7F, -12.5F, 9.95F, -2.2F),
+                this.part("wing_right_outer", 12.7F, 1.6F, -22.4F, 10.5F, -3.9F),
+                this.part("leg_front_left", 2.6F, 7.1F, 2.05F, 1.7F, -4.6F),
+                this.part("leg_front_right", 2.6F, 7.1F, -2.05F, 1.7F, -4.6F),
+                this.part("leg_back_left", 2.9F, 7.3F, 2.0F, 1.7F, 5.4F),
+                this.part("leg_back_right", 2.9F, 7.3F, -2.0F, 1.7F, 5.4F)
+        };
+        // Forge：本体 id 之后顺延分配部位 id（MC-158205），保证客户端与服务端部位 id 一致
+        this.setId(ENTITY_COUNTER.getAndAdd(this.bodyParts.length + 1) + 1);
+        this.updateBodyParts();
+    }
+
+    private BossBodyPart<DibazongzuilongEntity> part(String name, float width, float height,
+                                                      float offsetX, float offsetY, float offsetZ) {
+        return new BossBodyPart<>(this, name, width, height, offsetX, offsetY, offsetZ);
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+        if (this.bodyParts != null) {
+            for (int i = 0; i < this.bodyParts.length; i++) {
+                this.bodyParts[i].setId(id + i + 1);
+            }
+        }
+    }
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public PartEntity<?>[] getParts() {
+        return this.bodyParts;
+    }
+
+    /** 部位每 tick 跟随本体位置与朝向重新摆放（部位自身不会被 Level tick）。 */
+    @Override
+    public void tick() {
+        super.tick();
+        this.updateBodyParts();
+    }
+
+    private void updateBodyParts() {
+        float yaw = this.yBodyRot * ((float) Math.PI / 180.0F);
+        float cos = Mth.cos(yaw);
+        float sin = Mth.sin(yaw);
+        for (BossBodyPart<DibazongzuilongEntity> part : this.bodyParts) {
+            double prevX = part.getX();
+            double prevY = part.getY();
+            double prevZ = part.getZ();
+            double dx = part.getOffsetX();
+            double dz = part.getOffsetZ();
+            // Bedrock 模型经 180°-yaw 旋转渲染：局部 +X → 本体右方，局部 +Z → 本体后方
+            double worldX = -dx * cos + dz * sin;
+            double worldZ = -dx * sin - dz * cos;
+            part.setPos(this.getX() + worldX, this.getY() + part.getOffsetY(), this.getZ() + worldZ);
+            part.xo = prevX;
+            part.yo = prevY;
+            part.zo = prevZ;
+            part.xOld = prevX;
+            part.yOld = prevY;
+            part.zOld = prevZ;
+        }
+    }
+
+    /** 本体碰撞箱已缩到躯干核心，渲染剔除范围需覆盖整条龙（翼展 57.5 × 体长 43.7 格）。 */
+    @Override
+    public AABB getBoundingBoxForCulling() {
+        return new AABB(this.getX() - 29.0D, this.getY() - 0.5D, this.getZ() - 22.5D,
+                this.getX() + 29.0D, this.getY() + 13.5D, this.getZ() + 22.5D);
     }
 
     /**

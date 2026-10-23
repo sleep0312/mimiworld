@@ -137,21 +137,23 @@ public class ModEntities {
                             .fireImmune()
                             .build("cleansing_longevity_kui"));
     // 最懒终末龙：末影龙 Promax 狂暴强化版，超巨型陆空 Boss（GeckoLib：龙息/冲撞/最懒光束/撕咬/盘旋/嘶吼，火焰免疫）
-    // 模型实测包围盒：翼展 16.88 格 × 高 7.84 格（双翼展开、脚底距原点 0.56），碰撞箱取 17.0×8.5 覆盖整条龙
+    // 模型实测包围盒：翼展 16.88 格 × 高 7.84 格（双翼展开、脚底距原点 0.56），
+    // 本体碰撞箱只保留躯干核心 3.0×5.5，头/颈/尾/双翼/四肢由 BossBodyPart 多部件碰撞箱负责受击判定
     public static final RegistryObject<EntityType<LaziestFinalDragonEntity>> LAZIEST_FINAL_DRAGON =
             ENTITY_TYPES.register("laziest_final_dragon", () ->
                     EntityType.Builder.<LaziestFinalDragonEntity>of(LaziestFinalDragonEntity::new, MobCategory.MONSTER)
-                            .sized(17.0F, 8.5F)
+                            .sized(3.0F, 5.5F)
                             .clientTrackingRange(16)
                             .fireImmune()
                             .build("laziest_final_dragon"));
     // 第八宗罪龙：最终 Boss，龙系超巨型陆空 Boss（GeckoLib，最懒终末龙 1.5 倍体型/翼展 919.5px，
     // 技能复用最懒终末龙：龙息 50 CD30s / 冲撞 150 CD60s / 光束 500×每0.5s CD120s / 普攻撕咬 20，火焰免疫）
-    // 模型实测包围盒：翼展 57.5 格 × 高 11.8 格（脚底距原点 0.84），碰撞箱取 58.0×12.75 覆盖整条龙
+    // 模型实测包围盒：翼展 57.5 格 × 高 11.8 格（脚底距原点 0.84），
+    // 本体碰撞箱只保留躯干核心 6.0×8.5，头/颈/尾/双翼/四肢由 BossBodyPart 多部件碰撞箱负责受击判定
     public static final RegistryObject<EntityType<DibazongzuilongEntity>> DIBAZONGZUILONG =
             ENTITY_TYPES.register("dibazongzuilong", () ->
                     EntityType.Builder.<DibazongzuilongEntity>of(DibazongzuilongEntity::new, MobCategory.MONSTER)
-                            .sized(58.0F, 12.75F)
+                            .sized(6.0F, 8.5F)
                             .clientTrackingRange(16)
                             .fireImmune()
                             .build("dibazongzuilong"));

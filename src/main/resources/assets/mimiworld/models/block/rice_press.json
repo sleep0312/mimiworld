@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "mimiworld:block/rice_press"
+    "bottom": "mimiworld:block/rice_press",
+    "side": "mimiworld:block/rice_press",
+    "top": "mimiworld:block/rice_press_top"
   }
 }

@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "mimiworld:block/oven"
+    "bottom": "mimiworld:block/oven",
+    "side": "mimiworld:block/oven",
+    "top": "mimiworld:block/oven_top"
   }
 }

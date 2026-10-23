@@ -44,6 +44,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.ClipContext;
+import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -100,6 +101,13 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
             SynchedEntityData.defineId(LaziestFinalDragonEntity.class, EntityDataSerializers.INT);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    /**
+     * 身体部位碰撞箱（躯干/颈/头/尾/双翼内外段/四肢）。巨型模型无法用单个方块盒贴合，
+     * 因此拆成若干部位：每个部位独立 AABB 只做受击判定，不参与物理推挤，
+     * 伤害统一转交本体（见 {@link BossBodyPart}）。
+     */
+    private final BossBodyPart<LaziestFinalDragonEntity>[] bodyParts;
 
     private static final RawAnimation ANIM_CIRCLING = RawAnimation.begin().thenLoop("animation.circling");
     private static final RawAnimation ANIM_BREATH = RawAnimation.begin().thenPlay("animation.dragon_breath");
@@ -187,6 +195,90 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.LAVA, -1.0F);
+
+        // 身体部位（偏移取自 laziest_final_dragon.geo.json 各骨骼实测包围盒，单位格；
+        // 模型局部 -Z 为头的方向）：躯干 3.0×5.3、颈 1.6×2.6、头 1.8×3.4、
+        // 尾两段、双翼各内外两段、四肢各一件，共 13 个部位
+        this.bodyParts = new BossBodyPart[]{
+                this.part("body", 3.0F, 5.3F, 0.0F, 3.4F, -0.2F),
+                this.part("neck", 1.6F, 2.6F, 0.0F, 5.65F, -7.95F),
+                this.part("head", 1.8F, 3.4F, 0.0F, 5.15F, -11.5F),
+                this.part("tail_1", 2.0F, 2.6F, 0.0F, 4.4F, 7.0F),
+                this.part("tail_2", 1.1F, 2.1F, 0.0F, 4.9F, 11.55F),
+                this.part("wing_left_inner", 2.3F, 1.5F, 2.0F, 6.0F, -0.4F),
+                this.part("wing_left_outer", 5.5F, 1.2F, 5.4F, 6.6F, -2.6F),
+                this.part("wing_right_inner", 2.3F, 1.5F, -2.0F, 6.0F, -0.4F),
+                this.part("wing_right_outer", 5.5F, 1.2F, -5.4F, 6.6F, -2.6F),
+                this.part("leg_front_left", 1.3F, 4.8F, 1.15F, 1.15F, -3.3F),
+                this.part("leg_front_right", 1.3F, 4.8F, -1.15F, 1.15F, -3.3F),
+                this.part("leg_back_left", 1.5F, 4.9F, 1.1F, 1.15F, 3.4F),
+                this.part("leg_back_right", 1.5F, 4.9F, -1.1F, 1.15F, 3.4F)
+        };
+        // Forge：本体 id 之后顺延分配部位 id（MC-158205），保证客户端与服务端部位 id 一致
+        this.setId(ENTITY_COUNTER.getAndAdd(this.bodyParts.length + 1) + 1);
+        this.updateBodyParts();
+    }
+
+    private BossBodyPart<LaziestFinalDragonEntity> part(String name, float width, float height,
+                                                        float offsetX, float offsetY, float offsetZ) {
+        return new BossBodyPart<>(this, name, width, height, offsetX, offsetY, offsetZ);
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+        if (this.bodyParts != null) {
+            for (int i = 0; i < this.bodyParts.length; i++) {
+                this.bodyParts[i].setId(id + i + 1);
+            }
+        }
+    }
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public PartEntity<?>[] getParts() {
+        return this.bodyParts;
+    }
+
+    /** 部位每 tick 跟随本体位置与朝向重新摆放（部位自身不会被 Level tick）。 */
+    @Override
+    public void tick() {
+        super.tick();
+        this.updateBodyParts();
+    }
+
+    private void updateBodyParts() {
+        float yaw = this.yBodyRot * ((float) Math.PI / 180.0F);
+        float cos = Mth.cos(yaw);
+        float sin = Mth.sin(yaw);
+        for (BossBodyPart<LaziestFinalDragonEntity> part : this.bodyParts) {
+            double prevX = part.getX();
+            double prevY = part.getY();
+            double prevZ = part.getZ();
+            double dx = part.getOffsetX();
+            double dz = part.getOffsetZ();
+            // Bedrock 模型经 180°-yaw 旋转渲染：局部 +X → 本体右方，局部 +Z → 本体后方
+            double worldX = -dx * cos + dz * sin;
+            double worldZ = -dx * sin - dz * cos;
+            part.setPos(this.getX() + worldX, this.getY() + part.getOffsetY(), this.getZ() + worldZ);
+            part.xo = prevX;
+            part.yo = prevY;
+            part.zo = prevZ;
+            part.xOld = prevX;
+            part.yOld = prevY;
+            part.zOld = prevZ;
+        }
+    }
+
+    /** 本体碰撞箱已缩到躯干核心，渲染剔除范围需覆盖整条龙（翼展 16.3 × 体长 29 格）。 */
+    @Override
+    public AABB getBoundingBoxForCulling() {
+        return new AABB(this.getX() - 8.5D, this.getY() - 0.5D, this.getZ() - 15.0D,
+                this.getX() + 8.5D, this.getY() + 9.0D, this.getZ() + 15.0D);
     }
 
     /**
