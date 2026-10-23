@@ -1,6 +1,7 @@
 package com.mimiworld.mimiworld;
 
 import com.mimiworld.mimiworld.block.ModBlocks;
+import com.mimiworld.mimiworld.client.ConfigScreenRegistrar;
 import com.mimiworld.mimiworld.block.entity.ModBlockEntities;
 import com.mimiworld.mimiworld.effect.ModEffects;
 import com.mimiworld.mimiworld.entity.ModEntities;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -40,6 +42,11 @@ public class MimiWorld
 
         // 数值配置文件：config/mimiworld-common.toml（怪物/防具/武器/战斗/掉落）
         ModConfig.register();
+
+        // 可选的 Cloth Config 图形界面：仅在客户端且安装了 cloth_config 时注册模组列表的「配置」按钮
+        if (FMLEnvironment.dist.isClient()) {
+            ConfigScreenRegistrar.register();
+        }
 
         // GeckoLib 初始化：内部完成网络注册与客户端渲染/重载监听等事件总线订阅，
         // 是后续自定义 Geo 生物、立体 Geo 盔甲、动画方块/物品的必要前置（有 hasInitialized 防重入）

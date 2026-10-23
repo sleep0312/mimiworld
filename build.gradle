@@ -290,6 +290,12 @@ dependencies {
     // 生命/护甲/护甲韧性条超出原版上限时紧凑扩展显示，仅兼容性测试用
     runtimeOnly fg.deobf("curse.maven:overflowing-bars-852662:5763974")
 
+    // Cloth Config API 11.1.136（1.20.1 Forge，无前置）
+    // 配置界面 GUI 库：compileOnly 供界面代码编译，运行时按可选依赖处理
+    // （ConfigScreenRegistrar 用 ModList 判断，未安装时不注册「配置」按钮，mod 照常运行）
+    compileOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
+    runtimeOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
+
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"

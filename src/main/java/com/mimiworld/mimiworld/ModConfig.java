@@ -359,7 +359,7 @@ public final class ModConfig {
             out.put(id, stats);
         }
 
-        private static String armorName(String id) {
+        public static String armorName(String id) {
             return switch (id) {
                 case "rice_crystal_alloy" -> "饭晶合金套";
                 case "super_heavy_crystal" -> "超重结晶套";
@@ -374,7 +374,7 @@ public final class ModConfig {
             };
         }
 
-        private static String weaponName(String id) {
+        public static String weaponName(String id) {
             return switch (id) {
                 case "rice_crystal" -> "饭晶级";
                 case "super_crystal" -> "超结晶级";
