@@ -25,8 +25,7 @@ import java.util.function.Consumer;
  * 翅膀与尾巴挂在 armorBody 下，仅胸甲穿戴时显示）。
  *
  * 动画（assets/mimiworld/animations/remnant_fallen_cardinal_sin_armor.animation.json）：
- *   animation.walk  —— 双翼持续扇动
- *   animation.walk2 —— 尾巴持续摆动
+ *   animation.walk2 —— 尾巴持续摆动（双翼保持静态，不参与动画）
  */
 public class RemnantFallenCardinalSinArmorItem extends ArmorItem implements GeoItem {
 
@@ -56,12 +55,7 @@ public class RemnantFallenCardinalSinArmorItem extends ArmorItem implements GeoI
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        // 双翼扇动（wing_right / wing_left）
-        controllers.add(new AnimationController<>(this, "wings", 0, state -> {
-            state.setAndContinue(RawAnimation.begin().thenLoop("animation.walk"));
-            return PlayState.CONTINUE;
-        }));
-        // 尾巴摆动（tail）
+        // 尾巴摆动（tail；翅膀不加控制器，保持静态）
         controllers.add(new AnimationController<>(this, "tail", 0, state -> {
             state.setAndContinue(RawAnimation.begin().thenLoop("animation.walk2"));
             return PlayState.CONTINUE;
