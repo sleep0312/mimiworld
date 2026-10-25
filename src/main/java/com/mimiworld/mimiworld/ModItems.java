@@ -2236,10 +2236,6 @@ public class ModItems {
     public static final RegistryObject<Item> REALM_LORD_DRAGON_HEART = registerItem("realm_lord_dragon_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 宗罪龙头（Yu Sin Dragon Head）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> YU_SIN_DRAGON_HEAD = registerItem("yu_sin_dragon_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 宗罪龙头冠（Cardinal Sin Dragon Crown）：普通物品，最大堆叠 64；残堕宗罪套装修复材料
     public static final RegistryObject<Item> CARDINAL_SIN_DRAGON_CROWN = registerItem("cardinal_sin_dragon_crown",
             () -> new Item(new Item.Properties().stacksTo(64)));

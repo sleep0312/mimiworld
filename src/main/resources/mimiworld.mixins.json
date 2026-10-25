@@ -6,6 +6,7 @@
   "refmap": "mimiworld.refmap.json",
   "mixins": [
     "CauldronBlockMixin",
+    "ItemStackMixin",
     "JadeStatusEffectsProviderMixin",
     "LayeredCauldronBlockMixin",
     "LivingEntityMixin",

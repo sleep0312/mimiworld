@@ -2519,7 +2519,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_dragon_scale", has(ModItems.DRAGON_SCALE.get()))
                 .save(consumer);
 
-        // 同上，中心宗罪龙头 = 终罪龙头
+        // 同上，中心第八宗罪龙头 = 终罪龙头
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.FINAL_SIN_DRAGON_HEAD.get())
                 .pattern("ABC")
                 .pattern("DXD")
@@ -2528,8 +2528,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('B', ModItems.DRAGON_SCALE.get())
                 .define('C', ModItems.DRAGON_BONE.get())
                 .define('D', ModItems.SEVEN_DEADLY_FALLS.get())
-                .define('X', ModItems.YU_SIN_DRAGON_HEAD.get())
-                .unlockedBy("has_yu_sin_dragon_head", has(ModItems.YU_SIN_DRAGON_HEAD.get()))
+                .define('X', ModItems.DIBAZONGZUI_HEAD.get())
+                .unlockedBy("has_dibazongzui_head", has(ModItems.DIBAZONGZUI_HEAD.get()))
                 .save(consumer);
 
         // （残堕宗罪头盔；COMBAT）
@@ -2586,7 +2586,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("BDB")
                 .pattern("BEB")
                 .define('B', ModItems.DRAGON_SCALE.get())
-                .define('C', ModItems.YU_SIN_DRAGON_HEAD.get())
+                .define('C', ModItems.DIBAZONGZUI_HEAD.get())
                 .define('D', ModItems.SUPER_LAZY_ALLOY_BOW.get())
                 .define('E', ModItems.SEVEN_DEADLY_FALLS.get())
                 .unlockedBy("has_super_lazy_alloy_bow", has(ModItems.SUPER_LAZY_ALLOY_BOW.get()))
@@ -2638,15 +2638,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_li_pearl", has(ModItems.LI_PEARL.get()))
                 .save(consumer);
 
-        // （龙首之怒；龙鳞块 宗罪龙头）
+        // （龙首之怒；龙鳞块 第八宗罪龙头）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DRAGON_HEAD_WRATH.get())
                 .pattern("DCD")
                 .pattern("CBC")
                 .pattern("DCD")
                 .define('D', ModItems.SEVEN_DEADLY_FALLS.get())
                 .define('C', ModItems.DRAGON_SCALE_BLOCK.get())
-                .define('B', ModItems.YU_SIN_DRAGON_HEAD.get())
-                .unlockedBy("has_yu_sin_dragon_head", has(ModItems.YU_SIN_DRAGON_HEAD.get()))
+                .define('B', ModItems.DIBAZONGZUI_HEAD.get())
+                .unlockedBy("has_dibazongzui_head", has(ModItems.DIBAZONGZUI_HEAD.get()))
                 .save(consumer);
 
         // （终罪界心；界主龙心）

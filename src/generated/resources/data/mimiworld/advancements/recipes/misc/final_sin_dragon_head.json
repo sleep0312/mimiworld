@@ -1,28 +1,28 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "mimiworld:final_sin_dragon_head"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_yu_sin_dragon_head": {
+    "has_dibazongzui_head": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:yu_sin_dragon_head"
+              "mimiworld:dibazongzui_head"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:final_sin_dragon_head"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_yu_sin_dragon_head",
+      "has_dibazongzui_head",
       "has_the_recipe"
     ]
   ],

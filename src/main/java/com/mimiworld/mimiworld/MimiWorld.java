@@ -4,6 +4,7 @@ import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.client.ConfigScreenRegistrar;
 import com.mimiworld.mimiworld.block.entity.ModBlockEntities;
 import com.mimiworld.mimiworld.effect.ModEffects;
+import com.mimiworld.mimiworld.enchantment.ModEnchantments;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.menu.ModMenuTypes;
 import com.mimiworld.mimiworld.fluid.ModFluids;
@@ -61,6 +62,7 @@ public class MimiWorld
         ModBlockEntities.register(modEventBus); // 造米台方块实体类型
         ModMenuTypes.register(modEventBus);     // 造米台 GUI 菜单类型
         ModEffects.register(modEventBus);       // 自定义药水效果（腥红烛照 / 蟒蛇缠绕）
+        ModEnchantments.register(modEventBus);  // 自定义附魔（泣血）
         // 米树 configured_feature 是动态注册表内容，1.20.1 只能用数据包 JSON 注册（data/mimiworld/worldgen/configured_feature/rice_tree.json），无 DeferredRegister
 
         // commonSetup 主线程阶段注册米桶↔空炼药锅交互（需等物品/方块注册表填充完成）
