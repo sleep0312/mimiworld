@@ -10,6 +10,7 @@
     "JadeStatusEffectsProviderMixin",
     "LayeredCauldronBlockMixin",
     "LivingEntityMixin",
+    "NoiseBasedChunkGeneratorMixin",
     "RangedAttributeMixin"
   ],
   "client": [

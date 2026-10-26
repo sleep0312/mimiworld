@@ -149,7 +149,7 @@
   "block.mimiworld.bow_forging_table": "铸弓台",
   "item.mimiworld.mimi_eye": "米米之眼",
   "item.mimiworld.mimi_totem": "米米图腾",
-  "item.mimiworld.mimi_teleporter": "米米传送器",
+  "block.mimiworld.mimi_teleporter": "米米传送器",
   "item.mimiworld.small_summoner": "小型召唤器",
   "item.mimiworld.medium_summoner": "中型召唤器",
   "item.mimiworld.large_summoner": "大型召唤器",
@@ -510,5 +510,6 @@
   "effect.mimiworld.crimson_candlelight": "腥红烛照",
   "effect.mimiworld.python_constriction": "蟒蛇缠绕",
   "effect.mimiworld.creative_flight": "创造飞行",
+  "effect.mimiworld.creative_flight.desc": "你现在可以像创造一样飞行啦",
   "effect.mimiworld.remnant_corruption": "残堕化"
 }

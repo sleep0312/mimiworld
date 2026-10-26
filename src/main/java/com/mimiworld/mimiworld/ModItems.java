@@ -750,9 +750,10 @@ public class ModItems {
     public static final RegistryObject<Item> MIMI_TOTEM = registerItem("mimi_totem",
             () -> new MimiTotemItem(new Item.Properties()));
 
-    // 米米传送器（Mimi Teleporter）
+    // 米米传送器（Mimi Teleporter）：传送门框架方块（ModBlocks.MIMI_TELEPORTER）的 BlockItem，
+    // 放置后作为米米维度传送门框架使用；传送/激活逻辑后续实现。
     public static final RegistryObject<Item> MIMI_TELEPORTER = registerItem("mimi_teleporter",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new BlockItem(ModBlocks.MIMI_TELEPORTER.get(), new Item.Properties()));
 
     // 小型召唤器（Small Summoner）
     public static final RegistryObject<Item> SMALL_SUMMONER = registerItem("small_summoner",

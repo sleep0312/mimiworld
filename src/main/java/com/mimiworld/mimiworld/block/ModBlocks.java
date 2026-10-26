@@ -441,6 +441,17 @@ public class ModBlocks {
                             .strength(-1.0F, 3600000.0F)
                             .sound(SoundType.GLASS)));
 
+    // 米米传送器方块（mimi_teleporter）：传送门框架类方块，后续在框架内点燃/填充米米维度传送门。
+    // 当前仅注册为金属质地方块（硬度 3.0、抗爆 6.0、金属音效、需正确工具才掉落），
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签）；
+    // 破坏掉落本身（loot_tables/blocks/mimi_teleporter.json）。
+    public static final RegistryObject<Block> MIMI_TELEPORTER =
+            BLOCKS.register("mimi_teleporter", () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL)));
+
     // 磨制残堕深渊岩（）：残堕深渊岩石的磨制变体，深板岩质地全立方块（硬度 3.0、抗爆 6.0、深板岩声）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/polished_remnant_fallen_abyss_rock.json）。
