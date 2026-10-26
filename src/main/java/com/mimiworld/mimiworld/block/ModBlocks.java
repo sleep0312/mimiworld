@@ -441,16 +441,30 @@ public class ModBlocks {
                             .strength(-1.0F, 3600000.0F)
                             .sound(SoundType.GLASS)));
 
-    // 米米传送器方块（mimi_teleporter）：传送门框架类方块，后续在框架内点燃/填充米米维度传送门。
-    // 当前仅注册为金属质地方块（硬度 3.0、抗爆 6.0、金属音效、需正确工具才掉落），
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签）；
-    // 破坏掉落本身（loot_tables/blocks/mimi_teleporter.json）。
+    // 米米传送器方块（mimi_teleporter）：传送门框架类方块（MimiTeleporterBlock）。
+    // 按 7×7 图案摆放 12 个后手持米米之眼逐个右键插眼（每只眼消耗 1 个、每框限插 1 次），
+    // 插眼的框顶上 1 格悬浮显示缓慢旋转的米米之眼；12 个全部插眼后在中心生成
+    // 米米传送门方块（下 2 格）与泥米（顶上 1 格）。
+    // 硬度 3.0、抗爆 6.0、金属音效，镐可快速挖掘（mineable/pickaxe 标签）；
+    // 挖掘等级 2 = 铁镐（needs_iron_tool 标签）；破坏掉落本身（loot_tables/blocks/mimi_teleporter.json）。
     public static final RegistryObject<Block> MIMI_TELEPORTER =
-            BLOCKS.register("mimi_teleporter", () -> new Block(
+            BLOCKS.register("mimi_teleporter", () -> new MimiTeleporterBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
+
+    // 米米传送门方块（mimi_portal）：仪式激活后生成在框架中心的「块状」传送门本体（MimiPortalBlock），
+    // 全立方、无碰撞、发光 11、生存不可破坏（无 BlockItem、无战利品表，创造可拆除），
+    // 实体踩入即与米米维度双向传送（落点见 world/MimiPortalTeleporter）。
+    public static final RegistryObject<Block> MIMI_PORTAL =
+            BLOCKS.register("mimi_portal", () -> new MimiPortalBlock(
+                    BlockBehaviour.Properties.of()
+                            .noCollission()
+                            .noOcclusion()
+                            .lightLevel(state -> 11)
+                            .strength(-1.0F, 3600000.0F)
+                            .sound(SoundType.GLASS)));
 
     // 磨制残堕深渊岩（）：残堕深渊岩石的磨制变体，深板岩质地全立方块（硬度 3.0、抗爆 6.0、深板岩声）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。

@@ -213,6 +213,13 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(FallenCrossBlockEntity::new,
                             ModBlocks.FALLEN_CROSS.get()).build(null));
 
+    // 米米传送器（方块 mimi_teleporter）：客户端渲染顶上悬浮旋转的米米之眼；
+    // 服务端 ticker 每秒重试一次传送门激活（中心被占用时延后补生成），自身不存数据
+    public static final RegistryObject<BlockEntityType<MimiTeleporterBlockEntity>> MIMI_TELEPORTER =
+            BLOCK_ENTITIES.register("mimi_teleporter",
+                    () -> BlockEntityType.Builder.of(MimiTeleporterBlockEntity::new,
+                            ModBlocks.MIMI_TELEPORTER.get()).build(null));
+
     public static void register(IEventBus modEventBus) {
         BLOCK_ENTITIES.register(modEventBus);
     }

@@ -1,5 +1,6 @@
 {
   "variants": {
-    "": { "model": "mimiworld:block/mimi_teleporter" }
+    "eye=false": { "model": "mimiworld:block/mimi_teleporter" },
+    "eye=true": { "model": "mimiworld:block/mimi_teleporter" }
   }
 }

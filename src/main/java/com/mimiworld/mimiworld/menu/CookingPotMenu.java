@@ -28,7 +28,8 @@ public class CookingPotMenu extends GridCookingPotMenu {
         super(ModMenuTypes.COOKING_POT_MENU.get(), containerId, playerInventory,
                 container, data, access,
                 2, 8, 17, 18,
-                116, 17, 53,
+                // 右上输入槽 / 输出槽：与 cooking_pot.png 槽框（25..42 / 61..78）对齐
+                116, 26, 62,
                 18, 74,
                 96);
     }

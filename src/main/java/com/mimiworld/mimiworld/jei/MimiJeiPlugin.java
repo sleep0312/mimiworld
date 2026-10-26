@@ -68,74 +68,76 @@ public class MimiJeiPlugin implements IModPlugin {
         machines.clear();
         IGuiHelper gui = registration.getJeiHelpers().getGuiHelper();
 
-        // ---- A. MultiInputProcessor（有序槽；pos 表 = inputs 下标 → 槽格列/行）----
-        // 搅碎器：槽0 左上、槽1 左下、槽2 右上
-        add(gui, "crusher", ModBlocks.CRUSHER.get(), 2, 2, false,
+        // ---- A. MultiInputProcessor（pos 表 = inputs 下标 → GUI 绝对槽坐标）----
+        // 搅碎器：槽0 左上(26,17)、槽1 左下(26,50)、槽2 右上(121,17)
+        add(gui, "crusher", ModBlocks.CRUSHER.get(), 84, 121, 50,
                 () -> JeiLayouts.multi(CrusherBlockEntity.jeiRecipes(),
-                        new int[][]{{0, 0}, {0, 1}, {1, 0}}));
-        // 碾磨台：槽0~2 左列上中下、槽3~5 右列上中下
-        add(gui, "grinding_table", ModBlocks.GRINDING_TABLE.get(), 2, 3, false,
+                        new int[][]{{26, 17}, {26, 50}, {121, 17}}));
+        // 碾磨台：槽0~2 左列(26)、槽3~5 右列(130)，y=15/36/57
+        add(gui, "grinding_table", ModBlocks.GRINDING_TABLE.get(), 116, 79, 81,
                 () -> JeiLayouts.multi(GrindingTableBlockEntity.jeiRecipes(),
-                        new int[][]{{0, 0}, {0, 1}, {0, 2}, {1, 0}, {1, 1}, {1, 2}}));
-        // 淬剑台：槽0 左上、槽1 右上（隔一列）、槽2 居中下
-        add(gui, "sword_quenching_table", ModBlocks.SWORD_QUENCHING_TABLE.get(), 3, 2, false,
+                        new int[][]{{26, 15}, {26, 36}, {26, 57}, {130, 15}, {130, 36}, {130, 57}}));
+        // 淬剑台：槽0 (35,15)、槽1 (121,15)、槽2 (79,38)
+        add(gui, "sword_quenching_table", ModBlocks.SWORD_QUENCHING_TABLE.get(), 84, 79, 61,
                 () -> JeiLayouts.multi(SwordQuenchingTableBlockEntity.jeiRecipes(),
-                        new int[][]{{0, 0}, {2, 0}, {1, 1}}));
-        // 汲血台：槽0 左上、槽1 左下；标签配方（如任意肉类 + 玻璃瓶）并入同一分类
-        add(gui, "bloodletting_table", ModBlocks.BLOODLETTING_TABLE.get(), 1, 2, false,
+                        new int[][]{{35, 15}, {121, 15}, {79, 38}}));
+        // 汲血台：槽0 (44,18)、槽1 (44,50)；标签配方（如任意肉类 + 玻璃瓶）并入同一分类
+        add(gui, "bloodletting_table", ModBlocks.BLOODLETTING_TABLE.get(), 84, 116, 33,
                 () -> {
                     List<JeiView> views = new ArrayList<>(JeiLayouts.multi(
                             BloodlettingTableBlockEntity.jeiRecipes(),
-                            new int[][]{{0, 0}, {0, 1}}));
+                            new int[][]{{44, 18}, {44, 50}}));
                     views.addAll(JeiLayouts.bloodTags(
                             BloodlettingTableBlockEntity.jeiTaggedRecipes()));
                     return views;
                 });
 
-        // ---- B. DualInputProcessor（两槽无序；单输入配方只画一槽）----
-        add(gui, "ionization_table", ModBlocks.IONIZATION_TABLE.get(), 2, 1, false,
+        // ---- B. DualInputProcessor（两槽；单输入配方只画 A 槽）----
+        add(gui, "ionization_table", ModBlocks.IONIZATION_TABLE.get(), 84, 102, 33,
                 () -> JeiLayouts.dual(IonizationTableBlockEntity.jeiRecipes()));
-        add(gui, "precipitation_table", ModBlocks.PRECIPITATION_TABLE.get(), 2, 1, false,
+        add(gui, "precipitation_table", ModBlocks.PRECIPITATION_TABLE.get(), 84, 102, 33,
                 () -> JeiLayouts.dual(PrecipitationTableBlockEntity.jeiRecipes()));
 
-        // ---- C. 离解台（上槽 + 下槽）----
-        add(gui, "dissociation_table", ModBlocks.DISSOCIATION_TABLE.get(), 1, 2, false,
+        // ---- C. 离解台（上槽 (35,24) + 下槽 (79,53)）----
+        add(gui, "dissociation_table", ModBlocks.DISSOCIATION_TABLE.get(), 84, 121, 24,
                 () -> JeiLayouts.dissociation(DissociationTableBlockEntity.jeiRecipes()));
 
         // ---- D. 网格工作台（即时合成）----
-        add(gui, "pestle_realm_table", ModBlocks.PESTLE_REALM_TABLE.get(), 2, 2, false,
-                () -> JeiLayouts.gridCrafting(2, PestleRealmTableBlockEntity.jeiRecipes()));
-        add(gui, "ingot_condensation_table", ModBlocks.INGOT_CONDENSATION_TABLE.get(), 5, 5, false,
-                () -> JeiLayouts.gridCrafting(5, IngotCondensationTableBlockEntity.jeiRecipes()));
+        add(gui, "pestle_realm_table", ModBlocks.PESTLE_REALM_TABLE.get(), 84, 116, 44,
+                () -> JeiLayouts.gridCrafting(2, 38, 15, 22, 22,
+                        PestleRealmTableBlockEntity.jeiRecipes()));
+        add(gui, "ingot_condensation_table", ModBlocks.INGOT_CONDENSATION_TABLE.get(), 154, 79, 115,
+                () -> JeiLayouts.gridCrafting(5, 43, 13, 18, 18,
+                        IngotCondensationTableBlockEntity.jeiRecipes()));
 
-        // ---- E. 煮锅族（NxN 网格 + 右上额外槽，需燃料）----
-        add(gui, "cooking_pot", ModBlocks.COOKING_POT.get(), 3, 2, true,
-                () -> JeiLayouts.pot(2, CookingPotBlockEntity.jeiRecipes()));
-        add(gui, "large_cooking_pot", ModBlocks.LARGE_COOKING_POT.get(), 4, 3, true,
-                () -> JeiLayouts.pot(3, LargeCookingPotBlockEntity.jeiRecipes()));
-        add(gui, "extra_large_cooking_pot", ModBlocks.EXTRA_LARGE_COOKING_POT.get(), 5, 4, true,
-                () -> JeiLayouts.pot(4, ExtraLargeCookingPotBlockEntity.jeiRecipes()));
-        add(gui, "jumbo_mega_cooking_pot", ModBlocks.JUMBO_MEGA_COOKING_POT.get(), 6, 5, true,
-                () -> JeiLayouts.pot(5, JumboMegaCookingPotBlockEntity.jeiRecipes()));
-        add(gui, "iron_wok", ModBlocks.IRON_WOK.get(), 5, 2, true,
+        // ---- E. 煮锅族（NxN 网格 (8,17) 间距 18 + 右上独立输入槽）----
+        add(gui, "cooking_pot", ModBlocks.COOKING_POT.get(), 96, 116, 62,
+                () -> JeiLayouts.pot(2, 116, 26, CookingPotBlockEntity.jeiRecipes()));
+        add(gui, "large_cooking_pot", ModBlocks.LARGE_COOKING_POT.get(), 114, 116, 71,
+                () -> JeiLayouts.pot(3, 116, 35, LargeCookingPotBlockEntity.jeiRecipes()));
+        add(gui, "extra_large_cooking_pot", ModBlocks.EXTRA_LARGE_COOKING_POT.get(), 132, 116, 80,
+                () -> JeiLayouts.pot(4, 116, 44, ExtraLargeCookingPotBlockEntity.jeiRecipes()));
+        add(gui, "jumbo_mega_cooking_pot", ModBlocks.JUMBO_MEGA_COOKING_POT.get(), 150, 116, 89,
+                () -> JeiLayouts.pot(5, 116, 53, JumboMegaCookingPotBlockEntity.jeiRecipes()));
+        add(gui, "iron_wok", ModBlocks.IRON_WOK.get(), 96, 116, 74,
                 () -> JeiLayouts.ironWok(IronWokBlockEntity.jeiRecipes()));
-        add(gui, "oven", ModBlocks.OVEN.get(), 4, 3, true,
-                () -> JeiLayouts.pot(3, OvenBlockEntity.jeiRecipes()));
+        add(gui, "oven", ModBlocks.OVEN.get(), 114, 116, 71,
+                () -> JeiLayouts.pot(3, 116, 35, OvenBlockEntity.jeiRecipes()));
 
-        // ---- F. 搅拌器（两列四行 + 额外槽，无序即时合成）----
-        add(gui, "mixer", ModBlocks.MIXER.get(), 3, 4, false,
+        // ---- F. 搅拌器（两列四行 + 中央槽，无序即时合成）----
+        add(gui, "mixer", ModBlocks.MIXER.get(), 152, 79, 115,
                 () -> JeiLayouts.mixer(MixerBlockEntity.jeiRecipes()));
 
         // ---- G. 米系早期机器 ----
-        add(gui, "rice_pounding_table", ModBlocks.RICE_POUNDING_TABLE.get(), 2, 1, false,
+        add(gui, "rice_pounding_table", ModBlocks.RICE_POUNDING_TABLE.get(), 84, 112, 26,
                 () -> JeiLayouts.pounding(RicePoundingTableBlockEntity.jeiRecipes()));
-        add(gui, "advanced_rice_pounding_table", ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get(), 2, 1, false,
+        add(gui, "advanced_rice_pounding_table", ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get(), 84, 112, 26,
                 () -> JeiLayouts.advancedPounding(AdvancedRicePoundingTableBlockEntity.jeiRecipes()));
-        add(gui, "rice_press", ModBlocks.RICE_PRESS.get(), 3, 3, false,
+        add(gui, "rice_press", ModBlocks.RICE_PRESS.get(), 84, 81, 54,
                 () -> JeiLayouts.press(RicePressBlockEntity.jeiRecipes()));
 
         // ---- H. 米片机（原料 + 水（流体槽，500mB）→ 米）----
-        add(gui, "rice_maker", ModBlocks.RICE_MAKER.get(), 2, 1, false,
+        add(gui, "rice_maker", ModBlocks.RICE_MAKER.get(), 84, 112, 43,
                 () -> JeiLayouts.riceMaker(RiceMakerBlockEntity.jeiRecipes()));
 
         for (MachineDef def : machines) {
@@ -157,13 +159,19 @@ public class MimiJeiPlugin implements IModPlugin {
         }
     }
 
-    private void add(IGuiHelper gui, String name, Block block, int cols, int rows, boolean fuel,
+    /**
+     * 注册一台机器：背景贴图固定为 assets/mimiworld/textures/gui/&lt;name&gt;.png，
+     * panelHeight 为需要展示的面板高度（玩家背包起始行），outputX/Y 为产物槽绝对坐标。
+     */
+    private void add(IGuiHelper gui, String name, Block block, int panelHeight, int outputX, int outputY,
                      Supplier<List<JeiView>> views) {
         mezz.jei.api.recipe.RecipeType<JeiView> type =
                 mezz.jei.api.recipe.RecipeType.create(MimiWorld.MODID, name, JeiView.class);
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(MimiWorld.MODID,
+                "textures/gui/" + name + ".png");
         ItemStack catalyst = new ItemStack(block);
         machines.add(new MachineDef(type,
-                new ViewCategory(gui, type, catalyst, cols, rows, fuel),
+                new ViewCategory(gui, type, catalyst, texture, panelHeight, outputX, outputY),
                 views, catalyst));
     }
 }

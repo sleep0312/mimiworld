@@ -3,13 +3,11 @@ package com.mimiworld.mimiworld.jei;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -19,70 +17,39 @@ import net.minecraft.world.item.crafting.Ingredient;
  * mimiworld 全部工作方块共用的 JEI 分类实现。
  * <p>
  * 一台机器 = 一个本类实例（独立 RecipeType + 机器方块作图标/催化剂）。
- * 布局为标准「左输入区（cols×rows 个标准槽位）→ 箭头 → 右产物槽」，
- * 底部预留一条 16px 横带：燃料机器在左侧画火焰，无序配方在右侧放无序标记。
- * 槽位的实际坐标全部来自 {@link JeiView}（每族机器只有一份映射）。
+ * 背景直接取该机器 GUI 贴图的 176 x panelHeight 区域（panelHeight 为面板中
+ * 玩家背包起始行，即只截取机器操作区），槽位坐标全部是 GUI 内的绝对像素坐标，
+ * 直接来自各 Menu 的 addSlot —— 因此 JEI 页面与游戏内界面逐像素一致。
+ * <p>
+ * 槽框、进度箭头、火焰底均已在贴图内烘焙，所以这里不再绘制 JEI 槽位背景，
+ * 也不再自绘箭头/火焰，只按坐标摆放配料。
  */
 public class ViewCategory implements IRecipeCategory<JeiView> {
 
-    /** 原版熔炉 GUI 贴图：箭头与火焰图标直接复用，避免自绘 */
-    private static final ResourceLocation FURNACE_GUI =
-            ResourceLocation.fromNamespaceAndPath("minecraft", "textures/gui/container/furnace.png");
-
-    private static final int SLOT = 18;
-    private static final int PAD = 7;
-    private static final int GAP = 6;
-    private static final int ARROW_W = 24;
-    private static final int ARROW_H = 17;
-    private static final int FLAME_W = 14;
-    private static final int FLAME_H = 14;
-    /** 底部横带高度（放火焰 / 无序标记） */
-    private static final int STRIP = 16;
+    /** GUI 贴图统一宽度 */
+    public static final int GUI_WIDTH = 176;
 
     private final RecipeType<JeiView> recipeType;
     private final Component title;
     private final IDrawable background;
     private final IDrawable icon;
-    private final IDrawable slotBackground;
-    private final IDrawable arrow;
-    private final IDrawable flame;
-
-    private final int width;
-    private final int height;
-    private final int arrowX;
-    private final int arrowY;
     private final int outputX;
     private final int outputY;
-    private final int shapelessX;
-    private final int shapelessY;
-    private final int flameX;
-    private final int flameY;
-    private final boolean fuel;
 
-    public ViewCategory(IGuiHelper guiHelper, RecipeType<JeiView> recipeType,
-                        ItemStack catalyst, int cols, int rows, boolean fuel) {
+    /**
+     * @param texture   机器 GUI 贴图（mimiworld:textures/gui/&lt;机器&gt;.png）
+     * @param panelHeight 需要展示的面板高度（不含玩家背包）
+     * @param outputX   产物槽在 GUI 中的绝对坐标
+     * @param outputY   产物槽在 GUI 中的绝对坐标
+     */
+    public ViewCategory(IGuiHelper guiHelper, RecipeType<JeiView> recipeType, ItemStack catalyst,
+                        ResourceLocation texture, int panelHeight, int outputX, int outputY) {
         this.recipeType = recipeType;
         this.title = catalyst.getHoverName();
-        this.fuel = fuel;
-
-        this.width = PAD + cols * SLOT + GAP + ARROW_W + GAP + SLOT + PAD;
-        this.height = PAD + rows * SLOT + STRIP + PAD;
-
-        this.background = guiHelper.createBlankDrawable(width, height);
+        this.outputX = outputX;
+        this.outputY = outputY;
+        this.background = guiHelper.createDrawable(texture, 0, 0, GUI_WIDTH, panelHeight);
         this.icon = guiHelper.createDrawableItemStack(catalyst);
-        this.slotBackground = guiHelper.getSlotDrawable();
-        this.arrow = guiHelper.createDrawable(FURNACE_GUI, 176, 14, ARROW_W, ARROW_H);
-        this.flame = guiHelper.createDrawable(FURNACE_GUI, 176, 0, FLAME_W, FLAME_H);
-
-        this.arrowX = PAD + cols * SLOT + GAP;
-        this.arrowY = PAD + (rows * SLOT - ARROW_H) / 2;
-        this.outputX = arrowX + ARROW_W + GAP;
-        this.outputY = PAD + (rows * SLOT - SLOT) / 2;
-
-        this.shapelessX = width - PAD - 15;
-        this.shapelessY = PAD + rows * SLOT + 1;
-        this.flameX = PAD + 1;
-        this.flameY = shapelessY;
     }
 
     @Override
@@ -108,9 +75,7 @@ public class ViewCategory implements IRecipeCategory<JeiView> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, JeiView recipe, IFocusGroup focuses) {
         for (JeiView.Slot slot : recipe.inputs()) {
-            IRecipeSlotBuilder slotBuilder = builder
-                    .addSlot(RecipeIngredientRole.INPUT, slot.x(), slot.y())
-                    .setBackground(slotBackground, -1, -1);
+            IRecipeSlotBuilder slotBuilder = builder.addSlot(RecipeIngredientRole.INPUT, slot.x(), slot.y());
             if (slot.tag() != null) {
                 // 标签配料（如任意肉类）：展开为标签内全部物品轮播
                 slotBuilder.addIngredients(Ingredient.of(slot.tag()));
@@ -122,20 +87,6 @@ public class ViewCategory implements IRecipeCategory<JeiView> {
             }
         }
         builder.addSlot(RecipeIngredientRole.OUTPUT, outputX, outputY)
-                .setBackground(slotBackground, -1, -1)
                 .addItemStack(recipe.output());
-
-        if (recipe.shapeless()) {
-            builder.setShapeless(shapelessX, shapelessY);
-        }
-    }
-
-    @Override
-    public void draw(JeiView recipe, IRecipeSlotsView slotsView, GuiGraphics guiGraphics,
-                     double mouseX, double mouseY) {
-        arrow.draw(guiGraphics, arrowX, arrowY);
-        if (fuel) {
-            flame.draw(guiGraphics, flameX, flameY);
-        }
     }
 }

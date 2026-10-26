@@ -21,6 +21,7 @@ import com.mimiworld.mimiworld.client.renderer.PurifiedLongevityKuiHeadBlockRend
 import com.mimiworld.mimiworld.client.renderer.LaziestEndDragonHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.DibazongzuiHeadBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.FallenCrossBlockRenderer;
+import com.mimiworld.mimiworld.client.renderer.MimiTeleporterBlockRenderer;
 import com.mimiworld.mimiworld.client.renderer.FanjinghuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.ChaojingniuwangRenderer;
 import com.mimiworld.mimiworld.client.renderer.CompoundAzurePythonRenderer;
@@ -234,6 +235,9 @@ public class ClientSetup {
         // 堕落十字架：GeckoLib 华丽十字架方块（基座+紫黑十字+金纹+双面宝石静态模型，渲染器内 16/27 缩放收进一格贴地居中）
         event.registerBlockEntityRenderer(ModBlockEntities.FALLEN_CROSS.get(),
                 ctx -> new FallenCrossBlockRenderer<>(ctx));
+        // 米米传送器：方块 JSON 模型照常渲染，BER 仅在插眼后叠加正上方悬浮缓慢旋转的米米之眼
+        event.registerBlockEntityRenderer(ModBlockEntities.MIMI_TELEPORTER.get(),
+                MimiTeleporterBlockRenderer::new);
     }
 
     // 造米台菜单 ↔ GUI 屏幕的绑定（1.20.1 Forge 47.x 仍用 MenuScreens.register）
