@@ -42,16 +42,28 @@ public class MimiTeleporterBlock extends Block implements EntityBlock {
     /** 是否已插眼（米米之眼）：插上后永久为 true，仅消耗式插眼一次。 */
     public static final BooleanProperty EYE = BooleanProperty.create("eye");
 
+    // ==================== 激活序列时间轴（游戏刻，供服务端生成与客户端动画共用） ====================
+    /** 第一段：全部插眼后，眼睛转速用 3 秒（60 刻）平滑提升到原速的 3 倍。 */
+    public static final int SEQ_WARMUP = 60;
+    /** 第二段：从 60 刻起每 1 秒（20 刻）向泥米位置发射一束激光，共 {@link #SEQ_SHOTS} 束。 */
+    public static final int SEQ_INTERVAL = 20;
+    /** 激光总束数（= 框架数 12）。 */
+    public static final int SEQ_SHOTS = 12;
+    /** 生成时刻：最后一束（第 12 束，280 刻）发射后隔 1 秒生成传送门与泥米（300 刻）。 */
+    public static final int SEQ_FORM_AT = SEQ_WARMUP + SEQ_INTERVAL * SEQ_SHOTS;
+    /** 第三段：生成瞬间起用 3 秒（60 刻）把眼睛转速平滑降回原速，激光同时瞬间消失。 */
+    public static final int SEQ_SPIN_DOWN = 60;
+
     /**
-     * 12 个框架方块相对中心的水平偏移 (dx, dz)，与摆放示意图第一层一一对应：
-     * 上下边各 3 个（距中心 3 格、横向 -2/0/+2），左右边各 3 个（距中心 3 格、纵向 -2/0/+2）。
+     * 12 个框架方块相对中心的水平偏移 (dx, dz)。
+     * 下标即激活动画中该框架发射激光的先后顺序：从上边（北侧）起顺时针绕环一周
+     * —— 上边左→右、右边上→下、下边右→左、左边下→上（俯视 +x 向右、+z 向下）。
      */
-    private static final int[][] RING_OFFSETS = {
-            {-2, -3}, {0, -3}, {2, -3},
-            {-3, -2}, {3, -2},
-            {-3, 0}, {3, 0},
-            {-3, 2}, {3, 2},
-            {-2, 3}, {0, 3}, {2, 3},
+    public static final int[][] RING_OFFSETS = {
+            {-2, -3}, {0, -3}, {2, -3},   // 上边 z=-3：左→右
+            {3, -2}, {3, 0}, {3, 2},      // 右边 x=3：上→下
+            {2, 3}, {0, 3}, {-2, 3},      // 下边 z=3：右→左
+            {-3, 2}, {-3, 0}, {-3, -2},   // 左边 x=-3：下→上
     };
 
     public MimiTeleporterBlock(Properties properties) {
@@ -93,6 +105,7 @@ public class MimiTeleporterBlock extends Block implements EntityBlock {
         super.onRemove(state, level, pos, newState, movedByPiston);
         if (!state.is(newState.getBlock()) && !level.isClientSide) {
             breakPortalFor(level, pos);
+            clearSequence(level, pos);
         }
     }
 
@@ -145,22 +158,98 @@ public class MimiTeleporterBlock extends Block implements EntityBlock {
     }
 
     /**
-     * 以 clicked 为插眼中任意一个框架方块，反推中心并校验完整图案，
-     * 全部 12 个传送器均为已插眼状态时生成传送门。
+     * 以 clicked 为插眼中任意一个框架方块，反推中心并校验完整图案。
      *
-     * @return 本次是否生成了传送门
+     * <p>全部 12 个传送器均为已插眼时的三段式激活序列（不再立即生成）：</p>
+     * <ol>
+     *   <li>0–60 刻：眼睛转速平滑升至 3 倍；</li>
+     *   <li>60 刻起每 20 刻发射一束激光（共 12 束，280 刻发射完毕）；</li>
+     *   <li>300 刻：生成 2 格传送门 + 泥米盖，激光瞬间消失、转速 60 刻内降回原速
+     *       （时间轴常量见 {@link #SEQ_WARMUP} 等，动画由客户端渲染器播放）。</li>
+     * </ol>
+     *
+     * <p>序列进度记录在 12 个框架方块实体上（{@code seqStart}/{@code seqCenter}）并同步客户端。
+     * 框架在序列中被打断时由 {@link #clearSequence} 清除；区块重载后按存档的游戏刻续播。</p>
+     *
+     * @return 本次是否推进了激活流程（含“序列进行中/中心占用等待”）
      */
     public static boolean tryActivate(Level level, BlockPos clicked) {
         if (level.isClientSide) {
             return false;
         }
+        long now = level.getGameTime();
         for (int[] offset : RING_OFFSETS) {
             BlockPos center = clicked.offset(-offset[0], 0, -offset[1]);
-            if (isPatternComplete(level, center) && formPortal(level, center)) {
+            if (level.getBlockState(center).is(ModBlocks.MIMI_PORTAL.get())) {
+                continue; // 该中心已成型
+            }
+            if (!isPatternComplete(level, center)) {
+                continue;
+            }
+            if (!(level.getBlockEntity(center.offset(RING_OFFSETS[0][0], 0, RING_OFFSETS[0][1]))
+                    instanceof MimiTeleporterBlockEntity anchor)) {
+                continue;
+            }
+            if (anchor.seqStart == MimiTeleporterBlockEntity.SEQ_NONE) {
+                // 第 12 只眼落位、序列尚未开始：启动激活动画
+                startSequence(level, center, now);
                 return true;
             }
+            if (now - anchor.seqStart >= SEQ_FORM_AT && formPortal(level, center)) {
+                return true;
+            }
+            // 序列进行中（或中心暂被占用）：交由方块实体 ticker 逐 tick 继续推进
+            return true;
         }
         return false;
+    }
+
+    /** 启动激活动画：把序列起点刻与中心写入 12 个框架方块实体并同步客户端。 */
+    private static void startSequence(Level level, BlockPos center, long start) {
+        for (int[] offset : RING_OFFSETS) {
+            BlockPos framePos = center.offset(offset[0], 0, offset[1]);
+            if (level.getBlockEntity(framePos) instanceof MimiTeleporterBlockEntity tele) {
+                syncSequence(level, framePos, tele, start, center);
+            }
+        }
+    }
+
+    /**
+     * 清除以 framePos 为环成员的所有已启动序列（框架被破坏导致图案中断时调用）：
+     * 反推候选中心，凡该框架属于其序列环的，重置 12 个框架上的序列状态并同步客户端。
+     */
+    private static void clearSequence(Level level, BlockPos framePos) {
+        for (int[] offset : RING_OFFSETS) {
+            BlockPos center = framePos.offset(-offset[0], 0, -offset[1]);
+            boolean active = false;
+            for (int[] ring : RING_OFFSETS) {
+                if (level.getBlockEntity(center.offset(ring[0], 0, ring[1]))
+                        instanceof MimiTeleporterBlockEntity tele
+                        && tele.seqStart != MimiTeleporterBlockEntity.SEQ_NONE) {
+                    active = true;
+                    break;
+                }
+            }
+            if (!active) {
+                continue;
+            }
+            for (int[] ring : RING_OFFSETS) {
+                BlockPos frame = center.offset(ring[0], 0, ring[1]);
+                if (level.getBlockEntity(frame) instanceof MimiTeleporterBlockEntity tele) {
+                    syncSequence(level, frame, tele, MimiTeleporterBlockEntity.SEQ_NONE, null);
+                }
+            }
+        }
+    }
+
+    /** 写入并同步单个框架方块实体的序列状态（setChanged + sendBlockUpdated → 客户端收更新包）。 */
+    private static void syncSequence(Level level, BlockPos pos, MimiTeleporterBlockEntity tele,
+                                     long start, @Nullable BlockPos center) {
+        tele.seqStart = start;
+        tele.seqCenter = center;
+        tele.setChanged();
+        BlockState state = level.getBlockState(pos);
+        level.sendBlockUpdated(pos, state, state, 3);
     }
 
     /** 中心 12 个框架位置是否全部为「米米传送器 + 已插眼」。 */
@@ -192,6 +281,12 @@ public class MimiTeleporterBlock extends Block implements EntityBlock {
         level.setBlock(center, portal, 3);
         level.setBlock(second, portal, 3);
         level.setBlock(third, ModBlocks.MUD_RICE.get().defaultBlockState(), 3);
+        // 三格生成处播放方块碎裂粒子（2001 = 原版破坏效果），连发两次 = 普通碎裂的 2 倍数量
+        for (BlockPos pos : new BlockPos[]{center, second, third}) {
+            int blockId = Block.getId(level.getBlockState(pos));
+            level.levelEvent(2001, pos, blockId);
+            level.levelEvent(2001, pos, blockId);
+        }
         return true;
     }
 }

@@ -79,16 +79,35 @@ public class MimiPortalTeleporter implements ITeleporter {
     /**
      * 出生点列的地表落点（首个可站立的 Y，实体脚部位置）。
      *
-     * <p>刻意不用 {@code getHeightmapPos}：它返回 {@code min(地表高度, pos.getY() + 1)}，
-     * 会把传入坐标自身的 Y 当作上限——本世界 level.dat 的 SpawnY 异常为 -60，
-     * 用它会把玩家截断到世界底部（虚空）。这里直接用 {@link Level#getHeight} 的
-     * 三参重载，上限为世界最高点，不受出生点 Y 影响。</p>
+     * <p>两个坑都要绕开：</p>
+     * <ol>
+     *   <li>刻意不用 {@code getHeightmapPos}：它返回 {@code min(地表高度, pos.getY() + 1)}，
+     *       会把传入坐标自身的 Y 当作上限——旧世界 level.dat 的 SpawnY 异常为 -60 时
+     *       会把玩家截断到世界底部（虚空）；</li>
+     *   <li>{@link Level#getHeight} 在目标区块<b>未加载</b>时会直接返回
+     *       {@code getMinBuildHeight()}（米米维度 = -64）——新世界首次进入米米维度时
+     *       出生区块必然未加载，玩家会被放到底界处坠入虚空。因此先强制同步加载/生成
+     *       出生区块，查出的高度若仍是底界值则自顶向下扫描兜底。</li>
+     * </ol>
      */
     private static Vec3 surfaceSpawn(ServerLevel level) {
         BlockPos spawn = level.getSharedSpawnPos();
-        int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                spawn.getX(), spawn.getZ());
-        return new Vec3(spawn.getX() + 0.5D, y, spawn.getZ() + 0.5D);
+        int x = spawn.getX();
+        int z = spawn.getZ();
+        // 强制同步加载（或生成）出生区块，否则 getHeight 走「未加载」分支返回世界底界
+        level.getChunk(x >> 4, z >> 4);
+        int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+        if (y <= level.getMinBuildHeight() + 1) {
+            // 高度图仍未就绪的兜底：自顶向下找首个碰撞非空的方块，落点取其顶面
+            BlockPos.MutableBlockPos cursor =
+                    new BlockPos.MutableBlockPos(x, level.getMaxBuildHeight() - 1, z);
+            while (cursor.getY() > level.getMinBuildHeight()
+                    && level.getBlockState(cursor).getCollisionShape(level, cursor).isEmpty()) {
+                cursor.move(Direction.DOWN);
+            }
+            y = cursor.getY() + 1;
+        }
+        return new Vec3(x + 0.5D, y, z + 0.5D);
     }
 
     /** 读回入口传送门坐标；要求记录的维度与本次返程目标维度一致，否则视为无记录。 */
