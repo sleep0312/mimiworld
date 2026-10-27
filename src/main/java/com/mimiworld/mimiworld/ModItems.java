@@ -1902,14 +1902,6 @@ public class ModItems {
     public static final RegistryObject<Item> BIG_BOWL = registerItem("big_bowl",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 锅（Pot）：方块物品 BlockItem；基础铁制烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
-    public static final RegistryObject<Item> POT = registerItem("pot",
-            () -> new BlockItem(ModBlocks.POT.get(), new Item.Properties()));
-
-    // 大锅（Big Pot）：方块物品 BlockItem；铜箍加固的大型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
-    public static final RegistryObject<Item> BIG_POT = registerItem("big_pot",
-            () -> new BlockItem(ModBlocks.BIG_POT.get(), new Item.Properties()));
-
     // 天虚棘脑汤（Celestial Void Thorn Brain Soup）：熟食，饱食度 10；力量 20/1min、生命恢复 100/5min、迅捷 10/2min
     public static final RegistryObject<Item> CELESTIAL_VOID_THORN_BRAIN_SOUP =
             registerEffectFood("celestial_void_thorn_brain_soup", 10,

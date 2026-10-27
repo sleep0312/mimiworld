@@ -180,15 +180,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice_planks", has(ModItems.RICE_PLANKS.get()))
                 .save(consumer);
 
-        // （3 个米木板摆倒 T 形 → 锅）
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.POT.get())
-                .pattern("   ")
-                .pattern("P P")
-                .pattern(" P ")
-                .define('P', ModItems.RICE_PLANKS.get())
-                .unlockedBy("has_rice_planks", has(ModItems.RICE_PLANKS.get()))
-                .save(consumer);
-
         // （8 个米块围桶 → 米桶；桶按原版机制返还空桶）
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.RICE_BUCKET.get())
                 .pattern("BBB")
@@ -2277,15 +2268,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern(" A ")
                 .define('A', ModItems.RICE_PLANKS.get())
                 .unlockedBy("has_rice_planks", has(ModItems.RICE_PLANKS.get()))
-                .save(consumer);
-
-        // （占位产物；米石）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BIG_POT.get())
-                .pattern("   ")
-                .pattern("A A")
-                .pattern("AAA")
-                .define('A', ModItems.RICE_STONE.get())
-                .unlockedBy("has_rice_stone", has(ModItems.RICE_STONE.get()))
                 .save(consumer);
 
         // （盘子）

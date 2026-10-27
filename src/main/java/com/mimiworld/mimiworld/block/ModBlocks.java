@@ -564,28 +564,6 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 锅（ BlockItem）：基础铁制烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
-    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
-    // 破坏掉落本身（loot_tables/blocks/pot.json）。
-    public static final RegistryObject<Block> POT =
-            BLOCKS.register("pot", () -> new Block(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
-    // 大锅（ BlockItem）：铜箍加固的大型烹饪锅方块（当前为装饰性全立方块，无 GUI/交互逻辑），
-    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
-    // 破坏掉落本身（loot_tables/blocks/big_pot.json）。
-    public static final RegistryObject<Block> BIG_POT =
-            BLOCKS.register("big_pot", () -> new Block(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
     // 小煮锅（BlockItem）：带支脚的小型烹饪锅方块，1 输入 + 1 燃料 + 1 输出熔炉式定时加工（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
