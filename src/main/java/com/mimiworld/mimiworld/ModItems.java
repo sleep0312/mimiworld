@@ -6,6 +6,7 @@ import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.item.CleansingCompoundArmorItem;
 import com.mimiworld.mimiworld.item.CompoundRiceMealArmorItem;
 import com.mimiworld.mimiworld.item.EffectFoodItem;
+import com.mimiworld.mimiworld.item.LaziestHeavenfallArmorItem;
 import com.mimiworld.mimiworld.item.MimiArrowItem;
 import com.mimiworld.mimiworld.item.MimiDivineWingsItem;
 import com.mimiworld.mimiworld.item.MimiEyeItem;
@@ -1141,30 +1142,31 @@ public class ModItems {
                     () -> new RainbowNameSwordItem(ModItemTiers.LAZIEST_HEAVENFALL, 8, -2.4F,
                             new Item.Properties().stacksTo(1)));
 
-    // ===== 最懒天堕盔甲四件套（HEAVENFALL 材质，全部 stacksTo 1） =====
+    // ===== 最懒天堕盔甲四件套（HEAVENFALL 材质，全部 stacksTo 1）=====
+    // GeckoLib 3D 模型（LaziestHeavenfallArmorItem）：纯白双翼挂 armorBody，常驻扇翅动画
 
     // 天堕翼胸甲：CHESTPLATE
     public static final RegistryObject<Item> HEAVENFALL_WINGS_CHESTPLATE =
             registerItem("heavenfall_wings_chestplate",
-                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.CHESTPLATE,
+                    () -> new LaziestHeavenfallArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.CHESTPLATE,
                             new Item.Properties().stacksTo(1)));
 
     // 最懒天堕头盔：HELMET
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_HELMET =
             registerItem("laziest_heavenfall_helmet",
-                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.HELMET,
+                    () -> new LaziestHeavenfallArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.HELMET,
                             new Item.Properties().stacksTo(1)));
 
     // 最懒天堕护腿：LEGGINGS
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_LEGGINGS =
             registerItem("laziest_heavenfall_leggings",
-                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.LEGGINGS,
+                    () -> new LaziestHeavenfallArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.LEGGINGS,
                             new Item.Properties().stacksTo(1)));
 
     // 最懒天堕靴子：BOOTS
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_BOOTS =
             registerItem("laziest_heavenfall_boots",
-                    () -> new ArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.BOOTS,
+                    () -> new LaziestHeavenfallArmorItem(ModArmorMaterials.HEAVENFALL, ArmorItem.Type.BOOTS,
                             new Item.Properties().stacksTo(1)));
 
     // ===== 米米系列肉鱼食物（全部食用时长 1.5s = 30t，nutrition 单位=半个鸡腿） =====
