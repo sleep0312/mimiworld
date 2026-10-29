@@ -7,6 +7,8 @@ import com.mimiworld.mimiworld.item.CleansingCompoundArmorItem;
 import com.mimiworld.mimiworld.item.CompoundRiceMealArmorItem;
 import com.mimiworld.mimiworld.item.EffectFoodItem;
 import com.mimiworld.mimiworld.item.MimiArrowItem;
+import com.mimiworld.mimiworld.item.MimiDivineWingsItem;
+import com.mimiworld.mimiworld.item.MimiEyeItem;
 import com.mimiworld.mimiworld.item.MimiTotemItem;
 import com.mimiworld.mimiworld.item.MonkeyKingRuyiStaffItem;
 import com.mimiworld.mimiworld.item.RainbowNameItem;
@@ -740,9 +742,10 @@ public class ModItems {
 
     // ===== 米米之眼/传送器/召唤器系列（普通物品，最大堆叠 64） =====
 
-    // 米米之眼（Eye of Mimi）
+    // 米米之眼（Eye of Mimi）：右键米米传送器插眼激活传送门；在米米维度手持右键则返程回到
+    // 主世界入口传送门旁（MimiEyeItem，落点见 world/MimiPortalTeleporter）
     public static final RegistryObject<Item> MIMI_EYE = registerItem("mimi_eye",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new MimiEyeItem(new Item.Properties().stacksTo(64)));
 
     // 米米图腾（Mimi Totem）：不死图腾，主手/副手持有受致命伤时免死一次；
     // 效果与原版一致（回 1 血+再生 II 45s+伤害吸收 II 5s+抗火 I 40s），
@@ -992,9 +995,9 @@ public class ModItems {
 
     // ===== 米米神翼系列 + 上古剑意 + 超懒神剑残片 =====
 
-    // 米米神翼（Mimi Divine Wings）：胸甲装备，MIMI_WINGS 材质
+    // 米米神翼（Mimi Divine Wings）：胸甲装备，MIMI_WINGS 材质，GeckoLib 3D 双翼循环扇动
     public static final RegistryObject<Item> MIMI_DIVINE_WINGS = registerItem("mimi_divine_wings",
-            () -> new ArmorItem(ModArmorMaterials.MIMI_WINGS, ArmorItem.Type.CHESTPLATE,
+            () -> new MimiDivineWingsItem(ModArmorMaterials.MIMI_WINGS, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     // 米米幻翼膜（Mimi Phantom Membrane）：神翼修复材料，普通物品

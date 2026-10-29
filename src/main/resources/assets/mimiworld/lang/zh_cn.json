@@ -148,6 +148,7 @@
   "block.mimiworld.armor_forging_table": "铸甲台",
   "block.mimiworld.bow_forging_table": "铸弓台",
   "item.mimiworld.mimi_eye": "米米之眼",
+  "message.mimiworld.mimi_eye.no_portal": "未找到主世界的米米传送门，已返回出生点",
   "item.mimiworld.mimi_totem": "米米图腾",
   "block.mimiworld.mimi_teleporter": "米米传送器",
   "block.mimiworld.mimi_portal": "米米传送门方块",

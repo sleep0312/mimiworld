@@ -148,6 +148,7 @@
   "block.mimiworld.armor_forging_table": "Armor Forging Table",
   "block.mimiworld.bow_forging_table": "Bow Forging Table",
   "item.mimiworld.mimi_eye": "Eye of Mimi",
+  "message.mimiworld.mimi_eye.no_portal": "No Mimi Portal found in the Overworld - returned to spawn",
   "item.mimiworld.mimi_totem": "Mimi Totem",
   "block.mimiworld.mimi_teleporter": "Mimi Teleporter",
   "block.mimiworld.mimi_portal": "Mimi Portal Block",

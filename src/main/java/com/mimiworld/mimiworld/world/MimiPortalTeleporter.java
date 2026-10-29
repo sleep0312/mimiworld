@@ -63,17 +63,35 @@ public class MimiPortalTeleporter implements ITeleporter {
             return new PortalInfo(surfaceSpawn(destWorld), Vec3.ZERO, entity.getYRot(), entity.getXRot());
         }
         // 返程：点对点落回入口那座传送门旁（原版地狱门手感）。
-        BlockPos entry = recallEntry(entity, destWorld);
-        if (entry != null) {
-            BlockPos landing = findSafeLanding(destWorld, entry);
-            if (landing != null) {
-                return new PortalInfo(
-                        new Vec3(landing.getX() + 0.5D, landing.getY() + 1.0D, landing.getZ() + 0.5D),
-                        Vec3.ZERO, entity.getYRot(), entity.getXRot());
-            }
+        Vec3 landing = findReturnLanding(entity, destWorld);
+        if (landing != null) {
+            return new PortalInfo(landing, Vec3.ZERO, entity.getYRot(), entity.getXRot());
         }
         // 兜底：入口记录缺失 / 传送门已拆除 → 出生点列地表之上（同原版末地门回主世界）。
         return new PortalInfo(surfaceSpawn(destWorld), Vec3.ZERO, entity.getYRot(), entity.getXRot());
+    }
+
+    /**
+     * 返程落点：入口那座传送门旁的安全落脚位置（脚部坐标）。
+     *
+     * <p>供 {@link #getPortalInfo} 与米米之眼的右键返程共用。入口记录缺失、记录维度
+     * 与 {@code destWorld} 不符、或入口传送门已被拆除时返回 null。</p>
+     */
+    @Nullable
+    public static Vec3 findReturnLanding(Entity entity, ServerLevel destWorld) {
+        BlockPos entry = recallEntry(entity, destWorld);
+        if (entry == null) {
+            return null;
+        }
+        BlockPos landing = findSafeLanding(destWorld, entry);
+        return landing == null
+                ? null
+                : new Vec3(landing.getX() + 0.5D, landing.getY() + 1.0D, landing.getZ() + 0.5D);
+    }
+
+    /** 出生点列地表落点（米米之眼找不到入口传送门时的兜底，同返程兜底逻辑）。 */
+    public static Vec3 spawnLanding(ServerLevel level) {
+        return surfaceSpawn(level);
     }
 
     /**
