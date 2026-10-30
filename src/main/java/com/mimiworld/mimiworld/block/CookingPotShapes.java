@@ -46,6 +46,20 @@ public final class CookingPotShapes {
             {5.6, 8.8, 12.8, 10.4, 10.4, 14.4},  // 南
     };
 
+    /** 小煮锅 geo 模型的原始高度（px）；碰撞盒基准 12 个盒子即取自该模型。 */
+    public static final double BASE_MODEL_HEIGHT = 12.8;
+
+    /**
+     * 按渲染后的实际高度（px，1 格 = 16px）生成贴合模型的碰撞/选框形状。
+     *
+     * <p>五个煮锅的 geo 几何是小煮锅模型的等比放大（12.8 / 16.64 / 21.632 / 28.16 / 36.608），
+     * 渲染时各自缩放成 6 / 8 / 10.5 / 13 / 16px（巨无霸正好占满一格），
+     * 因此形状倍率 = 实际渲染高度 / {@link #BASE_MODEL_HEIGHT}。</p>
+     */
+    public static VoxelShape forRenderedHeight(double heightPx) {
+        return forScale(heightPx / BASE_MODEL_HEIGHT);
+    }
+
     /** 按倍率生成与模型一致的碰撞形状（单格煮锅用）。 */
     public static VoxelShape forScale(double scale) {
         VoxelShape result = Shapes.empty();

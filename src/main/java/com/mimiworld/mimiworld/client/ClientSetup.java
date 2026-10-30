@@ -192,22 +192,24 @@ public class ClientSetup {
         // 界天米：GeckoLib jietianmi 独眼飞行模型（idle/walk/attack 动画），守卫者式凝视蓄力激光，渲染放大 1.2
         event.registerEntityRenderer(ModEntities.JIETIAN_RICE.get(), JietianmiRenderer::new);
 
-        // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）
+        // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）。
+        // 体型按注册顺序递减（参考堕落十字架的做法，在 BER 内等比缩放收进一格）：
+        // 巨无霸大大大煮锅 = 16px = 占满一整个方块，其余依次缩小，最小的 6px 仍清晰可见。
         event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "small_cooking_pot")));
+                        new ResourceLocation(MimiWorld.MODID, "small_cooking_pot"), 6.0F / 12.8F));
         event.registerBlockEntityRenderer(ModBlockEntities.COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "cooking_pot")));
+                        new ResourceLocation(MimiWorld.MODID, "cooking_pot"), 8.0F / 16.64F));
         event.registerBlockEntityRenderer(ModBlockEntities.LARGE_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "large_cooking_pot")));
+                        new ResourceLocation(MimiWorld.MODID, "large_cooking_pot"), 10.5F / 21.632F));
         event.registerBlockEntityRenderer(ModBlockEntities.EXTRA_LARGE_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "extra_large_cooking_pot")));
+                        new ResourceLocation(MimiWorld.MODID, "extra_large_cooking_pot"), 13.0F / 28.16F));
         event.registerBlockEntityRenderer(ModBlockEntities.JUMBO_MEGA_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "jumbo_mega_cooking_pot")));
+                        new ResourceLocation(MimiWorld.MODID, "jumbo_mega_cooking_pot"), 16.0F / 36.608F));
         // 米米猴头：GeckoLib 头颅摆件方块（head+crown 静态模型，渲染器内缩放摆正贴地居中）
         event.registerBlockEntityRenderer(ModBlockEntities.MIMI_MONKEY_HEAD.get(),
                 ctx -> new MimiMonkeyHeadBlockRenderer<>(ctx));

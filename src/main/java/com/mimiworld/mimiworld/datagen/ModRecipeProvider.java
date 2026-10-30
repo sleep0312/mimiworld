@@ -2501,19 +2501,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_dragon_scale", has(ModItems.DRAGON_SCALE.get()))
                 .save(consumer);
 
-        // 同上，中心第八宗罪龙头 = 终罪龙头
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.FINAL_SIN_DRAGON_HEAD.get())
-                .pattern("ABC")
-                .pattern("DXD")
-                .pattern("ABC")
-                .define('A', ModItems.DRAGON_BLOOD.get())
-                .define('B', ModItems.DRAGON_SCALE.get())
-                .define('C', ModItems.DRAGON_BONE.get())
-                .define('D', ModItems.SEVEN_DEADLY_FALLS.get())
-                .define('X', ModItems.DIBAZONGZUI_HEAD.get())
-                .unlockedBy("has_dibazongzui_head", has(ModItems.DIBAZONGZUI_HEAD.get()))
-                .save(consumer);
-
         // （残堕宗罪头盔；COMBAT）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.REMNANT_FALLEN_CARDINAL_SIN_HELMET.get())
                 .pattern("BCB")

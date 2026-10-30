@@ -18,16 +18,34 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
  */
 public class CookingPotGeoBlockRenderer<T extends BlockEntity & GeoAnimatable> extends GeoBlockRenderer<T> {
 
-    public CookingPotGeoBlockRenderer(ResourceLocation assetSubpath) {
+    /** 世界渲染缩放。 */
+    private final float scale;
+    /** x/z 居中补偿：模型中心轴在 0，GeckoLib 内部平移 (0.5,0,0.5) 在先、缩放作用在其后。 */
+    private final float offsetXZ;
+
+    /**
+     * @param assetSubpath 注册 id（对应 geo/block/&lt;id&gt;.geo.json 与 textures/geckolib/&lt;id&gt;.png）
+     * @param scale        世界渲染缩放（参考堕落十字架的做法，在 BER 内等比缩放收进一格）。
+     *                     煮锅 geo 模型以方块中心为 X/Z 原点、底面为 y=0。
+     */
+    public CookingPotGeoBlockRenderer(ResourceLocation assetSubpath, float scale) {
         super(new CookingPotGeoModel<T>(assetSubpath));
+        this.scale = scale;
+        this.offsetXZ = 0.5F - 0.5F * scale;
     }
 
     @Override
     public void render(BlockEntity blockEntity, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        // PoseStack 为后乘：这里先平移+缩放，等价于先作用到顶点，之后才是 GeckoLib 内部的
+        // translate(0.5,0,0.5)。模型中心在 0，需补 0.5-0.5s 才回到格中心；y 底在 0，贴地无需偏移。
         // 按满亮渲染，与 Blockbench 预览（均匀满光、保留面方向明暗）目视一致，
         // 避免 BlockEntity 取到偏低光照导致整锅发黑
+        poseStack.pushPose();
+        poseStack.translate(offsetXZ, 0.0F, offsetXZ);
+        poseStack.scale(scale, scale, scale);
         super.render(blockEntity, partialTick, poseStack, bufferSource,
                 LightTexture.FULL_BRIGHT, packedOverlay);
+        poseStack.popPose();
     }
 }

@@ -2263,10 +2263,6 @@ public class ModItems {
     public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEART = registerItem("final_sin_dragon_heart",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 终罪龙头（Final Sin Dragon Head）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEAD = registerItem("final_sin_dragon_head",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
     // ---- 残堕宗罪套装（GeckoLib 4 动态 3D 盔甲，最大堆叠 1；修复材料宗罪龙头冠，
     //      材质 REMNANT_FALLEN_CARDINAL_SIN；模型/动画见 RemnantFallenCardinalSinArmorItem） ----
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_HELMET =

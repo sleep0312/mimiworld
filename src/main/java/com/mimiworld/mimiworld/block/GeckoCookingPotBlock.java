@@ -9,7 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
  * <p>仅煮锅/大煮锅/超大煮锅/巨无霸大大大煮锅继承本类；
  * 烤箱、铁锅继续使用 {@link GridCookingPotBlock}（普通 MODEL 渲染），不受影响。</p>
  *
- * <p>碰撞箱为普通完整方块；世界中的外观完全由 GeckoLib BlockEntityRenderer 渲染。</p>
+ * <p>碰撞箱/选框由各子类按渲染后的模型高度生成（{@link CookingPotShapes#forRenderedHeight}），
+ * 与堕落十字架一样贴合模型；世界中的外观完全由 GeckoLib BlockEntityRenderer 渲染。</p>
  */
 public abstract class GeckoCookingPotBlock extends GridCookingPotBlock {
 
