@@ -76,7 +76,7 @@ public class MimiWorld
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(ModFluids::registerCauldronInteractions);
-        // 工作方块（锤米台/压饭机）即时合成配方，需在注册表冻结后注册
+        // 工作方块（锤米台）即时合成配方，需在注册表冻结后注册
         event.enqueueWork(ModMachineRecipes::register);
         // 贪米鱼：水下生成规则（同原版鳕鱼——海平面附近、上方为水源的水中），
         // 具体生物群系（河流/海洋）由 data 下的 forge biome_modifier JSON 添加

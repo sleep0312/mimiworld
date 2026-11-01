@@ -29,7 +29,7 @@ A medium-sized rice-themed Minecraft Forge mod that adds a full progression of r
 
 模组提供大量功能性工作方块：
 
-- 造米机、锤米台 / 高级锤米台、压饭机
+- 造米机、锤米台 / 高级锤米台
 - 电离台、沉淀台、离解台、碾磨台、杵界台、凝锭台
 - 铸剑台、铸甲台、铸弓台、淬剑台、汲血台
 - 搅碎器、搅拌器、多输入 / 双输入处理器、栅格合成台

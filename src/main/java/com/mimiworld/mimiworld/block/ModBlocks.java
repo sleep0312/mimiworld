@@ -236,17 +236,6 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 压饭机（）：石头类机器方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
-    // 绑定方块实体 RicePressBlockEntity：右键打开 9 输入槽 + 1 输出槽的工作台式合成 GUI
-    // （见 menu.RicePressMenu，当前暂无配方）。
-    public static final RegistryObject<Block> RICE_PRESS =
-            BLOCKS.register("rice_press", () -> new RicePressBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(1.5F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.STONE)));
-
     // 高级锤米台（）：锤米台的合金强化版，石头类机器方块，属性参照原版石头
     // （硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。

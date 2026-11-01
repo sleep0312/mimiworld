@@ -19,7 +19,6 @@ import com.mimiworld.mimiworld.block.entity.PestleRealmTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.PrecipitationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RiceMakerBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RicePoundingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.RicePressBlockEntity;
 import com.mimiworld.mimiworld.block.entity.AdvancedRicePoundingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.SwordQuenchingTableBlockEntity;
 import mezz.jei.api.IModPlugin;
@@ -133,8 +132,6 @@ public class MimiJeiPlugin implements IModPlugin {
                 () -> JeiLayouts.pounding(RicePoundingTableBlockEntity.jeiRecipes()));
         add(gui, "advanced_rice_pounding_table", ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get(), 84, 112, 26,
                 () -> JeiLayouts.advancedPounding(AdvancedRicePoundingTableBlockEntity.jeiRecipes()));
-        add(gui, "rice_press", ModBlocks.RICE_PRESS.get(), 84, 81, 54,
-                () -> JeiLayouts.press(RicePressBlockEntity.jeiRecipes()));
 
         // ---- H. 米片机（原料 + 水（流体槽，500mB）→ 米）----
         add(gui, "rice_maker", ModBlocks.RICE_MAKER.get(), 84, 112, 43,

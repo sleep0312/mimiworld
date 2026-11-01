@@ -10,7 +10,6 @@ import com.mimiworld.mimiworld.block.entity.MixerBlockEntity;
 import com.mimiworld.mimiworld.block.entity.MultiInputProcessorBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RiceMakerBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RicePoundingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.RicePressBlockEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
 
@@ -29,7 +28,7 @@ import java.util.List;
  *   <li>网格工作台（杵界台/凝锭台）：shaped 按裁剪矩阵逐格，shapeless 行优先填满；</li>
  *   <li>煮锅族：NxN 网格 (8,17) 间距 18 + 右上独立输入槽（各锅位置不同）；</li>
  *   <li>搅拌器：左列 (43,10+21r)、右列 (115,10+21r)，中央槽 (79,84)；</li>
- *   <li>锤米台：两槽 (30,26)/(30,62)；压饭机：横向 9 格 (9+18i,18)；</li>
+ *   <li>锤米台：两槽 (30,26)/(30,62)；</li>
  *   <li>米片机：原料 (30,26) + 注水槽 (30,62)。</li>
  * </ul>
  * 产物槽坐标由 {@link ViewCategory} 持有（见 MimiJeiPlugin 的注册参数）。
@@ -62,9 +61,9 @@ final class JeiLayouts {
         List<JeiView> views = new ArrayList<>();
         for (DualInputProcessorBlockEntity.ProcessorRecipe recipe : recipes) {
             List<JeiView.Slot> slots = new ArrayList<>();
-            slots.add(JeiView.Slot.item(61, 20, recipe.inputA()));
-            if (recipe.inputB() != null) {
-                slots.add(JeiView.Slot.item(61, 46, recipe.inputB()));
+            slots.add(JeiView.Slot.item(61, 20, recipe.inputA(), recipe.countA()));
+            if (recipe.hasInputB()) {
+                slots.add(JeiView.Slot.item(61, 46, recipe.inputB(), recipe.countB()));
             }
             views.add(new JeiView(List.copyOf(slots), recipe.result(), true));
         }
@@ -207,21 +206,6 @@ final class JeiLayouts {
         return new JeiView(List.of(
                 JeiView.Slot.item(30, 26, a),
                 JeiView.Slot.item(30, 62, b)), result, true);
-    }
-
-    // -------------------- H. 压饭机（横向 9 格）--------------------
-
-    static List<JeiView> press(List<RicePressBlockEntity.PressRecipe> recipes) {
-        List<JeiView> views = new ArrayList<>();
-        for (RicePressBlockEntity.PressRecipe recipe : recipes) {
-            List<JeiView.Slot> slots = new ArrayList<>();
-            List<Item> inputs = recipe.inputs();
-            for (int i = 0; i < inputs.size(); i++) {
-                slots.add(JeiView.Slot.item(9 + i * 18, 18, inputs.get(i)));
-            }
-            views.add(new JeiView(List.copyOf(slots), recipe.result(), true));
-        }
-        return views;
     }
 
     // -------------------- 汲血台标签配方（上槽标签 + 下槽物品）--------------------

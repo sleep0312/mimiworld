@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "mimiworld:compressed_rice_pail"
+      "item": "mimiworld:rice_pail"
     },
     "N": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:diamond"
     }
   },
   "pattern": [

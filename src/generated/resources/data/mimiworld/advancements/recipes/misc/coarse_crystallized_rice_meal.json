@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_compressed_rice_pail": {
+    "has_rice_pail": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:compressed_rice_pail"
+              "mimiworld:rice_pail"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_compressed_rice_pail",
+      "has_rice_pail",
       "has_the_recipe"
     ]
   ],

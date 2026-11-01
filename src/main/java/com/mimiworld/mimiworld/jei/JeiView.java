@@ -28,7 +28,11 @@ public record JeiView(List<Slot> inputs, ItemStack output, boolean shapeless) {
                        Fluid fluid, long fluidAmount) {
 
         public static Slot item(int x, int y, Item item) {
-            return new Slot(x, y, new ItemStack(item), null, null, 0);
+            return item(x, y, item, 1);
+        }
+
+        public static Slot item(int x, int y, Item item, int count) {
+            return new Slot(x, y, new ItemStack(item, count), null, null, 0);
         }
 
         public static Slot tag(int x, int y, TagKey<Item> tag) {

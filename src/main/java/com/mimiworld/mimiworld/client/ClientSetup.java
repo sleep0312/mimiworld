@@ -56,7 +56,6 @@ import com.mimiworld.mimiworld.client.renderer.WujihuaRenderer;
 import com.mimiworld.mimiworld.client.renderer.ZhuomiChickenRenderer;
 import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
 import com.mimiworld.mimiworld.client.screen.RicePoundingTableScreen;
-import com.mimiworld.mimiworld.client.screen.RicePressScreen;
 import com.mimiworld.mimiworld.client.screen.AdvancedRicePoundingTableScreen;
 import com.mimiworld.mimiworld.client.screen.IonizationTableScreen;
 import com.mimiworld.mimiworld.client.screen.PrecipitationTableScreen;
@@ -268,8 +267,6 @@ public class ClientSetup {
             MenuScreens.register(ModMenuTypes.RICE_MAKER_MENU.get(), RiceMakerScreen::new);
             // 绑定锤米台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.RICE_POUNDING_TABLE_MENU.get(), RicePoundingTableScreen::new);
-            // 绑定压饭机菜单与 GUI 屏幕
-            MenuScreens.register(ModMenuTypes.RICE_PRESS_MENU.get(), RicePressScreen::new);
             // 绑定高级锤米台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.ADVANCED_RICE_POUNDING_TABLE_MENU.get(), AdvancedRicePoundingTableScreen::new);
             // 绑定电离台菜单与 GUI 屏幕

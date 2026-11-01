@@ -312,14 +312,6 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_PAIL = registerItem("rice_pail",
             () -> new RicePailItem(new Item.Properties().stacksTo(1)));
 
-    // 压饭机，Rice Press：石头类方块物品，放置后对应 ModBlocks.RICE_PRESS；铁镐（挖掘等级2）采集
-    public static final RegistryObject<Item> RICE_PRESS = registerItem("rice_press",
-            () -> new BlockItem(ModBlocks.RICE_PRESS.get(), new Item.Properties()));
-
-    // 压缩饭桶，Compressed Rice Pail：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> COMPRESSED_RICE_PAIL = registerItem("compressed_rice_pail",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 粗制饭晶，Coarse Crystallized Rice Meal：普通物品，最大堆叠 64
     public static final RegistryObject<Item> COARSE_CRYSTALLIZED_RICE_MEAL = registerItem("coarse_crystallized_rice_meal",
             () -> new Item(new Item.Properties().stacksTo(64)));

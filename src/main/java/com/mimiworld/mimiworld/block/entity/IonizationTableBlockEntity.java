@@ -28,7 +28,7 @@ public class IonizationTableBlockEntity extends DualInputProcessorBlockEntity {
     /** 注册一条电离配方：inputA + inputB → result，加工时长使用配方自带的 processTicks */
     public static void registerRecipe(Item inputA, Item inputB, ItemStack result, int processTicks) {
         RECIPES.put(recipeKey(inputA, inputB),
-                new ProcessorRecipe(inputA, inputB, result, processTicks));
+                new ProcessorRecipe(inputA, 1, inputB, 1, result, processTicks));
     }
 
     /** 注册一条电离配方（使用默认加工时长 {@value #DEFAULT_PROCESS_TICKS} tick） */

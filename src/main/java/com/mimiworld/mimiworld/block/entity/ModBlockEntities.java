@@ -27,12 +27,6 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(RicePoundingTableBlockEntity::new,
                             ModBlocks.RICE_POUNDING_TABLE.get()).build(null));
 
-    // 压饭机（方块 rice_press）：9 输入 + 1 输出，工作台式无序即时合成，GUI 见 menu.RicePressMenu
-    public static final RegistryObject<BlockEntityType<RicePressBlockEntity>> RICE_PRESS =
-            BLOCK_ENTITIES.register("rice_press",
-                    () -> BlockEntityType.Builder.of(RicePressBlockEntity::new,
-                            ModBlocks.RICE_PRESS.get()).build(null));
-
     // 高级锤米台（方块 advanced_rice_pounding_table）：功能同锤米台（2 输入 + 1 输出即时合成），仅 GUI 外观不同
     public static final RegistryObject<BlockEntityType<AdvancedRicePoundingTableBlockEntity>> ADVANCED_RICE_POUNDING_TABLE =
             BLOCK_ENTITIES.register("advanced_rice_pounding_table",

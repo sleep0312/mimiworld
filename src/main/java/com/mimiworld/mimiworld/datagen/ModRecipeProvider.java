@@ -42,7 +42,7 @@ import java.util.function.Consumer;
  * 内容由 ModItemTagsProvider 生成；因 Forge 1.20.1（47.4.10）Tags.Items 尚无肉类标签。
  * 4. 熔炉烧炼用 SimpleCookingRecipeBuilder.smelting/blasting，时间单位 tick，1s = 20 tick
  * （1s=20t、3s=60t、4s=80t）；高炉若保留同名烧炼，时间按惯例为熔炉一半。
- * 5. 工作台之外的工作方块（锤米台、压饭机等）不是数据包配方，不能写在本类；
+ * 5. 工作台之外的工作方块（锤米台等）不是数据包配方，不能写在本类；
  * 须在对应方块实体类的静态配方表注册，统一入口见 ModMachineRecipes。
  * 6. 配方 ID：默认等于产物注册名；只有“同一产物存在多条配方”时才必须显式指定不同 ID。
  * 【产物是原版物品时例外】：默认 ID 会落到 minecraft 命名空间（无效/冲突），
@@ -267,26 +267,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice_crystal_hammer", has(ModItems.RICE_CRYSTAL_HAMMER.get()))
                 .save(consumer);
 
-        // （米原木与米块夹红石 → 压饭机）
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.RICE_PRESS.get())
-                .pattern("LLL")
-                .pattern("BRB")
-                .pattern("LLL")
-                .define('L', ModItems.RICE_LOG.get())
-                .define('B', ModItems.RICE_BLOCK.get())
-                .define('R', Items.REDSTONE)
-                .unlockedBy("has_rice_block", has(ModItems.RICE_BLOCK.get()))
-                .save(consumer);
-
-        //
-        // （5 个压缩饭桶与 4 个下界合金锭交错 → 粗制饭晶）
+        // （5 个饭桶与 4 个钻石交错 → 粗制饭晶）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COARSE_CRYSTALLIZED_RICE_MEAL.get())
                 .pattern("ANA")
                 .pattern("NAN")
                 .pattern("ANA")
-                .define('A', ModItems.COMPRESSED_RICE_PAIL.get())
-                .define('N', Items.NETHERITE_INGOT)
-                .unlockedBy("has_compressed_rice_pail", has(ModItems.COMPRESSED_RICE_PAIL.get()))
+                .define('A', ModItems.RICE_PAIL.get())
+                .define('N', Items.DIAMOND)
+                .unlockedBy("has_rice_pail", has(ModItems.RICE_PAIL.get()))
                 .save(consumer);
 
         // ================= 第二批（草麻/网/超结晶/机器/米果线） =================
@@ -347,7 +335,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("AGA")
                 .pattern("NAN")
                 .define('A', ModItems.CRYSTALLIZED_RICE_MEAL.get())
-                .define('N', Items.NETHERITE_INGOT)
+                .define('N', Items.NETHERITE_SCRAP)
                 .define('G', Items.GOLD_INGOT)
                 .unlockedBy("has_crystallized_rice_meal", has(ModItems.CRYSTALLIZED_RICE_MEAL.get()))
                 .save(consumer);

@@ -26,11 +26,6 @@ public class ModMenuTypes {
             MENUS.register("rice_pounding_table",
                     () -> IForgeMenuType.create(RicePoundingTableMenu::new));
 
-    // 压饭机菜单
-    public static final RegistryObject<MenuType<RicePressMenu>> RICE_PRESS_MENU =
-            MENUS.register("rice_press",
-                    () -> IForgeMenuType.create(RicePressMenu::new));
-
     // 高级锤米台菜单
     public static final RegistryObject<MenuType<AdvancedRicePoundingTableMenu>> ADVANCED_RICE_POUNDING_TABLE_MENU =
             MENUS.register("advanced_rice_pounding_table",

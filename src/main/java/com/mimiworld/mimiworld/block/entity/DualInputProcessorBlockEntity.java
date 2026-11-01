@@ -33,8 +33,8 @@ import org.jetbrains.annotations.Nullable;
  * 双输入定时加工台方块实体基类（电离台 / 沉淀台共用）。
  * <p>
  * 加工节奏与原版熔炉一致：两个输入槽各放 1 种原料，命中已注册的双输入配方且输出槽
- * 可容纳时持续推进进度，加工满一个周期后两种原料各消耗 1 个、产出 1 个结果，进度归零
- * 重新计时（整组原料也要逐个周期加工）。
+ * 可容纳时持续推进进度，加工满一个周期后按配方数量消耗两种原料、产出配方结果，
+ * 进度归零重新计时（整组原料也要逐个周期加工）。
  * <p>
  * 与熔炉的区别：<b>不消耗燃料</b>，没有燃料槽；只要原料满足就一直加工。
  * <ul>
@@ -55,8 +55,16 @@ public abstract class DualInputProcessorBlockEntity extends BlockEntity
     /** 默认加工时长（tick）：与原版熔炉冶炼一致，10 秒；每条配方可用 processTicks 自定义 */
     public static final int DEFAULT_PROCESS_TICKS = 200;
 
-    /** 一条「输入 A + 输入 B → 产物」双输入无序配方（两槽顺序无关） */
-    public record ProcessorRecipe(Item inputA, Item inputB, ItemStack result, int processTicks) {
+    /**
+     * 一条「输入 A × countA + 输入 B × countB → 产物」双输入无序配方（两槽顺序无关）。
+     * 单输入配方 inputB 为 null、countB 为 0。
+     */
+    public record ProcessorRecipe(Item inputA, int countA, Item inputB, int countB,
+                                  ItemStack result, int processTicks) {
+
+        public boolean hasInputB() {
+            return inputB != null;
+        }
     }
 
     /**
@@ -120,14 +128,17 @@ public abstract class DualInputProcessorBlockEntity extends BlockEntity
     }
 
     /**
-     * 配方加工循环：两输入持续命中配方、输出槽可容纳时进度推进；到达配方时长后
-     * 两输入各 shrink(1)、产出 1 个结果，进度归零重新计时。条件不满足时进度立即归零。
+     * 配方加工循环：两输入持续满足配方数量、输出槽可容纳时进度推进；到达配方时长后
+     * 按配方数量消耗两种原料、产出配方结果，进度归零重新计时。条件不满足时进度立即归零。
      */
     private boolean processRecipe() {
         ItemStack inputA = items.get(SLOT_INPUT_A);
         ItemStack inputB = items.get(SLOT_INPUT_B);
         ProcessorRecipe recipe = findRecipe(inputA, inputB);
-        boolean canProcess = recipe != null && canOutputAccept(recipe.result());
+        boolean canProcess = recipe != null
+                && inputA.getCount() >= recipe.countA()
+                && (!recipe.hasInputB() || inputB.getCount() >= recipe.countB())
+                && canOutputAccept(recipe.result());
 
         if (!canProcess) {
             if (progress != 0) {
@@ -141,8 +152,10 @@ public abstract class DualInputProcessorBlockEntity extends BlockEntity
         data.set(DATA_MAX_PROGRESS, recipe.processTicks());
         progress++;
         if (progress >= recipe.processTicks()) {
-            inputA.shrink(1);
-            inputB.shrink(1);
+            inputA.shrink(recipe.countA());
+            if (recipe.hasInputB()) {
+                inputB.shrink(recipe.countB());
+            }
             ItemStack output = items.get(SLOT_OUTPUT);
             if (output.isEmpty()) {
                 items.set(SLOT_OUTPUT, recipe.result().copy());

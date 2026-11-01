@@ -45,6 +45,9 @@ public class ModLootTableProvider extends LootTableProvider {
     /** 每个实体类型对应的掉落池列表。 */
     private static final Map<EntityType<?>, Drop[]> DROPS = new HashMap<>();
 
+    /** 下界合金碎片：0~2 概率掉落（0 表示本次不掉，1~2 为实际掉落数量）。 */
+    private static final Drop NETHERITE_SCRAP = d(Items.NETHERITE_SCRAP, 0, 2);
+
     static {
         var rice = ModItems.RICE.get();
         DROPS.put(ModEntities.ZHUOMI_CHICKEN.get(), new Drop[]{d(rice, 1, 1), d(ModItems.ZHUOMI_CHICKEN.get(), 1, 1), d(ModItems.ZHUOMI_FEATHER.get(), 0, 2)});
@@ -55,18 +58,18 @@ public class ModLootTableProvider extends LootTableProvider {
         DROPS.put(ModEntities.PENMI_FISH.get(), new Drop[]{d(rice, 1, 1), d(ModItems.PENMI_FISH_SAC.get(), 1, 1)});
         DROPS.put(ModEntities.RICE_GOLEM.get(), new Drop[]{d(rice, 10, 20)});
         DROPS.put(ModEntities.HAOMI_WOLF.get(), new Drop[]{d(rice, 5, 6), d(ModItems.HAOMI_WOLF_HEART.get(), 0, 1)});
-        DROPS.put(ModEntities.MIMI_SKELETON.get(), new Drop[]{d(rice, 6, 7), d(ModItems.RICE_BONE.get(), 3, 4), d(ModItems.RICE_ARROW.get(), 2, 3)});
-        DROPS.put(ModEntities.HUMI_CORPSE.get(), new Drop[]{d(rice, 8, 9), d(ModItems.ROTTEN_RICE_FLESH.get(), 1, 2), d(ModItems.CRYSTALLIZED_RICE.get(), 0, 1)});
-        DROPS.put(ModEntities.PAMI_CRAWLER.get(), new Drop[]{d(rice, 3, 4), d(ModItems.HUOMI_POWDER.get(), 1, 2)});
-        DROPS.put(ModEntities.RICE_WITCH.get(), new Drop[]{d(rice, 8, 9), d(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get(), 0, 1), d(Items.GLOWSTONE_DUST, 0, 1)});
-        DROPS.put(ModEntities.MOMI_ENTRANT.get(), new Drop[]{d(rice, 19, 20), d(ModItems.YANMI_PEARL.get(), 0, 2)});
-        DROPS.put(ModEntities.EXPLOSIVE_RICE_SPIRIT.get(), new Drop[]{d(ModItems.BAOLIEMI_ROD.get(), 0, 2), d(rice, 15, 16)});
-        DROPS.put(ModEntities.CARVED_RICE_SKELETON.get(), new Drop[]{d(ModItems.CARVED_RICE_BONE.get(), 0, 2), d(rice, 15, 16)});
-        DROPS.put(ModEntities.MILAI_HORSE.get(), new Drop[]{d(rice, 3, 4), d(ModItems.MILAIMA_BALL.get(), 1, 2)});
-        DROPS.put(ModEntities.STICKY_RICE_SPIDER.get(), new Drop[]{d(rice, 6, 7), d(ModItems.NIANMI_SILK_THREAD.get(), 1, 2)});
-        DROPS.put(ModEntities.MIHENG_PIG_CORPSE.get(), new Drop[]{d(rice, 8, 9), d(ModItems.RAW_MIHENG_PORK.get(), 1, 2)});
-        DROPS.put(ModEntities.RICE_STEALER.get(), new Drop[]{d(ModItems.RICE_STEALER_HEART.get(), 0, 1), d(rice, 188, 189)});
-        DROPS.put(ModEntities.RICE_SOUL.get(), new Drop[]{d(rice, 1, 2), d(ModItems.RICE_SOUL_TEAR.get(), 0, 2)});
+        DROPS.put(ModEntities.MIMI_SKELETON.get(), new Drop[]{d(rice, 6, 7), d(ModItems.RICE_BONE.get(), 3, 4), d(ModItems.RICE_ARROW.get(), 2, 3), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.HUMI_CORPSE.get(), new Drop[]{d(rice, 8, 9), d(ModItems.ROTTEN_RICE_FLESH.get(), 1, 2), d(ModItems.CRYSTALLIZED_RICE.get(), 0, 1), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.PAMI_CRAWLER.get(), new Drop[]{d(rice, 3, 4), d(ModItems.HUOMI_POWDER.get(), 1, 2), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.RICE_WITCH.get(), new Drop[]{d(rice, 8, 9), d(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get(), 0, 1), d(Items.GLOWSTONE_DUST, 0, 1), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.MOMI_ENTRANT.get(), new Drop[]{d(rice, 19, 20), d(ModItems.YANMI_PEARL.get(), 0, 2), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.EXPLOSIVE_RICE_SPIRIT.get(), new Drop[]{d(ModItems.BAOLIEMI_ROD.get(), 0, 2), d(rice, 15, 16), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.CARVED_RICE_SKELETON.get(), new Drop[]{d(ModItems.CARVED_RICE_BONE.get(), 0, 2), d(rice, 15, 16), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.MILAI_HORSE.get(), new Drop[]{d(rice, 3, 4), d(ModItems.MILAIMA_BALL.get(), 1, 2), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.STICKY_RICE_SPIDER.get(), new Drop[]{d(rice, 6, 7), d(ModItems.NIANMI_SILK_THREAD.get(), 1, 2), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.MIHENG_PIG_CORPSE.get(), new Drop[]{d(rice, 8, 9), d(ModItems.RAW_MIHENG_PORK.get(), 1, 2), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.RICE_STEALER.get(), new Drop[]{d(ModItems.RICE_STEALER_HEART.get(), 0, 1), d(rice, 188, 189), NETHERITE_SCRAP});
+        DROPS.put(ModEntities.RICE_SOUL.get(), new Drop[]{d(rice, 1, 2), d(ModItems.RICE_SOUL_TEAR.get(), 0, 2), NETHERITE_SCRAP});
         // 界天米：第二条掉落为堕落之心
         DROPS.put(ModEntities.JIETIAN_RICE.get(), new Drop[]{d(ModItems.REMNANT_HEAVEN_WING.get(), 1, 2), d(ModItems.FALLEN_HEART.get(), 1, 1),
                 d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.REALM_HEAVEN_BRAIN_FLOWER.get(), 0, 1)});

@@ -6,6 +6,7 @@ import com.mimiworld.mimiworld.block.entity.DissociationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.ExtraLargeCookingPotBlockEntity;
 import com.mimiworld.mimiworld.block.entity.GrindingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IngotCondensationTableBlockEntity;
+import com.mimiworld.mimiworld.block.entity.DualInputProcessorBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IonizationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IronWokBlockEntity;
 import com.mimiworld.mimiworld.block.entity.JumboMegaCookingPotBlockEntity;
@@ -15,7 +16,6 @@ import com.mimiworld.mimiworld.block.entity.OvenBlockEntity;
 import com.mimiworld.mimiworld.block.entity.PestleRealmTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.PrecipitationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RicePoundingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.RicePressBlockEntity;
 import com.mimiworld.mimiworld.block.entity.BloodlettingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.SwordQuenchingTableBlockEntity;
 import com.mimiworld.mimiworld.tags.ModItemTags;
@@ -30,7 +30,7 @@ import java.util.Map;
  * 在 FMLCommonSetupEvent 的 enqueueWork 中调用（物品注册表已冻结，可安全读取注册名）。
  *
  * 对应 ModRecipeProvider 头部《配方书写规则》第 6 条：
- * 锤米台为无序双输入、压饭机为 1..9 输入多重集合，均为即时合成；
+ * 锤米台为无序双输入，均为即时合成；
  * 电离台/沉淀台为无序双输入定时加工（DualInputProcessor，registerRecipe 第 4 参为加工 ticks）。
  */
 public final class ModMachineRecipes {
@@ -93,15 +93,6 @@ public final class ModMachineRecipes {
                 ModItems.MOLTEN_MIXED_CRYSTAL.get(),
                 new ItemStack(ModItems.SUPER_LAZY_ALLOY_ROD.get()));
 
-        // 压饭机 —— 9 个饭桶 → 1 个压缩饭桶。
-        // 压饭机仅按输入槽 shrink(1) 消耗，不触发原版合成剩余物逻辑，因此【桶不返还】。
-        Item[] ninePails = new Item[RicePressBlockEntity.INPUT_SLOTS];
-        Item pail = ModItems.RICE_PAIL.get();
-        for (int i = 0; i < ninePails.length; i++) {
-            ninePails[i] = pail;
-        }
-        RicePressBlockEntity.registerRecipe(new ItemStack(ModItems.COMPRESSED_RICE_PAIL.get()), ninePails);
-
         // 电离台 —— 左上角粗制超懒合金锭 + 左下角清洁米沉离液，
         // 处理 2s（40t）→ 超懒合金离子态（输入无序，两槽各消耗 1 个）
         IonizationTableBlockEntity.registerRecipe(
@@ -118,15 +109,19 @@ public final class ModMachineRecipes {
                 new ItemStack(ModItems.SUPER_LAZY_ALLOY_DUST.get()),
                 40);
 
-        // 沉淀台 —— 单槽米果渣（另一槽留空）→ 一次产出 3 个米果汁
+        // 沉淀台 —— 米果渣 + 3 个玻璃瓶 → 一次产出 3 个米果汁（每周期消耗 1 米果渣 + 3 玻璃瓶）
         PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.RICE_POMACE.get(),
-                new ItemStack(ModItems.RICE_FRUIT_JUICE.get(), 3));
+                ModItems.RICE_POMACE.get(), 1,
+                Items.GLASS_BOTTLE, 3,
+                new ItemStack(ModItems.RICE_FRUIT_JUICE.get(), 3),
+                DualInputProcessorBlockEntity.DEFAULT_PROCESS_TICKS);
 
-        // 沉淀台 —— 单槽米果混合渣（另一槽留空）→ 一次产出 3 个米果清洁液
+        // 沉淀台 —— 米果混合渣 + 3 个玻璃瓶 → 一次产出 3 个米果清洁液（每周期消耗 1 米果混合渣 + 3 玻璃瓶）
         PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.RICE_FRUIT_MIXED_POMACE.get(),
-                new ItemStack(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get(), 3));
+                ModItems.RICE_FRUIT_MIXED_POMACE.get(), 1,
+                Items.GLASS_BOTTLE, 3,
+                new ItemStack(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get(), 3),
+                DualInputProcessorBlockEntity.DEFAULT_PROCESS_TICKS);
 
         // 离解台 —— 上槽米果混合液 + 下槽米（离解介质）→ 米果解析液
         DissociationTableBlockEntity.registerRecipe(
