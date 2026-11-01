@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:laziest_end_dragon_head"
+    }
+  ],
+  "result": {
+    "item": "mimiworld:laziest_final_dragon_spawn_egg"
+  }
+}

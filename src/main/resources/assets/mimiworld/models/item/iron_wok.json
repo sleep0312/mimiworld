@@ -1,3 +1,6 @@
 {
-  "parent": "mimiworld:block/iron_wok"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mimiworld:item/iron_wok"
+  }
 }

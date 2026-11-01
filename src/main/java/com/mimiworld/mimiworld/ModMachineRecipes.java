@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * 工作方块（非原版工作台/熔炉）配方统一注册入口。
- * 在 FMLCommonSetupEvent 的 enqueueWork 中调用（物品注册表已冻结，Item.getId 可用）。
+ * 在 FMLCommonSetupEvent 的 enqueueWork 中调用（物品注册表已冻结，可安全读取注册名）。
  *
  * 对应 ModRecipeProvider 头部《配方书写规则》第 6 条：
  * 锤米台为无序双输入、压饭机为 1..9 输入多重集合，均为即时合成；

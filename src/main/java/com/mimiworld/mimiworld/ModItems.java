@@ -2199,6 +2199,10 @@ public class ModItems {
     public static final RegistryObject<Item> OVEN = registerItem("oven",
             () -> new BlockItem(ModBlocks.OVEN.get(), new Item.Properties()));
 
+    // 炉灶（Stove）：方块物品 BlockItem；煮锅系列的无限热源方块，镐挖掘等级 2 = 铁镐，破坏掉落本身，方块本体见 block.ModBlocks
+    public static final RegistryObject<Item> STOVE = registerItem("stove",
+            () -> new BlockItem(ModBlocks.STOVE.get(), new Item.Properties()));
+
     // ===== 龙系素材/残堕宗罪装备/箭支批次 =====
 
     // 盖子（Pot Lid）：烹饪机器链公共部件（搅碎器/搅拌器/三级煮锅/铁锅都要用），

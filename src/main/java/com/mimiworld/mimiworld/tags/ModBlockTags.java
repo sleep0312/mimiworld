@@ -18,9 +18,9 @@ public final class ModBlockTags {
      * 炉灶（加热源）：放置在煮锅正下方时，锅无需燃料即可持续烹煮，
      * GUI 燃料火焰条保持满格。
      *
-     * <p>炉灶方块当前尚未注册；将来注册炉灶时，只需把它加入本标签
-     * （data/mimiworld/tags/blocks/stoves.json 或 datagen），
-     * 煮锅侧无需任何改动即可识别。</p>
+     * <p>方块的注册见 {@code block.ModBlocks#STOVE}（ID {@code mimiworld:stove}），
+     * 并已由 data/mimiworld/tags/blocks/stoves.json 收录；
+     * 将来再加其他炉灶类方块时，只需把它们加入本标签，煮锅侧无需任何改动即可识别。</p>
      */
     public static final TagKey<Block> STOVES =
             TagKey.create(Registries.BLOCK, new ResourceLocation(MimiWorld.MODID, "stoves"));

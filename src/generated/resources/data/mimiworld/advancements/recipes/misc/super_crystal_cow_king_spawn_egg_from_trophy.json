@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_echo_shard": {
+    "has_super_crystal_ox_head": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:echo_shard"
+              "mimiworld:super_crystal_ox_head"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mimiworld:rice_stealer_spawn_egg"
+        "recipe": "mimiworld:super_crystal_cow_king_spawn_egg_from_trophy"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_echo_shard",
+      "has_super_crystal_ox_head",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mimiworld:rice_stealer_spawn_egg"
+      "mimiworld:super_crystal_cow_king_spawn_egg_from_trophy"
     ]
   },
   "sends_telemetry_event": false

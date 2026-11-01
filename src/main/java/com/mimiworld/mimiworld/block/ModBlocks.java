@@ -564,6 +564,18 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
+    // 炉灶（BlockItem）：煮锅系列的热源方块（StoveBlock），正面朝向玩家；
+    // 放在任意煮锅/铁锅正下方时，锅无需燃料即可持续烹煮（由 #mimiworld:stoves 标签判定，见 block.CookingHeaters）。
+    // 石质全立方块、硬度 3.0、抗爆 6.0、石声、需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
+    // 破坏掉落本身（loot_tables/blocks/stove.json）。
+    public static final RegistryObject<Block> STOVE =
+            BLOCKS.register("stove", () -> new StoveBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 6.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE)));
+
     // 小煮锅（BlockItem）：带支脚的小型烹饪锅方块，1 输入 + 1 燃料 + 1 输出熔炉式定时加工（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。

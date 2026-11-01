@@ -13,12 +13,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Consumer;
@@ -38,9 +33,9 @@ import java.util.function.Consumer;
  * ShapedRecipeBuilder 会抛 "only takes in a single item" 异常，必须改用 ShapelessRecipeBuilder；
  * 单材料但占多格（如 3 格 L 形、四角、3×3 填满）仍可正常有序注册。
  * 2. “原版XX” = 原版物品（如 原版水桶=Items.WATER_BUCKET、原版红石=Items.REDSTONE）。
- * 同名物品靠药水效果区分（瞬间伤害/虚弱/跳跃/治疗/力量/速度药水等）时不能直接用 Items.POTION
- * （Ingredient.of(ItemStack) 会丢 NBT，任意药水都满足），必须用 potionIngredient(Potions.XXX)，
- * 内部走 Forge StrictNBTIngredient.of(...) 精确匹配；
+ * “任意XX”类同名物品直接用基物品匹配即可（如任意药水 = Items.POTION，不区分药水效果）；
+ * 若某个配方确实需要按药水效果区分 NBT，可用 Forge 的 StrictNBTIngredient.of(...) 精确匹配
+ * （Ingredient.of(ItemStack) 会丢 NBT，任意药水都满足）。
  * 工作台消耗药水后原版会按合成剩余物返还玻璃瓶，同理水桶返还空桶。
  * 3. “任意树苗/任意木板”等“任意XX” = 原版同名物品标签（ItemTags.SAPLINGS / PLANKS）。
  * “任意肉类”= 本模自建标签 mimiworld:meats（ModItemTags.MEATS，生/熟/鱼/腐肉均含），
@@ -535,20 +530,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         // （米果混合液）
-        // 六种原版药水用 potionIngredient 按效果区分；合成后原版返还 6 个玻璃瓶。
+        // 六种任意药水（仅按物品匹配，不区分药水效果）；合成后原版返还 6 个玻璃瓶。
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RICE_FRUIT_MIXTURE.get())
-                .pattern("HWL")
+                .pattern("XXX")
                 .pattern("KJP")
-                .pattern("TSF")
-                .define('H', potionIngredient(Potions.HARMING))
-                .define('W', potionIngredient(Potions.WEAKNESS))
-                .define('L', potionIngredient(Potions.LEAPING))
+                .pattern("XXX")
+                .define('X', Items.POTION)
                 .define('K', ModItems.RICE_BUCKET.get())
                 .define('J', ModItems.RICE_FRUIT_JUICE.get())
                 .define('P', ModItems.RICE_PAIL.get())
-                .define('T', potionIngredient(Potions.HEALING))
-                .define('S', potionIngredient(Potions.STRENGTH))
-                .define('F', potionIngredient(Potions.SWIFTNESS))
                 .unlockedBy("has_rice_fruit_juice", has(ModItems.RICE_FRUIT_JUICE.get()))
                 .save(consumer);
 
@@ -1241,7 +1231,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("RSR")
                 .define('R', ModItems.RICE.get())
                 .define('S', Items.END_STONE)
-                .define('D', Items.REINFORCED_DEEPSLATE)
+                .define('D', Items.CRYING_OBSIDIAN)
                 .unlockedBy("has_end_stone", has(Items.END_STONE))
                 .save(consumer);
 
@@ -1358,91 +1348,145 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_coarse_laziest_summon_core_blank", has(ModItems.COARSE_LAZIEST_SUMMON_CORE_BLANK.get()))
                 .save(consumer);
 
-        // （米米猴王生物蛋；米果黑混液）
+        // （米米猴王生物蛋；中心小型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MIMI_MONKEY_KING_SPAWN_EGG.get())
                 .pattern("SAS")
                 .pattern("AEA")
                 .pattern("SAS")
                 .define('S', ModItems.REINFORCED_RICE_STICK.get())
                 .define('A', ModItems.RICE_FRUIT_BLACK_MIXTURE.get())
-                .define('E', Items.DRAGON_EGG)
-                .unlockedBy("has_dragon_egg", has(Items.DRAGON_EGG))
+                .define('E', ModItems.SMALL_SUMMONER.get())
+                .unlockedBy("has_small_summoner", has(ModItems.SMALL_SUMMONER.get()))
                 .save(consumer);
 
-        // （饭晶虎王生物蛋；米果混黏液 猴王如意棍）
+        // （饭晶虎王生物蛋；米果混黏液围边，中心小型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RICE_CRYSTAL_TIGER_KING_SPAWN_EGG.get())
                 .pattern("IVI")
                 .pattern("VTV")
                 .pattern("IVI")
                 .define('I', Items.IRON_INGOT)
                 .define('V', ModItems.RICE_FRUIT_VISCOUS_MIXTURE.get())
-                .define('T', ModItems.MONKEY_KING_RUYI_STAFF.get())
-                .unlockedBy("has_monkey_king_ruyi_staff", has(ModItems.MONKEY_KING_RUYI_STAFF.get()))
+                .define('T', ModItems.SMALL_SUMMONER.get())
+                .unlockedBy("has_small_summoner", has(ModItems.SMALL_SUMMONER.get()))
                 .save(consumer);
 
-        // （超晶牛王生物蛋；米石 爆米绽放液 虎王利爪）
+        // （超晶牛王生物蛋；米石四角 爆米绽放液围边，中心中型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SUPER_CRYSTAL_COW_KING_SPAWN_EGG.get())
                 .pattern("RLR")
                 .pattern("LCL")
                 .pattern("RLR")
                 .define('R', ModItems.RICE_STONE.get())
                 .define('L', ModItems.POPRICE_BLOOM_LIQUID.get())
-                .define('C', ModItems.TIGER_KING_RAZOR_CLAW.get())
-                .unlockedBy("has_tiger_king_razor_claw", has(ModItems.TIGER_KING_RAZOR_CLAW.get()))
+                .define('C', ModItems.MEDIUM_SUMMONER.get())
+                .unlockedBy("has_medium_summoner", has(ModItems.MEDIUM_SUMMONER.get()))
                 .save(consumer);
 
-        // （重晶兔王生物蛋；爆米嘬心液 牛王晶角）
+        // （重晶兔王生物蛋；爆米嘬心液围边，中心中型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HEAVY_CRYSTAL_RABBIT_KING_SPAWN_EGG.get())
                 .pattern("RHR")
                 .pattern("HOH")
                 .pattern("RHR")
                 .define('R', ModItems.CRYSTALLIZED_RICE_MEAL.get())
                 .define('H', ModItems.POPRICE_HEART_SIP_LIQUID.get())
-                .define('O', ModItems.OX_KING_CRYSTAL_HORN.get())
-                .unlockedBy("has_ox_king_crystal_horn", has(ModItems.OX_KING_CRYSTAL_HORN.get()))
+                .define('O', ModItems.MEDIUM_SUMMONER.get())
+                .unlockedBy("has_medium_summoner", has(ModItems.MEDIUM_SUMMONER.get()))
                 .save(consumer);
 
-        // （复晶天青蟒生物蛋；眼米嘬心液 兔王腥红眼）
+        // （复晶天青蟒生物蛋；眼米嘬心液围边，中心大型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COMPOUND_AZURE_PYTHON_SPAWN_EGG.get())
                 .pattern("RYR")
                 .pattern("YEY")
                 .pattern("RYR")
                 .define('R', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
                 .define('Y', ModItems.YANMI_HEART_SIP_LIQUID.get())
-                .define('E', ModItems.RABBIT_KING_BLOODY_RED_EYE.get())
-                .unlockedBy("has_rabbit_king_bloody_red_eye", has(ModItems.RABBIT_KING_BLOODY_RED_EYE.get()))
+                .define('E', ModItems.LARGE_SUMMONER.get())
+                .unlockedBy("has_large_summoner", has(ModItems.LARGE_SUMMONER.get()))
                 .save(consumer);
 
-        // 清洁长命夔生物蛋：龙息四角，米米杂烩液围边，中心极毒青蟒牙
+        // 清洁长命夔生物蛋：龙息四角，米米杂烩液围边，中心大型召唤器
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CLEANSING_LONGEVITY_KUI_SPAWN_EGG.get())
                 .pattern("BMB")
                 .pattern("MFM")
                 .pattern("BMB")
                 .define('B', Items.DRAGON_BREATH)
                 .define('M', ModItems.MIMI_MEDLEY_LIQUID.get())
-                .define('F', ModItems.VENOM_AZURE_PYTHON_FANG.get())
-                .unlockedBy("has_venom_azure_python_fang", has(ModItems.VENOM_AZURE_PYTHON_FANG.get()))
+                .define('F', ModItems.LARGE_SUMMONER.get())
+                .unlockedBy("has_large_summoner", has(ModItems.LARGE_SUMMONER.get()))
                 .save(consumer);
 
-        // （最懒终末龙生物蛋）
+        // （最懒终末龙生物蛋）：四角超结晶 + 下界合金碎片，中心最懒召唤器
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAZIEST_FINAL_DRAGON_SPAWN_EGG.get())
                 .pattern("RNR")
-                .pattern("NRN")
+                .pattern("NMN")
                 .pattern("RNR")
                 .define('R', ModItems.SUPER_CRYSTAL.get())
                 .define('N', Items.NETHERITE_SCRAP)
+                .define('M', ModItems.LAZIEST_SUMMONER.get())
                 .unlockedBy("has_netherite_scrap", has(Items.NETHERITE_SCRAP))
                 .save(consumer);
 
-        // （第八宗罪龙生物蛋）：残堕精华锭 + 下界合金锭，终末级材料区分于第七Boss
+        // （第八宗罪龙生物蛋）：残堕精华锭 + 下界合金锭围边，中心最懒召唤器，终末级材料区分于第七Boss
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DIBAZONGZUILONG_SPAWN_EGG.get())
                 .pattern("RNR")
-                .pattern("NRN")
+                .pattern("NMN")
                 .pattern("RNR")
                 .define('R', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get())
                 .define('N', Items.NETHERITE_INGOT)
+                .define('M', ModItems.LAZIEST_SUMMONER.get())
                 .unlockedBy("has_remnant_fallen_world_essence_ingot", has(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get()))
                 .save(consumer);
+
+        // ================= 八大 Boss 战利品 → 对应生物蛋 =================
+        // 每个 Boss 的专属头颅战利品，都可在工作台合回对应的生物蛋（1:1，无序单材料）。
+        // 同一产物已有一条有序配方，此处必须显式指定不同的配方 ID（后缀 _from_trophy）。
+
+        // 米米猴头 → 米米猴王生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MIMI_MONKEY_KING_SPAWN_EGG.get(), 1)
+                .requires(ModItems.MIMI_MONKEY_HEAD.get())
+                .unlockedBy("has_mimi_monkey_head", has(ModItems.MIMI_MONKEY_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":mimi_monkey_king_spawn_egg_from_trophy");
+
+        // 饭晶虎王头 → 饭晶虎王生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RICE_CRYSTAL_TIGER_KING_SPAWN_EGG.get(), 1)
+                .requires(ModItems.RICE_CRYSTAL_TIGER_KING_HEAD.get())
+                .unlockedBy("has_rice_crystal_tiger_king_head", has(ModItems.RICE_CRYSTAL_TIGER_KING_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":rice_crystal_tiger_king_spawn_egg_from_trophy");
+
+        // 超晶牛头 → 超晶牛王生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SUPER_CRYSTAL_COW_KING_SPAWN_EGG.get(), 1)
+                .requires(ModItems.SUPER_CRYSTAL_OX_HEAD.get())
+                .unlockedBy("has_super_crystal_ox_head", has(ModItems.SUPER_CRYSTAL_OX_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":super_crystal_cow_king_spawn_egg_from_trophy");
+
+        // 重晶兔王头 → 重晶兔王生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.HEAVY_CRYSTAL_RABBIT_KING_SPAWN_EGG.get(), 1)
+                .requires(ModItems.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get())
+                .unlockedBy("has_heavy_crystal_rabbit_king_head", has(ModItems.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":heavy_crystal_rabbit_king_spawn_egg_from_trophy");
+
+        // 复晶天青蟒头 → 复晶天青蟒生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.COMPOUND_AZURE_PYTHON_SPAWN_EGG.get(), 1)
+                .requires(ModItems.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get())
+                .unlockedBy("has_compound_crystal_azure_python_head", has(ModItems.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":compound_azure_python_spawn_egg_from_trophy");
+
+        // 清洁长命夔头 → 清洁长命夔生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.CLEANSING_LONGEVITY_KUI_SPAWN_EGG.get(), 1)
+                .requires(ModItems.PURIFIED_LONGEVITY_KUI_HEAD.get())
+                .unlockedBy("has_purified_longevity_kui_head", has(ModItems.PURIFIED_LONGEVITY_KUI_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":cleansing_longevity_kui_spawn_egg_from_trophy");
+
+        // 最懒终末龙头 → 最懒终末龙生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.LAZIEST_FINAL_DRAGON_SPAWN_EGG.get(), 1)
+                .requires(ModItems.LAZIEST_END_DRAGON_HEAD.get())
+                .unlockedBy("has_laziest_end_dragon_head", has(ModItems.LAZIEST_END_DRAGON_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":laziest_final_dragon_spawn_egg_from_trophy");
+
+        // 第八宗罪龙头 → 第八宗罪龙生物蛋
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DIBAZONGZUILONG_SPAWN_EGG.get(), 1)
+                .requires(ModItems.DIBAZONGZUI_HEAD.get())
+                .unlockedBy("has_dibazongzui_head", has(ModItems.DIBAZONGZUI_HEAD.get()))
+                .save(consumer, MimiWorld.MODID + ":dibazongzuilong_spawn_egg_from_trophy");
 
         // （米米神翼；米米幻翼膜）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.MIMI_DIVINE_WINGS.get())
@@ -2011,18 +2055,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_super_lazy_alloy_pickaxe", has(ModItems.SUPER_LAZY_ALLOY_PICKAXE.get()))
                 .save(consumer);
 
-        // ================= 第八批（盗米者蛋/堕落台/深染链/世界精华机器） =================
-
-        // （盗米者生物蛋）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RICE_STEALER_SPAWN_EGG.get())
-                .pattern("ESE")
-                .pattern("RSR")
-                .pattern("ESE")
-                .define('E', Items.ECHO_SHARD)
-                .define('S', Items.SCULK_SENSOR)
-                .define('R', ModItems.RICE_BUCKET.get())
-                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
-                .save(consumer);
+        // ================= 第八批（堕落台/深染链/世界精华机器） =================
 
         // （堕落台）
         // 注意：目前仍是 placeholder_占位，本配方在实装前无法合法合成（按原文直译）。
@@ -2720,15 +2753,5 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', ModItems.RICE_STONE.get())
                 .unlockedBy("has_cleansing_compound_ingot", has(ModItems.CLEANSING_COMPOUND_INGOT.get()))
                 .save(consumer);
-    }
-
-    /**
-     * 构造指定效果的原版药水 Ingredient（Items.POTION + Potion NBT），
-     * 用于工作台有序配方的 define(Character, Ingredient)。
-     * 注意：1.20.1 的 Ingredient.of(ItemStack) 会丢弃 NBT（任意药水都满足），
-     * 必须用 Forge 的 StrictNBTIngredient 精确匹配，序列化为 type=forge:nbt。
-     */
-    private static Ingredient potionIngredient(Potion potion) {
-        return StrictNBTIngredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), potion));
     }
 }

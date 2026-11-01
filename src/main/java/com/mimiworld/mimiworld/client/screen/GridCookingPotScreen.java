@@ -62,6 +62,11 @@ public abstract class GridCookingPotScreen extends AbstractContainerScreen<GridC
         this.titleLabelX = TITLE_X;
         this.titleLabelY = TITLE_Y;
         this.inventoryLabelX = TITLE_X;
+        // 屏幕高度不足（topPos 为负）时贴顶显示，避免标题被上边缘裁掉；
+        // 底部放不下的情况由玩家调小 GUI Scale 解决（面板高 232，需窗口高/缩放 ≥ 232）
+        if (this.topPos < 0) {
+            this.topPos = 0;
+        }
     }
 
     @Override

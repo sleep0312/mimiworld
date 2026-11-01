@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_compound_crystal_azure_python_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:compound_crystal_azure_python_head"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:compound_azure_python_spawn_egg_from_trophy"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_compound_crystal_azure_python_head",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:compound_azure_python_spawn_egg_from_trophy"
+    ]
+  },
+  "sends_telemetry_event": false
+}

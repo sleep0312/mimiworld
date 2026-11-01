@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:rice_crystal_tiger_king_head"
+    }
+  ],
+  "result": {
+    "item": "mimiworld:rice_crystal_tiger_king_spawn_egg"
+  }
+}

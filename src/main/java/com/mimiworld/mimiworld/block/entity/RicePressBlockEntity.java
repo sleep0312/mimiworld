@@ -91,19 +91,19 @@ public class RicePressBlockEntity extends BlockEntity implements MenuProvider, C
         return recipe == null ? ItemStack.EMPTY : recipe.result().copy();
     }
 
-    /** 物品多重集合 → 规范键：注册 ID 升序、逗号拼接（种类/数量/重复次数全部体现在键里） */
+    /** 物品多重集合 → 规范键：注册名升序、逗号拼接（种类/数量/重复次数全部体现在键里） */
     private static String canonicalKeyOfItems(List<Item> items) {
-        int[] ids = new int[items.size()];
+        String[] names = new String[items.size()];
         for (int i = 0; i < items.size(); i++) {
-            ids[i] = Item.getId(items.get(i));
+            names[i] = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(items.get(i)).toString();
         }
-        java.util.Arrays.sort(ids);
+        java.util.Arrays.sort(names);
         StringBuilder sb = new StringBuilder();
-        for (int id : ids) {
+        for (String name : names) {
             if (sb.length() > 0) {
                 sb.append(',');
             }
-            sb.append(id);
+            sb.append(name);
         }
         return sb.toString();
     }

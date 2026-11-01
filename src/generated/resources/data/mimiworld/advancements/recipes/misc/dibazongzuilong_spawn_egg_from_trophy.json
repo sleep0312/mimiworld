@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dibazongzui_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:dibazongzui_head"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:dibazongzuilong_spawn_egg_from_trophy"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dibazongzui_head",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:dibazongzuilong_spawn_egg_from_trophy"
+    ]
+  },
+  "sends_telemetry_event": false
+}

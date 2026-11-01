@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:purified_longevity_kui_head"
+    }
+  ],
+  "result": {
+    "item": "mimiworld:cleansing_longevity_kui_spawn_egg"
+  }
+}

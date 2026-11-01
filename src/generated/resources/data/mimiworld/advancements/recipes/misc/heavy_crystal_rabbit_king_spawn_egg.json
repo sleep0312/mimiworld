@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ox_king_crystal_horn": {
+    "has_medium_summoner": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:ox_king_crystal_horn"
+              "mimiworld:medium_summoner"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_ox_king_crystal_horn",
+      "has_medium_summoner",
       "has_the_recipe"
     ]
   ],

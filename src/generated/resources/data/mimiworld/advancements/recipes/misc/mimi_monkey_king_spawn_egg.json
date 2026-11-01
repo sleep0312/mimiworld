@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_dragon_egg": {
+    "has_small_summoner": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:dragon_egg"
+              "mimiworld:small_summoner"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_dragon_egg",
+      "has_small_summoner",
       "has_the_recipe"
     ]
   ],

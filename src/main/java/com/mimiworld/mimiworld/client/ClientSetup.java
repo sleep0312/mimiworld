@@ -210,6 +210,10 @@ public class ClientSetup {
         event.registerBlockEntityRenderer(ModBlockEntities.JUMBO_MEGA_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
                         new ResourceLocation(MimiWorld.MODID, "jumbo_mega_cooking_pot"), 16.0F / 36.608F));
+        // 铁锅：GeckoLib 平底锅 geo 模型（模型本身按 16px 内设计，1:1 渲染）
+        event.registerBlockEntityRenderer(ModBlockEntities.IRON_WOK.get(),
+                ctx -> new CookingPotGeoBlockRenderer<>(
+                        new ResourceLocation(MimiWorld.MODID, "iron_wok"), 1.0F));
         // 米米猴头：GeckoLib 头颅摆件方块（head+crown 静态模型，渲染器内缩放摆正贴地居中）
         event.registerBlockEntityRenderer(ModBlockEntities.MIMI_MONKEY_HEAD.get(),
                 ctx -> new MimiMonkeyHeadBlockRenderer<>(ctx));

@@ -2,56 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "F": {
-      "type": "forge:nbt",
-      "count": 1,
-      "item": "minecraft:potion",
-      "nbt": "{Potion:\"minecraft:swiftness\"}"
-    },
-    "H": {
-      "type": "forge:nbt",
-      "count": 1,
-      "item": "minecraft:potion",
-      "nbt": "{Potion:\"minecraft:harming\"}"
-    },
     "J": {
       "item": "mimiworld:rice_fruit_juice"
     },
     "K": {
       "item": "mimiworld:rice_bucket"
     },
-    "L": {
-      "type": "forge:nbt",
-      "count": 1,
-      "item": "minecraft:potion",
-      "nbt": "{Potion:\"minecraft:leaping\"}"
-    },
     "P": {
       "item": "mimiworld:rice_pail"
     },
-    "S": {
-      "type": "forge:nbt",
-      "count": 1,
-      "item": "minecraft:potion",
-      "nbt": "{Potion:\"minecraft:strength\"}"
-    },
-    "T": {
-      "type": "forge:nbt",
-      "count": 1,
-      "item": "minecraft:potion",
-      "nbt": "{Potion:\"minecraft:healing\"}"
-    },
-    "W": {
-      "type": "forge:nbt",
-      "count": 1,
-      "item": "minecraft:potion",
-      "nbt": "{Potion:\"minecraft:weakness\"}"
+    "X": {
+      "item": "minecraft:potion"
     }
   },
   "pattern": [
-    "HWL",
+    "XXX",
     "KJP",
-    "TSF"
+    "XXX"
   ],
   "result": {
     "item": "mimiworld:rice_fruit_mixture"

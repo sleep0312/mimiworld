@@ -23,8 +23,8 @@ import java.util.Map;
  */
 public class PrecipitationTableBlockEntity extends DualInputProcessorBlockEntity {
 
-    /** 键：双输入排序 long（见 recipeKey） */
-    private static final Map<Long, ProcessorRecipe> RECIPES = new HashMap<>();
+    /** 键：双输入有序化注册名（见 recipeKey） */
+    private static final Map<String, ProcessorRecipe> RECIPES = new HashMap<>();
 
     /** 注册一条沉淀配方：inputA + inputB → result，加工时长使用配方自带的 processTicks */
     public static void registerRecipe(Item inputA, Item inputB, ItemStack result, int processTicks) {
@@ -51,11 +51,11 @@ public class PrecipitationTableBlockEntity extends DualInputProcessorBlockEntity
         registerRecipe(singleInput, result, DEFAULT_PROCESS_TICKS);
     }
 
-    /** 低位 32 位全 1 作为"另一槽为空"标记（真实物品注册 ID 不可能为 -1） */
-    private static final long EMPTY_SLOT_MARKER = 0xFFFFFFFFL;
+    /** 低位占位标记：真实物品注册名不可能包含尖括号，故与任何双输入键都不冲突 */
+    private static final String EMPTY_SLOT_MARKER = "<empty>";
 
-    private static long singleInputKey(Item input) {
-        return ((long) BuiltInRegistries.ITEM.getId(input) << 32) | EMPTY_SLOT_MARKER;
+    private static String singleInputKey(Item input) {
+        return BuiltInRegistries.ITEM.getKey(input) + "|" + EMPTY_SLOT_MARKER;
     }
 
     @Nullable

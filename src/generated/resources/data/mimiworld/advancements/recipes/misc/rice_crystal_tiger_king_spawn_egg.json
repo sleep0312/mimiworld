@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_monkey_king_ruyi_staff": {
+    "has_small_summoner": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:monkey_king_ruyi_staff"
+              "mimiworld:small_summoner"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_monkey_king_ruyi_staff",
+      "has_small_summoner",
       "has_the_recipe"
     ]
   ],

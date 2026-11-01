@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:compound_crystal_azure_python_head"
+    }
+  ],
+  "result": {
+    "item": "mimiworld:compound_azure_python_spawn_egg"
+  }
+}

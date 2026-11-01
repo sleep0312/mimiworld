@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:heavy_crystal_rabbit_king_head"
+    }
+  ],
+  "result": {
+    "item": "mimiworld:heavy_crystal_rabbit_king_spawn_egg"
+  }
+}

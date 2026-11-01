@@ -62,11 +62,9 @@ public class DissociationTableBlockEntity extends BlockEntity
     public record DissociationRecipe(Item top, Item bottom, ItemStack result, int processTicks) {
     }
 
-    /** 有序配方键：高位为上方原料、低位为下方介质 */
-    public static long recipeKey(Item top, Item bottom) {
-        int idTop = BuiltInRegistries.ITEM.getId(top);
-        int idBottom = BuiltInRegistries.ITEM.getId(bottom);
-        return ((long) idTop << 32) | (idBottom & 0xFFFFFFFFL);
+    /** 有序配方键：高位为上方原料、低位为下方介质的注册名（不可互换） */
+    public static String recipeKey(Item top, Item bottom) {
+        return BuiltInRegistries.ITEM.getKey(top) + "|" + BuiltInRegistries.ITEM.getKey(bottom);
     }
 
     // -------------------- 状态 --------------------
@@ -85,8 +83,8 @@ public class DissociationTableBlockEntity extends BlockEntity
 
     private LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> new InvWrapper(this));
 
-    /** 键：有序配方 long（见 recipeKey）；当前为空表 */
-    private static final Map<Long, DissociationRecipe> RECIPES = new HashMap<>();
+    /** 键：有序配方注册名（见 recipeKey）；当前为空表 */
+    private static final Map<String, DissociationRecipe> RECIPES = new HashMap<>();
 
     /** 注册一条离解配方：top（上槽原料）+ bottom（下槽介质）→ result */
     public static void registerRecipe(Item top, Item bottom, ItemStack result, int processTicks) {

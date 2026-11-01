@@ -2,6 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "M": {
+      "item": "mimiworld:laziest_summoner"
+    },
     "N": {
       "item": "minecraft:netherite_ingot"
     },
@@ -11,7 +14,7 @@
   },
   "pattern": [
     "RNR",
-    "NRN",
+    "NMN",
     "RNR"
   ],
   "result": {

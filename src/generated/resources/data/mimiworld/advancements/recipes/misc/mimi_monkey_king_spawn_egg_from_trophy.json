@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mimi_monkey_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:mimi_monkey_head"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:mimi_monkey_king_spawn_egg_from_trophy"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_mimi_monkey_head",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:mimi_monkey_king_spawn_egg_from_trophy"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:mimi_monkey_head"
+    }
+  ],
+  "result": {
+    "item": "mimiworld:mimi_monkey_king_spawn_egg"
+  }
+}

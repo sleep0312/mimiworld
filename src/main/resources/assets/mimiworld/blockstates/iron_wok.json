@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "mimiworld:block/iron_wok" }
+    "facing=east": { "model": "mimiworld:block/iron_wok" },
+    "facing=north": { "model": "mimiworld:block/iron_wok" },
+    "facing=south": { "model": "mimiworld:block/iron_wok" },
+    "facing=west": { "model": "mimiworld:block/iron_wok" }
   }
 }

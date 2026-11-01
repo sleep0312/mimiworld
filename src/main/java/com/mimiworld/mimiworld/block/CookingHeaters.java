@@ -7,8 +7,9 @@ import net.minecraft.world.level.LevelReader;
 /**
  * 煮锅加热源（炉灶）检测工具。
  *
- * <p>当前以方块标签 {@link ModBlockTags#STOVES} 作为唯一判定依据：
- * 炉灶以后注册时加入该标签即可，煮锅与炉灶之间不产生代码耦合。</p>
+ * <p>以方块标签 {@link ModBlockTags#STOVES} 作为唯一判定依据：
+ * 炉灶方块（{@code mimiworld:stove}）已在标签内，其他炉灶类方块加入该标签即可，
+ * 煮锅与炉灶之间不产生代码耦合。</p>
  */
 public final class CookingHeaters {
 

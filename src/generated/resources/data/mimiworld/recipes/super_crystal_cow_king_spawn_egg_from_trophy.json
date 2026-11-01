@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:super_crystal_ox_head"
+    }
+  ],
+  "result": {
+    "item": "mimiworld:super_crystal_cow_king_spawn_egg"
+  }
+}

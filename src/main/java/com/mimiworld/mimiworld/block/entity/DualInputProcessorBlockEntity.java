@@ -6,6 +6,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -59,15 +60,17 @@ public abstract class DualInputProcessorBlockEntity extends BlockEntity
     }
 
     /**
-     * 双输入配方键：两种物品的注册 ID 先排序再拼成一个 long，
+     * 双输入配方键：两种物品的<b>注册名</b>（ResourceLocation）按字典序排序后拼接，
      * 保证 (A,B) 与 (B,A) 命中同一条配方（无序合成）。
+     * <p>
+     * 注意：不能用物品数字 ID —— Forge 在世界加载时会重映射注册表数字 ID，
+     * 模组加载阶段（配方注册时）算出的 ID 与游戏运行时的 ID 可能不同，
+     * 会导致配方表永久查不到。
      */
-    public static long recipeKey(Item a, Item b) {
-        int idA = BuiltInRegistries.ITEM.getId(a);
-        int idB = BuiltInRegistries.ITEM.getId(b);
-        int lo = Math.min(idA, idB);
-        int hi = Math.max(idA, idB);
-        return ((long) lo << 32) | (hi & 0xFFFFFFFFL);
+    public static String recipeKey(Item a, Item b) {
+        ResourceLocation keyA = BuiltInRegistries.ITEM.getKey(a);
+        ResourceLocation keyB = BuiltInRegistries.ITEM.getKey(b);
+        return keyA.compareTo(keyB) <= 0 ? keyA + "|" + keyB : keyB + "|" + keyA;
     }
 
     // -------------------- 状态 --------------------

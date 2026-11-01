@@ -22,8 +22,8 @@ import java.util.Map;
  */
 public class IonizationTableBlockEntity extends DualInputProcessorBlockEntity {
 
-    /** 键：双输入排序 long（见 recipeKey） */
-    private static final Map<Long, ProcessorRecipe> RECIPES = new HashMap<>();
+    /** 键：双输入有序化注册名（见 recipeKey） */
+    private static final Map<String, ProcessorRecipe> RECIPES = new HashMap<>();
 
     /** 注册一条电离配方：inputA + inputB → result，加工时长使用配方自带的 processTicks */
     public static void registerRecipe(Item inputA, Item inputB, ItemStack result, int processTicks) {

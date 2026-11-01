@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rabbit_king_bloody_red_eye": {
+    "has_large_summoner": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:rabbit_king_bloody_red_eye"
+              "mimiworld:large_summoner"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_rabbit_king_bloody_red_eye",
+      "has_large_summoner",
       "has_the_recipe"
     ]
   ],

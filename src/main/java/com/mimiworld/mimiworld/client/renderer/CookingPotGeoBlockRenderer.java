@@ -42,6 +42,9 @@ public class CookingPotGeoBlockRenderer<T extends BlockEntity & GeoAnimatable> e
         // 按满亮渲染，与 Blockbench 预览（均匀满光、保留面方向明暗）目视一致，
         // 避免 BlockEntity 取到偏低光照导致整锅发黑
         poseStack.pushPose();
+        // 带 FACING 的锅（如铁锅平底锅）：GeckoLib 的 GeoBlockRenderer 检测到状态里有
+        // HorizontalDirectionalBlock.FACING 属性时，会自动绕方块中心按朝向旋转模型
+        // （模型需按「锅柄朝南 +Z」建模），无需在此手动旋转。煮锅等无该属性的方块不旋转。
         poseStack.translate(offsetXZ, 0.0F, offsetXZ);
         poseStack.scale(scale, scale, scale);
         super.render(blockEntity, partialTick, poseStack, bufferSource,

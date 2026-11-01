@@ -4,8 +4,10 @@ import com.mimiworld.mimiworld.menu.RicePoundingTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
@@ -56,20 +58,23 @@ public class RicePoundingTableBlockEntity extends BlockEntity implements MenuPro
     public record PoundingRecipe(Item inputA, Item inputB, ItemStack result) {
     }
 
-    /** 键：两个输入物品的注册 ID 按小大排序后拼成，保证无序 */
-    private static final Map<Long, PoundingRecipe> RECIPES = new HashMap<>();
+    /** 键：两个输入物品的注册名按字典序排序后拼接，保证无序匹配 */
+    private static final Map<String, PoundingRecipe> RECIPES = new HashMap<>();
 
     /** 注册一条无序双输入配方。应在模组加载阶段调用；当前尚无配方。 */
     public static void registerRecipe(Item inputA, Item inputB, ItemStack result) {
         RECIPES.put(recipeKey(inputA, inputB), new PoundingRecipe(inputA, inputB, result.copy()));
     }
 
-    private static long recipeKey(Item a, Item b) {
-        int idA = Item.getId(a);
-        int idB = Item.getId(b);
-        int lo = Math.min(idA, idB);
-        int hi = Math.max(idA, idB);
-        return ((long) lo << 32) | (hi & 0xFFFFFFFFL);
+    /**
+     * 无序双输入键：注册名（ResourceLocation）排序拼接。
+     * 不能用物品数字 ID —— Forge 加载世界时会重映射注册表数字 ID，
+     * 模组加载阶段与运行时的 ID 可能不一致，导致配方永久查不到。
+     */
+    private static String recipeKey(Item a, Item b) {
+        ResourceLocation keyA = BuiltInRegistries.ITEM.getKey(a);
+        ResourceLocation keyB = BuiltInRegistries.ITEM.getKey(b);
+        return keyA.compareTo(keyB) <= 0 ? keyA + "|" + keyB : keyB + "|" + keyA;
     }
 
     /** 查询两槽物品能否合成：两槽都非空且命中配方时返回结果副本，否则返回空栈 */
