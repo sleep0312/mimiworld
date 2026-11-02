@@ -477,33 +477,5 @@ public final class ModMachineRecipes {
                         "ABXBA"
                 }, worldTearKeys);
 
-        // ---- 凝锭台：25 个相同材料摆满即得 ----
-
-        // 龙骨架构：25 个龙骨
-        Item dragonBone = ModItems.DRAGON_BONE.get();
-        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.DRAGON_BONE_FRAMEWORK.get()),
-                dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
-                dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
-                dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
-                dragonBone, dragonBone, dragonBone, dragonBone, dragonBone,
-                dragonBone, dragonBone, dragonBone, dragonBone, dragonBone);
-
-        // 龙血精华：25 个龙血
-        Item dragonBlood = ModItems.DRAGON_BLOOD.get();
-        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.DRAGON_BLOOD_ESSENCE.get()),
-                dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
-                dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
-                dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
-                dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood,
-                dragonBlood, dragonBlood, dragonBlood, dragonBlood, dragonBlood);
-
-        // 龙鳞块：25 个龙鳞
-        Item dragonScale = ModItems.DRAGON_SCALE.get();
-        IngotCondensationTableBlockEntity.registerShapeless(new ItemStack(ModItems.DRAGON_SCALE_BLOCK.get()),
-                dragonScale, dragonScale, dragonScale, dragonScale, dragonScale,
-                dragonScale, dragonScale, dragonScale, dragonScale, dragonScale,
-                dragonScale, dragonScale, dragonScale, dragonScale, dragonScale,
-                dragonScale, dragonScale, dragonScale, dragonScale, dragonScale,
-                dragonScale, dragonScale, dragonScale, dragonScale, dragonScale);
     }
 }

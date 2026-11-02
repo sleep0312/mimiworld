@@ -48,10 +48,10 @@ public enum ModArmorMaterials implements ArmorMaterial {
     HEAVENFALL("heavenfall", 50, new int[]{4, 7, 9, 4}, 20,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.5F, 0.12F,
             () -> Ingredient.of(ModItems.FALLEN_HEART.get())),
-    /** 残堕宗罪套（头盔/胸甲/护腿/靴子）：龙系终末甲，29 点总防御、韧性 5.5、击退抗性 0.18（修复宗罪龙头冠） */
+    /** 残堕宗罪套（头盔/胸甲/护腿/靴子）：龙系终末甲，29 点总防御、韧性 5.5、击退抗性 0.18（修复终末龙逆鳞） */
     REMNANT_FALLEN_CARDINAL_SIN("remnant_fallen_cardinal_sin", 60, new int[]{5, 8, 11, 5}, 24,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 5.5F, 0.18F,
-            () -> Ingredient.of(ModItems.CARDINAL_SIN_DRAGON_CROWN.get()));
+            () -> Ingredient.of(ModItems.END_DRAGON_REVERSE_SCALE.get()));
 
     /** 各槽位耐久基准，顺序与 EquipmentSlot.values() 一致（脚/腿/胸/头） */
     private static final int[] BASE_DURABILITY = {13, 15, 16, 11};

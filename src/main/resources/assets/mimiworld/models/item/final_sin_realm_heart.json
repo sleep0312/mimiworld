@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mimiworld:item/final_sin_realm_heart"
-  }
-}

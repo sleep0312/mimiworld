@@ -2009,12 +2009,6 @@ public class ModItems {
                     effect(() -> MobEffects.HEALTH_BOOST, 50, MIN_3),
                     effect(() -> MobEffects.WEAKNESS, 5, MIN_2));
 
-    // 凤伤汤（Phoenix Wound Soup）：熟食，饱食度 10；缓慢 1/1min、生命恢复 200/2min、力量 5/5min
-    public static final RegistryObject<Item> PHOENIX_WOUND_SOUP = registerEffectFood("phoenix_wound_soup", 10,
-            effect(() -> MobEffects.MOVEMENT_SLOWDOWN, 1, MIN_1),
-            effect(() -> MobEffects.REGENERATION, 200, MIN_2),
-            effect(() -> MobEffects.DAMAGE_BOOST, 5, MIN_5));
-
     // 蜃楼幻想（Mirage Illusion）：熟食，饱食度 10；反胃 255/30s、瞬间恢复 255
     public static final RegistryObject<Item> MIRAGE_ILLUSION = registerEffectFood("mirage_illusion", 10,
             effect(() -> MobEffects.CONFUSION, 255, SEC_30),
@@ -2081,13 +2075,6 @@ public class ModItems {
     // 肢体烤串（Limb Skewer）：熟食，3 饱食度
     public static final RegistryObject<Item> LIMB_SKEWER = registerItem("limb_skewer",
             () -> new Item(new Item.Properties().stacksTo(64).food(cookedFood(6, 0.7F))));
-
-    // 蜃虚龙凤烤串（Mirage Void Dragon-Phoenix Skewer）：熟食，饱食度 10；反胃 255/30s、创造飞行/5min、生命恢复 255/30s
-    public static final RegistryObject<Item> MIRAGE_VOID_DRAGON_PHOENIX_SKEWER =
-            registerEffectFood("mirage_void_dragon_phoenix_skewer", 10,
-                    effect(() -> MobEffects.CONFUSION, 255, SEC_30),
-                    effect(ModEffects.CREATIVE_FLIGHT::get, 1, MIN_5),
-                    effect(() -> MobEffects.REGENERATION, 255, SEC_30));
 
     // 饭团（Onigiri）：熟食，饱食度 666；生命恢复 255/2min、缓慢 5/1min（注意：rice_ball「米团」是另一个可投掷物品，故本物品注册名为 onigiri）
     public static final RegistryObject<Item> ONIGIRI = registerEffectFood("onigiri", 666,
@@ -2177,60 +2164,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPOON = registerItem("spoon",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 骊珠（Li Pearl）：黑龙颔下之珠，普通物品，最大堆叠 64
-    public static final RegistryObject<Item> LI_PEARL = registerItem("li_pearl",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙血（Dragon Blood）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> DRAGON_BLOOD = registerItem("dragon_blood",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙鳞（Dragon Scale）：普通物品，最大堆叠 64；9 个可在工作台压缩成龙鳞块（配方待定）
-    public static final RegistryObject<Item> DRAGON_SCALE = registerItem("dragon_scale",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 宗罪龙逆鳞（Yu Sin Dragon Reverse Scale）：普通物品，最大堆叠 64；残堕工具修复材料
-    public static final RegistryObject<Item> YU_SIN_DRAGON_REVERSE_SCALE = registerItem("yu_sin_dragon_reverse_scale",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙骨（Dragon Bone）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> DRAGON_BONE = registerItem("dragon_bone",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 界主龙心（Realm Lord Dragon Heart）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> REALM_LORD_DRAGON_HEART = registerItem("realm_lord_dragon_heart",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 宗罪龙头冠（Cardinal Sin Dragon Crown）：普通物品，最大堆叠 64；残堕宗罪套装修复材料
-    public static final RegistryObject<Item> CARDINAL_SIN_DRAGON_CROWN = registerItem("cardinal_sin_dragon_crown",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙骨架构（Dragon Bone Framework）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> DRAGON_BONE_FRAMEWORK = registerItem("dragon_bone_framework",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙血精华（Dragon Blood Essence）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> DRAGON_BLOOD_ESSENCE = registerItem("dragon_blood_essence",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙鳞块（Block of Dragon Scale）：龙鳞的压缩存储块，
-    // 放置后对应 ModBlocks.DRAGON_SCALE_BLOCK；钻石镐（挖掘等级3）采集，破坏掉落本身
-    public static final RegistryObject<Item> DRAGON_SCALE_BLOCK = registerItem("dragon_scale_block",
-            () -> new BlockItem(ModBlocks.DRAGON_SCALE_BLOCK.get(), new Item.Properties()));
-
-    // 终罪骊珠（Final Sin Li Pearl）：终罪龙之力凝结的暗紫骊珠（骊珠的终罪形态），普通物品，最大堆叠 64
-    public static final RegistryObject<Item> FINAL_SIN_LI_PEARL = registerItem("final_sin_li_pearl",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 终罪逆鳞（Final Sin Reverse Scale）：终罪龙逆生之鳞（注册名去掉历史后缀 mmjm），普通物品，最大堆叠 64
-    public static final RegistryObject<Item> FINAL_SIN_REVERSE_SCALE = registerItem("final_sin_reverse_scale",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 终罪龙心（Final Sin Dragon Heart）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> FINAL_SIN_DRAGON_HEART = registerItem("final_sin_dragon_heart",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // ---- 残堕宗罪套装（GeckoLib 4 动态 3D 盔甲，最大堆叠 1；修复材料宗罪龙头冠，
+    // ---- 残堕宗罪套装（GeckoLib 4 动态 3D 盔甲，最大堆叠 1；修复材料终末龙逆鳞，
     //      材质 REMNANT_FALLEN_CARDINAL_SIN；模型/动画见 RemnantFallenCardinalSinArmorItem） ----
     public static final RegistryObject<Item> REMNANT_FALLEN_CARDINAL_SIN_HELMET =
             registerItem("remnant_fallen_cardinal_sin_helmet",
@@ -2265,30 +2199,6 @@ public class ModItems {
     public static final RegistryObject<Item> REMNANT_FALLEN_REVERSE_SCALE_SWORD =
             registerItem("remnant_fallen_reverse_scale_sword",
                     () -> new SwordItem(ModItemTiers.REMNANT_FALLEN, 5, -2.8F, new Item.Properties().stacksTo(1)));
-
-    // 龙鳞之威（Dragon Scale Might）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> DRAGON_SCALE_MIGHT = registerItem("dragon_scale_might",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙元（Dragon Yuan）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> DRAGON_YUAN = registerItem("dragon_yuan",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 龙首之怒（Dragon Head Wrath）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> DRAGON_HEAD_WRATH = registerItem("dragon_head_wrath",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 终罪界心（Final Sin Realm Heart）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> FINAL_SIN_REALM_HEART = registerItem("final_sin_realm_heart",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 净化架构（Purification Framework）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> PURIFICATION_FRAMEWORK = registerItem("purification_framework",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 世界净化器（World Purifier）：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> WORLD_PURIFIER = registerItem("world_purifier",
-            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // ---- 箭支：均为可发射箭矢（MimiArrowItem），命中结算固定伤害 + 中毒（等级 0 无中毒） ----
     // 饭晶箭（Rice Crystal Arrow）：4 伤害 + 中毒 I 10s
