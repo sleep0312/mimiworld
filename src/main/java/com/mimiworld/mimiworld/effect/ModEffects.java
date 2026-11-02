@@ -59,6 +59,23 @@ public class ModEffects {
             "remnant_corruption",
             () -> new RemnantCorruptionEffect(MobEffectCategory.BENEFICIAL, 0xFFA02A2A));
 
+    /**
+     * 易怒 —— 正面效果。颜色 #F4511E 橙红。
+     * 受伤后 1 秒内攻击有 25% 概率增伤 5%×等级（上限 5 级），
+     * 由 {@link com.mimiworld.mimiworld.event.ModEffectEvents} 在 LivingHurtEvent 中处理。
+     */
+    public static final RegistryObject<MobEffect> IRRITABLE = MOB_EFFECTS.register(
+            "irritable",
+            () -> new IrritableEffect(MobEffectCategory.BENEFICIAL, 0xFFF4511E));
+
+    /**
+     * 暗毒 —— 负面效果。颜色 #4B2A5E 暗紫。
+     * 携带者的生命恢复量 -75%（只保留 25%），由 ModEffectEvents 在 LivingHealEvent 中处理。
+     */
+    public static final RegistryObject<MobEffect> DARK_POISON = MOB_EFFECTS.register(
+            "dark_poison",
+            () -> new DarkPoisonEffect(MobEffectCategory.HARMFUL, 0xFF4B2A5E));
+
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
     }

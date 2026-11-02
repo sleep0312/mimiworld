@@ -7,6 +7,7 @@ import com.mimiworld.mimiworld.effect.ModEffects;
 import com.mimiworld.mimiworld.enchantment.ModEnchantments;
 import com.mimiworld.mimiworld.entity.ModEntities;
 import com.mimiworld.mimiworld.menu.ModMenuTypes;
+import com.mimiworld.mimiworld.network.ModNetwork;
 import com.mimiworld.mimiworld.fluid.ModFluids;
 import com.mojang.logging.LogUtils;
 import software.bernie.geckolib.GeckoLib;
@@ -52,6 +53,9 @@ public class MimiWorld
         // GeckoLib 初始化：内部完成网络注册与客户端渲染/重载监听等事件总线订阅，
         // 是后续自定义 Geo 生物、立体 Geo 盔甲、动画方块/物品的必要前置（有 hasInitialized 防重入）
         GeckoLib.initialize();
+
+        // 网络通道：猩红竖眼的按键请求（C2S）
+        ModNetwork.register();
 
         // 挂载各注册器到 mod 事件总线
         ModBlocks.register(modEventBus);

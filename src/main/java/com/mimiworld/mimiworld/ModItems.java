@@ -7,6 +7,17 @@ import com.mimiworld.mimiworld.item.BookOfDepartureItem;
 import com.mimiworld.mimiworld.item.CleansingCompoundArmorItem;
 import com.mimiworld.mimiworld.item.CompoundRiceMealArmorItem;
 import com.mimiworld.mimiworld.item.EffectFoodItem;
+import com.mimiworld.mimiworld.item.FieryGoldenEyesItem;
+import com.mimiworld.mimiworld.item.RuyiItem;
+import com.mimiworld.mimiworld.item.TigerKingDisdainItem;
+import com.mimiworld.mimiworld.item.AncientPeltItem;
+import com.mimiworld.mimiworld.item.AzureWheelItem;
+import com.mimiworld.mimiworld.item.DarkSpiritFangItem;
+import com.mimiworld.mimiworld.item.SnakeskinTailItem;
+import com.mimiworld.mimiworld.item.CrimsonVerticalEyeItem;
+import com.mimiworld.mimiworld.item.MoonPhasesItem;
+import com.mimiworld.mimiworld.item.ToughTigerHideItem;
+import com.mimiworld.mimiworld.item.TranscendenceHornItem;
 import com.mimiworld.mimiworld.item.LaziestHeavenfallArmorItem;
 import com.mimiworld.mimiworld.item.MimiArrowItem;
 import com.mimiworld.mimiworld.item.MimiDivineWingsItem;
@@ -732,6 +743,61 @@ public class ModItems {
     // data/mimiworld/curios/slots/shenyi_book.json；效果实现见 BookOfDepartureItem。
     public static final RegistryObject<Item> BOOK_OF_DEPARTURE = registerItem("book_of_departure",
             () -> new BookOfDepartureItem(new Item.Properties().stacksTo(1)));
+
+    // 火眼金睛（Fiery Golden Eyes）：Curios「圣遗物」槽位饰品，槽位数据见
+    // data/mimiworld/curios/slots/sacred_relic.json；效果实现见 FieryGoldenEyesItem。
+    public static final RegistryObject<Item> FIERY_GOLDEN_EYES = registerItem("fiery_golden_eyes",
+            () -> new FieryGoldenEyesItem(new Item.Properties().stacksTo(1)));
+
+    // 如意（Ruyi）：Curios「圣遗物」槽位饰品，攻击距离 +5、攻击伤害 +5。
+    public static final RegistryObject<Item> RUYI = registerItem("ruyi",
+            () -> new RuyiItem(new Item.Properties().stacksTo(1)));
+
+    // 虎王之蔑（Tiger King's Disdain）：Curios「圣遗物」槽位饰品，
+    // 受到伤害分 5 次、每次 20%、每 1 秒结算一次（逻辑见 ModEffectEvents）。
+    public static final RegistryObject<Item> TIGER_KING_DISDAIN = registerItem("tiger_king_disdain",
+            () -> new TigerKingDisdainItem(new Item.Properties().stacksTo(1)));
+
+    // 坚韧虎皮（Tough Tiger Hide）：Curios「圣遗物」槽位饰品，
+    // 护甲 +12、攻击力 + 总护甲 ×10%，再扣除等量护甲（逻辑见 ModEffectEvents）。
+    public static final RegistryObject<Item> TOUGH_TIGER_HIDE = registerItem("tough_tiger_hide",
+            () -> new ToughTigerHideItem(new Item.Properties().stacksTo(1)));
+
+    // 月有圆缺（Moon Phases）：Curios「圣遗物」槽位饰品，
+    // 暴击率 +30%、攻击力 +10、受到的总伤害 +25%、5 格内怪物 20% 概率额外 50% 伤害
+    // （动态结算见 ModEffectEvents）。
+    public static final RegistryObject<Item> MOON_PHASES = registerItem("moon_phases",
+            () -> new MoonPhasesItem(new Item.Properties().stacksTo(1)));
+
+    // 猩红竖眼（Crimson Vertical Eye）：Curios「圣遗物」槽位饰品，
+    // 21×21×21 范围内怪物发光，按自定义按键传送到发光怪物身后（逻辑见 CrimsonEyeEvents）。
+    public static final RegistryObject<Item> CRIMSON_VERTICAL_EYE = registerItem("crimson_vertical_eye",
+            () -> new CrimsonVerticalEyeItem(new Item.Properties().stacksTo(1)));
+
+    // 超越之号角（Horn of Transcendence）：Curios「圣遗物」槽位饰品，
+    // 护甲 +10、最大生命值 +10、攻击速度 +30%（属性修饰符见物品类）。
+    public static final RegistryObject<Item> TRANSCENDENCE_HORN = registerItem("transcendence_horn",
+            () -> new TranscendenceHornItem(new Item.Properties().stacksTo(1)));
+
+    // 上古毛皮（Ancient Pelt）：Curios「圣遗物」槽位饰品，
+    // 抢夺 +2，并持续获得「易怒」效果；每次增伤触发时升级、10 秒未触发降回 I 级
+    // （易怒维持与升降级见 ModEffectEvents）。
+    public static final RegistryObject<Item> ANCIENT_PELT = registerItem("ancient_pelt",
+            () -> new AncientPeltItem(new Item.Properties().stacksTo(1)));
+
+    // 蛇皮驺尾（Snakeskin Tail）：Curios「圣遗物」槽位饰品，移动速度 +0.1、护甲 +5。
+    public static final RegistryObject<Item> SNAKESKIN_TAIL = registerItem("snakeskin_tail",
+            () -> new SnakeskinTailItem(new Item.Properties().stacksTo(1)));
+
+    // 暗灵毒牙（Dark Spirit Fang）：Curios「圣遗物」槽位饰品，
+    // 攻击力 +25%，攻击命中时给予目标 3 秒「暗毒」（施加逻辑见 ModEffectEvents）。
+    public static final RegistryObject<Item> DARK_SPIRIT_FANG = registerItem("dark_spirit_fang",
+            () -> new DarkSpiritFangItem(new Item.Properties().stacksTo(1)));
+
+    // 天青轮盘（Azure Wheel）：Curios「圣遗物」槽位饰品，
+    // 攻击命中时 50% 概率伤害翻倍、50% 概率伤害减半（判定见 ModEffectEvents）。
+    public static final RegistryObject<Item> AZURE_WHEEL = registerItem("azure_wheel",
+            () -> new AzureWheelItem(new Item.Properties().stacksTo(1)));
 
     // 米米传送器（Mimi Teleporter）：传送门框架方块（ModBlocks.MIMI_TELEPORTER）的 BlockItem，
     // 放置后作为米米维度传送门框架使用；传送/激活逻辑后续实现。

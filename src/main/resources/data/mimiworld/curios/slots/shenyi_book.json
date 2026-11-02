@@ -1,5 +1,6 @@
 {
   "order": 300,
+  "size": 1,
   "icon": "mimiworld:slot/shenyi_book",
   "validators": ["curios:tag"]
 }

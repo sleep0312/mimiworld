@@ -1,4 +1,4 @@
 {
   "entities": ["minecraft:player"],
-  "slots": ["shenyi_book"]
+  "slots": ["shenyi_book", "sacred_relic"]
 }

@@ -1,0 +1,6 @@
+{
+  "order": 310,
+  "size": 3,
+  "icon": "mimiworld:slot/sacred_relic",
+  "validators": ["curios:tag"]
+}
