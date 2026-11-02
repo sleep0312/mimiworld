@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_extra_large_cooking_pot": {
+    "has_large_cooking_pot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:extra_large_cooking_pot"
+              "mimiworld:large_cooking_pot"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_extra_large_cooking_pot",
+      "has_large_cooking_pot",
       "has_the_recipe"
     ]
   ],

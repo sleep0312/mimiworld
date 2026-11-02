@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * 巨无霸大大大煮锅方块实体（jumbo_mega_cooking_pot）：5x5 网格（25 入）+ 右上单独输入 + 燃料 + 输出。
- * 配方为网格有序 + 右上槽指定物品，配方表独立且当前为空。
+ * 配方为网格有序 + 右上槽指定物品，配方见 ModMachineRecipes。
  */
 public class JumboMegaCookingPotBlockEntity extends GeckoCookingPotBlockEntity {
 

@@ -56,13 +56,9 @@ import com.mimiworld.mimiworld.client.renderer.WujihuaRenderer;
 import com.mimiworld.mimiworld.client.renderer.ZhuomiChickenRenderer;
 import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
 import com.mimiworld.mimiworld.client.screen.RicePoundingTableScreen;
-import com.mimiworld.mimiworld.client.screen.AdvancedRicePoundingTableScreen;
 import com.mimiworld.mimiworld.client.screen.IonizationTableScreen;
 import com.mimiworld.mimiworld.client.screen.PrecipitationTableScreen;
 import com.mimiworld.mimiworld.client.screen.DissociationTableScreen;
-import com.mimiworld.mimiworld.client.screen.SwordForgingTableScreen;
-import com.mimiworld.mimiworld.client.screen.ArmorForgingTableScreen;
-import com.mimiworld.mimiworld.client.screen.BowForgingTableScreen;
 import com.mimiworld.mimiworld.client.screen.SwordQuenchingTableScreen;
 import com.mimiworld.mimiworld.client.screen.BloodlettingTableScreen;
 import com.mimiworld.mimiworld.client.screen.GrindingTableScreen;
@@ -70,10 +66,7 @@ import com.mimiworld.mimiworld.client.screen.CrusherScreen;
 import com.mimiworld.mimiworld.client.screen.PestleRealmTableScreen;
 import com.mimiworld.mimiworld.client.screen.IngotCondensationTableScreen;
 import com.mimiworld.mimiworld.client.screen.MixerScreen;
-import com.mimiworld.mimiworld.client.screen.SmallCookingPotScreen;
-import com.mimiworld.mimiworld.client.screen.CookingPotScreen;
 import com.mimiworld.mimiworld.client.screen.LargeCookingPotScreen;
-import com.mimiworld.mimiworld.client.screen.ExtraLargeCookingPotScreen;
 import com.mimiworld.mimiworld.client.screen.JumboMegaCookingPotScreen;
 import com.mimiworld.mimiworld.client.screen.IronWokScreen;
 import com.mimiworld.mimiworld.client.screen.OvenScreen;
@@ -191,21 +184,11 @@ public class ClientSetup {
         // 界天米：GeckoLib jietianmi 独眼飞行模型（idle/walk/attack 动画），守卫者式凝视蓄力激光，渲染放大 1.2
         event.registerEntityRenderer(ModEntities.JIETIAN_RICE.get(), JietianmiRenderer::new);
 
-        // 煮锅系列五方块：GeckoLib geo 模型（无动画，静态渲染）。
-        // 体型按注册顺序递减（参考堕落十字架的做法，在 BER 内等比缩放收进一格）：
-        // 巨无霸大大大煮锅 = 16px = 占满一整个方块，其余依次缩小，最小的 6px 仍清晰可见。
-        event.registerBlockEntityRenderer(ModBlockEntities.SMALL_COOKING_POT.get(),
-                ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "small_cooking_pot"), 6.0F / 12.8F));
-        event.registerBlockEntityRenderer(ModBlockEntities.COOKING_POT.get(),
-                ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "cooking_pot"), 8.0F / 16.64F));
+        // 煮锅系列两方块：GeckoLib geo 模型（无动画，静态渲染）。
+        // 体型按注册顺序递减（参考堕落十字架的做法，在 BER 内等比缩放收进一格）。
         event.registerBlockEntityRenderer(ModBlockEntities.LARGE_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
                         new ResourceLocation(MimiWorld.MODID, "large_cooking_pot"), 10.5F / 21.632F));
-        event.registerBlockEntityRenderer(ModBlockEntities.EXTRA_LARGE_COOKING_POT.get(),
-                ctx -> new CookingPotGeoBlockRenderer<>(
-                        new ResourceLocation(MimiWorld.MODID, "extra_large_cooking_pot"), 13.0F / 28.16F));
         event.registerBlockEntityRenderer(ModBlockEntities.JUMBO_MEGA_COOKING_POT.get(),
                 ctx -> new CookingPotGeoBlockRenderer<>(
                         new ResourceLocation(MimiWorld.MODID, "jumbo_mega_cooking_pot"), 16.0F / 36.608F));
@@ -267,18 +250,12 @@ public class ClientSetup {
             MenuScreens.register(ModMenuTypes.RICE_MAKER_MENU.get(), RiceMakerScreen::new);
             // 绑定锤米台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.RICE_POUNDING_TABLE_MENU.get(), RicePoundingTableScreen::new);
-            // 绑定高级锤米台菜单与 GUI 屏幕
-            MenuScreens.register(ModMenuTypes.ADVANCED_RICE_POUNDING_TABLE_MENU.get(), AdvancedRicePoundingTableScreen::new);
             // 绑定电离台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.IONIZATION_TABLE_MENU.get(), IonizationTableScreen::new);
             // 绑定沉淀台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.PRECIPITATION_TABLE_MENU.get(), PrecipitationTableScreen::new);
             // 绑定离解台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.DISSOCIATION_TABLE_MENU.get(), DissociationTableScreen::new);
-            // 绑定铸剑台/铸甲台/铸弓台菜单与 GUI 屏幕（原版工作台外观，各自独立配方表）
-            MenuScreens.register(ModMenuTypes.SWORD_FORGING_TABLE_MENU.get(), SwordForgingTableScreen::new);
-            MenuScreens.register(ModMenuTypes.ARMOR_FORGING_TABLE_MENU.get(), ArmorForgingTableScreen::new);
-            MenuScreens.register(ModMenuTypes.BOW_FORGING_TABLE_MENU.get(), BowForgingTableScreen::new);
             // 绑定淬剑台/汲血台/碾磨台/搅碎器菜单与 GUI 屏幕（多输入熔炉式定时加工）
             MenuScreens.register(ModMenuTypes.SWORD_QUENCHING_TABLE_MENU.get(), SwordQuenchingTableScreen::new);
             MenuScreens.register(ModMenuTypes.BLOODLETTING_TABLE_MENU.get(), BloodlettingTableScreen::new);
@@ -287,13 +264,10 @@ public class ClientSetup {
             // 绑定杵界台/凝锭台菜单与 GUI 屏幕（NxN 网格工作台式即时合成）
             MenuScreens.register(ModMenuTypes.PESTLE_REALM_TABLE_MENU.get(), PestleRealmTableScreen::new);
             MenuScreens.register(ModMenuTypes.INGOT_CONDENSATION_TABLE_MENU.get(), IngotCondensationTableScreen::new);
-            // 绑定搅拌器（9 入 1 出即时合成）/ 小煮锅（熔炉式燃料加工）菜单与 GUI 屏幕
+            // 绑定搅拌器（9 入 1 出即时合成）菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.MIXER_MENU.get(), MixerScreen::new);
-            MenuScreens.register(ModMenuTypes.SMALL_COOKING_POT_MENU.get(), SmallCookingPotScreen::new);
-            // 绑定煮锅/大煮锅/超大煮锅/巨无霸大大大煮锅菜单与 GUI 屏幕（NxN 网格熔炉式燃料加工）
-            MenuScreens.register(ModMenuTypes.COOKING_POT_MENU.get(), CookingPotScreen::new);
+            // 绑定大煮锅/巨无霸大大大煮锅菜单与 GUI 屏幕（NxN 网格熔炉式燃料加工）
             MenuScreens.register(ModMenuTypes.LARGE_COOKING_POT_MENU.get(), LargeCookingPotScreen::new);
-            MenuScreens.register(ModMenuTypes.EXTRA_LARGE_COOKING_POT_MENU.get(), ExtraLargeCookingPotScreen::new);
             MenuScreens.register(ModMenuTypes.JUMBO_MEGA_COOKING_POT_MENU.get(), JumboMegaCookingPotScreen::new);
             // 绑定铁锅（菱形 4 输入）/ 烤箱（几何同大煮锅、配方独立）菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.IRON_WOK_MENU.get(), IronWokScreen::new);

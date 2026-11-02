@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "mimiworld:block/armor_forging_table",
-    "side": "mimiworld:block/armor_forging_table",
-    "top": "mimiworld:block/armor_forging_table_top"
-  }
-}

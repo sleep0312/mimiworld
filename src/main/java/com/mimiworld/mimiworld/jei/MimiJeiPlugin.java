@@ -3,10 +3,8 @@ package com.mimiworld.mimiworld.jei;
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.block.entity.BloodlettingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.CookingPotBlockEntity;
 import com.mimiworld.mimiworld.block.entity.CrusherBlockEntity;
 import com.mimiworld.mimiworld.block.entity.DissociationTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.ExtraLargeCookingPotBlockEntity;
 import com.mimiworld.mimiworld.block.entity.GrindingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IngotCondensationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IonizationTableBlockEntity;
@@ -19,7 +17,6 @@ import com.mimiworld.mimiworld.block.entity.PestleRealmTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.PrecipitationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RiceMakerBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RicePoundingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.AdvancedRicePoundingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.SwordQuenchingTableBlockEntity;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -110,12 +107,8 @@ public class MimiJeiPlugin implements IModPlugin {
                         IngotCondensationTableBlockEntity.jeiRecipes()));
 
         // ---- E. 煮锅族（NxN 网格 (8,17) 间距 18 + 右上独立输入槽）----
-        add(gui, "cooking_pot", ModBlocks.COOKING_POT.get(), 96, 116, 62,
-                () -> JeiLayouts.pot(2, 116, 26, CookingPotBlockEntity.jeiRecipes()));
         add(gui, "large_cooking_pot", ModBlocks.LARGE_COOKING_POT.get(), 114, 116, 71,
                 () -> JeiLayouts.pot(3, 116, 35, LargeCookingPotBlockEntity.jeiRecipes()));
-        add(gui, "extra_large_cooking_pot", ModBlocks.EXTRA_LARGE_COOKING_POT.get(), 132, 116, 80,
-                () -> JeiLayouts.pot(4, 116, 44, ExtraLargeCookingPotBlockEntity.jeiRecipes()));
         add(gui, "jumbo_mega_cooking_pot", ModBlocks.JUMBO_MEGA_COOKING_POT.get(), 150, 116, 89,
                 () -> JeiLayouts.pot(5, 116, 53, JumboMegaCookingPotBlockEntity.jeiRecipes()));
         add(gui, "iron_wok", ModBlocks.IRON_WOK.get(), 96, 116, 74,
@@ -130,8 +123,6 @@ public class MimiJeiPlugin implements IModPlugin {
         // ---- G. 米系早期机器 ----
         add(gui, "rice_pounding_table", ModBlocks.RICE_POUNDING_TABLE.get(), 84, 112, 26,
                 () -> JeiLayouts.pounding(RicePoundingTableBlockEntity.jeiRecipes()));
-        add(gui, "advanced_rice_pounding_table", ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get(), 84, 112, 26,
-                () -> JeiLayouts.advancedPounding(AdvancedRicePoundingTableBlockEntity.jeiRecipes()));
 
         // ---- H. 米片机（原料 + 水（流体槽，500mB）→ 米）----
         add(gui, "rice_maker", ModBlocks.RICE_MAKER.get(), 84, 112, 43,

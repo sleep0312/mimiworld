@@ -381,11 +381,6 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_CRYSTAL_BOW = registerItem("rice_crystal_bow",
             () -> new RiceCrystalBowItem(1.2D, new Item.Properties().durability(384)));
 
-    // 高级锤米台，Advanced Rice Pounding Table：石头类方块物品，
-    // 放置后对应 ModBlocks.ADVANCED_RICE_POUNDING_TABLE；铁镐（挖掘等级2）采集，破坏掉落本身
-    public static final RegistryObject<Item> ADVANCED_RICE_POUNDING_TABLE = registerItem("advanced_rice_pounding_table",
-            () -> new BlockItem(ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get(), new Item.Properties()));
-
     // 粗超结晶，Coarse Super Crystal：结晶材料，粗糙灰蓝晶簇含金色杂质
     public static final RegistryObject<Item> COARSE_SUPER_CRYSTAL = registerItem("coarse_super_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
@@ -718,20 +713,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOOTS = registerItem("super_lazy_alloy_boots",
             () -> new SuperLazyAlloyArmorItem(ModArmorMaterials.SUPER_LAZY_ALLOY, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
-
-    // ===== 装备锻造台系列方块（金属机器方块，钻石镐采集，破坏掉落本身） =====
-
-    // 铸剑台，Sword Forging Table：放置后对应 ModBlocks.SWORD_FORGING_TABLE
-    public static final RegistryObject<Item> SWORD_FORGING_TABLE = registerItem("sword_forging_table",
-            () -> new BlockItem(ModBlocks.SWORD_FORGING_TABLE.get(), new Item.Properties()));
-
-    // 铸甲台，Armor Forging Table：放置后对应 ModBlocks.ARMOR_FORGING_TABLE
-    public static final RegistryObject<Item> ARMOR_FORGING_TABLE = registerItem("armor_forging_table",
-            () -> new BlockItem(ModBlocks.ARMOR_FORGING_TABLE.get(), new Item.Properties()));
-
-    // 铸弓台，Bow Forging Table：放置后对应 ModBlocks.BOW_FORGING_TABLE
-    public static final RegistryObject<Item> BOW_FORGING_TABLE = registerItem("bow_forging_table",
-            () -> new BlockItem(ModBlocks.BOW_FORGING_TABLE.get(), new Item.Properties()));
 
     // ===== 米米之眼/传送器/召唤器系列（普通物品，最大堆叠 64） =====
 
@@ -2162,23 +2143,11 @@ public class ModItems {
     public static final RegistryObject<Item> MIXER = registerItem("mixer",
             () -> new BlockItem(ModBlocks.MIXER.get(), new Item.Properties()));
 
-    // 小煮锅（Small Cooking Pot）：方块物品 BlockItem；带支脚的小型烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
-    public static final RegistryObject<Item> SMALL_COOKING_POT = registerItem("small_cooking_pot",
-            () -> new BlockItem(ModBlocks.SMALL_COOKING_POT.get(), new Item.Properties()));
-
-    // 煮锅（Cooking Pot）：方块物品 BlockItem；铜箍加固的标准烹饪锅方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
-    public static final RegistryObject<Item> COOKING_POT = registerItem("cooking_pot",
-            () -> new BlockItem(ModBlocks.COOKING_POT.get(), new Item.Properties()));
-
     // 大煮锅（Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> LARGE_COOKING_POT = registerItem("large_cooking_pot",
             () -> new BlockItem(ModBlocks.LARGE_COOKING_POT.get(), new Item.Properties()));
 
-    // 超大煮锅（Extra-Large Cooking Pot）：方块物品 BlockItem；烹饪机器方块，镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
-    public static final RegistryObject<Item> EXTRA_LARGE_COOKING_POT = registerItem("extra_large_cooking_pot",
-            () -> new BlockItem(ModBlocks.EXTRA_LARGE_COOKING_POT.get(), new Item.Properties()));
-
-    // 巨无霸大大大煮锅（Jumbo Mega Cooking Pot）：方块物品 BlockItem；在超大煮锅之上的特级烹饪方块，
+    // 巨无霸大大大煮锅（Jumbo Mega Cooking Pot）：方块物品 BlockItem；特级烹饪方块，
     // 镐挖掘等级 3 = 钻石镐，破坏掉落本身，方块本体见 block.ModBlocks
     public static final RegistryObject<Item> JUMBO_MEGA_COOKING_POT = registerItem("jumbo_mega_cooking_pot",
             () -> new BlockItem(ModBlocks.JUMBO_MEGA_COOKING_POT.get(), new Item.Properties()));

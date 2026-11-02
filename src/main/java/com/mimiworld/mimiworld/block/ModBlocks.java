@@ -236,19 +236,6 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 高级锤米台（）：锤米台的合金强化版，石头类机器方块，属性参照原版石头
-    // （硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
-    // 破坏掉落本身（loot_tables/blocks/advanced_rice_pounding_table.json）。
-    // 绑定方块实体 AdvancedRicePoundingTableBlockEntity：功能与锤米台完全一致（2 输入 + 1 输出，
-    // 工作台式即时合成，当前无配方），仅 GUI 贴图外观不同（右上角金锤装饰）。
-    public static final RegistryObject<Block> ADVANCED_RICE_POUNDING_TABLE =
-            BLOCKS.register("advanced_rice_pounding_table", () -> new AdvancedRicePoundingTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(1.5F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.STONE)));
-
     // 米矿石（）：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
     // 战利品表同原版矿石（loot_tables/blocks/rice_ore.json）：普通开采掉米石（时运增产），
@@ -311,36 +298,6 @@ public class ModBlocks {
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
-
-    // 铸剑台（）：装备锻造机器方块（SwordForgingTableBlock），右键打开原版工作台外观的 3x3 即时合成 GUI，使用独立配方表（与其他锻造台/原版工作台不通用）。
-    // 金属质地、硬度 3.0、抗爆 6.0。镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落网格内物品（loot_tables/blocks/sword_forging_table.json 掉方块本身）。
-    public static final RegistryObject<Block> SWORD_FORGING_TABLE =
-            BLOCKS.register("sword_forging_table", () -> new SwordForgingTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
-    // 铸甲台（）：装备锻造机器方块（ArmorForgingTableBlock），右键打开原版工作台外观的 3x3 即时合成 GUI，使用独立配方表（与其他锻造台/原版工作台不通用）。
-    // 金属质地、硬度 3.0、抗爆 6.0。镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落网格内物品（loot_tables/blocks/armor_forging_table.json 掉方块本身）。
-    public static final RegistryObject<Block> ARMOR_FORGING_TABLE =
-            BLOCKS.register("armor_forging_table", () -> new ArmorForgingTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
-    // 铸弓台（）：装备锻造机器方块（BowForgingTableBlock），右键打开原版工作台外观的 3x3 即时合成 GUI，使用独立配方表（与其他锻造台/原版工作台不通用）。
-    // 金属质地、硬度 3.0、抗爆 6.0。镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落网格内物品（loot_tables/blocks/bow_forging_table.json 掉方块本身）。
-    public static final RegistryObject<Block> BOW_FORGING_TABLE =
-            BLOCKS.register("bow_forging_table", () -> new BowForgingTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
 
     // 淬剑台：剑类淬火机器方块（SwordQuenchingTableBlock），右键打开 3 入 1 出加工 GUI，右侧"开始"按钮按下才加工一轮。
     // 金属质地、硬度 3.0、抗爆 6.0。镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
@@ -520,17 +477,6 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL)));
 
-    // 超大煮锅（ BlockItem）：4x4 共 16 个网格输入槽 + 右上输入 + 燃料 + 输出的熔炉式煮锅（右键开 GUI），
-    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
-    // 破坏掉落本身（loot_tables/blocks/extra_large_cooking_pot.json）。
-    public static final RegistryObject<Block> EXTRA_LARGE_COOKING_POT =
-            BLOCKS.register("extra_large_cooking_pot", () -> new ExtraLargeCookingPotBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
     // 铁锅（BlockItem）：菱形 4 输入 + 右上输入 + 燃料 + 输出的熔炉式炒锅（右键开 GUI），
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
@@ -564,28 +510,6 @@ public class ModBlocks {
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
-
-    // 小煮锅（BlockItem）：带支脚的小型烹饪锅方块，1 输入 + 1 燃料 + 1 输出熔炉式定时加工（右键开 GUI），
-    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
-    // 破坏掉落本身（loot_tables/blocks/small_cooking_pot.json）。
-    public static final RegistryObject<Block> SMALL_COOKING_POT =
-            BLOCKS.register("small_cooking_pot", () -> new SmallCookingPotBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
-    // 煮锅（ BlockItem）：2x2 共 4 个网格输入槽 + 右上输入 + 燃料 + 输出的熔炉式煮锅（右键开 GUI），
-    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
-    // 破坏掉落本身（loot_tables/blocks/cooking_pot.json）。
-    public static final RegistryObject<Block> COOKING_POT =
-            BLOCKS.register("cooking_pot", () -> new CookingPotMachineBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
 
     // 龙鳞块（ BlockItem）：龙鳞的压缩存储块，致密龙鳞质地全立方块
     // （硬度照铁块 5.0、抗爆 6.0、下界合金块声、需正确工具才掉落）。

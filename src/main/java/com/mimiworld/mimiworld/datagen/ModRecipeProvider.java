@@ -420,17 +420,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （高级锤米台方块）
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.ADVANCED_RICE_POUNDING_TABLE.get())
-                .pattern("PPP")
-                .pattern("RHR")
-                .pattern("PPP")
-                .define('P', ModItems.RICE_PLANKS.get())
-                .define('R', Items.REDSTONE)
-                .define('H', ModItems.RICE_CRYSTAL_ALLOY_HAMMER.get())
-                .unlockedBy("has_rice_crystal_alloy_hammer", has(ModItems.RICE_CRYSTAL_ALLOY_HAMMER.get()))
-                .save(consumer);
-
         // （粗超结晶；用户未写等号按条目号推断）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COARSE_SUPER_CRYSTAL.get())
                 .pattern("SRS")
@@ -1167,39 +1156,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('A', ModItems.ADVANCED_ARMOR_CORE_INGOT.get())
                 .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
                 .unlockedBy("has_super_lazy_alloy_armor_blank", has(ModItems.SUPER_LAZY_ALLOY_ARMOR_BLANK.get()))
-                .save(consumer);
-
-        // （铸剑台；P=复合米饭锭 A=饭晶合金锭 W=米木板）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SWORD_FORGING_TABLE.get())
-                .pattern(" P ")
-                .pattern("AAA")
-                .pattern("WWW")
-                .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
-                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
-                .define('W', ModItems.RICE_PLANKS.get())
-                .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
-                .save(consumer);
-
-        // （铸甲台）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ARMOR_FORGING_TABLE.get())
-                .pattern("P  ")
-                .pattern("AAA")
-                .pattern("WWW")
-                .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
-                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
-                .define('W', ModItems.RICE_PLANKS.get())
-                .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
-                .save(consumer);
-
-        // （铸弓台）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BOW_FORGING_TABLE.get())
-                .pattern("  P")
-                .pattern("AAA")
-                .pattern("WWW")
-                .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
-                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
-                .define('W', ModItems.RICE_PLANKS.get())
-                .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
                 .save(consumer);
 
         // （米米之眼）
@@ -2379,29 +2335,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_iron_shovel", has(Items.IRON_SHOVEL))
                 .save(consumer);
 
-        // （占位产物）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SMALL_COOKING_POT.get())
-                .pattern(" R ")
-                .pattern(" H ")
-                .pattern(" P ")
-                .define('R', ModItems.POT_LID.get())
-                .define('H', ModItems.SPOON.get())
-                .define('P', Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
-                .unlockedBy("has_spoon", has(ModItems.SPOON.get()))
-                .save(consumer);
-
-        // （占位产物）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COOKING_POT.get())
-                .pattern(" R ")
-                .pattern("IHI")
-                .pattern(" P ")
-                .define('R', ModItems.POT_LID.get())
-                .define('I', Items.IRON_INGOT)
-                .define('H', ModItems.SPOON.get())
-                .define('P', Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
-                .unlockedBy("has_spoon", has(ModItems.SPOON.get()))
-                .save(consumer);
-
         // （大煮锅）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LARGE_COOKING_POT.get())
                 .pattern(" R ")
@@ -2414,18 +2347,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_spoon", has(ModItems.SPOON.get()))
                 .save(consumer);
 
-        // （超大煮锅）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.EXTRA_LARGE_COOKING_POT.get())
-                .pattern("IRI")
-                .pattern("IHI")
-                .pattern("IPI")
-                .define('R', ModItems.POT_LID.get())
-                .define('I', Items.IRON_INGOT)
-                .define('H', ModItems.SPOON.get())
-                .define('P', Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
-                .unlockedBy("has_large_cooking_pot", has(ModItems.LARGE_COOKING_POT.get()))
-                .save(consumer);
-
         // （巨无霸大大大煮锅）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.JUMBO_MEGA_COOKING_POT.get())
                 .pattern("BRB")
@@ -2435,7 +2356,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('B', Items.IRON_BLOCK)
                 .define('H', ModItems.SPOON.get())
                 .define('P', Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
-                .unlockedBy("has_extra_large_cooking_pot", has(ModItems.EXTRA_LARGE_COOKING_POT.get()))
+                .unlockedBy("has_large_cooking_pot", has(ModItems.LARGE_COOKING_POT.get()))
                 .save(consumer);
 
         // （铁锅；7=米木棍）

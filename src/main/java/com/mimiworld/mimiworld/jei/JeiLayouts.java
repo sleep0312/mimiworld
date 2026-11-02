@@ -1,6 +1,5 @@
 package com.mimiworld.mimiworld.jei;
 
-import com.mimiworld.mimiworld.block.entity.AdvancedRicePoundingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.BloodlettingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.DissociationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.DualInputProcessorBlockEntity;
@@ -184,19 +183,11 @@ final class JeiLayouts {
         return views;
     }
 
-    // -------------------- G. 锤米台 / 高级锤米台（两槽）--------------------
+    // -------------------- G. 锤米台（两槽）--------------------
 
     static List<JeiView> pounding(List<RicePoundingTableBlockEntity.PoundingRecipe> recipes) {
         List<JeiView> views = new ArrayList<>();
         for (RicePoundingTableBlockEntity.PoundingRecipe recipe : recipes) {
-            views.add(twoUnordered(recipe.inputA(), recipe.inputB(), recipe.result()));
-        }
-        return views;
-    }
-
-    static List<JeiView> advancedPounding(List<AdvancedRicePoundingTableBlockEntity.PoundingRecipe> recipes) {
-        List<JeiView> views = new ArrayList<>();
-        for (AdvancedRicePoundingTableBlockEntity.PoundingRecipe recipe : recipes) {
             views.add(twoUnordered(recipe.inputA(), recipe.inputB(), recipe.result()));
         }
         return views;

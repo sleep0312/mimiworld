@@ -1,9 +1,7 @@
 package com.mimiworld.mimiworld;
 
-import com.mimiworld.mimiworld.block.entity.CookingPotBlockEntity;
 import com.mimiworld.mimiworld.block.entity.CrusherBlockEntity;
 import com.mimiworld.mimiworld.block.entity.DissociationTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.ExtraLargeCookingPotBlockEntity;
 import com.mimiworld.mimiworld.block.entity.GrindingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IngotCondensationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.DualInputProcessorBlockEntity;
@@ -183,9 +181,9 @@ public final class ModMachineRecipes {
                 new ItemStack(ModItems.POLISHED_REMNANT_FALLEN_WORLD_ESSENCE.get()),
                 coarseEssence, coarseEssence, coarseEssence, coarseEssence);
 
-        // ================= 食物加工链（35 条）=================
-        // 用户机器代号：i=搅碎器 ii=搅拌器 iv=煮锅(2x2) v=大煮锅(3x3) vi=超大煮锅(4x4)
-        // viii=铁锅(4 槽菱形) vv=烤箱(3x3)；本批未用到 iii 小煮锅、vii 巨无霸大大大煮锅。
+        // ================= 食物加工链 =================
+        // 用户机器代号：i=搅碎器 ii=搅拌器 v=大煮锅(3x3) vii=巨无霸大大大煮锅(5x5)
+        // viii=铁锅(4 槽菱形) vv=烤箱(3x3)；原煮锅/超大煮锅的配方已分别移植到 v/vii 并删除原机器。
         // 额外槽物品：碗=大碗；玻璃瓶=原版 GLASS_BOTTLE（作为配料被消耗，机器不返还空瓶）；
         // 干海带=原版 DRIED_KELP；烤箱的额外槽物品=米木棍。未给额外槽物品时传 null（该槽必须为空）。
         Item bowl = ModItems.BIG_BOWL.get();
@@ -287,14 +285,13 @@ public final class ModMachineRecipes {
                 ModItems.FRAGRANT_POUCH.get(),
                 cookedFallenRice, cookedFallenRice, cookedFallenRice, cookedFallenRice);
 
-        // ---- iv 煮锅（2x2 网格行优先 + 右上额外槽）----
-
-        // 酱香双鲛尾：酱脑 + 米堕汁 + 浅鲛尾×2，额外碗
-        CookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.SAUCE_GLAZED_TWIN_MERMAID_TAIL.get()), bowl,
-                ModItems.SAUCED_BRAIN.get(), ModItems.FALLEN_RICE_JUICE.get(),
-                ModItems.PALE_MERMAID_TAIL.get(), ModItems.PALE_MERMAID_TAIL.get());
-
         // ---- v 大煮锅（3x3 网格行优先 + 右上额外槽）----
+
+        // 酱香双鲛尾（原煮锅 2x2 配方移植到大煮锅，置于 3x3 左上 2x2）：
+        // 酱脑 + 米堕汁 / 浅鲛尾 + 浅鲛尾，额外碗
+        LargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.SAUCE_GLAZED_TWIN_MERMAID_TAIL.get()), bowl,
+                ModItems.SAUCED_BRAIN.get(), ModItems.FALLEN_RICE_JUICE.get(), null,
+                ModItems.PALE_MERMAID_TAIL.get(), ModItems.PALE_MERMAID_TAIL.get());
 
         // 天虚棘脑汤：虚无触足 / 界天脑花 / 虚无触足
         // 棘花瓣 / 棘花瓣 / 棘花瓣
@@ -310,45 +307,14 @@ public final class ModMachineRecipes {
                 ModItems.PALE_MERMAID_TAIL.get(), ModItems.PALE_MERMAID_TAIL.get(), ModItems.PALE_MERMAID_TAIL.get(),
                 ModItems.PALE_MERMAID_TAIL.get(), ModItems.PRECIOUS_SEASONING.get(), ModItems.PALE_MERMAID_TAIL.get());
 
-        // ---- vi 超大煮锅（4x4 网格行优先 + 右上额外槽；null 位该格必须为空）----
-
-        // 堕米肉丸汤：蛟鲛肉泥×4；凤蜃肉泥×4；珍贵调料 / 虚无触足×2 / 棘花瓣；
-        // 半蜃肉片×2 / 棘花瓣×2，额外碗
+        // 后续铁锅/烤箱/巨无霸配方共用的局部物品（原超大煮锅配方已移植到巨无霸大大大煮锅）
         Item jiaoPaste = ModItems.JIAO_MERMAID_MEAT_PASTE.get();
         Item phoenixPaste = ModItems.PHOENIX_MIRAGE_MEAT_PASTE.get();
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.FALLEN_RICE_MEATBALL_SOUP.get()), bowl,
-                jiaoPaste, jiaoPaste, jiaoPaste, jiaoPaste,
-                phoenixPaste, phoenixPaste, phoenixPaste, phoenixPaste,
-                ModItems.PRECIOUS_SEASONING.get(), ModItems.VOID_TOUCH_TENTACLE.get(), ModItems.VOID_TOUCH_TENTACLE.get(), ModItems.THORN_PETAL.get(),
-                ModItems.HALF_MIRAGE_MEAT_SLICE.get(), ModItems.HALF_MIRAGE_MEAT_SLICE.get(), ModItems.THORN_PETAL.get(), ModItems.THORN_PETAL.get());
-
-        // 龙凤花汤：望米伤鲛足×4；米凤肉块×4；珍贵调料 / 花香油×2 / 珍贵调料；
-        // 空 / 花香油 / 空 / 空，额外碗
         Item mermaidLeg = ModItems.WANGMI_WOUNDED_MERMAID_LEG.get();
         Item phoenixMeat = ModItems.RICE_PHOENIX_MEAT_CHUNK.get();
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.DRAGON_PHOENIX_FLOWER_SOUP.get()), bowl,
-                mermaidLeg, mermaidLeg, mermaidLeg, mermaidLeg,
-                phoenixMeat, phoenixMeat, phoenixMeat, phoenixMeat,
-                ModItems.PRECIOUS_SEASONING.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.PRECIOUS_SEASONING.get(),
-                null, ModItems.FLORAL_FRAGRANCE_OIL.get(), null, null);
-
-        // 佛幻想：凤蜃肉泥×3 + 蛟鲛肉泥；蛟鲛肉泥×2 + 腌鹫翅×2；
-        // 腌鹫翅 + 花香油×2 + 珍贵调料；珍贵调料 + 三格空，额外碗
         Item marinatedWing = ModItems.MARINATED_VULTURE_WING.get();
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.BUDDHA_ILLUSION.get()), bowl,
-                phoenixPaste, phoenixPaste, phoenixPaste, jiaoPaste,
-                jiaoPaste, jiaoPaste, marinatedWing, marinatedWing,
-                marinatedWing, ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.PRECIOUS_SEASONING.get(),
-                ModItems.PRECIOUS_SEASONING.get(), null, null, null);
-
-        // 肉片粥：腌肉片×3 + 花香油 + 特色堕落米×12，额外碗
         Item marinatedSlice = ModItems.MARINATED_MEAT_SLICE.get();
         Item fallenRice = ModItems.SPECIALTY_FALLEN_RICE.get();
-        ExtraLargeCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.MEAT_SLICE_CONGEE.get()), bowl,
-                marinatedSlice, marinatedSlice, ModItems.FLORAL_FRAGRANCE_OIL.get(), marinatedSlice,
-                fallenRice, fallenRice, fallenRice, fallenRice,
-                fallenRice, fallenRice, fallenRice, fallenRice,
-                fallenRice, fallenRice, fallenRice, fallenRice);
 
         // ---- viii 铁锅（4 槽顺序：左上 / 右上 / 左下 / 右下 + 右上侧额外槽）----
 
@@ -429,6 +395,40 @@ public final class ModMachineRecipes {
                 phoenixPaste, marinade, null, compoundOil, phoenixPaste,
                 phoenixPaste, null, compoundOil, null, phoenixPaste,
                 phoenixPaste, marinade, compoundOil, compoundOil, phoenixPaste);
+
+        // ---- 原超大煮锅（4x4）四条配方移植到 5x5：原样保留逐格图案并置于左上 4x4，
+        // 第 5 列/第 5 行（null 位）必须为空，额外槽仍为碗 ----
+
+        // 堕米肉丸汤：蛟鲛肉泥×4；凤蜃肉泥×4；珍贵调料 / 虚无触足×2 / 棘花瓣；
+        // 半蜃肉片×2 / 棘花瓣×2，额外碗
+        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.FALLEN_RICE_MEATBALL_SOUP.get()), bowl,
+                jiaoPaste, jiaoPaste, jiaoPaste, jiaoPaste, null,
+                phoenixPaste, phoenixPaste, phoenixPaste, phoenixPaste, null,
+                ModItems.PRECIOUS_SEASONING.get(), ModItems.VOID_TOUCH_TENTACLE.get(), ModItems.VOID_TOUCH_TENTACLE.get(), ModItems.THORN_PETAL.get(), null,
+                ModItems.HALF_MIRAGE_MEAT_SLICE.get(), ModItems.HALF_MIRAGE_MEAT_SLICE.get(), ModItems.THORN_PETAL.get(), ModItems.THORN_PETAL.get(), null);
+
+        // 龙凤花汤：望米伤鲛足×4；米凤肉块×4；珍贵调料 / 花香油×2 / 珍贵调料；
+        // 空 / 花香油 / 空 / 空，额外碗
+        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.DRAGON_PHOENIX_FLOWER_SOUP.get()), bowl,
+                mermaidLeg, mermaidLeg, mermaidLeg, mermaidLeg, null,
+                phoenixMeat, phoenixMeat, phoenixMeat, phoenixMeat, null,
+                ModItems.PRECIOUS_SEASONING.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.PRECIOUS_SEASONING.get(), null,
+                null, ModItems.FLORAL_FRAGRANCE_OIL.get(), null, null, null);
+
+        // 佛幻想：凤蜃肉泥×3 + 蛟鲛肉泥；蛟鲛肉泥×2 + 腌鹫翅×2；
+        // 腌鹫翅 + 花香油×2 + 珍贵调料；珍贵调料 + 三格空，额外碗
+        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.BUDDHA_ILLUSION.get()), bowl,
+                phoenixPaste, phoenixPaste, phoenixPaste, jiaoPaste, null,
+                jiaoPaste, jiaoPaste, marinatedWing, marinatedWing, null,
+                marinatedWing, ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.FLORAL_FRAGRANCE_OIL.get(), ModItems.PRECIOUS_SEASONING.get(), null,
+                ModItems.PRECIOUS_SEASONING.get(), null, null, null, null);
+
+        // 肉片粥：腌肉片×3 + 花香油 + 特色堕落米×12，额外碗
+        JumboMegaCookingPotBlockEntity.registerRecipe(new ItemStack(ModItems.MEAT_SLICE_CONGEE.get()), bowl,
+                marinatedSlice, marinatedSlice, ModItems.FLORAL_FRAGRANCE_OIL.get(), marinatedSlice, null,
+                fallenRice, fallenRice, fallenRice, fallenRice, null,
+                fallenRice, fallenRice, fallenRice, fallenRice, null,
+                fallenRice, fallenRice, fallenRice, fallenRice, null);
 
         // ---- 汲血台（槽0=左上 / 槽1=左下，各消耗 1 个；支持上槽标签匹配）----
 

@@ -2,23 +2,8 @@
   "sources": [
     {
       "type": "minecraft:single",
-      "resource": "mimiworld:geckolib/small_cooking_pot",
-      "sprite": "mimiworld:geckolib/small_cooking_pot"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "mimiworld:geckolib/cooking_pot",
-      "sprite": "mimiworld:geckolib/cooking_pot"
-    },
-    {
-      "type": "minecraft:single",
       "resource": "mimiworld:geckolib/large_cooking_pot",
       "sprite": "mimiworld:geckolib/large_cooking_pot"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "mimiworld:geckolib/extra_large_cooking_pot",
-      "sprite": "mimiworld:geckolib/extra_large_cooking_pot"
     },
     {
       "type": "minecraft:single",

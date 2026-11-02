@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mimiworld:item/extra_large_cooking_pot"
-  }
-}

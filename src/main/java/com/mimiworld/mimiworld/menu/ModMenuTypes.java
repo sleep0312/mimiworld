@@ -26,11 +26,6 @@ public class ModMenuTypes {
             MENUS.register("rice_pounding_table",
                     () -> IForgeMenuType.create(RicePoundingTableMenu::new));
 
-    // 高级锤米台菜单
-    public static final RegistryObject<MenuType<AdvancedRicePoundingTableMenu>> ADVANCED_RICE_POUNDING_TABLE_MENU =
-            MENUS.register("advanced_rice_pounding_table",
-                    () -> IForgeMenuType.create(AdvancedRicePoundingTableMenu::new));
-
     // 电离台菜单
     public static final RegistryObject<MenuType<IonizationTableMenu>> IONIZATION_TABLE_MENU =
             MENUS.register("ionization_table",
@@ -45,21 +40,6 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<DissociationTableMenu>> DISSOCIATION_TABLE_MENU =
             MENUS.register("dissociation_table",
                     () -> IForgeMenuType.create(DissociationTableMenu::new));
-
-    // 铸剑台菜单
-    public static final RegistryObject<MenuType<SwordForgingTableMenu>> SWORD_FORGING_TABLE_MENU =
-            MENUS.register("sword_forging_table",
-                    () -> IForgeMenuType.create(SwordForgingTableMenu::new));
-
-    // 铸甲台菜单
-    public static final RegistryObject<MenuType<ArmorForgingTableMenu>> ARMOR_FORGING_TABLE_MENU =
-            MENUS.register("armor_forging_table",
-                    () -> IForgeMenuType.create(ArmorForgingTableMenu::new));
-
-    // 铸弓台菜单
-    public static final RegistryObject<MenuType<BowForgingTableMenu>> BOW_FORGING_TABLE_MENU =
-            MENUS.register("bow_forging_table",
-                    () -> IForgeMenuType.create(BowForgingTableMenu::new));
 
     // 淬剑台菜单
     public static final RegistryObject<MenuType<SwordQuenchingTableMenu>> SWORD_QUENCHING_TABLE_MENU =
@@ -96,23 +76,10 @@ public class ModMenuTypes {
             MENUS.register("mixer",
                     () -> IForgeMenuType.create(MixerMenu::new));
 
-    // 小煮锅菜单
-    public static final RegistryObject<MenuType<SmallCookingPotMenu>> SMALL_COOKING_POT_MENU =
-            MENUS.register("small_cooking_pot",
-                    () -> IForgeMenuType.create(SmallCookingPotMenu::new));
-
-    // 煮锅 / 大煮锅 / 超大煮锅 / 巨无霸大大大煮锅菜单
-    public static final RegistryObject<MenuType<CookingPotMenu>> COOKING_POT_MENU =
-            MENUS.register("cooking_pot",
-                    () -> IForgeMenuType.create(CookingPotMenu::new));
-
+    // 大煮锅 / 巨无霸大大大煮锅菜单
     public static final RegistryObject<MenuType<LargeCookingPotMenu>> LARGE_COOKING_POT_MENU =
             MENUS.register("large_cooking_pot",
                     () -> IForgeMenuType.create(LargeCookingPotMenu::new));
-
-    public static final RegistryObject<MenuType<ExtraLargeCookingPotMenu>> EXTRA_LARGE_COOKING_POT_MENU =
-            MENUS.register("extra_large_cooking_pot",
-                    () -> IForgeMenuType.create(ExtraLargeCookingPotMenu::new));
 
     public static final RegistryObject<MenuType<JumboMegaCookingPotMenu>> JUMBO_MEGA_COOKING_POT_MENU =
             MENUS.register("jumbo_mega_cooking_pot",

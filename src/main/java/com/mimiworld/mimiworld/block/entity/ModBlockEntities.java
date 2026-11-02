@@ -27,12 +27,6 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(RicePoundingTableBlockEntity::new,
                             ModBlocks.RICE_POUNDING_TABLE.get()).build(null));
 
-    // 高级锤米台（方块 advanced_rice_pounding_table）：功能同锤米台（2 输入 + 1 输出即时合成），仅 GUI 外观不同
-    public static final RegistryObject<BlockEntityType<AdvancedRicePoundingTableBlockEntity>> ADVANCED_RICE_POUNDING_TABLE =
-            BLOCK_ENTITIES.register("advanced_rice_pounding_table",
-                    () -> BlockEntityType.Builder.of(AdvancedRicePoundingTableBlockEntity::new,
-                            ModBlocks.ADVANCED_RICE_POUNDING_TABLE.get()).build(null));
-
     // 电离台（方块 ionization_table）：双输入定时加工（无燃料），GUI 见 menu.IonizationTableMenu
     public static final RegistryObject<BlockEntityType<IonizationTableBlockEntity>> IONIZATION_TABLE =
             BLOCK_ENTITIES.register("ionization_table",
@@ -50,24 +44,6 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("dissociation_table",
                     () -> BlockEntityType.Builder.of(DissociationTableBlockEntity::new,
                             ModBlocks.DISSOCIATION_TABLE.get()).build(null));
-
-    // 铸剑台（方块 sword_forging_table）：3x3 工作台式即时合成，独立配方表，GUI 见 menu.SwordForgingTableMenu
-    public static final RegistryObject<BlockEntityType<SwordForgingTableBlockEntity>> SWORD_FORGING_TABLE =
-            BLOCK_ENTITIES.register("sword_forging_table",
-                    () -> BlockEntityType.Builder.of(SwordForgingTableBlockEntity::new,
-                            ModBlocks.SWORD_FORGING_TABLE.get()).build(null));
-
-    // 铸甲台（方块 armor_forging_table）：3x3 工作台式即时合成，独立配方表，GUI 见 menu.ArmorForgingTableMenu
-    public static final RegistryObject<BlockEntityType<ArmorForgingTableBlockEntity>> ARMOR_FORGING_TABLE =
-            BLOCK_ENTITIES.register("armor_forging_table",
-                    () -> BlockEntityType.Builder.of(ArmorForgingTableBlockEntity::new,
-                            ModBlocks.ARMOR_FORGING_TABLE.get()).build(null));
-
-    // 铸弓台（方块 bow_forging_table）：3x3 工作台式即时合成，独立配方表，GUI 见 menu.BowForgingTableMenu
-    public static final RegistryObject<BlockEntityType<BowForgingTableBlockEntity>> BOW_FORGING_TABLE =
-            BLOCK_ENTITIES.register("bow_forging_table",
-                    () -> BlockEntityType.Builder.of(BowForgingTableBlockEntity::new,
-                            ModBlocks.BOW_FORGING_TABLE.get()).build(null));
 
     // 淬剑台（方块 sword_quenching_table）：3 入 1 出定时加工，开始按钮启动，GUI 见 menu.SwordQuenchingTableMenu
     public static final RegistryObject<BlockEntityType<SwordQuenchingTableBlockEntity>> SWORD_QUENCHING_TABLE =
@@ -111,29 +87,11 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(MixerBlockEntity::new,
                             ModBlocks.MIXER.get()).build(null));
 
-    // 小煮锅（方块 small_cooking_pot）：1 输入 + 1 燃料 + 1 输出熔炉式定时加工，GUI 见 menu.SmallCookingPotMenu
-    public static final RegistryObject<BlockEntityType<SmallCookingPotBlockEntity>> SMALL_COOKING_POT =
-            BLOCK_ENTITIES.register("small_cooking_pot",
-                    () -> BlockEntityType.Builder.of(SmallCookingPotBlockEntity::new,
-                            ModBlocks.SMALL_COOKING_POT.get()).build(null));
-
-    // 煮锅（方块 cooking_pot）：2x2 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.CookingPotMenu
-    public static final RegistryObject<BlockEntityType<CookingPotBlockEntity>> COOKING_POT =
-            BLOCK_ENTITIES.register("cooking_pot",
-                    () -> BlockEntityType.Builder.of(CookingPotBlockEntity::new,
-                            ModBlocks.COOKING_POT.get()).build(null));
-
     // 大煮锅（方块 large_cooking_pot）：3x3 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.LargeCookingPotMenu
     public static final RegistryObject<BlockEntityType<LargeCookingPotBlockEntity>> LARGE_COOKING_POT =
             BLOCK_ENTITIES.register("large_cooking_pot",
                     () -> BlockEntityType.Builder.of(LargeCookingPotBlockEntity::new,
                             ModBlocks.LARGE_COOKING_POT.get()).build(null));
-
-    // 超大煮锅（方块 extra_large_cooking_pot）：4x4 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.ExtraLargeCookingPotMenu
-    public static final RegistryObject<BlockEntityType<ExtraLargeCookingPotBlockEntity>> EXTRA_LARGE_COOKING_POT =
-            BLOCK_ENTITIES.register("extra_large_cooking_pot",
-                    () -> BlockEntityType.Builder.of(ExtraLargeCookingPotBlockEntity::new,
-                            ModBlocks.EXTRA_LARGE_COOKING_POT.get()).build(null));
 
     // 巨无霸大大大煮锅（方块 jumbo_mega_cooking_pot）：5x5 网格 + 右上输入 + 燃料 + 输出熔炉式定时加工，GUI 见 menu.JumboMegaCookingPotMenu
     public static final RegistryObject<BlockEntityType<JumboMegaCookingPotBlockEntity>> JUMBO_MEGA_COOKING_POT =
