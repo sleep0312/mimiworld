@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:rice_bone"
+    },
+    "B": {
+      "item": "mimiworld:huomi_powder"
+    },
+    "C": {
+      "item": "mimiworld:yanmi_pearl"
+    },
+    "D": {
+      "item": "mimiworld:baoliemi_rod"
+    },
+    "E": {
+      "item": "mimiworld:book_rice_pen"
+    },
+    "F": {
+      "item": "mimiworld:carved_rice_bone"
+    },
+    "G": {
+      "item": "mimiworld:milaima_ball"
+    },
+    "H": {
+      "item": "mimiworld:nianmi_silk_thread"
+    },
+    "R": {
+      "item": "mimiworld:rice"
+    }
+  },
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GRH"
+  ],
+  "result": {
+    "item": "mimiworld:book_of_departure"
+  },
+  "show_notification": true
+}

@@ -50,6 +50,8 @@ public class ModLootTableProvider extends LootTableProvider {
 
     static {
         var rice = ModItems.RICE.get();
+        // 原版坚守者：保留原版掉落（1 个幽匿催发体），追加 0~2 个强化深板岩概率掉落
+        DROPS.put(EntityType.WARDEN, new Drop[]{d(Items.SCULK_CATALYST, 1, 1), d(Items.REINFORCED_DEEPSLATE, 0, 2)});
         DROPS.put(ModEntities.ZHUOMI_CHICKEN.get(), new Drop[]{d(rice, 1, 1), d(ModItems.ZHUOMI_CHICKEN.get(), 1, 1), d(ModItems.ZHUOMI_FEATHER.get(), 0, 2)});
         DROPS.put(ModEntities.MIMOO_COW.get(), new Drop[]{d(rice, 4, 5), d(ModItems.RAW_MIMOO_BEEF.get(), 2, 3), d(ModItems.MIMOO_LEATHER.get(), 2, 3)});
         DROPS.put(ModEntities.MIMI_SHEEP.get(), new Drop[]{d(rice, 2, 3), d(ModItems.RAW_MIMI_MUTTON.get(), 2, 3), d(ModItems.MIMI_WOOL.get(), 1, 2)});

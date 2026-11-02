@@ -3,6 +3,7 @@ package com.mimiworld.mimiworld;
 import com.mimiworld.mimiworld.block.ModBlocks;
 import com.mimiworld.mimiworld.effect.ModEffects;
 import com.mimiworld.mimiworld.entity.ModEntities;
+import com.mimiworld.mimiworld.item.BookOfDepartureItem;
 import com.mimiworld.mimiworld.item.CleansingCompoundArmorItem;
 import com.mimiworld.mimiworld.item.CompoundRiceMealArmorItem;
 import com.mimiworld.mimiworld.item.EffectFoodItem;
@@ -726,6 +727,11 @@ public class ModItems {
     // 触发逻辑见 mixin.LivingEntityMixin；默认堆叠 64 同原版图腾；暂无配方
     public static final RegistryObject<Item> MIMI_TOTEM = registerItem("mimi_totem",
             () -> new MimiTotemItem(new Item.Properties()));
+
+    // 启航之书（Book of Departure）：Curios「神遗之书」槽位饰品，槽位数据见
+    // data/mimiworld/curios/slots/shenyi_book.json；效果实现见 BookOfDepartureItem。
+    public static final RegistryObject<Item> BOOK_OF_DEPARTURE = registerItem("book_of_departure",
+            () -> new BookOfDepartureItem(new Item.Properties().stacksTo(1)));
 
     // 米米传送器（Mimi Teleporter）：传送门框架方块（ModBlocks.MIMI_TELEPORTER）的 BlockItem，
     // 放置后作为米米维度传送门框架使用；传送/激活逻辑后续实现。
@@ -1779,10 +1785,6 @@ public class ModItems {
 
     // 世界之泪（Tear of the World）：普通材料物品
     public static final RegistryObject<Item> WORLD_TEAR = registerItem("world_tear",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 界主令牌（Realm Lord Token）：普通材料物品
-    public static final RegistryObject<Item> REALM_LORD_TOKEN = registerItem("realm_lord_token",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 界天脑花（Realm-Heaven Brain Flower）：界天米掉落的普通材料物品

@@ -1175,7 +1175,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("RSR")
                 .define('R', ModItems.RICE.get())
                 .define('S', Items.END_STONE)
-                .define('D', Items.CRYING_OBSIDIAN)
+                .define('D', Items.REINFORCED_DEEPSLATE)
                 .unlockedBy("has_end_stone", has(Items.END_STONE))
                 .save(consumer);
 
@@ -1454,6 +1454,26 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('S', Items.SCULK)
                 .define('M', Items.PHANTOM_MEMBRANE)
                 .unlockedBy("has_phantom_membrane", has(Items.PHANTOM_MEMBRANE))
+                .save(consumer);
+
+        // （启航之书；七种材料围满外圈，中心书米笔，中下米）
+        // 米骨   火米药   眼米珍珠
+        // 爆烈米棒 书米笔   雕米骨
+        // 米莱马球 米       黏米丝线
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BOOK_OF_DEPARTURE.get())
+                .pattern("ABC")
+                .pattern("DEF")
+                .pattern("GRH")
+                .define('A', ModItems.RICE_BONE.get())
+                .define('B', ModItems.HUOMI_POWDER.get())
+                .define('C', ModItems.YANMI_PEARL.get())
+                .define('D', ModItems.BAOLIEMI_ROD.get())
+                .define('E', ModItems.BOOK_RICE_PEN.get())
+                .define('F', ModItems.CARVED_RICE_BONE.get())
+                .define('G', ModItems.MILAIMA_BALL.get())
+                .define('H', ModItems.NIANMI_SILK_THREAD.get())
+                .define('R', ModItems.RICE.get())
+                .unlockedBy("has_book_rice_pen", has(ModItems.BOOK_RICE_PEN.get()))
                 .save(consumer);
 
         // 原版龙蛋：烈焰粉 龙息 烈焰粉 / 龙息 0 龙息 / 烈焰粉 龙息 烈焰粉
@@ -2209,17 +2229,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('B', ModItems.DEEP_DYED_MERMAID_TEAR.get())
                 .define('C', ModItems.REMNANT_FALLEN_INGOT.get())
                 .unlockedBy("has_deep_dyed_heaven_wing", has(ModItems.DEEP_DYED_REMNANT_HEAVEN_WING.get()))
-                .save(consumer);
-
-        // （界主令牌）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.REALM_LORD_TOKEN.get())
-                .pattern("ABA")
-                .pattern("BCB")
-                .pattern("ABA")
-                .define('A', ModItems.LAZIEST_END_DRAGON_HEAD.get())
-                .define('B', ModItems.POLISHED_REMNANT_FALLEN_ABYSS_ROCK.get())
-                .define('C', ModItems.WORLD_TEAR.get())
-                .unlockedBy("has_world_tear", has(ModItems.WORLD_TEAR.get()))
                 .save(consumer);
 
         // ================= 第十批（箭/餐具/饭团/烹饪机器/龙骨装备/世界净化器） =================

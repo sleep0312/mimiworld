@@ -206,6 +206,10 @@ public class ModEffectEvents {
         if (player.level().isClientSide) {
             return;
         }
+        // 旁观者模式的飞行由原版接管，不能修改其 mayfly/flying，否则会持续下坠
+        if (player.isSpectator()) {
+            return;
+        }
 
         CompoundTag data = player.getPersistentData();
         if (player.hasEffect(ModEffects.CREATIVE_FLIGHT.get())) {

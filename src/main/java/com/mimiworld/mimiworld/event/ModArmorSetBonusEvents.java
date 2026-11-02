@@ -1,6 +1,7 @@
 package com.mimiworld.mimiworld.event;
 
 import com.mimiworld.mimiworld.MimiWorld;
+import com.mimiworld.mimiworld.effect.ModEffects;
 import com.mimiworld.mimiworld.item.ArmorPieceEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -37,6 +38,9 @@ public class ModArmorSetBonusEvents {
     /** 穿戴期间药水效果的刷新时长（tick，11 秒）。逐 tick 刷新所致实际为持续生效。 */
     private static final int EFFECT_DURATION = 220;
 
+    /** 记录玩家当前的 mayfly 是否由「飞行盔甲」授予，用于脱下后精确撤销，避免误撤其它来源的飞行。 */
+    private static final String ARMOR_FLIGHT_FLAG = "mimiworld.armor_creative_flight";
+
     /** 五套盔甲可能提供的全部药水效果类型，用于脱下后清理残留效果。 */
     private static final Set<MobEffect> ARMOR_EFFECT_TYPES = Set.of(
             MobEffects.REGENERATION,
@@ -55,6 +59,10 @@ public class ModArmorSetBonusEvents {
         }
         Player player = event.player;
         if (player.level().isClientSide) {
+            return;
+        }
+        // 旁观者模式的飞行由原版接管，不能修改其 mayfly/flying，否则会持续下坠
+        if (player.isSpectator()) {
             return;
         }
 
@@ -100,10 +108,15 @@ public class ModArmorSetBonusEvents {
                 player.getAbilities().mayfly = true;
                 player.onUpdateAbilities();
             }
-        } else if (!player.getAbilities().instabuild && player.getAbilities().mayfly) {
-            player.getAbilities().mayfly = false;
-            player.getAbilities().flying = false;
-            player.onUpdateAbilities();
+            player.getPersistentData().putBoolean(ARMOR_FLIGHT_FLAG, true);
+        } else if (player.getPersistentData().getBoolean(ARMOR_FLIGHT_FLAG)) {
+            // 仅撤销本模组飞行盔甲授予的 mayfly；创造模式、创造飞行料理等其它来源的飞行保留
+            if (!player.getAbilities().instabuild && !player.hasEffect(ModEffects.CREATIVE_FLIGHT.get())) {
+                player.getAbilities().mayfly = false;
+                player.getAbilities().flying = false;
+                player.onUpdateAbilities();
+            }
+            player.getPersistentData().putBoolean(ARMOR_FLIGHT_FLAG, false);
         }
     }
 }
