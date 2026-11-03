@@ -296,6 +296,10 @@ dependencies {
     // 本环境使用已引入的 JEI，仅兼容性测试用
     runtimeOnly fg.deobf("curse.maven:advanced-loot-info-1205426:9208463")
 
+    // Inventory HUD+ 3.4.26（1.20.1 Forge，纯客户端，Curios 展示为可选依赖）
+    // HUD 显示装备耐久/背包信息，仅兼容性测试用
+    runtimeOnly fg.deobf("curse.maven:inventory-hud-forge-357540:5639966")
+
     // Cloth Config API 11.1.136（1.20.1 Forge，无前置）
     // 配置界面 GUI 库：compileOnly 供界面代码编译，运行时按可选依赖处理
     // （ConfigScreenRegistrar 用 ModList 判断，未安装时不注册「配置」按钮，mod 照常运行）

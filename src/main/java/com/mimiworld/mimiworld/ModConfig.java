@@ -26,7 +26,9 @@ import java.util.Map;
  *   <li>{@code [armor.*]}：每套自定义防具的四个部位防御、耐久系数、韧性、击退抗性、附魔能力；</li>
  *   <li>{@code [weapons.*]}：每个自定义工具/武器材料等级的耐久、挖掘速度、攻击加成、附魔能力；</li>
  *   <li>{@code [combat]}：全局伤害倍率（本模组生物造成/承受的伤害）；</li>
- *   <li>{@code [drops]}：本模组生物死亡时的掉落物数量倍率。</li>
+ *   <li>{@code [drops]}：本模组生物死亡时的掉落物数量倍率；</li>
+ *   <li>{@code [messages]}：界面提示开关（如猩红竖眼传送结果提示）；</li>
+ *   <li>{@code [slots]}：玩家各 Curios 栏位的数量（-1 表示沿用数据包默认）。</li>
  * </ul>
  *
  * <p>怪物数值在实体加入世界（{@code EntityJoinLevelEvent}）时写入基础属性，
@@ -73,6 +75,17 @@ public final class ModConfig {
         return read(COMMON.lootMultiplier);
     }
 
+    /** 是否在快捷栏上方显示猩红竖眼的传送结果提示。 */
+    public static boolean crimsonEyeTeleportHint() {
+        return read(COMMON.crimsonEyeTeleportHint);
+    }
+
+    /** 玩家栏位数量覆盖值；-1 表示沿用数据包默认，0 表示隐藏该栏位。 */
+    public static int slotSize(String identifier) {
+        ForgeConfigSpec.IntValue value = COMMON.slots.get(identifier);
+        return value == null ? -1 : read(value);
+    }
+
     /**
      * 读取配置项；配置尚未加载完成时退回默认值。
      * （开发环境下 Forge 在未加载时 {@code get()} 会抛异常，生产环境则直接返回默认值。）
@@ -99,12 +112,18 @@ public final class ModConfig {
             return;
         }
 
-        // 生命上限单独处理：先改上限，再把超出上限的当前血量压回去
+        // 生命上限单独处理：先改上限；刚生成（含生物蛋）的实体原本是满血，需要跟着新上限回满，
+        // 从存档载入的实体保留当前血量，只在超过新上限时压回去
         double maxHealth = read(stats.maxHealth);
         AttributeInstance health = mob.getAttribute(Attributes.MAX_HEALTH);
         if (health != null) {
+            float oldHealth = mob.getHealth();
+            double oldMaxHealth = health.getValue();
             health.setBaseValue(maxHealth);
-            if (mob.getHealth() > maxHealth) {
+            if (oldHealth > maxHealth) {
+                mob.setHealth((float) maxHealth);
+            } else if (oldHealth >= oldMaxHealth - 1.0E-4D) {
+                // 生成时血量为旧上限（即满血），按新上限回满
                 mob.setHealth((float) maxHealth);
             }
         }
@@ -173,6 +192,8 @@ public final class ModConfig {
         public final ForgeConfigSpec.DoubleValue mobDamageMultiplier;
         public final ForgeConfigSpec.DoubleValue mobDamageTakenMultiplier;
         public final ForgeConfigSpec.DoubleValue lootMultiplier;
+        public final ForgeConfigSpec.BooleanValue crimsonEyeTeleportHint;
+        public final Map<String, ForgeConfigSpec.IntValue> slots;
 
         Common(ForgeConfigSpec.Builder builder) {
             Map<String, MobStats> mobMap = new LinkedHashMap<>();
@@ -335,6 +356,40 @@ public final class ModConfig {
                     .comment("掉落数量倍率，最终数量不会超过物品堆叠上限")
                     .defineInRange("loot_multiplier", 1.0D, 0.0D, 64.0D);
             builder.pop();
+
+            // ---------- 界面提示 ----------
+            builder.comment("界面提示开关（快捷栏上方的操作反馈）。").push("messages");
+            this.crimsonEyeTeleportHint = builder
+                    .comment("猩红竖眼：按「自定义」键传送后，是否在快捷栏上方显示成功或失败原因")
+                    .define("crimson_eye_teleport_hint", false);
+            builder.pop();
+
+            // ---------- 玩家栏位数量 ----------
+            builder.comment("玩家各 Curios 栏位的数量。-1 = 沿用数据包默认，0 = 隐藏该栏位，≥1 = 覆盖为该数量。"
+                    + "改动后重新进入世界（或重生）生效；缩小栏位时超出的饰品会退回背包。")
+                    .push("slots");
+            Map<String, ForgeConfigSpec.IntValue> slotMap = new LinkedHashMap<>();
+            slot(builder, slotMap, "sacred_relic", "圣遗物", 3);
+            slot(builder, slotMap, "shenyi_book", "神遗之书", 1);
+            slot(builder, slotMap, "ring", "戒指", -1);
+            slot(builder, slotMap, "necklace", "项链", -1);
+            slot(builder, slotMap, "charm", "护符", -1);
+            slot(builder, slotMap, "belt", "腰带", -1);
+            slot(builder, slotMap, "back", "背部", -1);
+            slot(builder, slotMap, "body", "身体", -1);
+            slot(builder, slotMap, "bracelet", "手镯", -1);
+            slot(builder, slotMap, "hands", "手部", -1);
+            slot(builder, slotMap, "head", "头部饰品", -1);
+            slot(builder, slotMap, "curio", "通用饰品", -1);
+            builder.pop();
+            this.slots = Collections.unmodifiableMap(slotMap);
+        }
+
+        /** 定义一个栏位的数量配置。 */
+        private static void slot(ForgeConfigSpec.Builder builder, Map<String, ForgeConfigSpec.IntValue> out,
+                                 String id, String name, int defaultSize) {
+            out.put(id, builder.comment(name + "（curios:" + id + "）")
+                    .defineInRange(id, defaultSize, -1, 64));
         }
 
         /** 定义一个生物的全部八项数值。 */

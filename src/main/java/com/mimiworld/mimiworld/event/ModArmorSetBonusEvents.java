@@ -23,9 +23,10 @@ import java.util.Set;
  *
  * <p>寿命：#服务端 {@code PlayerTickEvent}，逐 tick 检查玩家穿戴的盔甲单件效果：
  * <ul>
- *   <li><b>持续生效</b>：把仍在穿戴的效果刷新到固定时长（等效永久，放大器低时不覆盖玩家自带的高等级药水）。</li>
- *   <li><b>脱下清理</b>：对不再由某件盔甲提供、且剩余时长不超过刷新阈值（说明是残留的灌注效果
- *       而非玩家自行饮用的长时药水）的效果调用 {@code removeEffect} 移除以满足「脱下移除」。</li>
+ *   <li><b>持续生效</b>：把仍在穿戴的效果刷新到 8 秒；仅在剩余 ≤3 秒时重置，即每 5 秒刷新一次
+ *       （放大器低时不覆盖玩家自带的高等级药水）。</li>
+ *   <li><b>脱下清理</b>：对不再由某件盔甲提供、且为 ambient（说明是盔甲灌注）、剩余时长不超过刷新阈值的
+ *       效果调用 {@code removeEffect} 移除以满足「脱下移除」；非 ambient 的短时效果（饰品、玩家自饮药水）不受影响。</li>
  * </ul>
  * +最大生命值不在此处理，由各 Item 的 {@code getAttributeModifiers} 合成 MAX_HEALTH 属性直接增删。
  */
@@ -35,8 +36,9 @@ public class ModArmorSetBonusEvents {
     private static final EquipmentSlot[] ARMOR_SLOTS =
             {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
 
-    /** 穿戴期间药水效果的刷新时长（tick，11 秒）。逐 tick 刷新所致实际为持续生效。 */
-    private static final int EFFECT_DURATION = 220;
+    /** 穿戴期间药水效果的刷新时长（tick，8 秒）与刷新阈值（剩余 ≤3 秒时重置，即每 5 秒一次）。 */
+    private static final int EFFECT_DURATION = 160;
+    private static final int EFFECT_REFRESH_REMAINING = 60;
 
     /** 记录玩家当前的 mayfly 是否由「飞行盔甲」授予，用于脱下后精确撤销，避免误撤其它来源的飞行。 */
     private static final String ARMOR_FLIGHT_FLAG = "mimiworld.armor_creative_flight";
@@ -79,17 +81,22 @@ public class ModArmorSetBonusEvents {
             }
         }
 
-        // 持续刷新穿戴中的效果（放大器不低于当前时刷新时长；比已生效低的不会覆盖玩家自带药水）
-        desired.forEach((effect, amp) ->
-                player.addEffect(new MobEffectInstance(effect, EFFECT_DURATION, amp, true, true, true)));
+        // 持续刷新穿戴中的效果：缺失或等级不足立即补上；等级相同时仅在剩余 ≤3 秒时重置回 8 秒（每 5 秒一次）
+        desired.forEach((effect, amp) -> {
+            MobEffectInstance current = player.getEffect(effect);
+            if (current == null || current.getAmplifier() < amp
+                    || (current.getAmplifier() == amp && current.getDuration() <= EFFECT_REFRESH_REMAINING)) {
+                player.addEffect(new MobEffectInstance(effect, EFFECT_DURATION, amp, true, true, true));
+            }
+        });
 
-        // 脱下后移除残留的盔甲来源效果
+        // 脱下后移除残留的盔甲来源效果（只清 ambient 的效果，避免误删饰品或药水提供的短时效果）
         for (MobEffect effect : ARMOR_EFFECT_TYPES) {
             if (desired.containsKey(effect)) {
                 continue;
             }
             MobEffectInstance instance = player.getEffect(effect);
-            if (instance != null && instance.getDuration() <= EFFECT_DURATION) {
+            if (instance != null && instance.isAmbient() && instance.getDuration() <= EFFECT_DURATION) {
                 player.removeEffect(effect);
             }
         }

@@ -13,6 +13,11 @@ import com.mimiworld.mimiworld.item.TigerKingDisdainItem;
 import com.mimiworld.mimiworld.item.AncientPeltItem;
 import com.mimiworld.mimiworld.item.AzureWheelItem;
 import com.mimiworld.mimiworld.item.DarkSpiritFangItem;
+import com.mimiworld.mimiworld.item.DomainExpansionItem;
+import com.mimiworld.mimiworld.item.KuiNiuPowerItem;
+import com.mimiworld.mimiworld.item.ShanhaiGraceItem;
+import com.mimiworld.mimiworld.item.ReverseScaleGallItem;
+import com.mimiworld.mimiworld.item.MimiShieldItem;
 import com.mimiworld.mimiworld.item.SnakeskinTailItem;
 import com.mimiworld.mimiworld.item.CrimsonVerticalEyeItem;
 import com.mimiworld.mimiworld.item.MoonPhasesItem;
@@ -798,6 +803,31 @@ public class ModItems {
     // 攻击命中时 50% 概率伤害翻倍、50% 概率伤害减半（判定见 ModEffectEvents）。
     public static final RegistryObject<Item> AZURE_WHEEL = registerItem("azure_wheel",
             () -> new AzureWheelItem(new Item.Properties().stacksTo(1)));
+
+    // 夔牛之力（Kui Niu Power）：Curios「圣遗物」槽位饰品，
+    // 攻击无视无敌帧（见 ModEffectEvents），攻速 +1、攻击力 +20%、护甲 +50%。
+    public static final RegistryObject<Item> KUI_NIU_POWER = registerItem("kui_niu_power",
+            () -> new KuiNiuPowerItem(new Item.Properties().stacksTo(1)));
+
+    // 领域展开（Domain Expansion）：Curios「圣遗物」槽位饰品，
+    // 以玩家为中心 10×10×10 范围内的敌对生物护甲值 -50%（见 DomainExpansionEvents）。
+    public static final RegistryObject<Item> DOMAIN_EXPANSION = registerItem("domain_expansion",
+            () -> new DomainExpansionItem(new Item.Properties().stacksTo(1)));
+
+    // 山海恩泽（Shanhai Grace）：Curios「圣遗物」槽位饰品，
+    // 持续跳跃提升 V，下落中的近战伤害每格 +1%（见 ModEffectEvents）。
+    public static final RegistryObject<Item> SHANHAI_GRACE = registerItem("shanhai_grace",
+            () -> new ShanhaiGraceItem(new Item.Properties().stacksTo(1)));
+
+    // 逆鳞龙胆（Reverse Scale Gall）：Curios「圣遗物」槽位饰品，
+    // 持续抗性提升 IV、护甲 +100%，单次受伤不超过最大生命的 20%（见 ModEffectEvents）。
+    public static final RegistryObject<Item> REVERSE_SCALE_GALL = registerItem("reverse_scale_gall",
+            () -> new ReverseScaleGallItem(new Item.Properties().stacksTo(1)));
+
+    // 米米圣盾（Mimi Shield）：Curios「圣遗物」槽位饰品，
+    // 最大生命值 +5，受伤后恢复 10% 最大生命（生命值高于 40% 时不触发，见 ModEffectEvents）。
+    public static final RegistryObject<Item> MIMI_SHIELD = registerItem("mimi_shield",
+            () -> new MimiShieldItem(new Item.Properties().stacksTo(1)));
 
     // 米米传送器（Mimi Teleporter）：传送门框架方块（ModBlocks.MIMI_TELEPORTER）的 BlockItem，
     // 放置后作为米米维度传送门框架使用；传送/激活逻辑后续实现。

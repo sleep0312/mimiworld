@@ -27,7 +27,7 @@ import java.util.UUID;
  *
  * <p>佩戴期间：</p>
  * <ul>
- *   <li>持续获得抗性提升 II、跳跃提升 I、生命恢复 I（每秒刷新，等效永久，脱下清除残留）；</li>
+ *   <li>持续获得抗性提升 II、跳跃提升 I、生命恢复 I（8 秒时长，每 5 秒刷新一次，脱下清除残留）；</li>
  *   <li>时运 +3、抢夺 +3（由 Curios 接入方块掉落与 {@code LootingLevelEvent}）；</li>
  *   <li>最大生命值 +25%、攻击力 +20%（Curios 属性修饰符自动增删）。</li>
  * </ul>
@@ -35,13 +35,13 @@ import java.util.UUID;
 public class BookOfDepartureItem extends Item implements ICurioItem {
 
     /**
-     * 药水效果刷新时长（tick，12 秒）；逐 tick 刷新所致实际为持续生效。
+     * 佩戴期间药水效果的刷新时长（tick，8 秒）与刷新阈值（剩余 ≤3 秒时重置，即每 5 秒一次）。
      *
-     * <p>必须大于 {@code ModArmorSetBonusEvents} 的 220 tick 清理阈值：该处理器会把
-     * 剩余时长 ≤220 且非盔甲提供的跳跃提升/生命恢复当作残留效果移除，
-     * 用 240 可避免启航之书的效果被它误删。</p>
+     * <p>以非 ambient 方式施加，避免被 {@code ModArmorSetBonusEvents} 的「脱下清理」
+     * 误判为盔甲残留效果删除。</p>
      */
-    private static final int EFFECT_DURATION = 240;
+    private static final int EFFECT_DURATION = 160;
+    private static final int EFFECT_REFRESH_REMAINING = 60;
 
     /** 本饰品提供的全部药水效果类型，用于脱下后清理残留。 */
     private static final Set<MobEffect> GRANTED_EFFECTS = Set.of(
@@ -59,12 +59,18 @@ public class BookOfDepartureItem extends Item implements ICurioItem {
         if (entity == null || entity.level().isClientSide) {
             return;
         }
-        entity.addEffect(new MobEffectInstance(
-                MobEffects.DAMAGE_RESISTANCE, EFFECT_DURATION, 1, true, true, true));
-        entity.addEffect(new MobEffectInstance(
-                MobEffects.JUMP, EFFECT_DURATION, 0, true, true, true));
-        entity.addEffect(new MobEffectInstance(
-                MobEffects.REGENERATION, EFFECT_DURATION, 0, true, true, true));
+        refreshEffect(entity, MobEffects.DAMAGE_RESISTANCE, 1);
+        refreshEffect(entity, MobEffects.JUMP, 0);
+        refreshEffect(entity, MobEffects.REGENERATION, 0);
+    }
+
+    /** 缺失或等级不足时立即施加；等级相同则仅在剩余 ≤3 秒时重置回 8 秒（即每 5 秒一次）。 */
+    private static void refreshEffect(LivingEntity entity, MobEffect effect, int amplifier) {
+        MobEffectInstance current = entity.getEffect(effect);
+        if (current == null || current.getAmplifier() < amplifier
+                || (current.getAmplifier() == amplifier && current.getDuration() <= EFFECT_REFRESH_REMAINING)) {
+            entity.addEffect(new MobEffectInstance(effect, EFFECT_DURATION, amplifier, false, true, true));
+        }
     }
 
     @Override

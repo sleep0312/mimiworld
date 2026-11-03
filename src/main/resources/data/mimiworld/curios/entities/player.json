@@ -1,4 +1,17 @@
 {
   "entities": ["minecraft:player"],
-  "slots": ["shenyi_book", "sacred_relic"]
+  "slots": [
+    "shenyi_book",
+    "sacred_relic",
+    "back",
+    "belt",
+    "body",
+    "bracelet",
+    "charm",
+    "curio",
+    "hands",
+    "head",
+    "necklace",
+    "ring"
+  ]
 }

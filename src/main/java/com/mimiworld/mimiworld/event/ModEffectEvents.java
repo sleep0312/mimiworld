@@ -21,6 +21,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -33,13 +35,16 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.ArrayList;
@@ -96,6 +101,9 @@ public class ModEffectEvents {
 
     /** 月有圆缺：暴击率、受伤倍率、附近怪物额外伤害的概率与倍率。 */
     private static final float MOON_CRIT_CHANCE = 0.30F;
+    /** AttributesLib 的暴击率属性（未安装时注册表中不存在，退化为事件概率判定）。 */
+    private static final ResourceLocation MOON_CRIT_CHANCE_ID =
+            new ResourceLocation("attributeslib", "crit_chance");
     private static final float MOON_DAMAGE_TAKEN_MULTIPLIER = 1.25F;
     private static final double MOON_MONSTER_RADIUS = 5.0D;
     private static final float MOON_MONSTER_CHANCE = 0.20F;
@@ -113,10 +121,11 @@ public class ModEffectEvents {
     /** 暗灵毒牙：命中时附加的暗毒持续时间（3 秒）。 */
     private static final int DARK_POISON_DURATION = 60;
 
-    /** 上古毛皮：易怒最高 5 级、10 秒（200 tick）未触发降级、效果刷新时长 2 秒。 */
+    /** 上古毛皮：易怒最高 5 级、10 秒（200 tick）未触发降级、效果刷新时长 8 秒（剩余 ≤3 秒时重置，每 5 秒一次）。 */
     private static final int PELT_MAX_LEVEL = 5;
     private static final long PELT_DECAY_TICKS = 200L;
-    private static final int PELT_EFFECT_DURATION = 40;
+    private static final int PELT_EFFECT_DURATION = 160;
+    private static final int PELT_REFRESH_REMAINING = 60;
 
     /** 佩戴上古毛皮的玩家当前的易怒等级与最近一次增伤触发时刻。 */
     private static final Map<UUID, PeltRageState> PELT_STATES = new HashMap<>();
@@ -383,7 +392,9 @@ public class ModEffectEvents {
             delayed.ticksUntilNext = DELAY_INTERVAL_TICKS;
             // 多笔伤害可能同一 tick 到点，且延迟伤害不应额外提供无敌帧
             player.invulnerableTime = 0;
-            player.hurt(delayedSource(player, delayed.source), delayed.amount);
+            if (player.hurt(delayedSource(player, delayed.source), delayed.amount)) {
+                hurtArmorDurability(player, delayed.source, delayed.amount);
+            }
             player.invulnerableTime = 0;
             if (--delayed.remaining <= 0) {
                 iterator.remove();
@@ -391,6 +402,30 @@ public class ModEffectEvents {
         }
         if (pending.isEmpty()) {
             DELAYED_DAMAGES.remove(player.getUUID());
+        }
+    }
+
+    /**
+     * 虎王之蔑的延迟伤害类型带 bypasses_armor，原版不会做盔甲减伤，也就不会调用 hurtArmor 扣耐久；
+     * 这里按原版公式补扣：每件护甲损失 max(1, 本次伤害 / 4) 点耐久。
+     */
+    private static void hurtArmorDurability(Player player, DamageSource source, float amount) {
+        if (amount <= 0.0F) {
+            return;
+        }
+        int wear = (int) Math.max(1.0F, amount / 4.0F);
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) {
+                continue;
+            }
+            ItemStack stack = player.getItemBySlot(slot);
+            if (!(stack.getItem() instanceof ArmorItem)) {
+                continue;
+            }
+            if (source.is(DamageTypeTags.IS_FIRE) && stack.getItem().isFireResistant()) {
+                continue;
+            }
+            stack.hurtAndBreak(wear, player, entity -> entity.broadcastBreakEvent(slot));
         }
     }
 
@@ -503,10 +538,16 @@ public class ModEffectEvents {
      *
      * <p>攻击力 +10 已由物品的属性修饰符提供，这里只处理暴击率。
      * 原版判定为暴击的攻击直接跳过，避免再次掷骰。</p>
+     *
+     * <p>若安装了 AttributesLib，暴击率会直接加在 {@code attributeslib:crit_chance} 属性上
+     * （面板可见），由该模组负责暴击判定，这里不再重复掷骰。</p>
      */
     @SubscribeEvent
     public static void onMoonPhasesCriticalHit(CriticalHitEvent event) {
         if (event.isVanillaCritical()) {
+            return;
+        }
+        if (ForgeRegistries.ATTRIBUTES.getValue(MOON_CRIT_CHANCE_ID) != null) {
             return;
         }
         Player player = event.getEntity();
@@ -676,6 +717,124 @@ public class ModEffectEvents {
         event.setAmount(event.getAmount() * multiplier);
     }
 
+    /**
+     * 夔牛之力：佩戴者（玩家）攻击实体前，先把目标的无敌帧清零，
+     * 使连续攻击不被原版 20 tick 无敌帧吞掉（出手间隔仍受攻击速度冷却限制）。
+     */
+    @SubscribeEvent
+    public static void onKuiNiuPowerAttack(AttackEntityEvent event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide || !(event.getTarget() instanceof LivingEntity target)) {
+            return;
+        }
+        boolean equipped = CuriosApi.getCuriosInventory(player).resolve()
+                .map(handler -> handler.isEquipped(ModItems.KUI_NIU_POWER.get()))
+                .orElse(false);
+        if (!equipped) {
+            return;
+        }
+        target.invulnerableTime = 0;
+    }
+
+    /**
+     * 山海恩泽：佩戴者处于下落中的近战攻击按下落高度增伤，每下落 1 格 +1%（与重锤的下落增伤同理）。
+     * 只有攻击者本人直接命中的伤害才计入，箭矢等远程攻击不受影响。
+     */
+    @SubscribeEvent
+    public static void onShanhaiGraceHurt(LivingHurtEvent event) {
+        if (!(event.getSource().getDirectEntity() instanceof Player player)
+                || player.level().isClientSide || player.fallDistance <= 0.0F) {
+            return;
+        }
+        boolean equipped = CuriosApi.getCuriosInventory(player).resolve()
+                .map(handler -> handler.isEquipped(ModItems.SHANHAI_GRACE.get()))
+                .orElse(false);
+        if (!equipped) {
+            return;
+        }
+        event.setAmount(event.getAmount() * (1.0F + player.fallDistance * 0.01F));
+    }
+
+    /**
+     * 逆鳞龙胆：佩戴者单次受到的最终伤害（护甲、抗性等结算之后）不超过最大生命值的 20%。
+     * 使用 LOWEST 优先级，确保其他增伤/减伤逻辑全部执行完再封顶。
+     */
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onReverseScaleGallDamage(LivingDamageEvent event) {
+        if (!(event.getEntity() instanceof Player player) || player.level().isClientSide) {
+            return;
+        }
+        boolean equipped = CuriosApi.getCuriosInventory(player).resolve()
+                .map(handler -> handler.isEquipped(ModItems.REVERSE_SCALE_GALL.get()))
+                .orElse(false);
+        if (!equipped) {
+            return;
+        }
+        float cap = player.getMaxHealth() * 0.2F;
+        if (event.getAmount() > cap) {
+            event.setAmount(cap);
+        }
+    }
+
+    /**
+     * 米米圣盾：受到任意伤害后立刻（无冷却）恢复 10% 最大生命值；
+     * 若这次伤害结算后生命值仍高于 40%，则不触发，避免高血量时白送治疗。
+     */
+    @SubscribeEvent
+    public static void onMimiShieldDamage(LivingDamageEvent event) {
+        if (!(event.getEntity() instanceof Player player) || player.level().isClientSide) {
+            return;
+        }
+        boolean equipped = CuriosApi.getCuriosInventory(player).resolve()
+                .map(handler -> handler.isEquipped(ModItems.MIMI_SHIELD.get()))
+                .orElse(false);
+        if (!equipped) {
+            return;
+        }
+        float maxHealth = player.getMaxHealth();
+        if (player.getHealth() - event.getAmount() > maxHealth * 0.4F) {
+            return;
+        }
+        player.heal(maxHealth * 0.1F);
+    }
+
+    /** 山海恩泽：跳跃提升 V 对应 amplifier 4；刷新时长 8 秒，剩余 ≤3 秒时重置（即每 5 秒一次）。 */
+    private static final int SHANHAI_JUMP_AMPLIFIER = 4;
+    private static final int SHANHAI_EFFECT_DURATION = 160;
+    private static final int SHANHAI_REFRESH_REMAINING = 60;
+
+    /**
+     * 山海恩泽：佩戴期间持续维持「跳跃提升 V」，每 5 秒重置回 8 秒。
+     * 与上古毛皮一致，用 PlayerTickEvent + Curios 查询判定，不依赖物品自身的 curioTick；
+     * 效果以非 ambient 方式施加，避免被盔甲效果的脱下清理逻辑误删。
+     */
+    @SubscribeEvent
+    public static void onShanhaiGraceTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) {
+            return;
+        }
+        Player player = event.player;
+        boolean equipped = CuriosApi.getCuriosInventory(player).resolve()
+                .map(handler -> handler.isEquipped(ModItems.SHANHAI_GRACE.get()))
+                .orElse(false);
+        if (!equipped) {
+            // 脱下后清掉本饰品灌注的跳跃提升，不误删其它来源的效果
+            MobEffectInstance jump = player.getEffect(MobEffects.JUMP);
+            if (jump != null && jump.getAmplifier() == SHANHAI_JUMP_AMPLIFIER
+                    && jump.getDuration() <= SHANHAI_EFFECT_DURATION) {
+                player.removeEffect(MobEffects.JUMP);
+            }
+            return;
+        }
+        MobEffectInstance jump = player.getEffect(MobEffects.JUMP);
+        if (jump == null || jump.getAmplifier() < SHANHAI_JUMP_AMPLIFIER
+                || (jump.getAmplifier() == SHANHAI_JUMP_AMPLIFIER
+                    && jump.getDuration() <= SHANHAI_REFRESH_REMAINING)) {
+            player.addEffect(new MobEffectInstance(MobEffects.JUMP, SHANHAI_EFFECT_DURATION,
+                    SHANHAI_JUMP_AMPLIFIER, false, false, true));
+        }
+    }
+
     /** 玩家是否佩戴上古毛皮。 */
     private static boolean hasAncientPelt(Player player) {
         return CuriosApi.getCuriosInventory(player).resolve()
@@ -702,7 +861,7 @@ public class ModEffectEvents {
      * 10 秒未触发增伤则降回 I 级。脱下时清除本方灌注的残留效果。
      *
      * <p>等级变化时先移除旧效果再重新施加，确保 HUD 等级立即回落到目标值；
-     * 平时仅在剩余时长不足 1 秒时刷新，避免逐 tick 重建效果。</p>
+     * 平时仅在剩余时长不足 3 秒时刷新回 8 秒（即每 5 秒一次）。</p>
      */
     @SubscribeEvent
     public static void onAncientPeltTick(TickEvent.PlayerTickEvent event) {
@@ -732,7 +891,7 @@ public class ModEffectEvents {
             player.removeEffect(ModEffects.IRRITABLE.get());
             current = null;
         }
-        if (current == null || current.getDuration() < 20) {
+        if (current == null || current.getDuration() <= PELT_REFRESH_REMAINING) {
             player.addEffect(new MobEffectInstance(ModEffects.IRRITABLE.get(),
                     PELT_EFFECT_DURATION, amplifier, true, true, true));
         }

@@ -43,6 +43,8 @@ public final class ClothConfigScreen {
         buildArmorCategory(builder, entries);
         buildWeaponCategory(builder, entries);
         buildGlobalCategory(builder, entries);
+        buildSlotCategory(builder, entries);
+        buildMessageCategory(builder, entries);
 
         return builder.build();
     }
@@ -131,6 +133,50 @@ public final class ClothConfigScreen {
         addDouble(sink, entries, "生物造成伤害倍率", ModConfig.COMMON.mobDamageMultiplier, 0.0D, 1000.0D, false);
         addDouble(sink, entries, "生物受到伤害倍率", ModConfig.COMMON.mobDamageTakenMultiplier, 0.0D, 1000.0D, false);
         addDouble(sink, entries, "掉落数量倍率", ModConfig.COMMON.lootMultiplier, 0.0D, 64.0D, false);
+    }
+
+    /** [slots]：玩家各 Curios 栏位数量，进世界 / 重生时生效。 */
+    private static void buildSlotCategory(ConfigBuilder builder, ConfigEntryBuilder entries) {
+        ConfigCategory category = builder.getOrCreateCategory(Component.literal("饰品槽数量"));
+        category.addEntry(entries.startTextDescription(
+                Component.literal("-1 = 沿用数据包默认，0 = 隐藏该栏位，≥1 = 指定数量；"
+                        + "重新进入世界（或重生）生效，缩小栏位时多余饰品会退回背包。")).build());
+
+        Consumer<AbstractConfigListEntry> sink = category::addEntry;
+        ModConfig.COMMON.slots.forEach((id, value) ->
+                addInt(sink, entries, slotName(id) + "（" + id + "）", value, -1, 64, false));
+    }
+
+    /** 栏位中文名，与 TOML 中的注释保持一致。 */
+    private static String slotName(String id) {
+        return switch (id) {
+            case "sacred_relic" -> "圣遗物";
+            case "shenyi_book" -> "神遗之书";
+            case "ring" -> "戒指";
+            case "necklace" -> "项链";
+            case "charm" -> "护符";
+            case "belt" -> "腰带";
+            case "back" -> "背部";
+            case "body" -> "身体";
+            case "bracelet" -> "手镯";
+            case "hands" -> "手部";
+            case "head" -> "头部饰品";
+            case "curio" -> "通用饰品";
+            default -> id;
+        };
+    }
+
+    /** [messages]：界面提示开关，保存后立即生效。 */
+    private static void buildMessageCategory(ConfigBuilder builder, ConfigEntryBuilder entries) {
+        ConfigCategory category = builder.getOrCreateCategory(Component.literal("界面提示"));
+        category.addEntry(entries.startTextDescription(
+                Component.literal("快捷栏上方的操作反馈，保存后立即生效。")).build());
+        category.addEntry(entries.startBooleanToggle(
+                        Component.literal("猩红竖眼：显示传送结果提示"),
+                        ModConfig.read(ModConfig.COMMON.crimsonEyeTeleportHint))
+                .setDefaultValue(ModConfig.COMMON.crimsonEyeTeleportHint.getDefault())
+                .setSaveConsumer(ModConfig.COMMON.crimsonEyeTeleportHint::set)
+                .build());
     }
 
     private static void addDouble(Consumer<AbstractConfigListEntry> sink, ConfigEntryBuilder entries,
