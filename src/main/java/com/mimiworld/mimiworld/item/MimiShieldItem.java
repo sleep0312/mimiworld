@@ -18,8 +18,8 @@ import java.util.UUID;
 /**
  * 米米圣盾（Mimi Shield）：Curios「圣遗物」槽位饰品。
  *
- * <p>佩戴期间最大生命值 +5；受到任意伤害后无冷却地恢复 10% 最大生命值，
- * 但结算后生命值高于 40% 时不触发（判定见 {@link com.mimiworld.mimiworld.event.ModEffectEvents}）。</p>
+ * <p>佩戴期间最大生命值 +5；受到任意伤害后获得 10% 最大生命值的额外生命值（HUD 显示为黄心），
+ * 额外生命值总额最多累计到最大生命值的 40%（判定见 {@link com.mimiworld.mimiworld.event.ModEffectEvents}）。</p>
  */
 public class MimiShieldItem extends Item implements ICurioItem {
 

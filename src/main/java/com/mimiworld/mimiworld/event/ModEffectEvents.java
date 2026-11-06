@@ -776,9 +776,14 @@ public class ModEffectEvents {
         }
     }
 
+    /** 米米圣盾：每次受伤给予 10% 最大生命值的额外生命值，总额最多累计到 40%。 */
+    private static final float MIMI_SHIELD_GAIN_RATIO = 0.1F;
+    private static final float MIMI_SHIELD_CAP_RATIO = 0.4F;
+
     /**
-     * 米米圣盾：受到任意伤害后立刻（无冷却）恢复 10% 最大生命值；
-     * 若这次伤害结算后生命值仍高于 40%，则不触发，避免高血量时白送治疗。
+     * 米米圣盾：受到任意伤害后获得 10% 最大生命值的额外生命值（原版吸收机制，HUD 显示为黄心），
+     * 额外生命值总额最多累计到最大生命值的 40%。
+     * 挂在 LivingDamageEvent 上：此时本次伤害已经结算完，新增的额外生命值只用于抵挡后续伤害。
      */
     @SubscribeEvent
     public static void onMimiShieldDamage(LivingDamageEvent event) {
@@ -792,10 +797,12 @@ public class ModEffectEvents {
             return;
         }
         float maxHealth = player.getMaxHealth();
-        if (player.getHealth() - event.getAmount() > maxHealth * 0.4F) {
+        float cap = maxHealth * MIMI_SHIELD_CAP_RATIO;
+        float current = player.getAbsorptionAmount();
+        if (current >= cap) {
             return;
         }
-        player.heal(maxHealth * 0.1F);
+        player.setAbsorptionAmount(Math.min(current + maxHealth * MIMI_SHIELD_GAIN_RATIO, cap));
     }
 
     /** 山海恩泽：跳跃提升 V 对应 amplifier 4；刷新时长 8 秒，剩余 ≤3 秒时重置（即每 5 秒一次）。 */

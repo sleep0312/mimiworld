@@ -16,16 +16,16 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
  * 直接渲染会又高又偏。这里在 super 渲染前做一次缩放+平移（{@code GeoBlockRenderer}
  * 内部还会再平移 (0.5,0,0.5) 且以 1/16 比例落像素坐标，需一并计入）：</p>
  * <ul>
- *   <li>以宽度铺满一格反算缩放 s = 16/30.8 ≈ 0.52（双雉鸡翎尖端恰好到格边），
- *       缩放后约 1 格宽、0.56 格高；</li>
+ *   <li>以宽度铺满两格反算缩放 s = 32/30.8 ≈ 1.04（双雉鸡翎尖端恰好到两格边），
+ *       缩放后约 2 格宽、1.12 格高；</li>
  *   <li>x 模型中心轴 0 → 格中心；z 中心 -0.925px → 格中心；
  *       y 底 19.9px → 贴地（y=0）。</li>
  * </ul>
  */
 public class MimiMonkeyHeadBlockRenderer<T extends BlockEntity & GeoAnimatable> extends GeoBlockRenderer<T> {
 
-    /** 以双雉鸡翎展开的模型宽度（30.8px）铺满一格反算。 */
-    private static final float SCALE = 16.0F / 30.8F;
+    /** 以双雉鸡翎展开的模型宽度（30.8px）铺满两格反算。 */
+    private static final float SCALE = 32.0F / 30.8F;
 
     /** x 中心对齐：0.5 - s·0.5（内部 0.5 平移）。 */
     private static final float TRANSLATE_X = 0.5F - 0.5F * SCALE;

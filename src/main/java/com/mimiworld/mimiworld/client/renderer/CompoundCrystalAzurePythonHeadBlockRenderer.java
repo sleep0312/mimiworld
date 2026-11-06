@@ -16,15 +16,15 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
  * 模型中心轴 x=0、z 中心 -26.5、底 y=34）。
  * {@code GeoBlockRenderer} 内部还会平移 (0.5,0,0.5) 并以 1/16 落像素坐标：</p>
  * <ul>
- *   <li>缩放 s=0.46：摆件约 0.40 格宽、0.69 格高、0.60 格深（吻部朝北）；</li>
+ *   <li>缩放 s=0.92：摆件约 0.80 格宽、1.38 格高、1.20 格深（吻部朝北）；</li>
  *   <li>x/z 居中、y 底贴地。</li>
  * </ul>
  */
 public class CompoundCrystalAzurePythonHeadBlockRenderer<T extends BlockEntity & GeoAnimatable>
         extends GeoBlockRenderer<T> {
 
-    /** 缩放：24px 高 → 0.69 格。 */
-    private static final float SCALE = 0.46F;
+    /** 缩放：24px 高 → 1.38 格。 */
+    private static final float SCALE = 0.92F;
 
     /** x 中心对齐（模型中心轴 0 + 内部 0.5 平移）。 */
     private static final float TRANSLATE_X = 0.5F - 0.5F * SCALE;

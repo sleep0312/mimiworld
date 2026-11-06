@@ -15,15 +15,15 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
  * 包围盒 x[-11,11]、y[24,40]、z[-13,3]（22×16×16 像素，模型中心轴 x=0、z 中心 -5、底 y=24）。
  * {@code GeoBlockRenderer} 内部还会平移 (0.5,0,0.5) 并以 1/16 落像素坐标：</p>
  * <ul>
- *   <li>缩放 s=0.72：摆件约 0.99 格宽（双角展）、0.72 格高、0.72 格深（吻部朝北）；</li>
+ *   <li>缩放 s=1.44：摆件约 1.98 格宽（双角展）、1.44 格高、1.44 格深（吻部朝北）；</li>
  *   <li>x/z 居中、y 底贴地。</li>
  * </ul>
  */
 public class SuperCrystalOxHeadBlockRenderer<T extends BlockEntity & GeoAnimatable>
         extends GeoBlockRenderer<T> {
 
-    /** 缩放：16px 高 → 0.72 格。 */
-    private static final float SCALE = 0.72F;
+    /** 缩放：16px 高 → 1.44 格。 */
+    private static final float SCALE = 1.44F;
 
     /** x 中心对齐（模型中心轴 0 + 内部 0.5 平移）。 */
     private static final float TRANSLATE_X = 0.5F - 0.5F * SCALE;

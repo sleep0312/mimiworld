@@ -318,8 +318,8 @@ public final class ModMachineRecipes {
 
         // ---- viii 铁锅（4 槽顺序：左上 / 右上 / 左下 / 右下 + 右上侧额外槽）----
 
-        // 香混肉片：腌肉片×2 + 棘花瓣 + 香粉，额外碗
-        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.FRAGRANT_MIXED_MEAT_SLICE.get()), bowl,
+        // 香混肉片：腌肉片×2 + 棘花瓣 + 香粉，无额外槽物品
+        IronWokBlockEntity.registerRecipe(new ItemStack(ModItems.FRAGRANT_MIXED_MEAT_SLICE.get()), null,
                 marinatedSlice, marinatedSlice, ModItems.THORN_PETAL.get(), ModItems.FRAGRANT_POWDER.get());
 
         // 油爆虚无触：虚无触足×2 + 复合油 + 油瓶，额外碗

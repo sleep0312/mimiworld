@@ -16,15 +16,15 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
  * 模型中心轴 x=0、z 中心 -276、底 y=106.8）。
  * {@code GeoBlockRenderer} 内部还会平移 (0.5,0,0.5) 并以 1/16 落像素坐标：</p>
  * <ul>
- *   <li>缩放 s=16/150：摆件约 0.48 格宽、0.65 格高、1.0 格深（长吻朝北占满一格）；</li>
+ *   <li>缩放 s=32/150：摆件约 0.96 格宽、1.30 格高、2.0 格深（长吻朝北占满两格）；</li>
  *   <li>x/z 居中、y 底贴地。</li>
  * </ul>
  */
 public class DibazongzuiHeadBlockRenderer<T extends BlockEntity & GeoAnimatable>
         extends GeoBlockRenderer<T> {
 
-    /** 缩放：150px 深的龙头 → 深 1.0 格。 */
-    private static final float SCALE = 16.0F / 150.0F;
+    /** 缩放：150px 深的龙头 → 深 2.0 格。 */
+    private static final float SCALE = 32.0F / 150.0F;
 
     /** x 中心对齐（模型中心轴 0 + 内部 0.5 平移）。 */
     private static final float TRANSLATE_X = 0.5F - 0.5F * SCALE;

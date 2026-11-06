@@ -16,15 +16,15 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
  * 模型中心轴 x=0、z 中心 -10.75、底 y=29）。
  * {@code GeoBlockRenderer} 内部还会平移 (0.5,0,0.5) 并以 1/16 落像素坐标：</p>
  * <ul>
- *   <li>缩放 s=0.45：摆件约 0.34 格宽、0.70 格高（耳尖）、0.32 格深（吻部朝北）；</li>
+ *   <li>缩放 s=0.90：摆件约 0.68 格宽、1.40 格高（耳尖）、0.64 格深（吻部朝北）；</li>
  *   <li>x/z 居中、y 底贴地。</li>
  * </ul>
  */
 public class HeavyCrystalRabbitKingHeadBlockRenderer<T extends BlockEntity & GeoAnimatable>
         extends GeoBlockRenderer<T> {
 
-    /** 缩放：25px 高（含长耳）→ 0.70 格。 */
-    private static final float SCALE = 0.45F;
+    /** 缩放：25px 高（含长耳）→ 1.40 格。 */
+    private static final float SCALE = 0.90F;
 
     /** x 中心对齐（模型中心轴 0 + 内部 0.5 平移）。 */
     private static final float TRANSLATE_X = 0.5F - 0.5F * SCALE;

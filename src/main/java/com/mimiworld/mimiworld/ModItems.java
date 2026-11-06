@@ -825,7 +825,7 @@ public class ModItems {
             () -> new ReverseScaleGallItem(new Item.Properties().stacksTo(1)));
 
     // 米米圣盾（Mimi Shield）：Curios「圣遗物」槽位饰品，
-    // 最大生命值 +5，受伤后恢复 10% 最大生命（生命值高于 40% 时不触发，见 ModEffectEvents）。
+    // 最大生命值 +5，受伤后获得 10% 最大生命值的额外生命值（最多累计到 40%，见 ModEffectEvents）。
     public static final RegistryObject<Item> MIMI_SHIELD = registerItem("mimi_shield",
             () -> new MimiShieldItem(new Item.Properties().stacksTo(1)));
 
