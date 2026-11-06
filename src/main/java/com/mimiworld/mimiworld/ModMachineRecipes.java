@@ -92,19 +92,21 @@ public final class ModMachineRecipes {
                 new ItemStack(ModItems.SUPER_LAZY_ALLOY_ROD.get()));
 
         // 电离台 —— 左上角粗制超懒合金锭 + 左下角清洁米沉离液，
-        // 处理 2s（40t）→ 超懒合金离子态（输入无序，两槽各消耗 1 个）
+        // 处理 2s（40t）→ 超懒合金粉（输入无序，两槽各消耗 1 个）
+        // （原「离子态」中转已移除，电离后直接得到合金粉）
         IonizationTableBlockEntity.registerRecipe(
                 ModItems.COARSE_SUPER_LAZY_ALLOY_INGOT.get(),
                 ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get(),
-                new ItemStack(ModItems.SUPER_LAZY_ALLOY_IONIC_FORM.get()),
+                new ItemStack(ModItems.SUPER_LAZY_ALLOY_DUST.get()),
                 40);
 
-        // 沉淀台 —— 左上角超懒合金离子态 + 左下角清洁米沉离液，
-        // 处理 2s（40t）→ 超懒合金粉（两槽各消耗 1 个）
+        // 沉淀台 —— 左上角超懒合金粉 + 左下角清洁米沉离液，
+        // 处理 2s（40t）→ 超懒合金锭（两槽各消耗 1 个）
+        // （原「合金碎块」中转已移除，沉淀后直接成锭）
         PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.SUPER_LAZY_ALLOY_IONIC_FORM.get(),
+                ModItems.SUPER_LAZY_ALLOY_DUST.get(),
                 ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get(),
-                new ItemStack(ModItems.SUPER_LAZY_ALLOY_DUST.get()),
+                new ItemStack(ModItems.SUPER_LAZY_ALLOY_INGOT.get()),
                 40);
 
         // 沉淀台 —— 米果渣 + 3 个玻璃瓶 → 一次产出 3 个米果汁（每周期消耗 1 米果渣 + 3 玻璃瓶）
@@ -114,18 +116,13 @@ public final class ModMachineRecipes {
                 new ItemStack(ModItems.RICE_FRUIT_JUICE.get(), 3),
                 DualInputProcessorBlockEntity.DEFAULT_PROCESS_TICKS);
 
-        // 沉淀台 —— 米果混合渣 + 3 个玻璃瓶 → 一次产出 3 个米果清洁液（每周期消耗 1 米果混合渣 + 3 玻璃瓶）
-        PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.RICE_FRUIT_MIXED_POMACE.get(), 1,
-                Items.GLASS_BOTTLE, 3,
-                new ItemStack(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get(), 3),
-                DualInputProcessorBlockEntity.DEFAULT_PROCESS_TICKS);
-
-        // 离解台 —— 上槽米果混合液 + 下槽米（离解介质）→ 米果解析液
+        // 离解台 —— 上槽米果汁 + 下槽米（离解介质），处理 2s（40t）→ 米果清洁液
+        // （原「混合液 → 解析液 → 复合液 → 混合渣」四道中转已合并为这一道）
         DissociationTableBlockEntity.registerRecipe(
-                ModItems.RICE_FRUIT_MIXTURE.get(),
+                ModItems.RICE_FRUIT_JUICE.get(),
                 ModItems.RICE.get(),
-                new ItemStack(ModItems.RICE_FRUIT_ANALYZING_SOLUTION.get()));
+                new ItemStack(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get()),
+                40);
 
         // 淬剑台 —— 左上超懒合金剑 + 右上上古剑意 + 中间淬剑液
         // → 超懒神剑·残缺·贰（需按"开始"按钮加工一轮）

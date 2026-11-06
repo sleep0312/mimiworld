@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_super_heavy_crystal": {
+    "has_super_heavy_crystal_nugget": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:super_heavy_crystal"
+              "mimiworld:super_heavy_crystal_nugget"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_super_heavy_crystal",
+      "has_super_heavy_crystal_nugget",
       "has_the_recipe"
     ]
   ],

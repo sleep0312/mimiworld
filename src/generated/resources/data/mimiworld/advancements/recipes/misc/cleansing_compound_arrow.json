@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cleansing_compound_ingot": {
+    "has_cleansing_compound_nugget": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:cleansing_compound_ingot"
+              "mimiworld:cleansing_compound_nugget"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_cleansing_compound_ingot",
+      "has_cleansing_compound_nugget",
       "has_the_recipe"
     ]
   ],

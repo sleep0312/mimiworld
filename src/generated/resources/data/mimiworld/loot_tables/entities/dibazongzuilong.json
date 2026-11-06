@@ -17,7 +17,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "mimiworld:coarse_cleansing_compound_ingot"
+          "name": "mimiworld:cleansing_compound_ingot"
         }
       ],
       "rolls": 1.0

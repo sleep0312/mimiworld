@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_compound_rice_meal_ingot": {
+    "has_compound_rice_meal_nugget": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:compound_rice_meal_ingot"
+              "mimiworld:compound_rice_meal_nugget"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_compound_rice_meal_ingot",
+      "has_compound_rice_meal_nugget",
       "has_the_recipe"
     ]
   ],

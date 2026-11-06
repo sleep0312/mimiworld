@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "D": {
-      "item": "minecraft:diamond"
+    "A": {
+      "item": "mimiworld:super_heavy_crystal"
     },
     "H": {
       "item": "mimiworld:rice_crystal_hammer"
     },
-    "P": {
-      "item": "mimiworld:compound_rice_meal_plate"
+    "X": {
+      "item": "mimiworld:rice_crystal_alloy_ingot"
     }
   },
   "pattern": [
-    "PPP",
-    "HDH",
-    "PPP"
+    "AXA",
+    "XHX",
+    "AXA"
   ],
   "result": {
     "item": "mimiworld:compound_rice_meal_ingot"

@@ -1,10 +1,21 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "cookingtime": 120,
-  "experience": 0.3,
-  "ingredient": {
-    "item": "mimiworld:coarse_crystallized_rice_meal"
+  "key": {
+    "A": {
+      "item": "mimiworld:rice_pail"
+    },
+    "N": {
+      "item": "minecraft:diamond"
+    }
   },
-  "result": "mimiworld:crystallized_rice_meal"
+  "pattern": [
+    "ANA",
+    "NAN",
+    "ANA"
+  ],
+  "result": {
+    "item": "mimiworld:crystallized_rice_meal"
+  },
+  "show_notification": true
 }

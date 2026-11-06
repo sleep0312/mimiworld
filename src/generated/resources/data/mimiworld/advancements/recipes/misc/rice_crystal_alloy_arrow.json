@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rice_crystal_alloy_ingot": {
+    "has_rice_crystal_alloy_nugget": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:rice_crystal_alloy_ingot"
+              "mimiworld:rice_crystal_alloy_nugget"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_rice_crystal_alloy_ingot",
+      "has_rice_crystal_alloy_nugget",
       "has_the_recipe"
     ]
   ],

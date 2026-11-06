@@ -304,10 +304,6 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_BATON = registerItem("rice_baton",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 米粉，Rice Flour：普通材料物品，最大堆叠 64
-    public static final RegistryObject<Item> RICE_FLOUR = registerItem("rice_flour",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 粗米块，Coarse Rice Block：石头类方块物品，放置后对应 ModBlocks.COARSE_RICE_BLOCK；钻石镐（挖掘等级3）采集
     public static final RegistryObject<Item> COARSE_RICE_BLOCK = registerItem("coarse_rice_block",
             () -> new BlockItem(ModBlocks.COARSE_RICE_BLOCK.get(), new Item.Properties()));
@@ -328,10 +324,6 @@ public class ModItems {
     // 构造器内部绑定 fluid.ModFluids.RICE_BROTH（饭汤源流体），行为同原版水桶
     public static final RegistryObject<Item> RICE_PAIL = registerItem("rice_pail",
             () -> new RicePailItem(new Item.Properties().stacksTo(1)));
-
-    // 粗制饭晶，Coarse Crystallized Rice Meal：普通物品，最大堆叠 64
-    public static final RegistryObject<Item> COARSE_CRYSTALLIZED_RICE_MEAL = registerItem("coarse_crystallized_rice_meal",
-            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 饭晶，Crystallized Rice Meal：普通物品，最大堆叠 64；注意区别于结晶米 CRYSTALLIZED_RICE
     public static final RegistryObject<Item> CRYSTALLIZED_RICE_MEAL = registerItem("crystallized_rice_meal",
@@ -435,16 +427,6 @@ public class ModItems {
     public static final RegistryObject<Item> PRECIPITATION_TABLE = registerItem("precipitation_table",
             () -> new BlockItem(ModBlocks.PRECIPITATION_TABLE.get(), new Item.Properties()));
 
-    // 粗制复合米饭锭，Coarse Compound Rice Meal Ingot：粗糙半成品锭
-    public static final RegistryObject<Item> COARSE_COMPOUND_RICE_MEAL_INGOT =
-            registerItem("coarse_compound_rice_meal_ingot",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 复合米饭板，Compound Rice Meal Plate：压制薄板半成品
-    public static final RegistryObject<Item> COMPOUND_RICE_MEAL_PLATE =
-            registerItem("compound_rice_meal_plate",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 复合米饭锭，Compound Rice Meal Ingot：精制光滑成品锭
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_INGOT =
             registerItem("compound_rice_meal_ingot",
@@ -456,10 +438,6 @@ public class ModItems {
 
     // 米果汁，Rice Fruit Juice：药水瓶造型的普通物品（非流体、不可倒出）
     public static final RegistryObject<Item> RICE_FRUIT_JUICE = registerItem("rice_fruit_juice",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 米果混合液，Rice Fruit Mixture：药水瓶造型的普通物品（非流体、不可倒出）
-    public static final RegistryObject<Item> RICE_FRUIT_MIXTURE = registerItem("rice_fruit_mixture",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 离解台，Dissociation Table：工艺机器方块（装饰性全立方块），
@@ -477,43 +455,13 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_PAPER = registerItem("rice_paper",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 米果解析液，Rice Fruit Analyzing Solution：药水瓶造型普通物品（非流体）
-    public static final RegistryObject<Item> RICE_FRUIT_ANALYZING_SOLUTION =
-            registerItem("rice_fruit_analyzing_solution",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 米果复合液，Rice Fruit Compound Solution：药水瓶造型普通物品（非流体）
-    public static final RegistryObject<Item> RICE_FRUIT_COMPOUND_SOLUTION =
-            registerItem("rice_fruit_compound_solution",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 米饭混合液，Rice Meal Mixture：药水瓶造型普通物品（非流体）
     public static final RegistryObject<Item> RICE_MEAL_MIXTURE = registerItem("rice_meal_mixture",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 米果混合渣，Rice Fruit Mixed Pomace
-    public static final RegistryObject<Item> RICE_FRUIT_MIXED_POMACE =
-            registerItem("rice_fruit_mixed_pomace",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 米果清洁液，Rice Fruit Cleansing Solution：药水瓶造型普通物品（非流体）
     public static final RegistryObject<Item> RICE_FRUIT_CLEANSING_SOLUTION =
             registerItem("rice_fruit_cleansing_solution",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 粗制清洁复合锭，Coarse Cleansing Compound Ingot：粗糙半成品锭
-    public static final RegistryObject<Item> COARSE_CLEANSING_COMPOUND_INGOT =
-            registerItem("coarse_cleansing_compound_ingot",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 清洁复合碎块，Cleansing Compound Chunk
-    public static final RegistryObject<Item> CLEANSING_COMPOUND_CHUNK =
-            registerItem("cleansing_compound_chunk",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 清洁复合板，Cleansing Compound Plate
-    public static final RegistryObject<Item> CLEANSING_COMPOUND_PLATE =
-            registerItem("cleansing_compound_plate",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 清洁复合锭，Cleansing Compound Ingot：精制光滑成品锭
@@ -526,19 +474,9 @@ public class ModItems {
             registerItem("coarse_super_lazy_alloy_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒合金离子态，Super Lazy Alloy Ionic Form：药水瓶造型普通物品（非流体）
-    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_IONIC_FORM =
-            registerItem("super_lazy_alloy_ionic_form",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 超懒合金粉，Super Lazy Alloy Dust：粉末状普通物品
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_DUST =
             registerItem("super_lazy_alloy_dust",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 超懒合金碎块，Super Lazy Alloy Chunk
-    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_CHUNK =
-            registerItem("super_lazy_alloy_chunk",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 超懒合金锭，Super Lazy Alloy Ingot：精制光滑成品锭
@@ -2320,6 +2258,27 @@ public class ModItems {
     // 清洁复合箭（Cleansing Compound Arrow）：9 伤害 + 中毒 II 10s
     public static final RegistryObject<Item> CLEANSING_COMPOUND_ARROW = registerItem("cleansing_compound_arrow",
             () -> new MimiArrowItem(9.0D, 2, new Item.Properties().stacksTo(64)));
+
+    // ---- 粒（Nugget）：1 锭 = 9 粒（超重结晶为 1 结晶 = 9 粒），可反向合成；贴图以原版铁粒改主题色 ----
+    // 饭晶合金粒，Rice Crystal Alloy Nugget：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_NUGGET = registerItem("rice_crystal_alloy_nugget",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 超重结晶粒，Super Heavy Crystal Nugget：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_NUGGET = registerItem("super_heavy_crystal_nugget",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 复合米饭粒，Compound Rice Meal Nugget：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> COMPOUND_RICE_MEAL_NUGGET = registerItem("compound_rice_meal_nugget",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 清洁复合粒，Cleansing Compound Nugget：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> CLEANSING_COMPOUND_NUGGET = registerItem("cleansing_compound_nugget",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    // 超懒合金粒，Super Lazy Alloy Nugget：普通物品，最大堆叠 64
+    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_NUGGET = registerItem("super_lazy_alloy_nugget",
+            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // ============================ 物品注册区结束 ============================
 

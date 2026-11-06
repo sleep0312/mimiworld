@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rice_flour": {
+    "has_cooked_rice": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:rice_flour"
+              "mimiworld:cooked_rice"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_rice_flour",
+      "has_cooked_rice",
       "has_the_recipe"
     ]
   ],

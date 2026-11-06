@@ -1,8 +1,12 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "bottom": "mimiworld:block/oven",
-    "side": "mimiworld:block/oven",
-    "top": "mimiworld:block/oven_top"
+    "particle": "mimiworld:block/oven_side",
+    "down": "mimiworld:block/oven_bottom",
+    "up": "mimiworld:block/oven_top",
+    "north": "mimiworld:block/oven_front",
+    "east": "mimiworld:block/oven_side",
+    "south": "mimiworld:block/oven_side",
+    "west": "mimiworld:block/oven_side"
   }
 }

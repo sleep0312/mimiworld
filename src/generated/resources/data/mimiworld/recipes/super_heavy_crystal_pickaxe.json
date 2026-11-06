@@ -13,9 +13,9 @@
     }
   },
   "pattern": [
-    "HHH",
-    " FH",
-    "R H"
+    " H ",
+    " F ",
+    " R "
   ],
   "result": {
     "item": "mimiworld:super_heavy_crystal_pickaxe"

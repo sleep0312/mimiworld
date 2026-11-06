@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coarse_crystallized_rice_meal": {
+    "has_rice_pail": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:coarse_crystallized_rice_meal"
+              "mimiworld:rice_pail"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_coarse_crystallized_rice_meal",
+      "has_rice_pail",
       "has_the_recipe"
     ]
   ],

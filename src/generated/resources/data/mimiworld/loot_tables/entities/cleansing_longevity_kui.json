@@ -17,7 +17,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "mimiworld:coarse_compound_rice_meal_ingot"
+          "name": "mimiworld:compound_rice_meal_ingot"
         }
       ],
       "rolls": 1.0

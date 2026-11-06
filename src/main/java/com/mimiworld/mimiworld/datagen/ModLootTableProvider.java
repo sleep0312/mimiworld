@@ -109,16 +109,16 @@ public class ModLootTableProvider extends LootTableProvider {
         // 复晶天青蟒：必掉超重结晶×1~2、极毒青蟒牙×1、复晶天青蟒头×1
         DROPS.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), new Drop[]{d(ModItems.SUPER_HEAVY_CRYSTAL.get(), 1, 2),
                 d(ModItems.VENOM_AZURE_PYTHON_FANG.get(), 1, 1), d(ModItems.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get(), 1, 1)});
-        // 清洁长命夔：必掉精制强化米网×2~3、恶夔长命角×1、清洁长命夔头×1，粗制复合米饭锭 0~2 概率掉落
-        DROPS.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), new Drop[]{d(ModItems.COARSE_COMPOUND_RICE_MEAL_INGOT.get(), 0, 2),
+        // 清洁长命夔：必掉精制强化米网×2~3、恶夔长命角×1、清洁长命夔头×1，复合米饭锭 0~2 概率掉落
+        DROPS.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), new Drop[]{d(ModItems.COMPOUND_RICE_MEAL_INGOT.get(), 0, 2),
                 d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 2, 3), d(ModItems.EVIL_KUI_LONGEVITY_HORN.get(), 1, 1),
                 d(ModItems.PURIFIED_LONGEVITY_KUI_HEAD.get(), 1, 1)});
-        // 最懒终末龙：必掉精制强化米网×4~5、终末龙逆鳞×1、最懒终末龙头×1，粗制清洁复合锭 0~2 概率掉落
-        DROPS.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), new Drop[]{d(ModItems.COARSE_CLEANSING_COMPOUND_INGOT.get(), 0, 2),
+        // 最懒终末龙：必掉精制强化米网×4~5、终末龙逆鳞×1、最懒终末龙头×1，清洁复合锭 0~2 概率掉落
+        DROPS.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), new Drop[]{d(ModItems.CLEANSING_COMPOUND_INGOT.get(), 0, 2),
                 d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 1, 1),
                 d(ModItems.LAZIEST_END_DRAGON_HEAD.get(), 1, 1)});
         // 第八宗罪龙：最终 Boss，掉落沿用最懒终末龙并追加残堕精华锭 1~3，头颅换为第八宗罪龙头
-        DROPS.put(ModEntities.DIBAZONGZUILONG.get(), new Drop[]{d(ModItems.COARSE_CLEANSING_COMPOUND_INGOT.get(), 0, 2),
+        DROPS.put(ModEntities.DIBAZONGZUILONG.get(), new Drop[]{d(ModItems.CLEANSING_COMPOUND_INGOT.get(), 0, 2),
                 d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 1, 1),
                 d(ModItems.DIBAZONGZUI_HEAD.get(), 1, 1), d(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get(), 1, 3)});
     }

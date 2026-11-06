@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_compound_rice_meal_plate": {
+    "has_super_heavy_crystal": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:compound_rice_meal_plate"
+              "mimiworld:super_heavy_crystal"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_compound_rice_meal_plate",
+      "has_super_heavy_crystal",
       "has_the_recipe"
     ]
   ],

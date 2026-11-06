@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mimiworld:cleansing_compound_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "mimiworld:cleansing_compound_nugget"
+  }
+}

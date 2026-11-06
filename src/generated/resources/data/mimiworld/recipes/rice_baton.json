@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "F": {
-      "item": "mimiworld:rice_flour"
+      "item": "mimiworld:cooked_rice"
     },
     "W": {
       "item": "minecraft:water_bucket"
@@ -15,6 +15,7 @@
     "   "
   ],
   "result": {
+    "count": 4,
     "item": "mimiworld:rice_baton"
   },
   "show_notification": true

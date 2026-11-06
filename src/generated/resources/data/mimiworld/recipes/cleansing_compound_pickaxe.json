@@ -2,9 +2,6 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "E": {
-      "item": "mimiworld:compound_rice_meal_pickaxe_head"
-    },
     "F": {
       "item": "mimiworld:coarse_rice_net"
     },
@@ -16,9 +13,9 @@
     }
   },
   "pattern": [
-    "HHH",
-    " FH",
-    "R E"
+    " H ",
+    " F ",
+    " R "
   ],
   "result": {
     "item": "mimiworld:cleansing_compound_pickaxe"

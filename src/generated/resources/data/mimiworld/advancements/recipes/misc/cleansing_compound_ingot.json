@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cleansing_compound_plate": {
+    "has_compound_rice_meal_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:cleansing_compound_plate"
+              "mimiworld:compound_rice_meal_ingot"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_cleansing_compound_plate",
+      "has_compound_rice_meal_ingot",
       "has_the_recipe"
     ]
   ],

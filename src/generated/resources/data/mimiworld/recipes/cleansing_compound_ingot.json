@@ -6,15 +6,15 @@
       "item": "mimiworld:rice_fruit_cleansing_solution"
     },
     "C": {
-      "item": "mimiworld:cleansing_compound_plate"
-    },
-    "P": {
       "item": "mimiworld:compound_rice_meal_ingot"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
     }
   },
   "pattern": [
     "ACA",
-    "CPC",
+    "CNC",
     "ACA"
   ],
   "result": {

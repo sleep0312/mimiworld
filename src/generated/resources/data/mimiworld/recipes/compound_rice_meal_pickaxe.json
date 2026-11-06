@@ -13,9 +13,9 @@
     }
   },
   "pattern": [
-    "HHH",
-    " FH",
-    "R H"
+    " H ",
+    " F ",
+    " R "
   ],
   "result": {
     "item": "mimiworld:compound_rice_meal_pickaxe"
