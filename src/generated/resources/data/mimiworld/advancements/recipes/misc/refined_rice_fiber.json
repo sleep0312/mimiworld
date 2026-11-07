@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_reinforced_wet_grass_fiber": {
+    "has_rice_grass": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:reinforced_wet_grass_fiber"
+              "mimiworld:rice_grass"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_reinforced_wet_grass_fiber",
+      "has_rice_grass",
       "has_the_recipe"
     ]
   ],

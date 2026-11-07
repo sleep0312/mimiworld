@@ -5,17 +5,17 @@
     "B": {
       "item": "mimiworld:rice_book"
     },
-    "N": {
-      "item": "mimiworld:refined_reinforced_rice_net"
+    "P": {
+      "item": "mimiworld:rice_paper"
     },
     "T": {
       "item": "minecraft:ghast_tear"
     }
   },
   "pattern": [
-    "TNT",
+    "TPT",
     "BBB",
-    "TNT"
+    "TPT"
   ],
   "result": {
     "item": "mimiworld:forbidden_sword_manual"

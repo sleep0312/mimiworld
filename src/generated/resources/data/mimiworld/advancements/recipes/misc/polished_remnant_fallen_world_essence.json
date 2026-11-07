@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deep_dyed_rice_essence": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:deep_dyed_remnant_fallen_rice_essence"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:polished_remnant_fallen_world_essence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_deep_dyed_rice_essence",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:polished_remnant_fallen_world_essence"
+    ]
+  },
+  "sends_telemetry_event": false
+}

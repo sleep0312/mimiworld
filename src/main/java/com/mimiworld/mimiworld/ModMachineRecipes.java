@@ -1,22 +1,15 @@
 package com.mimiworld.mimiworld;
 
 import com.mimiworld.mimiworld.block.entity.CrusherBlockEntity;
-import com.mimiworld.mimiworld.block.entity.DissociationTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.GrindingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IngotCondensationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.DualInputProcessorBlockEntity;
-import com.mimiworld.mimiworld.block.entity.IonizationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.IronWokBlockEntity;
 import com.mimiworld.mimiworld.block.entity.JumboMegaCookingPotBlockEntity;
 import com.mimiworld.mimiworld.block.entity.LargeCookingPotBlockEntity;
 import com.mimiworld.mimiworld.block.entity.MixerBlockEntity;
 import com.mimiworld.mimiworld.block.entity.OvenBlockEntity;
-import com.mimiworld.mimiworld.block.entity.PestleRealmTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.PrecipitationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.RicePoundingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.BloodlettingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.SwordQuenchingTableBlockEntity;
-import com.mimiworld.mimiworld.tags.ModItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,7 +22,7 @@ import java.util.Map;
  *
  * 对应 ModRecipeProvider 头部《配方书写规则》第 6 条：
  * 锤米台为无序双输入，均为即时合成；
- * 电离台/沉淀台为无序双输入定时加工（DualInputProcessor，registerRecipe 第 4 参为加工 ticks）。
+ * 沉淀台为无序双输入定时加工（DualInputProcessor，registerRecipe 第 4 参为加工 ticks）。
  */
 public final class ModMachineRecipes {
 
@@ -49,23 +42,23 @@ public final class ModMachineRecipes {
                 ModItems.COARSE_SUPER_CRYSTAL.get(),
                 new ItemStack(ModItems.SUPER_CRYSTAL.get()));
 
-        // 锤米台 —— 结晶米 + 铁锭 → 召唤核心胚
+        // 锤米台 —— 结晶米 + 铁锭 → 召唤核心
         RicePoundingTableBlockEntity.registerRecipe(
                 ModItems.CRYSTALLIZED_RICE.get(),
                 Items.IRON_INGOT,
-                new ItemStack(ModItems.SUMMON_CORE_BLANK.get()));
+                new ItemStack(ModItems.SUMMON_CORE.get()));
 
-        // 锤米台 —— 再结晶米 + 钻石 → 高级召唤核心胚
+        // 锤米台 —— 再结晶米 + 钻石 → 高级召唤核心
         RicePoundingTableBlockEntity.registerRecipe(
                 ModItems.RECRYSTALLIZED_RICE.get(),
                 Items.DIAMOND,
-                new ItemStack(ModItems.ADVANCED_SUMMON_CORE_BLANK.get()));
+                new ItemStack(ModItems.ADVANCED_SUMMON_CORE.get()));
 
-        // 锤米台 —— 熔融混合结晶 + 下界合金锭 → 最懒召唤核心胚
+        // 锤米台 —— 熔融混合结晶 + 下界合金锭 → 最懒召唤核心
         RicePoundingTableBlockEntity.registerRecipe(
                 ModItems.MOLTEN_MIXED_CRYSTAL.get(),
                 Items.NETHERITE_INGOT,
-                new ItemStack(ModItems.LAZIEST_SUMMON_CORE_BLANK.get()));
+                new ItemStack(ModItems.LAZIEST_SUMMON_CORE.get()));
 
         // 锤米台 —— 左上角超重结晶 + 左下角硬化米 → 超重结晶棒（镐手柄）
         RicePoundingTableBlockEntity.registerRecipe(
@@ -91,20 +84,11 @@ public final class ModMachineRecipes {
                 ModItems.MOLTEN_MIXED_CRYSTAL.get(),
                 new ItemStack(ModItems.SUPER_LAZY_ALLOY_ROD.get()));
 
-        // 电离台 —— 左上角粗制超懒合金锭 + 左下角清洁米沉离液，
-        // 处理 2s（40t）→ 超懒合金粉（输入无序，两槽各消耗 1 个）
-        // （原「离子态」中转已移除，电离后直接得到合金粉）
-        IonizationTableBlockEntity.registerRecipe(
-                ModItems.COARSE_SUPER_LAZY_ALLOY_INGOT.get(),
-                ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get(),
-                new ItemStack(ModItems.SUPER_LAZY_ALLOY_DUST.get()),
-                40);
-
-        // 沉淀台 —— 左上角超懒合金粉 + 左下角清洁米沉离液，
-        // 处理 2s（40t）→ 超懒合金锭（两槽各消耗 1 个）
-        // （原「合金碎块」中转已移除，沉淀后直接成锭）
+        // 沉淀台 —— 左上角粗制超懒合金锭 + 左下角清洁米沉离液，
+        // 处理 2s（40t）→ 超懒合金锭（输入无序，两槽各消耗 1 个）
+        // （原「粗制锭 → 合金粉 → 合金锭」两步已合并为这一步，跳过超懒合金粉中转）
         PrecipitationTableBlockEntity.registerRecipe(
-                ModItems.SUPER_LAZY_ALLOY_DUST.get(),
+                ModItems.COARSE_SUPER_LAZY_ALLOY_INGOT.get(),
                 ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get(),
                 new ItemStack(ModItems.SUPER_LAZY_ALLOY_INGOT.get()),
                 40);
@@ -116,67 +100,13 @@ public final class ModMachineRecipes {
                 new ItemStack(ModItems.RICE_FRUIT_JUICE.get(), 3),
                 DualInputProcessorBlockEntity.DEFAULT_PROCESS_TICKS);
 
-        // 离解台 —— 上槽米果汁 + 下槽米（离解介质），处理 2s（40t）→ 米果清洁液
-        // （原「混合液 → 解析液 → 复合液 → 混合渣」四道中转已合并为这一道）
-        DissociationTableBlockEntity.registerRecipe(
+        // 沉淀台 —— 上槽米果汁 + 下槽米（离解介质），处理 2s（40t）→ 米果清洁液
+        // （原离解台已删除，配方并入沉淀台；更早的「混合液 → 解析液 → 复合液 → 混合渣」四道中转已合并为这一道）
+        PrecipitationTableBlockEntity.registerRecipe(
                 ModItems.RICE_FRUIT_JUICE.get(),
                 ModItems.RICE.get(),
                 new ItemStack(ModItems.RICE_FRUIT_CLEANSING_SOLUTION.get()),
                 40);
-
-        // 淬剑台 —— 左上超懒合金剑 + 右上上古剑意 + 中间淬剑液
-        // → 超懒神剑·残缺·贰（需按"开始"按钮加工一轮）
-        SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_BROKEN_2.get()),
-                ModItems.SUPER_LAZY_ALLOY_SWORD.get(),
-                ModItems.ANCIENT_SWORD_INTENT.get(),
-                ModItems.SWORD_QUENCHING_LIQUID.get());
-
-        // 淬剑台 —— 左上残缺·贰 + 右上远古剑魄 + 中间淬剑液 → 残次
-        SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_DEFECTIVE.get()),
-                ModItems.SUPER_LAZY_DIVINE_SWORD_BROKEN_2.get(),
-                ModItems.ANCIENT_SWORD_SOUL.get(),
-                ModItems.SWORD_QUENCHING_LIQUID.get());
-
-        // 淬剑台 —— 左上残次 + 右上太古剑魄 + 中间淬剑液 → 赝品
-        SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT.get()),
-                ModItems.SUPER_LAZY_DIVINE_SWORD_DEFECTIVE.get(),
-                ModItems.PRIMORDIAL_SWORD_SOUL.get(),
-                ModItems.SWORD_QUENCHING_LIQUID.get());
-
-        // 淬剑台 —— 左上赝品 + 右上神剑鉴玉 + 中间淬剑液 → 瑕疵
-        SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_FLAWED.get()),
-                ModItems.SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT.get(),
-                ModItems.DIVINE_SWORD_APPRAISAL_JADE.get(),
-                ModItems.SWORD_QUENCHING_LIQUID.get());
-
-        // 淬剑台 —— 左上超懒剑法 + 右上瑕疵 + 中间淬剑液 → 完整
-        SwordQuenchingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.SUPER_LAZY_DIVINE_SWORD_COMPLETE.get()),
-                ModItems.SUPER_LAZY_SWORD_ART.get(),
-                ModItems.SUPER_LAZY_DIVINE_SWORD_FLAWED.get(),
-                ModItems.SWORD_QUENCHING_LIQUID.get());
-
-        // 碾磨台 —— 左列上 残堕锭 / 左列中 超懒合金锭，左列下与右列三格
-        // 共 4 个残堕深渊岩 → 磨制残堕深渊岩（槽序：左上/左中/左下/右上/右中/右下）
-        Item abyssRock = ModItems.REMNANT_FALLEN_ABYSS_ROCK.get();
-        GrindingTableBlockEntity.registerRecipe(
-                new ItemStack(ModItems.POLISHED_REMNANT_FALLEN_ABYSS_ROCK.get()),
-                ModItems.REMNANT_FALLEN_INGOT.get(),
-                ModItems.SUPER_LAZY_ALLOY_INGOT.get(),
-                abyssRock,
-                abyssRock,
-                abyssRock,
-                abyssRock);
-
-        // 杵界台 —— 2x2 四格各放 1 个粗制残堕世界精华（无序）→ 磨制残堕世界精华
-        Item coarseEssence = ModItems.COARSE_REMNANT_FALLEN_WORLD_ESSENCE.get();
-        PestleRealmTableBlockEntity.registerShapeless(
-                new ItemStack(ModItems.POLISHED_REMNANT_FALLEN_WORLD_ESSENCE.get()),
-                coarseEssence, coarseEssence, coarseEssence, coarseEssence);
 
         // ================= 食物加工链 =================
         // 用户机器代号：i=搅碎器 ii=搅拌器 v=大煮锅(3x3) vii=巨无霸大大大煮锅(5x5)
@@ -427,12 +357,6 @@ public final class ModMachineRecipes {
                 fallenRice, fallenRice, fallenRice, fallenRice, null,
                 fallenRice, fallenRice, fallenRice, fallenRice, null);
 
-        // ---- 汲血台（槽0=左上 / 槽1=左下，各消耗 1 个；支持上槽标签匹配）----
-
-        // 血瓶：左上任意肉类（mimiworld:meats 标签，生熟皆可）+ 左下原版玻璃瓶
-        BloodlettingTableBlockEntity.registerRecipe(new ItemStack(ModItems.BLOOD_VIAL.get()),
-                ModItemTags.MEATS, Items.GLASS_BOTTLE);
-
         // ---- 凝锭台（5x5=25 格工作台式即时合成，有序图案；空格' '=该格必须为空）----
 
         // 残堕世界精华锭：深染十素材围边 + 6 个盗米之心 + 9 个磨制残堕精华液
@@ -473,6 +397,17 @@ public final class ModMachineRecipes {
                         "BXXXB",
                         "ABXBA"
                 }, worldTearKeys);
+
+        // 凝锭台 —— 残堕锭 + 超懒合金锭 + 4 个残堕深渊岩 → 磨制残堕深渊岩（无序 6 格）
+        // （原碾磨台已删除，配方并入凝锭台）
+        IngotCondensationTableBlockEntity.registerShapeless(
+                new ItemStack(ModItems.POLISHED_REMNANT_FALLEN_ABYSS_ROCK.get()),
+                ModItems.REMNANT_FALLEN_INGOT.get(),
+                ModItems.SUPER_LAZY_ALLOY_INGOT.get(),
+                ModItems.REMNANT_FALLEN_ABYSS_ROCK.get(),
+                ModItems.REMNANT_FALLEN_ABYSS_ROCK.get(),
+                ModItems.REMNANT_FALLEN_ABYSS_ROCK.get(),
+                ModItems.REMNANT_FALLEN_ABYSS_ROCK.get());
 
     }
 }

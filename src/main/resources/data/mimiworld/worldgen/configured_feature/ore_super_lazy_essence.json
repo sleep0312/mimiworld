@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 6,
+    "targets": [
+      {
+        "state": {
+          "Name": "mimiworld:super_lazy_essence_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match", "block": "mimiworld:hardened_rice"
+        }
+      },
+      {
+        "state": {
+          "Name": "mimiworld:super_lazy_essence_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match", "block": "mimiworld:deepslate_hardened_rice"
+        }
+      }
+    ]
+  }
+}

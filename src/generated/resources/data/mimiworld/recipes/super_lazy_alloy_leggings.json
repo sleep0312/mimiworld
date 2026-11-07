@@ -2,11 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": {
-      "item": "mimiworld:advanced_armor_core_ingot"
-    },
     "B": {
-      "item": "mimiworld:super_lazy_alloy_armor_blank"
+      "item": "mimiworld:super_lazy_alloy_ingot"
     },
     "N": {
       "item": "mimiworld:refined_reinforced_rice_net"
@@ -14,7 +11,7 @@
   },
   "pattern": [
     "BBB",
-    "ANA",
+    "BNB",
     "BNB"
   ],
   "result": {

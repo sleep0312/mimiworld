@@ -206,20 +206,20 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 造米机/造米台（ = rice_maker）：石头类机器方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 米块（）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
-    // 绑定方块实体 RiceMakerBlockEntity：右键打开 2 输入槽 + 1 输出槽的加工 GUI（见 menu.RiceMakerMenu）。
-    public static final RegistryObject<Block> RICE_MAKER =
-            BLOCKS.register("rice_maker", () -> new RiceMakerBlock(
+    public static final RegistryObject<Block> RICE_BLOCK =
+            BLOCKS.register("rice_block", () -> new Block(
                     BlockBehaviour.Properties.of()
                             .strength(1.5F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
 
-    // 米块（）：石头类普通全立方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
+    // 造米机/造米台（ = rice_maker）：石头类机器方块，属性参照原版石头（硬度 1.5、抗爆 6.0、石声、需正确工具才掉落）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签）。
-    public static final RegistryObject<Block> RICE_BLOCK =
-            BLOCKS.register("rice_block", () -> new Block(
+    // 绑定方块实体 RiceMakerBlockEntity：右键打开 2 输入槽 + 1 输出槽的加工 GUI（见 menu.RiceMakerMenu）。
+    public static final RegistryObject<Block> RICE_MAKER =
+            BLOCKS.register("rice_maker", () -> new RiceMakerBlock(
                     BlockBehaviour.Properties.of()
                             .strength(1.5F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -249,6 +249,18 @@ public class ModBlocks {
                             .sound(SoundType.STONE),
                     UniformInt.of(3, 7)));
 
+    // 超懒精华矿（super_lazy_essence_ore）：类似原版铁矿石的石头类矿石。硬度/抗爆照抄铁矿 3.0/3.0，石声，需正确工具才掉落。
+    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
+    // 战利品表（loot_tables/blocks/super_lazy_essence_ore.json）：普通开采掉超懒精华（时运增产），精准采集掉矿石本身；
+    // 继承 DropExperienceBlock + UniformInt(3,7)：非精准采集另掉 3~7 经验球，精准采集不掉经验。
+    public static final RegistryObject<Block> SUPER_LAZY_ESSENCE_ORE =
+            BLOCKS.register("super_lazy_essence_ore", () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3.0F, 3.0F)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.STONE),
+                    UniformInt.of(3, 7)));
+
     // 超结晶块（）：超结晶的压缩存储块，金属块类全立方块（硬度照铁块 5.0、抗爆 6.0、紫晶声）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/super_crystal_block.json）。
@@ -259,31 +271,11 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.AMETHYST)));
 
-    // 电离台（）：双输入定时加工机器方块（右键开 GUI，无燃料，倒三角加工进度），金属质地、硬度 3.0、抗爆 6.0。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落本身（loot_tables/blocks/ionization_table.json）及槽内物品。
-    public static final RegistryObject<Block> IONIZATION_TABLE =
-            BLOCKS.register("ionization_table", () -> new IonizationTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
     // 沉淀台（）：双输入定时加工机器方块（右键开 GUI，无燃料，正三角加工进度），金属质地、硬度 3.0、抗爆 6.0。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/precipitation_table.json）及槽内物品。
     public static final RegistryObject<Block> PRECIPITATION_TABLE =
             BLOCKS.register("precipitation_table", () -> new PrecipitationTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
-    // 离解台（）：工艺机器方块（绑定方块实体），右键打开熔炉式加工 GUI（左上输入→右上输出，正下第二输入，无燃料）。
-    // 金属质地、硬度 3.0、抗爆 6.0。镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
-    // 破坏掉落本身（loot_tables/blocks/dissociation_table.json）；方块实体见 block.entity.DissociationTableBlockEntity。
-    public static final RegistryObject<Block> DISSOCIATION_TABLE =
-            BLOCKS.register("dissociation_table", () -> new DissociationTableBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
@@ -298,26 +290,6 @@ public class ModBlocks {
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.STONE)));
-
-    // 淬剑台：剑类淬火机器方块（SwordQuenchingTableBlock），右键打开 3 入 1 出加工 GUI，右侧"开始"按钮按下才加工一轮。
-    // 金属质地、硬度 3.0、抗爆 6.0。镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
-    // 破坏掉落槽内物品（loot_tables/blocks/sword_quenching_table.json 掉方块本身）。
-    public static final RegistryObject<Block> SWORD_QUENCHING_TABLE =
-            BLOCKS.register("sword_quenching_table", () -> new SwordQuenchingTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
-
-    // 汲血台：汲取血液的机器方块（BloodlettingTableBlock），右键打开 2 入 1 出熔炉式加工 GUI（左列两输入、右侧输出）。
-    // 金属质地、硬度 3.0、抗爆 6.0。镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
-    // 破坏掉落槽内物品（loot_tables/blocks/bloodletting_table.json 掉方块本身）。
-    public static final RegistryObject<Block> BLOODLETTING_TABLE =
-            BLOCKS.register("bloodletting_table", () -> new BloodlettingTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
 
     // 堕落台（）：堕落力量相关的仪式台方块（当前为装饰性全立方块，无 GUI/交互逻辑），
     // 暗下界合金质地、硬度 3.0、抗爆 6.0，需正确工具才掉落。
@@ -342,21 +314,10 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.NETHERITE_BLOCK)));
 
-    // 碾磨台：石质碾磨工作台（GrindingTableBlock），右键打开 6 入 1 出熔炉式加工 GUI（左右两列各 3 输入、底部输出，面板加高），
-    // 硬度照原版砂轮 2.0、抗爆 6.0、石声、需正确工具才掉落。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落槽内物品（loot_tables/blocks/grinding_table.json 掉方块本身）。
-    public static final RegistryObject<Block> GRINDING_TABLE =
-            BLOCKS.register("grinding_table", () -> new GrindingTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(2.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.STONE)));
-
     // 残堕深渊岩（）：深渊层原生岩石，深板岩质地全立方块（硬度 3.0、抗爆 6.0、深板岩声）。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/remnant_fallen_abyss_rock.json）。
-    // 同时是粗制残堕世界精华、碾磨台的合成材料。
+    // 同时是磨制残堕深渊岩（凝锭台无序合成）的材料。
     public static final RegistryObject<Block> REMNANT_FALLEN_ABYSS_ROCK =
             BLOCKS.register("remnant_fallen_abyss_rock", () -> new Block(
                     BlockBehaviour.Properties.of()
@@ -421,17 +382,6 @@ public class ModBlocks {
                             .strength(3.0F, 6.0F)
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.DEEPSLATE)));
-
-    // 杵界台（）：杵界仪式工作台方块（PestleRealmTableBlock），右键打开 2x2 网格（4 输入）+右下输出槽即时合成 GUI，
-    // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
-    // 破坏掉落本身（loot_tables/blocks/pestle_realm_table.json）。
-    public static final RegistryObject<Block> PESTLE_REALM_TABLE =
-            BLOCKS.register("pestle_realm_table", () -> new PestleRealmTableBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(3.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.METAL)));
 
     // 凝锭台：熔融金属冷凝成锭的工艺机器方块（IngotCondensationTableBlock），右键打开 5x5 网格（25 输入）+下方中央输出槽即时合成 GUI，
     // 金属质地、硬度 3.0、抗爆 6.0、需正确工具才掉落。

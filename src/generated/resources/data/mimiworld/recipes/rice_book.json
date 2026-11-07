@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "N": {
-      "item": "mimiworld:refined_reinforced_rice_net"
+    "L": {
+      "item": "mimiworld:rice_fruit_cleansing_solution"
     },
     "P": {
       "item": "mimiworld:rice_paper"
@@ -11,7 +11,7 @@
   },
   "pattern": [
     "   ",
-    " N ",
+    " L ",
     "PPP"
   ],
   "result": {

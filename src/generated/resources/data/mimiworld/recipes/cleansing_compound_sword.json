@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": {
-      "item": "mimiworld:sword_temper_ingot"
-    },
     "B": {
-      "item": "mimiworld:cleansing_compound_sword_blank"
+      "item": "mimiworld:cleansing_compound_ingot"
+    },
+    "S": {
+      "item": "mimiworld:reinforced_rice_stick"
     }
   },
   "pattern": [
-    "   ",
     " B ",
-    "AAA"
+    " B ",
+    " S "
   ],
   "result": {
     "item": "mimiworld:cleansing_compound_sword"

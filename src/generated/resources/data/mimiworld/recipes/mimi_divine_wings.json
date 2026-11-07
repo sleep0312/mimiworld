@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "mimiworld:super_lazy_alloy_armor_blank"
+      "item": "mimiworld:super_lazy_alloy_ingot"
     },
     "E": {
       "item": "minecraft:elytra"

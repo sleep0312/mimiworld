@@ -1,7 +1,5 @@
 package com.mimiworld.mimiworld.jei;
 
-import com.mimiworld.mimiworld.block.entity.BloodlettingTableBlockEntity;
-import com.mimiworld.mimiworld.block.entity.DissociationTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.DualInputProcessorBlockEntity;
 import com.mimiworld.mimiworld.block.entity.GridCraftingTableBlockEntity;
 import com.mimiworld.mimiworld.block.entity.GridCookingPotBlockEntity;
@@ -69,20 +67,7 @@ final class JeiLayouts {
         return views;
     }
 
-    // -------------------- C. 离解台（上槽 + 下槽）--------------------
-
-    static List<JeiView> dissociation(List<DissociationTableBlockEntity.DissociationRecipe> recipes) {
-        List<JeiView> views = new ArrayList<>();
-        for (DissociationTableBlockEntity.DissociationRecipe recipe : recipes) {
-            List<JeiView.Slot> slots = List.of(
-                    JeiView.Slot.item(35, 24, recipe.top()),
-                    JeiView.Slot.item(79, 53, recipe.bottom()));
-            views.add(new JeiView(slots, recipe.result(), false));
-        }
-        return views;
-    }
-
-    // -------------------- D. 网格工作台（杵界台 2x2 / 凝锭台 5x5）--------------------
+    // -------------------- D. 网格工作台（凝锭台 5x5）--------------------
 
     static List<JeiView> gridCrafting(int n, int gridX, int gridY, int pitchX, int pitchY,
                                       List<GridCraftingTableBlockEntity.GridRecipe> recipes) {
@@ -199,19 +184,7 @@ final class JeiLayouts {
                 JeiView.Slot.item(30, 62, b)), result, true);
     }
 
-    // -------------------- 汲血台标签配方（上槽标签 + 下槽物品）--------------------
-    static List<JeiView> bloodTags(List<BloodlettingTableBlockEntity.TaggedRecipe> recipes) {
-        List<JeiView> views = new ArrayList<>();
-        for (BloodlettingTableBlockEntity.TaggedRecipe recipe : recipes) {
-            List<JeiView.Slot> slots = List.of(
-                    JeiView.Slot.tag(44, 18, recipe.topTag()),
-                    JeiView.Slot.item(44, 50, recipe.bottom()));
-            views.add(new JeiView(slots, recipe.result(), false));
-        }
-        return views;
-    }
-
-    // -------------------- 米片机（原料 + 500mB 水 → 米，水桶注水返空桶）--------------------
+    // -------------------- H. 米片机（原料 + 100mB 水 → 米，水桶注水返空桶）--------------------
 
     static List<JeiView> riceMaker(List<RiceMakerBlockEntity.RiceRecipe> recipes) {
         List<JeiView> views = new ArrayList<>();

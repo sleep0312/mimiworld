@@ -43,7 +43,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import com.mimiworld.mimiworld.item.MimiBowItem;
-import com.mimiworld.mimiworld.item.MubangongBlankItem;
 import com.mimiworld.mimiworld.item.MubangongBowItem;
 import com.mimiworld.mimiworld.item.RiceCrystalBowItem;
 import net.minecraft.world.item.ElytraItem;
@@ -52,6 +51,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -252,12 +257,24 @@ public class ModItems {
             .effect(() -> new MobEffectInstance(MobEffects.WEAKNESS, 600, 0), 1.0F)  // 虚弱 I 30s
             .build();
 
-    // 米果：普通食物物品，最大堆叠 64；食用耗时 2s（默认食物 32t ≈ 1.6s，这里覆盖为 40t）
+    // 米果：普通食物物品，最大堆叠 64；食用耗时 2s（默认食物 32t ≈ 1.6s，这里覆盖为 40t）；
+    // 食用完成后额外获得 1 个米果渣（米果渣无合成配方，只能靠吃米果产出）
     public static final RegistryObject<Item> RICE_FRUIT = registerItem("rice_fruit",
             () -> new Item(new Item.Properties().stacksTo(64).food(RICE_FRUIT_FOOD)) {
                 @Override
                 public int getUseDuration(ItemStack stack) {
                     return 40; // 食用时间 2 秒
+                }
+
+                @Override
+                public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+                    // 先结算原版饱食度/效果，再在服务端给食用者 1 个米果渣（背包满时自动掉落）
+                    ItemStack result = super.finishUsingItem(stack, level, entity);
+                    if (!level.isClientSide && entity instanceof ServerPlayer player) {
+                        player.getInventory().placeItemBackInInventory(
+                                new ItemStack(ModItems.RICE_POMACE.get()));
+                    }
+                    return result;
                 }
             });
 
@@ -300,10 +317,6 @@ public class ModItems {
     public static final RegistryObject<Item> REINFORCED_RICE_STICK = registerItem("reinforced_rice_stick",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 米棍，Rice Baton：普通材料物品，最大堆叠 64
-    public static final RegistryObject<Item> RICE_BATON = registerItem("rice_baton",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 粗米块，Coarse Rice Block：石头类方块物品，放置后对应 ModBlocks.COARSE_RICE_BLOCK；钻石镐（挖掘等级3）采集
     public static final RegistryObject<Item> COARSE_RICE_BLOCK = registerItem("coarse_rice_block",
             () -> new BlockItem(ModBlocks.COARSE_RICE_BLOCK.get(), new Item.Properties()));
@@ -338,43 +351,11 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_CRYSTAL_HAMMER = registerItem("rice_crystal_hammer",
             RiceCrystalHammerItem::new);
 
-    // 湿草麻，Wet Grass Fiber：纤维束材料
-    public static final RegistryObject<Item> WET_GRASS_FIBER = registerItem("wet_grass_fiber",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 粗制米麻，Coarse Rice Fiber：纤维束材料
-    public static final RegistryObject<Item> COARSE_RICE_FIBER = registerItem("coarse_rice_fiber",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 强化湿草麻，Reinforced Wet Grass Fiber：纤维束材料
-    public static final RegistryObject<Item> REINFORCED_WET_GRASS_FIBER = registerItem("reinforced_wet_grass_fiber",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 精制米麻，Refined Rice Fiber：纤维束材料
+    // 米麻，Rice Fiber：通用纤维材料，低阶装备使用
     public static final RegistryObject<Item> REFINED_RICE_FIBER = registerItem("refined_rice_fiber",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 湿草网，Wet Grass Net：编织网材料
-    public static final RegistryObject<Item> WET_GRASS_NET = registerItem("wet_grass_net",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 粗制湿草网，Coarse Wet Grass Net：编织网材料
-    public static final RegistryObject<Item> COARSE_WET_GRASS_NET = registerItem("coarse_wet_grass_net",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 粗制米网，Coarse Rice Net：编织网材料
-    public static final RegistryObject<Item> COARSE_RICE_NET = registerItem("coarse_rice_net",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 强化湿草网，Reinforced Wet Grass Net：编织网材料
-    public static final RegistryObject<Item> REINFORCED_WET_GRASS_NET = registerItem("reinforced_wet_grass_net",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 精制强化湿草网，Refined Reinforced Wet Grass Net：编织网材料
-    public static final RegistryObject<Item> REFINED_REINFORCED_WET_GRASS_NET = registerItem("refined_reinforced_wet_grass_net",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 精制强化米网，Refined Reinforced Rice Net：编织网材料
+    // 米网，Rice Net：高阶装备使用的编织网材料
     public static final RegistryObject<Item> REFINED_REINFORCED_RICE_NET = registerItem("refined_reinforced_rice_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
@@ -404,6 +385,16 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_ORE = registerItem("rice_ore",
             () -> new BlockItem(ModBlocks.RICE_ORE.get(), new Item.Properties()));
 
+    // 超懒精华矿，Super Lazy Essence Ore：石头类矿石方块物品，放置后对应 ModBlocks.SUPER_LAZY_ESSENCE_ORE；
+    // 钻石镐（挖掘等级3）采集。普通开采掉超懒精华（时运可增产），精准采集才掉矿石本身；
+    // 非精准开采另掉 3~7 经验球
+    public static final RegistryObject<Item> SUPER_LAZY_ESSENCE_ORE = registerItem("super_lazy_essence_ore",
+            () -> new BlockItem(ModBlocks.SUPER_LAZY_ESSENCE_ORE.get(), new Item.Properties()));
+
+    // 超懒精华，Super Lazy Essence：超懒精华矿的掉落物，普通材料物品，最大堆叠 64
+    public static final RegistryObject<Item> SUPER_LAZY_ESSENCE = registerItem("super_lazy_essence",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
     // 米石，Rice Stone：嵌有奶白米纹的小石块，普通材料物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_STONE = registerItem("rice_stone",
             () -> new Item(new Item.Properties().stacksTo(64)));
@@ -417,11 +408,6 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL = registerItem("super_heavy_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 电离台，Ionization Table：工艺机器方块（装饰性全立方块），
-    // 放置后对应 ModBlocks.IONIZATION_TABLE；钻石镐（挖掘等级3）采集，破坏掉落本身
-    public static final RegistryObject<Item> IONIZATION_TABLE = registerItem("ionization_table",
-            () -> new BlockItem(ModBlocks.IONIZATION_TABLE.get(), new Item.Properties()));
-
     // 沉淀台，Precipitation Table：工艺机器方块（装饰性全立方块），
     // 放置后对应 ModBlocks.PRECIPITATION_TABLE；钻石镐（挖掘等级3）采集，破坏掉落本身
     public static final RegistryObject<Item> PRECIPITATION_TABLE = registerItem("precipitation_table",
@@ -432,18 +418,20 @@ public class ModItems {
             registerItem("compound_rice_meal_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 米果渣，Rice Pomace：榨汁后的米果残渣
+    // 米果渣，Rice Pomace：榨汁后的米果残渣；无合成配方，食用米果后即可获得（悬停说明见 tooltip）
     public static final RegistryObject<Item> RICE_POMACE = registerItem("rice_pomace",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+            () -> new Item(new Item.Properties().stacksTo(64)) {
+                @Override
+                public void appendHoverText(ItemStack stack, Level level,
+                                            List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.mimiworld.rice_pomace.source")
+                            .withStyle(ChatFormatting.GRAY));
+                }
+            });
 
     // 米果汁，Rice Fruit Juice：药水瓶造型的普通物品（非流体、不可倒出）
     public static final RegistryObject<Item> RICE_FRUIT_JUICE = registerItem("rice_fruit_juice",
             () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 离解台，Dissociation Table：工艺机器方块（装饰性全立方块），
-    // 放置后对应 ModBlocks.DISSOCIATION_TABLE；铁镐（挖掘等级2）采集，破坏掉落本身
-    public static final RegistryObject<Item> DISSOCIATION_TABLE = registerItem("dissociation_table",
-            () -> new BlockItem(ModBlocks.DISSOCIATION_TABLE.get(), new Item.Properties()));
 
     // ===== 米纸文书、米果加工液/渣、清洁复合与超懒合金材料链（均为普通物品，最大堆叠 64） =====
 
@@ -472,11 +460,6 @@ public class ModItems {
     // 粗制超懒合金锭，Coarse Super Lazy Alloy Ingot：粗糙半成品锭
     public static final RegistryObject<Item> COARSE_SUPER_LAZY_ALLOY_INGOT =
             registerItem("coarse_super_lazy_alloy_ingot",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 超懒合金粉，Super Lazy Alloy Dust：粉末状普通物品
-    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_DUST =
-            registerItem("super_lazy_alloy_dust",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 超懒合金锭，Super Lazy Alloy Ingot：精制光滑成品锭
@@ -547,31 +530,6 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_BOW = registerItem("super_heavy_crystal_bow",
             () -> new MubangongBowItem(2.0D, "chaozhongjiejinggong", new Item.Properties().durability(1024)));
 
-    // ---- 装备锻打专用锭（普通材料，堆叠64） ----
-    // 磨剑锭：锻打剑刃用
-    public static final RegistryObject<Item> SWORD_TEMPER_INGOT = registerItem("sword_temper_ingot",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 弓弦锭：锻打弓弦用
-    public static final RegistryObject<Item> BOWSTRING_INGOT = registerItem("bowstring_ingot",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 含甲锭：锻打甲片用
-    public static final RegistryObject<Item> ARMOR_CORE_INGOT = registerItem("armor_core_ingot",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 高级磨剑锭
-    public static final RegistryObject<Item> ADVANCED_SWORD_TEMPER_INGOT = registerItem("advanced_sword_temper_ingot",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 高级弓弦锭
-    public static final RegistryObject<Item> ADVANCED_BOWSTRING_INGOT = registerItem("advanced_bowstring_ingot",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 高级含甲锭
-    public static final RegistryObject<Item> ADVANCED_ARMOR_CORE_INGOT = registerItem("advanced_armor_core_ingot",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
     // ---- 超重结晶防具（高防重甲，修复材料超重结晶）：GeckoLib 3D 重甲（SuperHeavyCrystalArmorItem） ----
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL_HELMET = registerItem("super_heavy_crystal_helmet",
             () -> new SuperHeavyCrystalArmorItem(ModArmorMaterials.SUPER_HEAVY_CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
@@ -606,24 +564,13 @@ public class ModItems {
     public static final RegistryObject<Item> COMPOUND_RICE_MEAL_BOOTS = registerItem("compound_rice_meal_boots",
             () -> new CompoundRiceMealArmorItem(ModArmorMaterials.COMPOUND_RICE_MEAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // ---- 清洁复合胚件与成品（修复材料清洁复合锭） ----
-    // 胚件是锻打中间产物（普通材料，堆叠64）
-    public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD_BLANK = registerItem("cleansing_compound_sword_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 弓胚显示与正式弓相同的 GeckoLib 3D 模型，但仅为合成材料（堆叠64、无使用效果）
-    public static final RegistryObject<Item> CLEANSING_COMPOUND_BOW_BLANK = registerItem("cleansing_compound_bow_blank",
-            () -> new MubangongBlankItem("cleansing_compound_bow_blank", new Item.Properties().stacksTo(64)));
-
+    // ---- 清洁复合成品（修复材料清洁复合锭） ----
     public static final RegistryObject<Item> CLEANSING_COMPOUND_SWORD = registerItem("cleansing_compound_sword",
             () -> new SwordItem(ModItemTiers.CLEANSING_COMPOUND, 4, -2.4F, new Item.Properties().stacksTo(1)));
 
     // 清洁复合弓：耐久 1536 的弓，伤害倍率 ×2.6；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
     public static final RegistryObject<Item> CLEANSING_COMPOUND_BOW = registerItem("cleansing_compound_bow",
             () -> new MubangongBowItem(2.6D, "qingjiefuhegong", new Item.Properties().durability(1536)));
-
-    public static final RegistryObject<Item> CLEANSING_COMPOUND_ARMOR_BLANK = registerItem("cleansing_compound_armor_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // ---- 清洁米饭防具（下界合金同级华贵重甲，修复材料清洁复合锭）：GeckoLib 3D 紫晶甲（CleansingCompoundArmorItem） ----
     public static final RegistryObject<Item> CLEANSING_COMPOUND_HELMET = registerItem("cleansing_compound_helmet",
@@ -638,17 +585,7 @@ public class ModItems {
     public static final RegistryObject<Item> CLEANSING_COMPOUND_BOOTS = registerItem("cleansing_compound_boots",
             () -> new CleansingCompoundArmorItem(ModArmorMaterials.CLEANSING_COMPOUND, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
 
-    // ---- 超懒合金胚件与终极成品（修复材料超懒合金锭） ----
-    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_SWORD_BLANK = registerItem("super_lazy_alloy_sword_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 弓胚显示与正式弓相同的 GeckoLib 3D 模型，但仅为合成材料（堆叠64、无使用效果）
-    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_BOW_BLANK = registerItem("super_lazy_alloy_bow_blank",
-            () -> new MubangongBlankItem("super_lazy_alloy_bow_blank", new Item.Properties().stacksTo(64)));
-
-    public static final RegistryObject<Item> SUPER_LAZY_ALLOY_ARMOR_BLANK = registerItem("super_lazy_alloy_armor_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
+    // ---- 超懒合金终极成品（修复材料超懒合金锭） ----
     public static final RegistryObject<Item> SUPER_LAZY_ALLOY_SWORD = registerItem("super_lazy_alloy_sword",
             () -> new SwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 5, -2.4F, new Item.Properties().stacksTo(1)));
 
@@ -788,28 +725,11 @@ public class ModItems {
     public static final RegistryObject<Item> LAZIEST_SUMMONER = registerItem("laziest_summoner",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 召唤核心三级链（胚 → 粗制胚 → 核心），普通物品堆叠 64 =====
-
-    // 召唤核心胚
-    public static final RegistryObject<Item> SUMMON_CORE_BLANK = registerItem("summon_core_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 粗制召唤核心胚
-    public static final RegistryObject<Item> COARSE_SUMMON_CORE_BLANK = registerItem("coarse_summon_core_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
+    // ===== 召唤核心（锤米台直接产出），普通物品堆叠 64 =====
 
     // 召唤核心
     public static final RegistryObject<Item> SUMMON_CORE = registerItem("summon_core",
             () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 高级召唤核心胚
-    public static final RegistryObject<Item> ADVANCED_SUMMON_CORE_BLANK = registerItem("advanced_summon_core_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 粗制高级召唤核心胚
-    public static final RegistryObject<Item> COARSE_ADVANCED_SUMMON_CORE_BLANK =
-            registerItem("coarse_advanced_summon_core_blank",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 高级召唤核心
     public static final RegistryObject<Item> ADVANCED_SUMMON_CORE = registerItem("advanced_summon_core",
@@ -825,18 +745,9 @@ public class ModItems {
     public static final RegistryObject<Item> MOLTEN_MIXED_CRYSTAL = registerItem("molten_mixed_crystal",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 最懒召唤核心三级链 =====
+    // ===== 最懒召唤核心 =====
 
-    // 最懒召唤核心胚
-    public static final RegistryObject<Item> LAZIEST_SUMMON_CORE_BLANK = registerItem("laziest_summon_core_blank",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 粗制最懒召唤核心胚
-    public static final RegistryObject<Item> COARSE_LAZIEST_SUMMON_CORE_BLANK =
-            registerItem("coarse_laziest_summon_core_blank",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 最懒召唤核心（三级链的最终核心）
+    // 最懒召唤核心
     public static final RegistryObject<Item> LAZIEST_SUMMON_CORE = registerItem("laziest_summon_core",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
@@ -1028,26 +939,6 @@ public class ModItems {
     public static final RegistryObject<Item> ANCIENT_SWORD_INTENT = registerItem("ancient_sword_intent",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·残缺·壹（Super Lazy Divine Sword - Broken I）：仅作合成材料（普通物品）【非装备】，
-    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变
-    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_1 =
-            registerItem("super_lazy_divine_sword_broken_1",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
-
-    // 淬剑台（Sword Quenching Table）：放置后对应 ModBlocks.SWORD_QUENCHING_TABLE
-    public static final RegistryObject<Item> SWORD_QUENCHING_TABLE = registerItem("sword_quenching_table",
-            () -> new BlockItem(ModBlocks.SWORD_QUENCHING_TABLE.get(), new Item.Properties()));
-
-    // 超懒神剑·残缺·贰（Super Lazy Divine Sword - Broken II）：仅作合成材料（普通物品）【非装备】，
-    // 最大堆叠 1；RainbowNameItem 覆盖显示名，逐字动态彩虹渐变（与残缺·壹同款）
-    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_BROKEN_2 =
-            registerItem("super_lazy_divine_sword_broken_2",
-                    () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
-
-    // 汲血台（Bloodletting Table）：放置后对应 ModBlocks.BLOODLETTING_TABLE
-    public static final RegistryObject<Item> BLOODLETTING_TABLE = registerItem("bloodletting_table",
-            () -> new BlockItem(ModBlocks.BLOODLETTING_TABLE.get(), new Item.Properties()));
-
     // ===== 血瓶 / 淬剑液（普通物品，最大堆叠 64） =====
 
     // 血瓶（Blood Vial）
@@ -1058,29 +949,17 @@ public class ModItems {
     public static final RegistryObject<Item> SWORD_QUENCHING_LIQUID = registerItem("sword_quenching_liquid",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // ===== 剑魄与超懒神剑·残次/赝品 =====
+    // ===== 剑魄系列 =====
 
     // 远古剑魄（Ancient Sword Soul）
     public static final RegistryObject<Item> ANCIENT_SWORD_SOUL = registerItem("ancient_sword_soul",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·残次：剑类武器，堆叠 1，动态彩虹渐变名称
-    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_DEFECTIVE =
-            registerItem("super_lazy_divine_sword_defective",
-                    () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 5, -2.4F,
-                            new Item.Properties().stacksTo(1)));
-
     // 太古剑魄（Primordial Sword Soul）
     public static final RegistryObject<Item> PRIMORDIAL_SWORD_SOUL = registerItem("primordial_sword_soul",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·赝品：剑类武器，堆叠 1，动态彩虹渐变名称
-    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COUNTERFEIT =
-            registerItem("super_lazy_divine_sword_counterfeit",
-                    () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 6, -2.4F,
-                            new Item.Properties().stacksTo(1)));
-
-    // ===== 神玉系列与超懒神剑·瑕疵 =====
+    // ===== 神玉系列 =====
 
     // 神玉（Divine Jade）
     public static final RegistryObject<Item> DIVINE_JADE = registerItem("divine_jade",
@@ -1095,12 +974,6 @@ public class ModItems {
             registerItem("divine_sword_appraisal_jade",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 超懒神剑·瑕疵：剑类武器，堆叠 1，动态彩虹渐变名称
-    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_FLAWED =
-            registerItem("super_lazy_divine_sword_flawed",
-                    () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 7, -2.4F,
-                            new Item.Properties().stacksTo(1)));
-
     // ===== 剑谱系列（彩虹名物品堆叠 1） =====
 
     // 剑法禁卷（Forbidden Sword Manual）
@@ -1111,9 +984,10 @@ public class ModItems {
     public static final RegistryObject<Item> SUPER_LAZY_SWORD_ART = registerItem("super_lazy_sword_art",
             () -> new RainbowNameItem(new Item.Properties().stacksTo(1)));
 
-    // 超懒神剑·完整：剑类武器，堆叠 1，动态彩虹渐变名称
-    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD_COMPLETE =
-            registerItem("super_lazy_divine_sword_complete",
+    // 超懒神剑（Super Lazy Divine Sword）：剑类武器，堆叠 1，动态彩虹渐变名称，攻击 8、攻速 -2.4。
+    // 原「残缺·壹/贰 → 残次 → 赝品 → 瑕疵 → 完整」六阶段已合并为这一把
+    public static final RegistryObject<Item> SUPER_LAZY_DIVINE_SWORD =
+            registerItem("super_lazy_divine_sword",
                     () -> new RainbowNameSwordItem(ModItemTiers.SUPER_LAZY_ALLOY, 8, -2.4F,
                             new Item.Properties().stacksTo(1)));
 
@@ -1774,28 +1648,15 @@ public class ModItems {
             registerItem("deep_dyed_moon_devourer_wolf_claw",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 粗制残堕世界精华（Coarse Remnant Fallen World Essence）
-    public static final RegistryObject<Item> COARSE_REMNANT_FALLEN_WORLD_ESSENCE =
-            registerItem("coarse_remnant_fallen_world_essence",
-                    () -> new Item(new Item.Properties().stacksTo(64)));
-
     // ===== 方块物品 BlockItem（破坏掉落本身，方块本体见 block.ModBlocks） =====
-
-    // 碾磨台（Grinding Table）：石质工作台方块，镐挖掘等级 3 = 钻石镐
-    public static final RegistryObject<Item> GRINDING_TABLE = registerItem("grinding_table",
-            () -> new BlockItem(ModBlocks.GRINDING_TABLE.get(), new Item.Properties()));
 
     // 磨制残堕深渊岩（Polished Remnant Fallen Abyss Rock）：深板岩质地方块，镐挖掘等级 3 = 钻石镐
     public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_ABYSS_ROCK =
             registerItem("polished_remnant_fallen_abyss_rock",
                     () -> new BlockItem(ModBlocks.POLISHED_REMNANT_FALLEN_ABYSS_ROCK.get(), new Item.Properties()));
 
-    // 杵界台（Pestle Realm Table）：金属仪式工作台方块，镐挖掘等级 3 = 钻石镐
-    public static final RegistryObject<Item> PESTLE_REALM_TABLE = registerItem("pestle_realm_table",
-            () -> new BlockItem(ModBlocks.PESTLE_REALM_TABLE.get(), new Item.Properties()));
-
-    // 磨制残堕世界精华（Polished Remnant Fallen World Essence）：粗制精华的磨制成品，
-    // 磨制残堕精华液的材料，普通物品，最大堆叠 64
+    // 磨制残堕世界精华（Polished Remnant Fallen World Essence）：
+    // 由深染残堕米精 + 残堕深渊岩直接合成，磨制残堕精华液的材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> POLISHED_REMNANT_FALLEN_WORLD_ESSENCE =
             registerItem("polished_remnant_fallen_world_essence",
                     () -> new Item(new Item.Properties().stacksTo(64)));

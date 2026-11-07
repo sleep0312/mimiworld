@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": {
-      "item": "mimiworld:armor_core_ingot"
-    },
     "B": {
-      "item": "mimiworld:cleansing_compound_armor_blank"
+      "item": "mimiworld:cleansing_compound_ingot"
+    },
+    "N": {
+      "item": "mimiworld:refined_reinforced_rice_net"
     }
   },
   "pattern": [
-    "ABA",
-    "A A",
-    "A A"
+    "BBB",
+    "BNB",
+    "BNB"
   ],
   "result": {
     "item": "mimiworld:cleansing_compound_leggings"

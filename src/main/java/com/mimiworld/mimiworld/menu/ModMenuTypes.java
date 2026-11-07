@@ -26,45 +26,15 @@ public class ModMenuTypes {
             MENUS.register("rice_pounding_table",
                     () -> IForgeMenuType.create(RicePoundingTableMenu::new));
 
-    // 电离台菜单
-    public static final RegistryObject<MenuType<IonizationTableMenu>> IONIZATION_TABLE_MENU =
-            MENUS.register("ionization_table",
-                    () -> IForgeMenuType.create(IonizationTableMenu::new));
-
     // 沉淀台菜单
     public static final RegistryObject<MenuType<PrecipitationTableMenu>> PRECIPITATION_TABLE_MENU =
             MENUS.register("precipitation_table",
                     () -> IForgeMenuType.create(PrecipitationTableMenu::new));
 
-    // 离解台菜单
-    public static final RegistryObject<MenuType<DissociationTableMenu>> DISSOCIATION_TABLE_MENU =
-            MENUS.register("dissociation_table",
-                    () -> IForgeMenuType.create(DissociationTableMenu::new));
-
-    // 淬剑台菜单
-    public static final RegistryObject<MenuType<SwordQuenchingTableMenu>> SWORD_QUENCHING_TABLE_MENU =
-            MENUS.register("sword_quenching_table",
-                    () -> IForgeMenuType.create(SwordQuenchingTableMenu::new));
-
-    // 汲血台菜单
-    public static final RegistryObject<MenuType<BloodlettingTableMenu>> BLOODLETTING_TABLE_MENU =
-            MENUS.register("bloodletting_table",
-                    () -> IForgeMenuType.create(BloodlettingTableMenu::new));
-
-    // 碾磨台菜单
-    public static final RegistryObject<MenuType<GrindingTableMenu>> GRINDING_TABLE_MENU =
-            MENUS.register("grinding_table",
-                    () -> IForgeMenuType.create(GrindingTableMenu::new));
-
     // 搅碎器菜单
     public static final RegistryObject<MenuType<CrusherMenu>> CRUSHER_MENU =
             MENUS.register("crusher",
                     () -> IForgeMenuType.create(CrusherMenu::new));
-
-    // 杵界台菜单
-    public static final RegistryObject<MenuType<PestleRealmTableMenu>> PESTLE_REALM_TABLE_MENU =
-            MENUS.register("pestle_realm_table",
-                    () -> IForgeMenuType.create(PestleRealmTableMenu::new));
 
     // 凝锭台菜单
     public static final RegistryObject<MenuType<IngotCondensationTableMenu>> INGOT_CONDENSATION_TABLE_MENU =

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_black_mixture": {
+    "has_rice_fruit_cleansing_solution": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:rice_fruit_black_mixture"
+              "mimiworld:rice_fruit_cleansing_solution"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_black_mixture",
+      "has_rice_fruit_cleansing_solution",
       "has_the_recipe"
     ]
   ],

@@ -7,12 +7,15 @@
     },
     "C": {
       "item": "mimiworld:rice_fruit_cleansing_solution"
+    },
+    "S": {
+      "item": "mimiworld:super_lazy_essence"
     }
   },
   "pattern": [
-    "AAA",
+    "SSS",
     "ACA",
-    "AAA"
+    "SSS"
   ],
   "result": {
     "item": "mimiworld:coarse_super_lazy_alloy_ingot"

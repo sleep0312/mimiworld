@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cleansing_compound_armor_blank": {
+    "has_cleansing_compound_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:cleansing_compound_armor_blank"
+              "mimiworld:cleansing_compound_ingot"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_cleansing_compound_armor_blank",
+      "has_cleansing_compound_ingot",
       "has_the_recipe"
     ]
   ],

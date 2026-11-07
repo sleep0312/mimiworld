@@ -80,7 +80,7 @@ public class ViewCategory implements IRecipeCategory<JeiView> {
                 // 标签配料（如任意肉类）：展开为标签内全部物品轮播
                 slotBuilder.addIngredients(Ingredient.of(slot.tag()));
             } else if (slot.fluid() != null) {
-                // 流体配料（如米片机 500mB 水）：JEI 默认流体渲染器
+                // 流体配料（如米片机 100mB 水）：JEI 默认流体渲染器
                 slotBuilder.addFluidStack(slot.fluid(), slot.fluidAmount());
             } else if (slot.stack() != null && !slot.stack().isEmpty()) {
                 slotBuilder.addItemStack(slot.stack());

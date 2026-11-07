@@ -10,9 +10,9 @@
     }
   },
   "pattern": [
+    "RRR",
     "RER",
-    "ERE",
-    "RER"
+    "RRR"
   ],
   "result": {
     "item": "mimiworld:mimi_eye"

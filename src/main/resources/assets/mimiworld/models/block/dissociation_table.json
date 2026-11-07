@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "mimiworld:block/dissociation_table",
-    "side": "mimiworld:block/dissociation_table",
-    "top": "mimiworld:block/dissociation_table_top"
-  }
-}

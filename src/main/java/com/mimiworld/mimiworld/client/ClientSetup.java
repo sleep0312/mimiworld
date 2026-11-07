@@ -56,14 +56,8 @@ import com.mimiworld.mimiworld.client.renderer.WujihuaRenderer;
 import com.mimiworld.mimiworld.client.renderer.ZhuomiChickenRenderer;
 import com.mimiworld.mimiworld.client.screen.RiceMakerScreen;
 import com.mimiworld.mimiworld.client.screen.RicePoundingTableScreen;
-import com.mimiworld.mimiworld.client.screen.IonizationTableScreen;
 import com.mimiworld.mimiworld.client.screen.PrecipitationTableScreen;
-import com.mimiworld.mimiworld.client.screen.DissociationTableScreen;
-import com.mimiworld.mimiworld.client.screen.SwordQuenchingTableScreen;
-import com.mimiworld.mimiworld.client.screen.BloodlettingTableScreen;
-import com.mimiworld.mimiworld.client.screen.GrindingTableScreen;
 import com.mimiworld.mimiworld.client.screen.CrusherScreen;
-import com.mimiworld.mimiworld.client.screen.PestleRealmTableScreen;
 import com.mimiworld.mimiworld.client.screen.IngotCondensationTableScreen;
 import com.mimiworld.mimiworld.client.screen.MixerScreen;
 import com.mimiworld.mimiworld.client.screen.LargeCookingPotScreen;
@@ -250,19 +244,11 @@ public class ClientSetup {
             MenuScreens.register(ModMenuTypes.RICE_MAKER_MENU.get(), RiceMakerScreen::new);
             // 绑定锤米台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.RICE_POUNDING_TABLE_MENU.get(), RicePoundingTableScreen::new);
-            // 绑定电离台菜单与 GUI 屏幕
-            MenuScreens.register(ModMenuTypes.IONIZATION_TABLE_MENU.get(), IonizationTableScreen::new);
             // 绑定沉淀台菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.PRECIPITATION_TABLE_MENU.get(), PrecipitationTableScreen::new);
-            // 绑定离解台菜单与 GUI 屏幕
-            MenuScreens.register(ModMenuTypes.DISSOCIATION_TABLE_MENU.get(), DissociationTableScreen::new);
-            // 绑定淬剑台/汲血台/碾磨台/搅碎器菜单与 GUI 屏幕（多输入熔炉式定时加工）
-            MenuScreens.register(ModMenuTypes.SWORD_QUENCHING_TABLE_MENU.get(), SwordQuenchingTableScreen::new);
-            MenuScreens.register(ModMenuTypes.BLOODLETTING_TABLE_MENU.get(), BloodlettingTableScreen::new);
-            MenuScreens.register(ModMenuTypes.GRINDING_TABLE_MENU.get(), GrindingTableScreen::new);
+            // 绑定搅碎器菜单与 GUI 屏幕（多输入熔炉式定时加工）
             MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
-            // 绑定杵界台/凝锭台菜单与 GUI 屏幕（NxN 网格工作台式即时合成）
-            MenuScreens.register(ModMenuTypes.PESTLE_REALM_TABLE_MENU.get(), PestleRealmTableScreen::new);
+            // 绑定凝锭台菜单与 GUI 屏幕（NxN 网格工作台式即时合成）
             MenuScreens.register(ModMenuTypes.INGOT_CONDENSATION_TABLE_MENU.get(), IngotCondensationTableScreen::new);
             // 绑定搅拌器（9 入 1 出即时合成）菜单与 GUI 屏幕
             MenuScreens.register(ModMenuTypes.MIXER_MENU.get(), MixerScreen::new);

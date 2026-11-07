@@ -78,8 +78,7 @@ public class ModLootTableProvider extends LootTableProvider {
         DROPS.put(ModEntities.CHAOTIC_VOID_TOUCHER.get(), new Drop[]{d(ModItems.VOID_TOUCH.get(), 4, 4), d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.VOID_TOUCH_TENTACLE.get(), 3, 4)});
         DROPS.put(ModEntities.BLIGHTED_THORN_FLOWER.get(), new Drop[]{d(ModItems.FADED_FLOWER_BRANCH.get(), 5, 5), d(ModItems.MIMI_MEDLEY_LIQUID.get(), 2, 2),
                 d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.THORN_PETAL.get(), 2, 3)});
-        DROPS.put(ModEntities.FALLEN_RICE_PHOENIX.get(), new Drop[]{d(ModItems.CELESTIAL_PHOENIX_BEAK.get(), 1, 1), d(ModItems.ADVANCED_SWORD_TEMPER_INGOT.get(), 3, 5),
-                d(ModItems.ADVANCED_ARMOR_CORE_INGOT.get(), 3, 5), d(ModItems.ADVANCED_BOWSTRING_INGOT.get(), 3, 5),
+        DROPS.put(ModEntities.FALLEN_RICE_PHOENIX.get(), new Drop[]{d(ModItems.CELESTIAL_PHOENIX_BEAK.get(), 1, 1), d(ModItems.SUPER_LAZY_ALLOY_INGOT.get(), 1, 2),
                 d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.RICE_PHOENIX_MEAT_CHUNK.get(), 1, 2)});
         DROPS.put(ModEntities.HUALING_RICE.get(), new Drop[]{d(ModItems.REMNANT_FALLEN_RICE_ESSENCE.get(), 16, 16), d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.SPECIALTY_FALLEN_RICE.get(), 10, 20)});
         DROPS.put(ModEntities.PALE_MERMAID.get(), new Drop[]{d(ModItems.MERMAID_TEAR.get(), 3, 5), d(ModItems.SUPER_LAZY_ALLOY_INGOT.get(), 1, 1),

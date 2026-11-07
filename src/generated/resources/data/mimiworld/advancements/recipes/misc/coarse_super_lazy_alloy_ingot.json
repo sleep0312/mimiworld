@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cleansing_compound_ingot": {
+    "has_super_lazy_essence": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:cleansing_compound_ingot"
+              "mimiworld:super_lazy_essence"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_cleansing_compound_ingot",
+      "has_super_lazy_essence",
       "has_the_recipe"
     ]
   ],

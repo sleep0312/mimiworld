@@ -13,10 +13,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 /**
- * 双输入定时加工台菜单基类（电离台 / 沉淀台共用）：
+ * 双输入定时加工台菜单基类（沉淀台使用）：
  * 左列两个输入槽（上 A / 下 B，均接受任意物品）、右侧输出槽（只能取），
- * 下方为玩家背包。槽位坐标与 ionization_table.png / precipitation_table.png
- * 中槽框左上角严格一致（两张贴图槽位布局完全相同）。
+ * 下方为玩家背包。槽位坐标与 precipitation_table.png
+ * 中槽框左上角严格一致。
  */
 public abstract class DualInputProcessorMenu extends AbstractContainerMenu {
 

@@ -59,7 +59,7 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
     /** 默认/米配方加工时长（tick），2 秒 */
     public static final int RICE_PROCESS_TICKS = 40;
     /** 米配方耗水量（mB） */
-    public static final int RICE_WATER_COST = 500;
+    public static final int RICE_WATER_COST = 100;
 
     // -------------------- 配方表 --------------------
 
@@ -71,7 +71,7 @@ public class RiceMakerBlockEntity extends BlockEntity implements MenuProvider, n
     private static final Map<Item, RiceRecipe> RECIPES = new HashMap<>();
 
     static {
-        // 1 小麦种子 + 500 mB 水 → 1 米，加工 2 秒（40 tick）
+        // 1 小麦种子 + 100 mB 水 → 1 米，加工 2 秒（40 tick）
         registerRecipe(new RiceRecipe(
                 Items.WHEAT_SEEDS,
                 new ItemStack(ModItems.RICE.get()),

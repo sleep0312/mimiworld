@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_poprice_heart_sip_liquid": {
+    "has_rice_fruit_cleansing_solution": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:poprice_heart_sip_liquid"
+              "mimiworld:rice_fruit_cleansing_solution"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_poprice_heart_sip_liquid",
+      "has_rice_fruit_cleansing_solution",
       "has_the_recipe"
     ]
   ],

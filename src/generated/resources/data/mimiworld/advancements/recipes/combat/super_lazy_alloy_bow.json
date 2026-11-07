@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_super_lazy_alloy_bow_blank": {
+    "has_super_lazy_alloy_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:super_lazy_alloy_bow_blank"
+              "mimiworld:super_lazy_alloy_ingot"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_super_lazy_alloy_bow_blank",
+      "has_super_lazy_alloy_ingot",
       "has_the_recipe"
     ]
   ],

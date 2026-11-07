@@ -22,7 +22,7 @@ public record JeiView(List<Slot> inputs, ItemStack output, boolean shapeless) {
 
     /**
      * 一个输入槽：tag 非 null 时按标签配料展开（如 mimiworld:meats）；
-     * fluid 非 null 时显示流体（amount 单位 mB，如米片机 500mB 水）；否则显示 stack。
+     * fluid 非 null 时显示流体（amount 单位 mB，如米片机 100mB 水）；否则显示 stack。
      */
     public record Slot(int x, int y, ItemStack stack, TagKey<Item> tag,
                        Fluid fluid, long fluidAmount) {

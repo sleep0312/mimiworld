@@ -11,9 +11,9 @@ import net.minecraft.world.entity.player.Inventory;
 /**
  * 锤米台 GUI：贴图 256x256，左上角 176x166 为有效画面。
  * <p>
- * 贴图 rice_pounding_table.png 按 RiceMakerScreen 类头固化的「原版立体感」规范生成：
+ * 贴图 rice_pounding_table.png 按模组机器 GUI 的「原版立体感」规范生成：
  * furnace.png 176x166 面板 + (3,3,170,75) 擦机器区 + 3 个原版 18x18 槽精灵
- * （源 (7,83)，置于槽坐标 (x-1,y-1)）。与造米机不同的是本机器为工作台式即时
+ * （源 (7,83)，置于槽坐标 (x-1,y-1)）。本机器为工作台式即时
  * 合成，没有进度/液体等动态元素，因此本 Screen 只做整图 blit + 代码渲染标题：
  * <ul>
  *   <li>输入槽 A (30,26)、输入槽 B (30,62)、输出槽 (112,26)；</li>

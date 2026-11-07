@@ -27,53 +27,17 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(RicePoundingTableBlockEntity::new,
                             ModBlocks.RICE_POUNDING_TABLE.get()).build(null));
 
-    // 电离台（方块 ionization_table）：双输入定时加工（无燃料），GUI 见 menu.IonizationTableMenu
-    public static final RegistryObject<BlockEntityType<IonizationTableBlockEntity>> IONIZATION_TABLE =
-            BLOCK_ENTITIES.register("ionization_table",
-                    () -> BlockEntityType.Builder.of(IonizationTableBlockEntity::new,
-                            ModBlocks.IONIZATION_TABLE.get()).build(null));
-
     // 沉淀台（方块 precipitation_table）：双输入定时加工（无燃料），GUI 见 menu.PrecipitationTableMenu
     public static final RegistryObject<BlockEntityType<PrecipitationTableBlockEntity>> PRECIPITATION_TABLE =
             BLOCK_ENTITIES.register("precipitation_table",
                     () -> BlockEntityType.Builder.of(PrecipitationTableBlockEntity::new,
                             ModBlocks.PRECIPITATION_TABLE.get()).build(null));
 
-    // 离解台（方块 dissociation_table）：熔炉式有序双输入定时加工（无燃料），GUI 见 menu.DissociationTableMenu
-    public static final RegistryObject<BlockEntityType<DissociationTableBlockEntity>> DISSOCIATION_TABLE =
-            BLOCK_ENTITIES.register("dissociation_table",
-                    () -> BlockEntityType.Builder.of(DissociationTableBlockEntity::new,
-                            ModBlocks.DISSOCIATION_TABLE.get()).build(null));
-
-    // 淬剑台（方块 sword_quenching_table）：3 入 1 出定时加工，开始按钮启动，GUI 见 menu.SwordQuenchingTableMenu
-    public static final RegistryObject<BlockEntityType<SwordQuenchingTableBlockEntity>> SWORD_QUENCHING_TABLE =
-            BLOCK_ENTITIES.register("sword_quenching_table",
-                    () -> BlockEntityType.Builder.of(SwordQuenchingTableBlockEntity::new,
-                            ModBlocks.SWORD_QUENCHING_TABLE.get()).build(null));
-
-    // 汲血台（方块 bloodletting_table）：2 入 1 出定时加工，GUI 见 menu.BloodlettingTableMenu
-    public static final RegistryObject<BlockEntityType<BloodlettingTableBlockEntity>> BLOODLETTING_TABLE =
-            BLOCK_ENTITIES.register("bloodletting_table",
-                    () -> BlockEntityType.Builder.of(BloodlettingTableBlockEntity::new,
-                            ModBlocks.BLOODLETTING_TABLE.get()).build(null));
-
-    // 碾磨台（方块 grinding_table）：6 入 1 出定时加工（加高面板），GUI 见 menu.GrindingTableMenu
-    public static final RegistryObject<BlockEntityType<GrindingTableBlockEntity>> GRINDING_TABLE =
-            BLOCK_ENTITIES.register("grinding_table",
-                    () -> BlockEntityType.Builder.of(GrindingTableBlockEntity::new,
-                            ModBlocks.GRINDING_TABLE.get()).build(null));
-
     // 搅碎器（方块 crusher）：3 入 1 出定时加工，GUI 见 menu.CrusherMenu
     public static final RegistryObject<BlockEntityType<CrusherBlockEntity>> CRUSHER =
             BLOCK_ENTITIES.register("crusher",
                     () -> BlockEntityType.Builder.of(CrusherBlockEntity::new,
                             ModBlocks.CRUSHER.get()).build(null));
-
-    // 杵界台（方块 pestle_realm_table）：2x2 网格（4 入）+右下输出槽工作台式即时合成，GUI 见 menu.PestleRealmTableMenu
-    public static final RegistryObject<BlockEntityType<PestleRealmTableBlockEntity>> PESTLE_REALM_TABLE =
-            BLOCK_ENTITIES.register("pestle_realm_table",
-                    () -> BlockEntityType.Builder.of(PestleRealmTableBlockEntity::new,
-                            ModBlocks.PESTLE_REALM_TABLE.get()).build(null));
 
     // 凝锭台（方块 ingot_condensation_table）：5x5 网格（25 入）+下方中央输出槽工作台式即时合成（面板加高），GUI 见 menu.IngotCondensationTableMenu
     public static final RegistryObject<BlockEntityType<IngotCondensationTableBlockEntity>> INGOT_CONDENSATION_TABLE =

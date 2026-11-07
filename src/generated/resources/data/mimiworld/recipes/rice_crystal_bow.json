@@ -6,10 +6,10 @@
       "item": "mimiworld:crystallized_rice_meal"
     },
     "F": {
-      "item": "mimiworld:coarse_rice_fiber"
+      "item": "mimiworld:refined_rice_fiber"
     },
     "S": {
-      "item": "mimiworld:rice_baton"
+      "item": "mimiworld:rice_stick"
     }
   },
   "pattern": [
