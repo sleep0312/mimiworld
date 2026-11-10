@@ -11,13 +11,13 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 0.0
+                "max": 5.0,
+                "min": 4.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "mimiworld:compound_rice_meal_ingot"
+          "name": "mimiworld:super_lazy_alloy_ingot"
         }
       ],
       "rolls": 1.0
@@ -53,13 +53,40 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "mimiworld:evil_kui_longevity_horn"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.25,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
                 "max": 1.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "mimiworld:evil_kui_longevity_horn"
+          "name": "mimiworld:kui_niu_power"
         }
       ],
       "rolls": 1.0

@@ -38,7 +38,7 @@ public class ViewCategory implements IRecipeCategory<JeiView> {
 
     /**
      * @param texture   机器 GUI 贴图（mimiworld:textures/gui/&lt;机器&gt;.png）
-     * @param panelHeight 需要展示的面板高度（不含玩家背包）
+     * @param panelHeight 需要展示的面板高度（不含玩家背包，且不包含背包槽框顶边那一行）
      * @param outputX   产物槽在 GUI 中的绝对坐标
      * @param outputY   产物槽在 GUI 中的绝对坐标
      */

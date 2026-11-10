@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:heavenfall_ingot"
+    },
+    "B": {
+      "item": "mimiworld:cleansing_compound_ingot"
+    },
+    "T": {
+      "item": "mimiworld:evil_kui_longevity_horn"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "ATA",
+    "BAB"
+  ],
+  "result": {
+    "item": "mimiworld:shanhai_grace"
+  },
+  "show_notification": true
+}

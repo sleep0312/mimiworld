@@ -14,6 +14,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -38,8 +39,8 @@ public class ModLootTableProvider extends LootTableProvider {
                 new SubProviderEntry(EntityDrops::new, LootContextParamSets.ENTITY)));
     }
 
-    /** 单条掉落：物品 + 数量闭区间（min 可为 0 表示概率掉落）。 */
-    private record Drop(ItemLike item, int min, int max) {
+    /** 单条掉落：物品 + 数量闭区间；chance &lt; 1 时按该概率判定是否掉落。 */
+    private record Drop(ItemLike item, int min, int max, float chance) {
     }
 
     /** 每个实体类型对应的掉落池列表。 */
@@ -93,37 +94,48 @@ public class ModLootTableProvider extends LootTableProvider {
                 d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.FRAGRANT_POUCH.get(), 0, 1), d(ModItems.FRAGRANT_POWDER.get(), 16, 24)});
         DROPS.put(ModEntities.RICE_WOLF_VULTURE.get(), new Drop[]{d(ModItems.MOON_DEVOURER_WOLF_CLAW.get(), 2, 2), d(Items.NETHER_STAR, 3, 3),
                 d(ModItems.REMNANT_FALLEN_INGOT.get(), 1, 1), d(ModItems.DEVOURER_VULTURE_WING.get(), 1, 2)});
-        // 米米猴王：必掉猴王如意棍×1、米米猴王头×1，外加米 16~32
+        // 米米猴王：必掉猴王如意棍×1、猴王毫毛×2~3、米米猴王头×1、下界合金锭×2~3，外加米 16~32；火眼金睛 25% 概率掉 1 个
         DROPS.put(ModEntities.MIMI_MONKEY_KING.get(), new Drop[]{d(ModItems.MONKEY_KING_RUYI_STAFF.get(), 1, 1),
+                d(ModItems.MONKEY_KING_HAIR.get(), 2, 3), c(ModItems.FIERY_GOLDEN_EYES.get(), 1, 1, 0.25F),
+                d(Items.NETHERITE_INGOT, 2, 3),
                 d(ModItems.MIMI_MONKEY_HEAD.get(), 1, 1), d(rice, 16, 32)});
-        // 饭晶虎王：必掉饭晶×12~16、虎王利爪×1、饭晶虎王头×1
-        DROPS.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), new Drop[]{d(ModItems.CRYSTALLIZED_RICE_MEAL.get(), 12, 16),
-                d(ModItems.TIGER_KING_RAZOR_CLAW.get(), 1, 1), d(ModItems.RICE_CRYSTAL_TIGER_KING_HEAD.get(), 1, 1)});
-        // 超晶牛王：必掉饭晶合金锭×4~5、牛王晶角×1、超晶牛王头×1
-        DROPS.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), new Drop[]{d(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get(), 4, 5),
-                d(ModItems.OX_KING_CRYSTAL_HORN.get(), 1, 1), d(ModItems.SUPER_CRYSTAL_OX_HEAD.get(), 1, 1)});
-        // 重晶兔王：必掉超结晶×1~2、兔王腥红眼×1、重晶兔王头×1
-        DROPS.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), new Drop[]{d(ModItems.SUPER_CRYSTAL.get(), 1, 2),
-                d(ModItems.RABBIT_KING_BLOODY_RED_EYE.get(), 1, 1), d(ModItems.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get(), 1, 1)});
-        // 复晶天青蟒：必掉超重结晶×1~2、极毒青蟒牙×1、复晶天青蟒头×1
-        DROPS.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), new Drop[]{d(ModItems.SUPER_HEAVY_CRYSTAL.get(), 1, 2),
-                d(ModItems.VENOM_AZURE_PYTHON_FANG.get(), 1, 1), d(ModItems.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get(), 1, 1)});
-        // 清洁长命夔：必掉精制强化米网×2~3、恶夔长命角×1、清洁长命夔头×1，复合米饭锭 0~2 概率掉落
-        DROPS.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), new Drop[]{d(ModItems.COMPOUND_RICE_MEAL_INGOT.get(), 0, 2),
-                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 2, 3), d(ModItems.EVIL_KUI_LONGEVITY_HORN.get(), 1, 1),
-                d(ModItems.PURIFIED_LONGEVITY_KUI_HEAD.get(), 1, 1)});
-        // 最懒终末龙：必掉精制强化米网×4~5、终末龙逆鳞×1、最懒终末龙头×1，清洁复合锭 0~2 概率掉落
-        DROPS.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), new Drop[]{d(ModItems.CLEANSING_COMPOUND_INGOT.get(), 0, 2),
-                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 1, 1),
-                d(ModItems.LAZIEST_END_DRAGON_HEAD.get(), 1, 1)});
-        // 第八宗罪龙：最终 Boss，掉落沿用最懒终末龙并追加残堕精华锭 1~3，头颅换为第八宗罪龙头
-        DROPS.put(ModEntities.DIBAZONGZUILONG.get(), new Drop[]{d(ModItems.CLEANSING_COMPOUND_INGOT.get(), 0, 2),
-                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 1, 1),
-                d(ModItems.DIBAZONGZUI_HEAD.get(), 1, 1), d(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get(), 1, 3)});
+        // 饭晶虎王：必掉饭晶合金锭×4~5、虎王利爪×2~3、饭晶虎王头×1；坚韧虎皮 25% 概率掉 1 个
+        DROPS.put(ModEntities.RICE_CRYSTAL_TIGER_KING.get(), new Drop[]{d(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get(), 4, 5),
+                d(ModItems.TIGER_KING_RAZOR_CLAW.get(), 2, 3), c(ModItems.TOUGH_TIGER_HIDE.get(), 1, 1, 0.25F),
+                d(ModItems.RICE_CRYSTAL_TIGER_KING_HEAD.get(), 1, 1)});
+        // 超晶牛王：必掉超重结晶×4~5、牛王晶角×2~3、超晶牛王头×1；超越之号角 25% 概率掉 1 个
+        DROPS.put(ModEntities.SUPER_CRYSTAL_COW_KING.get(), new Drop[]{d(ModItems.SUPER_HEAVY_CRYSTAL.get(), 4, 5),
+                d(ModItems.OX_KING_CRYSTAL_HORN.get(), 2, 3), c(ModItems.TRANSCENDENCE_HORN.get(), 1, 1, 0.25F),
+                d(ModItems.SUPER_CRYSTAL_OX_HEAD.get(), 1, 1)});
+        // 重晶兔王：必掉复合米饭锭×4~5、兔王腥红眼×2~3、重晶兔王头×1；月有圆缺 25% 概率掉 1 个
+        DROPS.put(ModEntities.HEAVY_CRYSTAL_RABBIT_KING.get(), new Drop[]{d(ModItems.COMPOUND_RICE_MEAL_INGOT.get(), 4, 5),
+                d(ModItems.RABBIT_KING_BLOODY_RED_EYE.get(), 2, 3), c(ModItems.MOON_PHASES.get(), 1, 1, 0.25F),
+                d(ModItems.HEAVY_CRYSTAL_RABBIT_KING_HEAD.get(), 1, 1)});
+        // 复晶天青蟒：必掉清洁复合锭×4~5、极毒青蟒牙×2~3、复晶天青蟒头×1；蛇皮驺尾 25% 概率掉 1 个
+        DROPS.put(ModEntities.COMPOUND_AZURE_PYTHON.get(), new Drop[]{d(ModItems.CLEANSING_COMPOUND_INGOT.get(), 4, 5),
+                d(ModItems.VENOM_AZURE_PYTHON_FANG.get(), 2, 3), c(ModItems.SNAKESKIN_TAIL.get(), 1, 1, 0.25F),
+                d(ModItems.COMPOUND_CRYSTAL_AZURE_PYTHON_HEAD.get(), 1, 1)});
+        // 清洁长命夔：必掉超懒合金锭×4~5、精制强化米网×2~3、恶夔长命角×2~3、清洁长命夔头×1；夔牛之力 25% 概率掉 1 个
+        DROPS.put(ModEntities.CLEANSING_LONGEVITY_KUI.get(), new Drop[]{d(ModItems.SUPER_LAZY_ALLOY_INGOT.get(), 4, 5),
+                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 2, 3), d(ModItems.EVIL_KUI_LONGEVITY_HORN.get(), 2, 3),
+                c(ModItems.KUI_NIU_POWER.get(), 1, 1, 0.25F), d(ModItems.PURIFIED_LONGEVITY_KUI_HEAD.get(), 1, 1)});
+        // 最懒终末龙：必掉天堕锭×4~5、精制强化米网×4~5、终末龙逆鳞×2~3、最懒终末龙头×1；逆鳞龙胆 25% 概率掉 1 个
+        DROPS.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), new Drop[]{d(ModItems.HEAVENFALL_INGOT.get(), 4, 5),
+                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 2, 3),
+                c(ModItems.REVERSE_SCALE_GALL.get(), 1, 1, 0.25F), d(ModItems.LAZIEST_END_DRAGON_HEAD.get(), 1, 1)});
+        // 第八宗罪龙：最终 Boss，掉落精制强化米网 4~5、第八宗罪龙头×1、残堕世界精华锭 8~24
+        DROPS.put(ModEntities.DIBAZONGZUILONG.get(), new Drop[]{
+                d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5),
+                d(ModItems.DIBAZONGZUI_HEAD.get(), 1, 1), d(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get(), 8, 24)});
     }
 
     private static Drop d(ItemLike item, int min, int max) {
-        return new Drop(item, min, max);
+        return new Drop(item, min, max, 1.0F);
+    }
+
+    /** 概率掉落：以 chance 概率掉出 min~max 个。 */
+    private static Drop c(ItemLike item, int min, int max, float chance) {
+        return new Drop(item, min, max, chance);
     }
 
     private static class EntityDrops implements LootTableSubProvider {
@@ -132,11 +144,15 @@ public class ModLootTableProvider extends LootTableProvider {
             DROPS.forEach((entityType, drops) -> {
                 LootTable.Builder table = LootTable.lootTable();
                 for (Drop drop : drops) {
+                    LootItem.Builder entry = LootItem.lootTableItem(drop.item())
+                            .apply(SetItemCountFunction.setCount(
+                                    UniformGenerator.between(drop.min(), drop.max())));
+                    if (drop.chance() < 1.0F) {
+                        entry.when(LootItemRandomChanceCondition.randomChance(drop.chance()));
+                    }
                     table.withPool(LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1.0F))
-                            .add(LootItem.lootTableItem(drop.item())
-                                    .apply(SetItemCountFunction.setCount(
-                                            UniformGenerator.between(drop.min(), drop.max())))));
+                            .add(entry));
                 }
                 consumer.accept(entityType.getDefaultLootTable(), table);
             });

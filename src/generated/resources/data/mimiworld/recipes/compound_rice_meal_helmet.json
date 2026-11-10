@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "D": {
+      "item": "mimiworld:super_heavy_crystal_helmet"
+    },
     "M": {
       "item": "mimiworld:refined_rice_fiber"
     },
-    "N": {
-      "item": "mimiworld:refined_reinforced_rice_net"
-    },
     "P": {
       "item": "mimiworld:compound_rice_meal_ingot"
+    },
+    "T": {
+      "item": "mimiworld:ox_king_crystal_horn"
     }
   },
   "pattern": [
-    "PPP",
-    "PNP",
-    "M M"
+    "PDP",
+    "PMP",
+    " T "
   ],
   "result": {
     "item": "mimiworld:compound_rice_meal_helmet"

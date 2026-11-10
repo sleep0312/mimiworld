@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * 五套 GeckoLib 定制盔甲（T1饭晶合金→T5超懒合金）的「单件穿戴效果」契约。
+ * 七套 GeckoLib 定制盔甲（T1饭晶合金→T7残堕宗罪）的「单件穿戴效果」契约。
  *
  * <p>每套盔甲四件在穿戴时提供：</p>
  * <ul>

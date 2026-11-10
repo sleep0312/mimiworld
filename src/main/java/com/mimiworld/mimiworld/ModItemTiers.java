@@ -6,13 +6,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 /**
  * 米米世界自定义工具/武器材料等级（本模组的剑与弓引用本类）。
  *
- * <p>等级链（从低到高）：米木（原版木制级别）&lt; 饭晶 &lt; 超结晶 &lt; 饭晶合金锭
+ * <p>等级链（从低到高）：米木（原版木制级别）&lt; 饭晶 &lt; 饭晶合金锭
  * &lt; 超重结晶锭 &lt; 复合米饭锭 &lt; 清洁复合锭 &lt; 超懒合金锭 &lt; 最懒天堕（堕落之心修复）。</p>
  *
  * <p>数值逐档递增（耐久/挖掘速度/攻击加成/挖掘等级/附魔能力），修复材料全部用本模组已有物品：</p>
  * <ul>
  *   <li>饭晶 → 结晶米</li>
- *   <li>超结晶 → 超结晶</li>
  *   <li>饭晶合金 → 饭晶合金锭</li>
  *   <li>超重结晶 → 超重结晶</li>
  *   <li>复合米饭 → 复合米饭锭</li>
@@ -23,8 +22,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 public enum ModItemTiers implements Tier {
     /** 饭晶：钻石级（耐久 1561 / 速度 7 / 伤害 3，剑总伤 7），珍珠米白晶质（修复材料结晶米） */
     RICE_CRYSTAL(1561, 7.0F, 3.0F, 2, 14, () -> Ingredient.of(ModItems.CRYSTALLIZED_RICE.get())),
-    /** 超结晶：下界合金级（耐久 2031 / 伤害 4，剑总伤 8），蓝晶含金核（修复材料超结晶） */
-    SUPER_CRYSTAL(2031, 8.0F, 4.0F, 3, 16, () -> Ingredient.of(ModItems.SUPER_CRYSTAL.get())),
     /** 饭晶合金：下界合金级强化的均衡档（耐久 2200 / 伤害 4.5，剑总伤 8.5，修复材料饭晶合金锭） */
     RICE_CRYSTAL_ALLOY(2200, 8.0F, 4.5F, 3, 15, () -> Ingredient.of(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())),
     /** 超重结晶：慢速重武器路线（耐久 2400 / 伤害 6，剑总伤 12、攻速 -2.8），修复材料超重结晶 */

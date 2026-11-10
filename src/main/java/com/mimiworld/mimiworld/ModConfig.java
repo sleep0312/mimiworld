@@ -432,7 +432,6 @@ public final class ModConfig {
         public static String weaponName(String id) {
             return switch (id) {
                 case "rice_crystal" -> "饭晶级";
-                case "super_crystal" -> "超结晶级";
                 case "rice_crystal_alloy" -> "饭晶合金级";
                 case "super_heavy_crystal" -> "超重结晶级";
                 case "compound_rice_meal" -> "复合米饭级";

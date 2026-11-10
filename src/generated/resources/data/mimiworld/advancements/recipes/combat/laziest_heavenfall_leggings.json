@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_seven_deadly_falls": {
+    "has_evil_kui_horn": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:seven_deadly_falls"
+              "mimiworld:evil_kui_longevity_horn"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_seven_deadly_falls",
+      "has_evil_kui_horn",
       "has_the_recipe"
     ]
   ],

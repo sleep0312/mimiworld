@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rabbit_king_bloody_red_eye": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:rabbit_king_bloody_red_eye"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:crimson_vertical_eye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_rabbit_king_bloody_red_eye",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:crimson_vertical_eye"
+    ]
+  },
+  "sends_telemetry_event": false
+}

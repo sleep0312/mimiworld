@@ -3,25 +3,22 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "mimiworld:super_lazy_alloy_ingot"
-    },
-    "B": {
-      "item": "mimiworld:fallen_crown"
-    },
-    "C": {
-      "item": "mimiworld:super_lazy_alloy_ingot"
+      "item": "mimiworld:heavenfall_ingot"
     },
     "D": {
       "item": "mimiworld:super_lazy_alloy_leggings"
     },
-    "E": {
-      "item": "mimiworld:seven_deadly_falls"
+    "N": {
+      "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "T": {
+      "item": "mimiworld:evil_kui_longevity_horn"
     }
   },
   "pattern": [
-    "ABA",
-    "CDC",
-    "AEA"
+    "ATA",
+    "ADA",
+    "N N"
   ],
   "result": {
     "item": "mimiworld:laziest_heavenfall_leggings"

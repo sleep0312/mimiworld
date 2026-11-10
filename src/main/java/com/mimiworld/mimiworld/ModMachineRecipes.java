@@ -36,12 +36,6 @@ public final class ModMachineRecipes {
                 ModItems.RICE_LOG.get(),
                 new ItemStack(ModItems.RICE_PLANKS.get()));
 
-        // 锤米台 —— 金锭 + 粗超结晶 → 超结晶（两槽无序，各消耗 1 个）
-        RicePoundingTableBlockEntity.registerRecipe(
-                Items.GOLD_INGOT,
-                ModItems.COARSE_SUPER_CRYSTAL.get(),
-                new ItemStack(ModItems.SUPER_CRYSTAL.get()));
-
         // 锤米台 —— 结晶米 + 铁锭 → 召唤核心
         RicePoundingTableBlockEntity.registerRecipe(
                 ModItems.CRYSTALLIZED_RICE.get(),

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:super_lazy_alloy_ingot"
+    },
+    "T": {
+      "item": "mimiworld:venom_azure_python_fang"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ATA",
+    " A "
+  ],
+  "result": {
+    "item": "mimiworld:dark_spirit_fang"
+  },
+  "show_notification": true
+}

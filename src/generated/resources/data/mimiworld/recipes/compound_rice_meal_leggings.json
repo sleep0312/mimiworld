@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "H": {
-      "item": "mimiworld:super_heavy_crystal"
+    "D": {
+      "item": "mimiworld:super_heavy_crystal_leggings"
     },
-    "N": {
-      "item": "mimiworld:refined_reinforced_rice_net"
+    "M": {
+      "item": "mimiworld:refined_rice_fiber"
     },
     "P": {
       "item": "mimiworld:compound_rice_meal_ingot"
+    },
+    "T": {
+      "item": "mimiworld:ox_king_crystal_horn"
     }
   },
   "pattern": [
-    "PHP",
-    "PNP",
-    "PNP"
+    "MDM",
+    "PTP",
+    "PPP"
   ],
   "result": {
     "item": "mimiworld:compound_rice_meal_leggings"

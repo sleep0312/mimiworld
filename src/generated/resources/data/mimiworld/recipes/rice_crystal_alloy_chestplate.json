@@ -4,12 +4,21 @@
   "key": {
     "A": {
       "item": "mimiworld:rice_crystal_alloy_ingot"
+    },
+    "D": {
+      "item": "minecraft:netherite_chestplate"
+    },
+    "M": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "T": {
+      "item": "mimiworld:monkey_king_hair"
     }
   },
   "pattern": [
-    "A A",
-    "AAA",
-    "AAA"
+    "M M",
+    "ATA",
+    "ADA"
   ],
   "result": {
     "item": "mimiworld:rice_crystal_alloy_chestplate"

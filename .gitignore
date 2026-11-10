@@ -62,3 +62,6 @@ docs/
 # Forge MDK 自带变更日志（本地留存，不入库）
 changelog.txt
 forge*changelog.txt
+
+# Forge Datagen 增量缓存（每次 runData 都会重写，不入库）
+src/generated/resources/.cache/

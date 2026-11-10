@@ -5,14 +5,20 @@
     "B": {
       "item": "mimiworld:super_lazy_alloy_ingot"
     },
+    "D": {
+      "item": "mimiworld:cleansing_compound_leggings"
+    },
     "N": {
       "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "T": {
+      "item": "mimiworld:venom_azure_python_fang"
     }
   },
   "pattern": [
-    "BBB",
-    "BNB",
-    "BNB"
+    "NDN",
+    "BTB",
+    "BBB"
   ],
   "result": {
     "item": "mimiworld:super_lazy_alloy_leggings"

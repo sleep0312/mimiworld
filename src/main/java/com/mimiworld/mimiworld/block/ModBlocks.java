@@ -261,16 +261,6 @@ public class ModBlocks {
                             .sound(SoundType.STONE),
                     UniformInt.of(3, 7)));
 
-    // 超结晶块（）：超结晶的压缩存储块，金属块类全立方块（硬度照铁块 5.0、抗爆 6.0、紫晶声）。
-    // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 2 = 铁镐（needs_iron_tool 标签），木/石镐慢挖不掉落。
-    // 破坏掉落本身（loot_tables/blocks/super_crystal_block.json）。
-    public static final RegistryObject<Block> SUPER_CRYSTAL_BLOCK =
-            BLOCKS.register("super_crystal_block", () -> new Block(
-                    BlockBehaviour.Properties.of()
-                            .strength(5.0F, 6.0F)
-                            .requiresCorrectToolForDrops()
-                            .sound(SoundType.AMETHYST)));
-
     // 沉淀台（）：双输入定时加工机器方块（右键开 GUI，无燃料，正三角加工进度），金属质地、硬度 3.0、抗爆 6.0。
     // 镐可快速挖掘（mineable/pickaxe 标签）；挖掘等级 3 = 钻石镐（needs_diamond_tool 标签），铁镐及以下慢挖不掉落。
     // 破坏掉落本身（loot_tables/blocks/precipitation_table.json）及槽内物品。

@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": {
-      "item": "mimiworld:rice_crystal_alloy_ingot"
-    },
-    "F": {
-      "item": "mimiworld:refined_reinforced_rice_net"
+    "D": {
+      "item": "mimiworld:rice_crystal_alloy_chestplate"
     },
     "H": {
       "item": "mimiworld:super_heavy_crystal"
+    },
+    "M": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "T": {
+      "item": "mimiworld:tiger_king_razor_claw"
     }
   },
   "pattern": [
-    "HFH",
     "HHH",
-    "AHA"
+    "HTH",
+    "MDM"
   ],
   "result": {
     "item": "mimiworld:super_heavy_crystal_chestplate"

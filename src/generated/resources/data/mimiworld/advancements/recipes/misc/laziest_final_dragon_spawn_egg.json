@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_netherite_scrap": {
+    "has_super_lazy_alloy_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:netherite_scrap"
+              "mimiworld:super_lazy_alloy_ingot"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_netherite_scrap",
+      "has_super_lazy_alloy_ingot",
       "has_the_recipe"
     ]
   ],

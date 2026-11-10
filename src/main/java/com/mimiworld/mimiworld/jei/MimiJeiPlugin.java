@@ -60,38 +60,38 @@ public class MimiJeiPlugin implements IModPlugin {
 
         // ---- A. MultiInputProcessor（pos 表 = inputs 下标 → GUI 绝对槽坐标）----
         // 搅碎器：槽0 左上(26,17)、槽1 左下(26,50)、槽2 右上(121,17)
-        add(gui, "crusher", ModBlocks.CRUSHER.get(), 84, 121, 50,
+        add(gui, "crusher", ModBlocks.CRUSHER.get(), 83, 121, 50,
                 () -> JeiLayouts.multi(CrusherBlockEntity.jeiRecipes(),
                         new int[][]{{26, 17}, {26, 50}, {121, 17}}));
         // ---- B. DualInputProcessor（两槽；单输入配方只画 A 槽）----
-        add(gui, "precipitation_table", ModBlocks.PRECIPITATION_TABLE.get(), 84, 102, 33,
+        add(gui, "precipitation_table", ModBlocks.PRECIPITATION_TABLE.get(), 83, 102, 33,
                 () -> JeiLayouts.dual(PrecipitationTableBlockEntity.jeiRecipes()));
 
         // ---- D. 网格工作台（即时合成）----
-        add(gui, "ingot_condensation_table", ModBlocks.INGOT_CONDENSATION_TABLE.get(), 154, 79, 115,
+        add(gui, "ingot_condensation_table", ModBlocks.INGOT_CONDENSATION_TABLE.get(), 153, 79, 115,
                 () -> JeiLayouts.gridCrafting(5, 43, 13, 18, 18,
                         IngotCondensationTableBlockEntity.jeiRecipes()));
 
         // ---- E. 煮锅族（NxN 网格 (8,17) 间距 18 + 右上独立输入槽）----
-        add(gui, "large_cooking_pot", ModBlocks.LARGE_COOKING_POT.get(), 114, 116, 71,
+        add(gui, "large_cooking_pot", ModBlocks.LARGE_COOKING_POT.get(), 113, 116, 71,
                 () -> JeiLayouts.pot(3, 116, 35, LargeCookingPotBlockEntity.jeiRecipes()));
-        add(gui, "jumbo_mega_cooking_pot", ModBlocks.JUMBO_MEGA_COOKING_POT.get(), 150, 116, 89,
+        add(gui, "jumbo_mega_cooking_pot", ModBlocks.JUMBO_MEGA_COOKING_POT.get(), 149, 116, 89,
                 () -> JeiLayouts.pot(5, 116, 53, JumboMegaCookingPotBlockEntity.jeiRecipes()));
-        add(gui, "iron_wok", ModBlocks.IRON_WOK.get(), 96, 116, 74,
+        add(gui, "iron_wok", ModBlocks.IRON_WOK.get(), 95, 116, 74,
                 () -> JeiLayouts.ironWok(IronWokBlockEntity.jeiRecipes()));
-        add(gui, "oven", ModBlocks.OVEN.get(), 114, 116, 71,
+        add(gui, "oven", ModBlocks.OVEN.get(), 113, 116, 71,
                 () -> JeiLayouts.pot(3, 116, 35, OvenBlockEntity.jeiRecipes()));
 
         // ---- F. 搅拌器（两列四行 + 中央槽，无序即时合成）----
-        add(gui, "mixer", ModBlocks.MIXER.get(), 152, 79, 115,
+        add(gui, "mixer", ModBlocks.MIXER.get(), 151, 79, 115,
                 () -> JeiLayouts.mixer(MixerBlockEntity.jeiRecipes()));
 
         // ---- G. 米系早期机器 ----
-        add(gui, "rice_pounding_table", ModBlocks.RICE_POUNDING_TABLE.get(), 84, 112, 26,
+        add(gui, "rice_pounding_table", ModBlocks.RICE_POUNDING_TABLE.get(), 83, 112, 26,
                 () -> JeiLayouts.pounding(RicePoundingTableBlockEntity.jeiRecipes()));
 
         // ---- H. 米片机（原料 + 水（流体槽，100mB）→ 米）----
-        add(gui, "rice_maker", ModBlocks.RICE_MAKER.get(), 84, 112, 43,
+        add(gui, "rice_maker", ModBlocks.RICE_MAKER.get(), 83, 112, 43,
                 () -> JeiLayouts.riceMaker(RiceMakerBlockEntity.jeiRecipes()));
 
         for (MachineDef def : machines) {
@@ -115,7 +115,9 @@ public class MimiJeiPlugin implements IModPlugin {
 
     /**
      * 注册一台机器：背景贴图固定为 assets/mimiworld/textures/gui/&lt;name&gt;.png，
-     * panelHeight 为需要展示的面板高度（玩家背包起始行），outputX/Y 为产物槽绝对坐标。
+     * panelHeight 为需要展示的面板高度，outputX/Y 为产物槽绝对坐标。
+     * <p>panelHeight 必须止于玩家背包槽框顶边的上一行：GUI 贴图中槽框顶边画在
+     * “背包首行槽坐标 - 1”处，若按槽坐标裁剪会把这一像素虚线带进 JEI 页面。</p>
      */
     private void add(IGuiHelper gui, String name, Block block, int panelHeight, int outputX, int outputY,
                      Supplier<List<JeiView>> views) {

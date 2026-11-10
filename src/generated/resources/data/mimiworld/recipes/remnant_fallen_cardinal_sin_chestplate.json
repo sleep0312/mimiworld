@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mimiworld:remnant_fallen_world_essence_ingot"
+    },
+    "D": {
+      "item": "mimiworld:heavenfall_wings_chestplate"
+    },
+    "N": {
+      "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "T": {
+      "item": "mimiworld:end_dragon_reverse_scale"
+    }
+  },
+  "pattern": [
+    "ATA",
+    "ADA",
+    "N N"
+  ],
+  "result": {
+    "item": "mimiworld:remnant_fallen_cardinal_sin_chestplate"
+  },
+  "show_notification": true
+}

@@ -4,12 +4,21 @@
   "key": {
     "A": {
       "item": "mimiworld:rice_crystal_alloy_ingot"
+    },
+    "D": {
+      "item": "minecraft:netherite_leggings"
+    },
+    "M": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "T": {
+      "item": "mimiworld:monkey_king_hair"
     }
   },
   "pattern": [
-    "AAA",
-    "A A",
-    "A A"
+    "ADA",
+    "ATA",
+    "M M"
   ],
   "result": {
     "item": "mimiworld:rice_crystal_alloy_leggings"

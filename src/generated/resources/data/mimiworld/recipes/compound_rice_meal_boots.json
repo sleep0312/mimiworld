@@ -2,17 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "D": {
+      "item": "mimiworld:super_heavy_crystal_boots"
+    },
     "M": {
       "item": "mimiworld:refined_rice_fiber"
     },
     "P": {
       "item": "mimiworld:compound_rice_meal_ingot"
+    },
+    "T": {
+      "item": "mimiworld:ox_king_crystal_horn"
     }
   },
   "pattern": [
-    "   ",
+    " T ",
     "PMP",
-    "PMP"
+    "PDP"
   ],
   "result": {
     "item": "mimiworld:compound_rice_meal_boots"

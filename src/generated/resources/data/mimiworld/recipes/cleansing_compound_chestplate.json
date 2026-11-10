@@ -5,14 +5,20 @@
     "B": {
       "item": "mimiworld:cleansing_compound_ingot"
     },
-    "N": {
-      "item": "mimiworld:refined_reinforced_rice_net"
+    "D": {
+      "item": "mimiworld:compound_rice_meal_chestplate"
+    },
+    "M": {
+      "item": "mimiworld:refined_rice_fiber"
+    },
+    "T": {
+      "item": "mimiworld:rabbit_king_bloody_red_eye"
     }
   },
   "pattern": [
-    "BNB",
     "BBB",
-    "BBB"
+    "BTB",
+    "MDM"
   ],
   "result": {
     "item": "mimiworld:cleansing_compound_chestplate"

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mimiworld:dark_spirit_fang"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_venom_azure_python_fang": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mimiworld:venom_azure_python_fang"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_venom_azure_python_fang",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mimiworld:dark_spirit_fang"
+    ]
+  },
+  "sends_telemetry_event": false
+}

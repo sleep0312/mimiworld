@@ -5,14 +5,20 @@
     "B": {
       "item": "mimiworld:super_lazy_alloy_ingot"
     },
+    "D": {
+      "item": "mimiworld:cleansing_compound_chestplate"
+    },
     "N": {
       "item": "mimiworld:refined_reinforced_rice_net"
+    },
+    "T": {
+      "item": "mimiworld:venom_azure_python_fang"
     }
   },
   "pattern": [
-    "BNB",
     "BBB",
-    "BBB"
+    "BTB",
+    "NDN"
   ],
   "result": {
     "item": "mimiworld:super_lazy_alloy_chestplate"

@@ -371,14 +371,6 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_CRYSTAL_BOW = registerItem("rice_crystal_bow",
             () -> new RiceCrystalBowItem(1.2D, new Item.Properties().durability(384)));
 
-    // 粗超结晶，Coarse Super Crystal：结晶材料，粗糙灰蓝晶簇含金色杂质
-    public static final RegistryObject<Item> COARSE_SUPER_CRYSTAL = registerItem("coarse_super_crystal",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 超结晶，Super Crystal：结晶材料，高纯度亮蓝晶簇含金核
-    public static final RegistryObject<Item> SUPER_CRYSTAL = registerItem("super_crystal",
-            () -> new Item(new Item.Properties().stacksTo(64)));
-
     // 米矿石，Rice Ore：铁矿石类方块物品，放置后对应 ModBlocks.RICE_ORE；
     // 钻石镐（挖掘等级3）采集。普通开采掉米石（时运可增产），精准采集才掉矿石本身；
     // 非精准开采另掉 3~7 经验球；矿石也可熔炉/高炉烧炼成米石
@@ -398,11 +390,6 @@ public class ModItems {
     // 米石，Rice Stone：嵌有奶白米纹的小石块，普通材料物品，最大堆叠 64
     public static final RegistryObject<Item> RICE_STONE = registerItem("rice_stone",
             () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 超结晶块，Block of Super Crystal：超结晶的压缩块，
-    // 放置后对应 ModBlocks.SUPER_CRYSTAL_BLOCK；铁镐（挖掘等级2）采集，破坏掉落本身
-    public static final RegistryObject<Item> SUPER_CRYSTAL_BLOCK = registerItem("super_crystal_block",
-            () -> new BlockItem(ModBlocks.SUPER_CRYSTAL_BLOCK.get(), new Item.Properties()));
 
     // 超重结晶，Super Heavy Crystal：高密度重晶材料，普通物品，最大堆叠 64
     public static final RegistryObject<Item> SUPER_HEAVY_CRYSTAL = registerItem("super_heavy_crystal",
@@ -467,6 +454,11 @@ public class ModItems {
             registerItem("super_lazy_alloy_ingot",
                     () -> new Item(new Item.Properties().stacksTo(64)));
 
+    // 天堕锭，Heavenfall Ingot：残堕锭围一圈、中心嵌破败之心的锻材，
+    // 最懒天堕套四件（含天堕翼胸甲）的主合成锭
+    public static final RegistryObject<Item> HEAVENFALL_INGOT = registerItem("heavenfall_ingot",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
     // 米石块，Block of Rice Stone：米石的压缩存储块，
     // 放置后对应 ModBlocks.RICE_STONE_BLOCK；铁镐（挖掘等级2）采集，破坏掉落本身
     public static final RegistryObject<Item> RICE_STONE_BLOCK = registerItem("rice_stone_block",
@@ -488,18 +480,10 @@ public class ModItems {
 
     // ================== 装备材料链（米木<饭晶<饭晶合金<超重结晶<复合米饭<清洁复合<超懒合金） ==================
 
-    // ---- 饭晶 / 超结晶基础武器 ----
+    // ---- 饭晶基础武器 ----
     // 饭晶剑：珍珠米白晶质剑，ModItemTiers.RICE_CRYSTAL（修复材料结晶米）
     public static final RegistryObject<Item> RICE_CRYSTAL_SWORD = registerItem("rice_crystal_sword",
             () -> new SwordItem(ModItemTiers.RICE_CRYSTAL, 3, -2.4F, new Item.Properties().stacksTo(1)));
-
-    // 超结晶剑：蓝晶金核剑，SUPER_CRYSTAL（修复材料超结晶）
-    public static final RegistryObject<Item> SUPER_CRYSTAL_SWORD = registerItem("super_crystal_sword",
-            () -> new SwordItem(ModItemTiers.SUPER_CRYSTAL, 3, -2.4F, new Item.Properties().stacksTo(1)));
-
-    // 超结晶弓：耐久 640 的弓，伤害倍率 ×1.5；GeckoLib 3D 模型（MubangongBowItem，通用弓 mubangong 资源）
-    public static final RegistryObject<Item> SUPER_CRYSTAL_BOW = registerItem("super_crystal_bow",
-            () -> new MubangongBowItem(1.5D, "chaojiejinggong", new Item.Properties().durability(640)));
 
     // ---- 饭晶合金武器/防具（修复材料饭晶合金锭） ----
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_SWORD = registerItem("rice_crystal_alloy_sword",
@@ -1001,7 +985,7 @@ public class ModItems {
 
     // ===== 天堕/堕落系列 =====
 
-    // 最懒天堕剑·赝品：剑类武器，堆叠 1，动态彩虹渐变名称
+    // 最懒天堕剑：剑类武器，堆叠 1，动态彩虹渐变名称（沿用原赝品的注册名与数值）
     public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_COUNTERFEIT =
             registerItem("laziest_heavenfall_sword_counterfeit",
                     () -> new RainbowNameSwordItem(ModItemTiers.LAZIEST_HEAVENFALL, 6, -2.4F,
@@ -1022,12 +1006,6 @@ public class ModItems {
     // 七宗堕落（Seven Deadly Falls）
     public static final RegistryObject<Item> SEVEN_DEADLY_FALLS = registerItem("seven_deadly_falls",
             () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 最懒天堕剑·原罪：剑类武器，堆叠 1，动态彩虹渐变名称
-    public static final RegistryObject<Item> LAZIEST_HEAVENFALL_SWORD_ORIGINAL_SIN =
-            registerItem("laziest_heavenfall_sword_original_sin",
-                    () -> new RainbowNameSwordItem(ModItemTiers.LAZIEST_HEAVENFALL, 8, -2.4F,
-                            new Item.Properties().stacksTo(1)));
 
     // ===== 最懒天堕盔甲四件套（HEAVENFALL 材质，全部 stacksTo 1）=====
     // GeckoLib 3D 模型（LaziestHeavenfallArmorItem）：纯白双翼挂 armorBody，常驻扇翅动画
@@ -1352,6 +1330,10 @@ public class ModItems {
     // 猴王如意棍（Monkey King Ruyi Staff）：近战武器，16 伤 / 攻速 0.8 / 触及 6 格，命中附加虚弱 I 2s
     public static final RegistryObject<Item> MONKEY_KING_RUYI_STAFF = registerItem("monkey_king_ruyi_staff",
             () -> new MonkeyKingRuyiStaffItem(new Item.Properties().stacksTo(1)));
+
+    // 猴王毫毛（Monkey King Hair）：饭晶合金套的锻造门票，由米米猴王必掉 2~3 根
+    public static final RegistryObject<Item> MONKEY_KING_HAIR = registerItem("monkey_king_hair",
+            () -> new Item(new Item.Properties().stacksTo(64)));
 
     // 米米猴头（Mimi Monkey Head）：方块物品，放置后对应 ModBlocks.MIMI_MONKEY_HEAD
     // （GeckoLib 头颅摆件方块，猴头+金冠+双雉鸡翎）；仍可用于如意棍修复等既有引用
@@ -2099,10 +2081,6 @@ public class ModItems {
     // 饭晶箭（Rice Crystal Arrow）：4 伤害 + 中毒 I 10s
     public static final RegistryObject<Item> RICE_CRYSTAL_ARROW = registerItem("rice_crystal_arrow",
             () -> new MimiArrowItem(4.0D, 1, new Item.Properties().stacksTo(64)));
-
-    // 超结晶箭（Super Crystal Arrow）：5 伤害 + 中毒 I 10s
-    public static final RegistryObject<Item> SUPER_CRYSTAL_ARROW = registerItem("super_crystal_arrow",
-            () -> new MimiArrowItem(5.0D, 1, new Item.Properties().stacksTo(64)));
 
     // 饭晶合金箭（Rice Crystal Alloy Arrow）：6 伤害 + 中毒 II 10s
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_ARROW = registerItem("rice_crystal_alloy_arrow",

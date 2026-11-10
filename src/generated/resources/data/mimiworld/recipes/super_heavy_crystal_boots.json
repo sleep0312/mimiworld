@@ -2,16 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "D": {
+      "item": "mimiworld:rice_crystal_alloy_boots"
+    },
     "H": {
       "item": "mimiworld:super_heavy_crystal"
     },
     "M": {
       "item": "mimiworld:refined_rice_fiber"
+    },
+    "T": {
+      "item": "mimiworld:tiger_king_razor_claw"
     }
   },
   "pattern": [
-    "   ",
-    "HMH",
+    " T ",
+    "HDH",
     "HMH"
   ],
   "result": {

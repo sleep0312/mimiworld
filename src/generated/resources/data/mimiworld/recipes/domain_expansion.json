@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mimiworld:heavenfall_ingot"
+    },
+    "T": {
+      "item": "mimiworld:evil_kui_longevity_horn"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ATA",
+    " A "
+  ],
+  "result": {
+    "item": "mimiworld:domain_expansion"
+  },
+  "show_notification": true
+}

@@ -24,10 +24,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 /**
- * 七种通用弓的 GeckoLib 3D 物品实现。
+ * 六种通用弓的 GeckoLib 3D 物品实现。
  *
- * <p>超结晶弓（×1.5）、饭晶合金弓（×2）、超重结晶弓（×5）、复合米饭弓（×10）、
- * 清洁复合弓（×20）、超懒合金弓（×50）、残堕宗罪之弓（×100）共用本类，七者共用同一套
+ * <p>饭晶合金弓（×2）、超重结晶弓（×5）、复合米饭弓（×10）、
+ * 清洁复合弓（×20）、超懒合金弓（×50）、残堕宗罪之弓（×100）共用本类，六者共用同一套
  * geo 模型与动画（mubangong.*），仅伤害倍率与贴图不同（贴图名由构造参数 textureName 指定，
  * 渲染时解析为 textures/item/&lt;textureName&gt;.png）。</p>
  *

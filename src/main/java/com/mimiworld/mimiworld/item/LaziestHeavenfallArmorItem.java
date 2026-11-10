@@ -1,9 +1,13 @@
 package com.mimiworld.mimiworld.item;
 
+import com.google.common.collect.Multimap;
 import com.mimiworld.mimiworld.client.renderer.LaziestHeavenfallArmorRenderer;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
@@ -17,6 +21,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -27,7 +32,7 @@ import java.util.function.Consumer;
  * <p>动画（assets/mimiworld/animations/laziest_heavenfall_armor.animation.json）：
  *   animation.laziest_heavenfall_armor.wing_flap —— 双翼常驻循环扇动（catmullrom，3.2s/循环）。</p>
  */
-public class LaziestHeavenfallArmorItem extends ArmorItem implements GeoItem {
+public class LaziestHeavenfallArmorItem extends ArmorItem implements GeoItem, ArmorPieceEffects {
 
     private static final RawAnimation WING_FLAP = RawAnimation.begin()
             .thenLoop("animation.laziest_heavenfall_armor.wing_flap");
@@ -36,6 +41,28 @@ public class LaziestHeavenfallArmorItem extends ArmorItem implements GeoItem {
 
     public LaziestHeavenfallArmorItem(ArmorMaterial material, ArmorItem.Type type, Item.Properties properties) {
         super(material, type, properties);
+    }
+
+    // 最懒天堕套（T6）单件最大生命值：头盔+300、胸甲+700、护腿+400、靴子+400，整套合计 +1800。
+    @Override
+    public float getMaxHealthBonus(EquipmentSlot slot) {
+        return switch (this.getType()) {
+            case HELMET -> 300.0F;
+            case CHESTPLATE -> 700.0F;
+            case LEGGINGS -> 400.0F;
+            case BOOTS -> 400.0F;
+        };
+    }
+
+    /** 本套无单件药水效果（双翼仅作外观动画）。 */
+    @Override
+    public Map<MobEffect, Integer> getWornEffects(EquipmentSlot slot) {
+        return Map.of();
+    }
+
+    @Override
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+        return withMaxHealthBonus(super.getAttributeModifiers(slot, stack), slot, this.getEquipmentSlot(), "laziest_heavenfall");
     }
 
     @Override

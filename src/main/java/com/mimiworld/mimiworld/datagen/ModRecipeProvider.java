@@ -260,7 +260,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice_pail", has(ModItems.RICE_PAIL.get()))
                 .save(consumer);
 
-        // ================= 第二批（草麻/网/超结晶/机器/米果线） =================
+        // ================= 第二批（草麻/网/机器/米果线） =================
 
         // ---------- 熔炉烧炼（1s=20t，时长严格按用户秒数） ----------
 
@@ -327,36 +327,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （粗超结晶；用户未写等号按条目号推断）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COARSE_SUPER_CRYSTAL.get())
-                .pattern("SRS")
-                .pattern("GSG")
-                .pattern("SRS")
-                .define('S', ModItems.RICE_STONE.get())
-                .define('R', Items.REDSTONE)
-                .define('G', Items.GOLD_INGOT)
-                .unlockedBy("has_rice_stone", has(ModItems.RICE_STONE.get()))
-                .save(consumer);
-
-        // （超结晶块）
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.SUPER_CRYSTAL_BLOCK.get())
-                .pattern("XXX")
-                .pattern("XXX")
-                .pattern("XXX")
-                .define('X', ModItems.SUPER_CRYSTAL.get())
-                .unlockedBy("has_super_crystal", has(ModItems.SUPER_CRYSTAL.get()))
-                .save(consumer);
-
-        // （超重结晶；用户未写等号按条目号推断）
+        // （超重结晶；原料中的超结晶块已改为饭晶）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SUPER_HEAVY_CRYSTAL.get())
                 .pattern("ADA")
                 .pattern("BNB")
                 .pattern("ADA")
                 .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
                 .define('D', Items.DIAMOND)
-                .define('B', ModItems.SUPER_CRYSTAL_BLOCK.get())
+                .define('B', ModItems.CRYSTALLIZED_RICE_MEAL.get())
                 .define('N', Items.NETHERITE_INGOT)
-                .unlockedBy("has_super_crystal_block", has(ModItems.SUPER_CRYSTAL_BLOCK.get()))
+                .unlockedBy("has_crystallized_rice_meal", has(ModItems.CRYSTALLIZED_RICE_MEAL.get()))
                 .save(consumer);
 
         // （沉淀台方块）
@@ -498,28 +478,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_crystallized_rice_meal", has(ModItems.CRYSTALLIZED_RICE_MEAL.get()))
                 .save(consumer);
 
-        // （超结晶剑；X=超结晶 F=精制米麻 S=米木棍）
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_CRYSTAL_SWORD.get())
-                .pattern("  X")
-                .pattern("FX ")
-                .pattern("SF ")
-                .define('X', ModItems.SUPER_CRYSTAL.get())
-                .define('F', ModItems.REFINED_RICE_FIBER.get())
-                .define('S', ModItems.RICE_STICK.get())
-                .unlockedBy("has_super_crystal", has(ModItems.SUPER_CRYSTAL.get()))
-                .save(consumer);
-
-        // （超结晶弓）
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_CRYSTAL_BOW.get())
-                .pattern(" XS")
-                .pattern("XFS")
-                .pattern(" XS")
-                .define('X', ModItems.SUPER_CRYSTAL.get())
-                .define('F', ModItems.REFINED_RICE_FIBER.get())
-                .define('S', ModItems.RICE_STICK.get())
-                .unlockedBy("has_super_crystal", has(ModItems.SUPER_CRYSTAL.get()))
-                .save(consumer);
-
         // （饭晶合金剑；A=饭晶合金锭 F=S=强化米棍）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.RICE_CRYSTAL_ALLOY_SWORD.get())
                 .pattern("  A")
@@ -542,39 +500,51 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （饭晶合金头盔）
+        // （饭晶合金头盔；A=饭晶合金锭 M=米麻 T=猴王毫毛门票 D=下界合金头盔）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.RICE_CRYSTAL_ALLOY_HELMET.get())
-                .pattern("AAA")
-                .pattern("A A")
-                .pattern("   ")
+                .pattern("ADA")
+                .pattern("ATA")
+                .pattern(" M ")
                 .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.MONKEY_KING_HAIR.get())
+                .define('D', Items.NETHERITE_HELMET)
                 .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （饭晶合金胸甲）
+        // （饭晶合金胸甲；A=饭晶合金锭 M=米麻 T=猴王毫毛门票 D=下界合金胸甲）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.RICE_CRYSTAL_ALLOY_CHESTPLATE.get())
-                .pattern("A A")
-                .pattern("AAA")
-                .pattern("AAA")
+                .pattern("M M")
+                .pattern("ATA")
+                .pattern("ADA")
                 .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.MONKEY_KING_HAIR.get())
+                .define('D', Items.NETHERITE_CHESTPLATE)
                 .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （饭晶合金护腿）
+        // （饭晶合金护腿；A=饭晶合金锭 M=米麻 T=猴王毫毛门票 D=下界合金护腿）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.RICE_CRYSTAL_ALLOY_LEGGINGS.get())
-                .pattern("AAA")
-                .pattern("A A")
-                .pattern("A A")
+                .pattern("ADA")
+                .pattern("ATA")
+                .pattern("M M")
                 .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.MONKEY_KING_HAIR.get())
+                .define('D', Items.NETHERITE_LEGGINGS)
                 .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （饭晶合金靴子）
+        // （饭晶合金靴子；A=饭晶合金锭 M=米麻 T=猴王毫毛门票 D=下界合金靴子）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.RICE_CRYSTAL_ALLOY_BOOTS.get())
-                .pattern("   ")
-                .pattern("A A")
-                .pattern("A A")
+                .pattern(" D ")
+                .pattern("ATA")
+                .pattern("AMA")
                 .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.MONKEY_KING_HAIR.get())
+                .define('D', Items.NETHERITE_BOOTS)
                 .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
@@ -602,46 +572,51 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // ================= 第四批（锻造三锭/胚/套装） =================
 
-        // （超重结晶头盔；H=F=粗制米网 M=精制米麻）
+        // （超重结晶头盔；H=超重结晶 M=米麻 T=虎王利爪门票 D=饭晶合金头盔）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_HEAVY_CRYSTAL_HELMET.get())
-                .pattern("HHH")
-                .pattern("HFH")
-                .pattern("M M")
+                .pattern("HTH")
+                .pattern("HDH")
+                .pattern(" M ")
                 .define('H', ModItems.SUPER_HEAVY_CRYSTAL.get())
-                .define('F', ModItems.REFINED_REINFORCED_RICE_NET.get())
                 .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.TIGER_KING_RAZOR_CLAW.get())
+                .define('D', ModItems.RICE_CRYSTAL_ALLOY_HELMET.get())
                 .unlockedBy("has_super_heavy_crystal", has(ModItems.SUPER_HEAVY_CRYSTAL.get()))
                 .save(consumer);
 
-        // （超重结晶胸甲；A=饭晶合金锭）
+        // （超重结晶胸甲；H=超重结晶 M=米麻 T=虎王利爪门票 D=饭晶合金胸甲）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_HEAVY_CRYSTAL_CHESTPLATE.get())
-                .pattern("HFH")
                 .pattern("HHH")
-                .pattern("AHA")
+                .pattern("HTH")
+                .pattern("MDM")
                 .define('H', ModItems.SUPER_HEAVY_CRYSTAL.get())
-                .define('F', ModItems.REFINED_REINFORCED_RICE_NET.get())
-                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.TIGER_KING_RAZOR_CLAW.get())
+                .define('D', ModItems.RICE_CRYSTAL_ALLOY_CHESTPLATE.get())
                 .unlockedBy("has_super_heavy_crystal", has(ModItems.SUPER_HEAVY_CRYSTAL.get()))
                 .save(consumer);
 
-        // （超重结晶护腿）
+        // （超重结晶护腿；M=米麻 T=虎王利爪门票 D=饭晶合金护腿）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_HEAVY_CRYSTAL_LEGGINGS.get())
-                .pattern("HAH")
-                .pattern("HFH")
-                .pattern("HFH")
+                .pattern("MDM")
+                .pattern("HTH")
+                .pattern("HHH")
                 .define('H', ModItems.SUPER_HEAVY_CRYSTAL.get())
-                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
-                .define('F', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.TIGER_KING_RAZOR_CLAW.get())
+                .define('D', ModItems.RICE_CRYSTAL_ALLOY_LEGGINGS.get())
                 .unlockedBy("has_super_heavy_crystal", has(ModItems.SUPER_HEAVY_CRYSTAL.get()))
                 .save(consumer);
 
-        // （超重结晶靴子）
+        // （超重结晶靴子；T=虎王利爪门票 D=饭晶合金靴子）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_HEAVY_CRYSTAL_BOOTS.get())
-                .pattern("   ")
-                .pattern("HMH")
+                .pattern(" T ")
+                .pattern("HDH")
                 .pattern("HMH")
                 .define('H', ModItems.SUPER_HEAVY_CRYSTAL.get())
                 .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.TIGER_KING_RAZOR_CLAW.get())
+                .define('D', ModItems.RICE_CRYSTAL_ALLOY_BOOTS.get())
                 .unlockedBy("has_super_heavy_crystal", has(ModItems.SUPER_HEAVY_CRYSTAL.get()))
                 .save(consumer);
 
@@ -667,46 +642,51 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
                 .save(consumer);
 
-        // （复合米饭头盔；N=精制强化米网）
+        // （复合米饭头盔；M=米麻 T=牛王晶角门票 D=超重结晶头盔）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COMPOUND_RICE_MEAL_HELMET.get())
-                .pattern("PPP")
-                .pattern("PNP")
-                .pattern("M M")
+                .pattern("PDP")
+                .pattern("PMP")
+                .pattern(" T ")
                 .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
-                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
                 .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.OX_KING_CRYSTAL_HORN.get())
+                .define('D', ModItems.SUPER_HEAVY_CRYSTAL_HELMET.get())
                 .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
                 .save(consumer);
 
-        // （复合米饭胸甲）
+        // （复合米饭胸甲；M=米麻 T=牛王晶角门票 D=超重结晶胸甲）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COMPOUND_RICE_MEAL_CHESTPLATE.get())
-                .pattern("PNP")
                 .pattern("PPP")
-                .pattern("HPH")
-                .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
-                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
-                .define('H', ModItems.SUPER_HEAVY_CRYSTAL.get())
-                .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
-                .save(consumer);
-
-        // （复合米饭护腿）
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COMPOUND_RICE_MEAL_LEGGINGS.get())
-                .pattern("PHP")
-                .pattern("PNP")
-                .pattern("PNP")
-                .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
-                .define('H', ModItems.SUPER_HEAVY_CRYSTAL.get())
-                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
-                .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
-                .save(consumer);
-
-        // （复合米饭靴子）
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COMPOUND_RICE_MEAL_BOOTS.get())
-                .pattern("   ")
-                .pattern("PMP")
-                .pattern("PMP")
+                .pattern("PTP")
+                .pattern("MDM")
                 .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
                 .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.OX_KING_CRYSTAL_HORN.get())
+                .define('D', ModItems.SUPER_HEAVY_CRYSTAL_CHESTPLATE.get())
+                .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
+                .save(consumer);
+
+        // （复合米饭护腿；M=米麻 T=牛王晶角门票 D=超重结晶护腿）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COMPOUND_RICE_MEAL_LEGGINGS.get())
+                .pattern("MDM")
+                .pattern("PTP")
+                .pattern("PPP")
+                .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.OX_KING_CRYSTAL_HORN.get())
+                .define('D', ModItems.SUPER_HEAVY_CRYSTAL_LEGGINGS.get())
+                .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
+                .save(consumer);
+
+        // （复合米饭靴子；T=牛王晶角门票 D=超重结晶靴子）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COMPOUND_RICE_MEAL_BOOTS.get())
+                .pattern(" T ")
+                .pattern("PMP")
+                .pattern("PDP")
+                .define('P', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.OX_KING_CRYSTAL_HORN.get())
+                .define('D', ModItems.SUPER_HEAVY_CRYSTAL_BOOTS.get())
                 .unlockedBy("has_compound_rice_meal_ingot", has(ModItems.COMPOUND_RICE_MEAL_INGOT.get()))
                 .save(consumer);
 
@@ -731,43 +711,51 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_cleansing_compound_ingot", has(ModItems.CLEANSING_COMPOUND_INGOT.get()))
                 .save(consumer);
 
-        // （清洁复合头盔；B=清洁复合锭 N=精制强化米网）
+        // （清洁复合头盔；B=清洁复合锭 M=米麻 T=兔王血红之眼门票 D=复合米饭头盔）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.CLEANSING_COMPOUND_HELMET.get())
-                .pattern("BBB")
-                .pattern("BNB")
-                .pattern("   ")
+                .pattern("BDB")
+                .pattern("BMB")
+                .pattern(" T ")
                 .define('B', ModItems.CLEANSING_COMPOUND_INGOT.get())
-                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.RABBIT_KING_BLOODY_RED_EYE.get())
+                .define('D', ModItems.COMPOUND_RICE_MEAL_HELMET.get())
                 .unlockedBy("has_cleansing_compound_ingot", has(ModItems.CLEANSING_COMPOUND_INGOT.get()))
                 .save(consumer);
 
-        // （清洁复合胸甲；B=清洁复合锭 N=精制强化米网）
+        // （清洁复合胸甲；M=米麻 T=兔王血红之眼门票 D=复合米饭胸甲）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.CLEANSING_COMPOUND_CHESTPLATE.get())
-                .pattern("BNB")
                 .pattern("BBB")
-                .pattern("BBB")
+                .pattern("BTB")
+                .pattern("MDM")
                 .define('B', ModItems.CLEANSING_COMPOUND_INGOT.get())
-                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.RABBIT_KING_BLOODY_RED_EYE.get())
+                .define('D', ModItems.COMPOUND_RICE_MEAL_CHESTPLATE.get())
                 .unlockedBy("has_cleansing_compound_ingot", has(ModItems.CLEANSING_COMPOUND_INGOT.get()))
                 .save(consumer);
 
-        // （清洁复合护腿；B=清洁复合锭 N=精制强化米网）
+        // （清洁复合护腿；M=米麻 T=兔王血红之眼门票 D=复合米饭护腿）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.CLEANSING_COMPOUND_LEGGINGS.get())
+                .pattern("MDM")
+                .pattern("BTB")
                 .pattern("BBB")
-                .pattern("BNB")
-                .pattern("BNB")
                 .define('B', ModItems.CLEANSING_COMPOUND_INGOT.get())
-                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.RABBIT_KING_BLOODY_RED_EYE.get())
+                .define('D', ModItems.COMPOUND_RICE_MEAL_LEGGINGS.get())
                 .unlockedBy("has_cleansing_compound_ingot", has(ModItems.CLEANSING_COMPOUND_INGOT.get()))
                 .save(consumer);
 
-        // （清洁复合靴子；B=清洁复合锭 N=精制强化米网）
+        // （清洁复合靴子；M=米麻 T=兔王血红之眼门票 D=复合米饭靴子）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.CLEANSING_COMPOUND_BOOTS.get())
-                .pattern("BBB")
-                .pattern("BNB")
-                .pattern("N N")
+                .pattern("BTB")
+                .pattern("BMB")
+                .pattern("BDB")
                 .define('B', ModItems.CLEANSING_COMPOUND_INGOT.get())
-                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('M', ModItems.REFINED_RICE_FIBER.get())
+                .define('T', ModItems.RABBIT_KING_BLOODY_RED_EYE.get())
+                .define('D', ModItems.COMPOUND_RICE_MEAL_BOOTS.get())
                 .unlockedBy("has_cleansing_compound_ingot", has(ModItems.CLEANSING_COMPOUND_INGOT.get()))
                 .save(consumer);
 
@@ -792,45 +780,53 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.SUPER_LAZY_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （超懒合金头盔；B=超懒合金锭 N=精制强化米网）
+        // （超懒合金头盔；B=超懒合金锭 N=精制强化米网 T=毒蟒之牙门票 D=清洁复合头盔）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_LAZY_ALLOY_HELMET.get())
-                .pattern("BBB")
+                .pattern("BDB")
                 .pattern("BNB")
-                .pattern("   ")
+                .pattern(" T ")
                 .define('B', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
                 .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.VENOM_AZURE_PYTHON_FANG.get())
+                .define('D', ModItems.CLEANSING_COMPOUND_HELMET.get())
                 .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.SUPER_LAZY_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // （超懒合金胸甲）
+        // （超懒合金胸甲；B=超懒合金锭 N=精制强化米网 T=毒蟒之牙门票 D=清洁复合胸甲）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_LAZY_ALLOY_CHESTPLATE.get())
-                .pattern("BNB")
                 .pattern("BBB")
-                .pattern("BBB")
+                .pattern("BTB")
+                .pattern("NDN")
                 .define('B', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
                 .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.VENOM_AZURE_PYTHON_FANG.get())
+                .define('D', ModItems.CLEANSING_COMPOUND_CHESTPLATE.get())
                 .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.SUPER_LAZY_ALLOY_INGOT.get()))
                 .save(consumer);
 
-        // 超懒合金护腿：超懒合金锭满行；精制强化米网点缀
+        // 超懒合金护腿：精制强化米网×2 点缀；T=毒蟒之牙门票 D=清洁复合护腿
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_LAZY_ALLOY_LEGGINGS.get())
+                .pattern("NDN")
+                .pattern("BTB")
                 .pattern("BBB")
-                .pattern("BNB")
-                .pattern("BNB")
                 .define('B', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
                 .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.VENOM_AZURE_PYTHON_FANG.get())
+                .define('D', ModItems.CLEANSING_COMPOUND_LEGGINGS.get())
                 .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.SUPER_LAZY_ALLOY_INGOT.get()))
                 .save(consumer);
 
         // ================= 第五批（靴子/铸造台/召唤器链/Boss 生物蛋/神翼） =================
 
-        // （超懒合金靴子；B=超懒合金锭 N=精制强化米网）
+        // （超懒合金靴子；B=超懒合金锭 N=精制强化米网 T=毒蟒之牙门票 D=清洁复合靴子）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SUPER_LAZY_ALLOY_BOOTS.get())
-                .pattern("BBB")
+                .pattern("BTB")
                 .pattern("BNB")
-                .pattern("N N")
+                .pattern("BDB")
                 .define('B', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
                 .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.VENOM_AZURE_PYTHON_FANG.get())
+                .define('D', ModItems.CLEANSING_COMPOUND_BOOTS.get())
                 .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.SUPER_LAZY_ALLOY_INGOT.get()))
                 .save(consumer);
 
@@ -988,15 +984,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_large_summoner", has(ModItems.LARGE_SUMMONER.get()))
                 .save(consumer);
 
-        // （最懒终末龙生物蛋）：四角超结晶 + 下界合金碎片，中心最懒召唤器
+        // （最懒终末龙生物蛋）：四角超懒合金锭 + 下界合金碎片，中心最懒召唤器
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAZIEST_FINAL_DRAGON_SPAWN_EGG.get())
                 .pattern("RNR")
                 .pattern("NMN")
                 .pattern("RNR")
-                .define('R', ModItems.SUPER_CRYSTAL.get())
+                .define('R', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
                 .define('N', Items.NETHERITE_SCRAP)
                 .define('M', ModItems.LAZIEST_SUMMONER.get())
-                .unlockedBy("has_netherite_scrap", has(Items.NETHERITE_SCRAP))
+                .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.SUPER_LAZY_ALLOY_INGOT.get()))
                 .save(consumer);
 
         // （第八宗罪龙生物蛋）：残堕精华锭 + 下界合金锭围边，中心最懒召唤器，终末级材料区分于第七Boss
@@ -1104,6 +1100,91 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('H', ModItems.NIANMI_SILK_THREAD.get())
                 .define('R', ModItems.RICE.get())
                 .unlockedBy("has_book_rice_pen", has(ModItems.BOOK_RICE_PEN.get()))
+                .save(consumer);
+
+        // ---------- 圣遗物饰品获取配方 ----------
+        // 每个 Boss 至少直接掉落 1 件饰品（见 ModLootTableProvider），其余饰品用
+        // 「该阶段可合成的对应等级锭 + Boss 专属掉落物」在工作台合成。
+
+        // 如意：饭晶合金锭×4 + 猴王毫毛（猴王档）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RUYI.get())
+                .pattern(" A ")
+                .pattern("ATA")
+                .pattern(" A ")
+                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
+                .define('T', ModItems.MONKEY_KING_HAIR.get())
+                .unlockedBy("has_monkey_king_hair", has(ModItems.MONKEY_KING_HAIR.get()))
+                .save(consumer);
+
+        // 虎王之蔑：超重结晶×4 + 虎王利爪（虎王档）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TIGER_KING_DISDAIN.get())
+                .pattern(" A ")
+                .pattern("ATA")
+                .pattern(" A ")
+                .define('A', ModItems.SUPER_HEAVY_CRYSTAL.get())
+                .define('T', ModItems.TIGER_KING_RAZOR_CLAW.get())
+                .unlockedBy("has_tiger_king_razor_claw", has(ModItems.TIGER_KING_RAZOR_CLAW.get()))
+                .save(consumer);
+
+        // 猩红竖眼：清洁复合锭×4 + 兔王腥红眼（兔王档）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CRIMSON_VERTICAL_EYE.get())
+                .pattern(" A ")
+                .pattern("ATA")
+                .pattern(" A ")
+                .define('A', ModItems.CLEANSING_COMPOUND_INGOT.get())
+                .define('T', ModItems.RABBIT_KING_BLOODY_RED_EYE.get())
+                .unlockedBy("has_rabbit_king_bloody_red_eye", has(ModItems.RABBIT_KING_BLOODY_RED_EYE.get()))
+                .save(consumer);
+
+        // 暗灵毒牙：超懒合金锭×4 + 极毒青蟒牙（天青蟒档）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DARK_SPIRIT_FANG.get())
+                .pattern(" A ")
+                .pattern("ATA")
+                .pattern(" A ")
+                .define('A', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
+                .define('T', ModItems.VENOM_AZURE_PYTHON_FANG.get())
+                .unlockedBy("has_venom_azure_python_fang", has(ModItems.VENOM_AZURE_PYTHON_FANG.get()))
+                .save(consumer);
+
+        // 天青轮盘：超懒合金锭×8 + 极毒青蟒牙（天青蟒档，环形成本高于暗灵毒牙）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.AZURE_WHEEL.get())
+                .pattern("AAA")
+                .pattern("ATA")
+                .pattern("AAA")
+                .define('A', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
+                .define('T', ModItems.VENOM_AZURE_PYTHON_FANG.get())
+                .unlockedBy("has_venom_azure_python_fang", has(ModItems.VENOM_AZURE_PYTHON_FANG.get()))
+                .save(consumer);
+
+        // 领域展开：天堕锭×4 + 恶夔长命角（长命夔档）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DOMAIN_EXPANSION.get())
+                .pattern(" A ")
+                .pattern("ATA")
+                .pattern(" A ")
+                .define('A', ModItems.HEAVENFALL_INGOT.get())
+                .define('T', ModItems.EVIL_KUI_LONGEVITY_HORN.get())
+                .unlockedBy("has_evil_kui_horn", has(ModItems.EVIL_KUI_LONGEVITY_HORN.get()))
+                .save(consumer);
+
+        // 山海恩泽：天堕锭×4 + 清洁复合锭×4 + 恶夔长命角（长命夔档）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SHANHAI_GRACE.get())
+                .pattern("BAB")
+                .pattern("ATA")
+                .pattern("BAB")
+                .define('A', ModItems.HEAVENFALL_INGOT.get())
+                .define('B', ModItems.CLEANSING_COMPOUND_INGOT.get())
+                .define('T', ModItems.EVIL_KUI_LONGEVITY_HORN.get())
+                .unlockedBy("has_evil_kui_horn", has(ModItems.EVIL_KUI_LONGEVITY_HORN.get()))
+                .save(consumer);
+
+        // 上古毛皮：复合米饭锭×4 + 牛王晶角（牛王档）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ANCIENT_PELT.get())
+                .pattern(" A ")
+                .pattern("ATA")
+                .pattern(" A ")
+                .define('A', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
+                .define('T', ModItems.OX_KING_CRYSTAL_HORN.get())
+                .unlockedBy("has_ox_king_crystal_horn", has(ModItems.OX_KING_CRYSTAL_HORN.get()))
                 .save(consumer);
 
         // 原版龙蛋：烈焰粉 龙息 烈焰粉 / 龙息 0 龙息 / 烈焰粉 龙息 烈焰粉
@@ -1239,7 +1320,7 @@ public class ModRecipeProvider extends RecipeProvider {
         // （超懒剑法）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SUPER_LAZY_SWORD_ART.get())
                 .pattern("ABA")
-                .pattern("ACD")
+                .pattern("ACA")
                 .pattern("DDD")
                 .define('A', ModItems.GOLDEN_RICE_JADE.get())
                 .define('B', ModItems.FORBIDDEN_SWORD_MANUAL.get())
@@ -1287,7 +1368,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RUINED_HEART.get())
                 .pattern("ENE")
                 .pattern("DSD")
-                .pattern("END")
+                .pattern("ENE")
                 .define('E', Items.ENDER_EYE)
                 .define('N', ModItems.RICE_CRYSTAL_ALLOY_HAMMER.get())
                 .define('D', Items.DRAGON_BREATH)
@@ -1302,6 +1383,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("ABA")
                 .define('A', ModItems.CLEANSING_RICE_SEPARATION_SOLUTION.get())
                 .define('B', ModItems.RUINED_HEART.get())
+                .unlockedBy("has_ruined_heart", has(ModItems.RUINED_HEART.get()))
+                .save(consumer);
+
+        // （天堕锭：中间 1 破败之心，周围一圈 8 个残堕锭 → 1 天堕锭，最懒天堕套主合成锭）
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HEAVENFALL_INGOT.get())
+                .pattern("RRR")
+                .pattern("RUR")
+                .pattern("RRR")
+                .define('R', ModItems.REMNANT_FALLEN_INGOT.get())
+                .define('U', ModItems.RUINED_HEART.get())
                 .unlockedBy("has_ruined_heart", has(ModItems.RUINED_HEART.get()))
                 .save(consumer);
 
@@ -1331,68 +1422,100 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_fallen_crown", has(ModItems.FALLEN_CROWN.get()))
                 .save(consumer);
 
-        // （最懒天堕剑·原罪）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAZIEST_HEAVENFALL_SWORD_ORIGINAL_SIN.get())
-                .pattern("ACA")
-                .pattern("NBN")
-                .pattern("ADA")
-                .define('A', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
-                .define('C', ModItems.FALLEN_CROWN.get())
-                .define('N', Items.NETHER_STAR)
-                .define('B', ModItems.SEVEN_DEADLY_FALLS.get())
-                .define('D', ModItems.LAZIEST_HEAVENFALL_SWORD_COUNTERFEIT.get())
-                .unlockedBy("has_seven_deadly_falls", has(ModItems.SEVEN_DEADLY_FALLS.get()))
-                .save(consumer);
-
-        // （天堕翼胸甲）
+        // （天堕翼胸甲；A=天堕锭 N=精制强化米网 T=恶夔长命角门票 C=超懒翼胸甲）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.HEAVENFALL_WINGS_CHESTPLATE.get())
-                .pattern("ABA")
+                .pattern("ATA")
                 .pattern("ACA")
-                .pattern("ADA")
-                .define('A', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
-                .define('B', ModItems.FALLEN_CROWN.get())
+                .pattern("N N")
+                .define('A', ModItems.HEAVENFALL_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.EVIL_KUI_LONGEVITY_HORN.get())
                 .define('C', ModItems.SUPER_LAZY_WINGS_CHESTPLATE.get())
-                .define('D', ModItems.SEVEN_DEADLY_FALLS.get())
-                .unlockedBy("has_seven_deadly_falls", has(ModItems.SEVEN_DEADLY_FALLS.get()))
+                .unlockedBy("has_evil_kui_horn", has(ModItems.EVIL_KUI_LONGEVITY_HORN.get()))
                 .save(consumer);
 
-        // （最懒天堕头盔）
+        // （最懒天堕头盔；A=天堕锭 N=精制强化米网 T=恶夔长命角门票 D=超懒合金头盔）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.LAZIEST_HEAVENFALL_HELMET.get())
-                .pattern("ABA")
-                .pattern("CDC")
-                .pattern("AEA")
-                .define('A', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
-                .define('B', ModItems.FALLEN_CROWN.get())
-                .define('C', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
+                .pattern("ATA")
+                .pattern("ADA")
+                .pattern(" N ")
+                .define('A', ModItems.HEAVENFALL_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.EVIL_KUI_LONGEVITY_HORN.get())
                 .define('D', ModItems.SUPER_LAZY_ALLOY_HELMET.get())
-                .define('E', ModItems.SEVEN_DEADLY_FALLS.get())
-                .unlockedBy("has_seven_deadly_falls", has(ModItems.SEVEN_DEADLY_FALLS.get()))
+                .unlockedBy("has_evil_kui_horn", has(ModItems.EVIL_KUI_LONGEVITY_HORN.get()))
                 .save(consumer);
 
-        // （最懒天堕护腿）
+        // （最懒天堕护腿；A=天堕锭 N=精制强化米网 T=恶夔长命角门票 D=超懒合金护腿）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.LAZIEST_HEAVENFALL_LEGGINGS.get())
-                .pattern("ABA")
-                .pattern("CDC")
-                .pattern("AEA")
-                .define('A', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
-                .define('B', ModItems.FALLEN_CROWN.get())
-                .define('C', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
+                .pattern("ATA")
+                .pattern("ADA")
+                .pattern("N N")
+                .define('A', ModItems.HEAVENFALL_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.EVIL_KUI_LONGEVITY_HORN.get())
                 .define('D', ModItems.SUPER_LAZY_ALLOY_LEGGINGS.get())
-                .define('E', ModItems.SEVEN_DEADLY_FALLS.get())
-                .unlockedBy("has_seven_deadly_falls", has(ModItems.SEVEN_DEADLY_FALLS.get()))
+                .unlockedBy("has_evil_kui_horn", has(ModItems.EVIL_KUI_LONGEVITY_HORN.get()))
                 .save(consumer);
 
-        // （最懒天堕靴子）
+        // （最懒天堕靴子；A=天堕锭 N=精制强化米网 T=恶夔长命角门票 D=超懒合金靴子）
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.LAZIEST_HEAVENFALL_BOOTS.get())
-                .pattern("ABA")
-                .pattern("CDC")
-                .pattern("AEA")
-                .define('A', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
-                .define('B', ModItems.FALLEN_CROWN.get())
-                .define('C', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
+                .pattern("ATA")
+                .pattern("ADA")
+                .pattern(" N ")
+                .define('A', ModItems.HEAVENFALL_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.EVIL_KUI_LONGEVITY_HORN.get())
                 .define('D', ModItems.SUPER_LAZY_ALLOY_BOOTS.get())
-                .define('E', ModItems.SEVEN_DEADLY_FALLS.get())
-                .unlockedBy("has_seven_deadly_falls", has(ModItems.SEVEN_DEADLY_FALLS.get()))
+                .unlockedBy("has_evil_kui_horn", has(ModItems.EVIL_KUI_LONGEVITY_HORN.get()))
+                .save(consumer);
+
+        // （残堕宗罪头盔；A=残堕世界精华锭 N=精制强化米网 T=终末龙逆鳞门票 D=最懒天堕头盔）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.REMNANT_FALLEN_CARDINAL_SIN_HELMET.get())
+                .pattern("ATA")
+                .pattern("ADA")
+                .pattern(" N ")
+                .define('A', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.END_DRAGON_REVERSE_SCALE.get())
+                .define('D', ModItems.LAZIEST_HEAVENFALL_HELMET.get())
+                .unlockedBy("has_end_dragon_reverse_scale", has(ModItems.END_DRAGON_REVERSE_SCALE.get()))
+                .save(consumer);
+
+        // （残堕宗罪胸甲；A=残堕世界精华锭 N=精制强化米网 T=终末龙逆鳞门票 D=天堕翼胸甲）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.REMNANT_FALLEN_CARDINAL_SIN_CHESTPLATE.get())
+                .pattern("ATA")
+                .pattern("ADA")
+                .pattern("N N")
+                .define('A', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.END_DRAGON_REVERSE_SCALE.get())
+                .define('D', ModItems.HEAVENFALL_WINGS_CHESTPLATE.get())
+                .unlockedBy("has_end_dragon_reverse_scale", has(ModItems.END_DRAGON_REVERSE_SCALE.get()))
+                .save(consumer);
+
+        // （残堕宗罪护腿；A=残堕世界精华锭 N=精制强化米网 T=终末龙逆鳞门票 D=最懒天堕护腿）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.REMNANT_FALLEN_CARDINAL_SIN_LEGGINGS.get())
+                .pattern("ATA")
+                .pattern("ADA")
+                .pattern("N N")
+                .define('A', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.END_DRAGON_REVERSE_SCALE.get())
+                .define('D', ModItems.LAZIEST_HEAVENFALL_LEGGINGS.get())
+                .unlockedBy("has_end_dragon_reverse_scale", has(ModItems.END_DRAGON_REVERSE_SCALE.get()))
+                .save(consumer);
+
+        // （残堕宗罪靴子；A=残堕世界精华锭 N=精制强化米网 T=终末龙逆鳞门票 D=最懒天堕靴子）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.REMNANT_FALLEN_CARDINAL_SIN_BOOTS.get())
+                .pattern("ATA")
+                .pattern("ADA")
+                .pattern(" N ")
+                .define('A', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get())
+                .define('N', ModItems.REFINED_REINFORCED_RICE_NET.get())
+                .define('T', ModItems.END_DRAGON_REVERSE_SCALE.get())
+                .define('D', ModItems.LAZIEST_HEAVENFALL_BOOTS.get())
+                .unlockedBy("has_end_dragon_reverse_scale", has(ModItems.END_DRAGON_REVERSE_SCALE.get()))
                 .save(consumer);
 
         // 啄米鸡肉（生）在熔炉烧 2s（40t）→ 熟啄米鸡肉
@@ -2005,17 +2128,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('B', ModItems.RICE_STICK.get())
                 .define('C', ModItems.RICE_STONE.get())
                 .unlockedBy("has_crystallized_rice_meal", has(ModItems.CRYSTALLIZED_RICE_MEAL.get()))
-                .save(consumer);
-
-        // （超结晶箭；超结晶 强化米棍）
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SUPER_CRYSTAL_ARROW.get())
-                .pattern(" A ")
-                .pattern(" B ")
-                .pattern(" C ")
-                .define('A', ModItems.SUPER_CRYSTAL.get())
-                .define('B', ModItems.REINFORCED_RICE_STICK.get())
-                .define('C', ModItems.RICE_STONE.get())
-                .unlockedBy("has_super_crystal", has(ModItems.SUPER_CRYSTAL.get()))
                 .save(consumer);
 
         // （饭晶合金箭；饭晶合金粒 7=米木棍）
