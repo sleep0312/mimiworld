@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_refined_rice_fiber": {
+    "has_monkey_king_hair": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mimiworld:refined_rice_fiber"
+              "mimiworld:monkey_king_hair"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mimiworld:rice_crystal_hammer"
+        "recipe": "mimiworld:mimi_shield"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_refined_rice_fiber",
+      "has_monkey_king_hair",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mimiworld:rice_crystal_hammer"
+      "mimiworld:mimi_shield"
     ]
   },
   "sends_telemetry_event": false

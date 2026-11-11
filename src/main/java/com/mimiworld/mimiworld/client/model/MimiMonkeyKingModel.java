@@ -11,7 +11,8 @@ import software.bernie.geckolib.model.GeoModel;
  * <p>资源（Blockbench 导出）：</p>
  * <ul>
  *   <li>模型：geo/mimihouwang.geo.json（10 骨骼：root/body/head/crown/rightArm/leftArm/
- *       tail/leftLeg/rightLeg/staff，73 方块；staff 独立挂在 root 下以便扔棒动画脱手）</li>
+ *       tail/leftLeg/rightLeg/staff，80 方块；staff 独立挂在 root 下以便扔棒动画脱手，
+ *       棒体方块直接建在 staff 骨骼里、位置对齐右手掌心）</li>
  *   <li>贴图：textures/entity/mimihouwang.png（128×128）</li>
  *   <li>动画：animations/mimihouwang.animation.json
  *       （animation.mimihouwang.idle / walk / attack / attack_slam / throw）</li>

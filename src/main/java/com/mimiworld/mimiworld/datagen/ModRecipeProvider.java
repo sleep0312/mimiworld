@@ -239,15 +239,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_rice", has(ModItems.RICE.get()))
                 .save(consumer);
 
-        // （米原木夹饭晶锤 → 锤米台）
+        // （米原木夹饭晶 → 锤米台）
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.RICE_POUNDING_TABLE.get())
                 .pattern("LLL")
                 .pattern("RHR")
                 .pattern("LLL")
                 .define('L', ModItems.RICE_LOG.get())
                 .define('R', Items.REDSTONE)
-                .define('H', ModItems.RICE_CRYSTAL_HAMMER.get())
-                .unlockedBy("has_rice_crystal_hammer", has(ModItems.RICE_CRYSTAL_HAMMER.get()))
+                .define('H', ModItems.CRYSTALLIZED_RICE_MEAL.get())
+                .unlockedBy("has_crystallized_rice_meal", has(ModItems.CRYSTALLIZED_RICE_MEAL.get()))
                 .save(consumer);
 
         // （5 个饭桶与 4 个钻石交错 → 饭晶；原「粗制饭晶 → 熔炉精炼」两步已合并为一步）
@@ -287,17 +287,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_crystallized_rice_meal", has(ModItems.CRYSTALLIZED_RICE_MEAL.get()))
                 .save(consumer);
 
-        // （饭晶锤）
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.RICE_CRYSTAL_HAMMER.get())
-                .pattern("AFA")
-                .pattern("ASA")
-                .pattern(" S ")
-                .define('A', ModItems.CRYSTALLIZED_RICE_MEAL.get())
-                .define('F', ModItems.REFINED_RICE_FIBER.get())
-                .define('S', ModItems.REINFORCED_RICE_STICK.get())
-                .unlockedBy("has_refined_rice_fiber", has(ModItems.REFINED_RICE_FIBER.get()))
-                .save(consumer);
-
         // （3 个米草 L 形 → 米麻；低阶装备通用纤维）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.REFINED_RICE_FIBER.get())
                 .pattern("   ")
@@ -314,17 +303,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("N N")
                 .define('N', ModItems.REFINED_RICE_FIBER.get())
                 .unlockedBy("has_refined_rice_fiber", has(ModItems.REFINED_RICE_FIBER.get()))
-                .save(consumer);
-
-        // （饭晶合金锤）
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.RICE_CRYSTAL_ALLOY_HAMMER.get())
-                .pattern("AHA")
-                .pattern("ASA")
-                .pattern(" S ")
-                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
-                .define('H', ModItems.REFINED_REINFORCED_RICE_NET.get())
-                .define('S', ModItems.REINFORCED_RICE_STICK.get())
-                .unlockedBy("has_rice_crystal_alloy_ingot", has(ModItems.RICE_CRYSTAL_ALLOY_INGOT.get()))
                 .save(consumer);
 
         // （超重结晶；原料中的超结晶块已改为饭晶）
@@ -357,7 +335,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("AXA")
                 .define('A', ModItems.SUPER_HEAVY_CRYSTAL.get())
                 .define('X', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
-                .define('H', ModItems.RICE_CRYSTAL_HAMMER.get())
+                .define('H', ModItems.CRYSTALLIZED_RICE_MEAL.get())
                 .unlockedBy("has_super_heavy_crystal", has(ModItems.SUPER_HEAVY_CRYSTAL.get()))
                 .save(consumer);
 
@@ -918,45 +896,45 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_mixed_crystal", has(ModItems.MIXED_CRYSTAL.get()))
                 .save(consumer);
 
-        // （米米猴王生物蛋；中心小型召唤器）
+        // （米米猴王生物蛋；四角下界合金锭，中心小型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MIMI_MONKEY_KING_SPAWN_EGG.get())
                 .pattern("SAS")
                 .pattern("AEA")
                 .pattern("SAS")
-                .define('S', ModItems.REINFORCED_RICE_STICK.get())
+                .define('S', Items.NETHERITE_INGOT)
                 .define('A', ModItems.RICE_FRUIT_BLACK_MIXTURE.get())
                 .define('E', ModItems.SMALL_SUMMONER.get())
                 .unlockedBy("has_small_summoner", has(ModItems.SMALL_SUMMONER.get()))
                 .save(consumer);
 
-        // （饭晶虎王生物蛋；米果混黏液围边，中心小型召唤器）
+        // （饭晶虎王生物蛋；四角饭晶合金锭，米果混黏液围边，中心小型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RICE_CRYSTAL_TIGER_KING_SPAWN_EGG.get())
                 .pattern("IVI")
                 .pattern("VTV")
                 .pattern("IVI")
-                .define('I', Items.IRON_INGOT)
+                .define('I', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
                 .define('V', ModItems.RICE_FRUIT_VISCOUS_MIXTURE.get())
                 .define('T', ModItems.SMALL_SUMMONER.get())
                 .unlockedBy("has_small_summoner", has(ModItems.SMALL_SUMMONER.get()))
                 .save(consumer);
 
-        // （超晶牛王生物蛋；米石四角 爆米绽放液围边，中心中型召唤器）
+        // （超晶牛王生物蛋；四角超重结晶 爆米绽放液围边，中心中型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SUPER_CRYSTAL_COW_KING_SPAWN_EGG.get())
                 .pattern("RLR")
                 .pattern("LCL")
                 .pattern("RLR")
-                .define('R', ModItems.RICE_STONE.get())
+                .define('R', ModItems.SUPER_HEAVY_CRYSTAL.get())
                 .define('L', ModItems.POPRICE_BLOOM_LIQUID.get())
                 .define('C', ModItems.MEDIUM_SUMMONER.get())
                 .unlockedBy("has_medium_summoner", has(ModItems.MEDIUM_SUMMONER.get()))
                 .save(consumer);
 
-        // （重晶兔王生物蛋；爆米嘬心液围边，中心中型召唤器）
+        // （重晶兔王生物蛋；四角复合米饭锭，爆米嘬心液围边，中心中型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HEAVY_CRYSTAL_RABBIT_KING_SPAWN_EGG.get())
                 .pattern("RHR")
                 .pattern("HOH")
                 .pattern("RHR")
-                .define('R', ModItems.CRYSTALLIZED_RICE_MEAL.get())
+                .define('R', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
                 .define('H', ModItems.POPRICE_HEART_SIP_LIQUID.get())
                 .define('O', ModItems.MEDIUM_SUMMONER.get())
                 .unlockedBy("has_medium_summoner", has(ModItems.MEDIUM_SUMMONER.get()))
@@ -973,26 +951,26 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_large_summoner", has(ModItems.LARGE_SUMMONER.get()))
                 .save(consumer);
 
-        // 清洁长命夔生物蛋：龙息四角，米米杂烩液围边，中心大型召唤器
+        // 清洁长命夔生物蛋：超懒合金锭四角，米米杂烩液围边，中心大型召唤器
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CLEANSING_LONGEVITY_KUI_SPAWN_EGG.get())
                 .pattern("BMB")
                 .pattern("MFM")
                 .pattern("BMB")
-                .define('B', Items.DRAGON_BREATH)
+                .define('B', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
                 .define('M', ModItems.MIMI_MEDLEY_LIQUID.get())
                 .define('F', ModItems.LARGE_SUMMONER.get())
                 .unlockedBy("has_large_summoner", has(ModItems.LARGE_SUMMONER.get()))
                 .save(consumer);
 
-        // （最懒终末龙生物蛋）：四角超懒合金锭 + 下界合金碎片，中心最懒召唤器
+        // （最懒终末龙生物蛋）：四角天堕锭 + 下界合金碎片，中心最懒召唤器
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAZIEST_FINAL_DRAGON_SPAWN_EGG.get())
                 .pattern("RNR")
                 .pattern("NMN")
                 .pattern("RNR")
-                .define('R', ModItems.SUPER_LAZY_ALLOY_INGOT.get())
+                .define('R', ModItems.HEAVENFALL_INGOT.get())
                 .define('N', Items.NETHERITE_SCRAP)
                 .define('M', ModItems.LAZIEST_SUMMONER.get())
-                .unlockedBy("has_super_lazy_alloy_ingot", has(ModItems.SUPER_LAZY_ALLOY_INGOT.get()))
+                .unlockedBy("has_heavenfall_ingot", has(ModItems.HEAVENFALL_INGOT.get()))
                 .save(consumer);
 
         // （第八宗罪龙生物蛋）：残堕精华锭 + 下界合金锭围边，中心最懒召唤器，终末级材料区分于第七Boss
@@ -1187,6 +1165,24 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_ox_king_crystal_horn", has(ModItems.OX_KING_CRYSTAL_HORN.get()))
                 .save(consumer);
 
+        // 米米圣盾：前四档 Boss 的专属战利品各一件（猴王毫毛/虎王利爪/牛王晶角/兔王腥红眼），
+        // 四角再各配一枚该 Boss 掉落的主材料锭（下界合金锭/饭晶合金锭/超重结晶/复合米饭锭），中心放 1 个米
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.MIMI_SHIELD.get())
+                .pattern("TNU")
+                .pattern("BRA")
+                .pattern("CDM")
+                .define('T', ModItems.MONKEY_KING_HAIR.get())
+                .define('N', Items.NETHERITE_INGOT)
+                .define('U', ModItems.TIGER_KING_RAZOR_CLAW.get())
+                .define('A', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
+                .define('B', ModItems.SUPER_HEAVY_CRYSTAL.get())
+                .define('R', ModItems.RICE.get())
+                .define('C', ModItems.OX_KING_CRYSTAL_HORN.get())
+                .define('D', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
+                .define('M', ModItems.RABBIT_KING_BLOODY_RED_EYE.get())
+                .unlockedBy("has_monkey_king_hair", has(ModItems.MONKEY_KING_HAIR.get()))
+                .save(consumer);
+
         // 原版龙蛋：烈焰粉 龙息 烈焰粉 / 龙息 0 龙息 / 烈焰粉 龙息 烈焰粉
         // 产物是原版物品，默认 ID 会落在 minecraft 命名空间，必须显式指定 mimiworld:dragon_egg
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DRAGON_EGG)
@@ -1364,13 +1360,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         // （破败之心）
-        // 判定：mod 无此物品，"幽匿感应器"=原版幽匿感测体 SCULK_SENSOR；饭晶合金锤
+        // 判定：mod 无此物品，"幽匿感应器"=原版幽匿感测体 SCULK_SENSOR；饭晶合金锭
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RUINED_HEART.get())
                 .pattern("ENE")
                 .pattern("DSD")
                 .pattern("ENE")
                 .define('E', Items.ENDER_EYE)
-                .define('N', ModItems.RICE_CRYSTAL_ALLOY_HAMMER.get())
+                .define('N', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
                 .define('D', Items.DRAGON_BREATH)
                 .define('S', Items.SCULK_SENSOR)
                 .unlockedBy("has_sculk_sensor", has(Items.SCULK_SENSOR))

@@ -346,11 +346,6 @@ public class ModItems {
     public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_INGOT = registerItem("rice_crystal_alloy_ingot",
             () -> new Item(new Item.Properties().stacksTo(64)));
 
-    // 饭晶锤，Rice Crystal Hammer：自定义工具类，镐类挖掘（钻石级 tier），近战 +7 伤害/-3.2 攻速；
-    // 直接继承 Item（非 DiggerItem），stacksTo(1) 与普通工具一致，逻辑见 RiceCrystalHammerItem
-    public static final RegistryObject<Item> RICE_CRYSTAL_HAMMER = registerItem("rice_crystal_hammer",
-            RiceCrystalHammerItem::new);
-
     // 米麻，Rice Fiber：通用纤维材料，低阶装备使用
     public static final RegistryObject<Item> REFINED_RICE_FIBER = registerItem("refined_rice_fiber",
             () -> new Item(new Item.Properties().stacksTo(64)));
@@ -358,12 +353,6 @@ public class ModItems {
     // 米网，Rice Net：高阶装备使用的编织网材料
     public static final RegistryObject<Item> REFINED_REINFORCED_RICE_NET = registerItem("refined_reinforced_rice_net",
             () -> new Item(new Item.Properties().stacksTo(64)));
-
-    // 饭晶合金锤，Rice Crystal Alloy Hammer：自定义工具类，
-    // 饭晶锤的合金强化版；镐类挖掘（下界合金级 tier，speed 9.0），近战 +9 伤害/-3.1 攻速；
-    // 直接继承 Item（非 DiggerItem），stacksTo(1) 与普通工具一致，逻辑见 RiceCrystalAlloyHammerItem
-    public static final RegistryObject<Item> RICE_CRYSTAL_ALLOY_HAMMER = registerItem("rice_crystal_alloy_hammer",
-            RiceCrystalAlloyHammerItem::new);
 
     // 饭晶弓，Rice Crystal Bow：GeckoLib 3D 模型的弓（RiceCrystalBowItem，伤害倍率 ×1.2），
     // 资源 geo/fanjinggong.geo.json + textures/item/fanjinggong.png + animations/fanjinggong.animation.json，
