@@ -929,24 +929,24 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_medium_summoner", has(ModItems.MEDIUM_SUMMONER.get()))
                 .save(consumer);
 
-        // （重晶兔王生物蛋；四角复合米饭锭，爆米嘬心液围边，中心中型召唤器）
+        // （重晶兔王生物蛋；四角复合米饭锭，眼米嘬心液围边，中心中型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HEAVY_CRYSTAL_RABBIT_KING_SPAWN_EGG.get())
                 .pattern("RHR")
                 .pattern("HOH")
                 .pattern("RHR")
                 .define('R', ModItems.COMPOUND_RICE_MEAL_INGOT.get())
-                .define('H', ModItems.POPRICE_HEART_SIP_LIQUID.get())
+                .define('H', ModItems.YANMI_HEART_SIP_LIQUID.get())
                 .define('O', ModItems.MEDIUM_SUMMONER.get())
                 .unlockedBy("has_medium_summoner", has(ModItems.MEDIUM_SUMMONER.get()))
                 .save(consumer);
 
-        // （复晶天青蟒生物蛋；眼米嘬心液围边，中心大型召唤器）
+        // （复晶天青蟒生物蛋；爆米嘬心液围边，中心大型召唤器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COMPOUND_AZURE_PYTHON_SPAWN_EGG.get())
                 .pattern("RYR")
                 .pattern("YEY")
                 .pattern("RYR")
                 .define('R', ModItems.RICE_CRYSTAL_ALLOY_INGOT.get())
-                .define('Y', ModItems.YANMI_HEART_SIP_LIQUID.get())
+                .define('Y', ModItems.POPRICE_HEART_SIP_LIQUID.get())
                 .define('E', ModItems.LARGE_SUMMONER.get())
                 .unlockedBy("has_large_summoner", has(ModItems.LARGE_SUMMONER.get()))
                 .save(consumer);
@@ -962,24 +962,24 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_large_summoner", has(ModItems.LARGE_SUMMONER.get()))
                 .save(consumer);
 
-        // （最懒终末龙生物蛋）：四角天堕锭 + 下界合金碎片，中心最懒召唤器
+        // （最懒终末龙生物蛋）：四角天堕锭，浸染液围边，中心最懒召唤器
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAZIEST_FINAL_DRAGON_SPAWN_EGG.get())
                 .pattern("RNR")
                 .pattern("NMN")
                 .pattern("RNR")
                 .define('R', ModItems.HEAVENFALL_INGOT.get())
-                .define('N', Items.NETHERITE_SCRAP)
+                .define('N', ModItems.DYEING_SOLUTION.get())
                 .define('M', ModItems.LAZIEST_SUMMONER.get())
                 .unlockedBy("has_heavenfall_ingot", has(ModItems.HEAVENFALL_INGOT.get()))
                 .save(consumer);
 
-        // （第八宗罪龙生物蛋）：残堕精华锭 + 下界合金锭围边，中心最懒召唤器，终末级材料区分于第七Boss
+        // （第八宗罪龙生物蛋）：四角残堕世界精华锭，磨制残堕精华液围边，中心最懒召唤器
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DIBAZONGZUILONG_SPAWN_EGG.get())
                 .pattern("RNR")
                 .pattern("NMN")
                 .pattern("RNR")
                 .define('R', ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get())
-                .define('N', Items.NETHERITE_INGOT)
+                .define('N', ModItems.POLISHED_REMNANT_FALLEN_ESSENCE_SOLUTION.get())
                 .define('M', ModItems.LAZIEST_SUMMONER.get())
                 .unlockedBy("has_remnant_fallen_world_essence_ingot", has(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get()))
                 .save(consumer);
