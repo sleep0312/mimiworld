@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import com.mimiworld.mimiworld.effect.ModEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -539,7 +541,7 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
             this.runTicks = 0;
             CompoundAzurePythonEntity.this.getNavigation().stop();
             CompoundAzurePythonEntity.this.entityData.set(DATA_KISS_ANIM_TICKS, KISS_ANIMATION_TICKS);
-            CompoundAzurePythonEntity.this.playSound(SoundEvents.RAVAGER_ROAR, 1.1F, 0.85F);
+            CompoundAzurePythonEntity.this.playSound(ModSounds.COMPOUND_AZURE_PYTHON_ROAR.get(), 1.1F, 0.9F);
         }
 
         @Override
@@ -626,7 +628,7 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.CAT_HISS;
+        return ModSounds.COMPOUND_AZURE_PYTHON_AMBIENT.get();
     }
 
     @Override
@@ -636,12 +638,12 @@ public class CompoundAzurePythonEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.SLIME_HURT;
+        return ModSounds.COMPOUND_AZURE_PYTHON_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.WOLF_DEATH;
+        return ModSounds.COMPOUND_AZURE_PYTHON_DEATH.get();
     }
 
     @Override

@@ -123,10 +123,11 @@ public class ModLootTableProvider extends LootTableProvider {
         DROPS.put(ModEntities.LAZIEST_FINAL_DRAGON.get(), new Drop[]{d(ModItems.HEAVENFALL_INGOT.get(), 4, 5),
                 d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5), d(ModItems.END_DRAGON_REVERSE_SCALE.get(), 2, 3),
                 c(ModItems.REVERSE_SCALE_GALL.get(), 1, 1, 0.25F), d(ModItems.LAZIEST_END_DRAGON_HEAD.get(), 1, 1)});
-        // 第八宗罪龙：最终 Boss，掉落精制强化米网 4~5、第八宗罪龙头×1、残堕世界精华锭 8~24
+        // 第八宗罪龙：最终 Boss，掉落精制强化米网 4~5、第八宗罪龙头×1、残堕世界精华锭 8~24、米米图腾（15%）
         DROPS.put(ModEntities.DIBAZONGZUILONG.get(), new Drop[]{
                 d(ModItems.REFINED_REINFORCED_RICE_NET.get(), 4, 5),
-                d(ModItems.DIBAZONGZUI_HEAD.get(), 1, 1), d(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get(), 8, 24)});
+                d(ModItems.DIBAZONGZUI_HEAD.get(), 1, 1), d(ModItems.REMNANT_FALLEN_WORLD_ESSENCE_INGOT.get(), 8, 24),
+                c(ModItems.MIMI_TOTEM.get(), 1, 1, 0.15F)});
     }
 
     private static Drop d(ItemLike item, int min, int max) {

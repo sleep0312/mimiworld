@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -464,7 +466,7 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
             this.victims.clear();
             ChaojingniuwangEntity.this.getNavigation().stop();
             ChaojingniuwangEntity.this.entityData.set(DATA_CHARGE_WINDUP_TICKS, CHARGE_WINDUP_TICKS);
-            ChaojingniuwangEntity.this.playSound(SoundEvents.RAVAGER_ROAR, 1.2F, 0.8F);
+            ChaojingniuwangEntity.this.playSound(ModSounds.SUPER_CRYSTAL_COW_KING_ROAR.get(), 1.2F, 0.95F);
         }
 
         @Override
@@ -622,17 +624,17 @@ public class ChaojingniuwangEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.RAVAGER_AMBIENT;
+        return ModSounds.SUPER_CRYSTAL_COW_KING_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.RAVAGER_HURT;
+        return ModSounds.SUPER_CRYSTAL_COW_KING_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.RAVAGER_DEATH;
+        return ModSounds.SUPER_CRYSTAL_COW_KING_DEATH.get();
     }
 
     @Override

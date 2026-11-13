@@ -1,10 +1,10 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -45,7 +45,8 @@ import java.util.EnumSet;
  *
  * <p>行为：常驻无重力悬浮飞行（{@link FlyingMoveControl} + {@link FlyingPathNavigation}），
  * 主动索敌玩家、受击反击，贴近后用触须扑击（近战）；无目标时在空中随机漂浮。
- * 9 心（沿用占位数值）、近战 3 点；音效沿用原版恼鬼（尖细的魂鸣）。</p>
+ * 9 心（沿用占位数值）、近战 3 点；音效使用自定义米魂一套（哀鸣/受伤/消散/尖啸），
+ * 扑击命中时概率触发尖啸（roar）。</p>
  */
 public class RiceSoulEntity extends Monster implements GeoEntity {
 
@@ -140,6 +141,10 @@ public class RiceSoulEntity extends Monster implements GeoEntity {
     public boolean doHurtTarget(Entity target) {
         if (super.doHurtTarget(target)) {
             this.entityData.set(DATA_ATTACK_ANIM_TICKS, ATTACK_ANIMATION_TICKS);
+            // 扑击命中时 1/5 概率发出尖啸
+            if (this.random.nextInt(5) == 0) {
+                this.playSound(ModSounds.RICE_SOUL_ROAR.get(), 0.8F, 1.0F);
+            }
             return true;
         }
         return false;
@@ -172,17 +177,17 @@ public class RiceSoulEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.VEX_AMBIENT;
+        return ModSounds.RICE_SOUL_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.VEX_HURT;
+        return ModSounds.RICE_SOUL_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.VEX_DEATH;
+        return ModSounds.RICE_SOUL_DEATH.get();
     }
 
     @Override

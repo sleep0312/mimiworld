@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -538,7 +540,7 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
             this.runTicks = 0;
             QingjiechangmingkuiEntity.this.getNavigation().stop();
             QingjiechangmingkuiEntity.this.entityData.set(DATA_ROAR_ANIM_TICKS, ROAR_ANIMATION_TICKS);
-            QingjiechangmingkuiEntity.this.playSound(SoundEvents.WARDEN_ROAR, 2.0F, 0.85F);
+            QingjiechangmingkuiEntity.this.playSound(ModSounds.CLEANSING_LONGEVITY_KUI_ROAR.get(), 2.0F, 0.9F);
         }
 
         @Override
@@ -728,7 +730,7 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.WARDEN_AMBIENT;
+        return ModSounds.CLEANSING_LONGEVITY_KUI_AMBIENT.get();
     }
 
     @Override
@@ -738,12 +740,12 @@ public class QingjiechangmingkuiEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.RAVAGER_HURT;
+        return ModSounds.CLEANSING_LONGEVITY_KUI_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.RAVAGER_DEATH;
+        return ModSounds.CLEANSING_LONGEVITY_KUI_DEATH.get();
     }
 
     @Override

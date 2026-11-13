@@ -1,0 +1,434 @@
+{
+  "mob.rice_soul.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.mob.rice_soul.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:mob/rice_soul/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "mob.rice_soul.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.mob.rice_soul.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:mob/rice_soul/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "mob.rice_soul.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.mob.rice_soul.death",
+    "sounds": [
+      {
+        "name": "mimiworld:mob/rice_soul/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "mob.rice_soul.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.mob.rice_soul.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:mob/rice_soul/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.mimi_monkey_king.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.mimi_monkey_king.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/mimi_monkey_king/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.mimi_monkey_king.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.mimi_monkey_king.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/mimi_monkey_king/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.mimi_monkey_king.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.mimi_monkey_king.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/mimi_monkey_king/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.mimi_monkey_king.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.mimi_monkey_king.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/mimi_monkey_king/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.rice_crystal_tiger_king.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.rice_crystal_tiger_king.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/rice_crystal_tiger_king/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.rice_crystal_tiger_king.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.rice_crystal_tiger_king.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/rice_crystal_tiger_king/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.rice_crystal_tiger_king.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.rice_crystal_tiger_king.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/rice_crystal_tiger_king/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.rice_crystal_tiger_king.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.rice_crystal_tiger_king.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/rice_crystal_tiger_king/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.super_crystal_cow_king.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.super_crystal_cow_king.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/super_crystal_cow_king/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.super_crystal_cow_king.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.super_crystal_cow_king.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/super_crystal_cow_king/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.super_crystal_cow_king.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.super_crystal_cow_king.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/super_crystal_cow_king/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.super_crystal_cow_king.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.super_crystal_cow_king.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/super_crystal_cow_king/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.heavy_crystal_rabbit_king.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.heavy_crystal_rabbit_king.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/heavy_crystal_rabbit_king/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.heavy_crystal_rabbit_king.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.heavy_crystal_rabbit_king.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/heavy_crystal_rabbit_king/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.heavy_crystal_rabbit_king.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.heavy_crystal_rabbit_king.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/heavy_crystal_rabbit_king/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.heavy_crystal_rabbit_king.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.heavy_crystal_rabbit_king.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/heavy_crystal_rabbit_king/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.compound_azure_python.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.compound_azure_python.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/compound_azure_python/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.compound_azure_python.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.compound_azure_python.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/compound_azure_python/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.compound_azure_python.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.compound_azure_python.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/compound_azure_python/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.compound_azure_python.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.compound_azure_python.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/compound_azure_python/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.cleansing_longevity_kui.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.cleansing_longevity_kui.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/cleansing_longevity_kui/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.cleansing_longevity_kui.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.cleansing_longevity_kui.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/cleansing_longevity_kui/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.cleansing_longevity_kui.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.cleansing_longevity_kui.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/cleansing_longevity_kui/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.cleansing_longevity_kui.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.cleansing_longevity_kui.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/cleansing_longevity_kui/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.laziest_final_dragon.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.laziest_final_dragon.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/laziest_final_dragon/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.laziest_final_dragon.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.laziest_final_dragon.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/laziest_final_dragon/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.laziest_final_dragon.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.laziest_final_dragon.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/laziest_final_dragon/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.laziest_final_dragon.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.laziest_final_dragon.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/laziest_final_dragon/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.dibazongzuilong.ambient": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.dibazongzuilong.ambient",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/dibazongzuilong/ambient",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.dibazongzuilong.hurt": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.dibazongzuilong.hurt",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/dibazongzuilong/hurt",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.dibazongzuilong.death": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.dibazongzuilong.death",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/dibazongzuilong/death",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "boss.dibazongzuilong.roar": {
+    "category": "hostile",
+    "subtitle": "subtitles.mimiworld.boss.dibazongzuilong.roar",
+    "sounds": [
+      {
+        "name": "mimiworld:boss/dibazongzuilong/roar",
+        "stream": false,
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  }
+}

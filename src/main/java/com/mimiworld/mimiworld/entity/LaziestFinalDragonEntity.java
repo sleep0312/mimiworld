@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -589,17 +591,17 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENDER_DRAGON_GROWL;
+        return ModSounds.LAZIEST_FINAL_DRAGON_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENDER_DRAGON_HURT;
+        return ModSounds.LAZIEST_FINAL_DRAGON_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENDER_DRAGON_DEATH;
+        return ModSounds.LAZIEST_FINAL_DRAGON_DEATH.get();
     }
 
     @Override
@@ -658,7 +660,7 @@ public class LaziestFinalDragonEntity extends PathfinderMob implements GeoEntity
             this.runTicks = 0;
             LaziestFinalDragonEntity.this.brakeInAir();
             LaziestFinalDragonEntity.this.entityData.set(DATA_BREATH_ANIM_TICKS, BREATH_ANIMATION_TICKS);
-            LaziestFinalDragonEntity.this.playSound(SoundEvents.ENDER_DRAGON_GROWL, 2.0F, 0.7F);
+            LaziestFinalDragonEntity.this.playSound(ModSounds.LAZIEST_FINAL_DRAGON_ROAR.get(), 2.0F, 0.8F);
         }
 
         @Override

@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import com.mimiworld.mimiworld.MimiWorld;
 import com.mimiworld.mimiworld.effect.ModEffects;
 import net.minecraft.core.BlockPos;
@@ -526,7 +528,7 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
             HeavyCrystalRabbitKingEntity.this.yBodyRot = this.leapYaw;
             HeavyCrystalRabbitKingEntity.this.setYHeadRot(this.leapYaw);
             HeavyCrystalRabbitKingEntity.this.resetFallDistance();
-            HeavyCrystalRabbitKingEntity.this.playSound(SoundEvents.RAVAGER_ROAR, 1.3F, 1.1F);
+            HeavyCrystalRabbitKingEntity.this.playSound(ModSounds.HEAVY_CRYSTAL_RABBIT_KING_ROAR.get(), 1.3F, 1.15F);
         }
 
         @Override
@@ -622,17 +624,17 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.RAVAGER_AMBIENT;
+        return ModSounds.HEAVY_CRYSTAL_RABBIT_KING_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.RAVAGER_HURT;
+        return ModSounds.HEAVY_CRYSTAL_RABBIT_KING_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.RAVAGER_DEATH;
+        return ModSounds.HEAVY_CRYSTAL_RABBIT_KING_DEATH.get();
     }
 
     @Override

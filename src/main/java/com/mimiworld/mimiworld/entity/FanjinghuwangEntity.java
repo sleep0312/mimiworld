@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -453,7 +455,7 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
             this.runTicks = 0;
             FanjinghuwangEntity.this.getNavigation().stop();
             FanjinghuwangEntity.this.entityData.set(DATA_SLAM_ANIM_TICKS, SLAM_ANIMATION_TICKS);
-            FanjinghuwangEntity.this.playSound(SoundEvents.RAVAGER_ROAR, 1.2F, 0.7F);
+            FanjinghuwangEntity.this.playSound(ModSounds.RICE_CRYSTAL_TIGER_KING_ROAR.get(), 1.2F, 0.9F);
         }
 
         @Override
@@ -480,17 +482,17 @@ public class FanjinghuwangEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.WOLF_GROWL;
+        return ModSounds.RICE_CRYSTAL_TIGER_KING_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.WOLF_WHINE;
+        return ModSounds.RICE_CRYSTAL_TIGER_KING_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.WOLF_DEATH;
+        return ModSounds.RICE_CRYSTAL_TIGER_KING_DEATH.get();
     }
 
     @Override

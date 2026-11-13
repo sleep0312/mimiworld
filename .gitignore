@@ -39,6 +39,9 @@ replay_pid*
 # 贴图临时预览/脚本目录（不同步到 GitHub）
 _tex_draft/
 
+# 音效生成脚本草稿目录（不同步到 GitHub）
+_sound_draft/
+
 # 原版 MC 纹理参考目录（不同步到 GitHub）
 1.20.1原版mc纹理/
 

@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -591,17 +593,17 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENDER_DRAGON_GROWL;
+        return ModSounds.DIBAZONGZUILONG_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENDER_DRAGON_HURT;
+        return ModSounds.DIBAZONGZUILONG_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENDER_DRAGON_DEATH;
+        return ModSounds.DIBAZONGZUILONG_DEATH.get();
     }
 
     @Override
@@ -660,7 +662,7 @@ public class DibazongzuilongEntity extends PathfinderMob implements GeoEntity, E
             this.runTicks = 0;
             DibazongzuilongEntity.this.brakeInAir();
             DibazongzuilongEntity.this.entityData.set(DATA_BREATH_ANIM_TICKS, BREATH_ANIMATION_TICKS);
-            DibazongzuilongEntity.this.playSound(SoundEvents.ENDER_DRAGON_GROWL, 2.0F, 0.7F);
+            DibazongzuilongEntity.this.playSound(ModSounds.DIBAZONGZUILONG_ROAR.get(), 2.0F, 0.8F);
         }
 
         @Override

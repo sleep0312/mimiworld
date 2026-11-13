@@ -1,5 +1,7 @@
 package com.mimiworld.mimiworld.entity;
 
+import com.mimiworld.mimiworld.sound.ModSounds;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -264,6 +266,7 @@ public class MimiMonkeyKingEntity extends Monster implements GeoEntity {
             }
         }
 
+        this.playSound(ModSounds.MIMI_MONKEY_KING_ROAR.get(), 1.0F, 1.05F);
         this.playSound(SoundEvents.GENERIC_EXPLODE, 0.7F, 1.3F);
         if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
             // 粒子铺满前方 3×3：纵深 3 排 × 横向 3 列
@@ -464,17 +467,17 @@ public class MimiMonkeyKingEntity extends Monster implements GeoEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.PARROT_AMBIENT;
+        return ModSounds.MIMI_MONKEY_KING_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.PARROT_HURT;
+        return ModSounds.MIMI_MONKEY_KING_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.PARROT_DEATH;
+        return ModSounds.MIMI_MONKEY_KING_DEATH.get();
     }
 
     @Override
