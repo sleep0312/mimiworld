@@ -13,8 +13,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
  *
  * <p>效果：持有附魔剑的实体造成近战伤害时，按最终伤害值回复自身生命，
  * 1 级回复 6%，每提升 1 级额外增加 2%（I 级 6%、II 级 8%、III 级 10%……）。
- * 实际回复逻辑由 {@link com.mimiworld.mimiworld.event.ModEnchantmentEvents}
- * 在 Forge LivingDamageEvent 中结算。</p>
+ * 实际回复逻辑由 {@link com.mimiworld.mimiworld.event.DamagePipeline}
+ * 在阶段 2（LivingDamageEvent）中结算。</p>
  */
 public class WeepingBloodEnchantment extends Enchantment {
 

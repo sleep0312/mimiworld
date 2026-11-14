@@ -89,6 +89,14 @@ public class ModCreativeTabs {
                         EnchantedBookItem.addEnchantment(flawlessBook,
                                 new EnchantmentInstance(ModEnchantments.FLAWLESS.get(), 1));
                         output.accept(flawlessBook);
+
+                        // 迅击附魔书 I～V：同上，仅存储的附魔等级不同
+                        for (int level = 1; level <= ModEnchantments.SWIFT_STRIKE.get().getMaxLevel(); level++) {
+                            ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+                            EnchantedBookItem.addEnchantment(book,
+                                    new EnchantmentInstance(ModEnchantments.SWIFT_STRIKE.get(), level));
+                            output.accept(book);
+                        }
                     })
                     .build());
 

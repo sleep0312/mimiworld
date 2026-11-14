@@ -15,7 +15,7 @@ A rice-themed Minecraft Forge mod featuring a rice industry chain, a 9-tier gear
 | 项目 | 内容 |
 | --- | --- |
 | 模组 ID | `mimiworld` |
-| 版本 | 1.0.2 |
+| 版本 | 1.0.4-beta |
 | Minecraft | 1.20.1 |
 | Forge | 47.4.10+ |
 | 必需前置 | [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) 4.7+、[Curios API](https://www.curseforge.com/minecraft/mc-mods/curios) 5.14+ |
@@ -23,9 +23,9 @@ A rice-themed Minecraft Forge mod featuring a rice industry chain, a 9-tier gear
 
 ## 内容概览
 
-- **农业与材料**：米树、米草、米矿与米米平原；从「米 → 熟米 → 米团」的加工链，到饭晶 → 超结晶 → 饭晶合金 → 超重结晶 → 复合米饭 → 清洁复合 → 超懒合金 → 最懒天堕 → 残堕的 9 级装备材料科技树。
+- **农业与材料**：米树、米草、米矿与米米平原；从「米 → 熟米 → 米团」的加工链，到饭晶 → 饭晶合金 → 超重结晶 → 复合米饭 → 清洁复合 → 超懒合金 → 最懒天堕 → 残堕的 9 级装备材料科技树。
 - **机器与烹饪**：造米机、锤米台、电离台、沉淀台、离解台、碾磨台、杵界台、凝锭台、淬剑台、汲血台、搅碎器、搅拌器、大煮锅、巨无霸大大大煮锅、铁锅、烤箱、炉灶、堕落台等。
-- **生物与 Boss**：47 种实体、38 枚生物蛋。8 个 Boss：米米猴王、饭晶虎王、超晶牛王、重晶兔王、复晶天青蟒、清洁长命夔、最懒终末龙、第八宗罪龙。
+- **生物与 Boss**：44 种实体、38 枚生物蛋。8 个 Boss：米米猴王、饭晶虎王、超晶牛王、重晶兔王、复晶天青蟒、清洁长命夔、最懒终末龙、第八宗罪龙。
 - **维度与结构**：米米维度（米米平原）与残堕界（残堕荒原）两个维度；米米宝藏结构含 10 种固定怪物变体及其对应宝箱。
 - **战斗与饰品**：自定义伤害类型、药水效果与箭矢；Curios 圣遗物槽位与神遗之书槽位；可放置的 Boss 头颅摆件。
 - **模型与动画**：63 个 GeckoLib 模型、46 个动画文件，均由 Blockbench 制作。

@@ -14,6 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
  * <ul>
  *   <li>weeping_blood（泣血）：剑类武器专属，造成伤害后按伤害值百分比回复生命。</li>
  *   <li>flawless（完美无缺）：可附魔任意有耐久的物品，使其不再消耗耐久。</li>
+ *   <li>swift_strike（迅击）：近战武器专属，最终伤害按附魔等级与当前移动速度值放大。</li>
  * </ul>
  */
 public class ModEnchantments {
@@ -29,6 +30,11 @@ public class ModEnchantments {
     public static final RegistryObject<Enchantment> FLAWLESS = ENCHANTMENTS.register(
             "flawless",
             FlawlessEnchantment::new);
+
+    /** 迅击 —— 近战武器附魔，最高 5 级，最终伤害随移动速度值放大。 */
+    public static final RegistryObject<Enchantment> SWIFT_STRIKE = ENCHANTMENTS.register(
+            "swift_strike",
+            SwiftStrikeEnchantment::new);
 
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);

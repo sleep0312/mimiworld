@@ -14,6 +14,8 @@ import com.mimiworld.mimiworld.item.AncientPeltItem;
 import com.mimiworld.mimiworld.item.AzureWheelItem;
 import com.mimiworld.mimiworld.item.DarkSpiritFangItem;
 import com.mimiworld.mimiworld.item.DomainExpansionItem;
+import com.mimiworld.mimiworld.item.DoubleHappinessItem;
+import com.mimiworld.mimiworld.item.TheMoreTheMerrierItem;
 import com.mimiworld.mimiworld.item.KuiNiuPowerItem;
 import com.mimiworld.mimiworld.item.ShanhaiGraceItem;
 import com.mimiworld.mimiworld.item.ReverseScaleGallItem;
@@ -588,7 +590,7 @@ public class ModItems {
 
     // 米米图腾（Mimi Totem）：不死图腾，主手/副手持有受致命伤时免死一次；
     // 效果与原版一致（回 1 血+再生 II 45s+伤害吸收 II 5s+抗火 I 40s），
-    // 触发逻辑见 mixin.LivingEntityMixin；默认堆叠 64 同原版图腾；暂无配方
+    // 触发逻辑见 mixin.LivingEntityMixin；默认堆叠 64 同原版图腾；配方见 ModRecipeProvider（不死图腾居中 + 一圈米）
     public static final RegistryObject<Item> MIMI_TOTEM = registerItem("mimi_totem",
             () -> new MimiTotemItem(new Item.Properties()));
 
@@ -676,6 +678,16 @@ public class ModItems {
     // 最大生命值 +5，受伤后获得 10% 最大生命值的额外生命值（最多累计到 40%，见 ModEffectEvents）。
     public static final RegistryObject<Item> MIMI_SHIELD = registerItem("mimi_shield",
             () -> new MimiShieldItem(new Item.Properties().stacksTo(1)));
+
+    // 双倍快乐（Double Happiness）：Curios「圣遗物」槽位饰品，
+    // 主手与副手物品相同时（忽略 NBT），造成的伤害 ×2（见 ModEffectEvents）。
+    public static final RegistryObject<Item> DOUBLE_HAPPINESS = registerItem("double_happiness",
+            () -> new DoubleHappinessItem(new Item.Properties().stacksTo(1)));
+
+    // 多多益善（The More the Merrier）：Curios「圣遗物」槽位饰品，
+    // 10×10 水平范围内每有 1 只怪物，造成的伤害 +10%（最多 +200%，见 ModEffectEvents）。
+    public static final RegistryObject<Item> THE_MORE_THE_MERRIER = registerItem("the_more_the_merrier",
+            () -> new TheMoreTheMerrierItem(new Item.Properties().stacksTo(1)));
 
     // 米米传送器（Mimi Teleporter）：传送门框架方块（ModBlocks.MIMI_TELEPORTER）的 BlockItem，
     // 放置后作为米米维度传送门框架使用；传送/激活逻辑后续实现。

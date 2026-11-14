@@ -324,7 +324,7 @@ public class HeavyCrystalRabbitKingEntity extends Monster implements GeoEntity {
     /**
      * 施加【腥红烛照】药水效果：crimson_candlelight Level II（amplifier 1 = 全部攻击伤害 ×3），
      * 持续 600 tick。效果图标会显示在 Boss 身上，伤害倍率由
-     * {@link com.mimiworld.mimiworld.event.ModEffectEvents} 的 LivingHurtEvent 统一结算。
+     * {@link com.mimiworld.mimiworld.event.DamagePipeline} 的阶段 1（LivingHurtEvent，护甲前）统一结算。
      */
     private void applyEnrageBuff() {
         this.entityData.set(DATA_ENRAGE_BUFF_TICKS, ENRAGE_BUFF_DURATION);

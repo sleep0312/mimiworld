@@ -11,13 +11,14 @@ import net.minecraftforge.registries.RegistryObject;
 /**
  * 米米世界自定义药水效果注册类。
  *
- * <p>注册两个效果：</p>
+ * <p>注册以下效果：</p>
  * <ul>
  *   <li>crimson_candlelight（腥红烛照）：正面效果，拥有该效果的实体造成的所有攻击伤害倍率 = amplifier + 2
  *       （I=2倍、II=3倍、III=4倍……）。</li>
  *   <li>python_constriction（蟒蛇缠绕）：负面效果，每秒造成 10×等级 点魔法伤害
  *       （I 级 10/秒、II 级 20/秒……，无视护甲、可致死）；同时拥有该效果的攻击方
- *       对复晶天青蟒造成的伤害 ×1.5（由 ModEffectEvents 在 LivingHurtEvent 中处理）。</li>
+ *       对复晶天青蟒造成的伤害 ×1.5（由 DamagePipeline 在阶段 1 处理）。</li>
+ *   <li>cardiopulmonary_resuscitation（心肺复苏）：正面效果，仅 1 级，每秒恢复 100 点生命值。</li>
  * </ul>
  */
 public class ModEffects {
@@ -26,7 +27,7 @@ public class ModEffects {
 
     /**
      * 腥红烛照 —— 正面增益。颜色 #E63946 暗红。
-     * 伤害倍率由 {@link com.mimiworld.mimiworld.event.ModEffectEvents} 在 LivingHurtEvent 中处理。
+     * 伤害倍率由 {@link com.mimiworld.mimiworld.event.DamagePipeline} 在阶段 1 处理。
      */
     public static final RegistryObject<MobEffect> CRIMSON_CANDLELIGHT = MOB_EFFECTS.register(
             "crimson_candlelight",
@@ -35,7 +36,7 @@ public class ModEffects {
     /**
      * 蟒蛇缠绕 —— 负面效果。颜色 #2D6A4F 深绿。
      * 自身每秒造成 10×(amplifier+1) 点魔法伤害（I 级 10/秒、II 级 20/秒……）；
-     * 对复晶天青蟒 ×1.5 易伤由 {@link com.mimiworld.mimiworld.event.ModEffectEvents} 处理。
+     * 对复晶天青蟒 ×1.5 易伤由 {@link com.mimiworld.mimiworld.event.DamagePipeline} 在阶段 1 处理。
      */
     public static final RegistryObject<MobEffect> PYTHON_CONSTRICTION = MOB_EFFECTS.register(
             "python_constriction",
@@ -52,8 +53,8 @@ public class ModEffects {
 
     /**
      * 残堕化 —— 正面效果。颜色 #A02A2A 残堕暗红。
-     * 每级减少 10% 受到的伤害，由 {@link com.mimiworld.mimiworld.event.ModEffectEvents}
-     * 在 LivingHurtEvent 中处理。
+     * 每级减少 10% 受到的伤害，由 {@link com.mimiworld.mimiworld.event.DamagePipeline}
+     * 在阶段 1（LivingHurtEvent，护甲前）处理。
      */
     public static final RegistryObject<MobEffect> REMNANT_CORRUPTION = MOB_EFFECTS.register(
             "remnant_corruption",
@@ -62,7 +63,7 @@ public class ModEffects {
     /**
      * 易怒 —— 正面效果。颜色 #F4511E 橙红。
      * 受伤后 1 秒内攻击有 25% 概率增伤 5%×等级（上限 5 级），
-     * 由 {@link com.mimiworld.mimiworld.event.ModEffectEvents} 在 LivingHurtEvent 中处理。
+     * 由 {@link com.mimiworld.mimiworld.event.DamagePipeline} 在阶段 1（LivingHurtEvent，护甲前）处理。
      */
     public static final RegistryObject<MobEffect> IRRITABLE = MOB_EFFECTS.register(
             "irritable",
@@ -75,6 +76,14 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> DARK_POISON = MOB_EFFECTS.register(
             "dark_poison",
             () -> new DarkPoisonEffect(MobEffectCategory.HARMFUL, 0xFF4B2A5E));
+
+    /**
+     * 心肺复苏 —— 正面效果，仅 1 级。颜色 #E0393B 鲜红。
+     * 每秒恢复 100 点生命值，由效果自身 applyEffectTick 结算。
+     */
+    public static final RegistryObject<MobEffect> CARDIOPULMONARY_RESUSCITATION = MOB_EFFECTS.register(
+            "cardiopulmonary_resuscitation",
+            () -> new CardiopulmonaryResuscitationEffect(MobEffectCategory.BENEFICIAL, 0xFFE0393B));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "mimiworld:rice"
+    },
+    "T": {
+      "item": "minecraft:totem_of_undying"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RTR",
+    "RRR"
+  ],
+  "result": {
+    "item": "mimiworld:mimi_totem"
+  },
+  "show_notification": true
+}

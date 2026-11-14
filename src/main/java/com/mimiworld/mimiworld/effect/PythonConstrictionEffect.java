@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
  *   <li><b>持续绞压伤害</b>：每秒钟造成 {@code 10 × (amplifier + 1)} 点魔法伤害
  *       （无视护甲，可致死）。即 I 级每秒 10 点、II 级每秒 20 点、III 级每秒 30 点，以此类推。</li>
  *   <li><b>弱点标记（易伤）</b>：由
- *       {@link com.mimiworld.mimiworld.event.ModEffectEvents} 在 LivingHurtEvent 中实现——
+ *       {@link com.mimiworld.mimiworld.event.DamagePipeline} 在阶段 1（LivingHurtEvent，护甲前）实现——
  *       拥有该效果的玩家攻击复晶天青蟒时，对其造成的伤害提升至原来的 150%。</li>
  * </ol>
  *

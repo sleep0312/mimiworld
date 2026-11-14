@@ -818,6 +818,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_ender_eye", has(Items.ENDER_EYE))
                 .save(consumer);
 
+        // （米米图腾；不死图腾居中，周围一圈米）
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.MIMI_TOTEM.get())
+                .pattern("RRR")
+                .pattern("RTR")
+                .pattern("RRR")
+                .define('R', ModItems.RICE.get())
+                .define('T', Items.TOTEM_OF_UNDYING)
+                .unlockedBy("has_totem_of_undying", has(Items.TOTEM_OF_UNDYING))
+                .save(consumer);
+
         // （米米传送器）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MIMI_TELEPORTER.get())
                 .pattern("RSR")
